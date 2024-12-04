@@ -5,17 +5,50 @@ body {
     margin: 0;
 }
 
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    /* Fully visible */
+    transform: translateY(0);
+    /* Reset position */
+}
+
 .changeTheme {
-    background: grey;
+    background: linear-gradient(to bottom, #1D1E22 0%, #2C2F33 100%);
+
     .box-programmes,
     .box-coaching {
-        background-color: black;
-        color: #ffffff;
-        box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+        background-color: #282A36;
+        color: #FFFFFF;
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
     }
-        .box-programmes,
-        .box-coaching, p {
-            color: #ffffff;
+
+    .box-programmes,
+    .box-coaching,
+    p {
+        color: #EAEAEA;
+    }
+
+    .box-programmes.button-like:hover {
+        background-color: #3A3F48;
+    }
+    
+    .box-programmes.button-like:active {
+        background-color: #2C3037;
+    }
+    
+    
+    .box-coaching.button-like:hover {
+        background-color: #3A3F48;
+    }
+    
+    .box-coaching.button-like:active {
+        background-color: #2C3037;
     }
 
 }
@@ -44,16 +77,10 @@ body {
 
 @media (min-width: 768px) {
 
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        text-align: left;
-    }
-
     .flex-container {
         display: flex;
         gap: 80px;
+        justify-content: center;
     }
 
     .container {
@@ -68,7 +95,6 @@ body {
     background-color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    width: 90%;
     max-width: 800px;
     padding: 20px;
     text-align: center;
@@ -77,10 +103,28 @@ body {
     margin: auto auto 50px auto;
 }
 
+.box-programmes.button-like:hover {
+    background-color: #d9d9d9;
+}
+
+.box-programmes.button-like:active {
+    background-color: #8c8c8c;
+}
+
+
+.box-coaching.button-like:hover {
+    background-color: #d9d9d9;
+}
+
+.box-coaching.button-like:active {
+    background-color: #8c8c8c;
+}
+
 .container {
 
-    align-items: center;
-    padding: 50px;
+    margin: auto;
+    padding: 20px;
+    width: 90%;
 
 }
 

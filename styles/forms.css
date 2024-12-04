@@ -1,0 +1,140 @@
+body {
+    font-family: "Arial", sans-serif;
+    background: linear-gradient(to bottom, #ffffff 0%, #e6f7ff 100%);
+    height: 100vh;
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.header {
+    position: relative;
+    text-align: center;
+    padding: 10px 15px;
+}
+
+.form-container {
+  width: 80%;
+  border: 3px solid whitesmoke;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin: auto;
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-question {
+  margin: 10px;
+}
+
+.form-options ol {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px;
+}
+
+.form-options li {
+  background-color: #f2f2f2;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 20px 0px;
+  cursor: pointer;
+  transition: background-color 0.3 ease;
+}
+
+li.button-like:hover {
+  background-color: #d9d9d9;
+}
+
+li.button-like:active {
+  background-color: #8c8c8c;
+}
+
+  .progress-bar {
+    width: 90%;
+    height: 30px;
+    background-color: #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: auto;
+  }
+  
+  .progress-bar-fill {
+    width: 0;
+    height: 100%;
+    background-color: #4caf50;
+    transition: width 0.3s ease;
+  }
+
+  .footer {
+    background-color: #333;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.footer-content p {
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.social-icons img {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s;
+}
+
+.social-icons img:hover {
+    transform: scale(1.1);
+} */
+
+/* .footer {
+    margin-top: auto;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+  
