@@ -347,7 +347,7 @@ const workoutAvailabilityMultipliers = {
   7: 1.0,
 };
 
-import { EXERCISE_DATABASE } from './exercise.js';
+import { EXERCISE_DATABASE } from './modules/exercise.js';
 window.allExercises = EXERCISE_DATABASE;
 
 // Bodyweight fallback
@@ -404,7 +404,7 @@ const staticCoolDownStretches = [
   { name: "Upper Back Stretch", duration: "30 seconds", rpe: 3 },
 ];
 
-import { mealDatabase } from './meals.js';
+import { mealDatabase }    from './modules/meals.js';
 
 /***********************************************************************
  * 3) BMI / MAINTENANCE / GOAL CALCS

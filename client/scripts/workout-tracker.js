@@ -1783,24 +1783,24 @@ function renderMyProgressForCore() {
     {
       name: "David",
       text: "The strength graphs showed me I was improving even on the weeks I felt off. That feedback gave me confidence — and helped me stay consistent long enough to gain real muscle.",
-      beforeImage: "src/images/harry_chest_before.jpg",
-      afterImage: "src/images/harry_chest_after.jpg",
-      testImage: "src/images/5-stars.png",
+      beforeImage: "../assets/harry_chest_before.jpg",
+      afterImage:  "../assets/harry_chest_after.jpg",
+      testImage:   "../assets/5-stars.png",
     },
     {
 
       name: "Maria",
       text: "Seeing my streaks and Progress Score tick up each week made all the difference. I wasn’t just guessing anymore — I could actually see myself improving.",
-      beforeImage: "src/images/halima_back_before.jpg",
-      afterImage: "src/images/halima_back_after.jpg",
-      testImage: "src/images/5-stars.png",
+      beforeImage: "../assets/halima_back_before.jpg",
+      afterImage:  "../assets/halima_back_after.jpg",
+      testImage:   "../assets/5-stars.png",
     },
     {
       name: "Lee",
       text: "The Coach Insights and milestone tracking kept me grounded. I’d see a new lowest weight logged or a consistency badge, and it reminded me this was actually working.",
-      beforeImage: "src/images/lynn_before.JPEG",
-      afterImage: "src/images/lynn_after.png",
-      testImage: "src/images/5-stars.png",
+      beforeImage: "../assets/lynn_before.JPEG",
+      afterImage:  "../assets/lynn_after.png",
+      testImage:   "../assets/5-stars.png",
     },
   ];
 
@@ -8844,40 +8844,40 @@ window.addEventListener("load", () => {
     if (userGoal.includes("gain")) {
       name = "Max";
       txt = "Nothing worked until this. Now I train with confidence — and real progress.";
-      beforeImg = "src/images/harry_chest_before.jpg";
-      afterImg = "src/images/harry_chest_after.jpg";
+      beforeImg = "../assets/harry_chest_before.jpg";
+      afterImg  = "../assets/harry_chest_after.jpg";
     } else {
       if (gender === "female") {
         name = "Alice";
         txt = "This changed everything. I feel lighter, healthier, and in control for once.";
-        beforeImg = "src/images/halima_back_before.jpg";
-        afterImg = "src/images/halima_back_after.jpg";
+        beforeImg = "../assets/halima_back_before.jpg";
+        afterImg  = "../assets/halima_back_after.jpg";
       } else {
         name = "Bob";
         txt = "I’ve dropped the weight, feel sharper, and finally feel like myself again.";
-        beforeImg = "src/images/lynn_before.JPEG";
-        afterImg = "src/images/lynn_after.png";
+        beforeImg = "../assets/lynn_before.JPEG";
+        afterImg  = "../assets/lynn_after.png";
       }
     }
 
-    const wrap = document.createElement("div");
-    wrap.className = "testimonial-mini";
-    wrap.innerHTML = `
+  const wrap = document.createElement("div");
+  wrap.className = "testimonial-mini";
+  wrap.innerHTML = `
     <div class="images">
       <div><img src="${beforeImg}" alt="Before"><p>Before</p></div>
       <div><img src="${afterImg}"  alt="After"><p>After</p></div>
     </div>
-  
+
     <div class="name-stars">
       <p class="review-name">${name}</p>
       <div class="five-stars">
-        <img src="src/images/5-stars.png" alt="5 Stars" width="100">
+        <img src="../assets/5-stars.png" alt="5 Stars" width="100">
       </div>
     </div>
-  
+
     <p class="review-text-mini">${txt}</p>`;
-    return wrap;
-  }
+  return wrap;
+}
 
   /* ---------------------------------------------------------------- */
   /* Helper – comparison snapshot                                     */

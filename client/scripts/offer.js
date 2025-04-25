@@ -516,21 +516,21 @@ document.addEventListener("DOMContentLoaded", () => {
     // Muscle gain review.
     selectedReviewName = "Max";
     selectedReviewText = "I always struggled to build muscle — I didn’t know what I was doing wrong. This gave me structure, tracked everything, and just made it click. I actually look forward to training now.";
-    beforeImgSrc = "src/images/harry_chest_before.jpg"; // Replace with the actual path.
-    afterImgSrc = "src/images/harry_chest_after.jpg";   // Replace with the actual path.
+    beforeImgSrc = "../assets/harry_chest_before.jpg";
+    afterImgSrc  = "../assets/harry_chest_after.jpg";
   } else if (userGoal === "lose weight" || userGoal === "improve body composition") {
     if (gender === "male") {
       // Male weight loss review.
       selectedReviewName = "Bob";
       selectedReviewText = "At first, I wasn’t sure I could stick with it. But everything’s laid out for you — no guessing. I’ve lost weight, my clothes fit better, and I feel like myself again.";
-      beforeImgSrc = "src/images/lynn_before.JPEG"; // Replace with the actual path.
-      afterImgSrc = "src/images/lynn_after.png";   // Replace with the actual path.
+      beforeImgSrc = "../assets/lynn_before.JPEG";
+      afterImgSrc  = "../assets/lynn_after.png";
     } else if (gender === "female") {
       // Female weight loss review.
       selectedReviewName = "Alice";
       selectedReviewText = "I didn’t expect much, but this actually changed how I see food and fitness. I’ve lost weight, I feel healthier, and I finally enjoy the process.";
-      beforeImgSrc = "src/images/halima_back_before.jpg"; // Replace with the actual path.
-      afterImgSrc = "src/images/halima_back_after.jpg";   // Replace with the actual path.
+      beforeImgSrc = "../assets/halima_back_before.jpg";
+      afterImgSrc  = "../assets/halima_back_after.jpg";
     }
   } else {
     // Fallback default review.
@@ -586,42 +586,42 @@ document.addEventListener("DOMContentLoaded", () => {
   const whatsIncludedData = [
     {
       title: "Tailored From Day One (CT)",
-      image: "src/images/1_tailored.png",
+      image: "../assets/1_tailored.png",
       desc: "Your tracker is tailored from the start — built around your goal, training frequency, and available equipment."
     },
     {
       title: "Track Workouts, Earn XP (CT)",
-      image: "src/images/2_track_workouts.png",
+      image: "../assets/2_track_workouts.png",
       desc: "Log your workouts, earn XP, and get instant feedback — just like having a trainer guide you, every session."
     },
     {
       title: "Adaptive Progression Engine (PT)",
-      image: "src/images/3_adaptive.png",
+      image: "../assets/3_adaptive.png",
       desc: "Your tracker evolves with you — adjusting your workouts as you improve, stall, or regress to keep you moving forward."
     },
     {
       title: "Macro-Matched Meals (PT)",
-      image: "src/images/4_macro_matched.png",
+      image: "../assets/4_macro_matched.png",
       desc: "No more guessing or tracking — meals are portioned to match your exact macros automatically and updated weekly."
     },
     {
       title: "Flexible Logging, Your Way (PT)",
-      image: "src/images/5_flexible_logging.png",
+      image: "../assets/5_flexible_logging.png",
       desc: "Log in one tap, customize meals, or skip when needed — your tracker adjusts for you."
     },
     {
       title: "Daily Streaks That Stick (CT)",
-      image: "src/images/6_daily_streaks.png",
+      image: "../assets/6_daily_streaks.png",
       desc: "Build streaks that unlock milestones — with encouragement that celebrates your wins and helps you stay on track when it counts."
     },
     {
       title: "Your Fitness Story, Visualized (PT)",
-      image: "src/images/7_your_fitness_story.png",
+      image: "../assets/7_your_fitness_story.png",
       desc: "Your tracker doesn't just log data — it highlights trends, flags issues, and offers insights like a coach who's always paying attention."
     },
     {
       title: "Your Progress, Scored (PT)",
-      image: "src/images/8_your_progress.png",
+      image: "../assets/8_your_progress.png",
       desc: "One score that reflects your training, nutrition, and consistency — so you can see how far you’ve come."
     }
   ];
@@ -1273,24 +1273,24 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       name: "Lee",
       text: "I’d tried bootcamps, meal plans — nothing stuck. This finally made everything click. My workouts, meals, and progress were all in one place. I’ve lost 8kg, but more than that, I don’t feel lost anymore.",
-      beforeImage: "src/images/lynn_before.JPEG",
-      afterImage: "src/images/lynn_after.png",
-      testImage: "src/images/5-stars.png",
+      beforeImage: "../assets/lynn_before.JPEG",
+      afterImage: "../assets/lynn_after.png",
+      testImage:  "../assets/5-stars.png",
     },
     {
       name: "David",
       text: "I used to wing it at the gym. I never knew if I was doing enough. Seeing my workouts and progress adapt over time changed everything. I’ve gained 6kg of muscle — and confidence too.",
-      beforeImage: "src/images/harry_chest_before.jpg",
-      afterImage: "src/images/harry_chest_after.jpg",
-      testImage: "src/images/5-stars.png",
+      beforeImage: "../assets/harry_chest_before.jpg",
+      afterImage:  "../assets/harry_chest_after.jpg",
+      testImage:  "../assets/5-stars.png",
     },
     {
 
       name: "Maria",
       text: "Strict plans never worked for me. This didn’t just tell me what to do — it fit into my life. Logging workouts and meals became second nature. For the first time, I feel in control.",
-      beforeImage: "src/images/halima_back_before.jpg",
-      afterImage: "src/images/halima_back_after.jpg",
-      testImage: "src/images/5-stars.png",
+      beforeImage: "../assets/halima_back_before.jpg",
+      afterImage:  "../assets/halima_back_after.jpg",
+      testImage:  "../assets/5-stars.png",
     },
   ];
 
