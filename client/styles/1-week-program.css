@@ -1,0 +1,874 @@
+:root {
+  --heading-color: #000000;       /* headings => #000000 */
+  --subheading-color: #4A4A4A;    /* subheadings => #4A4A4A */
+  --text-color: #333;          /* body text => #666666 */
+}
+
+/* Global Defaults */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #f9f7f2;
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+  color: var(--text-color); /* overall text color */
+}
+
+h1 {
+  text-align: center;
+  margin: 1rem 0;
+  color: var(--heading-color);
+}
+
+.locked-banner-row,
+.locked-banner-row * {
+  color: #FFFFFF !important;
+}
+
+.buttons {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  background-color: #333;
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0.2rem;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+}
+.buttons:hover {
+  background-color: #111;
+}
+
+/* Hide PDF containers initially */
+.pdf-container {
+  display: none; 
+}
+
+.pdf-page {
+  position: relative;
+  width: 793px;
+  height: 1122px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0.5rem 2rem 0 2rem;
+  background-color: #f9f7f2;
+}
+
+.page-header-left-logo {
+  position: absolute;
+  top: 1rem; 
+  left: 1rem;
+}
+.logo-badge {
+  width: 100px;
+  height: auto;
+}
+
+.with-badge-logo {
+  text-align: center;
+  margin-top: 2.5rem; 
+  margin-bottom: 1rem;
+}
+
+.cover-slogan {
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #f9f7f2;
+  border-top: 3px solid #f9f7f2;
+  color: #333333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  padding: 1rem;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.footer-left, .footer-center, .footer-right {
+  display: flex;
+  align-items: center;
+}
+
+.footer-left .contact-link {
+  color: #333333;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.footer-center {
+  justify-content: center;
+  margin-left: -1.5rem; 
+}
+
+.footer-right {
+  flex: 0 0 auto;
+  margin-right: 0.5rem;
+}
+
+/* Social icons */
+.social-icon-lg {
+  width: 42px;
+  height: 42px;
+  margin: 0 0.5rem;
+}
+
+.footer-main {
+  justify-content: flex-end;
+  padding-right: 2rem;
+}
+.footer-main .footer-left,
+.footer-main .footer-center {
+  display: none;
+}
+
+/* Cover Page */
+.cover-page {
+  background-color: #e7e3dc;
+  text-align: center;
+}
+
+.cover-logo {
+  display: block;
+  max-width: 300px;
+  margin: 0 auto 1rem auto;
+}
+
+.cover-placeholder-image {
+  display: block;
+  width: 100%;
+  height: 30vh;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.cover-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem;
+  margin-top: 1rem;
+  text-align: center;
+  color: var(--heading-color);
+}
+
+.cover-subtitle {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 1rem;
+  color: var(--text-color);
+}
+
+.divider {
+  border: none;
+  border-top: 2px solid #000;
+  margin: 1rem 0;
+}
+
+.nav-right-num {
+  text-align: right;
+  font-weight: bold;
+  color: #333 !important; /* CHANGED from #007BFF to #333 */
+}
+
+.quick-access-title {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+.quick-access-links {
+  text-align: center;
+  margin: 0.5rem 0;
+}
+.quick-access-links a {
+  margin: 0 0.5rem;
+  color: #007BFF;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+/* "Log Your Workout" button on main workout pages */
+.log-workout-btn {
+  display: inline-block;
+  background-color: #007BFF;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.8rem 1.2rem;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.log-workout-btn:hover {
+  background-color: #0056b3;
+}
+
+/* General text pages */
+.centered {
+  text-align: center;
+}
+.page-heading {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--heading-color); 
+}
+.video-placeholder {
+  width: 100%;
+  height: 200px;
+  background-color: #ddd;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.introduction-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Profile container */
+.profile-container {
+  background: #f5efe7;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  color: var(--text-color);
+}
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+.profile-grid-item {
+  background: #fff;
+  padding: 0.7rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+.label {
+  background: #e8e2d9;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+/* Program intro */
+.intro-logo {
+  display: block;
+  max-width: 180px;
+  margin: 0 auto 1rem auto;
+}
+#oneWeekDurationText {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+  color: var(--text-color);
+}
+
+/* Session tables */
+.session-table-container {
+  margin-top: 1rem;
+  width: 100%;
+  overflow-x: auto;
+}
+.session-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.1rem;
+}
+.session-table td, .session-table th {
+  border: 1px solid #ddd;
+  padding: 0.7rem;
+  vertical-align: middle;
+  color: var(--text-color);
+}
+.session-table tbody tr:nth-child(even) {
+  background-color: #f0f0f0;
+}
+.session-table tbody tr:nth-child(odd) {
+  background-color: #fff;
+}
+.section-divider {
+  background-color: #f9f7f2;
+  font-weight: 700;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  color: var(--text-color);
+}
+
+/* Modern table variant */
+.modern-table-wrapper {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-top: 1rem;
+}
+
+.modern-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+.modern-table thead tr {
+  background-color: #e7e3dc;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.modern-table th {
+  padding: 12px 16px;
+  text-align: center;
+  border: 1px solid #ddd;
+  vertical-align: middle;
+  color: var(--heading-color);
+}
+.modern-table td {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+.modern-table tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+.modern-table tr:hover {
+  background-color: #e9f7ff;
+  cursor: pointer;
+}
+
+#wcmoTable thead th:nth-child(1) {
+  text-align: center !important;
+}
+
+/* WCMO width definitions */
+#wcmoTable thead th:nth-child(1),
+#wcmoTable tbody td:nth-child(1) {
+  width: 12%;
+  text-align: center !important;
+  padding-left: 0.5rem !important; 
+  padding-right: 0.5rem !important;
+}
+
+#wcmoTable thead th:nth-child(2),
+#wcmoTable tbody td:nth-child(2) {
+  width: 23%;
+}
+#wcmoTable thead th:nth-child(3),
+#wcmoTable tbody td:nth-child(3) {
+  width: 21%;
+}
+#wcmoTable thead th:nth-child(4),
+#wcmoTable tbody td:nth-child(4) {
+  width: 22%;
+}
+#wcmoTable thead th:nth-child(5),
+#wcmoTable tbody td:nth-child(5) {
+  width: 22%;
+}
+
+/* Macro highlighting */
+.macro-highlight-green {
+  background-color: #c9f6d3 !important;
+  color: #2e7d32;
+}
+.macro-highlight-red {
+  background-color: #ffd9d9 !important;
+  color: #d32f2f;
+}
+.macro-highlight-yellow {
+  background-color: #fff3cd !important;
+  color: #856404 !important;
+}
+
+.final-page-section {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1.2rem;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 0.6rem;
+  text-align: center;
+}
+.subheading {
+  font-size: 1.2rem;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 0.6rem;
+  color: var(--subheading-color);
+}
+.introduction-text,
+p,
+label,
+span {
+  color: var(--text-color);
+}
+.final-page-section .subtext {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  line-height: 1.4;
+  color: var(--text-color);
+}
+.heading {
+  font-family: 'Poppins', sans-serif;
+  /* color: var(--subheading-color); //#4A4A4A */
+  font-size: 2rem !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  margin: 1rem 0 !important;
+}
+.benefit-title i {
+  color: #607D8B;
+  margin-right: 0.5rem;
+  font-weight: 300;   /* CHANGED: use thinner tick icon */
+  font-size: 1em;
+}
+.final-page-section .subheading {
+  color: var(--subheading-color); /* #333 */
+}
+.upgrade-image-placeholder {
+  width: 80%;
+  height: 20vh;
+  background-color: #ddd;
+  margin: 0.6rem auto;
+  display: block;
+  object-fit: cover;
+}
+.list-container {
+  text-align: left;
+  display: inline-block;
+  margin-top: 1rem;
+}
+.list-container .list-item {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+.list-container .list-item i.fa-check {
+  color: #607D8B; /* bluish grey */
+  margin-right: 0.5rem;
+}
+
+.upgrade-now-btn {
+  font-family: 'Poppins', sans-serif;
+  display: block;
+  margin: 1rem auto 1rem auto; /* increased bottom margin */
+  padding: 1.15rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: #007BFF;  /* solid color */
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+}
+.upgrade-now-btn:hover {
+  background: linear-gradient(to bottom, #005FCC, #007AFF);
+}
+
+.locked-banner-row {
+  background-color: #2C3E50 !important; 
+  color: #FFFFFF !important; /* CHANGED #2: ensures banner text is unaffected */
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  text-align: center;
+}
+.locked-banner-row td {
+  display: flex;
+  justify-content: center;  /* horizontally center */
+  align-items: center;      /* vertically center */
+  padding: 0.7rem !important;
+  border: none !important;
+  text-align: center !important;
+  white-space: normal;      /* allow wrapping instead of pushing text away */
+}
+
+.locked-banner-row td[colspan] {
+  display: table-cell !important; /* override flex */
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding: 1rem !important;       /* (or whatever you like) */
+}
+
+
+.locked-banner-row i {
+  margin-right: 0.5rem;
+}
+
+.efg-table thead tr {
+  background-color: #e7e3dc !important;
+}
+
+.efg-table thead th:nth-child(1),
+.efg-table tbody td:nth-child(1) {
+  width: 40%;
+  text-align: center;
+  padding-left: 0.5rem !important; /* add some padding for FOOD col */
+  padding-right: 0.5rem !important;
+}
+/* The other columns remain 20% each. */
+.efg-table thead th:nth-child(2),
+.efg-table tbody td:nth-child(2),
+.efg-table thead th:nth-child(3),
+.efg-table tbody td:nth-child(3),
+.efg-table thead th:nth-child(4),
+.efg-table tbody td:nth-child(4) {
+  width: 20%;
+  text-align: center;
+}
+.efg-table thead th {
+  vertical-align: middle;
+}
+
+/* Force the EFG to have normal row striping, locked or unlocked. */
+.efg-table tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+.efg-table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.efg-table tr, .meal-plan-table tr {
+  color: var(--text-color);
+}
+
+.locked-meal-cell.macro-highlight-green,
+.locked-meal-cell.macro-highlight-red,
+.locked-meal-cell.macro-highlight-yellow {
+  background-color: inherit !important;
+  color: #666 !important;
+}
+
+.efg-table thead th:nth-child(1) {
+  white-space: normal;
+}
+
+.locked-meal-cell {
+  position: relative;
+}
+
+.locked-meal-cell .unlocked-content {
+  visibility: hidden; /* so the cell remains same size, 
+                         but is hidden behind overlay */
+}
+.locked-meal-cell .locked-overlay {
+  /* we defined above */
+}
+
+/* The same for a banner row in the recipe table */
+.locked-meal-banner {
+  position: relative;
+}
+
+.locked-meal-banner .unlocked-content {
+  visibility: hidden;
+}
+
+.locked-meal-banner .locked-overlay-banner {
+  /* we defined above */
+}
+
+.meal-plan-table {
+  width: 100%;
+  table-layout: fixed; /* ensures locked rows are same size */
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+.meal-plan-table thead th {
+  text-align: center;
+  background-color: #e7e3dc;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.meal-plan-table td, .meal-plan-table th {
+  border: 1px solid #ccc;
+  vertical-align: top;
+  padding: 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+}
+.meal-plan-table tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+.meal-plan-table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.meal-plan-table .col-2 {
+  width: 25% !important;
+}
+.meal-plan-table .col-4 {
+  width: 30% !important;
+}
+
+.locked-meal-cell {
+  color: #666 !important;
+  font-weight: bold;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+.meal-plan-table {
+  border-bottom: 1px solid #ccc;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+.meal-name-divider {
+  display: block;
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 0.6rem !important;  /* already there */
+  padding-bottom: 0.6rem;           /* add this to push the line further down */
+}
+
+.meal-plan-heading {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--heading-color);
+}
+.meal-plan-subheading {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--subheading-color);
+}
+
+.locked-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #2C3E50;
+  color: #fff;
+  opacity: 0.95;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  text-align: center;
+  z-index: 2;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.locked-overlay i {
+  margin-right: 0.5rem;
+}
+.locked-overlay-banner {
+  background-color: #2C3E50;
+  color: #fff;
+  opacity: 0.95;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 9; 
+  font-size: 1.1rem;
+  font-weight: bold;
+  flex-direction: row;
+}
+
+.benefits-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 2rem;
+}
+.benefit-column {
+  flex: 1 1 40%;
+  min-width: 250px;
+  text-align: start;
+}
+.benefit-item {
+  margin-bottom: 1.2rem;
+}
+.benefit-title {
+  font-weight: 600;
+  margin-top: 0;
+  padding-top: 0;
+}
+.benefit-subtext {
+  margin-left: 1.4rem;
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 0.3rem;
+}
+
+/* CHANGED #5(f) – 30-day money back guarantee styling */
+.money-back-text {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #666;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  text-align: center; /* center guarantee text */
+}
+.money-back-text::before {
+  content: "✓ "; /* add checkmark on left */
+  color: #666; 
+}
+
+.benefit-title::before {
+  content: "✓ "; /* add checkmark on left */
+  color: #333;
+  margin-right: 5px; 
+}
+
+.whats-included-container {
+  background-color: #E8E4DB; /* swapped! */
+  border-radius: 6px;
+  padding: 0.1rem 1rem 0.5rem 1rem;      /* CHANGED: reduced padding */
+  margin-top: 1rem;   /* CHANGED: reduced margin */
+  text-align: center; /* ensure subheading is centered */
+}
+
+.whats-included-container .subheading {
+  margin-bottom: 1rem; /* CHANGED: add spacing between subheading and benefits */
+  text-align: center;
+}
+
+.alt-ex-table thead th:nth-child(1) {
+  width: 30%; /* 3/10 = 30% */
+}
+.alt-ex-table thead th:nth-child(2) {
+  width: 70%; /* 7/10 = 70% */
+}
+.alt-ex-table tbody tr:nth-child(even) {
+  background-color: #f0f0f0; /* so locked cells match the even row color */
+}
+.alt-ex-table tbody tr:nth-child(odd) {
+  background-color: #fff;    /* matches the odd row color */
+}
+
+/* Remove forced BG so locked cells adopt row striping */
+.alt-ex-table .locked-cell {
+  /* -- REMOVED background-color: #f9f7f2; -- */
+  color: #666;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+}
+.alt-ex-table .locked-cell i {
+  margin-right: 0.4rem;
+}
+
+.footer-log-link {
+  color: #0056B3;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 325px;
+  letter-spacing: 0.5px;
+}
+
+.section-heading {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin: 1rem 0 0.5rem 0;
+}
+
+.nav-right-num {
+  text-align: right;
+  font-weight: bold;
+  color: #333;
+}
+
+.nav-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 70px;
+  row-gap: 2.3rem;
+  column-gap: 3rem;
+  margin: 3rem auto;
+  align-items: center;
+  max-width: 80%;
+  font-size: 1.1rem;
+}
+
+.locked-row td {
+  min-height: 40px;  
+  min-width: 100%;     /* or 60px, 80px, etc. */
+  vertical-align: middle;
+}
+
+.meal-plan-page .meal-plan-table {
+  width: 100%;
+  table-layout: fixed; /* ensures the colgroup widths remain in proportion */
+}
+
+.locked-fullsize-table {
+  width: 100% !important;          /* or any desired width, e.g. 95%, etc. */
+  table-layout: fixed !important;  /* ensures the colgroup widths are respected */
+}
+
+.locked-fullsize-table .locked-banner-row td {
+  padding: 3rem 1rem !important;   /* or any desired vertical padding */
+  text-align: center !important;  /* optional, if you want the icon/text centered */
+  font-size: 1.1rem;
+}
+
+.learn-more-header {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin: 0;  /* adjust as needed */
+  text-align: center;
+  color: #333;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.locked-meal-subtext {
+  margin-top: 1rem;       /* or more, if you want extra space */
+  font-size: 1rem;      /* optional smaller text */
+  line-height: 1.4;       /* comfortable line spacing */
+  /* color: #333; etc. */
+  text-align: center;
+}
+
+.pdf-page.locked-meal-plan-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centers vertically */
+  align-items: center;     /* centers horizontally */
+  height: 100vh;           /* full viewport height, adjust if needed */
+}
+
+.pdf-page p {
+  line-height: 1.5;
+}

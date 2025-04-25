@@ -1,0 +1,631 @@
+:root {
+    --base-font-size: 1.2rem;
+    --heading-color: #000000;
+    --subheading-color: #4A4A4A;
+    --text-color: #333;
+  }
+  
+  /* Global Defaults */
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #f9f7f2;
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    font-size: var(--base-font-size);
+    color: var(--text-color);
+  }
+  
+  h1 {
+    text-align: center;
+    margin: 1rem 0;
+    color: var(--heading-color);
+  }
+  
+  .buttons {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    background-color: #333;
+    color: #fff;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0.2rem;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+  }
+  .buttons:hover {
+    background-color: #111;
+  }
+  
+  /* Hide PDF containers initially */
+  .pdf-container {
+    display: none; /* will be toggled on prior to pdf generation */
+  }
+  
+  .pdf-page {
+    position: relative;
+    width: 793px; /* A4 portrait width in px */
+    height: 1122px; /* A4 portrait height in px */
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 0.5rem 2rem 0 2rem;
+    background-color: #f9f7f2;
+  }
+  
+  .page-header-left-logo {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+  }
+  
+  .logo-badge {
+    width: 100px;
+    height: auto;
+  }
+  
+  .with-badge-logo {
+    text-align: center;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .cover-slogan {
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+  }
+  
+  .cover-page {
+    background-color: #e7e3dc;
+    text-align: center;
+  }
+  
+  .no-footer {
+    /* indicates we won't add a normal footer on these cover pages */
+  }
+  
+  .cover-logo {
+    display: block;
+    max-width: 300px;
+    margin: 0 auto 1rem auto;
+  }
+  
+  .cover-placeholder-image {
+    display: block;
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+  
+  .cover-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    margin-top: 1rem;
+    text-align: center;
+    color: var(--heading-color);
+  }
+  
+  .cover-subtitle {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: 1rem;
+    color: var(--text-color);
+  }
+  
+  .divider {
+    border: none;
+    border-top: 2px solid #000;
+    margin: 1rem 0;
+  }
+  
+  /* Smaller label under main title, e.g. "Foundational Phase" */
+  .foundation-phase-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  
+  /* Footer */
+  .footer {
+    position: absolute;
+    bottom: 0.8rem;
+    left: 0.1rem;
+    right: 2rem;
+    background-color: #f9f7f2;
+    border-top: 3px solid #f9f7f2;
+    color: #333333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  .footer-right .page-number {
+    font-size: 1rem;
+    margin-right: 0.2rem;
+  }
+  
+  .footer-intro {
+    background-color: #f9f7f2;
+  }
+  
+  .footer-main {
+    background-color: #f9f7f2;
+  }
+  
+  .footer-left,
+  .footer-center,
+  .footer-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .footer-left .contact-link {
+    color: #333333;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-right: 18px;
+  }
+  
+  .footer-center {
+    justify-content: center;
+  }
+  
+  .footer-right {
+    flex: 0 0 auto;
+  }
+  
+  /* Social icons */
+  .social-icon-lg {
+    width: 42px;
+    height: 42px;
+    margin: 0 0.5rem;
+  }
+  
+  /* Basic text styling */
+  .centered {
+    text-align: center;
+  }
+  
+  .page-heading {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 2rem; /* increased margin */
+    text-align: center;
+    color: var(--heading-color);
+  }
+  
+  .video-placeholder {
+    width: 100%;
+    height: 200px;
+    background-color: #ddd;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .introduction-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Profile container */
+  .profile-container {
+    background: #f5efe7;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  }
+  
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+  
+  .profile-grid-item {
+    background: #fff;
+    padding: 0.7rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1.1rem;
+  }
+  
+  .label {
+    background: #e8e2d9;
+    font-weight: 700;
+  }
+  
+  /* Session table styles */
+  .session-table-container {
+    margin-top: 1rem;
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .session-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.1rem;
+  }
+  
+  .session-table td,
+  .session-table th {
+    border: 1px solid #ddd;
+    padding: 0.7rem;
+    vertical-align: middle;
+  }
+  
+  .session-table tbody tr:nth-child(even) {
+    background-color: #f0f0f0;
+  }
+  
+  .session-table tbody tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  
+  .section-heading {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 1rem 0 0.5rem 0;
+  }
+  
+  /* Modern table variant */
+  .modern-table-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+  }
+  
+  .modern-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: var(--text-color);
+  }
+  
+  .modern-table thead tr {
+    background-color: #e7e3dc;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .modern-table th {
+    padding: 12px 16px;
+    text-align: center;
+    border: 1px solid #ddd;
+    vertical-align: middle;
+    color: var(--heading-color);
+  }
+  
+  .modern-table td {
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  
+  .modern-table tr:nth-child(even) {
+    background-color: #f5f5f5;
+  }
+  
+  .modern-table tr:hover {
+    background-color: #e9f7ff;
+    cursor: pointer;
+  }
+  
+  /* Navi Page Right Numbers */
+  .nav-right-num {
+    text-align: right;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .nav-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 70px;
+    row-gap: 2.3rem;
+    column-gap: 3rem;
+    margin: 3rem auto;
+    align-items: center;
+    max-width: 80%;
+  }
+  
+  .note-text-nav {
+    font-size: 0.9rem;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  /* Log Workout Button */
+  .log-workout-btn {
+    display: block;
+    background: linear-gradient(145deg, #7cb342, #558b2f);
+    color: #fff;
+    font-weight: 600;
+    padding: 1rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    margin: 0 auto 1rem auto;
+    max-width: 50%;
+  }
+  .log-workout-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Upsell replaced with motivational / congratulatory page in many cases */
+  .upgrade-image-placeholder {
+    width: 80%;
+    height: 20vh;
+    background-color: #ddd;
+    margin: 0.6rem auto;
+    display: block;
+    object-fit: cover;
+  }
+  
+  .heading {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 1rem 0;
+  }
+  
+  .subheading {
+    font-size: 1.2rem;
+    font-family: 'Poppins', sans-serif;
+    color: var(--subheading-color);
+    margin-bottom: 0.6rem;
+    text-align: center;
+  }
+  
+  .subtext {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    line-height: 1.4;
+    text-align: center;
+  }
+  
+  /* Meal plan tables */
+  .meal-plan-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  .meal-plan-table thead th {
+    text-align: center;
+    background-color: #e7e3dc;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  
+  .meal-plan-table td,
+  .meal-plan-table th {
+    border: 1px solid #ccc;
+    vertical-align: top;
+    padding: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+  }
+  
+  .meal-plan-table tr:nth-child(even) {
+    background-color: #f5f5f5;
+  }
+  
+  .meal-plan-table tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  
+  .meal-name-divider {
+    display: block;
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.6rem;
+  }
+  
+  .col-2 {
+    width: 25% !important;
+  }
+  
+  .col-4 {
+    width: 30% !important;
+  }
+  
+  /* Motivational (congrats) page styling */
+  .congrats-container {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .congrats-container h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #000;
+  }
+  .congrats-container p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+    color: #333;
+  }
+  .congrats-btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    padding: 1rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+  }
+  .congrats-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Macro highlight classes if needed */
+  .macro-highlight-green {
+    background-color: #d4f5d6; /* a light green */
+    color: #333;
+  }
+  .macro-highlight-red {
+    background-color: #ffd4d4; /* a light red/pink */
+    color: #333;
+  }
+  .macro-highlight-yellow {
+    background-color: #fffac6; /* a light yellow */
+    color: #333;
+  }
+  
+  /* Lock banner row styling (if you are locking anything) */
+  .locked-banner-row td {
+    background-color: #2C3E50 !important;
+    color: #fff !important;
+    text-align: center;
+    font-size: 1.1rem;
+  }
+  .locked-banner-row td i.fa-lock {
+    margin-right: 8px;
+  }
+  
+  /* Background color for content */
+.content-container {
+  background-color: #f3f0ea; /* Light beige */
+  padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+  border-radius: 10px;
+}
+
+/* Info Box Styling */
+.info-box {
+  padding: 0.3rem 0.5rem 0.5rem 0.3rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+/* Alternate Background (for contrast) */
+.alt-background {
+  background-color: #f8f5f0; /* Slightly darker beige */
+}
+
+/* Pro Tip Styling */
+.pro-tip {
+  font-style: italic;
+  font-size: 1rem;
+  color: #007bff;
+  text-align: center;
+}
+
+/* Final Tip Styling */
+.final-tip {
+  padding: 0.5rem;
+  background-color: #ffefd5;
+  border-left: 4px solid #ff9800;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+/* Font Size Adjustments */
+h2, h3, p, ul, li {
+  font-size: 1rem;
+}
+
+h3 {
+  text-align: center;
+}
+
+.page-subheading {
+  text-align: center;
+}
+
+.footer-log-link {
+  color: #0056B3;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 100px;
+  letter-spacing: 0.5px;
+}
+
+.footer-log-link:hover {
+  opacity: 0.8;
+}
+
+.footer-mealplan .footer-center {
+  flex: 1; /* expand the center section */
+  justify-content: center; /* horizontally center the link */
+}
+
+.footer-right {
+  white-space: nowrap;
+}
+
+/* 2) Tighten up the main heading spacing */
+.pdf-page.meal-plan-page .page-heading.with-badge-logo {
+  margin-top: 0.5rem !important;   /* or 0 if you want it fully flush */
+  margin-bottom: 0.4rem !important;
+  /* You could also do 'line-height: 1.2;' if you want it even tighter */
+}
+
+/* 3) Reduce vertical gap under subheadings (Breakfast, Lunch, etc.) */
+.pdf-page.meal-plan-page h4.subheading {
+  margin-top: 0.3rem !important;  
+  margin-bottom: 0.3rem !important;
+}
+
+/* 4) Decrease spacing between tables and subsequent headings */
+.pdf-page.meal-plan-page .meal-plan-table {
+  margin-bottom: 0.5rem !important; 
+}
+
+.introduction-text {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.advice-text {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.program-intro-text {
+  font-size: 1rem;
+  line-height: 1.5;
+}

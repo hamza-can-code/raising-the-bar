@@ -1,0 +1,1038 @@
+:root {
+  --base-font-size: 1.2rem;
+  --heading-color: #000000;
+  --subheading-color: #4A4A4A;
+  --text-color: #333;
+}
+
+/* Global Defaults */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f9f7f2;
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+  font-size: var(--base-font-size);
+  color: var(--text-color);
+}
+
+h1 {
+  text-align: center;
+  margin: 1rem 0;
+  color: var(--heading-color);
+}
+
+.buttons {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  background-color: #333;
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0.2rem;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.buttons:hover {
+  background-color: #111;
+}
+
+/* Hide PDF containers initially */
+.pdf-container {
+  display: none;
+}
+
+.pdf-page {
+  position: relative;
+  width: 793px;
+  height: 1122px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0.5rem 2rem 0 2rem;
+  background-color: #f9f7f2;
+}
+
+.page-header-left-logo {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+.logo-badge {
+  width: 100px;
+  height: auto;
+}
+
+.with-badge-logo {
+  text-align: center;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.cover-slogan {
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.cover-page {
+  background-color: #e7e3dc;
+  text-align: center;
+}
+
+.no-footer {}
+
+
+.cover-logo {
+  display: block;
+  max-width: 300px;
+  margin: 0 auto 1rem auto;
+}
+
+.cover-placeholder-image {
+  display: block;
+  width: 100%;
+  height: 30vh;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.cover-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem;
+  margin-top: 1rem;
+  text-align: center;
+  color: var(--heading-color);
+}
+
+.cover-subtitle {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 1rem;
+  color: var(--text-color);
+}
+
+.divider {
+  border: none;
+  border-top: 2px solid #000;
+  margin: 1rem 0;
+}
+
+/* Footer */
+.footer {
+  position: absolute;
+  bottom: 0.8rem;
+  left: 0.1rem;
+  right: 2rem;
+  background-color: #f9f7f2;
+  border-top: 3px solid #f9f7f2;
+  color: #333333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.footer-right .page-number {
+  font-size: 1rem;
+  margin-right: 0.2rem;
+}
+
+.footer-intro {
+  background-color: #f9f7f2;
+}
+
+.footer-main {
+  background-color: #f9f7f2;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+  display: flex;
+  align-items: center;
+}
+
+.footer-left .contact-link {
+  color: #333333;
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-right: 18px;
+}
+
+.footer-center {
+  justify-content: center;
+}
+
+.footer-right {
+  flex: 0 0 auto;
+}
+
+/* Social icons */
+.social-icon-lg {
+  width: 42px;
+  height: 42px;
+  margin: 0 0.5rem;
+}
+
+/* Basic text styling */
+.centered {
+  text-align: center;
+}
+
+.page-heading {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--heading-color);
+}
+
+.video-placeholder {
+  width: 100%;
+  height: 200px;
+  background-color: #ddd;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.introduction-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Profile container */
+.profile-container {
+  background: #f5efe7;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.profile-grid-item {
+  background: #fff;
+  padding: 0.7rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 1.1rem;
+}
+
+.label {
+  background: #e8e2d9;
+  font-weight: 700;
+}
+
+/* Session table styles */
+.session-table-container {
+  margin-top: 1rem;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.session-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.1rem;
+}
+
+.session-table td,
+.session-table th {
+  border: 1px solid #ddd;
+  padding: 0.7rem;
+  vertical-align: middle;
+}
+
+.session-table tbody tr:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+.session-table tbody tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.section-divider {
+  background-color: #e7e3dc;
+  font-weight: 700;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+}
+
+.section-heading {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  font-weight: 700;
+  /* or 600, up to you */
+  font-size: 1.2rem;
+  /* or 1.1rem, if you want smaller */
+  margin: 1rem 0 0.5rem 0;
+  /* spacing above/below */
+}
+
+/* Modern table variant */
+.modern-table-wrapper {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+}
+
+.modern-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.modern-table thead tr {
+  background-color: #e7e3dc;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.modern-table th {
+  padding: 12px 16px;
+  text-align: center;
+  border: 1px solid #ddd;
+  vertical-align: middle;
+  color: var(--heading-color);
+}
+
+.modern-table td {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.modern-table tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+.modern-table tr:hover {
+  background-color: #e9f7ff;
+  cursor: pointer;
+}
+
+#wcmoTable thead th:nth-child(1) {
+  width: 12% !important;
+  /* narrower for "Week" */
+}
+
+#wcmoTable thead th:nth-child(2),
+#wcmoTable thead th:nth-child(3),
+#wcmoTable thead th:nth-child(4),
+#wcmoTable thead th:nth-child(5) {
+  width: 22% !important;
+}
+
+/* Navi Page Right Numbers */
+.nav-right-num {
+  text-align: right;
+  font-weight: bold;
+  color: #333;
+}
+
+.nav-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 70px;
+  row-gap: 2.3rem;
+  column-gap: 3rem;
+  margin: 3rem auto;
+  align-items: center;
+  max-width: 80%;
+}
+
+.note-text-nav {
+  font-size: 0.9rem;
+  /* smaller font */
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Log Workout Button */
+.log-workout-btn {
+  display: block;
+  background: linear-gradient(145deg, #7cb342, #558b2f);
+  color: #fff;
+  font-weight: 600;
+  padding: 1rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  margin: 0 auto 1rem auto;
+  max-width: 50%;
+}
+
+.log-workout-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Upsell page, meal plan, etc. remain consistent */
+.upgrade-image-placeholder {
+  width: 80%;
+  height: 20vh;
+  background-color: #ddd;
+  margin: 0.6rem auto;
+  display: block;
+  object-fit: cover;
+}
+
+.heading {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.subheading {
+  font-size: 1.2rem;
+  font-family: 'Poppins', sans-serif;
+  color: var(--subheading-color);
+  margin-bottom: 0.6rem;
+  text-align: center;
+}
+
+.subtext {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.upgrade-now-btn {
+  font-family: 'Poppins', sans-serif;
+  display: block;
+  margin: 1rem auto 0 auto;
+  padding: 1.15rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: #007BFF;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.upgrade-now-btn:hover {
+  background: linear-gradient(to bottom, #005FCC, #007AFF);
+}
+
+.money-back-text {
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.whats-included-container {
+  background-color: #E8E4DB;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.benefits-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 2rem;
+}
+
+.benefit-column {
+  flex: 1 1 40%;
+  min-width: 250px;
+  text-align: start;
+}
+
+.benefit-item {
+  margin-bottom: 1.2rem;
+}
+
+.benefit-title {
+  font-weight: 600;
+}
+
+.benefit-title::before {
+  content: "✓ ";
+  color: #333;
+  margin-right: 5px;
+}
+
+/* Essential Food Guide (fully unlocked for 4-week) */
+.efg-table thead tr {
+  background-color: #e7e3dc !important;
+}
+
+.efg-table thead th {
+  vertical-align: middle;
+}
+
+.efg-table thead th:nth-child(1) {
+  width: 40%;
+  text-align: center;
+}
+
+.efg-table thead th:nth-child(2),
+.efg-table thead th:nth-child(3),
+.efg-table thead th:nth-child(4) {
+  width: 20%;
+  text-align: center;
+}
+
+.locked-banner-row td {
+  background-color: #2C3E50 !important;
+  color: #fff !important;
+  text-align: center;
+  font-weight: normal !important;
+  /* remove bold from the banner text */
+  font-size: 1.1rem;
+}
+
+.locked-banner-row td i.fa-lock {
+  margin-right: 8px;
+}
+
+.macro-highlight-green {
+  background-color: #d4f5d6;
+  /* a light green */
+  color: #333;
+}
+
+.macro-highlight-red {
+  background-color: #ffd4d4;
+  /* a light red/pink */
+  color: #333;
+}
+
+.macro-highlight-yellow {
+  background-color: #fffac6;
+  /* a light yellow */
+  color: #333;
+}
+
+.locked-meal-cell.macro-highlight-green,
+.locked-meal-cell.macro-highlight-red,
+.locked-meal-cell.macro-highlight-yellow {
+  background-color: inherit !important;
+  color: #666 !important;
+}
+
+/* Meal plan tables, no locked rows for 4-week. */
+.meal-plan-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.meal-plan-table thead th {
+  text-align: center;
+  background-color: #e7e3dc;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.meal-plan-table td,
+.meal-plan-table th {
+  border: 1px solid #ccc;
+  vertical-align: top;
+  padding: 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+}
+
+.meal-plan-table tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+.meal-plan-table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.meal-name-divider {
+  display: block;
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
+.meal-plan-heading {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--heading-color);
+}
+
+.meal-plan-subheading {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  /* same size as .meal-plan-heading now */
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--heading-color);
+}
+
+.col-2 {
+  width: 25% !important;
+}
+
+.col-4 {
+  width: 30% !important;
+}
+
+/* Modify Your Workout (with multiple subheadings) */
+.alt-ex-table .locked-cell {
+  color: #666;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+}
+
+.alt-ex-table thead th:nth-child(1) {
+  width: 30%;
+}
+
+.alt-ex-table thead th:nth-child(2) {
+  width: 70%;
+}
+
+.upsell-hero-block {
+  background-color: #F3F0EA;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.upsell-hero-heading {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.upsell-hero-subtext {
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 0 auto 0.5rem auto;
+  line-height: 1.4;
+  max-width: 95%;
+}
+
+/* 2) Testimonial row: left = 250px box, right = text */
+.upsell-testimonial-row {
+  display: flex;
+  flex-wrap: nowrap;
+  /* ensures side-by-side in a row */
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: center;
+  /* vertical alignment */
+}
+
+/* 250x250 placeholder box on the left */
+.upsell-testimonial-placeholder {
+  width: 250px;
+  height: 250px;
+  background-color: #ccc;
+  flex: 0 0 auto;
+  border-radius: 4px;
+}
+
+.upsell-testimonial-text {
+  flex: 1 1 auto;
+  /* background-color: #fff; */
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.15);
+  font-size: 1rem;
+  line-height: 1.6;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* 3) Two-lists side by side comparing 4 vs 12 week */
+.upsell-compare-lists {
+  margin-bottom: 1rem;
+}
+
+.upsell-compare-heading {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.compare-container {
+  display: flex;
+  flex-wrap: nowrap;
+  /* or wrap if you prefer responsiveness */
+  gap: 1rem;
+}
+
+.compare-list {
+  flex: 1 1 50%;
+  background-color: #f9f9f8;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.compare-list h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.compare-list ul {
+  padding-left: 1.2rem;
+  margin: 0.5rem 0 0 0;
+  list-style-type: none;
+}
+
+.compare-list li::before {
+  content: "✓ ";
+  color: #333;
+}
+
+.compare-list-gold {
+  border: 2px solid #d4af37;
+  /* thin gold border */
+}
+
+/* 4) Guarantee statement with lock icon, #eee background */
+.upsell-guarantee-block {
+  background-color: #eee;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.upsell-guarantee-heading {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.upsell-guarantee-subtext {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.lock-icon {
+  color: #d4af37;
+  /* goldish */
+  margin-right: 0.3rem;
+}
+
+/* 5) Final CTA button - large, impossible to miss */
+.upsell-cta-btn {
+  display: block;
+  background-color: #007BFF;
+  color: #fff;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  padding: 1.5rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  margin: 1rem auto 0 auto;
+  max-width: 95%;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.upsell-cta-btn:hover {
+  background-color: #0056b3;
+}
+
+.next-step-heading {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  font-size: 2rem !important;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.myw-page .footer {
+  background-color: #E6EBF1;
+  border-top: none;
+}
+
+.grocery-sub-table thead th:nth-child(1) {
+  width: 20% !important;
+}
+
+.grocery-sub-table thead th:nth-child(2) {
+  width: 80% !important;
+}
+
+.twocol-20-80 thead th:nth-child(1) {
+  width: 20% !important;
+}
+
+.twocol-20-80 thead th:nth-child(2) {
+  width: 80% !important;
+}
+
+/* Updated column widths for the Portioning & Structuring Your Meals table */
+.portion-table-adjusted thead th:nth-child(1),
+.portion-table-adjusted tbody td:nth-child(1) {
+  width: 20% !important;
+  /* narrower first column */
+}
+
+.portion-table-adjusted thead th:nth-child(2),
+.portion-table-adjusted tbody td:nth-child(2) {
+  width: 30% !important;
+  /* wider second column */
+}
+
+.portion-table-adjusted thead th:nth-child(3),
+.portion-table-adjusted tbody td:nth-child(3) {
+  width: 20% !important;
+}
+
+.portion-table-adjusted thead th:nth-child(4),
+.portion-table-adjusted tbody td:nth-child(4) {
+  width: 30% !important;
+}
+
+.upsell-benefits-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.upsell-benefit-col {
+  flex: 1 1 200px;
+  min-width: 200px;
+}
+
+.upsell-benefit-item {
+  margin-bottom: 0.75rem;
+}
+
+.upsell-testimonial-row {
+  background-color: #e8e4db; 
+  padding: 0.25rem;
+  border-radius: 6px;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start; /* keep the top edges aligned */
+}
+
+.upsell-testimonial-text-container {
+  margin-left: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column; 
+}
+
+/* Header (Name + Stars) */
+.upsell-testimonial-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.2rem; 
+  background-color: #858585; /* A light color that contrasts with #e8e4db */
+  padding: 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem; /* Space between header and the text below */
+  color: #ffffff;
+}
+
+/* Bold name on the left, stars next, etc. */
+.upsell-testimonial-header strong {
+  font-weight: bold;
+}
+
+/* The testimonial text itself */
+.upsell-testimonial-text {
+  font-size: 1.1rem;
+  margin: 0.5rem 0 0 0; /* small top margin to separate from header */
+  text-align: left;     /* ensure text is left-aligned */
+  width: 100%
+}
+
+.upsell-benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 0.75rem;
+  column-gap: 1rem;
+  background-color: #f3f0ea;
+  padding: 1rem 1.25rem 0.75rem 1.25rem;
+  margin-bottom: 1.5rem; 
+  border-radius: 6px;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.upsell-benefit-row {
+  display: contents; /* lets each item fall into its own grid cell */
+}
+
+.upsell-benefit-item {
+  font-weight: 600;
+  text-align: center;
+}
+
+.discounted-price {
+  color: #ffffff;
+  background-color: #d9534f;
+  font-size: 24px;
+  margin-left: 2px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Background color for content */
+.content-container {
+  background-color: #f3f0ea; /* Light beige */
+  padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+  border-radius: 10px;
+
+  /* Center all text in this container */
+  text-align: center;
+}
+
+/* Increase line spacing for bullet points */
+.content-container ul li {
+  line-height: 1.6; /* Increase as needed (e.g. 1.8) */
+}
+
+/* Info Box Styling */
+.info-box {
+  padding: 0.3rem 0.5rem 0.5rem 0.3rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+/* Alternate Background (for contrast) */
+.alt-background {
+  background-color: #f8f5f0; /* Slightly darker beige */
+}
+
+/* Pro Tip Styling (only used if user wants an unlocked Pro Tip somewhere) */
+.pro-tip {
+  font-style: italic;
+  font-size: 1rem;
+  color: #007bff;
+  text-align: center;
+}
+
+/* Final Tip Styling */
+.final-tip {
+  padding: 0.5rem;
+  background-color: #ffefd5;
+  border-left: 4px solid #ff9800;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+/* Locked Final Tip Styling */
+.final-tip.locked {
+  background-color: #2C3E50; /* Dark background */
+  border: none;
+  color: #fff;              /* White text */
+  font-weight: normal;      /* Not bold */
+  border-radius: 8px;
+  /* For consistent spacing: */
+  padding: 0.75rem 1rem;
+}
+
+/* More specific rule to force 1.1rem inside the locked banner */
+.final-tip.locked p {
+  font-size: 1.1rem !important;
+  line-height: 1.4 !important;
+  margin: 0; /* remove default margin */
+  text-align: center !important;
+}
+
+/* Locked Content (bullets and Pro Tip) */
+.locked-content {
+  color: #666;
+  font-weight: bold;
+}
+
+/* Font Size Adjustments for headings & paragraphs */
+h2, h3, p, ul, li {
+  font-size: 1rem;
+}
+
+/* Center subheadings (though .content-container already does this) */
+h3 {
+  text-align: center;
+}
+
+/* Center the page subheading too */
+.page-subheading {
+  text-align: center;
+}
+
+/* Remove bullet points & default list padding */
+.content-container ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.content-container ul li {
+  line-height: 2; /* adjust as you like */
+}
+
+.footer-log-link {
+  color: #0056B3;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 100px;
+  letter-spacing: 0.5px;
+}

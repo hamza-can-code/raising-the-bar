@@ -1,0 +1,888 @@
+/* -------- Base -------- */
+:root {
+  --brand-blue: #007bff;
+  --brand-cream: #f9f7f2;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  background: var(--brand-cream);
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  body {
+    height: 100vh;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.cta {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+
+}
+
+/* fade‑in helper (re‑used from NT) */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s, transform 1s;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* -------- Header -------- */
+.header {
+  text-align: center;
+  padding: 25px 10px 10px;
+}
+
+.logo img {
+  max-height: 80px;
+}
+
+/* ——— Header & Nav ——— */
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+.main-nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+}
+.main-nav a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #fff;
+  transition: color 0.2s;
+}
+.main-nav a:hover {
+  color: #A855F7;  /* pro purple hover */
+}
+/* hide desktop nav on mobile, show hamburger */
+@media (max-width: 768px) {
+  .main-nav { display: none; }
+  .hamburger { display: block; }
+}
+@media (min-width: 769px) {
+  .hamburger { display: none; }
+}
+
+/* ——— Modal Overlay & Content ——— */
+.faq-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 3000;
+}
+.faq-modal-content {
+  background: #fff;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 8px;
+  position: relative;
+}
+.close-btn {
+  position: absolute;
+  top: 12px; right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.faq-modal-content h2 {
+  margin-top: 0;
+}
+.faq-modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.faq-modal-content input[type="email"] {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.faq-modal-content button[type="submit"] {
+  padding: 0.8rem;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.faq-modal-content button[type="submit"]:hover {
+  background: #0056b3;
+}
+.faq-list details {
+  margin-bottom: 1rem;
+}
+.faq-list summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #333;
+  font-size: 1.1rem;
+}
+/* small text under login form */
+.small {
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* ——— Mobile Nav Tweaks ——— */
+
+  .header-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .header .hamburger {
+    position: absolute;
+    top: 7%;                /* halfway down the header */
+    left: 20px;
+    transform: translateY(-50%);
+  }
+
+  .hamburger {
+    display: block;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  /* hide desktop‑style menu until toggled */
+  .main-nav {
+    display: none;
+  }
+  
+  .main-nav.open {
+    display: flex;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2000;
+    /* no centering—panel itself will define its layout */
+  }
+  
+  .main-nav.open ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 60%;            /* shrink the panel width from 75% → 60% */
+    max-width: 300px;
+    margin: 0;
+    /* add extra left‑padding so items aren’t flush to the edge */
+    padding: 4.5rem 1rem 1rem 2rem;
+    background: #fff;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    border-radius: 0 8px 8px 0;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;  /* left‑align the flex items */
+    gap: 1rem; 
+    list-style: none;
+  }
+  .main-nav.open ul li + li {
+    margin-top: 0.5rem;
+  }
+  .main-nav.open ul li {
+    margin: 0;
+    width: 100%;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 0.75rem;
+  }
+  .main-nav.open ul li:last-child {
+    border-bottom: none;     /* no border on last */
+    padding-bottom: 0;       /* optional: remove extra padding */
+  }
+  .main-nav.open ul a {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+    color: #333;
+    text-align: left;
+    display: block;
+    font-weight: 500;
+    font-size: 1.2rem;
+  }
+  .main-nav.open ul a:hover {
+    background: #F0F0F0;
+  }
+  .nav-close {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+    z-index: 2100;
+  }
+  .main-nav.open .nav-close {
+    color: #333;
+  }
+  .main-nav.open::before {
+    content: '';
+    position: absolute;
+    top: 3.75rem; left: 0;
+    width: 100%;
+    height: 1px;
+    /* background: #e5e5e5; */
+  }
+
+  .faq-answer {
+    color: #444;
+    background-color: #F6F4EF;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+/* -------- Greeting -------- */
+.welcome {
+  text-align: center;
+  margin: 5px auto 20px;
+}
+
+.welcome h1 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  margin: 0;
+}
+
+.welcome-sub {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* -------- XP bar -------- */
+.xp-bar-container,
+.fixed-header .xp-bar {
+  position: relative;
+}
+
+.xp-bar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 25px;
+}
+
+#currentLevel {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.xp-bar {
+  width: 70%;
+  max-width: 500px;
+  height: 22px;
+  border-radius: 11px;
+  background: #e0e0e0;
+  overflow: hidden;
+}
+
+.xp-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--brand-blue);
+  transition: width .4s ease;
+}
+
+#xpGainAnim,
+#stickyXpGainAnim {
+  position: absolute;
+  right: 0;
+  top: 55%;
+  transform: translateY(-50%);
+  opacity: 0;
+  font-weight: 700;
+  color: var(--brand-blue);
+  transition: opacity .4s, transform .4s;
+}
+
+/* sticky */
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #F6EFE3;
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, .08);
+  transform: translateY(-100%);
+  transition: transform .35s ease;
+  font-weight: bold;
+}
+
+.fixed-header.visible {
+  transform: none;
+}
+
+/* -------- Cards -------- */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4%;
+
+  width: 100%;
+  /* <-- add this */
+  max-width: 900px;
+  /* your cap */
+  margin: 0 auto 40px;
+}
+
+.tracker-card {
+  flex: 1 1 48%;
+  min-width: 250px;
+  padding: 24px 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: rgba(147, 51, 234, 0.08);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+#ntCard,
+#mpCard {
+  flex: 1 1 48%;
+  min-width: 250px;
+  padding: 24px 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: rgba(147, 51, 234, 0.08);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.tracker-card .emoji {
+  font-size: 2.4rem;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.tracker-card h2 {
+  margin: 6px 0 14px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+}
+
+.status,
+.streak {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  margin: 4px 0;
+
+}
+
+.status {
+  color: #666;
+}
+
+.streak {
+  margin: 40px 0 4px 0;
+  color: #333;
+}
+
+.nt-subtext,
+.mp-subtext {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 20px 0 10px;
+  color: #666;
+  font-weight: 600;
+}
+
+.nt-subtext-emoji,
+.mp-subtext-emoji {
+  font-size: 1rem;
+}
+
+.cta {
+  margin-top: 1rem;
+  margin-bottom: 4px;
+  display: inline-block;
+  background: var(--brand-blue);
+  color: #fff;
+  padding: 22px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .25s;
+  width: 90%;
+  font-size: 1.1rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  /* Subtle shadow for elevation */
+  transition: all 0.3s ease;
+}
+
+.cta:hover {
+  background: #0056b3;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+  /* Slightly larger shadow */
+  transform: translateY(-2px);
+}
+
+.cta:active {
+  background-color: #003f7f;
+  /* Even darker blue on click */
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+  /* Reduced shadow */
+  transform: translateY(2px);
+  /* Press effect on click */
+}
+
+@media (max-width: 768px) {
+  .tracker-card {
+    flex: none;
+    /* turn flex back off so it obeys width */
+    width: 90%;
+    margin: 26px auto;
+    max-width: none;
+    /* clear the desktop cap */
+  }
+
+  #ntCard,
+  #mpCard {
+    flex: none;
+    width: 90%;
+    margin: 26px auto;
+    max-width: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .tracker-card {
+    margin: 80px auto 40px auto;
+  }
+}
+
+/* -------- Motivation -------- */
+.motivation {
+  max-width: 600px;
+  margin: 0 auto 50px;
+  text-align: center;
+}
+
+.motivation p {
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+
+/* ─────────  Core vs Pro badges  ───────── */
+.pt-extra-container,
+.ct-extra-container,
+.tracker-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 10px !important;
+  padding: 6px 12px;
+  font-size: 0.7rem;
+  border-radius: 5px;
+  text-align: center !important;
+}
+
+.pt-extra-container,
+.tracker-badge.pt-extra-container {
+  background: #9333EA !important;
+}
+
+.pt-extra-container {
+  background: #9333EA;
+  margin: 10px auto 15px auto;
+  text-align: center;
+  padding: 2px 12px 6px 12px;
+  border-radius: 5px;
+}
+
+.ct-extra-container,
+.tracker-badge.ct-extra-container {
+  background: #e0e0e0;
+}
+
+.pt-extra {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #F8F4FF !important;
+  margin-top: 5px;
+}
+
+.ct-extra {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #333 !important;
+}
+
+.crown-emoji {
+  font-size: 1.1rem;
+  display: inline-block;
+  line-height: 1;
+  vertical-align: text-top;
+  /* hugs the first line of “Pro” */
+  font-style: normal;
+}
+
+.lock-emoji {
+  font-size: 1.1rem;
+}
+
+.tracker-badge {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  z-index: 1100;
+  max-width: 100px;
+  line-height: 1.2;
+  text-align: center;
+  display: block;
+  text-align: center;
+}
+
+.pt-extra,
+.ct-extra {
+  display: inline-block;
+}
+
+/* ─────────  Purple CTAs  ───────── */
+.pt-cta {
+  background: #9333EA !important;
+}
+
+.pt-cta:hover {
+  background: #7c2bd6 !important;
+}
+
+/* ─────────  Workout upsell line  ───────── */
+
+.tracker-card .core-lock {
+  align-self: stretch;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 20px;
+  text-align: center;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word;
+}
+
+
+.core-lock {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+@media (min-width: 768px) {
+  /* make sure the card is a column flex so margin-auto works */
+  #wtCard {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* push only the Workout CTA down */
+  #wtCard .cta {
+    margin-top: auto;
+  }
+}
+
+/* ─────────  Compare‑Plans prompt  ───────── */
+.compare-plans {
+  text-align: center;
+  font-size: 0.9rem;
+  margin: 0 0 20px;
+  display: none;
+}
+
+.compare-plans a {
+  text-decoration: underline;
+}
+
+/* ─────────  First‑Workout banner  ───────── */
+.first-workout-banner {
+  background: rgba(244, 232, 255, 0.85);
+  /* soft purple tint */
+  backdrop-filter: blur(6px);
+  /* matches tracker-card */
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  /* subtle, elegant */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  /* smooth shadow */
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+
+.first-workout-banner .headline {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.first-workout-banner .subline {
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+}
+
+/* ─────────  Compare‑Plans modal  ───────── */
+
+.table-wrapper {
+  margin-bottom: 20px;     /* space before the testimonial */
+  overflow-x: auto;        /* allow side‑scroll on small viewports */
+  -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+}
+
+#compareModal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, .6);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s, visibility .3s;
+  z-index: 1200;
+}
+
+#compareModal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  position: relative;
+  background: #fff;
+  width: 90%;
+  /* max-width: 500px; */
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  padding: 30px 20px;
+  transform: translateY(30px);
+  transition: transform .3s;
+}
+
+.modal.show .modal-content {
+  transform: none;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.modal-content .subtext {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal-content .close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.compare-table {
+  width: max-content;      /* table will size to its content */
+  max-width: 100%;         /* but never exceed its wrapper */
+  border-collapse: collapse;
+  table-layout: fixed; 
+  margin-bottom: 20px;
+}
+
+.compare-table .col-feature { width: 55%; }  /* ~half the table for the labels */
+.compare-table .col-ct,
+.compare-table .col-pt { width: 22.5%; }     /* split remainder evenly */
+
+.compare-table th,
+.compare-table td {
+  padding: 10px 6px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+  white-space: normal;       /* allow wrapping at spaces */
+  word-break: break-word;   
+}
+
+.compare-table th:first-child,
+.compare-table td:first-child {
+  text-align: left;
+}
+
+@media (max-width: 480px) {
+  .compare-table th,
+  .compare-table td {
+    font-size: 0.9rem;
+    padding: 8px 6px;
+  }
+}
+
+.testimonial {
+  font-style: italic;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* -------- Footer -------- */
+.footer {
+  margin-top: auto;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.footer-content p {
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.social-icons img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+
+  .footer {
+    padding: 20px 0;
+
+  }
+
+  .footer-links {
+    flex-direction: column;
+    /* Stack links vertically */
+    gap: 10px;
+    padding: 5px 0;
+  }
+
+  .footer-links a {
+    font-size: 1.1rem;
+    /* Larger text for easier readability */
+    margin-bottom: 10px;
+    text-decoration: underline;
+  }
+
+  .footer p {
+    font-size: 1rem;
+    /* Larger text for easier readability */
+    margin-bottom: 20px;
+  }
+
+  .social-icons img {
+    width: 42px;
+    /* Slightly larger for mobile */
+    height: 42px;
+    margin: 0 35px;
+  }
+
+  .footer span {
+    display: none;
+  }
+}

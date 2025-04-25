@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Share Your Story</title>
+    <link href="styles/share-your-story.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <a href="landing-page.html">
+                <img id="logo" class="fade-in" src="src/images/rtb-logo-white.png" alt="Raising The Bar Logo"
+                    height="100px">
+            </a>
+        </div>
+        <div class="dark-mode-button">
+            <img id="darkModeToggle" class="fade-in" src="src/images/dark-mode-off-button.png" alt="Dark Mode Button"
+                height="0px">
+        </div>
+    </div>
+
+    <!-- Apply Section -->
+    <section class="apply-section">
+        <div class="container">
+            <div class="fade-in">
+                <h2 class="section-title">Share Your Story</h2>
+                <p class="section-description">
+                    We’d love to hear about your fitness journey and how Raising The Bar has helped you achieve your
+                    goals. Share your story, upload your progress pictures, and inspire others to take the next step in
+                    their fitness transformation!
+                </p>
+            </div>
+            <div class="fade-in">
+                <form class="apply-form" enctype="multipart/form-data">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                    <label for="story">Your Story:</label>
+                    <textarea id="story" name="story"
+                        placeholder="Tell us about your journey, challenges, and achievements." rows="5"
+                        required></textarea>
+
+                    <label for="photos">Upload Progress Pictures:</label>
+                    <input type="file" id="photos" name="photos" accept="image/*" multiple required>
+                    <small class="file-note">You can upload multiple images. Accepted formats: JPG, PNG.</small>
+                    <div>
+                        <button type="submit" class="submit-btn">Submit Your Story</button>
+                    </div>
+                </form>
+
+            <p class="privacy-note">
+                Your information and photos will be kept confidential unless you give explicit permission to share them.
+            </p>
+        </div>
+        </div>
+    </section>
+
+
+    <footer class="footer fade-in" id="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Raising The Bar. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#programmes">Programmes</a>
+                <span class="separator">|</span>
+                <a href="#coaching">Coaching</a>
+                <span class="separator">|</span>
+                <a href="#contact">Contact Us</a>
+            </div>
+            <div class="social-icons">
+                <a href="https://www.youtube.com" target="_blank" aria-label="YouTube">
+                    <img src="src/images/youtube-icon.png" alt="YouTube">
+                </a>
+                <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+                    <img src="src/images/instagram-icon.png" alt="Instagram">
+                </a>
+                <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok">
+                    <img src="src/images/tiktok-icon.png" alt="TikTok">
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script src="scripts/share-your-story.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>4-Week Program</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
+    rel="stylesheet" />
+
+  <!-- Main CSS for 4-Week Program -->
+  <link rel="stylesheet" href="styles/4-week-program.css" />
+
+  <!-- html2pdf.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+  <!-- FontAwesome for Lock Icons (if needed) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body>
+
+  <h1>4-Week Program Demo</h1>
+  <p>Click below to generate and download your two PDFs: Workouts & Nutrition.</p>
+
+  <!-- Single button that triggers both PDF downloads -->
+  <button id="download4WeekBtn" class="buttons">Download 4-Week Program</button>
+
+  <!-- ===============================
+       PDF 1: Workouts Container
+       =============================== -->
+  <div id="pdf4WeekWorkout" class="pdf-container">
+    <!-- 1) Front Cover -->
+    <div class="pdf-page cover-page no-footer" id="pdf4WorkoutCover">
+      <img src="src/images/rtb-logo-white.png" alt="RTB Logo" class="cover-logo" style="max-width:300px;" />
+      <p class="cover-slogan">
+        Delivering empowering, enjoyable and result-driven workout programs tailored for you.
+      </p>
+
+      <img src="#" alt="Cover Placeholder" class="cover-placeholder-image" />
+      <hr class="divider" />
+      <h2 id="fourWeekCoverTitle" class="cover-title"></h2>
+      <hr class="divider" />
+      <p class="cover-subtitle">
+        A Step-by-Step Guide to Your Best Health and Fitness Journey
+      </p>
+      <!-- Footer is added dynamically -->
+    </div>
+
+    <!-- 2) Navigation Page -->
+    <div class="pdf-page" id="pdf4WorkoutNavPage">
+      <div class="page-header-left-logo">
+        <img src="src/images/rtb-logo-white.png" alt="RTB small logo" class="logo-badge" />
+      </div>
+      <!-- Filled dynamically with sections & computed page #s -->
+    </div>
+
+    <!-- 3) Introduction Page -->
+    <div class="pdf-page" id="pdf4WorkoutIntroPage">
+      <div class="page-header-left-logo">
+        <img src="src/images/rtb-logo-white.png" alt="RTB small logo" class="logo-badge" />
+      </div>
+      <!-- Placeholder intro text; styled like 1-Week introduction -->
+    </div>
+
+    <!-- 4) Client Profile Page -->
+    <div class="pdf-page" id="pdf4WorkoutClientProfilePage">
+      <div class="page-header-left-logo">
+        <img src="src/images/rtb-logo-white.png" alt="RTB small logo" class="logo-badge" />
+      </div>
+      <!-- Identical to 1-Week “{Name}’s Profile” layout -->
+    </div>
+
+    <!-- 5) Additional Advice -->
+    <div class="pdf-page" id="pdf4WorkoutAdditionalAdvicePage">
+      <div class="page-header-left-logo">
+        <img src="src/images/rtb-logo-white.png" alt="RTB small logo" class="logo-badge" />
+      </div>
+      <!-- Identical content to 1-Week Additional Advice -->
+    </div>
+
+    <!-- 6) Your Workout Program -->
+    <div class="pdf-page" id="pdf4YourWorkoutProgramPage">
+      <div class="page-header-left-logo">
+        <img src="src/images/rtb-logo-white.png" alt="RTB small logo" class="logo-badge" />
+      </div>
+      <!-- Placeholder text for “Your Workout Program,” same styling. -->
+    </div>
+
+    <!-- 7) Modify Your Workout Page -->
+    <!-- <div class="pdf-page" id="pdf4ModifyWorkoutPage">
+      <div class="page-header-left-logo">
+        <img src="src/images/rtb-logo-white.png" alt="RTB small logo" class="logo-badge" />
+      </div>
+    </div> -->
+
+    <!-- 8) Modify Your Workout Page(s) -->
+    <!-- We will generate possibly multiple pages for MYW; we place them dynamically -->
+    <div id="pdf4ModifyWorkoutPagesWrapper"></div>
+
+    <!-- 9) 4-Week Program (Weeks 1 - 4) -->
+    <!-- We will generate multiple pages inside this container: warm-up / main workout for each day, each week. -->
+    <div id="pdf4AllWeeksContainer"></div>
+
+    <!-- 10) Upsell Page -->
+    <div class="pdf-page" id="pdf4WorkoutUpsellPage">
+      <!-- Identical to 1-Week Program’s upsell structure (to be refined later). -->
+    </div>
+  </div>
+  <!-- END PDF 1 Container -->
+
+  <!-- =====================================
+       PDF 2 (PART 1): Nutrition Container
+       ===================================== -->
+
+  <div id="pdf4WeekNutritionPart1" class="pdf-container" style="display:none;">
+    <!-- 1) Cover -->
+    <div class="pdf-page cover-page no-footer" id="pdf4NutritionCover">
+      <img src="src/images/rtb-logo-white.png" alt="RTB Logo" class="cover-logo" style="max-width:300px;" />
+
+      <p class="cover-slogan">
+        Delivering empowering, enjoyable and result-driven workout programs tailored for you.
+      </p>
+
+      <!-- Optional placeholder image -->
+      <img src="#" alt="Cover Placeholder" class="cover-placeholder-image" />
+
+      <hr class="divider" />
+      <!-- Title set dynamically by fillNutritionCoverPage() -->
+      <h2 id="fourWeekNutritionCoverTitle" class="cover-title"></h2>
+      <hr class="divider" />
+
+      <p id="fourWeekNutritionSubtitle" class="cover-subtitle">
+        Fuel Your Body and Maximize Your 4-Week Transformation
+      </p>
+      <!-- Footer is added dynamically -->
+    </div>
+
+    <!-- 2) Navigation Page -->
+    <div class="pdf-page" id="pdf4NutritionNavPage"></div>
+
+    <!-- 3) Introduction Page -->
+    <div class="pdf-page" id="pdf4NutritionIntroPage"></div>
+
+    <!-- 4) Weekly Calorie & Macro Overview -->
+    <div class="pdf-page" id="pdf4NutritionCaloriePage"></div>
+
+    <!-- 5) Essential Food Guide -->
+    <div class="pdf-page" id="pdf4EssentialFoodGuidePage"></div>
+
+    <!-- 7) Food Portioning Guide -->
+    <div class="pdf-page" id="pdf4FoodPortionGuidePage"></div>
+
+    <!-- 8) Meal-Building Framework Page -->
+    <!-- <div class="pdf-page" id="pdf4MealBuildingFrameworkPage"></div> -->
+
+    <!-- 9) Nutrition Quick-Start Guide Page (1) -->
+    <div class="pdf-page" id="pdf4NutritionQuickStartPage"></div>
+
+    <!-- 10) Nutrition Quick-Start Guide Page (2) -->
+    <div class="pdf-page" id="pdf4NutritionQuickStartPage2"></div>
+
+        <!-- 9) Strategic Meal Prep & Time-Saving Guide (New Page) -->
+        <div class="pdf-page" id="pdf12MealPrepTimePage"></div>
+
+        <!-- 10) How to Eat for Long-Term Success (New Page) -->
+        <div class="pdf-page" id="pdf12LongTermSuccessPage"></div>
+    
+        <!-- 11) Eating Out & Social Events Guide (New Page) -->
+        <div class="pdf-page" id="pdf12EatingOutSocialPage"></div>
+
+        <!-- 6) (Previously “Meal Plans for W1-2,” now removed) -->
+        <div class="pdf-page" id="pdf4GroceryPage1"></div>
+        <div class="pdf-page" id="pdf4GroceryPage2"></div>
+        <div class="pdf-page" id="pdf4GroceryPage3"></div>
+
+    <!-- 11) Upsell Page -->
+    <div class="pdf-page" id="pdf4NutritionUpsellPage"></div>
+  </div>
+  <!-- END PDF 2 Container -->
+
+
+  <!-- ================================
+           PDF 3: Meal Plan Container
+           ================================ -->
+  <div id="pdf4WeekNutritionPart2" class="pdf-container" style="display:none;">
+    <!-- Minimal or partial cover for Weeks 3 & 4 -->
+    <div class="pdf-page cover-page no-footer" id="pdf4MealPlanCover">
+      <img src="src/images/rtb-logo-white.png" alt="RTB Logo" class="cover-logo" style="max-width:300px;" />
+    
+      <p class="cover-slogan"> Delivering empowering, enjoyable and result-driven workout programs tailored for you.</p>
+      
+      <!-- Optional placeholder image (ensure same size as in other PDFs) -->
+      <img src="#" alt="Cover Placeholder" class="cover-placeholder-image" />
+    
+      <hr class="divider" />
+      
+      <!-- Title set dynamically by fillMealPlanCoverPage() -->
+      <h2 id="fourWeekMealPlanCoverTitle" class="cover-title"></h2>
+      
+      <hr class="divider" />
+      
+      <p class="cover-subtitle">Your Structured Meal Plan for Energy, Recovery, and Results.</p>
+    </div>
+    
+    <div class="pdf-page" id="pdf4NutritionPart2NavPage"></div>
+
+    <!-- <div class="pdf-page" id="pdf4NutritionPart2IntroPage"></div> -->
+
+    <!-- Container for W3-4 meal plan pages only -->
+    <div id="pdf4MealPlansContainerPart2"></div>
+  </div>
+  <!-- END PDF 3 Container -->
+
+  <!-- Main JS for the 4-Week Program -->
+  <script src="scripts/4-week-program.js"></script>
+</body>
+
+</html>

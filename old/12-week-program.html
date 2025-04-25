@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>12-Week Program</title>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Main CSS for 12-Week Program -->
+  <link rel="stylesheet" href="styles/12-week-program.css" />
+
+  <!-- html2pdf.js CDN -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"
+    defer
+  ></script>
+
+  <!-- FontAwesome for Lock Icons (if needed) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+</head>
+<body>
+
+  <h1>12-Week Program Demo</h1>
+  <p>Click below to generate and download your seven PDFs for the 12-Week Program.</p>
+
+  <!-- Single button that triggers all 7 PDF downloads -->
+  <button id="download12WeekBtn" class="buttons">Download 12-Week Program</button>
+
+  <!-- =====================================================
+       PDF #1: 12-Week-Workout-Program-Foundation Container
+       ===================================================== -->
+  <div id="pdf12WeekWorkoutFoundation" class="pdf-container">
+    <!-- 1) Front Cover -->
+    <div class="pdf-page cover-page no-footer" id="pdf12FoundationCoverPage">
+      <img src="src/images/rtb-logo-white.png" alt="RTB Logo" class="cover-logo" style="max-width:300px;" />
+
+      <p class="cover-slogan">
+        Delivering empowering, enjoyable and result-driven workout programs tailored for you.
+      </p>
+
+      <img src="#" alt="Cover Placeholder" class="cover-placeholder-image" />
+      <hr class="divider" />
+      <h2 id="twelveWeekCoverTitleFoundation" class="cover-title"></h2>
+      <p class="foundation-phase-label">Foundational Phase</p>
+      <hr class="divider" />
+      <p class="cover-subtitle">
+        A Step-by-Step Guide to Your 12-Week Transformation
+      </p>
+    </div>
+
+    <!-- 2) Navigation Page -->
+    <div class="pdf-page" id="pdf12FoundationNavPage">
+      <!-- Will be filled dynamically with sections & computed page #s -->
+    </div>
+
+    <!-- 3) Introduction -->
+    <div class="pdf-page" id="pdf12FoundationIntroPage"></div>
+
+    <!-- 4) Client Profile -->
+    <div class="pdf-page" id="pdf12FoundationClientProfilePage"></div>
+
+    <!-- 5) Additional Advice -->
+    <div class="pdf-page" id="pdf12FoundationAdditionalAdvicePage"></div>
+
+    <!-- 6) Your Workout Program -->
+    <div class="pdf-page" id="pdf12FoundationYourWorkoutProgramPage"></div>
+
+    <!-- 7) Modify Your Workout -->
+    <div id="pdf12FoundationModifyWorkoutWrapper"></div>
+
+    <!-- 8) Workout Section (Weeks 1-4 Only) -->
+    <div id="pdf12FoundationWorkoutsContainer"></div>
+
+    <!-- 9) Motivational Page (Upsell replaced with Congratulatory) -->
+    <div class="pdf-page" id="pdf12FoundationCongratsPage"></div>
+  </div>
+
+  <!-- ============================================================
+       PDF #2: 12-Week-Workout-Program-Hypertrophy Container
+       ============================================================ -->
+  <div id="pdf12WeekWorkoutHypertrophy" class="pdf-container">
+    <!-- 1) Front Cover -->
+    <div class="pdf-page cover-page no-footer" id="pdf12HypertrophyCoverPage">
+      <img src="src/images/rtb-logo-white.png" alt="RTB Logo" class="cover-logo" style="max-width:300px;" />
+      <p class="cover-slogan">
+        Delivering empowering, enjoyable and result-driven workout programs tailored for you.
+      </p>
+
+      <img src="#" alt="Cover Placeholder" class="cover-placeholder-image" />
+      <hr class="divider" />
+      <h2 id="twelveWeekCoverTitleHypertrophy" class="cover-title"></h2>
+      <p class="foundation-phase-label">Hypertrophy Phase</p>
+      <hr class="divider" />
+      <p class="cover-subtitle">
+        A Step-by-Step Guide to Your 12-Week Transformation
+      </p>
+    </div>
+
+    <!-- 2) Navigation Page -->
+    <div class="pdf-page" id="pdf12HypertrophyNavPage">
+      <!-- Format will show Introduction, Week 5, Week 6, Week 7, Week 8 -->
+    </div>
+
+    <!-- 3) Introduction -->
+    <div class="pdf-page" id="pdf12HypertrophyIntroPage"></div>
+
+    <div id="pdf12HypertrophyModifyWorkoutWrapper"></div>
+
+    <!-- 4) Workout Section for Weeks 5-8 -->
+    <div id="pdf12HypertrophyWorkoutsContainer"></div>
+
+    <!-- 5) Motivational Page -->
+    <div class="pdf-page" id="pdf12HypertrophyCongratsPage"></div>
+  </div>
+
+  <!-- =========================================================
+       PDF #3: 12-Week-Workout-Program-Strength Container
+       ========================================================= -->
+  <div id="pdf12WeekWorkoutStrength" class="pdf-container">
+    <!-- 1) Front Cover -->
+    <div class="pdf-page cover-page no-footer" id="pdf12StrengthCoverPage">
+      <img src="src/images/rtb-logo-white.png" alt="RTB Logo" class="cover-logo" style="max-width:300px;" />
+      <p class="cover-slogan">
+        Delivering empowering, enjoyable and result-driven workout programs tailored for you.
+      </p>
+
+      <img src="#" alt="Cover Placeholder" class="cover-placeholder-image" />
+      <hr class="divider" />
+      <h2 id="twelveWeekCoverTitleStrength" class="cover-title"></h2>
+      <p class="foundation-phase-label">Strength Phase</p>
+      <hr class="divider" />
+      <p class="cover-subtitle">
+        A Step-by-Step Guide to Your 12-Week Transformation
+      </p>
+    </div>
+
+    <!-- 2) Navigation Page -->
+    <div class="pdf-page" id="pdf12StrengthNavPage">
+      <!-- Format will show Introduction, Week 9, Week 10, Week 11, Week 12 -->
+    </div>
+
+    <!-- 3) Introduction -->
+    <div class="pdf-page" id="pdf12StrengthIntroPage"></div>
+
+    <div id="pdf12StrengthModifyWorkoutWrapper"></div>
+
+    <!-- 4) Workout Section for Weeks 9-12 -->
+    <div id="pdf12StrengthWorkoutsContainer"></div>
+
+    <!-- 5) Motivational Page -->
+    <div class="pdf-page" id="pdf12StrengthCongratsPage"></div>
+  </div>
+
+  <!-- =========================================
+       PDF #4: 12-Week-Nutrition-Guide Container
+       ========================================= -->
+  <div id="pdf12WeekNutritionGuide" class="pdf-container">
+    <!-- 1) Front Cover -->
+    <div class="pdf-page cover-page no-footer" id="pdf12NutritionCoverPage">
+      <img src="src/images/rtb-logo-white.png" alt="RTB Logo" class="cover-logo" style="max-width:300px;" />
+      <p class="cover-slogan">
+        Delivering empowering, enjoyable and result-driven workout programs tailored for you.
+      </p>
+
+      <img src="#" alt="Cover Placeholder" class="cover-placeholder-image" />
+      <hr class="divider" />
+      <h2 id="twelveWeekNutritionCoverTitle" class="cover-title"></h2>
+      <hr class="divider" />
+      <p class="cover-subtitle">Maximize Your 12-Week Transformation</p>
+    </div>
+
+    <!-- 2) Navigation Page -->
+    <div class="pdf-page" id="pdf12NutritionNavPage"></div>
+
+    <!-- 3) Introduction -->
+    <div class="pdf-page" id="pdf12NutritionIntroPage"></div>
+
+    <!-- 4) Weekly Calorie & Macro Overview (Unlocked Table for 12 Weeks) -->
+    <div class="pdf-page" id="pdf12NutritionCaloriePage"></div>
+
+    <!-- 5) Essential Food Guide -->
+    <div class="pdf-page" id="pdf12EssentialFoodGuidePage"></div>
+
+    <!-- 6) Portioning & Structuring Your Meals -->
+    <div class="pdf-page" id="pdf12PortionStructPage"></div>
+
+    <!-- 7) Nutrition Summary Page 1 -->
+    <div class="pdf-page" id="pdf12NutritionSummaryPage1"></div>
+
+    <!-- 8) Nutrition Summary Page 2 -->
+    <div class="pdf-page" id="pdf12NutritionSummaryPage2"></div>
+
+    <!-- 9) Strategic Meal Prep & Time-Saving Guide (New Page) -->
+    <div class="pdf-page" id="pdf12MealPrepTimePage"></div>
+
+    <!-- 10) How to Eat for Long-Term Success (New Page) -->
+    <div class="pdf-page" id="pdf12LongTermSuccessPage"></div>
+
+    <!-- 11) Eating Out & Social Events Guide (New Page) -->
+    <div class="pdf-page" id="pdf12EatingOutSocialPage"></div>
+
+    <!-- 12) Grocery Planning & Substitutions -->
+    <div id="pdf12GroceryPlanningPage1" class="pdf-page">
+      <!-- This is the Protein Sources page -->
+    </div>
+    <div id="pdf12GroceryPlanningPage2" class="pdf-page">
+      <!-- This is the Carbs & Grain Substitutes page -->
+    </div>
+    <div id="pdf12GroceryPlanningPage3" class="pdf-page">
+      <!-- This is the Fats & Cooking Substitutes page -->
+    </div>
+  </div>
+
+  <!-- ==================================================
+       PDF #5: 12-Week-Meal-Plan-Foundation Container
+       ================================================== -->
+  <div id="pdf12MealPlanFoundation" class="pdf-container">
+    <!-- 1) Front Cover -->
+    <div class="pdf-page cover-page no-footer" id="pdf12MealPlanFoundationCover">
+      <img src="src/images/rtb-logo-white.png" alt="RTB Logo" class="cover-logo" style="max-width:300px;" />
+      <p class="cover-slogan"> Delivering empowering, enjoyable and result-driven workout programs tailored for you.</p>
+      <img src="#" alt="Cover Placeholder" class="cover-placeholder-image" />
+      <hr class="divider" />
+      <h2 id="twelveWeekMealPlanFoundationTitle" class="cover-title"></h2>
+      <p class="foundation-phase-label">Foundational Phase</p>
+      <hr class="divider" />
+      <p class="cover-subtitle">Your Structured Meal Plan for Energy, Recovery, and Results.</p>
+    </div>
+
+    <!-- 2) Navigation Page -->
+    <div class="pdf-page" id="pdf12MealPlanFoundationNavPage"></div>
+
+    <!-- 3) Meal Plan Section (Weeks 1-4) -->
+    <div id="pdf12MealPlanFoundationContainer"></div>
+  </div>
+
+  <!-- =======================================================
+       PDF #6: 12-Week-Meal-Plan-Hypertrophy Container
+       ======================================================= -->
+  <div id="pdf12MealPlanHypertrophy" class="pdf-container">
+    <!-- 1) Front Cover -->
+    <div class="pdf-page cover-page no-footer" id="pdf12MealPlanHypertrophyCover">
+      <img src="src/images/rtb-logo-white.png" alt="RTB Logo" class="cover-logo" style="max-width:300px;" />
+      <p class="cover-slogan"> Delivering empowering, enjoyable and result-driven workout programs tailored for you.</p>
+      <img src="#" alt="Cover Placeholder" class="cover-placeholder-image" />
+      <hr class="divider" />
+      <h2 id="twelveWeekMealPlanHypertrophyTitle" class="cover-title"></h2>
+      <p class="foundation-phase-label">Hypertrophy Phase</p>
+      <hr class="divider" />
+      <p class="cover-subtitle">Your Structured Meal Plan for Energy, Recovery, and Results.</p>
+    </div>
+
+    <!-- 2) Navigation Page -->
+    <div class="pdf-page" id="pdf12MealPlanHypertrophyNavPage"></div>
+
+    <!-- 3) Meal Plan Section (Weeks 5-8) -->
+    <div id="pdf12MealPlanHypertrophyContainer"></div>
+  </div>
+
+  <!-- ====================================================
+       PDF #7: 12-Week-Meal-Plan-Strength Container
+       ==================================================== -->
+  <div id="pdf12MealPlanStrength" class="pdf-container">
+    <!-- 1) Front Cover -->
+    <div class="pdf-page cover-page no-footer" id="pdf12MealPlanStrengthCover">
+      <img src="src/images/rtb-logo-white.png" alt="RTB Logo" class="cover-logo" style="max-width:300px;" />
+      <p class="cover-slogan"> Delivering empowering, enjoyable and result-driven workout programs tailored for you.</p>
+      <img src="#" alt="Cover Placeholder" class="cover-placeholder-image" />
+      <hr class="divider" />
+      <h2 id="twelveWeekMealPlanStrengthTitle" class="cover-title"></h2>
+      <p class="foundation-phase-label">Strength Phase</p>
+      <hr class="divider" />
+      <p class="cover-subtitle">Your Structured Meal Plan for Energy, Recovery, and Results.</p>
+    </div>
+
+    <!-- 2) Navigation Page -->
+    <div class="pdf-page" id="pdf12MealPlanStrengthNavPage"></div>
+
+    <!-- 3) Meal Plan Section (Weeks 9-12) -->
+    <div id="pdf12MealPlanStrengthContainer"></div>
+  </div>
+
+  <!-- Main JS for the 12-Week Program -->
+  <script src="scripts/12-week-program.js" defer></script>
+
+</body>
+</html>
