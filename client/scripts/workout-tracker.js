@@ -2283,6 +2283,21 @@ function renderWorkoutDisplay() {
 
         finishBtn.addEventListener("click", () => {
           cancelRestTimer();
+        
+          // — simulate the old day‐checkbox logic —
+          const dayKey = `day_${currentWeekIndex}_${currentDayIndex}`;
+          if (!loadXPAwarded(dayKey)) {
+            saveXPAwarded(dayKey);
+            addXPForDay(dayData);
+            updateActiveWeekOnLog();
+          }
+          saveCheckboxState(dayKey, true);
+        
+          checkAllExercises();
+          // autoCheckDayIfAllExercisesAreChecked();
+          updateWeeklyTotals();
+        
+          // — now finish the workout as before —
           showWorkoutRecapPopup(currentWeekIndex, currentDayIndex, "finish");
           setWorkoutFinished(currentWeekIndex, currentDayIndex, true);
         });
