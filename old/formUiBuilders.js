@@ -1,3 +1,4 @@
+import { questions } from "./formData.js";
 import { cmFromFtIn, kgFromLbs } from "./formUnits.js";
 import { updateAnthroMetrics }    from "./formMetrics.js";
 import {
@@ -18,7 +19,7 @@ export const optionsContainer = document.querySelector(".form-options ol");
 export const nextButton       = document.getElementById("next-button");
 export const progressBarFill  = document.querySelector(".progress-bar-fill");
 
-export function toggleNextButtonState() {
+export function toggleNextButtonState(currentQuestionIndex) {
   const currentQ = questions[currentQuestionIndex];
   let isInputValid = false;
 
@@ -68,19 +69,25 @@ export function toggleNextButtonState() {
   }
 }
 
-export function addInputListeners() {
-  const currentQ = questions[currentQuestionIndex];
-
-  if (["text","number","date"].includes(currentQ.type)) {
-    const input = optionsContainer.querySelector("input");
-    input.addEventListener("input", toggleNextButtonState);
-  } else {
-    optionsContainer.querySelectorAll("li")
-      .forEach(li => li.addEventListener("click", toggleNextButtonState));
+export function addInputListeners(currentQuestionIndex) {
+    const currentQ = questions[currentQuestionIndex];
+  
+    if (["text","number","date"].includes(currentQ.type)) {
+      const input = optionsContainer.querySelector("input");
+     // wrap in an arrow so we pass the index, not the event
+     input.addEventListener("input", () => {
+        toggleNextButtonState(currentQuestionIndex);
+      });
+    } else {
+      optionsContainer.querySelectorAll("li").forEach(li =>
+       li.addEventListener("click", () => {
+          toggleNextButtonState(currentQuestionIndex);
+        })
+      );
+   }
   }
-}
 
-export function buildHeightInput() {
+export function buildHeightInput(currentQuestionIndex) {
   optionsContainer.innerHTML = `
     <div class="unit-toggle pill-toggle">
       <input type="radio" name="hUnit" id="hUnit-cm"  value="cm" checked autocomplete="off">
@@ -116,7 +123,7 @@ export function buildHeightInput() {
         cmBox.classList.add("hidden");
         ftInRow.classList.remove("hidden");
       }
-      toggleNextButtonState();
+      toggleNextButtonState(currentQuestionIndex);
     })
   );
 
@@ -133,14 +140,14 @@ export function buildHeightInput() {
       }
       localStorage.setItem("heightRaw", JSON.stringify(formData.heightRaw));
       updateAnthroMetrics();
-      toggleNextButtonState();
+      toggleNextButtonState(currentQuestionIndex);
     })
   );
 
-  toggleNextButtonState();
+  toggleNextButtonState(currentQuestionIndex);
 }
 
-export function buildWeightInput() {
+export function buildWeightInput(currentQuestionIndex) {
   optionsContainer.innerHTML = `
     <div class="unit-toggle pill-toggle">
       <input type="radio" name="wUnit" id="wUnit-kg"  value="kg" checked autocomplete="off">
@@ -171,7 +178,7 @@ export function buildWeightInput() {
         kgBox.classList.add("hidden");
         lbsBox.classList.remove("hidden");
       }
-      toggleNextButtonState();
+      toggleNextButtonState(currentQuestionIndex);
     })
   );
 
@@ -187,9 +194,9 @@ export function buildWeightInput() {
       }
       localStorage.setItem("weightRaw", JSON.stringify(formData.weightRaw));
       updateAnthroMetrics();
-      toggleNextButtonState();
+      toggleNextButtonState(currentQuestionIndex);
     })
   );
 
-  toggleNextButtonState();
+  toggleNextButtonState(currentQuestionIndex);
 }

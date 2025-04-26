@@ -1,5 +1,7 @@
 // client/scripts/modules/formMetrics.js
 
+import { questions } from "./formData.js";
+
 import {
     formData,
     heightUnit,
@@ -157,7 +159,7 @@ import {
     1: 0.6, 2: 0.75, 3: 0.9, 4: 1.0, 5: 1.1, 6: 1.05, 7: 1.0,
   };
   
-  function roundToOneDecimal(v) {
+  export function roundToOneDecimal(v) {
     return Math.round(v * 10) / 10;
   }
   

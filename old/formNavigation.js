@@ -4,8 +4,6 @@ import {
     weightUnit,
 } from "./formState.js";
 
-import { addInputListeners, toggleNextButtonState } from "./formUiBuilders.js";
-
 // import { formData } from "./formState.js";
 import { questions } from "./formData.js";
 import {
@@ -16,23 +14,29 @@ import {
 import {
     buildHeightInput,
     buildWeightInput,
-    // addInputListeners,
-    // toggleNextButtonState
 } from "./formUiBuilders.js";
 import { cmFromFtIn, kgFromLbs } from "./formUnits.js";
 
 import { validateAndAdvance } from "./formValidators.js";
-nextButton.addEventListener("click", validateAndAdvance);
+import { calculateAge } from "./formValidators.js";
+import { toggleNextButtonState, addInputListeners} from "./formUiBuilders.js";
+import { displayWarning } from "./formValidators.js";
+import { replaceWithFinalPage } from "./formGeneratorFinal.js";
 
 
-let currentQuestionIndex = 0;
+export let currentQuestionIndex = 0;
+// export const questionText      = document.querySelector(".form-question h2");
+// export const optionsContainer = document.querySelector(".form-options ol");
+// export const nextButton       = document.getElementById("next-button");
+export const backButton       = document.getElementById("back-button");
+// export const progressBarFill  = document.querySelector(".progress-bar-fill");
 
 const questionText = document.querySelector(".form-question h2");
 const optionsContainer = document.querySelector(".form-options ol");
 const nextButton = document.getElementById("next-button");
 const progressBarFill = document.querySelector(".progress-bar-fill");
 
-function handleInputUpdate(currentQuestion) {
+export function handleInputUpdate(currentQuestion) {
     return (e) => {
         formData[currentQuestion.key] =
             currentQuestion.type === "number" ? parseFloat(e.target.value) || 0 : e.target.value;
@@ -60,7 +64,7 @@ function handleInputUpdate(currentQuestion) {
     };
 }
 
-function handleOptionClick(selectedOption, type) {
+export function handleOptionClick(selectedOption, type) {
     const clickedText = selectedOption.textContent.trim();
     const questionKey = questions[currentQuestionIndex].key;
 
@@ -80,7 +84,7 @@ function handleOptionClick(selectedOption, type) {
             // no need to fall through to the generic case below
             optionsContainer.querySelectorAll("li").forEach(li => li.classList.remove("selected"));
             selectedOption.classList.add("selected");
-            toggleNextButtonState();
+            toggleNextButtonState(currentQuestionIndex);
             return;
         }
 
@@ -170,7 +174,7 @@ function handleOptionClick(selectedOption, type) {
     }
 }
 
-function loadQuestion(i) {
+export function loadQuestion(i) {
     const currentQ = questions[i];
     if (currentQ.condition) {
         const condKey = currentQ.condition.key;
@@ -198,13 +202,15 @@ function loadQuestion(i) {
 
     if (currentQ.type === "text" || currentQ.type === "number") {
         if (currentQ.key === "height") {
-            buildHeightInput();     // <‑‑ new helper (see below)
-            addInputListeners();
+            buildHeightInput(currentQuestionIndex);
+            addInputListeners(currentQuestionIndex);
+            toggleNextButtonState(currentQuestionIndex);
             return;
         }
         if (currentQ.key === "weight") {
-            buildWeightInput();     // <‑‑ new helper (see below)
-            addInputListeners();
+            buildWeightInput(currentQuestionIndex);
+            addInputListeners(currentQuestionIndex);
+            toggleNextButtonState(currentQuestionIndex);
             return;
         }
         const input = document.createElement("input");
@@ -292,11 +298,11 @@ function loadQuestion(i) {
 
         gw.addEventListener("input", e => {
             formData.goalWeightInputTemp = e.target.value;   // temp store
-            toggleNextButtonState();
+            toggleNextButtonState(currentQuestionIndex);
         });
 
         optionsContainer.appendChild(gw);
-        toggleNextButtonState();
+        toggleNextButtonState(currentQuestionIndex);
         return;            // *** important: skip the generic builder ***
     }
     if (currentQuestionIndex > 0) {
@@ -305,11 +311,11 @@ function loadQuestion(i) {
         if (agreementCheckbox) agreementCheckbox.parentElement.style.display = "none";
         if (warningText) warningText.style.display = "none";
     }
-    toggleNextButtonState();
-    addInputListeners();
+    toggleNextButtonState(currentQuestionIndex);
+    addInputListeners(currentQuestionIndex);
 }
 
-function updateProgressBar() {
+export function updateProgressBar() {
     const total = questions.length;
     const percent = ((currentQuestionIndex + 1) / total) * 100;
     progressBarFill.style.width = percent + "%";
@@ -321,16 +327,73 @@ function updateProgressBar() {
     }
 }
 
-loadQuestion(currentQuestionIndex);
-updateProgressBar();
+// loadQuestion(currentQuestionIndex);
+// updateProgressBar();
 
-// Make the fixed footer pop in once the DOM is ready
-window.addEventListener("DOMContentLoaded", () => {
-    const fixedFooter = document.querySelector(".fixed-footer");
-    if (fixedFooter) {
-        // Delay slightly if you want it to appear after other elements:
+// // Make the fixed footer pop in once the DOM is ready
+// window.addEventListener("DOMContentLoaded", () => {
+//     const fixedFooter = document.querySelector(".fixed-footer");
+//     if (fixedFooter) {
+//         // Delay slightly if you want it to appear after other elements:
+//         setTimeout(() => {
+//             fixedFooter.classList.add("visible");
+//         }, 1500);
+//     }
+// });
+
+export function initForm() {
+    loadQuestion(currentQuestionIndex);
+    updateProgressBar();
+  
+    nextButton.addEventListener("click", validateAndAdvance);
+  
+    const backButton = document.getElementById("back-button");
+    backButton.addEventListener("click", () => {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        loadQuestion(currentQuestionIndex);
+        updateProgressBar();
+      }
+    });
+  
+    // Fixed footer pop-in
+    window.addEventListener("DOMContentLoaded", () => {
+      const fixedFooter = document.querySelector(".fixed-footer");
+      if (fixedFooter) {
         setTimeout(() => {
-            fixedFooter.classList.add("visible");
+          fixedFooter.classList.add("visible");
         }, 1500);
+      }
+    });
+  }
+
+  export function advanceQuestion() {
+    if (currentQuestionIndex < questions.length - 1) {
+      currentQuestionIndex++;
+      loadQuestion(currentQuestionIndex);
+      updateProgressBar();
+      const scrollableElement = document.querySelector(".scroll");
+      if (scrollableElement) {
+        scrollableElement.scrollTop = 0;
+      } else {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
+    } else {
+      replaceWithFinalPage();
+      calculateGoalCalories();
+      if (
+        formData.weight &&
+        formData.height &&
+        formData.age &&
+        formData.gender &&
+        formData.activityLevel
+      ) {
+        calculateMaintenanceCalories();
+        calculateBaseProjections();
+      }
+      calculateWeeklyCaloriesAndMacros12Week();
+      calculateProjectedGoalDate();
     }
-});
+  }
+  

@@ -27,8 +27,8 @@ export function setRotatingMsgInterval(id) { rotatingMsgInterval  = id; }
 // ────────────────────────────────
 // DB imports – note *no* “./modules/”
 // ────────────────────────────────
-import { EXERCISE_DATABASE } from "./exercise.js";
-import { mealDatabase }       from "./meals.js";
+import { EXERCISE_DATABASE } from "../client/scripts/modules/exercise.js";
+import { mealDatabase }       from "../client/scripts/modules/meals.js";
 
 window.allExercises = EXERCISE_DATABASE;      // handy for console
 

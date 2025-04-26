@@ -8,7 +8,7 @@ import {
 let pushDayCount = 0;
 let legDayCount = 0;
 
-function isGroupB() {
+export function isGroupB() {
   const age = formData.age || 30;
   const inj = (formData.injuries || []).map(x => x.toLowerCase());
   if (formData.pregnancyStatus) {
@@ -56,13 +56,13 @@ const PHASES = {
   },
 };
 
-function getPhaseForWeek(wNum) {
+export function getPhaseForWeek(wNum) {
   if (wNum <= 4) return PHASES.FOUNDATIONAL;
   if (wNum <= 8) return PHASES.HYPERTROPHY;
   return PHASES.STRENGTH;
 }
-function isPhase1(wNum) { return (wNum >= 1 && wNum <= 4); }
-function isNovice() {
+export function isPhase1(wNum) { return (wNum >= 1 && wNum <= 4); }
+export function isNovice() {
   const lvl = (formData.fitnessLevel || "").toLowerCase();
   const sp = (formData.structuredProgram || "").toLowerCase();
   if (lvl === "beginner") return true;
@@ -71,7 +71,7 @@ function isNovice() {
 }
 
 /** getTimeBlocksForGoal => skip RT if user wants only HIIT, else normal logic. */
-function getTimeBlocksForGoal(sessionLen, userGoal) {
+export function getTimeBlocksForGoal(sessionLen, userGoal) {
   // [UNCHANGED but your intervals for RT/Cardio remain]
   let numericLength = 30;
   if (sessionLen.startsWith("0-30")) numericLength = 30;
@@ -112,14 +112,14 @@ function getTimeBlocksForGoal(sessionLen, userGoal) {
   return blocks;
 }
 
-function getMaxRPEByAge(age) {
+export function getMaxRPEByAge(age) {
   // [UNCHANGED]
   if (age >= 45) return 7;
   if (age >= 30) return 8;
   return 9;
 }
 
-function generateAllPrograms() {
+export function generateAllPrograms() {
   console.log("Generating 1-,4-,12-week programs...");
 
   let wd = parseInt(formData.workoutDays || 3, 10);
@@ -152,7 +152,7 @@ const phaseCacheData = {
   "Strength Phase": null,
 };
 
-function buildPhaseIfNeeded(phaseName, exList) {
+export function buildPhaseIfNeeded(phaseName, exList) {
   if (phaseCacheData[phaseName]) {
     // Already built => do nothing
     return;
@@ -182,7 +182,7 @@ function buildPhaseIfNeeded(phaseName, exList) {
   };
 }
 
-function pick2ChestCompounds(exList) {
+export function pick2ChestCompounds(exList) {
   const chestComp = exList.filter(
     x => x.splitTag === "push" && x.muscleGroup === "chest" && x.typeOfMovement === "compound"
   );
@@ -206,7 +206,7 @@ function pick2ChestCompounds(exList) {
 }
 
 /** For push accessories => pick 1 chest iso, 1 shoulder comp, 1 shoulder iso, 2 triceps => remain same entire phase */
-function pickPushAccessories(exList) {
+export function pickPushAccessories(exList) {
   const isoChest = exList.filter(x =>
     x.splitTag === "push" &&
     x.muscleGroup === "chest" &&
@@ -236,7 +236,7 @@ function pickPushAccessories(exList) {
 }
 
 /** pick2QuadCompounds => e.g. barbell squat, smith squat, or leg press. */
-function pick2QuadCompounds(exList) {
+export function pick2QuadCompounds(exList) {
   const quadComps = exList.filter(x =>
     x.splitTag === "legs" &&
     x.muscleGroup === "quads" &&
@@ -249,7 +249,7 @@ function pick2QuadCompounds(exList) {
   const c2 = pickRandom(quadComps, [c1]);
   return [c1, c2];
 }
-function pickQuadAccessories(exList) {
+export function pickQuadAccessories(exList) {
   const qIso = exList.filter(x =>
     x.muscleGroup === "quads" &&
     x.typeOfMovement === "isolation"
@@ -269,7 +269,7 @@ function pickQuadAccessories(exList) {
 }
 
 /** pick2HamCompounds => e.g. RDL, Deadlift. */
-function pick2HamCompounds(exList) {
+export function pick2HamCompounds(exList) {
   const hamComps = exList.filter(x =>
     x.splitTag === "legs" &&
     x.muscleGroup === "hamstrings" &&
@@ -282,7 +282,7 @@ function pick2HamCompounds(exList) {
   const c2 = pickRandom(hamComps, [c1]);
   return [c1, c2];
 }
-function pickHamAccessories(exList) {
+export function pickHamAccessories(exList) {
   const hamIso = exList.filter(x =>
     x.muscleGroup === "hamstrings" &&
     x.typeOfMovement === "isolation"
@@ -305,7 +305,7 @@ function pickHamAccessories(exList) {
 * pickLegDay => toggles between quad/ham every day
 ***********************************************************************/
 
-// function pickLegDay(exList, wNum, dayIndex) {
+// export function pickLegDay(exList, wNum, dayIndex) {
 //   legSessionCount++;
 //   const isEvenSession = (legSessionCount % 2 === 0);
 
@@ -326,7 +326,7 @@ function pickHamAccessories(exList) {
 //   }
 // }
 
-function pickLegDay(exList, wNum, dayCount) {
+export function pickLegDay(exList, wNum, dayCount) {
   // Use the dayCount (or dayIndex) to determine which leg workout to build
   if (dayCount % 2 === 1) {
     // For odd days, build a quad-focused day.
@@ -341,72 +341,8 @@ function pickLegDay(exList, wNum, dayCount) {
 * Pull day fallback => if vertical eq not possible => use second horizontal
 ***********************************************************************/
 
-// function pickPullDay(exList, wNum) {
-//   // Make a copy of the exercise list
-//   let arr = [...exList];
 
-//   // Filter based on user equipment preferences
-//   const eqPrefs = formData.equipment.map(e => e.toLowerCase());
-//   arr = arr.filter(e =>
-//     e.equipmentNeeded.every(eq => eqPrefs.includes(eq.toLowerCase()))
-//   );
-
-//   console.log("Filtered exercise list:", arr);
-
-//   // Slot 1: Vertical back movement
-//   let slot1 = null;
-//   const verticalCandidates = arr.filter(x =>
-//     x.muscleGroup === "back" && x.movementPlane === "vertical"
-//   );
-
-//   if (verticalCandidates.length > 0) {
-//     slot1 = pickRandom(verticalCandidates);
-//     arr.splice(arr.indexOf(slot1), 1); // Remove selected exercise
-//   } else {
-//     // Fallback: Arch movements
-//     const archCandidates = arr.filter(x =>
-//       x.muscleGroup === "back" &&
-//       (x.name.toLowerCase().includes("pullover") || x.movementPlane === "arch")
-//     );
-
-//     if (archCandidates.length > 0) {
-//       slot1 = pickRandom(archCandidates);
-//       arr.splice(arr.indexOf(slot1), 1); // Remove selected exercise
-//       console.log("Fallback arch movement selected:", slot1);
-//     } else {
-//       console.warn("No vertical or arch movements available for Slot 1.");
-//     }
-//   }
-
-//   // Slot 2: Horizontal back movement
-//   const horizontalCandidates = arr.filter(x =>
-//     x.muscleGroup === "back" && x.movementPlane === "horizontal"
-//   );
-//   const slot2 = pickRandom(horizontalCandidates);
-//   if (slot2) arr.splice(arr.indexOf(slot2), 1);
-
-//   // Slot 3: Biceps movement
-//   const bicepsCandidates = arr.filter(x => x.muscleGroup === "biceps");
-//   const slot3 = pickRandom(bicepsCandidates);
-//   if (slot3) arr.splice(arr.indexOf(slot3), 1);
-
-//   // Slot 4: Traps movement
-//   const trapsCandidates = arr.filter(x => x.muscleGroup === "traps");
-//   const slot4 = pickRandom(trapsCandidates);
-//   if (slot4) arr.splice(arr.indexOf(slot4), 1);
-
-//   // Slot 5: Forearms movement
-//   const forearmsCandidates = arr.filter(x => x.muscleGroup === "forearms");
-//   const slot5 = pickRandom(forearmsCandidates);
-
-//   // Compile the final pull day selection
-//   const result = [slot1, slot2, slot3, slot4, slot5].filter(Boolean);
-
-//   console.log("Final pull day selection:", result);
-//   return result;
-// }
-
-function pickPullDay(exList, wNum) {
+export function pickPullDay(exList, wNum) {
   // First, filter the candidate exercises.
   let arr = [...exList];
 
@@ -452,7 +388,7 @@ function pickPullDay(exList, wNum) {
   return [slot1, slot2, slot3, slot4, slot5].filter(Boolean);
 }
 
-function pickPullDayNoVertical(exList) {
+export function pickPullDayNoVertical(exList) {
   const arr = [...exList];
   console.log("Fallback pull day exercise list:", arr);
 
@@ -512,7 +448,7 @@ function pickPullDayNoVertical(exList) {
 *  Prefer isTechnical: true ONLY in Foundational Phase
 *********************************************************/
 
-function shouldExcludeTechnicalForThisUser(weekNumber) {
+export function shouldExcludeTechnicalForThisUser(weekNumber) {
   return (isPhase1(weekNumber) && isNovice());
 }
 
@@ -525,7 +461,7 @@ function shouldExcludeTechnicalForThisUser(weekNumber) {
 * Improved Exercise Filtering
 ***********************************************************************/
 
-function filterExercisesForUser(exList) {
+export function filterExercisesForUser(exList) {
   let arr = [...exList];
   const loc = (formData.workoutLocation || "home").toLowerCase();
   const eq = (formData.equipment || []).map(s => s.toLowerCase());
@@ -592,16 +528,16 @@ function filterExercisesForUser(exList) {
 * Pull‐Up Bar / Dip Station Calisthenics Approach
 ***********************************************************************/
 
-function userHasOnlyPullupBar() {
+export function userHasOnlyPullupBar() {
   const eq = (formData.equipment || []).map(s => s.toLowerCase());
   // “only pull-up bar” => eq has “pull-up bar” and eq.length===1
   return (eq.length === 1 && eq.includes("pull-up bar"));
 }
-function userHasOnlyDipStation() {
+export function userHasOnlyDipStation() {
   const eq = (formData.equipment || []).map(s => s.toLowerCase());
   return (eq.length === 1 && eq.includes("dip station"));
 }
-function userHasPullupBarAndDipStationOnly() {
+export function userHasPullupBarAndDipStationOnly() {
   const eq = (formData.equipment || []).map(s => s.toLowerCase());
   // Must contain exactly 2 items: “pull-up bar” + “dip station”
   if (eq.length === 2 && eq.includes("pull-up bar") && eq.includes("dip station")) {
@@ -609,7 +545,7 @@ function userHasPullupBarAndDipStationOnly() {
   }
   return false;
 }
-function isExclusiveCalisthenics() {
+export function isExclusiveCalisthenics() {
   // Check if the user’s entire equipment set is only “pull-up bar,” or only “dip station,” or both
   if (userHasOnlyPullupBar()) return true;
   if (userHasOnlyDipStation()) return true;
@@ -617,7 +553,7 @@ function isExclusiveCalisthenics() {
   return false;
 }
 
-function buildCalisthenicsWeek(weekNum, totalDays) {
+export function buildCalisthenicsWeek(weekNum, totalDays) {
   let dayLabels = ["push", "pull", "legs", "upper", "fullbody"];
   if (totalDays > 5) totalDays = 5;
 
@@ -633,7 +569,7 @@ function buildCalisthenicsWeek(weekNum, totalDays) {
   };
 }
 
-function getCalisthenicsExercisesFor(splitName, phaseName) {
+export function getCalisthenicsExercisesFor(splitName, phaseName) {
   const eq = (formData.equipment || []).map(s => s.toLowerCase());
   let havePull = eq.includes("pull-up bar");
   let haveDip = eq.includes("dip station");
@@ -653,7 +589,7 @@ function getCalisthenicsExercisesFor(splitName, phaseName) {
 * buildMultiWeekProgram => creates an array of weeks
 ***********************************************************************/
 
-function buildMultiWeekProgram(exList, endWeek) {
+export function buildMultiWeekProgram(exList, endWeek) {
   let out = [];
   for (let w = 1; w <= endWeek; w++) {
     out.push(buildWeekProgram(exList, w));
@@ -671,7 +607,7 @@ const storedPhaseWorkouts = {
   "Strength Phase": {},
 };
 
-function getCachedPullWorkoutForPhase(phaseName, exList) {
+export function getCachedPullWorkoutForPhase(phaseName, exList) {
   if (!storedPhaseWorkouts[phaseName]) {
     storedPhaseWorkouts[phaseName] = {};
   }
@@ -684,7 +620,7 @@ function getCachedPullWorkoutForPhase(phaseName, exList) {
   return pullArray;
 }
 
-function doPullLogicForPhase(phaseName, exList) {
+export function doPullLogicForPhase(phaseName, exList) {
   let isPhase1 = (phaseName === "Foundational Phase");
   let arr = [...exList];
   if (isPhase1) {
@@ -697,12 +633,12 @@ function doPullLogicForPhase(phaseName, exList) {
   return out;
 }
 
-function canFillPullSlots(possible) {
+export function canFillPullSlots(possible) {
   let temp = pickPullDay(possible, 1);
   return (temp.length >= 6);
 }
 
-function pickPullDayOnce(arr) {
+export function pickPullDayOnce(arr) {
   // #1 => back vertical
   let backV = arr.filter(e => e.muscleGroup === "back" && e.movementPlane === "vertical");
   let slot1 = pickRandom(backV);
@@ -744,7 +680,7 @@ function pickPullDayOnce(arr) {
   return [slot1, slot2, slot3, slot4, slot5, slot6].filter(Boolean);
 }
 
-function buildUpperForThisWeek(phaseDat, wNum) {
+export function buildUpperForThisWeek(phaseDat, wNum) {
   const phaseName = getPhaseForWeek(wNum).name;
   if (!storedPhaseWorkouts[phaseName]) {
     storedPhaseWorkouts[phaseName] = {};
@@ -810,7 +746,7 @@ function buildUpperForThisWeek(phaseDat, wNum) {
   return final;
 }
 
-function buildFullbodyForThisWeek(phaseDat, wNum) {
+export function buildFullbodyForThisWeek(phaseDat, wNum) {
   const phaseName = getPhaseForWeek(wNum).name;
   if (!storedPhaseWorkouts[phaseName]) {
     storedPhaseWorkouts[phaseName] = {};
@@ -909,7 +845,7 @@ function buildFullbodyForThisWeek(phaseDat, wNum) {
 * getCachedOrBuildDay => unifies how we pick push/pull/legs/upper
 ***********************************************************************/
 
-function getCachedOrBuildDay(splitType, exList, wNum, dayIndex) {
+export function getCachedOrBuildDay(splitType, exList, wNum, dayIndex) {
   const phObj = getPhaseForWeek(wNum);
   const phaseName = phObj.name;
   buildPhaseIfNeeded(phaseName, exList);
@@ -961,7 +897,7 @@ function getCachedOrBuildDay(splitType, exList, wNum, dayIndex) {
 * buildPushForThisWeek => toggles inc/flat
 ***********************************************************************/
 
-function buildPushForThisWeek(phaseDat, wNum) {
+export function buildPushForThisWeek(phaseDat, wNum) {
   const phaseName = getPhaseForWeek(wNum).name;
   // Ensure we have an object for this phase
   if (!storedPhaseWorkouts[phaseName]) {
@@ -1028,7 +964,7 @@ function buildPushForThisWeek(phaseDat, wNum) {
 * buildLegsForThisWeek => toggles quad/ham day without re-randomizing iso
 ***********************************************************************/
 
-function buildLegsForThisWeek(phaseDat, wNum) {
+export function buildLegsForThisWeek(phaseDat, wNum) {
   const phaseName = getPhaseForWeek(wNum).name;
   if (!storedPhaseWorkouts[phaseName]) {
     storedPhaseWorkouts[phaseName] = {};
@@ -1065,7 +1001,7 @@ function buildLegsForThisWeek(phaseDat, wNum) {
 }
 
 
-function removeDuplicatesByName(exerciseArray) {
+export function removeDuplicatesByName(exerciseArray) {
   const used = new Set();
   return exerciseArray.filter(ex => {
     if (used.has(ex.name)) return false;
@@ -1078,7 +1014,7 @@ function removeDuplicatesByName(exerciseArray) {
 * sequenceAndFinalize => ensures time-based gating for *all* splits
 ***********************************************************************/
 
-function sequenceAndFinalize(exArray, splitCode, wNum) {
+export function sequenceAndFinalize(exArray, splitCode, wNum) {
   // 1) Use exArray instead of 'filtered'
   const blocks = getTimeBlocksForGoal(
     formData.sessionDuration || "30-45 Minutes",
@@ -1101,7 +1037,7 @@ function sequenceAndFinalize(exArray, splitCode, wNum) {
 }
 
 const musclePriority = ["chest", "back", "quads", "hamstrings", "shoulders", "arms"];
-function maybeReorderForFocus(exArray, splitType) {
+export function maybeReorderForFocus(exArray, splitType) {
   let focuses = (formData.muscleFocus || []).map(m => m.toLowerCase());
   if (!focuses.length || focuses.includes("none of the above")) {
     return exArray; // no reordering needed
@@ -1137,7 +1073,7 @@ function maybeReorderForFocus(exArray, splitType) {
 * buildWeekProgram => builds a single week's set of daily workouts
 ***********************************************************************/
 
-function buildWeekProgram(exList, wNum) {
+export function buildWeekProgram(exList, wNum) {
 
   if (isExclusiveCalisthenics()) {
     let dayCount = parseInt(formData.workoutDays || 3, 10);
@@ -1193,7 +1129,7 @@ function buildWeekProgram(exList, wNum) {
   };
 }
 
-function getGroupBSplits(days) {
+export function getGroupBSplits(days) {
   // [UNCHANGED]
   switch (days) {
     case 1: return ["fullbody"];
@@ -1204,7 +1140,7 @@ function getGroupBSplits(days) {
   }
 }
 
-function getSplitsForDays(dayCount, userPref) {
+export function getSplitsForDays(dayCount, userPref) {
   // [UNCHANGED]
   const base = {
     1: ["fullbody"],
@@ -1228,7 +1164,7 @@ function getSplitsForDays(dayCount, userPref) {
 * buildDayWorkout => does the time allocation properly
 ***********************************************************************/
 
-function buildDayWorkout(exList, splitType, wNum, dayIndex) {
+export function buildDayWorkout(exList, splitType, wNum, dayIndex) {
   const dayObj = {
     dayLabel: `Day ${dayIndex} - ${splitType.toUpperCase()}`,
     warmUp: [],
@@ -1426,7 +1362,7 @@ function buildDayWorkout(exList, splitType, wNum, dayIndex) {
   return dayObj;
 }
 
-function getFinalSplitType(splitType, wNum) {
+export function getFinalSplitType(splitType, wNum) {
   if (splitType === "legs" || splitType === "lower") {
     let isHam = (legDayCount % 2 === 0);
     return isHam ? "legs-hamstring" : "legs-quad";
@@ -1441,7 +1377,7 @@ function getFinalSplitType(splitType, wNum) {
 * applySupersetLogic => looks at each day’s finalEx array, modifies it
 * by adding a superset property, e.g. { supersetExercise: {...}, sets:??, reps:??, rpe:?? }
 ***********************************************************************/
-function applySupersetLogic(exArray, wNum) {
+export function applySupersetLogic(exArray, wNum) {
   const phaseObj = getPhaseForWeek(wNum);
   let pName = phaseObj.name;
   let isP1 = (pName === "Foundational Phase");
@@ -1480,7 +1416,7 @@ function applySupersetLogic(exArray, wNum) {
 }
 
 /** pickCoreBalanceExercises => for groupB "core-balance" day [UNCHANGED] */
-function pickCoreBalanceExercises() {
+export function pickCoreBalanceExercises() {
   // [UNCHANGED]
   return [
     { name: "Chair Squats", sets: 2, reps: 10, notes: "Balance" },
@@ -1490,7 +1426,7 @@ function pickCoreBalanceExercises() {
   ];
 }
 
-function pickHIITVariety() {
+export function pickHIITVariety() {
   // [UNCHANGED]
   const pool = [
     { name: "Sprints in Place", sets: 4, reps: "15s on/45s off", notes: "RPE7-8" },
@@ -1523,7 +1459,7 @@ let usedFBBThisWeek = {};
 * For each (weekNumber, dayIndex) we ensure the user doesn't get the same HIIT workout
 * twice in the *same week*. Next week resets.
 */
-function pickNonRepeatingHIIT(category, wNum, dayIdx) {
+export function pickNonRepeatingHIIT(category, wNum, dayIdx) {
   // If we start a new week, reset usedHIITThisWeek
   if (!usedHIITThisWeek[wNum]) usedHIITThisWeek[wNum] = [];
 
@@ -1544,7 +1480,7 @@ function pickNonRepeatingHIIT(category, wNum, dayIdx) {
 * pickNonRepeatingFBB
 * Similarly ensures no repeated FBB workout in the same week
 */
-function pickNonRepeatingFBB(category, wNum, dayIdx) {
+export function pickNonRepeatingFBB(category, wNum, dayIdx) {
   if (!usedFBBThisWeek[wNum]) usedFBBThisWeek[wNum] = [];
 
   const workouts = FBB_WORKOUTS[category] || [];
@@ -1562,7 +1498,7 @@ function pickNonRepeatingFBB(category, wNum, dayIdx) {
 * pickExercisesForSplit => push/pull/legs/upper => references
 ***********************************************************************/
 
-function pickExercisesForSplit(exList, splitType, sessionLen, wNum, dayIndex) {
+export function pickExercisesForSplit(exList, splitType, sessionLen, wNum, dayIndex) {
   switch (splitType) {
     case "push": return pickPushDay(exList, wNum);
     case "pull": return pickPullDay(exList, wNum);
@@ -1581,7 +1517,7 @@ function pickExercisesForSplit(exList, splitType, sessionLen, wNum, dayIndex) {
 * pickPushDayWithPreference / pickPullDayWithPreference / ...
 ***********************************************************************/
 
-function pickPushDayWithPreference(exList, wNum) {
+export function pickPushDayWithPreference(exList, wNum) {
   const isP1Novice = (isPhase1(wNum) && isNovice());
   if (!isP1Novice) {
     return pickPushDay(exList, wNum); // original
@@ -1654,7 +1590,7 @@ function pickPushDayWithPreference(exList, wNum) {
   return [1, 4, 2, 5, 3, 6].map(i => out[i]).filter(x => x);
 }
 
-function pickPullDayWithPreference(exList, wNum) {
+export function pickPullDayWithPreference(exList, wNum) {
   const isP1Novice = (isPhase1(wNum) && isNovice());
   if (!isP1Novice) {
     return pickPullDay(exList, wNum);
@@ -1696,7 +1632,7 @@ function pickPullDayWithPreference(exList, wNum) {
   return [slot1, slot2, slot3, slot4, slot5, slot6].filter(Boolean);
 }
 
-function pickFullbodyDayWithPreference(exList, wNum) {
+export function pickFullbodyDayWithPreference(exList, wNum) {
   const isP1Novice = (isPhase1(wNum) && isNovice());
   if (!isP1Novice) {
     return pickFullbodyDay(exList, wNum);
@@ -1735,12 +1671,12 @@ function pickFullbodyDayWithPreference(exList, wNum) {
 }
 
 /** pickLegDay => calls buildQuadDayOrdered or buildHamDayOrdered */
-// function pickLegDay(exList, wNum, dayCount) {
+// export function pickLegDay(exList, wNum, dayCount) {
 //   if (dayCount % 2 === 1) return buildQuadDayOrdered(exList, wNum);
 //   else return buildHamDayOrdered(exList, wNum);
 // }
 
-function pickFullbodyDay(exList, wNum) {
+export function pickFullbodyDay(exList, wNum) {
   let arr = exList.slice();
   if (shouldExcludeTechnicalForThisUser(wNum)) {
     arr = arr.filter(x => !x.isTechnical);
@@ -1794,7 +1730,7 @@ function pickFullbodyDay(exList, wNum) {
 /***********************************************************************
 * CHANGED => pickPushDay => now toggles between Flat vs. Incline 
 ***********************************************************************/
-function pickPushDay(exList, wNum) {
+export function pickPushDay(exList, wNum) {
   let arr = exList.slice();
   if (shouldExcludeTechnicalForThisUser(wNum)) {
     arr = arr.filter(x => !x.isTechnical);
@@ -1843,7 +1779,7 @@ function pickPushDay(exList, wNum) {
   return [1, 4, 2, 5, 3, 6].map(i => out[i]).filter(x => x);
 }
 
-function buildPullDayPoolPhaseAware(exList, wNum) {
+export function buildPullDayPoolPhaseAware(exList, wNum) {
   const phaseObj = getPhaseForWeek(wNum);
   const isP1 = (phaseObj.name === "Foundational Phase");
   const eqAll = (formData.equipment || []).map(e => e.toLowerCase());
@@ -1861,7 +1797,7 @@ function buildPullDayPoolPhaseAware(exList, wNum) {
 * CHANGED => pickPullDay => [UNCHANGED except we clarified the arch usage]
 ***********************************************************************/
 
-// function pickPullDay(exList, wNum) {
+// export function pickPullDay(exList, wNum) {
 //   // Build the phase-aware pool
 //   const isP1Novice = isPhase1(wNum) && isNovice();
 //   const finalPool = exList.filter(e => {
@@ -1913,7 +1849,7 @@ function buildPullDayPoolPhaseAware(exList, wNum) {
 * buildQuadDayOrdered / buildHamDayOrdered => [UNCHANGED except logs]
 ***********************************************************************/
 
-function buildQuadDayOrdered(exList, wNum) {
+export function buildQuadDayOrdered(exList, wNum) {
   let out = {};
   const ph = getPhaseForWeek(wNum).name;
   const isBeg = isNovice();
@@ -1954,7 +1890,7 @@ function buildQuadDayOrdered(exList, wNum) {
 }
 
 /** buildHamDayOrdered => 1 ham comp, 2 ham iso, 4 quad iso, 3 calves */
-function buildHamDayOrdered(exList, wNum) {
+export function buildHamDayOrdered(exList, wNum) {
   let out = {};
   const ph = getPhaseForWeek(wNum).name;
   const isBeg = isNovice();
@@ -1999,7 +1935,7 @@ function buildHamDayOrdered(exList, wNum) {
 }
 
 /** pickUpperDay => [UNCHANGED except logs] */
-function pickUpperDay(exList, sessionLen, wNum) {
+export function pickUpperDay(exList, sessionLen, wNum) {
   const ph = getPhaseForWeek(wNum).name;
   const isBeg = (formData.fitnessLevel || "beginner").toLowerCase() === "beginner";
   let arr = exList.filter(e =>
@@ -2014,19 +1950,19 @@ function pickUpperDay(exList, sessionLen, wNum) {
 }
 
 // [UNCHANGED helper fns for push/pull/upper counts]
-function getUpperCount(sessionLen) {
+export function getUpperCount(sessionLen) {
   if (sessionLen.startsWith("0-30")) return 2;
   if (sessionLen.startsWith("30-45")) return 4;
   if (sessionLen.startsWith("45-60")) return 5;
   return 6;
 }
-function getPushCount(sessionLen) {
+export function getPushCount(sessionLen) {
   if (sessionLen.startsWith("0-30")) return 2;
   if (sessionLen.startsWith("30-45")) return 4;
   if (sessionLen.startsWith("45-60")) return 5;
   return 6;
 }
-function getPullCount(sessionLen) {
+export function getPullCount(sessionLen) {
   if (sessionLen.startsWith("0-30")) return 2;
   if (sessionLen.startsWith("30-45")) return 4;
   if (sessionLen.startsWith("45-60")) return 5;
@@ -2034,7 +1970,7 @@ function getPullCount(sessionLen) {
 }
 
 /** pickMainChest => [UNCHANGED except logs] */
-function pickMainChest(chestList, pushCount) {
+export function pickMainChest(chestList, pushCount) {
   if (!chestList.length) return null;
   const inclines = chestList.filter(x => x.name.toLowerCase().includes("incline"));
   const flats = chestList.filter(x => x.name.toLowerCase().includes("flat") && !x.name.toLowerCase().includes("smith machine bench press (flat)"));
@@ -2053,7 +1989,7 @@ function pickMainChest(chestList, pushCount) {
 }
 
 /** pickChestAccessory => [UNCHANGED except logs] */
-function pickChestAccessory(chestList, mainChest) {
+export function pickChestAccessory(chestList, mainChest) {
   if (!mainChest) return pickRandom(chestList, []);
   let lower = mainChest.name.toLowerCase();
   let exclude = "";
@@ -2072,7 +2008,7 @@ function pickChestAccessory(chestList, mainChest) {
 ***********************************************************************/
 
 /** pickRandom => [UNCHANGED] */
-function pickRandom(list, alreadyPicked = []) {
+export function pickRandom(list, alreadyPicked = []) {
   const arr = list.filter(x => !alreadyPicked.includes(x));
   if (!arr.length) return null;
   return arr[Math.floor(Math.random() * arr.length)];
@@ -2155,7 +2091,7 @@ const CODE_CRITERIA = {
   },
 };
 
-function sequenceExercises(split, exercisePool, allocated = 30) {
+export function sequenceExercises(split, exercisePool, allocated = 30) {
   let order = SPLIT_CODE_ORDER[split];
   if (!order) return [];
   let final = [];
@@ -2172,7 +2108,7 @@ function sequenceExercises(split, exercisePool, allocated = 30) {
   return final;
 }
 
-function findExercise(pool, crit) {
+export function findExercise(pool, crit) {
   // [UNCHANGED: checks muscleGroup, movementPlane, typeOfMovement, etc.]
   return pool.find(e => {
     if (crit.muscleGroup && e.muscleGroup.toLowerCase() !== crit.muscleGroup.toLowerCase()) return false;
@@ -2186,7 +2122,7 @@ function findExercise(pool, crit) {
 * Enhanced Finalization of Exercises
 ***********************************************************************/
 
-function finalizeExercise(ex, idx, wNum) {
+export function finalizeExercise(ex, idx, wNum) {
   const ph = getPhaseForWeek(wNum);
   let isPhase2Or3 = (wNum >= 5);
 
@@ -2225,7 +2161,7 @@ function finalizeExercise(ex, idx, wNum) {
 
   return {
     ...ex,
-    sets: typeof ph.sets === "function" ? ph.sets(ex.typeOfMovement) : ph.sets,
+    sets: typeof ph.sets === "export function" ? ph.sets(ex.typeOfMovement) : ph.sets,
     reps: `${repL}-${repH}`,
     rpe: `${finalRL}-${finalRH}`,
     rest: `${ph.restTime}s`,
@@ -2235,9 +2171,9 @@ function finalizeExercise(ex, idx, wNum) {
 }
 
 /***********************************************************************
-* maybePhaseTechAdjust => The new function to "switch" to non-technical or technical if possible
+* maybePhaseTechAdjust => The new export function to "switch" to non-technical or technical if possible
 ***********************************************************************/
-function maybePhaseTechAdjust(origEx, wNum) {
+export function maybePhaseTechAdjust(origEx, wNum) {
   if (exMatchesUserPreference(origEx)) return origEx;
   if (origEx.muscleGroup.toLowerCase() === "back") {
     return origEx;
@@ -2272,7 +2208,7 @@ function maybePhaseTechAdjust(origEx, wNum) {
 * exMatchesUserPreference => check if the user’s eq preferences
 * includes the equipment used by origEx (like "smith machine," "barbells," etc.)
 ***********************************************************************/
-function exMatchesUserPreference(ex) {
+export function exMatchesUserPreference(ex) {
   let eqPrefs = (formData.equipmentPreference || []).map(s => s.toLowerCase());
   if (!eqPrefs.length) {
     // no explicit preference => return false => means we might do the normal phase logic
@@ -2293,7 +2229,7 @@ function exMatchesUserPreference(ex) {
 * => tries to find an alternative in the DB that has same muscleGroup & typeOfMovement
 * => isTechnical==wantTech
 ***********************************************************************/
-function pickAltExercise(origEx, wantTech, wNum) {
+export function pickAltExercise(origEx, wantTech, wNum) {
   const mg = origEx.muscleGroup.toLowerCase();
   const mov = origEx.typeOfMovement;
   let all = EXERCISE_DATABASE.filter(e =>
@@ -2345,7 +2281,7 @@ function pickAltExercise(origEx, wantTech, wNum) {
 /***********************************************************************
 * [FIX #3] => pickBodyweightFullDayWithTime => 2ex / 10min
 ***********************************************************************/
-function pickBodyweightFullDayWithTime(exList, allocatedRT = 30) {
+export function pickBodyweightFullDayWithTime(exList, allocatedRT = 30) {
   // define upperBW, lowerBW, coreBW
   const upperBW = exList.filter(e =>
     e.equipmentNeeded.length === 1
@@ -2388,7 +2324,7 @@ function pickBodyweightFullDayWithTime(exList, allocatedRT = 30) {
 /***********************************************************************
 * trySwapToTechnical => forcibly swap to barbell/dumbbell if compound
 ***********************************************************************/
-function trySwapToTechnical(origEx, forceCheck = false) {
+export function trySwapToTechnical(origEx, forceCheck = false) {
   if (origEx.isTechnical) return origEx;
   if (origEx.typeOfMovement !== "compound") return origEx;
 

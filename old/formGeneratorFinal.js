@@ -96,7 +96,7 @@ export function replaceWithFinalPage() {
     requestAnimationFrame(fillBar);
 }
 
-function getRotatingMessage() {
+export function getRotatingMessage() {
     let goal = (localStorage.getItem("goal") || "").toLowerCase();
     let goalArray = [];
 

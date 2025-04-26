@@ -30,7 +30,7 @@ const WEIGHT_LOSS_MAP = {
     },
   };
   
-  function getAdjustedMaintenance(week, maintenanceCals, userGoal) {
+  export function getAdjustedMaintenance(week, maintenanceCals, userGoal) {
     // Determine the phase (1: weeks 1-4, 2: weeks 5-8, 3: weeks 9-12)
     let phase;
     if (week <= 4) phase = 1;
@@ -60,7 +60,7 @@ const WEIGHT_LOSS_MAP = {
   //   Weeks 1–4 = phaseIndex 0
   //   Weeks 5–8 = phaseIndex 1
   //   Weeks 9–12 = phaseIndex 2
-  function getPhaseIndex(week) {
+  export function getPhaseIndex(week) {
     if (week >= 9) return 2; // 3rd block
     if (week >= 5) return 1; // 2nd block
     return 0;                // 1st block
@@ -70,7 +70,7 @@ const WEIGHT_LOSS_MAP = {
   //   - weight-loss: weeks with remainder 1,2,3 => deficit; week%4===0 => maintenance
   //   - muscle-gain: remainder 1,2,3 => surplus; remainder 0 => maintenance
   //   - improve-body-composition => remainder 1 or 2 => deficit, remainder 3 => surplus, remainder 0 => maintenance
-  function getWeeklyPhase(userGoal, week) {
+  export function getWeeklyPhase(userGoal, week) {
     if (userGoal.includes("improve")) {
       // remainder 0 => maintenance, 1-2 => deficit, 3 => surplus
       const mod = week % 4;
@@ -90,7 +90,7 @@ const WEIGHT_LOSS_MAP = {
   }
   
   // Main function that replicates the partial-fraction approach:
-  function getCalsForWeek(week) {
+  export  function getCalsForWeek(week) {
     const userGoalRaw = (localStorage.getItem("goal") || "lose weight").toLowerCase();
     const weeklyPhase = getWeeklyPhase(userGoalRaw, week);
     const maintenanceCals = parseInt(localStorage.getItem("maintenanceCalories") || "2500", 10);
@@ -181,7 +181,7 @@ const WEIGHT_LOSS_MAP = {
    * [B] HELPER FUNCTIONS FOR PORTION SCALING, ETC.
    *    (Copy from 12-week-program.js but remove DOM references)
    *********************************************************/
-  function getMealFrequency() {
+  export  function getMealFrequency() {
     // e.g. localStorage might contain "2", "3", or "4", or "2 meals"
     const freqRaw = localStorage.getItem("mealFrequency") || "4";
     // Try parseInt. e.g. parseInt("3 meals", 10) => 3
@@ -193,12 +193,12 @@ const WEIGHT_LOSS_MAP = {
   }
   
   // For debugging if “mealFrequency” never got stored properly
-  function debugCheckMealFreq() {
+  export  function debugCheckMealFreq() {
     const raw = localStorage.getItem("mealFrequency");
     console.log("DEBUG: localStorage mealFrequency=", raw, " => parsed=", getMealFrequency());
   }
   
-  function calculateMacros(totalCals, macroRatio) {
+  export function calculateMacros(totalCals, macroRatio) {
     // standard: 4 kcal/g for protein, 4 kcal/g carbs, 9 kcal/g fats
     const p = Math.round((totalCals * (macroRatio.protein || 0)) / 4);
     const c = Math.round((totalCals * (macroRatio.carbs || 0)) / 4);
@@ -206,7 +206,7 @@ const WEIGHT_LOSS_MAP = {
     return { protein: p, carbs: c, fats: f };
   }
   
-  function scaleIngredient(ingredient, multiplier) {
+  export function scaleIngredient(ingredient, multiplier) {
     let newQuantity = ingredient.quantity * multiplier;
   
     // 1) Decide if this is a whole-item ingredient (e.g., “eggs”).
@@ -266,7 +266,7 @@ const WEIGHT_LOSS_MAP = {
     };
   }
   
-  function portionScaleMeal(meal, newCalorieTarget) {
+  export  function portionScaleMeal(meal, newCalorieTarget) {
     console.log("\n--- portionScaleMeal START ---");
     console.log("Original Meal:", meal.mealName);
   
@@ -317,7 +317,7 @@ const WEIGHT_LOSS_MAP = {
   /*********************************************************
    * pickMealForCategory, ratioData, etc.
    *********************************************************/
-  function pickMealForCategory(category, mealTarget, database) {
+  export function pickMealForCategory(category, mealTarget, database) {
     const lowerBound = 0.9 * mealTarget;
     const upperBound = 1.1 * mealTarget;
   
@@ -364,13 +364,13 @@ const WEIGHT_LOSS_MAP = {
     }
   };
   
-  function getMealSplitsForPhase(phase, mealFreq) {
+  export function getMealSplitsForPhase(phase, mealFreq) {
     // If ratioData[phase] is undefined, default to ratioData.deloadPhase
     const phaseObj = ratioData[phase] || ratioData.deloadPhase;
     return phaseObj[mealFreq] || ratioData.deloadPhase[4];
   }
   
-  function getMealPhaseForWeek(weekNum, userGoal) {
+  export  function getMealPhaseForWeek(weekNum, userGoal) {
     // Example logic:
     const g = userGoal.toLowerCase();
     // w4 => deload, else deficit/surplus
@@ -386,7 +386,7 @@ const WEIGHT_LOSS_MAP = {
     }
   }
   
-  function generateTwelveWeekMealPlan() {
+  export function generateTwelveWeekMealPlan() {
     const userGoal = (localStorage.getItem("goal") || "lose weight").toLowerCase();
     const mealFreq = getMealFrequency();  // e.g. 2, 3, or 4
     const allWeeks = [];
