@@ -1294,34 +1294,30 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   ];
 
-  const sliderContainer = document.querySelector(".testimonial-slider");
-  const prevBtn = document.querySelector(".arrow-button.prev");
-  const nextBtn = document.querySelector(".arrow-button.next");
-  const dotsContainer = document.querySelector(".dots-container");
+  const testimonialWrapper = document.querySelector(".testimonial-container");
+  const sliderContainer    = document.querySelector(".testimonial-slider");
+  const prevBtn            = document.querySelector(".arrow-button.prev");
+  const nextBtn            = document.querySelector(".arrow-button.next");
+  const dotsContainer      = document.querySelector(".dots-container");
 
+  // 2) state
   let currentIndex = 0;
-  let startX = 0;
-  let endX = 0;
+  let startX       = 0;
+  let endX         = 0;
 
+  // 3) build the slides
   function createTestimonialCards() {
-    // Clear existing content
     sliderContainer.innerHTML = "";
-
-    reviews.forEach((review, index) => {
-      // Create a .testimonial-card
+    reviews.forEach((review) => {
       const card = document.createElement("div");
       card.classList.add("testimonial-card");
-
-      // HTML for each card (similar to your existing structure)
       card.innerHTML = `
         <div class="images">
           <div class="before">
-            <img src="${review.beforeImage}" alt="Before">
-            <p>Before</p>
+            <img src="${review.beforeImage}" alt="Before"><p>Before</p>
           </div>
           <div class="after">
-            <img src="${review.afterImage}" alt="After">
-            <p>After</p>
+            <img src="${review.afterImage}" alt="After"><p>After</p>
           </div>
         </div>
         <p class="review-name">${review.name}</p>
@@ -1330,40 +1326,33 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         <p class="review-text">${review.text}</p>
       `;
-
       sliderContainer.appendChild(card);
     });
   }
 
-  // 2) Create & update the dots
+  // 4) build the dots
   function createDots() {
     dotsContainer.innerHTML = "";
-    reviews.forEach((_, index) => {
+    reviews.forEach((_, i) => {
       const dot = document.createElement("div");
       dot.classList.add("dot");
-      if (index === currentIndex) dot.classList.add("active");
-      // Clicking a dot => jump to that slide
+      if (i === currentIndex) dot.classList.add("active");
       dot.addEventListener("click", () => {
-        currentIndex = index;
+        currentIndex = i;
         updateSlider();
       });
       dotsContainer.appendChild(dot);
     });
   }
 
-  // 3) Move the slider to the currentIndex & update dots
+  // 5) slide logic
   function updateSlider() {
-    const slideWidth = sliderContainer.clientWidth; // each card is 100% of this container
-    sliderContainer.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-
-    // Update dots
-    const allDots = dotsContainer.querySelectorAll(".dot");
-    allDots.forEach((dot, idx) => {
-      dot.classList.toggle("active", idx === currentIndex);
+    const width = sliderContainer.clientWidth;
+    sliderContainer.style.transform = `translateX(-${currentIndex * width}px)`;
+    dotsContainer.querySelectorAll(".dot").forEach((dot, i) => {
+      dot.classList.toggle("active", i === currentIndex);
     });
   }
-
-  // 4) Arrow button handlers
   function goNext() {
     currentIndex = (currentIndex + 1) % reviews.length;
     updateSlider();
@@ -1373,36 +1362,27 @@ document.addEventListener("DOMContentLoaded", () => {
     updateSlider();
   }
 
-  // 5) Mobile swipe detection
+  // 6) swipe on the **wrapper** instead of the inner slider
   function enableSwipe() {
-    sliderContainer.addEventListener("touchstart", (e) => {
+    testimonialWrapper.addEventListener("touchstart", e => {
       startX = e.touches[0].clientX;
     });
-
-    sliderContainer.addEventListener("touchend", (e) => {
+    testimonialWrapper.addEventListener("touchend", e => {
       endX = e.changedTouches[0].clientX;
-      if (startX - endX > 50) {
-        // Swipe left => next
-        goNext();
-      } else if (endX - startX > 50) {
-        // Swipe right => prev
-        goPrev();
-      }
+      if      (startX - endX > 50) goNext();
+      else if (endX - startX > 50) goPrev();
     });
   }
 
+  // 7) on resize, recalc
   window.addEventListener("resize", updateSlider);
 
-  // 7) Init everything
+  // 8) init
   createTestimonialCards();
   createDots();
   enableSwipe();
-
-  // Arrows (desktop)
   nextBtn.addEventListener("click", goNext);
   prevBtn.addEventListener("click", goPrev);
-
-  // On load, set initial position
   updateSlider();
 });
 

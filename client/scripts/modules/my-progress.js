@@ -2688,25 +2688,24 @@
       
         // 5) Mobile swipe detection
         function enableSwipe() {
-          sliderContainer.addEventListener("touchstart", (e) => {
+          // listen on the outer container, not the inner slider
+          const testimonialWrapper = document.querySelector(".testimonial-container");
+          testimonialWrapper.addEventListener("touchstart", (e) => {
             startX = e.touches[0].clientX;
           });
-      
-          sliderContainer.addEventListener("touchend", (e) => {
+        
+          testimonialWrapper.addEventListener("touchend", (e) => {
             endX = e.changedTouches[0].clientX;
-            if (startX - endX > 50) {
-              // Swipe left => next
-              goNext();
-            } else if (endX - startX > 50) {
-              // Swipe right => prev
-              goPrev();
-            }
+            if      (startX - endX > 50) goNext();
+            else if (endX - startX > 50) goPrev();
           });
         }
+        
+        // …and then later in your init code…
         if (typeof createTestimonialCards === "function") {
-          createTestimonialCards();                 // your existing helpers
-          createDots();
-          enableSwipe();
+          createTestimonialCards();   // build the slides
+          createDots();               // build the dots
+          enableSwipe();              // now anywhere in the container will detect a swipe!
           nextBtn.addEventListener("click", goNext);
           prevBtn.addEventListener("click", goPrev);
           updateSlider();

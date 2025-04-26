@@ -449,6 +449,7 @@ h6 {
 }
 
 .testimonial-container {
+  touch-action: pan-y; 
   position: relative;
   max-width: 750px;
   margin: 0 auto;

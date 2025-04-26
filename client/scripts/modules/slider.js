@@ -69,16 +69,21 @@ export function initTestimonialsSlider() {
       }
     });
   
-    slider.addEventListener("touchstart", e => startX = e.touches[0].clientX);
-    slider.addEventListener("touchend", e => {
+    const sliderContainer = document.querySelector(".testimonial-container");
+
+    sliderContainer.addEventListener("touchstart", e => {
+      startX = e.touches[0].clientX;
+    });
+    
+    sliderContainer.addEventListener("touchend", e => {
       const delta = startX - e.changedTouches[0].clientX;
-      if      (delta > 50)  idx = (idx+1)%reviews.length;
-      else if (delta < -50) idx = (idx-1+reviews.length)%reviews.length;
+      if      (delta > 50)  idx = (idx + 1) % reviews.length;
+      else if (delta < -50) idx = (idx - 1 + reviews.length) % reviews.length;
       render();
     });
-  
+    
     window.addEventListener("resize", render);
-  
+    
     render();
   }
   

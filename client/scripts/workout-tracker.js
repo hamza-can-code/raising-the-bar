@@ -1,9 +1,9 @@
-if (localStorage.getItem("hasAWTSubscription") !== "true") {
-  localStorage.setItem("hasAWTSubscription", "true");
-}
-if (localStorage.getItem("hasPOSAddOnForAWT") !== "true") {
-  localStorage.setItem("hasPOSAddOnForAWT", "true");
-}
+// if (localStorage.getItem("hasAWTSubscription") !== "true") {
+//   localStorage.setItem("hasAWTSubscription", "true");
+// }
+// if (localStorage.getItem("hasPOSAddOnForAWT") !== "true") {
+//   localStorage.setItem("hasPOSAddOnForAWT", "true");
+// }
 
 let exerciseExpansionState = JSON.parse(localStorage.getItem("exerciseExpansionState") || "{}");
 let currentWeekIndex = parseInt(localStorage.getItem("currentWeekIndex") || "0", 10);
