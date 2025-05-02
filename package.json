@@ -2,8 +2,9 @@
   "name": "raising-the-bar",
   "version": "1.0.0",
   "description": "A website by Raising The Bar, offering custom workout programs and 1-on-1 coaching.",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
+    "start": "node server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
