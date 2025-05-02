@@ -72,7 +72,7 @@ const stripeRoutes    = require('./routes/stripeRoutes');
 const apiRoutes       = require('./routes/api');
 const workoutRoutes   = require('./routes/workoutRoutes');
 const nutritionRoutes = require('./routes/nutritionRoutes');
-const accessRoutes    = require('./routes/accessRoutes'); 
+const accessRoutes    = require('./routes/accessRoutes');
 
 const app  = express();
 const PORT = process.env.PORT || 5001;
@@ -87,34 +87,34 @@ app.use((req, _res, next) => {
 /* 2) DB connection                                              */
 connectDB();
 
-/* 3)  Stripe webhook (raw body)  – MOUNT FIRST !                */
+/* 3) Stripe webhook (raw body) – MOUNT FIRST!                   */
 app.use('/api', webhookRouter);     // → POST /api/webhook
 
-/* 4)  JSON body-parser for everything else                      */
+/* 4) JSON body-parser for everything else                      */
 app.use(express.json({ limit: '10mb' }));
 
-/* 5)  Health-check                                              */
+/* 5) Health-check                                              */
 app.get('/api/test', (_req, res) => res.json({ ok: true }));
 
-/* 6)  App API routes                                            */
+/* 6) App API routes                                            */
 console.log('🧠 Loading API routes…');
 app.use('/api', apiRoutes);
 app.use('/api', workoutRoutes);
 app.use('/api', nutritionRoutes);
-app.use('/api', accessRoutes); 
+app.use('/api', accessRoutes);
 
-/* 7)  Stripe checkout route (normal JSON)                       */
+/* 7) Stripe checkout route (normal JSON)                       */
 app.use('/api', stripeRoutes);
 
 console.log('🚀 All API routes mounted');
 
-/* 8)  Static front-end                                          */
+/* 8) Static front-end                                          */
 app.use(express.static(path.join(__dirname, '../client')));
 
-/* 9)  404 catch-all                                             */
+/* 9) 404 catch-all                                             */
 app.use((_req, res) => res.status(404).send('Not Found'));
 
-/* 10) Start server                                              */
+/* 10) Start server                                             */
 app.listen(PORT, () =>
   console.log(`Server running on http://localhost:${PORT}`)
 );
