@@ -1,16 +1,287 @@
 /*********************************************
  * NUTRITION TRACKER 
- * 
- * This file is structured similarly to workout-tracker.js,
- * but adapted for the new "Nutrition Tracker" features.
  *********************************************/
 
-if (localStorage.getItem("hasAWTSubscription") !== "true") {
-  localStorage.setItem("hasAWTSubscription", "true");
+async function sendMealLog(mealData) {
+  const token = localStorage.getItem('token');
+  if (!token) return console.error('No token, cannot log meal');
+  try {
+    const res = await fetch('/api/logMeal', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(mealData)
+    });
+    if (!res.ok) throw new Error(await res.text());
+    console.log('✅ Meal log saved');
+  } catch (err) {
+    console.error('❌ Error logging meal:', err.message);
+  }
 }
-if (localStorage.getItem("hasPOSAddOnForAWT") !== "true") {
-  localStorage.setItem("hasPOSAddOnForAWT", "true");
+
+function buildUserProgress() {
+  const userProgress = {
+    xp: Number(localStorage.getItem('currentXP')) || 0,
+    currentLevel: Number(localStorage.getItem('currentLevel')) || 1,
+    progressScore:Number(localStorage.getItem('progressScore')),
+    streak: {
+      count: Number(localStorage.getItem('streakCount')) || 0,
+      startDate: localStorage.getItem('streakStartDate') || null,
+    },
+    program: {
+      startDate: localStorage.getItem('programStartDate') || null,
+      activeWorkoutWeek: Number(localStorage.getItem('activeWorkoutWeek')) || 1,
+      activeNutritionWeek: Number(localStorage.getItem('activeNutritionWeek')) || 1,
+      completedThisWeek: Number(localStorage.getItem('completedThisWeek')) || 0,
+      weeklyStats: {}
+    },
+    workoutLogs: JSON.parse(localStorage.getItem('workoutLogs') || '[]'),
+    awardedState: JSON.parse(localStorage.getItem('awardedState') || '{}'),
+    checkboxState: JSON.parse(localStorage.getItem('checkboxState') || '{}'),
+    workoutStarted: {},
+    workoutFinished: {},
+    recapShown: JSON.parse(localStorage.getItem('currentWorkoutRecapShown') || '{}'),
+    upsells: {
+      ctUpsellFirstWorkout: localStorage.getItem('ctUpsell_shown_firstWorkout') === 'true'
+    },
+      profile: {
+      goalWeight:        parseFloat(localStorage.getItem('userGoalWeight')       || '0'),
+      goalDate:          localStorage.getItem('userGoalDate')                 || '',
+      currentWeight:     parseFloat(localStorage.getItem('userCurrentWeight')  || '0'),
+      currentWeightDate: localStorage.getItem('userCurrentWeightDate')        || ''
+    },
+    bodyWeightLogs: JSON.parse(localStorage.getItem('bodyWeightLogs') || '[]'),
+
+    // ← existing setValues
+    setValues: {}
+  };
+
+  for (let key in localStorage) {
+    if (key.startsWith('workoutStarted_')) {
+      userProgress.workoutStarted[key] = localStorage.getItem(key) === 'true';
+    }
+    if (key.startsWith('workoutFinished_')) {
+      userProgress.workoutFinished[key] = localStorage.getItem(key) === 'true';
+    }
+  }
+
+  for (let i = 1; i <= 12; i++) {
+    userProgress.program.weeklyStats[`week${i}`] = {
+      workoutsDone: Number(localStorage.getItem(`week${i}_workoutsDone`)) || 0,
+      totalReps: Number(localStorage.getItem(`week${i}_totalReps`)) || 0,
+      totalSets: Number(localStorage.getItem(`week${i}_totalSets`)) || 0,
+      totalWeight: Number(localStorage.getItem(`week${i}_totalWeight`)) || 0,
+    };
+  }
+
+  const setValues = {};
+  Object.keys(localStorage).forEach(k => {
+    if (/_set\d+_(actual|suggested)(Reps|Weight|Duration)$/.test(k)) {
+      setValues[k] = localStorage.getItem(k);
+    }
+  });
+  userProgress.setValues = setValues;
+
+  userProgress.wt_onboarding_complete = localStorage.getItem('wt_onboarding_complete') === '1';
+
+  return userProgress;
 }
+
+function buildNutritionProgress() {
+
+  const prog = {
+    /* ---------- VALUES SHARED ACROSS ALL TRACKERS ---------- */
+    currentXP:      Number(localStorage.getItem('currentXP'))      || 0,
+    currentLevel:   Number(localStorage.getItem('currentLevel'))   || 1,
+    progressScore:  Number(localStorage.getItem('progressScore'))  || 0,
+
+    /* ---------- NUTRITION-ONLY STREAK ---------- */
+    nutritionStreakCount: Number(localStorage.getItem('nutritionStreakCount')) || 0,
+
+    /* ---------- PROGRAM ---------- */
+    program: {
+      startDate:   localStorage.getItem('programStartDate')           || null,
+      activeWeek:  Number(localStorage.getItem('activeNutritionWeek'))|| 1
+    },
+
+    /* ---------- OTHER STATE ---------- */
+    savedMeals: JSON.parse(localStorage.getItem('savedMealsList') || '[]'),
+
+    uiState: {
+      tip:      localStorage.getItem('todaysTip_NT'),
+      tipDate:  localStorage.getItem('todaysTipDate_NT'),
+      lastTab:  localStorage.getItem('lastSelectedNutritionTab')
+    },
+
+    nt_onboarding_complete: localStorage.getItem('nt_onboarding_complete') || '0'
+  };
+
+  /* copy every weekX_dayY_… key */
+  Object.keys(localStorage).forEach(k => {
+    if (/^week\d+_day\d+_/i.test(k)) prog[k] = localStorage.getItem(k);
+  });
+
+  return prog;
+}
+
+async function saveNutritionProgressToServer() {
+  const token = localStorage.getItem('token');
+  if (!token) return console.error('No token, cannot save progress');
+  const progress = buildNutritionProgress();
+  try {
+    const res = await fetch('/api/nutrition/saveUserProgress', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(progress)
+    });
+    if (!res.ok) throw new Error(await res.text());
+    console.log('✅ Nutrition progress snapshot saved');
+  } catch (err) {
+    console.error('❌ Error saving nutrition progress:', err.message);
+  }
+}
+
+async function saveMyProgressToServer() {
+  const token = localStorage.getItem('token');
+  if (!token) return;
+
+  /* FULL workout-style snapshot — identical to WT */
+  const payload = buildUserProgress();
+
+  try {
+    const res = await fetch('/api/workouts/saveUserProgress', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+      console.error('❌ saveMyProgressToServer:', await res.text());
+    } else {
+      console.log('✅ Workout-side snapshot updated (streak preserved)');
+    }
+  } catch (err) {
+    console.error('❌ saveMyProgressToServer:', err.message);
+  }
+}
+
+function normaliseXPandLevel () {
+  let xp  = Number(localStorage.getItem('currentXP'))   || 0;
+  let lvl = Number(localStorage.getItem('currentLevel'))|| 0;
+
+  while (xp >= xpNeededForLevel(lvl)) {          // “carry” overflow XP upward
+    xp  -= xpNeededForLevel(lvl);
+    lvl++;
+  }
+
+  localStorage.setItem('currentXP',   xp);
+  localStorage.setItem('currentLevel', lvl);
+
+  return { xp, lvl };                            // feed the result back
+}
+
+function renderXPBar() {
+  const xp  = Number(localStorage.getItem('currentXP'))   || 0;
+  const lvl = Number(localStorage.getItem('currentLevel'))|| 0;
+  const needed = xpNeededForLevel(lvl);
+  const pct = Math.min(xp / needed, 1) * 100;
+
+  const fill = document.getElementById('xpBarFill');
+  if (fill) fill.style.width = pct + '%';
+}
+
+async function loadNutritionProgress () {
+  const token = localStorage.getItem('token');
+  if (!token) return;
+
+  try {
+    const res = await fetch('/api/nutrition/getUserProgress', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (!res.ok) return;                 // first-time user ⇒ nothing to restore
+
+    const prog = await res.json();
+
+    /* 1 ▸ copy ONLY nutrition-specific keys back to localStorage */
+    Object.entries(prog).forEach(([k, v]) => {
+      /* ignore the three “global” keys so we don’t stomp on WT/Dashboard */
+      if (k === 'currentXP'      ||
+          k === 'currentLevel'   ||
+          k === 'progressScore') return;
+
+      if (typeof v === 'object') localStorage.setItem(k, JSON.stringify(v));
+      else                       localStorage.setItem(k, v);
+    });
+
+    /* 2 ▸ refresh nutrition-streak counter in memory & redraw message */
+    nutritionStreakCount =
+      Number(localStorage.getItem('nutritionStreakCount')) || 0;
+    updateNutritionStreakDisplay();
+
+    console.log('✅ Nutrition progress restored (XP/PS left untouched)');
+  } catch (err) {
+    console.error('❌ loadNutritionProgress:', err.message);
+  }
+}
+
+const mealPlanData   = JSON.parse(localStorage.getItem('twelveWeekMealPlan') || '[]');
+let   totalWeeks     = Math.min(mealPlanData.length, 12);
+
+let   purchasedWeeks;            // runtime value (filled below)
+const planName = localStorage.getItem('planName') || '';
+
+function getPurchasedWeeks () {
+  return typeof purchasedWeeks === 'number'
+    ? purchasedWeeks
+    : Number(localStorage.getItem('purchasedWeeks') || 0);
+}
+
+async function fetchPurchasedWeeks () {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) throw new Error("No auth token");
+
+    const res = await fetch("/api/access", {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error(await res.text());
+
+    /* backend returns the rolling allowance for subscriptions           */
+    const { unlockedWeeks } = await res.json();
+
+    /* ── SINGLE-PAY 12-WEEK PROGRAM ───────────────────────────────── */
+    const twelveWeek = (planName === "12-Week Program");
+    purchasedWeeks   = twelveWeek ? 12 : (Number(unlockedWeeks) || 0);
+
+  } catch (err) {
+    /* very unlikely now – only runs when the call itself fails */
+    console.warn("[NT Access] falling back –", err.message);
+    purchasedWeeks = (planName === "12-Week Program") ? 12 : 0;
+  }
+
+  localStorage.setItem("purchasedWeeks", String(purchasedWeeks));
+
+  renderWeekSelector();
+  renderDaySelector();
+  renderDailyMealDisplay();
+}
+fetchPurchasedWeeks();
+
+window.addEventListener('DOMContentLoaded', fetchPurchasedWeeks);
+
+// if (localStorage.getItem("hasAWTSubscription") !== "true") {
+//   localStorage.setItem("hasAWTSubscription", "true");
+// }
+// if (localStorage.getItem("hasPOSAddOnForAWT") !== "true") {
+//   localStorage.setItem("hasPOSAddOnForAWT", "true");
+// }
 
 const sub = (localStorage.getItem("hasAWTSubscription") === "true");
 const pos = (localStorage.getItem("hasPOSAddOnForAWT") === "true");
@@ -113,7 +384,7 @@ function updateActiveWeek() {
     localStorage.setItem("programStartDate", rawStart);
     console.log("Program start date set to today:", today.toString());
   }
-  
+
   // 2. Calculate the calendar week based on programStartDate
   const startDate = new Date(rawStart);
   const now = new Date();
@@ -480,30 +751,34 @@ function checkProgressBarVisibility() {
 
 window.addEventListener("scroll", checkProgressBarVisibility);
 
-function updateNutritionProgressScore() {
-  // Retrieve the progress score from localStorage.
-  const storedPS = parseInt(localStorage.getItem("progressScore") || "0", 10);
+async function updateNutritionProgressScore() {
 
-  const psEl = document.getElementById("nutritionProgressScoreValue");
-  if (!psEl) return;
+  /* 1 | current stored value */
+  const storedPS = Number(localStorage.getItem("progressScore") || "0");
+
+  /* 2 | update the UI */
+  const psEl     = document.getElementById("nutritionProgressScoreValue");
+  const trackEl  = document.getElementById("nutritionProgressTrackStatus");
+  const dailyEl  = document.getElementById("nutritionProgressDailyMessage");
+  if (!psEl || !trackEl || !dailyEl) return;      // elements not on this page
+
   psEl.textContent = storedPS.toString();
 
-  // Get elements for the track message and daily message.
-  const trackMsgEl = document.getElementById("nutritionProgressTrackStatus");
-  const dailyMsgEl = document.getElementById("nutritionProgressDailyMessage");
-
-  // Determine if the user is on track.
-  const onTrack = checkIfUserIsOnTrackForNutrition(); // Your custom logic.
-  
+  const onTrack = checkIfUserIsOnTrackForNutrition();   // ← your own helper
   if (onTrack) {
-    trackMsgEl.textContent = "";
-    // Use the caching function so that the message is only re-randomized once per day,
-    // or when the user's progress score moves to a new threshold.
-    dailyMsgEl.textContent = getNutritionMessage(storedPS);
+    trackEl.textContent = "";
+    dailyEl.textContent = getNutritionMessage(storedPS);        // ← your helper
   } else {
-    trackMsgEl.textContent = "You might be off-track. Let’s refocus this week!";
-    dailyMsgEl.textContent = getRandomOffTrackMessageForNutrition();
+    trackEl.textContent = "You might be off-track. Let’s refocus this week!";
+    dailyEl.textContent = getRandomOffTrackMessageForNutrition();
   }
+
+  /* 3 | console log (same as WT) */
+  console.log("[PS] Done updating. Final PS =", storedPS);
+
+  /* 4 | push unchanged score to both snapshots so all pages share it */
+  await saveNutritionProgressToServer();   // nutrition document
+  await saveMyProgressToServer();          // workout / dashboard document
 }
 
 const nutritionOnTrackMessages = [
@@ -924,41 +1199,52 @@ myProgressTab.addEventListener("click", () => {
 ////////////////////////////
 
 // Example structure stored in localStorage: "twelveWeekMealPlan"
-const mealPlanData = JSON.parse(localStorage.getItem("twelveWeekMealPlan") || "[]");
+// const mealPlanData = JSON.parse(localStorage.getItem("twelveWeekMealPlan") || "[]");
 // Some users may have a 12-week plan, or less. We'll limit ourselves to however many are in the array.
-let totalWeeks = mealPlanData.length;
+// let totalWeeks = mealPlanData.length;
 let mealPrepPopupVisible = false;
 if (totalWeeks > 12) totalWeeks = 12;
 
 let currentWeekIndex = parseInt(localStorage.getItem("currentNutritionWeekIndex") || "0", 10);
 let currentDayIndex = parseInt(localStorage.getItem("currentNutritionDayIndex") || "0", 10);
 
-function renderWeekSelector() {
+function renderWeekSelector () {
   const weekSelector = document.getElementById("weekSelector");
   if (!weekSelector) return;
+
   weekSelector.innerHTML = "";
-  if (totalWeeks <= 0) return;
+  if (totalWeeks === 0) return;
 
   for (let i = 0; i < totalWeeks; i++) {
-    const wBox = document.createElement("div");
+    const wObj  = mealPlanData[i];
+    const wBox  = document.createElement("div");
+    const wNum  = wObj?.week || (i + 1);
+
     wBox.classList.add("week-box");
-    const wNumber = mealPlanData[i].week;
-    wBox.textContent = `Week ${wNumber}`;
 
-    if (i === currentWeekIndex) {
-      wBox.classList.add("active");
+    /* ── LOCKED? ───────────────────────── */
+    if (i >= purchasedWeeks) {
+      wBox.classList.add("locked");
+      wBox.textContent = `🔒 Week ${wNum}`;
+      // nothing clickable
+    } else {
+      /* ── UNLOCKED ────────────────────── */
+      wBox.textContent = `Week ${wNum}`;
+      if (i <  currentWeekIndex) wBox.classList.add("completed");
+      if (i === currentWeekIndex) wBox.classList.add("active");
+
+      wBox.addEventListener("click", () => {
+        currentWeekIndex = i;
+        currentDayIndex  = 0;
+
+        localStorage.setItem("currentNutritionWeekIndex", String(i));
+        localStorage.setItem("currentNutritionDayIndex",  "0");
+
+        updateWeekBoxes();
+        renderDaySelector();
+        renderDailyMealDisplay();
+      });
     }
-
-    wBox.addEventListener("click", () => {
-      currentWeekIndex = i;
-      // Reset currentDayIndex to 0 (Day 1) whenever a new week is selected
-      currentDayIndex = 0;
-      localStorage.setItem("currentNutritionWeekIndex", currentWeekIndex.toString());
-      localStorage.setItem("currentNutritionDayIndex", "0");
-      updateWeekBoxes();
-      renderDaySelector();
-      renderDailyMealDisplay();
-    });
 
     weekSelector.appendChild(wBox);
   }
@@ -1858,45 +2144,84 @@ function createSubCollapse(titleText, contentGenerator) {
 // 7) Button Logic
 //////////////////////////////
 
-function handleLogMeal(mealData, wNum, dayNum, mealIndex) {
-  // Check if the current log is from a week higher than the current active week
-  const currentLogWeek = mealPlanData[currentWeekIndex].week; // e.g., if the user selected Week 2
+async function handleLogMeal(mealData, wNum, dayNum, mealIndex) {
+  /* ---------- 1. current local logic (unchanged) ---------- */
+  const currentLogWeek = mealPlanData[currentWeekIndex].week;
   let activeNutritionWeek = parseInt(localStorage.getItem("activeNutritionWeek") || "1", 10);
+
   if (currentLogWeek > activeNutritionWeek && activeNutritionWeek < 3) {
-    // User is logging in a later week (Week 2) early.
     localStorage.setItem("lockedActiveWeek", currentLogWeek.toString());
     activeNutritionWeek = currentLogWeek;
     localStorage.setItem("activeNutritionWeek", activeNutritionWeek.toString());
     localStorage.setItem("activeWorkoutWeek", activeNutritionWeek.toString());
-    console.log(`User logged in Week ${currentLogWeek} early. Locked active week to Week ${currentLogWeek}`);
   }
 
-  // Continue with the usual logging...
   const mealStatusKey = `week${wNum}_day${dayNum}_meal${mealIndex}_status`;
   localStorage.setItem(mealStatusKey, "logged");
-  // Save meal macros/calories (as before)…
+
   localStorage.setItem(`week${wNum}_day${dayNum}_meal${mealIndex}_cals`, mealData.calories.toString());
   localStorage.setItem(`week${wNum}_day${dayNum}_meal${mealIndex}_protein`, mealData.protein.toString());
   localStorage.setItem(`week${wNum}_day${dayNum}_meal${mealIndex}_carbs`, mealData.carbs.toString());
   localStorage.setItem(`week${wNum}_day${dayNum}_meal${mealIndex}_fats`, mealData.fats.toString());
 
-  // Award XP (with streak multiplier, etc.)
   addXP(50);
-
-  // Re-render the day display.
   renderDailyMealDisplay();
-  updateActiveWeekOnLog()
+  updateActiveWeekOnLog();
+
+  /* ---------- 2. backend round-trips ---------- */
+  const mealLog = {
+    week: wNum,
+    day: dayNum,
+    mealIdx: mealIndex,
+    calories: mealData.calories,
+    protein: mealData.protein,
+    carbs: mealData.carbs,
+    fats: mealData.fats,
+    status: 'logged'
+  };
+
+  await sendMealLog(mealLog);              // one-row insert
+  await saveNutritionProgressToServer();   // full snapshot
+  await saveMyProgressToServer();
 }
 
-function handleSwapMeal(mealData, wNum, dayNum, mealIndex) {
-  // Show the pop-up that asks user to pick from previously saved meals or type new
+async function handleSwapMeal(mealData, wNum, dayNum, mealIndex) {
   showSwapMealPopup(mealData, wNum, dayNum, mealIndex);
-  updateActiveWeekOnLog()
+  updateActiveWeekOnLog();
+
+  const mealLog = {
+    week: wNum,
+    day: dayNum,
+    mealIdx: mealIndex,
+    calories: mealData.calories,
+    protein: mealData.protein,
+    carbs: mealData.carbs,
+    fats: mealData.fats,
+    status: 'swapped',
+    swappedName: mealData.mealName        // whatever you capture in the popup
+  };
+
+  // await sendMealLog(mealLog);
+  // await saveNutritionProgressToServer();
 }
 
-function handleSkipMeal(mealData, wNum, dayNum, mealIndex) {
+async function handleSkipMeal(mealData, wNum, dayNum, mealIndex) {
   showSkipMealPopup(mealData, wNum, dayNum, mealIndex);
-  updateActiveWeekOnLog()
+  updateActiveWeekOnLog();
+
+  const mealLog = {
+    week: wNum,
+    day: dayNum,
+    mealIdx: mealIndex,
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fats: 0,
+    status: 'skipped'
+  };
+
+  // await sendMealLog(mealLog);
+  // await saveNutritionProgressToServer();
 }
 
 ////////////////////////////
@@ -2145,13 +2470,13 @@ function showSwapMealPopup(mealData, wNum, dayNum, mealIndex) {
   const confirmBtn = document.createElement("button");
   confirmBtn.id = "confirmSwapMealBtn";
   confirmBtn.textContent = "Swap Meal";
-  confirmBtn.disabled = true; // Initially disabled
+  confirmBtn.disabled = true;
   btnContainer.appendChild(confirmBtn);
 
   /* -----------------------------------------------------------
      Confirm button click handler
   ----------------------------------------------------------- */
-  confirmBtn.addEventListener("click", () => {
+  confirmBtn.addEventListener("click", async () => {
     const nameVal = mealNameInput.value.trim();
     const calsVal = parseFloat(mealCalsInput.value.trim());
     const protVal = parseFloat(mealProtInput.value.trim());
@@ -2206,6 +2531,23 @@ function showSwapMealPopup(mealData, wNum, dayNum, mealIndex) {
 
     // 6) Award XP
     addXP(50);
+
+    const mealLog = {
+      week: wNum,
+      day: dayNum,
+      mealIdx: mealIndex,
+      calories: calsVal,
+      protein: protVal,
+      carbs: carbVal,
+      fats: fatVal,
+      status: 'swapped',
+      swappedName: nameVal,
+      originalName: mealData.mealName || ''
+    };
+
+    await sendMealLog(mealLog);            // one-row insert
+    await saveNutritionProgressToServer(); // full snapshot
+    await saveMyProgressToServer();
 
     // 7) Close popup & re-render
     closeSwapMealPopup();
@@ -2346,7 +2688,7 @@ function showSkipMealPopup(mealData, wNum, dayNum, mealIndex) {
   yesBtn.style.width = "100%";
   yesBtn.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.15)";
   yesBtn.style.marginBottom = "10px";
-  yesBtn.addEventListener("click", () => {
+  yesBtn.addEventListener("click", async () => {
     // Mark the meal as "skipped"
     const mealStatusKey = `week${wNum}_day${dayNum}_meal${mealIndex}_status`;
     localStorage.setItem(mealStatusKey, "skipped");
@@ -2363,6 +2705,21 @@ function showSkipMealPopup(mealData, wNum, dayNum, mealIndex) {
 
     // Reset the nutrition streak
     resetNutritionStreak();
+
+    const mealLog = {
+      week: wNum,
+      day: dayNum,
+      mealIdx: mealIndex,
+      calories: 0,
+      protein: 0,
+      carbs: 0,
+      fats: 0,
+      status: 'skipped'
+    };
+
+    await sendMealLog(mealLog);
+    await saveNutritionProgressToServer();
+    await saveMyProgressToServer();
 
     closeSkipMealPopup();
     renderDailyMealDisplay();
@@ -2644,7 +3001,7 @@ function showSummaryPopup() {
             `🧠 Discipline unlocked: ${streakCount}-${streakCount === 1 ? 'day' : 'days'} streak.`,
           (streakCount) =>
             `⏳ ${streakCount} ${streakCount === 1 ? 'day' : 'days'} of progress. Every meal has moved you forward.`
-        ];        
+        ];
         streakMessage = activeStreakMessages[Math.floor(Math.random() * activeStreakMessages.length)];
       }
       // Freeze the message for this day
@@ -3980,9 +4337,9 @@ function computeMacroMatchScore({ planProtein, planCarbs, planFats, userProtein,
   return (0.30 * protPctHit) + (0.40 * carbPctHit) + (0.30 * fatPctHit);
 }
 
-function drawMacroBreakdownChart({ 
+function drawMacroBreakdownChart({
   planProtein, planCarbs, planFats,
-  userProtein, userCarbs, userFats}) {
+  userProtein, userCarbs, userFats }) {
   // 1) Compute "achieved" vs "remaining" for each macro.
   //    Achieved is the min of (userVal, planVal); Remainder is planVal - achieved.
   const protAchieved = Math.min(userProtein, planProtein);
@@ -4006,15 +4363,15 @@ function drawMacroBreakdownChart({
 
   // 3) Colors for macros
   const proteinColor = "#7ED6A2";   // greenish
-  const carbColor    = "#5DADEC";   // bluish
-  const fatColor     = "#FFC75F";   // yellowish
-  const greyColor    = "#E0E0E0";
+  const carbColor = "#5DADEC";   // bluish
+  const fatColor = "#FFC75F";   // yellowish
+  const greyColor = "#E0E0E0";
 
   // Outer ring uses pairs: Achieved color, then grey for remainder
   const outerColors = [
     proteinColor, greyColor,
-    carbColor,    greyColor,
-    fatColor,     greyColor
+    carbColor, greyColor,
+    fatColor, greyColor
   ];
 
   // 4) Grab our chart canvas
@@ -4206,15 +4563,15 @@ function renderNutritionTrendsFor(selection) {
   const container = document.getElementById("nutritionTrendsCards");
   const dots = document.getElementById("nutritionTrendsDots");
   if (!container || !dots) return;
-  
+
   // Clear existing content and reset swipe position.
   container.innerHTML = "";
   dots.innerHTML = "";
   container.style.transform = "translateX(0px)";
-  
+
   // Save the user's selection.
   localStorage.setItem("nutritionTrendsOption", selection);
-  
+
   // 1) Build the “Calories Over Time” card.
   const calCard = document.createElement("div");
   calCard.classList.add("trend-card");
@@ -4223,7 +4580,7 @@ function renderNutritionTrendsFor(selection) {
     <canvas id="caloriesOverTimeChart" style="width:100%; max-height:250px;"></canvas>
   `;
   container.appendChild(calCard);
-  
+
   // 2) Build the “Protein Over Time” card.
   const protCard = document.createElement("div");
   protCard.classList.add("trend-card");
@@ -4232,7 +4589,7 @@ function renderNutritionTrendsFor(selection) {
     <canvas id="proteinOverTimeChart" style="width:100%; max-height:250px;"></canvas>
   `;
   container.appendChild(protCard);
-  
+
   // 3) Build the “Surplus/Deficit Tracker” card.
   const sdCard = document.createElement("div");
   sdCard.classList.add("trend-card");
@@ -4241,25 +4598,25 @@ function renderNutritionTrendsFor(selection) {
     <canvas id="surplusDeficitChart" style="width:100%; max-height:250px;"></canvas>
   `;
   container.appendChild(sdCard);
-  
+
   // 4) Build Meal Logging Heatmap cards.
   buildMealLoggingHeatmapCards(selection, container);
-  
+
   // Build dot indicators and initialize swipe navigation.
   initSwipeableNutritionTrendCards();
-  
+
   // Compute data and draw charts.
   const { calData, protData, surplusData } = computeTrendsData(selection);
   drawCaloriesOverTimeChart(calData);
   drawProteinOverTimeChart(protData);
   drawSurplusDeficitChart(surplusData);
-  
+
   // 5) Build the Areas for Improvement section.
   // Here the gatherAreasForImprovementNutrition function will automatically generate
   // a stats object if none is passed.
   const improvements = gatherAreasForImprovementNutrition();
   showImprovementsSection(improvements);
-  
+
   // 6) Finally, build the Coach Insights card underneath the trend cards.
   buildNutritionCoachInsights(selection);
 }
@@ -4784,7 +5141,7 @@ function generateNutritionCoachInsight(selection) {
     if (activeWeek === 1) {
       return "Keep logging your meals. Once your first week is complete, you'll get insights on your progress!";
     }
-    
+
     // Aggregate totals for weeks 1 to activeWeek-1
     let aggregate = {
       totalCals: 0,
@@ -5024,30 +5381,30 @@ function buildNutritionCoachInsights(selection) {
     console.warn("nutritionCoachInsightsContainer not found in DOM.");
     return;
   }
-  
+
   // Clear out any existing content.
   coachContainer.innerHTML = "";
-  
+
   // Create the card element.
   const card = document.createElement("div");
   card.classList.add("coach-insights-note");
-  
+
   // Create a heading for the card.
   const heading = document.createElement("h3");
   heading.textContent = "Coach Insights";
   card.appendChild(heading);
-  
+
   // Generate the insight message using the selection.
   const insightMessage = generateNutritionCoachInsight(selection);
-  
+
   // Create a paragraph element to display the insight.
   const messageEl = document.createElement("p");
   messageEl.innerHTML = insightMessage;
   card.appendChild(messageEl);
-  
+
   // Append the insight card to the container.
   coachContainer.appendChild(card);
-  
+
   // Optionally add a fade-in effect.
   setTimeout(() => {
     card.classList.add("visible");
@@ -5157,9 +5514,9 @@ function updateBodyWeightChart() {
 
 /** Read stored goal/current from localStorage & populate inputs **/
 function loadGoalProgressInputs() {
-  const goalWeightInput        = document.getElementById("goalWeightInput");
-  const goalByDateInput        = document.getElementById("goalByDateInput");
-  const currentWeightInput     = document.getElementById("currentWeightInput");
+  const goalWeightInput = document.getElementById("goalWeightInput");
+  const goalByDateInput = document.getElementById("goalByDateInput");
+  const currentWeightInput = document.getElementById("currentWeightInput");
   // const currentWeightDateInput = document.getElementById("currentWeightDateInput");
 
   // Stored values are always in kilograms
@@ -5177,7 +5534,7 @@ function loadGoalProgressInputs() {
     const displayGoal = unit === "lbs"
       ? kgToLbs(storedGoalKg).toFixed(1)
       : storedGoalKg.toFixed(1);
-    goalWeightInput.value       = displayGoal;
+    goalWeightInput.value = displayGoal;
     goalWeightInput.placeholder = `${displayGoal} ${unit}`;
   } else {
     // no saved value yet, just show placeholder
@@ -5193,7 +5550,7 @@ function loadGoalProgressInputs() {
       ? kgToLbs(storedCurrKg).toFixed(1)
       : storedCurrKg.toFixed(1);
     // leave `value` blank so user types fresh, but show the placeholder
-    currentWeightInput.value       = "";
+    currentWeightInput.value = "";
     currentWeightInput.placeholder = `${displayCurr} ${unit}`;
   } else {
     currentWeightInput.placeholder = `0.0 ${unit}`;
@@ -5249,7 +5606,7 @@ function updateGoalProgressUI() {
 }
 
 /** The main function that runs when user clicks "Log Weight" **/
-function handleLogWeight() {
+async function handleLogWeight() {
   const goalWeightInput = document.getElementById("goalWeightInput");
   const goalByDateInput = document.getElementById("goalByDateInput");
   const currentWeightInput = document.getElementById("currentWeightInput");
@@ -5310,6 +5667,8 @@ function handleLogWeight() {
   localStorage.removeItem("bodyCompCoachInsightMessage");
   checkRecentMilestones();
   showBodyCompCoachInsights();
+  await saveNutritionProgressToServer();
+  await saveMyProgressToServer();
 }
 
 /** Calculate the progress bar fill & percentage **/
@@ -5498,7 +5857,7 @@ function checkRecentMilestones() {
   const goal = rawGoal.toLowerCase().trim();
   const isWeightLoss = goal.includes("loss");
   const isMuscleGain = goal.includes("gain");
-  const isBodyComp   = goal.includes("composition") || goal.includes("comp");
+  const isBodyComp = goal.includes("composition") || goal.includes("comp");
 
   // 2) collect any milestones
   const triggered = [];
@@ -5791,16 +6150,16 @@ function getMilestoneHighlightInsight(userGoal, logs) {
 ////////////////////////////
 
 // Use event delegation on a parent container that always exists
-document.getElementById("nutritionTrendsWrapper").addEventListener("click", function(e) {
+document.getElementById("nutritionTrendsWrapper").addEventListener("click", function (e) {
   // Check if the clicked element (or one of its parents) is an info icon.
   // Adjust the selector if needed (e.g., if you're using a specific class for your info icons).
   let infoIcon = e.target.closest(".info-icon");
-  
+
   // Check if it's one of our heatmap info icons (IDs beginning with "heatmapInfoIconNut")
   if (infoIcon && infoIcon.id && infoIcon.id.indexOf("heatmapInfoIconNut") === 0) {
     // Prevent further propagation so that the global click doesn't immediately hide it
     e.stopPropagation();
-    
+
     // Get the popup element
     const heatmapPopup = document.getElementById("heatmapInfoPopup");
     if (heatmapPopup) {
@@ -5818,12 +6177,12 @@ document.getElementById("nutritionTrendsWrapper").addEventListener("click", func
   }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Select all heatmap info icons (whose id starts with 'heatmapInfoIconNut')
   const heatmapIcons = document.querySelectorAll('[id^="heatmapInfoIconNut"]');
   // Get the popup element – ensure it exists in your HTML.
   const heatmapPopup = document.getElementById("heatmapInfoPopup");
-  
+
   if (heatmapPopup) {
     // Set the desired default inline styles on the popup.
     Object.assign(heatmapPopup.style, {
@@ -5844,10 +6203,10 @@ document.addEventListener("DOMContentLoaded", function() {
       zIndex: "999"
     });
   }
-  
+
   // Add click event to each heatmap info icon.
   heatmapIcons.forEach(icon => {
-    icon.addEventListener("click", function(e) {
+    icon.addEventListener("click", function (e) {
       e.stopPropagation(); // Prevent the event from bubbling so that the document click handler doesn't immediately hide the popup.
       if (heatmapPopup) {
         // Show the popup by setting opacity and pointer events.
@@ -5856,9 +6215,9 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   });
-  
+
   // Hide the popup when clicking outside of any info icon or the popup itself.
-  document.addEventListener("click", function(e) {
+  document.addEventListener("click", function (e) {
     let clickedOnIcon = false;
     heatmapIcons.forEach(icon => {
       if (icon.contains(e.target)) {
@@ -5872,7 +6231,9 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
+  await loadNutritionProgress();
+  showNutritionOnboardingOverlay(); 
   // Retrieve the user's name (with a default)
   const userName = localStorage.getItem("name") || "User";
   // Check if the user has visited before
@@ -5946,178 +6307,183 @@ window.addEventListener("load", () => {
    SECTION 103 · Workout‑Tracker Onboarding
 ──────────────────────────────────────────────────────────────── */
 
-(function() {
-  // helper to read localStorage
-  function ls(key) {
-    const v = localStorage.getItem(key);
-    return v === null ? undefined : v;
-  }
-
-  // user data
-  const name           = ls('name') || 'User';
-  const goalRaw        = ls('goal') || '';
-  const goalDriver     = ls('goalDriver');
-  const userGoalWeight = parseFloat(ls('userGoalWeight'));
-  const weight         = parseFloat(ls('weight'));
-  const goal           = goalRaw.toLowerCase().trim();
-
-  // build goal line with nutrition framing
-  let goalLines = '';
-  if (goal.includes('lose weight')) {
-    if (!isNaN(weight) && !isNaN(userGoalWeight) && weight > userGoalWeight) {
-      goalLines = `<span class="nt-emoji-goal">🔥</span>
-        Your goal is to lose ${(weight - userGoalWeight).toFixed(1)}kg — and nutrition will drive that change.`;
-    } else {
-      goalLines = `<span class="nt-emoji-goal">🔥</span>
-        You’re here to lose weight — and nutrition will drive that change.`;
-    }
-  } else if (goal.includes('gain muscle')) {
-    if (!isNaN(weight) && !isNaN(userGoalWeight) && userGoalWeight > weight) {
-      goalLines = `<span class="nt-emoji-goal">💪</span>
-        You’re aiming to gain ${(userGoalWeight - weight).toFixed(1)}kg of muscle — fueled by nutrition.`;
-    } else {
-      goalLines = `<span class="nt-emoji-goal">💪</span>
-        You’re here to build strength and gain muscle — nutrition will make it possible.`;
-    }
-  } else if (goal.includes('improve body composition')) {
-    if (!isNaN(weight) && !isNaN(userGoalWeight) && Math.abs(userGoalWeight - weight) < 3) {
-      goalLines = `<span class="nt-emoji-goal">🔥</span>
-        You’re focused on getting leaner and stronger — nutrition will guide you there.`;
-    } else if (!isNaN(userGoalWeight)) {
-      goalLines = `<span class="nt-emoji-goal">🔥</span>
-        Your goal weight is ${userGoalWeight}kg — nutrition will move you toward it.`;
-    } else {
-      goalLines = `<span class="nt-emoji-goal">🔥</span>
-        You’re focused on getting leaner and stronger — nutrition will guide you there.`;
-    }
-  }
-
-  // driver messages
-  const driverLines = {
-    "A wedding or special event":
-      `<span class="nt-emoji-goal">💍</span> Let’s help you feel incredible on the big day.`,
-    "An upcoming holiday":
-      `<span class="nt-emoji-goal">✈️</span> We’ll help you feel confident stepping off that plane — and even better in your photos.`,
-    "A recent breakup or life change":
-      `<span class="nt-emoji-goal">🚀</span> This is a powerful reset — and we’re with you every step of the way.`,
-    "I want to feel confident in my body again":
-      `<span class="nt-emoji-goal">🚀</span> Let’s rebuild that confidence, one meal at a time.`,
-    "I'm tired of feeling tired or unmotivated":
-      `<span class="nt-emoji-goal">🚀</span> We’ll help you take back your energy and momentum.`,
-    "I’m doing this for my mental and emotional health":
-      `<span class="nt-emoji-goal">🚀</span> Strong body, strong mind — this is for all of you.`,
-    "I’ve let things slip and want to get back on track":
-      `<span class="nt-emoji-goal">🚀</span> No judgment. Just forward progress from here on out.`,
-    "I want to build discipline and stop starting over":
-      `<span class="nt-emoji-goal">🚀</span> Consistency starts now — and this time, it’s different.`,
-    "I just feel ready for a change":
-      `<span class="nt-emoji-goal">🌱</span> New chapter unlocked. Let’s make it your strongest yet.`
-  };
-
-  // tutorial steps (screen 2)
-  const tutorialSteps   = [
-    `<strong>Meals are matched to your macros</strong> — swap if needed.`,
-    `<strong>Log, skip, or view full details</strong> — including ingredients and recipes.`,
-    `<strong>Earn XP with every meal</strong> — and build your progress streak.`
-  ]
-  const tutorialEmoji   = [`✅`,`🔄`,`⭐`];
-  const encouragement   = `You’ll get the hang of it in no time — just stay consistent and keep showing up.`;
-
-  // motivation (screen 3)
-  const motivationTitle    = `🔥 Consistency beats perfection — every meal is a chance to build momentum.`;
-  const motivationSubtitle = `Your results are built one meal at a time. Start strong, stay steady.`;
-
-  // bail if already seen
+function showNutritionOnboardingOverlay() {
   const overlay = document.getElementById('ntOnboardingOverlay');
-  if (!overlay || localStorage.getItem('nt_onboarding_complete')) return;
-
-  const slider   = overlay.querySelector('.nt-onboarding-slider');
-  const dotsWrap = document.getElementById('ntOnboardingDots');
-  const cards    = [...slider.children];
-  let   index    = 0;
-  slider.style.width = `${cards.length * 100}%`;
-
-  // fill Screen 1
-  cards[0].querySelector('.nt-title').innerHTML  = `🎯 Let’s get started, ${name}!`;
-  cards[0].querySelector('.nt-goal').innerHTML   = goalLines;
-  cards[0].querySelector('.nt-driver').innerHTML = driverLines[goalDriver] || '';
-
-  // fill Screen 2
-  const list = cards[1].querySelector('.nt-tutorial');
-  list.innerHTML = '';
-  tutorialSteps.forEach((text,i) => {
-    const li = document.createElement('li');
-    li.className = 'nt-line';
-    li.innerHTML = `<span class="nt-emoji-tutorial">${tutorialEmoji[i]}</span> ${text}`;
-    list.appendChild(li);
-  });
-  cards[1].querySelector('.nt-sub').textContent = encouragement;
-
-  // fill Screen 3
-  cards[2].querySelector('.nt-title').innerHTML    = motivationTitle;
-  cards[2].querySelector('.nt-subtitle').innerHTML = motivationSubtitle;
-
-  // build pagination dots
-  cards.forEach((_, i) => {
-    const dot = document.createElement('span');
-    dot.className = 'nt-dot' + (i===0 ? ' active' : '');
-    dot.addEventListener('click', () => goToSlide(i));
-    dotsWrap.appendChild(dot);
-  });
-
-  // slide/swipe logic
-  function goToSlide(n) {
-    index = Math.max(0, Math.min(cards.length - 1, n));
-    slider.style.transform = `translateX(${-index*(100/cards.length)}%)`;
-    dotsWrap.querySelectorAll('.nt-dot')
-           .forEach((d,i) => d.classList.toggle('active', i===index));
-    revealLines(cards[index]);
-  }
-  function nextSlide() { goToSlide(index+1); }
-
-  let startX = null;
-  overlay.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-  overlay.addEventListener('touchend',   e => {
-    if (startX===null) return;
-    const dx = e.changedTouches[0].clientX - startX;
-    if (Math.abs(dx)>60) dx<0 ? nextSlide() : goToSlide(index-1);
-    startX = null;
-  });
-
-  function revealLines(card) {
-    if (card.dataset.revealed) {
-      card.querySelectorAll('.nt-line').forEach(l => l.classList.add('show'));
-      return;
+  if (!overlay) return;
+  if (localStorage.getItem('nt_onboarding_complete') === '1') return;
+  (function () {
+    // helper to read localStorage
+    function ls(key) {
+      const v = localStorage.getItem(key);
+      return v === null ? undefined : v;
     }
-    card.dataset.revealed = 'true';
-    card.querySelectorAll('.nt-line')
-        .forEach((el,i) => setTimeout(() => el.classList.add('show'), 300*i));
-  }
 
-  // button handlers
-  overlay.addEventListener('click', e => {
-    if (e.target.matches('.nt-next-btn')) nextSlide();
-    if (e.target.matches('.nt-close-btn')) {
-      localStorage.setItem('nt_onboarding_complete','1');
-      overlay.classList.add('closing');
-      overlay.addEventListener('transitionend', ()=>overlay.remove(), { once:true });
+    // user data
+    const name = ls('name') || 'User';
+    const goalRaw = ls('goal') || '';
+    const goalDriver = ls('goalDriver');
+    const userGoalWeight = parseFloat(ls('userGoalWeight'));
+    const weight = parseFloat(ls('weight'));
+    const goal = goalRaw.toLowerCase().trim();
+
+    // build goal line with nutrition framing
+    let goalLines = '';
+    if (goal.includes('lose weight')) {
+      if (!isNaN(weight) && !isNaN(userGoalWeight) && weight > userGoalWeight) {
+        goalLines = `<span class="nt-emoji-goal">🔥</span>
+        Your goal is to lose ${(weight - userGoalWeight).toFixed(1)}kg — and nutrition will drive that change.`;
+      } else {
+        goalLines = `<span class="nt-emoji-goal">🔥</span>
+        You’re here to lose weight — and nutrition will drive that change.`;
+      }
+    } else if (goal.includes('gain muscle')) {
+      if (!isNaN(weight) && !isNaN(userGoalWeight) && userGoalWeight > weight) {
+        goalLines = `<span class="nt-emoji-goal">💪</span>
+        You’re aiming to gain ${(userGoalWeight - weight).toFixed(1)}kg of muscle — fueled by nutrition.`;
+      } else {
+        goalLines = `<span class="nt-emoji-goal">💪</span>
+        You’re here to build strength and gain muscle — nutrition will make it possible.`;
+      }
+    } else if (goal.includes('improve body composition')) {
+      if (!isNaN(weight) && !isNaN(userGoalWeight) && Math.abs(userGoalWeight - weight) < 3) {
+        goalLines = `<span class="nt-emoji-goal">🔥</span>
+        You’re focused on getting leaner and stronger — nutrition will guide you there.`;
+      } else if (!isNaN(userGoalWeight)) {
+        goalLines = `<span class="nt-emoji-goal">🔥</span>
+        Your goal weight is ${userGoalWeight}kg — nutrition will move you toward it.`;
+      } else {
+        goalLines = `<span class="nt-emoji-goal">🔥</span>
+        You’re focused on getting leaner and stronger — nutrition will guide you there.`;
+      }
     }
-  });
 
-  // show onboarding
-  overlay.classList.add('open');
-  goToSlide(0);
-})();
+    // driver messages
+    const driverLines = {
+      "A wedding or special event":
+        `<span class="nt-emoji-goal">💍</span> Let’s help you feel incredible on the big day.`,
+      "An upcoming holiday":
+        `<span class="nt-emoji-goal">✈️</span> We’ll help you feel confident stepping off that plane — and even better in your photos.`,
+      "A recent breakup or life change":
+        `<span class="nt-emoji-goal">🚀</span> This is a powerful reset — and we’re with you every step of the way.`,
+      "I want to feel confident in my body again":
+        `<span class="nt-emoji-goal">🚀</span> Let’s rebuild that confidence, one meal at a time.`,
+      "I'm tired of feeling tired or unmotivated":
+        `<span class="nt-emoji-goal">🚀</span> We’ll help you take back your energy and momentum.`,
+      "I’m doing this for my mental and emotional health":
+        `<span class="nt-emoji-goal">🚀</span> Strong body, strong mind — this is for all of you.`,
+      "I’ve let things slip and want to get back on track":
+        `<span class="nt-emoji-goal">🚀</span> No judgment. Just forward progress from here on out.`,
+      "I want to build discipline and stop starting over":
+        `<span class="nt-emoji-goal">🚀</span> Consistency starts now — and this time, it’s different.`,
+      "I just feel ready for a change":
+        `<span class="nt-emoji-goal">🌱</span> New chapter unlocked. Let’s make it your strongest yet.`
+    };
 
-const loginModal   = document.getElementById("login-modal");
-const faqModal     = document.getElementById("faq-modal");
-const btnWorkouts  = document.getElementById("nav-workouts");
+    // tutorial steps (screen 2)
+    const tutorialSteps = [
+      `<strong>Meals are matched to your macros</strong> — swap if needed.`,
+      `<strong>Log, skip, or view full details</strong> — including ingredients and recipes.`,
+      `<strong>Earn XP with every meal</strong> — and build your progress streak.`
+    ]
+    const tutorialEmoji = [`✅`, `🔄`, `⭐`];
+    const encouragement = `You’ll get the hang of it in no time — just stay consistent and keep showing up.`;
+
+    // motivation (screen 3)
+    const motivationTitle = `🔥 Consistency beats perfection — every meal is a chance to build momentum.`;
+    const motivationSubtitle = `Your results are built one meal at a time. Start strong, stay steady.`;
+
+    // bail if already seen
+    const overlay = document.getElementById('ntOnboardingOverlay');
+    if (!overlay || localStorage.getItem('nt_onboarding_complete')) return;
+
+    const slider = overlay.querySelector('.nt-onboarding-slider');
+    const dotsWrap = document.getElementById('ntOnboardingDots');
+    const cards = [...slider.children];
+    let index = 0;
+    slider.style.width = `${cards.length * 100}%`;
+
+    // fill Screen 1
+    cards[0].querySelector('.nt-title').innerHTML = `🎯 Let’s get started, ${name}!`;
+    cards[0].querySelector('.nt-goal').innerHTML = goalLines;
+    cards[0].querySelector('.nt-driver').innerHTML = driverLines[goalDriver] || '';
+
+    // fill Screen 2
+    const list = cards[1].querySelector('.nt-tutorial');
+    list.innerHTML = '';
+    tutorialSteps.forEach((text, i) => {
+      const li = document.createElement('li');
+      li.className = 'nt-line';
+      li.innerHTML = `<span class="nt-emoji-tutorial">${tutorialEmoji[i]}</span> ${text}`;
+      list.appendChild(li);
+    });
+    cards[1].querySelector('.nt-sub').textContent = encouragement;
+
+    // fill Screen 3
+    cards[2].querySelector('.nt-title').innerHTML = motivationTitle;
+    cards[2].querySelector('.nt-subtitle').innerHTML = motivationSubtitle;
+
+    // build pagination dots
+    cards.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.className = 'nt-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsWrap.appendChild(dot);
+    });
+
+    // slide/swipe logic
+    function goToSlide(n) {
+      index = Math.max(0, Math.min(cards.length - 1, n));
+      slider.style.transform = `translateX(${-index * (100 / cards.length)}%)`;
+      dotsWrap.querySelectorAll('.nt-dot')
+        .forEach((d, i) => d.classList.toggle('active', i === index));
+      revealLines(cards[index]);
+    }
+    function nextSlide() { goToSlide(index + 1); }
+
+    let startX = null;
+    overlay.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+    overlay.addEventListener('touchend', e => {
+      if (startX === null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 60) dx < 0 ? nextSlide() : goToSlide(index - 1);
+      startX = null;
+    });
+
+    function revealLines(card) {
+      if (card.dataset.revealed) {
+        card.querySelectorAll('.nt-line').forEach(l => l.classList.add('show'));
+        return;
+      }
+      card.dataset.revealed = 'true';
+      card.querySelectorAll('.nt-line')
+        .forEach((el, i) => setTimeout(() => el.classList.add('show'), 300 * i));
+    }
+
+    // button handlers
+    overlay.addEventListener('click', e => {
+      if (e.target.matches('.nt-next-btn')) nextSlide();
+      if (e.target.matches('.nt-close-btn')) {
+        localStorage.setItem('nt_onboarding_complete', '1');
+        overlay.classList.add('closing');
+        overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
+      }
+    });
+
+    // show onboarding
+    overlay.classList.add('open');
+    goToSlide(0);
+  })();
+}
+
+const loginModal = document.getElementById("login-modal");
+const faqModal = document.getElementById("faq-modal");
+const btnWorkouts = document.getElementById("nav-workouts");
 const btnNutrition = document.getElementById("nav-nutrition");
-const btnHelp      = document.getElementById("nav-help");
-const closeBtns    = document.querySelectorAll(".close-btn");
-const mainNav   = document.querySelector(".main-nav");
+const btnHelp = document.getElementById("nav-help");
+const closeBtns = document.querySelectorAll(".close-btn");
+const mainNav = document.querySelector(".main-nav");
 const hamburger = document.getElementById("hamburger-btn");
-const navClose  = document.getElementById("nav-close");
+const navClose = document.getElementById("nav-close");
 
 // open FAQ modal on Help click
 btnHelp.addEventListener("click", e => {
@@ -6142,7 +6508,7 @@ navClose.addEventListener("click", () => {
 });
 
 // close modals when clicking outside content
-[ loginModal, faqModal ].forEach(modal => {
+[loginModal, faqModal].forEach(modal => {
   if (!modal) return;   // ← bail out early if “modal” is null
   modal.addEventListener("click", e => {
     if (e.target === modal) modal.style.display = "none";

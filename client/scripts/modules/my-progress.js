@@ -2117,7 +2117,7 @@
       }
       
       /** The main function that runs when user clicks "Log Weight" **/
-      function handleLogWeight() {
+      async function handleLogWeight() {
         const goalWeightInput = document.getElementById("goalWeightInput");
         const goalByDateInput = document.getElementById("goalByDateInput");
         const currentWeightInput = document.getElementById("currentWeightInput");
@@ -2178,6 +2178,7 @@
         localStorage.removeItem("bodyCompCoachInsightMessage");
         checkRecentMilestones();
         showBodyCompCoachInsights();
+        await saveMyProgressToServer();
       }
       
       /** Calculate the progress bar fill & percentage **/

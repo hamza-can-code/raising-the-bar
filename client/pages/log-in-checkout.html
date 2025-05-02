@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Basic meta -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Log in & Checkout</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Page-specific stylesheet -->
+  <link href="../styles/log-in-checkout.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- ─── HEADER ───────────────────────────────────────────────────────────── -->
+  <header class="header">
+    <div class="logo">
+      <a href="../index.html">
+        <img id="logo" class="fade-in" src="../assets/rtb-logo-white.png" alt="Raising The Bar Logo">
+      </a>
+    </div>
+    <!-- (optional dark-mode toggle lives here) -->
+  </header>
+
+  <!-- ─── MAIN CONTENT ─────────────────────────────────────────────────────── -->
+  <main class="login-container">
+    <div class="login-box">
+      <!-- Dynamic plan summary (populated by JS) -->
+      <div id="planSummary" class="plan-summary"></div>
+
+      <h2 style="text-align: center;">Welcome Back</h2>
+      <p class="subheading">
+        Log in, review your order and complete payment – all in one quick step.
+      </p>
+
+      <form id="loginCheckoutForm" novalidate>
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email"
+                 id="email"
+                 name="email"
+                 placeholder="you@example.com"
+                 required
+                 aria-describedby="email-error">
+          <span class="error-message" id="email-error" role="alert"></span>
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password"
+                 id="password"
+                 name="password"
+                 placeholder="Enter your password"
+                 required
+                 aria-describedby="password-error">
+          <span class="error-message" id="password-error" role="alert"></span>
+        </div>
+
+        <button type="submit" class="login-btn" id="paySubmitBtn">Claim My Program</button>
+      </form>
+
+      <p class="terms">
+        By proceeding you agree to our
+        <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> &
+        <a href="privacy-policy.html"   target="_blank" rel="noopener">Privacy Policy</a>.
+        Subscription renews unless cancelled.
+      </p>
+
+      <p class="signup-link">
+        New here? <a href="sign-up-checkout.html">Create an account</a>
+      </p>
+    </div>
+  </main>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────────────────────── -->
+  <footer class="footer fade-in" id="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 Raising The Bar. All rights reserved.</p>
+
+      <div class="footer-links">
+        <a href="index.html">Start Training</a>
+        <span class="separator">|</span>
+        <a href="legal-overview.html">Our Policies</a>
+        <span class="separator">|</span>
+        <a href="contact-us.html">Contact Us</a>
+      </div>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+          <img src="../assets/instagram-icon.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com" target="_blank" aria-label="YouTube">
+          <img src="../assets/youtube-icon.png" alt="YouTube">
+        </a>
+        <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok">
+          <img src="../assets/tiktok-icon.png" alt="TikTok">
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Stripe.js (only loads when your key is set server-side) -->
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <!-- Page logic -->
+  <script type="module" src="../scripts/log-in-checkout.js"></script>
+</body>
+</html>

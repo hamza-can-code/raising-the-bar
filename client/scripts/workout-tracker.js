@@ -1,9 +1,484 @@
+async function sendWorkoutLog(workoutData) {
+  const token = localStorage.getItem('token');
+
+  if (!token) return console.error('No token found, cannot log workout.');
+  if (!workoutData || !workoutData.exercises || workoutData.exercises.length === 0) {
+    console.warn('⚠️ No exercises found, skipping workout log.');
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/logWorkout', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(workoutData)
+    });
+
+    if (!res.ok) {
+      throw new Error('Failed to log workout');
+    }
+
+    console.log('✅ Workout log saved to backend');
+  } catch (err) {
+    console.error('❌ Error saving workout log:', err.message);
+  }
+}
+
+function formatExerciseKey(name) {
+  return name
+    .toLowerCase()
+    .replace(/\s+/g, '_')
+    .replace(/[^\w\-()]/g, '')
+    .replace(/_+/g, '_');
+}
+
+function buildUserProgress() {
+  const userProgress = {
+    xp: Number(localStorage.getItem('currentXP')) || 0,
+    currentLevel: Number(localStorage.getItem('currentLevel')) || 1,
+    progressScore: Number(localStorage.getItem('progressScore')),
+    streak: {
+      count: Number(localStorage.getItem('streakCount')) || 0,
+      startDate: localStorage.getItem('streakStartDate') || null,
+    },
+    program: {
+      startDate: localStorage.getItem('programStartDate') || null,
+      activeWorkoutWeek: Number(localStorage.getItem('activeWorkoutWeek')) || 1,
+      activeNutritionWeek: Number(localStorage.getItem('activeNutritionWeek')) || 1,
+      completedThisWeek: Number(localStorage.getItem('completedThisWeek')) || 0,
+      weeklyStats: {}
+    },
+    workoutLogs: JSON.parse(localStorage.getItem('workoutLogs') || '[]'),
+    awardedState: JSON.parse(localStorage.getItem('awardedState') || '{}'),
+    checkboxState: JSON.parse(localStorage.getItem('checkboxState') || '{}'),
+    workoutStarted: {},
+    workoutFinished: {},
+    recapShown: JSON.parse(localStorage.getItem('currentWorkoutRecapShown') || '{}'),
+    upsells: {
+      ctUpsellFirstWorkout: localStorage.getItem('ctUpsell_shown_firstWorkout') === 'true'
+    },
+    profile: {
+      goalWeight: parseFloat(localStorage.getItem('userGoalWeight') || '0'),
+      goalDate: localStorage.getItem('userGoalDate') || '',
+      currentWeight: parseFloat(localStorage.getItem('userCurrentWeight') || '0'),
+      currentWeightDate: localStorage.getItem('userCurrentWeightDate') || ''
+    },
+    bodyWeightLogs: JSON.parse(localStorage.getItem('bodyWeightLogs') || '[]'),
+
+    // ← existing setValues
+    setValues: {}
+  };
+
+  for (let key in localStorage) {
+    if (key.startsWith('workoutStarted_')) {
+      userProgress.workoutStarted[key] = localStorage.getItem(key) === 'true';
+    }
+    if (key.startsWith('workoutFinished_')) {
+      userProgress.workoutFinished[key] = localStorage.getItem(key) === 'true';
+    }
+  }
+
+  for (let i = 1; i <= 12; i++) {
+    userProgress.program.weeklyStats[`week${i}`] = {
+      workoutsDone: Number(localStorage.getItem(`week${i}_workoutsDone`)) || 0,
+      totalReps: Number(localStorage.getItem(`week${i}_totalReps`)) || 0,
+      totalSets: Number(localStorage.getItem(`week${i}_totalSets`)) || 0,
+      totalWeight: Number(localStorage.getItem(`week${i}_totalWeight`)) || 0,
+    };
+  }
+
+  const setValues = {};
+  Object.keys(localStorage).forEach(k => {
+    if (/_set\d+_(actual|suggested)(Reps|Weight|Duration)$/.test(k)) {
+      setValues[k] = localStorage.getItem(k);
+    }
+  });
+  userProgress.setValues = setValues;
+
+  userProgress.ds_onboarding_complete =
+    localStorage.getItem('ds_onboarding_complete') === '1';
+  userProgress.wt_onboarding_complete =
+    localStorage.getItem('wt_onboarding_complete') === '1';
+
+  return userProgress;
+}
+
+async function saveMyProgressToServer(progressOverride = null) {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    console.warn('[saveMyProgressToServer] No auth token – aborting');
+    return;
+  }
+
+  // Use the supplied object or build a fresh one.
+  const payload = progressOverride || buildUserProgress();
+
+  try {
+    const res = await fetch('/api/workouts/saveUserProgress', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) {
+      console.error('❌ saveMyProgressToServer:', await res.text());
+    } else {
+      console.log('✅ Workout-side snapshot updated',
+        new Date().toLocaleTimeString());
+    }
+  } catch (err) {
+    console.error('❌ saveMyProgressToServer:', err.message);
+  }
+}
+
+async function saveUserProgress(userProgress) {
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    console.error('No token found, cannot save user progress.');
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/workouts/saveUserProgress', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userProgress)
+    });
+
+    if (!res.ok) {
+      throw new Error('Failed to save user progress');
+    }
+
+    console.log('✅ User progress saved to backend');
+  } catch (err) {
+    console.error('❌ Error saving user progress:', err.message);
+  }
+}
+
+async function handleWorkoutCompletion(currentWeekIndex, currentDayIndex) {
+  const workoutData = extractWorkoutData(currentWeekIndex, currentDayIndex);
+  if (workoutData) {
+    await sendWorkoutLog(workoutData);
+  }
+
+  // ① Recalculate & persist the latest Progress Score
+  updateProgressScoreAndMessages();
+
+  // ② Now build the snapshot (it will include the updated PS)
+  const userProgress = buildUserProgress();
+  localStorage.setItem('userProgress', JSON.stringify(userProgress));
+
+  // ③ Finally send it to the server
+  await saveUserProgress(userProgress);
+}
+
+// ─── NORMALISE & RETURN CONSISTENT XP / LEVEL ──────────────────────────────
+function normaliseXPandLevel() {
+  let xp = Number(localStorage.getItem('currentXP')) || 0;
+  let lvl = Number(localStorage.getItem('currentLevel')) || 0;
+
+  while (xp >= xpNeededForLevel(lvl)) {          // “carry” overflow XP upward
+    xp -= xpNeededForLevel(lvl);
+    lvl++;
+  }
+
+  localStorage.setItem('currentXP', xp);
+  localStorage.setItem('currentLevel', lvl);
+
+  return { xp, lvl };                            // feed the result back
+}
+
+async function loadUserProgress() {
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    console.error('❌ No token found.');
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/progress/getUserProgress', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) {
+      console.warn('⚠️ No user progress found.');
+      return;
+    }
+
+    const progress = await res.json();
+
+    // if (progress.ds_onboarding_complete === true) {
+    //   localStorage.setItem('ds_onboarding_complete', '1');
+    // }
+    // if (progress.wt_onboarding_complete === true) {
+    //   localStorage.setItem('wt_onboarding_complete', '1');
+    // }
+
+    if (progress) {
+      Object.entries(progress).forEach(([key, value]) => {
+        if (typeof value === "object") {
+          localStorage.setItem(key, JSON.stringify(value));
+        } else {
+          localStorage.setItem(key, value);
+        }
+      });
+    }
+
+    // Now restore it to localStorage
+    localStorage.setItem('currentXP', progress.xp);
+    localStorage.setItem('currentLevel', progress.currentLevel);
+    localStorage.setItem('progressScore', progress.progressScore || 0);
+    localStorage.setItem('streakCount', progress.streak.count);
+    localStorage.setItem('streakStartDate', progress.streak.startDate);
+    localStorage.setItem('programStartDate', progress.program.startDate);
+    localStorage.setItem('activeWorkoutWeek', progress.program.activeWorkoutWeek);
+    localStorage.setItem('activeNutritionWeek', progress.program.activeNutritionWeek);
+    localStorage.setItem('completedThisWeek', progress.program.completedThisWeek);
+
+    for (let week in progress.program.weeklyStats) {
+      const stats = progress.program.weeklyStats[week];
+      localStorage.setItem(`${week}_workoutsDone`, stats.workoutsDone);
+      localStorage.setItem(`${week}_totalReps`, stats.totalReps);
+      localStorage.setItem(`${week}_totalSets`, stats.totalSets);
+      localStorage.setItem(`${week}_totalWeight`, stats.totalWeight);
+    }
+
+    if (progress.workoutLogs) {
+      localStorage.setItem('workoutLogs', JSON.stringify(progress.workoutLogs));
+    }
+    if (progress.awardedState) {
+      localStorage.setItem('awardedState', JSON.stringify(progress.awardedState));
+    }
+    if (progress.checkboxState) {
+      const local = JSON.parse(localStorage.getItem('checkboxState') || '{}');
+      const merged = { ...progress.checkboxState, ...local }; // local wins
+      localStorage.setItem('checkboxState', JSON.stringify(merged));
+    }
+    if (progress.workoutStarted) {
+      for (let key in progress.workoutStarted) {
+        localStorage.setItem(key, progress.workoutStarted[key]);
+      }
+    }
+    if (progress.workoutFinished) {
+      for (let key in progress.workoutFinished) {
+        localStorage.setItem(key, progress.workoutFinished[key]);
+      }
+    }
+    if (progress.recapShown) {
+      localStorage.setItem('currentWorkoutRecapShown', JSON.stringify(progress.recapShown));
+    }
+    if (progress.upsells && progress.upsells.ctUpsellFirstWorkout) {
+      localStorage.setItem('ctUpsell_shown_firstWorkout', 'true');
+    }
+
+    console.log('✅ User progress restored from server');
+    const { xp, lvl } = normaliseXPandLevel();
+    currentXP = xp;
+    currentLevel = lvl;
+
+    // 2. Update UI elements
+    updateLevelLabel(currentLevel);
+
+    const xpFill = document.getElementById('xpBarFill');
+    if (xpFill) {
+      const needed = xpNeededForLevel(currentLevel);
+      xpFill.style.transition = 'none';
+      xpFill.style.width = (Math.min(currentXP / needed, 1) * 100) + '%';
+    }
+
+    const stickyFill = document.getElementById('stickyXpBarFill');
+    if (stickyFill) {
+      const needed = xpNeededForLevel(currentLevel);
+      stickyFill.style.transition = 'none';
+      stickyFill.style.width = (Math.min(currentXP / needed, 1) * 100) + '%';
+    }
+
+    // ─── restore every set-level key we saved earlier ───
+    if (progress.setValues) {
+      Object.entries(progress.setValues).forEach(([k, v]) => {
+        localStorage.setItem(k, v);
+      });
+    }
+  } catch (err) {
+    console.error('❌ Error loading user progress:', err);
+  }
+}
+
+function extractWorkoutData(currentWeekIndex, currentDayIndex) {
+  const weekData = twelveWeekProgram[currentWeekIndex];
+  if (!weekData) return null;
+
+  const dayData = weekData.days[currentDayIndex];
+  if (!dayData) return null;
+
+  const exercises = [];
+
+  if (dayData.mainWork && Array.isArray(dayData.mainWork)) {
+    dayData.mainWork.forEach(block => {
+      if (block.exercises && Array.isArray(block.exercises)) {
+        block.exercises.forEach((exercise) => {
+          const sets = [];
+          let setIndex = 1;
+
+          while (true) {
+            const repsKey = `${formatExerciseKey(exercise.name)}_week${currentWeekIndex + 1}_day${currentDayIndex + 1}_set${setIndex}_actualReps`;
+            const weightKey = `${formatExerciseKey(exercise.name)}_week${currentWeekIndex + 1}_day${currentDayIndex + 1}_set${setIndex}_actualWeight`;
+
+            const reps = localStorage.getItem(repsKey);
+            const weight = localStorage.getItem(weightKey);
+
+            if (reps !== null && weight !== null) {
+              sets.push({
+                reps: Number(reps),
+                weight: Number(weight),
+              });
+              setIndex++;
+            } else {
+              break; // No more sets found for this exercise
+            }
+          }
+
+          if (sets.length > 0) {
+            exercises.push({
+              name: exercise.name,
+              sets: sets
+            });
+          }
+        });
+      }
+    });
+  }
+
+  return {
+    week: weekData.week,
+    day: dayData.dayLabel || `Day ${currentDayIndex + 1}`,
+    date: new Date(),
+    exercises: exercises,
+  };
+}
+
+let saveProgressDebounce;
+function queueProgressSave() {
+  clearTimeout(saveProgressDebounce);
+  saveProgressDebounce = setTimeout(() => {
+    const payload = buildUserProgress();          // you already have this
+    saveMyProgressToServer(payload);              // existing API helper
+  }, 1500);   // waits 1½ s – avoids hammering the API
+}
+
 // if (localStorage.getItem("hasAWTSubscription") !== "true") {
 //   localStorage.setItem("hasAWTSubscription", "true");
 // }
 // if (localStorage.getItem("hasPOSAddOnForAWT") !== "true") {
 //   localStorage.setItem("hasPOSAddOnForAWT", "true");
 // }
+
+let purchasedWeeks = 0;                 // will be fetched
+const planName = localStorage.getItem('planName') || '';
+
+// helpers
+const isProSub = planName === 'Pro Tracker Subscription';
+const isTwelve = planName === '12-Week Program';
+const isFourWeek = planName === '4-Week Program';
+const isOneWeek = planName === '1-Week Program';
+
+/* 1)  Initialise the AWT flag from the plan name alone
+      (will be confirmed again after we hit the API)          */
+let hasPurchasedAWT = isProSub || isTwelve;
+
+/*  ⬇ Sync legacy localStorage keys so the rest of the site
+      can stay untouched                                       */
+if (isProSub) {
+  localStorage.setItem('hasAWTSubscription', 'true');
+  localStorage.removeItem('hasPOSAddOnForAWT');
+} else if (isTwelve) {
+  localStorage.setItem('hasPOSAddOnForAWT', 'true');
+  localStorage.removeItem('hasAWTSubscription');
+} else {
+  localStorage.removeItem('hasAWTSubscription');
+  localStorage.removeItem('hasPOSAddOnForAWT');
+}
+
+window.hasPurchasedAWT = hasPurchasedAWT;   // other scripts read this
+
+function getPurchasedWeeks() {
+  if (typeof purchasedWeeks === 'number') return purchasedWeeks;
+  return Number(localStorage.getItem('purchasedWeeks') || 0);
+}
+
+async function fetchPurchasedWeeks() {
+  try {
+    /* 1) call the back-end — works for subscriptions only ------------- */
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error('No auth token');
+
+    const res = await fetch('/api/access', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error(await res.text());
+
+    const { unlockedWeeks, subscriptionActive } = await res.json();
+
+    /* 2) decide                                                         */
+    if (isProSub && subscriptionActive) {
+      // real subscription → trust the DB
+      purchasedWeeks = unlockedWeeks || 4;        // 4 on first billing cycle
+      hasPurchasedAWT = true;
+    } else if (isTwelve) {
+      purchasedWeeks = 12;
+      hasPurchasedAWT = true;
+    } else if (isFourWeek) {
+      purchasedWeeks = 4;
+      hasPurchasedAWT = false;
+    } else if (isOneWeek) {
+      purchasedWeeks = 1;
+      hasPurchasedAWT = false;
+    } else {
+      purchasedWeeks = 0;
+      hasPurchasedAWT = false;
+    }
+  } catch (err) {
+    /* 3) network/auth failed – pure front-end fallback ---------------- */
+    if (isTwelve) purchasedWeeks = 12;
+    else if (isFourWeek) purchasedWeeks = 4;
+    else if (isOneWeek) purchasedWeeks = 1;
+    else if (isProSub) purchasedWeeks = 4;
+    else purchasedWeeks = 0;
+
+    hasPurchasedAWT = isTwelve || isProSub;
+    console.warn('[Access-fetch] Fallback →', purchasedWeeks, 'weeks –', err.message);
+  }
+
+  /* 4) persist + tell the rest of the page --------------------------- */
+  localStorage.setItem('purchasedWeeks', String(purchasedWeeks));
+  window.hasPurchasedAWT = hasPurchasedAWT;
+
+  renderWeekSelector();
+  renderDaySelector();
+  if (typeof fullyPrecomputeAllWeeks === 'function') fullyPrecomputeAllWeeks();
+  if (typeof renderWorkoutDisplay === 'function') renderWorkoutDisplay();
+  if (typeof renderDailyMealDisplay === 'function') renderDailyMealDisplay();
+}
+
+/* run once on load */
+fetchPurchasedWeeks();
+
+/* Fire once on load */
+window.addEventListener('DOMContentLoaded', fetchPurchasedWeeks);
 
 let exerciseExpansionState = JSON.parse(localStorage.getItem("exerciseExpansionState") || "{}");
 let currentWeekIndex = parseInt(localStorage.getItem("currentWeekIndex") || "0", 10);
@@ -70,7 +545,7 @@ function applyAWTSubscriptionNavLock() {
   // 2️⃣ Remove its href
   navNutrition.removeAttribute("href");
   // 3️⃣ Grey it out
-  navNutrition.style.cursor  = "default";
+  navNutrition.style.cursor = "default";
   navNutrition.style.opacity = "0.6";
   // 4️⃣ Block stray clicks
   navNutrition.addEventListener("click", e => e.preventDefault());
@@ -564,9 +1039,14 @@ function loadCheckboxState(key) {
 }
 
 function saveCheckboxState(key, value) {
-  const state = JSON.parse(localStorage.getItem("checkboxState") || "{}");
+  const state = JSON.parse(localStorage.getItem('checkboxState') || '{}');
+
+  // no-op if nothing changed ↓ (saves a network call)
+  if (state[key] === value) return;
+
   state[key] = value;
-  localStorage.setItem("checkboxState", JSON.stringify(state));
+  localStorage.setItem('checkboxState', JSON.stringify(state));
+  queueProgressSave();
 }
 
 function loadXPAwarded(key) {
@@ -904,7 +1384,7 @@ function fullyPrecomputeAllWeeks() {
   });
 
   // Loop through weeks 1 to purchasedWeeks and recalc each exercise if not a deload week.
-  for (let weekNum = 1; weekNum <= purchasedWeeks; weekNum++) {
+  for (let weekNum = 1; weekNum <= getPurchasedWeeks(); weekNum++) {
     const weekObj = weekMap[weekNum];
     if (!weekObj) continue; // Skip missing weeks
 
@@ -931,7 +1411,7 @@ function fullyPrecomputeAllWeeks() {
 function clearFutureSuggestedWeights(exName, currentWeekNumber, purchasedWeeks) {
   const safeName = exName.toLowerCase().replace(/\s+/g, "_");
   // Loop over weeks after the current week
-  for (let week = currentWeekNumber + 1; week <= purchasedWeeks; week++) {
+  for (let week = currentWeekNumber + 1; week <= getPurchasedWeeks(); week++) {
     // Iterate over all keys in localStorage
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
@@ -965,17 +1445,16 @@ function clearSameWeekSubsequentDaysSuggestedWeights(exName, currentWeekNumber, 
 
 let userName = localStorage.getItem("name") || "User";
 let hasVisited = localStorage.getItem("hasVisitedWorkoutTracker") === "true";
-let purchasedWeeks = parseInt(localStorage.getItem("purchasedWeeks") || "12");
+// let purchasedWeeks = parseInt(localStorage.getItem("purchasedWeeks") || "12");
 let requiredWorkoutsPerWeek = parseInt(localStorage.getItem("requiredWorkoutsPerWeek") || "3");
 let userGender = localStorage.getItem("userGender") || "male";
 let userBodyweight = parseFloat(localStorage.getItem("userBodyweight") || "70"); // in kg
-let hasPurchasedAWT = false;
-// If either “hasAWTSubscription” == "true" OR “hasPOSAddOnForAWT” == "true", then set hasPurchasedAWT = true
-const sub = (localStorage.getItem("hasAWTSubscription") === "true");
-const pos = (localStorage.getItem("hasPOSAddOnForAWT") === "true");
-if (sub || pos) {
-  hasPurchasedAWT = true;
-}
+// let hasPurchasedAWT = false;
+// const sub = (localStorage.getItem("hasAWTSubscription") === "true");
+// const pos = (localStorage.getItem("hasPOSAddOnForAWT") === "true");
+// if (sub || pos) {
+//   hasPurchasedAWT = true;
+// }
 
 /* ──────────────────────────────────────────────────────────────
  *  SECTION 105 · SMART TRIGGER‑BASED UPSELLS  (Core users only)
@@ -1050,7 +1529,7 @@ const proEncouragementMessages = [
   },
   {
     title: "Momentum like this deserves more.",
-    subtext: 
+    subtext:
       "Pro keeps the ball rolling — intelligently adjusting your workouts behind the scenes."
   }
 ];
@@ -1608,10 +2087,10 @@ function checkProgressBarVisibility() {
 /***************************************
  * 6) TAB SELECTION
  ***************************************/
-const myWorkoutsTab      = document.getElementById("myWorkoutsTab");
-const myProgressTab      = document.getElementById("myProgressTab");
-const myWorkoutsSection  = document.getElementById("myWorkoutsSection");
-const myProgressSection  = document.getElementById("myProgressSection");
+const myWorkoutsTab = document.getElementById("myWorkoutsTab");
+const myProgressTab = document.getElementById("myProgressTab");
+const myWorkoutsSection = document.getElementById("myWorkoutsSection");
+const myProgressSection = document.getElementById("myProgressSection");
 
 myWorkoutsTab.addEventListener("click", () => {
   localStorage.setItem("lastSelectedTab", "myWorkouts");
@@ -1620,7 +2099,7 @@ myWorkoutsTab.addEventListener("click", () => {
   myWorkoutsSection.classList.add("active");
   myProgressSection.classList.remove("active");
   document.querySelector(".week-selector-frame").style.display = "block";
-  document.querySelector(".day-selector-frame").style.display  = "block";
+  document.querySelector(".day-selector-frame").style.display = "block";
 });
 
 // ------------------------------------------------
@@ -1798,75 +2277,71 @@ const offTrackMessages = [
 ];
 
 // (C) Master function to recalc and display the user’s PS
+function getWorkoutStreakMultiplier() {
+  const streakCount = parseInt(localStorage.getItem("streakCount") || "0", 10);
+  return Math.min(1 + streakCount * 0.05, 1.5);
+}
+
+// (C) Master function to recalc and display the user’s PS
 function updateProgressScoreAndMessages() {
   const psValueEl = document.getElementById("progressScoreValue");
   const dailyMsgEl = document.getElementById("progressDailyMessage");
   if (!psValueEl || !dailyMsgEl) return;
 
-  // Calculate current aggregated data
+  // 1) Recalculate aggregates
   let totalXP = parseInt(localStorage.getItem("currentXP") || "0", 10);
   let totalReps = 0;
   let totalWeight = 0;
   const checkboxState = JSON.parse(localStorage.getItem("checkboxState") || "{}");
 
   for (let key in checkboxState) {
-    if (checkboxState[key] === true) {
-      if (key.startsWith("set_") || key.startsWith("fallback_") || key.startsWith("cardio_")) {
-        const parts = key.split("_");
-        if (parts.length >= 5) {
-          const exerciseName = parts.slice(3, parts.length - 1).join("_").toLowerCase();
-          const setIndex = parts[parts.length - 1];
-          for (let w = 1; w <= purchasedWeeks; w++) {
-            for (let d = 1; d <= 7; d++) {
-              let repsKey = `${exerciseName}_week${w}_day${d}_set${setIndex}_actualReps`;
-              let weightKey = `${exerciseName}_week${w}_day${d}_set${setIndex}_actualWeight`;
-
-              const repsVal = localStorage.getItem(repsKey);
-              const weightVal = localStorage.getItem(weightKey);
-
-              if (repsVal) {
-                totalReps += parseInt(repsVal, 10) || 0;
-              }
-              if (weightVal) {
-                totalWeight += parseInt(weightVal, 10) || 0;
-              }
-            }
+    if (checkboxState[key] === true &&
+      (key.startsWith("set_") || key.startsWith("fallback_") || key.startsWith("cardio_"))) {
+      const parts = key.split("_");
+      if (parts.length >= 5) {
+        const exName = parts.slice(3, parts.length - 1).join("_").toLowerCase();
+        const setIndex = parts[parts.length - 1];
+        for (let w = 1; w <= purchasedWeeks; w++) {
+          for (let d = 1; d <= 7; d++) {
+            const repsKey = `${exName}_week${w}_day${d}_set${setIndex}_actualReps`;
+            const weightKey = `${exName}_week${w}_day${d}_set${setIndex}_actualWeight`;
+            totalReps += parseInt(localStorage.getItem(repsKey) || "0", 10);
+            totalWeight += parseInt(localStorage.getItem(weightKey) || "0", 10);
           }
         }
       }
     }
   }
 
-  // Compute the current aggregator value
-  let currentAggregator = totalXP + totalReps + totalWeight;
-
-  // Retrieve the last aggregator checkpoint (defaulting to 0)
+  // 2) Compute diff since last time
+  const currentAggregator = totalXP + totalReps + totalWeight;
   let lastAggregator = parseInt(localStorage.getItem("lastAggregator") || "0", 10);
-
-  // Only add the positive difference
   let newAddition = currentAggregator - lastAggregator;
   if (newAddition < 0) newAddition = 0;
 
-  // Update the progress score by adding only the new addition
+  // ── APPLY STREAK MULTIPLIER ──
+  newAddition = Math.round(newAddition * getWorkoutStreakMultiplier());
+
+  // 3) Bump the stored PS by **only** that positive, multiplied diff
   let storedPS = parseInt(localStorage.getItem("progressScore") || "0", 10);
   let finalPS = storedPS + newAddition;
   localStorage.setItem("progressScore", finalPS.toString());
 
-  // Update the checkpoint so that future updates only add new changes.
+  // 4) Save the new checkpoint so future diffs are always positive
   localStorage.setItem("lastAggregator", currentAggregator.toString());
 
-  // Update the DOM elements with the new progress score and message.
+  // 5) Update the DOM
   psValueEl.textContent = finalPS;
 
-  // Your logic to determine whether the user is on track
   const isFirstWeek = (parseInt(localStorage.getItem("currentWeekIndex") || "0", 10) === 0);
-  let onTrack = isFirstWeek ? true : checkLastWeekOnTrack();
-  let dailyMsg = onTrack ? getOnTrackMessageForPS(finalPS) : getRandomOffTrackMessage();
-  dailyMsgEl.textContent = dailyMsg;
+  const onTrack = isFirstWeek ? true : checkLastWeekOnTrack();
+  const dailyMsg = onTrack
+    ? getOnTrackMessageForPS(finalPS)
+    : getRandomOffTrackMessage();
 
+  dailyMsgEl.textContent = dailyMsg;
   console.log("[PS] Done updating. Final PS =", finalPS);
 }
-
 
 // Helper: check if user met last week's required workouts
 function checkLastWeekOnTrack() {
@@ -1975,67 +2450,47 @@ function saveCollapsibleStates() {
  * 7) WEEK SELECTION
  ***************************************/
 const weekSelectorEl = document.getElementById("weekSelector");
-const totalWeeksToShow = Math.min(purchasedWeeks, twelveWeekProgram.length);
+const totalWeeksToShow = twelveWeekProgram.length;
 
 function renderWeekSelector() {
   weekSelectorEl.innerHTML = "";
-
-  // Get the week wrapper element.
   const weekWrapper = document.querySelector(".week-selector-wrapper");
 
-  if (purchasedWeeks === 1) {
-    // Only one week: create a single centered week label.
+  // always allow scrolling
+  weekSelectorEl.style.display = "";
+  weekSelectorEl.style.justifyContent = "";
+  if (weekWrapper) {
+    weekWrapper.style.overflowX = "auto";
+  }
+
+  for (let i = 0; i < twelveWeekProgram.length; i++) {
+    const weekNumber = i + 1;
     const div = document.createElement("div");
     div.classList.add("week-box");
-    div.textContent = "Week 1";
-    div.classList.add("active"); // mark as active
-    weekSelectorEl.appendChild(div);
 
-    // Center horizontally and disable horizontal scrolling.
-    weekSelectorEl.style.display = "flex";
-    weekSelectorEl.style.justifyContent = "center";
-    if (weekWrapper) {
-      weekWrapper.style.overflowX = "hidden";
-    }
-  } else {
-    // Reset any inline centering and enable scrolling if more than one week.
-    weekSelectorEl.style.justifyContent = "";
-    weekSelectorEl.style.display = "";
-    if (weekWrapper) {
-      weekWrapper.style.overflowX = "auto";
-    }
-
-    for (let i = 0; i < totalWeeksToShow; i++) {
-      const weekNumber = i + 1;
-      const div = document.createElement("div");
-      div.classList.add("week-box");
+    const unlocked = getPurchasedWeeks();
+    if (i >= unlocked) {
+      // LOCKED
+      div.classList.add("locked");
+      div.innerHTML = `🔒 Week ${weekNumber}`;
+    } else {
+      // UNLOCKED
       div.textContent = `Week ${weekNumber}`;
-
-      if (i < currentWeekIndex) {
-        div.classList.add("completed");
-      }
-      if (i === currentWeekIndex) {
-        div.classList.add("active");
-      }
-
+      if (i < currentWeekIndex) div.classList.add("completed");
+      if (i === currentWeekIndex) div.classList.add("active");
       div.addEventListener("click", () => {
         currentWeekIndex = i;
-        localStorage.setItem("currentWeekIndex", currentWeekIndex.toString());
-
-        // Reset the current day to 0 (Day 1) when a new week is selected.
+        localStorage.setItem("currentWeekIndex", String(i));
         currentDayIndex = 0;
         localStorage.setItem("currentDayIndex", "0");
-
-        // Ensure all weeks up to the current one are computed:
         fullyPrecomputeAllWeeks();
-
         updateWeekBoxes();
         renderWorkoutDisplay();
         renderDaySelector();
       });
-
-      weekSelectorEl.appendChild(div);
     }
+
+    weekSelectorEl.appendChild(div);
   }
 }
 
@@ -2166,7 +2621,7 @@ function renderWorkoutDisplay() {
 
   // dayCheckbox.addEventListener("change", () => {
   //   const key = dayCheckbox.getAttribute("data-checkbox-key");
-  
+
   //   if (dayCheckbox.checked) {
   //     // Only award once, even if they uncheck/recheck
   //     if (!loadXPAwarded(key)) {
@@ -2175,16 +2630,16 @@ function renderWorkoutDisplay() {
   //       updateActiveWeekOnLog();
   //     }
   //     saveCheckboxState(key, true);
-  
+
   //     const allSections = workoutDisplayEl.querySelectorAll(".collapsible-content");
   //     allSections.forEach(section => {
   //       section.style.display = "block";
   //     });
-  
+
   //     checkAllExercises();
   //     setTimeout(autoCheckDayIfAllExercisesAreChecked, 100);
   //     renderWorkoutDisplay();
-  
+
   //     if (activeRestTimerExercise) {
   //       cancelRestTimer();
   //       activeRestTimerExercise = null;
@@ -2205,7 +2660,7 @@ function renderWorkoutDisplay() {
   //       localStorage.getItem(`week${currentWeekNumber}_workoutsDone`)
   //     );
   //   }
-  
+
   //   setTimeout(updateProgressScoreAndMessages, 0);
   // });
 
@@ -2281,9 +2736,9 @@ function renderWorkoutDisplay() {
           }, 10);
         }
 
-        finishBtn.addEventListener("click", () => {
+        finishBtn.addEventListener("click", async () => {
           cancelRestTimer();
-        
+
           // — simulate the old day‐checkbox logic —
           const dayKey = `day_${currentWeekIndex}_${currentDayIndex}`;
           if (!loadXPAwarded(dayKey)) {
@@ -2292,14 +2747,22 @@ function renderWorkoutDisplay() {
             updateActiveWeekOnLog();
           }
           saveCheckboxState(dayKey, true);
-        
-          checkAllExercises();
+
+          // checkAllExercises();
           // autoCheckDayIfAllExercisesAreChecked();
           updateWeeklyTotals();
-        
+
           // — now finish the workout as before —
           showWorkoutRecapPopup(currentWeekIndex, currentDayIndex, "finish");
           setWorkoutFinished(currentWeekIndex, currentDayIndex, true);
+
+          // 🧠 Replace this:
+          // const workoutData = extractWorkoutData(currentWeekIndex, currentDayIndex);
+          // sendWorkoutLog(workoutData);
+
+          // 🚀 With this:
+          await handleWorkoutCompletion(currentWeekIndex, currentDayIndex);
+          await saveMyProgressToServer();
         });
         finishButtonContainer.appendChild(finishBtn);
       } else {
@@ -2446,7 +2909,8 @@ function renderExercise(ex, parentEl, sectionKey) {
       if (!loadXPAwarded(key)) {
         saveXPAwarded(key);
         addXPForExercise(ex);
-        updateActiveWeekOnLog()
+        updateActiveWeekOnLog();
+        updateProgressScoreAndMessages();
       }
       saveCheckboxState(key, true);
       checkAllSetsForExercise(details);
@@ -2548,73 +3012,73 @@ function renderExercise(ex, parentEl, sectionKey) {
     setCheckbox.type = "checkbox";
     setCheckbox.classList.add("set-checkbox", "duration-checkbox");
     // include sectionKey so warm-up and main-work don't share the same key
-// … after you’ve created durationRow, durationInput and setCheckbox …
+    // … after you’ve created durationRow, durationInput and setCheckbox …
 
-// 1) give each cardio checkbox its own key, scoped by sectionKey
-const setKey = `cardio_${sectionKey}_${currentWeekIndex}_${currentDayIndex}_${ex.name}`;
-setCheckbox.setAttribute("data-checkbox-key", setKey);
+    // 1) give each cardio checkbox its own key, scoped by sectionKey
+    const setKey = `cardio_${sectionKey}_${currentWeekIndex}_${currentDayIndex}_${ex.name}`;
+    setCheckbox.setAttribute("data-checkbox-key", setKey);
 
-// 2) initialize from storage
-if (loadCheckboxState(setKey)) {
-  setCheckbox.checked = true;
-  setCheckbox.setAttribute("data-xp-awarded", "true");
-}
-
-// 3) wire up change handler
-setCheckbox.addEventListener("change", () => {
-  // only care when it becomes checked
-  if (!setCheckbox.checked) {
-    saveCheckboxState(setKey, false);
-    durationInput.readOnly = false;
-    renderWorkoutDisplay();
-    // autoCheckDayIfAllExercisesAreChecked();
-    updateActiveWeekOnLog();
-    return;
-  }
-
-  // debug: verify you’re using the new key
-  console.log(`[Cardio] checkbox key: ${setKey}`);
-
-  // award XP once
-  if (!loadXPAwarded(setKey)) {
-    saveXPAwarded(setKey);
-    addXP(3);
-    maybeStartStreak();
-  }
-
-  // persist the check
-  saveCheckboxState(setKey, true);
-
-  // auto-tick the exercise if all sets are done
-  autoCheckExerciseIfAllSets(exerciseCheckbox, details);
-
-  // start rest timer if needed
-  if (ex.rest && !activeRestTimerExercise) {
-    startRestTimerWithDelay(ex);
-  }
-
-  // lock the duration input and solidify its value
-  durationInput.readOnly = true;
-  if (!durationInput.value.trim()) {
-    let ph = durationInput.placeholder.trim();
-    let unit = ph.match(/seconds?/i) ? " seconds" : " minutes";
-    let num = parseInt(ph, 10);
-    if (!isNaN(num)) {
-      durationInput.value = num + unit;
-      saveSetValue(ex.name, currentWeekNumber, dayNumber, 1, "actualDuration", num);
-      console.log(`[Cardio] Duration solidified to ${num}${unit}`);
+    // 2) initialize from storage
+    if (loadCheckboxState(setKey)) {
+      setCheckbox.checked = true;
+      setCheckbox.setAttribute("data-xp-awarded", "true");
     }
-  }
 
-  // re-render and bubble up
-  renderWorkoutDisplay();
-  // autoCheckDayIfAllExercisesAreChecked();
-  updateActiveWeekOnLog();
-});
+    // 3) wire up change handler
+    setCheckbox.addEventListener("change", () => {
+      // only care when it becomes checked
+      if (!setCheckbox.checked) {
+        saveCheckboxState(setKey, false);
+        durationInput.readOnly = false;
+        renderWorkoutDisplay();
+        // autoCheckDayIfAllExercisesAreChecked();
+        updateActiveWeekOnLog();
+        return;
+      }
 
-// 4) finally append your checkbox back into the row
-durationRow.appendChild(setCheckbox);
-setContainer.appendChild(durationRow);
+      // debug: verify you’re using the new key
+      console.log(`[Cardio] checkbox key: ${setKey}`);
+
+      // award XP once
+      if (!loadXPAwarded(setKey)) {
+        saveXPAwarded(setKey);
+        addXP(3);
+        maybeStartStreak();
+      }
+
+      // persist the check
+      saveCheckboxState(setKey, true);
+
+      // auto-tick the exercise if all sets are done
+      autoCheckExerciseIfAllSets(exerciseCheckbox, details);
+
+      // start rest timer if needed
+      if (ex.rest && !activeRestTimerExercise) {
+        startRestTimerWithDelay(ex);
+      }
+
+      // lock the duration input and solidify its value
+      durationInput.readOnly = true;
+      if (!durationInput.value.trim()) {
+        let ph = durationInput.placeholder.trim();
+        let unit = ph.match(/seconds?/i) ? " seconds" : " minutes";
+        let num = parseInt(ph, 10);
+        if (!isNaN(num)) {
+          durationInput.value = num + unit;
+          saveSetValue(ex.name, currentWeekNumber, dayNumber, 1, "actualDuration", num);
+          console.log(`[Cardio] Duration solidified to ${num}${unit}`);
+        }
+      }
+
+      // re-render and bubble up
+      renderWorkoutDisplay();
+      // autoCheckDayIfAllExercisesAreChecked();
+      updateActiveWeekOnLog();
+    });
+
+    // 4) finally append your checkbox back into the row
+    durationRow.appendChild(setCheckbox);
+    setContainer.appendChild(durationRow);
 
 
   } else if (isSetsBased(ex)) {
@@ -2803,13 +3267,13 @@ setContainer.appendChild(durationRow);
           // only for mainWork, after set 2
           if (!hasPurchasedAWT && sectionKey === "mainWork" && s >= 3) {
             const dayData = twelveWeekProgram[currentWeekIndex].days[currentDayIndex];
-          
+
             // is this *exactly* the first exercise in mainWork?
             const isFirstExercise =
               Array.isArray(dayData.mainWork) &&
               dayData.mainWork.length &&
               dayData.mainWork[0]?.name === ex.name;
-          
+
             if (!isFirstExercise) {
               maybeShowCoreRandomUpsell();   // second exercise (or later) → show
             }
@@ -2890,16 +3354,16 @@ setContainer.appendChild(durationRow);
 
           // 2) grab whatever they typed (might be NaN)
           let repValNew = parseInt(repsInput.value, 10);
-          
+
           // 3) figure out your suggested range *first*
           const defaultSuggestedReps = ex.suggestedReps || ex.reps || "12-15";
-          
+
           // 4) if they left it blank, treat it as the *lower* bound
           if (isNaN(repValNew)) {
             const range = parseSuggestedReps(defaultSuggestedReps);
             if (range) repValNew = range.min;
           }
-          
+
           // 5) now save/solidify that value
           saveSetValue(ex.name, currentWeekNumber, dayNumber, s, "actualReps", repValNew);
           repsInput.value = repValNew;
@@ -3093,8 +3557,8 @@ setContainer.appendChild(durationRow);
         }
         // autoCheckDayIfAllExercisesAreChecked();
         updateWeeklyTotals();
-      
-        return; 
+
+        return;
       });
       setRow.appendChild(setCheckbox);
       const changedMarkerKey = setKey + "_changedMidWorkout";
@@ -3167,82 +3631,82 @@ setContainer.appendChild(durationRow);
 
   // =========== Buttons row (Change Exercise / Watch Video) ===========
   const isResistanceTraining =
-  sectionKey === "mainWork" &&
-  !isCardio(ex) &&
-  isSetsBased(ex);
+    sectionKey === "mainWork" &&
+    !isCardio(ex) &&
+    isSetsBased(ex);
 
-if (isResistanceTraining) {
-  const buttonsRow = document.createElement("div");
-  buttonsRow.classList.add("set-row", "buttons-row");
+  if (isResistanceTraining) {
+    const buttonsRow = document.createElement("div");
+    buttonsRow.classList.add("set-row", "buttons-row");
 
-  // placeholder to align with set-label column
-  buttonsRow.appendChild(document.createElement("div"));
+    // placeholder to align with set-label column
+    buttonsRow.appendChild(document.createElement("div"));
 
-  // helper to lock a button in purple with new text
-  const styleAsLocked = (btn, newText) => {
-    btn.style.transition = "background-color 0.3s ease";
-    btn.style.backgroundColor = "#9333EA";
-    btn.textContent = newText;
-  };
+    // helper to lock a button in purple with new text
+    const styleAsLocked = (btn, newText) => {
+      btn.style.transition = "background-color 0.3s ease";
+      btn.style.backgroundColor = "#9333EA";
+      btn.textContent = newText;
+    };
 
-  // session-storage keys so we only lock once per page load
-  const CHANGE_KEY = "upsell_changeExercise";
-  const VIDEO_KEY  = "upsell_watchVideo";
+    // session-storage keys so we only lock once per page load
+    const CHANGE_KEY = "upsell_changeExercise";
+    const VIDEO_KEY = "upsell_watchVideo";
 
-  // ─ Change / Smart-Swap button ───────────────────────────────
-  const changeExerciseBtn = document.createElement("button");
-  changeExerciseBtn.classList.add("exercise-btn");
-  changeExerciseBtn.textContent = hasPurchasedAWT
-    ? "Change Exercise"
-    : "Smart Swap";
-  // if already upsold this session, lock immediately
-  if (!hasPurchasedAWT && sessionStorage.getItem(CHANGE_KEY)) {
-    styleAsLocked(changeExerciseBtn, "🔒Smart Swap");
-  }
-  changeExerciseBtn.addEventListener("click", e => {
-    e.preventDefault();
-    if (hasPurchasedAWT) {
-      showChangeExercisePopup(ex, details, exerciseRow);
-    } else {
-      showCoreUpsellPopup(
-        "Want smarter swaps?",
-        "Unlock Pro to get expert-curated alternatives, tailored to your setup and goals."
-      );
-      sessionStorage.setItem(CHANGE_KEY, "true");
+    // ─ Change / Smart-Swap button ───────────────────────────────
+    const changeExerciseBtn = document.createElement("button");
+    changeExerciseBtn.classList.add("exercise-btn");
+    changeExerciseBtn.textContent = hasPurchasedAWT
+      ? "Change Exercise"
+      : "Smart Swap";
+    // if already upsold this session, lock immediately
+    if (!hasPurchasedAWT && sessionStorage.getItem(CHANGE_KEY)) {
       styleAsLocked(changeExerciseBtn, "🔒Smart Swap");
     }
-  });
-  buttonsRow.appendChild(changeExerciseBtn);
+    changeExerciseBtn.addEventListener("click", e => {
+      e.preventDefault();
+      if (hasPurchasedAWT) {
+        showChangeExercisePopup(ex, details, exerciseRow);
+      } else {
+        showCoreUpsellPopup(
+          "Want smarter swaps?",
+          "Unlock Pro to get expert-curated alternatives, tailored to your setup and goals."
+        );
+        sessionStorage.setItem(CHANGE_KEY, "true");
+        styleAsLocked(changeExerciseBtn, "🔒Smart Swap");
+      }
+    });
+    buttonsRow.appendChild(changeExerciseBtn);
 
-  // ─ Video Tutorial button ────────────────────────────────────
-  const watchVideoBtn = document.createElement("button");
-  watchVideoBtn.classList.add("exercise-btn");
-  watchVideoBtn.textContent = hasPurchasedAWT
-    ? "Watch Video"
-    : "Video Tutorial";
-  if (!hasPurchasedAWT && sessionStorage.getItem(VIDEO_KEY)) {
-    styleAsLocked(watchVideoBtn, "🔒Video Tutorial");
-  }
-  watchVideoBtn.addEventListener("click", e => {
-    e.preventDefault();
-    if (hasPurchasedAWT) {
-      alert("Watch Video not implemented yet.");
-    } else {
-      showCoreUpsellPopup(
-        "Not sure if your form is right?",
-        "Pro gives you in-app, step-by-step videos so you can lift with confidence."
-      );
-      sessionStorage.setItem(VIDEO_KEY, "true");
+    // ─ Video Tutorial button ────────────────────────────────────
+    const watchVideoBtn = document.createElement("button");
+    watchVideoBtn.classList.add("exercise-btn");
+    watchVideoBtn.textContent = hasPurchasedAWT
+      ? "Watch Video"
+      : "Video Tutorial";
+    if (!hasPurchasedAWT && sessionStorage.getItem(VIDEO_KEY)) {
       styleAsLocked(watchVideoBtn, "🔒Video Tutorial");
     }
-  });
-  buttonsRow.appendChild(watchVideoBtn);
+    watchVideoBtn.addEventListener("click", e => {
+      e.preventDefault();
+      if (hasPurchasedAWT) {
+        alert("Watch Video not implemented yet.");
+      } else {
+        showCoreUpsellPopup(
+          "Not sure if your form is right?",
+          "Pro gives you in-app, step-by-step videos so you can lift with confidence."
+        );
+        sessionStorage.setItem(VIDEO_KEY, "true");
+        styleAsLocked(watchVideoBtn, "🔒Video Tutorial");
+      }
+    });
+    buttonsRow.appendChild(watchVideoBtn);
 
-  // placeholder for the checkbox-column alignment
-  buttonsRow.appendChild(document.createElement("div"));
+    // placeholder for the checkbox-column alignment
+    buttonsRow.appendChild(document.createElement("div"));
 
-  setContainer.appendChild(buttonsRow);
-}
+    setContainer.appendChild(buttonsRow);
+  }
   // Append everything
   parentEl.appendChild(exerciseRow);
   parentEl.appendChild(details);
@@ -3264,6 +3728,7 @@ function checkAllSetsForExercise(detailsSection) {
         saveXPAwarded(key);
         addXP(3);
         maybeStartStreak();
+        updateProgressScoreAndMessages();
       }
       // Manually dispatch a change event so the set checkbox's own handler runs.
       cb.dispatchEvent(new Event("change", { bubbles: true }));
@@ -3288,6 +3753,7 @@ function checkAllExercises() {
       if (!loadXPAwarded(key)) {
         saveXPAwarded(key);
         addXPForExercise({});
+        updateProgressScoreAndMessages();
       }
       // NEW: Fire the same event the user would have triggered
       cb.dispatchEvent(new Event("change", { bubbles: true }));
@@ -3304,6 +3770,7 @@ function checkAllExercises() {
         saveXPAwarded(key);
         addXP(3);
         maybeStartStreak();
+        updateProgressScoreAndMessages();
       }
       // NEW: Fire the same event here, too!
       cb.dispatchEvent(new Event("change", { bubbles: true }));
@@ -3323,6 +3790,7 @@ function checkAllSetsForExercise(detailsSection) {
         saveXPAwarded(key);
         addXP(3);
         maybeStartStreak();
+        updateProgressScoreAndMessages();
       }
       // Manually dispatch a change event so the set checkbox's own handler runs.
       cb.dispatchEvent(new Event("change", { bubbles: true }));
@@ -3357,8 +3825,8 @@ function uncheckAllSetsForExercise(detailsSection) {
 // XP awarding for entire day or exercise
 function addXPForDay(dayObj) {
   addXP(15);
-  incrementWorkoutsThisWeek();
-  maybeStartStreak();
+  // incrementWorkoutsThisWeek();
+  // maybeStartStreak();
 }
 function addXPForExercise(exObj) {
   addXP(8);
@@ -3431,6 +3899,7 @@ function autoCheckExerciseIfAllSets(exCheckbox, detailsSection) {
     if (!loadXPAwarded(key)) {
       saveXPAwarded(key);
       addXPForExercise({});
+      updateProgressScoreAndMessages();
     }
     // Cancel any rest timer if applicable:
     if (activeRestTimerExercise) {
@@ -3486,6 +3955,25 @@ function handleIntraWorkoutRepLogic(exerciseObj, userReps, currentSetIndex, defa
 
   if (isInsideRange) {
     console.log(`No pop-up needed for "${exerciseObj.name}"—User matched suggested range.`);
+    return;
+  }
+
+  const currentWeekNumber = twelveWeekProgram[currentWeekIndex].week;
+  const phase = getPhaseFromWeek(currentWeekNumber);
+  let hardLimit, easyLimit;
+  if (phase === 1) {
+    hardLimit = 9; easyLimit = 15;
+  } else if (phase === 2) {
+    hardLimit = 5; easyLimit = 13;
+  } else {
+    hardLimit = 3; easyLimit = 9;
+  }
+  // If userReps is between (hardLimit + 1) and (easyLimit - 1), bail out:
+  if (userReps > hardLimit && userReps < easyLimit) {
+    console.log(
+      `[handleIntraWorkoutRepLogic] Rep=${userReps} in ` +
+      `mid-range for phase ${phase}; skipping popup.`
+    );
     return;
   }
 
@@ -3956,7 +4444,7 @@ nextBtn.addEventListener("click", () => {
 function maybeStartStreak() {
   // If a reset flag exists OR if the streak count is 0, then immediately initialize the streak.
   if (localStorage.getItem("workoutStreakReset") === "true" ||
-      !streakCount || parseInt(streakCount, 10) === 0) {
+    !streakCount || parseInt(streakCount, 10) === 0) {
     // Remove the reset flag if present.
     localStorage.removeItem("workoutStreakReset");
 
@@ -3978,7 +4466,6 @@ function maybeStartStreak() {
     localStorage.setItem("streakStartDate", streakStartDate);
   }
 }
-
 
 function incrementWorkoutsThisWeek() {
   let completedThisWeek = parseInt(localStorage.getItem("completedThisWeek") || "0");
@@ -4019,7 +4506,11 @@ function showRestTimer(seconds) {
       <div class="timer-header-row">
         <!-- Left side: Cancel icon -->
         <div class="timer-left">
-          <div id="timerCancelIcon" class="timer-icon-btn cancel-btn">&#x2715</div>
+          <div id="timerCancelIcon" class="timer-icon-btn cancel-btn">
+            <span class="icon">
+              <i class="fa-solid fa-xmark"></i>
+            </span>
+          </div>
         </div>
   
         <!-- Center: - / Timer / + -->
@@ -4031,11 +4522,12 @@ function showRestTimer(seconds) {
   
         <!-- Right side: Pause / Play -->
         <div class="timer-right">
+        <div class="timer-right">
           <div id="timerPauseIcon" class="timer-icon-btn pause-btn">
-            <span class="icon">&#x23F8;</span>
+            <span class="icon"><i class="fa-solid fa-pause"></i></span>
           </div>
           <div id="timerPlayIcon" class="timer-icon-btn play-btn">
-            <span class="icon">&#x25BA;</span>
+            <span class="icon"><i class="fa-solid fa-play"></i></span>
           </div>
         </div>
       </div>
@@ -4516,35 +5008,58 @@ function handlePerformanceClick(buttonType, exerciseObj, userReps, currentSetInd
   }
 
   // Use the recommendation.direction property to decide if we skip the fallback:
-  if (buttonType === "JF" && recommendation.direction === "maintain") {
-    console.log("[Popup] User pressed Just Fine and recommendation is maintain => applying changes");
-    closePerformancePopup(() => {
-      if (exerciseObj.rest) {
-        if (restTimerDelayTimeout) {
-          clearTimeout(restTimerDelayTimeout);
-          restTimerDelayTimeout = null;
-          console.log("[Pop-up logic] Cleared delayed timer so it won't re-fire.");
-        }
-        exerciseObj.rest = null;
-        console.log("[Pop-up logic] ex.rest set to null => skipping normal delayed timer");
-        startRestTimerImmediately(recommendation.restTime);
-      }
-      // First re-render the workout UI:
-      renderWorkoutDisplay();
+  // if (buttonType === "JF" && recommendation.direction === "maintain") {
+  //     console.log("[Popup] User pressed Just Fine and recommendation is maintain => applying changes");
+  //     closePerformancePopup(() => {
+  //       if (exerciseObj.rest) {
+  //         if (restTimerDelayTimeout) {
+  //           clearTimeout(restTimerDelayTimeout);
+  //           restTimerDelayTimeout = null;
+  //           console.log("[Pop-up logic] Cleared delayed timer so it won't re-fire.");
+  //         }
+  //         exerciseObj.rest = null;
+  //         console.log("[Pop-up logic] ex.rest set to null => skipping normal delayed timer");
+  //         startRestTimerImmediately(recommendation.restTime);
+  //       }
+  //       // First re-render the workout UI:
+  //       renderWorkoutDisplay();
 
-      // Then, get fresh DOM references:
-      const newExerciseRow = document.querySelector(
-        `[data-exercise-key="exercise_${currentWeekIndex}_${currentDayIndex}_${exerciseObj.name}"]`
-      );
-      if (newExerciseRow) {
-        const newDetails = newExerciseRow.querySelector(".exercise-details");
-        const newExerciseCheckbox = newExerciseRow.querySelector(".exercise-checkbox");
-        // Now auto-check using the new elements:
-        autoCheckExerciseIfAllSets(newExerciseCheckbox, newDetails);
-      }
-      // Optionally, also re-check the day-level checkbox:
-      // autoCheckDayIfAllExercisesAreChecked();
-    });
+  //       // Then, get fresh DOM references:
+  //       const newExerciseRow = document.querySelector(
+  //         `[data-exercise-key="exercise_${currentWeekIndex}_${currentDayIndex}_${exerciseObj.name}"]`
+  //       );
+  //       if (newExerciseRow) {
+  //         const newDetails = newExerciseRow.querySelector(".exercise-details");
+  //         const newExerciseCheckbox = newExerciseRow.querySelector(".exercise-checkbox");
+  //         // Now auto-check using the new elements:
+  //         autoCheckExerciseIfAllSets(newExerciseCheckbox, newDetails);
+  //       }
+  //     });
+  //     return;
+  //   }
+
+  if (buttonType === "JF") {
+    if (recommendation.direction === "maintain") {
+      closePerformancePopup(() => {
+        if (exerciseObj.rest) {
+          if (restTimerDelayTimeout) {
+            clearTimeout(restTimerDelayTimeout);
+            restTimerDelayTimeout = null;
+          }
+          startRestTimerImmediately(exerciseObj.rest);
+        }
+        renderWorkoutDisplay();
+        const sel = `[data-exercise-key="exercise_${currentWeekIndex}_${currentDayIndex}_${exerciseObj.name}"]`;
+        const row = document.querySelector(sel);
+        if (row) {
+          const newCheckbox = row.querySelector(".exercise-checkbox");
+          const newDetails = row.nextElementSibling;
+          autoCheckExerciseIfAllSets(newCheckbox, newDetails);
+        }
+      });
+    } else {
+      showFallbackYesNo(exerciseObj, userReps, currentSetIndex, recommendation, exerciseCheckbox, details);
+    }
     return;
   }
 
@@ -4678,11 +5193,11 @@ function showFallbackYesNo(exerciseObj, userReps, currentSetIndex, recommendatio
         const oldRest = parseInt(exerciseObj.rest, 10) || 45;
         startRestTimerImmediately(oldRest);
       }
-  
+
       // Re-render so that your manually saved actualWeight shows up again,
       // and so that any cascadeSuggestedWeightForward from your blur has taken effect
       renderWorkoutDisplay();
-  
+
       // Re-select the refreshed elements and re-run the auto-checkers
       const newExerciseRow = document.querySelector(
         `[data-exercise-key="exercise_${currentWeekIndex}_${currentDayIndex}_${exerciseObj.name}"]`
@@ -5779,27 +6294,28 @@ window.addEventListener("load", () => {
   });
 });
 
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
+  await loadUserProgress(); // 🧠 First fetch progress and update localStorage
+
+  // 🛠️ NOW we can safely do everything that depends on localStorage
+  addTrackerBadge();
+  applyAWTSubscriptionNavLock();
+
   const lastTab = localStorage.getItem("lastSelectedTab") || "myWorkouts";
   if (lastTab === "myProgress") {
-    // Programmatically click the "My Progress" tab
     myProgressTab.click();
   } else {
-    // default to myWorkouts
     myWorkoutsTab.click();
   }
+
   const savedTime = localStorage.getItem("restTimerRemaining");
   if (savedTime) {
     const parsedTime = parseInt(savedTime, 10);
 
-    // Only show the timer if there is time left (parsedTime > 0)
     if (parsedTime > 0) {
       showRestTimer(parsedTime);
-
-      // Auto-pause so it doesn’t run immediately
       restTimerPaused = true;
 
-      // Show “Play” instead of “Pause”
       const pauseIcon = document.getElementById("timerPauseIcon");
       const playIcon = document.getElementById("timerPlayIcon");
       if (pauseIcon && playIcon) {
@@ -5807,18 +6323,14 @@ window.addEventListener("load", () => {
         playIcon.style.display = "block";
       }
 
-      // If minimized was saved, reflect that
       if (localStorage.getItem("restTimerMinimized") === "true") {
         currentRestTimerElement.classList.add("minimized");
         restTimerMinimized = true;
       }
     } else {
-      // If time is 0 or invalid, remove it so the timer won't reappear at 00:00 or 00:01
       localStorage.removeItem("restTimerRemaining");
     }
   }
-  addTrackerBadge();
-  applyAWTSubscriptionNavLock()
 });
 
 /* ────────────────────────────────────────────────────────────────
@@ -5910,7 +6422,8 @@ window.addEventListener("load", () => {
 
   // early‑out if already seen
   const overlay = document.getElementById('wtOnboardingOverlay');
-  if (!overlay || localStorage.getItem('wt_onboarding_complete')) return;
+  const wtSeen = localStorage.getItem('wt_onboarding_complete');
+  if (!overlay || wtSeen === '1' || wtSeen === 'true') return;
 
   // element refs
   const slider = overlay.querySelector('.wt-onboarding-slider');
@@ -5974,10 +6487,33 @@ window.addEventListener("load", () => {
   }
 
   // button wiring
-  overlay.addEventListener('click', e => {
-    if (e.target.matches('.wt-next-btn')) nextSlide();
+  overlay.addEventListener('click', async e => {
+    // 1) Next-button → advance the slider
+    if (e.target.matches('.wt-next-btn')) {
+      nextSlide();
+      return;
+    }
+
+    // 2) Close-button → mark complete + dismiss
     if (e.target.matches('.wt-close-btn')) {
       localStorage.setItem('wt_onboarding_complete', '1');
+
+      // Persist immediately
+      const payload = {
+        ...buildUserProgress(),
+        wt_onboarding_complete: true
+      };
+
+      // POST to the same “saveMyProgress” route that Dashboard uses
+      await fetch('/api/progress/saveMyProgress', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ progress: payload })
+      }).catch(() => { });
+
       overlay.classList.add('closing');
       overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
     }
@@ -5994,196 +6530,196 @@ window.addEventListener("load", () => {
    (shows 1 × “first workout” & 1 × “first week complete”)
 ──────────────────────────────────────────────────────────────── */
 
-  /************  CONFIG  ************/
-  const celebrationMessages = [
-    "🎉 Week {n} complete — you’re on a roll!",
-    "🔥 You wrapped up Week {n} strong!",
-    "🚀 Week {n} finished — and you’re just getting started.",
-    "🎯 Week {n} done. That’s how consistency is built.",
-    "💪 Another win. Week {n} ✅.",
-    "🥇 Week {n} down — and you’re leveling up fast.",
-    "🎖️ Week {n} is in the books. Let’s keep it going!",
-    "🎉 Finished Week {n}? That deserves a celebration.",
-    "🔥 You stuck with it through Week {n}. Impressive.",
-    "🚀 Week {n} — complete. Momentum looks good on you.",
-    "💪 Solid effort this week. Week {n} was yours.",
-    "🎯 Week {n} progress locked in — ready to unlock more?",
-    "🎖️ Done with Week {n}? You’re ahead of the curve.",
-    "🥇 Another step forward. Week {n} complete!",
-    "🎉 Great finish to Week {n} — let’s take it even further.",
-  ];
+/************  CONFIG  ************/
+const celebrationMessages = [
+  "🎉 Week {n} complete — you’re on a roll!",
+  "🔥 You wrapped up Week {n} strong!",
+  "🚀 Week {n} finished — and you’re just getting started.",
+  "🎯 Week {n} done. That’s how consistency is built.",
+  "💪 Another win. Week {n} ✅.",
+  "🥇 Week {n} down — and you’re leveling up fast.",
+  "🎖️ Week {n} is in the books. Let’s keep it going!",
+  "🎉 Finished Week {n}? That deserves a celebration.",
+  "🔥 You stuck with it through Week {n}. Impressive.",
+  "🚀 Week {n} — complete. Momentum looks good on you.",
+  "💪 Solid effort this week. Week {n} was yours.",
+  "🎯 Week {n} progress locked in — ready to unlock more?",
+  "🎖️ Done with Week {n}? You’re ahead of the curve.",
+  "🥇 Another step forward. Week {n} complete!",
+  "🎉 Great finish to Week {n} — let’s take it even further.",
+];
 
-  const motivationalSubtexts = [
-    "Momentum is on your side — Pro helps it grow.",
-    "Your plan should evolve with you. That’s what Pro does.",
-    "Real progress needs smart tracking. Pro handles that.",
-    "Train smarter, not harder — Pro makes it simple.",
-    "You’ve built the habit — now build the results.",
-    "Consistency matters. Pro keeps it sustainable.",
-    "You bring the effort. Pro brings the strategy.",
-    "Every session counts — let Pro make it compound.",
-    "Build momentum that sticks. Pro makes it happen.",
-    "You’ve started — now let Pro unlock your next level."
-  ];
+const motivationalSubtexts = [
+  "Momentum is on your side — Pro helps it grow.",
+  "Your plan should evolve with you. That’s what Pro does.",
+  "Real progress needs smart tracking. Pro handles that.",
+  "Train smarter, not harder — Pro makes it simple.",
+  "You’ve built the habit — now build the results.",
+  "Consistency matters. Pro keeps it sustainable.",
+  "You bring the effort. Pro brings the strategy.",
+  "Every session counts — let Pro make it compound.",
+  "Build momentum that sticks. Pro makes it happen.",
+  "You’ve started — now let Pro unlock your next level."
+];
 
-  /************  RENDER MODAL  ************/
-  function renderUpsellModal(opts) {
-    /* scaffold overlay + card */
-    const overlay = document.createElement("div");
-    overlay.id = "coreUpsellOverlay";
+/************  RENDER MODAL  ************/
+function renderUpsellModal(opts) {
+  /* scaffold overlay + card */
+  const overlay = document.createElement("div");
+  overlay.id = "coreUpsellOverlay";
 
-    const card = document.createElement("div");
-    card.className = "core-upsell-card";
-    overlay.appendChild(card);
-    document.body.appendChild(overlay);
+  const card = document.createElement("div");
+  card.className = "core-upsell-card";
+  overlay.appendChild(card);
+  document.body.appendChild(overlay);
 
-    /* tiny confetti + fade-in */
-    import("https://cdn.skypack.dev/canvas-confetti")
-      .then(({ default: confetti }) => confetti({ particleCount: 150, spread: 80, origin: { y: .3 } }));
-    requestAnimationFrame(() => overlay.classList.add("visible"));
+  /* tiny confetti + fade-in */
+  import("https://cdn.skypack.dev/canvas-confetti")
+    .then(({ default: confetti }) => confetti({ particleCount: 150, spread: 80, origin: { y: .3 } }));
+  requestAnimationFrame(() => overlay.classList.add("visible"));
 
-    /* create the scrollable content wrapper */
-    const content = document.createElement("div");
-    content.className = "modal-content";
-    card.appendChild(content);
+  /* create the scrollable content wrapper */
+  const content = document.createElement("div");
+  content.className = "modal-content";
+  card.appendChild(content);
 
-    /* --------  Top Heading  -------- */
-    const h3 = document.createElement("h3");
-    h3.className = "upsell-heading";
-    if (opts.type === "first") {
-      h3.textContent = "🎉 You just finished your first workout!";
-    } else {
-      const msg = celebrationMessages[
-        Math.floor(Math.random() * celebrationMessages.length)
-      ];
-      h3.textContent = msg.replace("{n}", opts.weekNumber);
-    }
-    content.appendChild(h3);
+  /* --------  Top Heading  -------- */
+  const h3 = document.createElement("h3");
+  h3.className = "upsell-heading";
+  if (opts.type === "first") {
+    h3.textContent = "🎉 You just finished your first workout!";
+  } else {
+    const msg = celebrationMessages[
+      Math.floor(Math.random() * celebrationMessages.length)
+    ];
+    h3.textContent = msg.replace("{n}", opts.weekNumber);
+  }
+  content.appendChild(h3);
 
-    /* --------  Static sub‑text  -------- */
-    const pTop = document.createElement("p");
-    pTop.textContent = "Stay consistent. Pro adapts as you grow.";
-    content.appendChild(pTop);
+  /* --------  Static sub‑text  -------- */
+  const pTop = document.createElement("p");
+  pTop.textContent = "Stay consistent. Pro adapts as you grow.";
+  content.appendChild(pTop);
 
-    /* --------  Mini‑testimonial  -------- */
-    content.appendChild(buildMiniTestimonial());
+  /* --------  Mini‑testimonial  -------- */
+  content.appendChild(buildMiniTestimonial());
 
-    /* --------  Quote line  -------- */
-    const pLine = document.createElement("p");
-    pLine.textContent = "This is the moment many users decide to go Pro — and for good reason.";
-    Object.assign(pLine.style, {
-      fontStyle: "italic",
-      fontSize: "0.95rem",
-      color: "#444",
-      margin: "0",
-      textAlign: "center",
-      lineHeight: "1.4"
-    });
-    content.appendChild(pLine);
+  /* --------  Quote line  -------- */
+  const pLine = document.createElement("p");
+  pLine.textContent = "This is the moment many users decide to go Pro — and for good reason.";
+  Object.assign(pLine.style, {
+    fontStyle: "italic",
+    fontSize: "0.95rem",
+    color: "#444",
+    margin: "0",
+    textAlign: "center",
+    lineHeight: "1.4"
+  });
+  content.appendChild(pLine);
 
-    /* --------  CTA footer (sticky)  -------- */
-    const footer = document.createElement("div");
-    footer.className = "cta-footer";
+  /* --------  CTA footer (sticky)  -------- */
+  const footer = document.createElement("div");
+  footer.className = "cta-footer";
 
-    // —— move timer into footer ——
-    const timerWrap = document.createElement("div");
-    timerWrap.className = "timer-container";
-    timerWrap.innerHTML = `
+  // —— move timer into footer ——
+  const timerWrap = document.createElement("div");
+  timerWrap.className = "timer-container";
+  timerWrap.innerHTML = `
       <div class="timer-text">
         <span class="discount-label">⏳ Unlock Pro today for £9.99:</span>
         <span class="time-remaining" id="countdownTimer">10:00</span>
       </div>`;
-    footer.appendChild(timerWrap);
-    startTenMinuteCountdown(timerWrap.querySelector("#countdownTimer"));
+  footer.appendChild(timerWrap);
+  startTenMinuteCountdown(timerWrap.querySelector("#countdownTimer"));
 
-    // —— then CTA & Maybe later ——
-    const cta = document.createElement("a");
-    cta.className = "cta";
-    cta.textContent = "🔓 Unlock Pro Tracker";
-    // **instead** of cta.href = "offer.html", we’ll intercept the click:
-    cta.addEventListener("click", e => {
-      e.preventDefault();
-      // pull the live "MM:SS" off the modal
-      const timerEl = timerWrap.querySelector("#countdownTimer");
-      if (timerEl) {
-        const [mm, ss] = timerEl.textContent.split(":").map(Number);
-        const remainingMs = (mm * 60 + ss) * 1000;
-        // compute the absolute deadline for the offer page
-        const resumeOfferEnd = Date.now() + remainingMs;
-        localStorage.setItem("offerResumeEnd", resumeOfferEnd);
-      }
-      // now navigate
-      window.location.href = "offer.html";
-    });
-    footer.appendChild(cta);
-
-    const laterBtn = document.createElement("button");
-    laterBtn.className = "maybe-later";
-    laterBtn.textContent = "Maybe later";
-    laterBtn.addEventListener("click", closeOverlay);
-    footer.appendChild(laterBtn);
-
-    // fade‑in “Maybe later” after 5s
-    setTimeout(() => laterBtn.classList.add("show"), 5000);
-
-    // finally, add footer to card
-    overlay.appendChild(footer);
-
-    /* fade-in “Maybe later” after 5s */
-    setTimeout(() => laterBtn.classList.add("show"), 5000);
-
-    /* close on outside click */
-    overlay.addEventListener("click", e => {
-      if (e.target === overlay) closeOverlay();
-    });
-
-    function closeOverlay() {
-      overlay.classList.remove("visible");
-      setTimeout(() => overlay.remove(), 350);
+  // —— then CTA & Maybe later ——
+  const cta = document.createElement("a");
+  cta.className = "cta";
+  cta.textContent = "🔓 Unlock Pro Tracker";
+  // **instead** of cta.href = "offer.html", we’ll intercept the click:
+  cta.addEventListener("click", e => {
+    e.preventDefault();
+    // pull the live "MM:SS" off the modal
+    const timerEl = timerWrap.querySelector("#countdownTimer");
+    if (timerEl) {
+      const [mm, ss] = timerEl.textContent.split(":").map(Number);
+      const remainingMs = (mm * 60 + ss) * 1000;
+      // compute the absolute deadline for the offer page
+      const resumeOfferEnd = Date.now() + remainingMs;
+      localStorage.setItem("offerResumeEnd", resumeOfferEnd);
     }
+    // now navigate
+    window.location.href = "offer.html";
+  });
+  footer.appendChild(cta);
+
+  const laterBtn = document.createElement("button");
+  laterBtn.className = "maybe-later";
+  laterBtn.textContent = "Maybe later";
+  laterBtn.addEventListener("click", closeOverlay);
+  footer.appendChild(laterBtn);
+
+  // fade‑in “Maybe later” after 5s
+  setTimeout(() => laterBtn.classList.add("show"), 5000);
+
+  // finally, add footer to card
+  overlay.appendChild(footer);
+
+  /* fade-in “Maybe later” after 5s */
+  setTimeout(() => laterBtn.classList.add("show"), 5000);
+
+  /* close on outside click */
+  overlay.addEventListener("click", e => {
+    if (e.target === overlay) closeOverlay();
+  });
+
+  function closeOverlay() {
+    overlay.classList.remove("visible");
+    setTimeout(() => overlay.remove(), 350);
   }
+}
 
-  /* ---------------------------------------------------------------- */
-  /* Helper – countdown mm:ss                                         */
-  /* ---------------------------------------------------------------- */
-  function startTenMinuteCountdown(el) {
-    let remaining = 600; // seconds
-    const tick = () => {
-      const m = String(Math.floor(remaining / 60)).padStart(2, "0");
-      const s = String(remaining % 60).padStart(2, "0");
-      el.textContent = `${m}:${s}`;
-      remaining--;
-      if (remaining >= 0) setTimeout(tick, 1000);
-    };
-    tick();
-  }
+/* ---------------------------------------------------------------- */
+/* Helper – countdown mm:ss                                         */
+/* ---------------------------------------------------------------- */
+function startTenMinuteCountdown(el) {
+  let remaining = 600; // seconds
+  const tick = () => {
+    const m = String(Math.floor(remaining / 60)).padStart(2, "0");
+    const s = String(remaining % 60).padStart(2, "0");
+    el.textContent = `${m}:${s}`;
+    remaining--;
+    if (remaining >= 0) setTimeout(tick, 1000);
+  };
+  tick();
+}
 
-  /* ---------------------------------------------------------------- */
-  /* Helper – testimonial builder                                     */
-  /* ---------------------------------------------------------------- */
-  function buildMiniTestimonial() {
-    const userGoal = (localStorage.getItem("goal") || "").toLowerCase();
-    const gender = (localStorage.getItem("userGender") || "male").toLowerCase();
+/* ---------------------------------------------------------------- */
+/* Helper – testimonial builder                                     */
+/* ---------------------------------------------------------------- */
+function buildMiniTestimonial() {
+  const userGoal = (localStorage.getItem("goal") || "").toLowerCase();
+  const gender = (localStorage.getItem("userGender") || "male").toLowerCase();
 
-    let name, txt, beforeImg, afterImg;
-    if (userGoal.includes("gain")) {
-      name = "Max";
-      txt = "Nothing worked until this. Now I train with confidence — and real progress.";
-      beforeImg = "../assets/harry_chest_before.jpg";
-      afterImg  = "../assets/harry_chest_after.jpg";
+  let name, txt, beforeImg, afterImg;
+  if (userGoal.includes("gain")) {
+    name = "Max";
+    txt = "Nothing worked until this. Now I train with confidence — and real progress.";
+    beforeImg = "../assets/harry_chest_before.jpg";
+    afterImg = "../assets/harry_chest_after.jpg";
+  } else {
+    if (gender === "female") {
+      name = "Alice";
+      txt = "This changed everything. I feel lighter, healthier, and in control for once.";
+      beforeImg = "../assets/halima_back_before.jpg";
+      afterImg = "../assets/halima_back_after.jpg";
     } else {
-      if (gender === "female") {
-        name = "Alice";
-        txt = "This changed everything. I feel lighter, healthier, and in control for once.";
-        beforeImg = "../assets/halima_back_before.jpg";
-        afterImg  = "../assets/halima_back_after.jpg";
-      } else {
-        name = "Bob";
-        txt = "I’ve dropped the weight, feel sharper, and finally feel like myself again.";
-        beforeImg = "../assets/lynn_before.JPEG";
-        afterImg  = "../assets/lynn_after.png";
-      }
+      name = "Bob";
+      txt = "I’ve dropped the weight, feel sharper, and finally feel like myself again.";
+      beforeImg = "../assets/lynn_before.JPEG";
+      afterImg = "../assets/lynn_after.png";
     }
+  }
 
   const wrap = document.createElement("div");
   wrap.className = "testimonial-mini";
@@ -6204,66 +6740,66 @@ window.addEventListener("load", () => {
   return wrap;
 }
 
-  /* ---------------------------------------------------------------- */
-  /* Helper – comparison snapshot                                     */
-  /* ---------------------------------------------------------------- */
-  // function buildComparisonSnapshot() {
-  //   const box = document.createElement("div");
-  //   box.className = "compare-box";
-  //   box.innerHTML = `
-  //     <h4>Here’s What You Unlock with Pro</h4>
-  //     <table class="compare-table">
-  //       <tr><td>XP System</td>                     <td>✅ XP&nbsp;+ Progress Score</td></tr>
-  //       <tr><td>Workout Logging</td>               <td>✅ Adaptive Progression</td></tr>
-  //       <tr><td>❌ Nutrition Tracker</td>           <td>✅ Full Meal Plans + Macro Tracking</td></tr>
-  //       <tr><td>❌ Coach Insights</td>              <td>✅ Personalized Tips & Trends</td></tr>
-  //       <tr><td>❌ Video Tutorials</td>             <td>✅ Expert Form Guidance</td></tr>
-  //       <tr><td>❌ Community Challenges</td>        <td>✅ Monthly Challenges & Rankings</td></tr>
-  //     </table>`;
-  //   return box;
-  // }
+/* ---------------------------------------------------------------- */
+/* Helper – comparison snapshot                                     */
+/* ---------------------------------------------------------------- */
+// function buildComparisonSnapshot() {
+//   const box = document.createElement("div");
+//   box.className = "compare-box";
+//   box.innerHTML = `
+//     <h4>Here’s What You Unlock with Pro</h4>
+//     <table class="compare-table">
+//       <tr><td>XP System</td>                     <td>✅ XP&nbsp;+ Progress Score</td></tr>
+//       <tr><td>Workout Logging</td>               <td>✅ Adaptive Progression</td></tr>
+//       <tr><td>❌ Nutrition Tracker</td>           <td>✅ Full Meal Plans + Macro Tracking</td></tr>
+//       <tr><td>❌ Coach Insights</td>              <td>✅ Personalized Tips & Trends</td></tr>
+//       <tr><td>❌ Video Tutorials</td>             <td>✅ Expert Form Guidance</td></tr>
+//       <tr><td>❌ Community Challenges</td>        <td>✅ Monthly Challenges & Rankings</td></tr>
+//     </table>`;
+//   return box;
+// }
 
-  /* ---------------------------------------------------------------- */
-  /* Expose to global (for console testing)                           */
-  /* ---------------------------------------------------------------- */
-  (function () {
-    function maybeShowCoreUpsell(weekIdx, dayIdx) {
-      // 1) Bail for Pro/AWT users
-      if (window.hasPurchasedAWT) return;
-    
-      // 2) Only if they've actually finished it
-      if (!isWorkoutFinished(weekIdx, dayIdx)) return;
-    
-      const firstKey = "ctUpsell_shown_firstWorkout";
-      const weekKey  = "ctUpsell_shown_week" + (weekIdx + 1);
-    
-      // 3) First workout ever
-      if (!localStorage.getItem(firstKey)) {
-        localStorage.setItem(firstKey, "true");
-        renderUpsellModal({ type: "first" });
-        return;
-      }
-    
-      // 4) Last workout day of the week
-      if (!localStorage.getItem(weekKey)) {
-        const program = window.twelveWeekProgram || [];
-        const week = program[weekIdx];
-        if (!week) return;
-    
-        const allDone = week.days.every((_, d) =>
-          localStorage.getItem(`workoutFinished_w${weekIdx}_d${d}`) === "true"
-        );
-    
-        if (allDone) {
-          localStorage.setItem(weekKey, "true");
-          renderUpsellModal({ type: "week", weekNumber: weekIdx + 1 });
-        }
+/* ---------------------------------------------------------------- */
+/* Expose to global (for console testing)                           */
+/* ---------------------------------------------------------------- */
+(function () {
+  function maybeShowCoreUpsell(weekIdx, dayIdx) {
+    // 1) Bail for Pro/AWT users
+    if (window.hasPurchasedAWT) return;
+
+    // 2) Only if they've actually finished it
+    if (!isWorkoutFinished(weekIdx, dayIdx)) return;
+
+    const firstKey = "ctUpsell_shown_firstWorkout";
+    const weekKey = "ctUpsell_shown_week" + (weekIdx + 1);
+
+    // 3) First workout ever
+    if (!localStorage.getItem(firstKey)) {
+      localStorage.setItem(firstKey, "true");
+      renderUpsellModal({ type: "first" });
+      return;
+    }
+
+    // 4) Last workout day of the week
+    if (!localStorage.getItem(weekKey)) {
+      const program = window.twelveWeekProgram || [];
+      const week = program[weekIdx];
+      if (!week) return;
+
+      const allDone = week.days.every((_, d) =>
+        localStorage.getItem(`workoutFinished_w${weekIdx}_d${d}`) === "true"
+      );
+
+      if (allDone) {
+        localStorage.setItem(weekKey, "true");
+        renderUpsellModal({ type: "week", weekNumber: weekIdx + 1 });
       }
     }
-    
-    // expose it
-    window.maybeShowCoreUpsell = maybeShowCoreUpsell;
-  })();
+  }
+
+  // expose it
+  window.maybeShowCoreUpsell = maybeShowCoreUpsell;
+})();
 
 // A) Count precision‑overrides on weight blur
 document.addEventListener(
@@ -6292,15 +6828,15 @@ document.addEventListener(
   true
 );
 
-const loginModal   = document.getElementById("login-modal");
-const faqModal     = document.getElementById("faq-modal");
-const btnWorkouts  = document.getElementById("nav-workouts");
+const loginModal = document.getElementById("login-modal");
+const faqModal = document.getElementById("faq-modal");
+const btnWorkouts = document.getElementById("nav-workouts");
 const btnNutrition = document.getElementById("nav-nutrition");
-const btnHelp      = document.getElementById("nav-help");
-const closeBtns    = document.querySelectorAll(".close-btn");
-const mainNav   = document.querySelector(".main-nav");
+const btnHelp = document.getElementById("nav-help");
+const closeBtns = document.querySelectorAll(".close-btn");
+const mainNav = document.querySelector(".main-nav");
 const hamburger = document.getElementById("hamburger-btn");
-const navClose  = document.getElementById("nav-close");
+const navClose = document.getElementById("nav-close");
 
 // open FAQ modal on Help click
 btnHelp.addEventListener("click", e => {
@@ -6325,9 +6861,26 @@ navClose.addEventListener("click", () => {
 });
 
 // close modals when clicking outside content
-[ loginModal, faqModal ].forEach(modal => {
+[loginModal, faqModal].forEach(modal => {
   if (!modal) return;   // ← bail out early if “modal” is null
   modal.addEventListener("click", e => {
     if (e.target === modal) modal.style.display = "none";
   });
+});
+
+document.addEventListener('DOMContentLoaded', async () => {
+  // 1) lock Pro/Nav as before
+  applyAWTSubscriptionNavLock();
+
+  // 2) fetch & restore server-side progress into localStorage
+  await loadUserProgress();
+
+  // 3) rehydrate your in-memory program & stats
+  twelveWeekProgram = JSON.parse(localStorage.getItem('twelveWeekProgram') || '[]');
+  fullyPrecomputeAllWeeks();
+
+  // 4) rebuild the UI immediately
+  renderWeekSelector();
+  renderDaySelector();
+  renderWorkoutDisplay();
 });

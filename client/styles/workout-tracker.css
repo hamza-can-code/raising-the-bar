@@ -735,6 +735,18 @@ body.xp-cap #stickyXpBarFill  { background:#bdbdbd; }
 /***********************************************
  * 4) Each “Week X” box
  ***********************************************/
+
+ .week-box.locked {
+  opacity: 0.45;
+  pointer-events: none;      /* disables clicks */
+  cursor: default;
+}
+
+.week-box.locked .icon-lock {
+  margin-right: 4px;
+  font-size: 0.9em;          /* tweak to taste */
+}
+
 .week-box {
   flex: 0 0 auto;
   min-width: 80px;
@@ -1270,6 +1282,7 @@ body.xp-cap #stickyXpBarFill  { background:#bdbdbd; }
   transform: translateY(-100%);
   pointer-events: none;
   transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  z-index: 10001;
 }
 
 /* When visible, slide down & become clickable */
@@ -1360,7 +1373,7 @@ body.xp-cap #stickyXpBarFill  { background:#bdbdbd; }
   /* Just a simple chevron icon; you can also set the text via JavaScript. */
   transform: rotate(180deg);
   /* rotate the chevron by 180° */
-  font-size: 2rem;
+  font-size: 1rem;
   color: #fff;
 }
 
@@ -1384,7 +1397,7 @@ body.xp-cap #stickyXpBarFill  { background:#bdbdbd; }
 
 .pause-btn .icon {
   position: relative;
-  top: -2px;
+  /* top: -2px; */
 }
 
 /* Play styling */
@@ -1400,7 +1413,8 @@ body.xp-cap #stickyXpBarFill  { background:#bdbdbd; }
 
 .play-btn .icon {
   position: relative;
-  top: -1px;
+  /* top: -1px; */
+  right: -1px;
 }
 
 /* Minimizing => slide it up so only 20px remains visible */

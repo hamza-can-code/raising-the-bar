@@ -42,21 +42,51 @@
   <!-- ————— Modals ————— -->
   
   <!-- Email‑login / Claim modal -->
-  <div id="login-modal" class="modal">
+  <div id="login-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
     <div class="modal-content">
-      <button class="close-btn" data-target="login-modal">✕</button>
-      <h2>Please log in to continue</h2>
-      <form id="login-form">
-        <label for="email">Your email</label>
-        <input type="email" id="email" required placeholder="you@example.com">
-        <button type="submit">Send me a link</button>
+      <button class="close-btn" data-target="login-modal" aria-label="Close">✕</button>
+  
+      <h2 id="login-title">Log in to your Tracker</h2>
+  
+      <!-- identical field names to main login page -->
+      <form id="modal-login-form" novalidate>
+        <div class="input-group">
+          <label for="modal-email">Email</label>
+          <input type="email"
+                 id="modal-email"
+                 name="email"
+                 placeholder="you@example.com"
+                 required
+                 autocomplete="email">
+          <span class="error-message" id="modal-email-error" role="alert"></span>
+        </div>
+  
+        <div class="input-group">
+          <label for="modal-password">Password</label>
+          <input type="password"
+                 id="modal-password"
+                 name="password"
+                 placeholder="Your password"
+                 required
+                 autocomplete="current-password">
+          <span class="error-message" id="modal-password-error" role="alert"></span>
+        </div>
+
+        <label class="remember-wrap">
+          <input type="checkbox" id="remember-me" class="checkbox">
+          <span class="checkmark"></span>
+          Remember me
+        </label>
+  
+        <button type="submit" class="login-btn">Continue</button>
       </form>
+  
       <p class="small">
         Don’t have a program yet?
         <a href="forms.html">Claim your program here →</a>
       </p>
     </div>
-  </div>
+  </div>  
   
   <!-- Help / FAQ modal (Option B) -->
   <div id="faq-modal" class="modal">

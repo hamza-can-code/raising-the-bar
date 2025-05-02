@@ -34,6 +34,54 @@
   </header>
   <div id="trackerBadge"></div>
 
+  <div id="wtOnboardingOverlay" class="wt-onboarding-overlay">
+    <div class="wt-onboarding-slider">
+      <!-- Screen 1 – personalised welcome ---------------------------->
+      <section class="wt-onboarding-card" data-step="1">
+        <h2 class="wt-line wt-title"></h2>
+        <p class="wt-line wt-goal"></p>
+        <p class="wt-line wt-driver"></p>
+
+        <button class="wt-next-btn">Next</button>
+      </section>
+
+      <!-- Screen 2 – tracker tutorial ------------------------------->
+      <section class="wt-onboarding-card" data-step="2">
+        <h2 class="wt-line wt-title">What’s inside your tracker.</h2>
+        <ul class="wt-tutorial">
+          <li class="wt-line">
+            <span class="wt-emoji-tutorial">🏋️</span>
+            <strong>Workout Tracker</strong> — follow your personalised workouts and log your training each session.
+          </li>
+          <li class="wt-line">
+            <span class="wt-emoji-tutorial">🍽️</span>
+            <strong>Nutrition Tracker</strong> — view your meal plan, swap meals, and keep your nutrition on track.
+          </li>
+          <li class="wt-line">
+            <span class="wt-emoji-tutorial">📈</span>
+            <strong>My Progress</strong> — track your consistency, streaks, and personal bests over time.
+          </li>
+        </ul>
+        <p class="wt-line wt-sub">
+          Everything’s designed to keep you focused and moving forward—jump in when you’re ready.
+        </p>
+        <button class="wt-next-btn">Next</button>
+      </section>
+      
+
+      <!-- Screen 3 – motivation ------------------------------------->
+      <section class="wt-onboarding-card" data-step="3">
+        <h2 class="wt-line wt-title"></h2>
+        <p class="wt-line wt-subtitle"></p>
+
+        <button class="wt-close-btn">Open My Tracker</button>
+      </section>
+    </div>
+
+    <!-- dot indicators -->
+    <div id="wtOnboardingDots" class="wt-onboarding-dots"></div>
+  </div>
+
   <!-- Greeting -->
   <section class="welcome">
     <h1 id="welcomeHeading"></h1>

@@ -75,6 +75,14 @@ button {
   .input-group {
     margin-bottom: 20px;
   }
+
+  .error-message {
+    color: #c00;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    display: block;
+    min-height: 1em;
+  }
   
   label {
     display: block;

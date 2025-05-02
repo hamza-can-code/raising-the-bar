@@ -1,19 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // Toggle show/hide password
-  const toggles = document.querySelectorAll(".toggle-password");
-  toggles.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const input = btn.previousElementSibling;
-      const type = input.getAttribute("type") === "password" ? "text" : "password";
-      input.setAttribute("type", type);
-      btn.setAttribute("aria-label", type === "password" ? "Show password" : "Hide password");
-      btn.textContent = type === "password" ? "👁️" : "🙈";
-    });
-  });
+// client/scripts/sign-up.js
 
-  // Simple inline validation + redirect
+import { savePreferencesAfterLogin } from "../scripts/savePreferencesAfterLogin.js";
+
+document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("signup-form");
-  form.addEventListener("submit", e => {
+
+  form.addEventListener("submit", async e => {
     e.preventDefault();
     clearErrors();
 
@@ -22,28 +14,64 @@ document.addEventListener("DOMContentLoaded", () => {
     const confirm = form["confirm-password"];
     let valid = true;
 
-    // Email validity
     if (!email.checkValidity()) {
       showError("email-error", "Please enter a valid email address.");
       valid = false;
     }
-
-    // Password length
     if (pw.value.length < 8) {
       showError("password-error", "Password must be at least 8 characters.");
       valid = false;
     }
-
-    // Passwords match
-    if (pw.value && confirm.value !== pw.value) {
+    if (pw.value !== confirm.value) {
       showError("confirm-error", "Passwords do not match.");
       valid = false;
     }
-
     if (!valid) return;
-    
-    // all good → go to dashboard
-    window.location.href = "dashboard.html";
+
+    try {
+      // Step 1: Register user
+      const registerRes = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email.value,
+          password: pw.value
+        })
+      });
+
+      const registerBody = await registerRes.json();
+      if (!registerRes.ok) {
+        throw new Error(registerBody.message || "Signup failed");
+      }
+
+      // Step 2: Immediately login
+      const loginRes = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email.value,
+          password: pw.value
+        })
+      });
+
+      const loginBody = await loginRes.json();
+      if (!loginRes.ok) {
+        throw new Error(loginBody.message || "Login after signup failed");
+      }
+
+      // Step 3: Save token
+      localStorage.setItem("token", loginBody.token);
+
+      // Step 4: Now save preferences
+      await savePreferencesAfterLogin();
+
+      // Step 5: Redirect to dashboard
+      window.location.href = "dashboard.html";
+
+    } catch (err) {
+      console.error(err);
+      showError("email-error", err.message);
+    }
   });
 
   function showError(id, message) {
@@ -52,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function clearErrors() {
-    document.querySelectorAll(".error-message").forEach(el => el.textContent = "");
+    document.querySelectorAll(".error-message")
+            .forEach(el => (el.textContent = ""));
   }
 });

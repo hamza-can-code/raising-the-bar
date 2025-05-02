@@ -1,3 +1,223 @@
+(async function protectAndInit() {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    window.location.href = 'log-in.html';
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/auth/me', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error('Invalid token');
+
+    // load everything into localStorage first
+    await Promise.all([
+      decideProStatus(token),
+      fetchAndStorePreferences(token),
+      loadUserProgressSafe()
+    ]);
+
+    console.log('✅ Preferences and Progress loaded');
+
+    // **run the overlay here (flags are now correct)**
+    runDsOnboarding();
+
+    // then build the rest of the dashboard UI
+    initDashboard();
+
+  } catch (err) {
+    console.error('❌ Auth error:', err);
+    localStorage.removeItem('token');
+    window.location.href = 'log-in.html';
+  }
+})();
+
+async function decideProStatus (token) {
+  const plan = localStorage.getItem('planName') || '';
+
+  /* 1) quick front-end guess so the UI doesn’t flash blank */
+  let isPro = plan === '12-Week Program' || plan === 'Pro Tracker Subscription';
+
+  /* 2) call the backend (handles cancelled subscriptions, etc.) */
+  try {
+    const res = await fetch('/api/access', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (res.ok) {
+      const { unlockedWeeks = 0, subscriptionActive = false } = await res.json();
+
+      if (plan === 'Pro Tracker Subscription') {
+        isPro = subscriptionActive;          // only while the sub is active
+      } else if (plan === '12-Week Program') {
+        isPro = true;                        // always Pro
+      } else {
+        isPro = false;                       // 1-Week or 4-Week
+      }
+
+      /* handy for the workout-tracker later on */
+      localStorage.setItem('purchasedWeeks', String(unlockedWeeks));
+    }
+  } catch (err) {
+    console.warn('[decideProStatus] backend unreachable – using best guess:', err.message);
+  }
+
+  localStorage.setItem('hasProTracker', isPro ? 'true' : 'false');
+  console.log('🔧 Pro-Tracker flag set →', isPro);
+}
+
+async function loadUserProgressSafe() {
+  const token = localStorage.getItem('token');
+  if (!token) return;
+
+  const headers = { Authorization: `Bearer ${token}` };
+
+  // 1) Fetch the Workout‐tracker snapshot
+  let workoutProgress = {};
+  try {
+    const res = await fetch('/api/workouts/getUserProgress', {
+      method: 'GET',
+      headers
+    });
+    if (res.ok) {
+      workoutProgress = await res.json();
+    } else if (res.status !== 404) {
+      console.error('❌ /api/workouts/getUserProgress failed:', res.statusText);
+    }
+  } catch (err) {
+    console.error('❌ Error fetching workouts/getUserProgress:', err);
+  }
+
+  // 2) Fetch the Dashboard snapshot (for ds_onboarding_complete)
+  let dashboardProgress = {};
+  try {
+    const res = await fetch('/api/progress/getUserProgress', {
+      method: 'GET',
+      headers
+    });
+    if (res.ok) {
+      dashboardProgress = await res.json();
+    } else if (res.status !== 404) {
+      console.error('❌ /api/progress/getUserProgress failed:', res.statusText);
+    }
+  } catch (err) {
+    console.error('❌ Error fetching progress/getUserProgress:', err);
+  }
+
+  // 3) Merge them (dashboardProgress wins on flags)
+  const progress = {
+    ...workoutProgress,
+    ...dashboardProgress
+  };
+
+  // 4) Write core fields
+  localStorage.setItem('currentXP',        progress.xp ?? 0);
+  localStorage.setItem('currentLevel',     progress.currentLevel ?? 1);
+  localStorage.setItem('streakCount',      progress.streak?.count ?? 0);
+  localStorage.setItem('streakStartDate',  progress.streak?.startDate ?? '');
+
+  localStorage.setItem('programStartDate', progress.program?.startDate ?? '');
+  localStorage.setItem('activeWorkoutWeek',
+                       progress.program?.activeWorkoutWeek ?? 1);
+  localStorage.setItem('activeNutritionWeek',
+                       progress.program?.activeNutritionWeek ?? 1);
+  localStorage.setItem('completedThisWeek',
+                       progress.program?.completedThisWeek ?? 0);
+
+  if (progress.program?.weeklyStats) {
+    for (const wk in progress.program.weeklyStats) {
+      const s = progress.program.weeklyStats[wk];
+      if (!s) continue;
+      localStorage.setItem(`${wk}_workoutsDone`, s.workoutsDone ?? 0);
+      localStorage.setItem(`${wk}_totalReps`,    s.totalReps    ?? 0);
+      localStorage.setItem(`${wk}_totalSets`,    s.totalSets    ?? 0);
+      localStorage.setItem(`${wk}_totalWeight`,  s.totalWeight  ?? 0);
+    }
+  }
+
+  // 5) Simple object/boolean blobs
+  if (progress.checkboxState) {
+    for (const k in progress.checkboxState) {
+      localStorage.setItem(k, progress.checkboxState[k] ? 'true' : 'false');
+    }
+  }
+  if (progress.awardedState) {
+    for (const k in progress.awardedState) {
+      localStorage.setItem(k, progress.awardedState[k] ? 'true' : 'false');
+    }
+  }
+  if (progress.workoutStarted) {
+    for (const k in progress.workoutStarted) {
+      localStorage.setItem(k, progress.workoutStarted[k] ? 'true' : 'false');
+    }
+  }
+  if (progress.workoutFinished) {
+    for (const k in progress.workoutFinished) {
+      localStorage.setItem(k, progress.workoutFinished[k] ? 'true' : 'false');
+    }
+  }
+  if (progress.recapShown) {
+    localStorage.setItem('currentWorkoutRecapShown',
+                         JSON.stringify(progress.recapShown));
+  }
+  if (progress.setValues) {
+    for (const k in progress.setValues) {
+      localStorage.setItem(k, progress.setValues[k]);
+    }
+  }
+
+  // 6) **Onboarding flags** – only ever flip false→true
+  if (dashboardProgress.ds_onboarding_complete === true) {
+    localStorage.setItem('ds_onboarding_complete', '1');
+  }
+  if (workoutProgress.wt_onboarding_complete === true) {
+    localStorage.setItem('wt_onboarding_complete', '1');
+  }
+
+  console.log('✅ Full user progress restored (merged endpoints)');
+  const { xp, lvl } = normaliseXPandLevel();
+  console.log(`🔄 Normalised to XP=${xp}, Level=${lvl}`);
+}
+
+// ✨ New helper
+async function fetchAndStorePreferences(token) {
+  try {
+    const res = await fetch('/api/getUserPreferences', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch preferences');
+    }
+
+    const data = await res.json();
+
+    // Store fields in localStorage (match your existing system)
+    if (data.goal)            localStorage.setItem('goal', data.goal);
+    if (data.goalDriver)      localStorage.setItem('goalDriver', data.goalDriver);
+    if (data.units)           localStorage.setItem('weightUnit', data.units);
+    if (data.startWeight)     localStorage.setItem('weight', data.startWeight);
+    if (data.goalWeight)      localStorage.setItem('userGoalWeight', data.goalWeight);
+    if (data.goalDate)        localStorage.setItem('userGoalDate', data.goalDate);
+    if (data.activityLevel)   localStorage.setItem('activityLevel', data.activityLevel);
+    if (data.workoutExperience) localStorage.setItem('fitnessLevel', data.workoutExperience);
+    if (Array.isArray(data.dietaryPreferences)) {
+      localStorage.setItem('dietaryRestrictions', data.dietaryPreferences[0] || '');
+    }
+    if (typeof data.mealsPerDay === 'number') {
+      localStorage.setItem('mealFrequency', data.mealsPerDay.toString());
+    }
+
+    console.log('✅ Preferences loaded into localStorage');
+  } catch (err) {
+    console.error('❌ Failed to fetch/store preferences:', err);
+    alert('Could not load your preferences. Please try re-logging in.');
+  }
+}
+
 /* ——— PLAN helpers ——— */
 function isProUser() {
   /* ✨ If you store the flag under a different key, just swap it here */
@@ -153,7 +373,7 @@ const dailyMotivationArr = [
   "Every win starts with a decision to begin."
 ];
 
-const lostWorkoutStreakMsg   = noWorkoutStreakMsg;
+const lostWorkoutStreakMsg = noWorkoutStreakMsg;
 const lostNutritionStreakMsg = noNutritionStreakMsg;
 
 /* ---------- 2. Helpers ---------- */
@@ -163,6 +383,22 @@ function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 /* XP utilities (mirrors NT) */
 const xpLevels = [10, 20, 40, 70, 100, 130, 160, 190, 220, 250];
 const xpNeeded = lvl => (lvl < xpLevels.length ? xpLevels[lvl] : 250);
+
+function normaliseXPandLevel() {
+  let xp  = Number(localStorage.getItem('currentXP'))   || 0;
+  let lvl = Number(localStorage.getItem('currentLevel'))|| 0;
+
+  // carry overflow XP upward
+  while (xp >= xpNeeded(lvl)) {
+    xp  -= xpNeeded(lvl);
+    lvl++;
+  }
+
+  localStorage.setItem('currentXP',   xp);
+  localStorage.setItem('currentLevel', lvl);
+
+  return { xp, lvl };
+}
 
 function renderXP() {
   const xp = +localStorage.getItem("currentXP") || 0;
@@ -265,8 +501,8 @@ function populateWorkoutCard() {
   const streakEl = $("#wtStreak");
 
   if (info.hasCurrent) {
-// new
-statusEl.textContent = `${info.name}: ${Math.round(info.progressPct*100)}% Complete`;
+    // new
+    statusEl.textContent = `${info.name}: ${Math.round(info.progressPct * 100)}% Complete`;
 
   } else {
     statusEl.textContent = rand(firstTimeWorkoutDesc);
@@ -322,7 +558,7 @@ function applyCoreDashboardChanges() {
   /* 1 · Workout card upsell line */
   const wtCardEl = document.getElementById("wtCard");
   wtCardEl.style.background = "rgba(225, 225, 225, 0.85)";
-  wtCardEl.style.border     = "1px solid rgba(0, 0, 0, 0.06)";
+  wtCardEl.style.border = "1px solid rgba(0, 0, 0, 0.06)";
   const wtCard = document.getElementById("wtCard");
   const upsell = document.createElement("p");
   upsell.className = "core-lock";
@@ -343,7 +579,7 @@ function applyCoreDashboardChanges() {
 
   const ntCTA = document.querySelector("#ntCard .cta");
   ntCTA.textContent = "🔓 Unlock Pro Tracker";
-  ntCTA.href        = "offer.html";
+  ntCTA.href = "offer.html";
   ntCTA.classList.add("pt-cta");
 
   /* 3 · My Progress card (only visible for Core) */
@@ -353,7 +589,7 @@ function applyCoreDashboardChanges() {
   const motivationSec = document.querySelector(".motivation");
   const comparePrompt = document.querySelector(".compare-plans");
   if (comparePrompt) {
-    comparePrompt.style.display = "block";         
+    comparePrompt.style.display = "block";
     motivationSec.parentNode.insertBefore(comparePrompt, motivationSec);
   }
   const navNutrition = document.getElementById("nav-nutrition");
@@ -389,11 +625,11 @@ function applyCoreDashboardChanges() {
 function maybeShowFirstWorkoutBanner() {
   if (isProUser()) return;   // Pro users never see it
 
-  const completedASet   = Object.keys(localStorage)
-        .some(k => k.startsWith("checkboxState") && localStorage.getItem(k) === "true");
+  const completedASet = Object.keys(localStorage)
+    .some(k => k.startsWith("checkboxState") && localStorage.getItem(k) === "true");
 
-  const clickedFinish   = Object.keys(localStorage)
-        .some(k => k.startsWith("workoutFinished_") && localStorage.getItem(k) === "true");
+  const clickedFinish = Object.keys(localStorage)
+    .some(k => k.startsWith("workoutFinished_") && localStorage.getItem(k) === "true");
 
   if (!completedASet && !clickedFinish) return;     // no workout logged yet
 
@@ -410,27 +646,26 @@ function reveal() {
 }
 
 /* ---------- 6. Init ---------- */
-function init() {
-  populateGreeting();
-  renderXP();
-  populateWorkoutCard();
-  populateNutritionCard();
-  populateMotivation();
-  reveal();
-  wireUpCardClicks();
-  addTrackerBadge();           // badge in the corner
-  applyCoreDashboardChanges(); // only runs if user is on Core
-  setUpCompareModal();         // modal listeners
-  if (isProUser()) {
-    const ntSub = document.querySelector('.nt-subtext');
-    if (ntSub) ntSub.remove();
-    document
-    .querySelectorAll('#wtCard a.cta, #ntCard a.cta')
-    .forEach(btn => btn.classList.add('pt-cta'));
-  }
-}
 
-document.addEventListener("DOMContentLoaded", init);
+function initDashboard() {
+    populateGreeting();
+    renderXP();
+    populateWorkoutCard();
+    populateNutritionCard();
+    populateMotivation();
+    reveal();
+    wireUpCardClicks();
+    addTrackerBadge();           // badge in the corner
+    applyCoreDashboardChanges(); // only runs if user is on Core
+    setUpCompareModal();         // modal listeners
+    if (isProUser()) {
+      const ntSub = document.querySelector('.nt-subtext');
+      if (ntSub) ntSub.remove();
+      document
+        .querySelectorAll('#wtCard a.cta, #ntCard a.cta')
+        .forEach(btn => btn.classList.add('pt-cta'));
+    }
+}
 
 // ───────────────────────────────────────────────────────────
 // 7. Card “click outside” handler: 
@@ -456,9 +691,9 @@ function wireUpCardClicks() {
 }
 
 function setUpCompareModal() {
-  const link    = document.getElementById("comparePlansLink");
+  const link = document.getElementById("comparePlansLink");
   const bannerC = document.getElementById("firstWorkoutCompare");  // ← new
-  const modal   = document.getElementById("compareModal");
+  const modal = document.getElementById("compareModal");
   if (!modal) return;
 
   const closeBtn = modal.querySelector(".close");
@@ -486,15 +721,15 @@ function setUpCompareModal() {
   });
 }
 
-const loginModal   = document.getElementById("login-modal");
-const faqModal     = document.getElementById("faq-modal");
-const btnWorkouts  = document.getElementById("nav-workouts");
+const loginModal = document.getElementById("login-modal");
+const faqModal = document.getElementById("faq-modal");
+const btnWorkouts = document.getElementById("nav-workouts");
 const btnNutrition = document.getElementById("nav-nutrition");
-const btnHelp      = document.getElementById("nav-help");
-const closeBtns    = document.querySelectorAll(".close-btn");
-const mainNav   = document.querySelector(".main-nav");
+const btnHelp = document.getElementById("nav-help");
+const closeBtns = document.querySelectorAll(".close-btn");
+const mainNav = document.querySelector(".main-nav");
 const hamburger = document.getElementById("hamburger-btn");
-const navClose  = document.getElementById("nav-close");
+const navClose = document.getElementById("nav-close");
 
 // open FAQ modal on Help click
 btnHelp.addEventListener("click", e => {
@@ -519,9 +754,194 @@ navClose.addEventListener("click", () => {
 });
 
 // close modals when clicking outside content
-[ loginModal, faqModal ].forEach(modal => {
+[loginModal, faqModal].forEach(modal => {
   if (!modal) return;   // ← bail out early if “modal” is null
   modal.addEventListener("click", e => {
     if (e.target === modal) modal.style.display = "none";
   });
 });
+function runDsOnboarding() {
+  const overlay = document.getElementById('wtOnboardingOverlay');
+  if (!overlay) return;
+
+  // **this must be the very first check**
+  if (localStorage.getItem('ds_onboarding_complete') === '1') return;
+
+  // helper to read localStorage
+  function ls(key) {
+    const v = localStorage.getItem(key);
+    return v === null ? undefined : v;
+  }
+
+  // pull user data
+  const name = ls('name') || 'Athlete';
+  const goalRaw = ls('goal') || '';
+  const kgToLbs = w => w * 2.2046226218;
+  const getPref = () => (ls('weightUnit') || 'kg').toLowerCase();
+  const fmtW = kg => (getPref() === 'lbs'
+    ? `${kgToLbs(kg).toFixed(1)} lbs`
+    : `${kg.toFixed(1)} kg`);
+  const goalDriver = ls('goalDriver');
+  const userGoalWeight = parseFloat(ls('userGoalWeight'));
+  const weight = parseFloat(ls('weight'));
+  const goal = goalRaw.toLowerCase().trim();
+
+  // build the goal line with <span> emoji
+  let goalLines = '';
+
+  if (goal.includes('lose weight')) {
+    if (!isNaN(weight) && !isNaN(userGoalWeight) && weight > userGoalWeight) {
+      goalLines = `<span class="wt-emoji-goal">🔥</span> Your goal is to lose ${fmtW(weight - userGoalWeight)}.`;
+    } else {
+      goalLines = `<span class="wt-emoji-goal">🔥</span> You’re here to lose weight — and we’ll help you do it, one workout at a time.`;
+    }
+  } else if (goal.includes('gain muscle')) {
+    if (!isNaN(weight) && !isNaN(userGoalWeight) && userGoalWeight > weight) {
+      goalLines = `<span class="wt-emoji-goal">💪</span> You’re aiming to gain ${fmtW(userGoalWeight - weight)} of muscle.`;
+    } else {
+      goalLines = `<span class="wt-emoji-goal">💪</span> You’re here to build strength and gain muscle — let’s make it happen.`;
+    }
+  } else if (goal.includes('improve body composition')) {
+    if (!isNaN(weight) && !isNaN(userGoalWeight) && Math.abs(userGoalWeight - weight) < 3) {
+      goalLines = `<span class="wt-emoji-goal">🔥</span> You’re focused on getting leaner and stronger — we’ll guide you there.`;
+    } else if (!isNaN(userGoalWeight)) {
+      goalLines = `<span class="wt-emoji-goal">🔥</span> Your goal weight is ${fmtW(userGoalWeight)} — let’s move toward it with purpose.`;
+    } else {
+      goalLines = `<span class="wt-emoji-goal">🔥</span> You’re focused on getting leaner and stronger — we’ll guide you there.`;
+    }
+  }
+
+  // driver lines with <span> emoji
+  const driverLines = {
+    "A wedding or special event":
+      `<span class="wt-emoji-goal">💍</span> Let’s help you feel incredible on the big day.`,
+    "An upcoming holiday":
+      `<span class="wt-emoji-goal">✈️</span> We’ll help you feel confident stepping off that plane — and even better in your photos.`,
+    "A recent breakup or life change":
+      `<span class="wt-emoji-goal">🚀</span> This is a powerful reset — and we’re with you every step of the way.`,
+    "I want to feel confident in my body again":
+      `<span class="wt-emoji-goal">🚀</span> Let’s rebuild that confidence, one workout at a time.`,
+    "I'm tired of feeling tired or unmotivated":
+      `<span class="wt-emoji-goal">🚀</span> We’ll help you take back your energy and momentum.`,
+    "I’m doing this for my mental and emotional health":
+      `<span class="wt-emoji-goal">🚀</span> Strong body, strong mind — this is for all of you.`,
+    "I’ve let things slip and want to get back on track":
+      `<span class="wt-emoji-goal">🚀</span> No judgment. Just forward progress from here on out.`,
+    "I want to build discipline and stop starting over":
+      `<span class="wt-emoji-goal">🚀</span> Consistency starts now — and this time, it’s different.`,
+    "I just feel ready for a change":
+      `<span class="wt-emoji-goal">🌱</span> New chapter unlocked. Let’s make it your strongest yet.`
+  };
+
+  // motivation copy for step 3
+  const motivationCopy = {
+    "lose weight": [
+      `<span>🔥</span> You’ve got everything you need — now it’s time to put it to work.`,
+      `Every check-in, every session — one step closer to your goal.`
+    ],
+    "gain muscle": [
+      `<span>💪</span> This is where progress happens — and it starts today.`,
+      `Each session builds strength and moves you forward.`
+    ],
+    "improve body composition": [
+      `<span>🔥</span> Ready to transform? It all starts here.`,
+      `Stronger, leaner, more focused — one step at a time.`
+    ]
+  };
+  
+
+  // early‑out if already seen
+  // const overlay = document.getElementById('wtOnboardingOverlay');
+  if (!overlay || localStorage.getItem('ds_onboarding_complete')) return;
+
+  // element refs
+  const slider = overlay.querySelector('.wt-onboarding-slider');
+  const dotsWrap = document.getElementById('wtOnboardingDots');
+  const cards = [...slider.children];
+  let index = 0;
+
+  slider.style.width = `${cards.length * 100}%`;
+
+  // fill card 1
+  const s1 = cards[0];
+  s1.querySelector('.wt-title').innerHTML = `🎯 Let’s get started, ${name}!`;
+  s1.querySelector('.wt-goal').innerHTML = goalLines;
+  s1.querySelector('.wt-driver').innerHTML = driverLines[goalDriver] || '';
+
+  // fill card 3
+  const s3 = cards[cards.length - 1];
+  const [t3, sub3] = motivationCopy[goal] || ['You’re ready.', 'Let’s begin.'];
+  s3.querySelector('.wt-title').innerHTML = t3;
+  s3.querySelector('.wt-subtitle').innerHTML = sub3;
+
+  // build dots
+  cards.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.className = 'wt-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsWrap.appendChild(dot);
+  });
+
+  // slide logic
+  function goToSlide(n) {
+    index = Math.max(0, Math.min(cards.length - 1, n));
+    const pct = -(index * (100 / cards.length));
+    slider.style.transform = `translateX(${pct}%)`;
+    dotsWrap.querySelectorAll('.wt-dot')
+      .forEach((d, i) => d.classList.toggle('active', i === index));
+    revealLines(cards[index]);
+  }
+  function nextSlide() { goToSlide(index + 1); }
+
+  // touch‑swipe
+  let startX = null;
+  overlay.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+  overlay.addEventListener('touchend', e => {
+    if (startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 60) dx < 0 ? nextSlide() : goToSlide(index - 1);
+    startX = null;
+  });
+
+  // one‑time reveal
+  function revealLines(card) {
+    if (card.dataset.revealed === 'true') {
+      card.querySelectorAll('.wt-line').forEach(l => l.classList.add('show'));
+      return;
+    }
+    card.dataset.revealed = 'true';
+    card.querySelectorAll('.wt-line').forEach((el, i) => {
+      setTimeout(() => el.classList.add('show'), 300 * i);
+    });
+  }
+
+  // button wiring
+  const nextButtons = overlay.querySelectorAll('.wt-next-btn');
+  nextButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      nextSlide();
+    });
+  });
+
+  // when you click the Close button, mark complete + dismiss
+  overlay.addEventListener('click', async e => {
+    if (!e.target.matches('.wt-close-btn')) return;
+  
+    /* mark locally */
+    localStorage.setItem('ds_onboarding_complete', '1');
+  
+    /* persist to backend immediately */
+    await fetch('/api/dashboard/setOnboardingComplete', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    }).catch(() => {});
+  
+    overlay.classList.add('closing');
+    overlay.addEventListener('transitionend', () => overlay.remove(),
+                             { once: true });
+  });
+
+  // show it
+  overlay.classList.add('open');
+  goToSlide(0);
+}

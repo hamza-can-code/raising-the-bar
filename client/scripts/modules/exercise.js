@@ -1775,7 +1775,7 @@ export const EXERCISE_DATABASE = [
       { name: "Plank Jacks", muscleGroup: "core", equipmentNeeded: ["Bodyweight"], splitTag: "fullbody", isTechnical: false, advancedVariant: false, typeOfMovement: "compound", isBodyweight: true },
       { name: "Broad Jumps", muscleGroup: "quads", equipmentNeeded: ["Bodyweight"], splitTag: "legs", isTechnical: false, advancedVariant: false, typeOfMovement: "compound", isBodyweight: true },
       { name: "Battle Rope Waves", muscleGroup: "fullbody", equipmentNeeded: ["None of the above"], splitTag: "fullbody", isTechnical: false, advancedVariant: false, typeOfMovement: "compound", isBodyweight: true },
-      { name: "Kettlebell Swings", muscleGroup: "hamstrings", equipmentNeeded: ["Kettlebells"], splitTag: "legs", isTechnical: false, advancedVariant: false, typeOfMovement: "compound", isBodyweight: true },
+      { name: "Kettlebell Swings", muscleGroup: "hamstrings", equipmentNeeded: ["Kettlebells"], splitTag: "legs", isTechnical: false, advancedVariant: false, typeOfMovement: "compound" },
     
       // *** Cardio Machines (Gym Only)
       { name: "Treadmill", muscleGroup: "cardio", equipmentNeeded: ["Machines"], splitTag: "fullbody", isTechnical: false, advancedVariant: false, typeOfMovement: "cardio" },

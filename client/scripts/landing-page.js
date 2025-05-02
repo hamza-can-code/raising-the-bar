@@ -3,6 +3,7 @@ import { initFadeIn }             from "./modules/fadeIn.js";
 import { initTestimonialsSlider } from "./modules/slider.js";
 import { initCookieBanner }       from "./modules/cookieBanner.js";
 import { initNavModal }           from "./modules/navModal.js";
+import { initModalLogin }         from "./modules/modalLogin.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();
@@ -10,4 +11,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initTestimonialsSlider();
   initCookieBanner();
   initNavModal();
+  initModalLogin();
 });

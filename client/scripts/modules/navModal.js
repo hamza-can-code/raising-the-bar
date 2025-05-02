@@ -41,11 +41,11 @@ export function initNavModal() {
     );
   
     // magic-link form
-    document.getElementById("login-form")
-      .addEventListener("submit", e => {
-        e.preventDefault();
-        alert(`Magic link sent to ${e.target.email.value}`);
-        loginModal.style.display = "none";
-      });
+    // document.getElementById("login-form")
+    //   .addEventListener("submit", e => {
+    //     e.preventDefault();
+    //     alert(`Magic link sent to ${e.target.email.value}`);
+    //     loginModal.style.display = "none";
+    //   });
   }
   

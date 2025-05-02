@@ -449,7 +449,7 @@ h6 {
 }
 
 .testimonial-container {
-  touch-action: pan-y; 
+  touch-action: pan-y;
   position: relative;
   max-width: 750px;
   margin: 0 auto;
@@ -923,40 +923,57 @@ button:hover {
   justify-content: space-between;
   padding: 10px 20px;
 }
+
 .main-nav ul {
   display: flex;
   gap: 20px;
   list-style: none;
   margin: 0;
 }
+
 .main-nav a {
   text-decoration: none;
   font-weight: 600;
   color: #fff;
   transition: color 0.2s;
 }
+
 .main-nav a:hover {
-  color: #A855F7;  /* pro purple hover */
+  color: #A855F7;
+  /* pro purple hover */
 }
+
 /* hide desktop nav on mobile, show hamburger */
 @media (max-width: 768px) {
-  .main-nav { display: none; }
-  .hamburger { display: block; }
+  .main-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
 }
+
 @media (min-width: 769px) {
-  .hamburger { display: none; }
+  .hamburger {
+    display: none;
+  }
 }
 
 /* ——— Modal Overlay & Content ——— */
 .modal {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
   display: none;
-  align-items: center; justify-content: center;
+  align-items: center;
+  justify-content: center;
   z-index: 3000;
 }
+
 .modal-content {
   background: #fff;
   padding: 2rem;
@@ -965,27 +982,33 @@ button:hover {
   border-radius: 8px;
   position: relative;
 }
+
 .close-btn {
   position: absolute;
-  top: 12px; right: 12px;
+  top: 12px;
+  right: 12px;
   background: transparent;
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
 }
+
 .modal-content h2 {
   margin-top: 0;
 }
+
 .modal-content form {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
 }
+
 .modal-content input[type="email"] {
   padding: 0.6rem;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
 .modal-content button[type="submit"] {
   padding: 0.8rem;
   background: #007bff;
@@ -994,18 +1017,22 @@ button:hover {
   border-radius: 4px;
   cursor: pointer;
 }
+
 .modal-content button[type="submit"]:hover {
   background: #0056b3;
 }
+
 .faq-list details {
   margin-bottom: 1rem;
 }
+
 .faq-list summary {
   cursor: pointer;
   font-weight: 600;
   color: #333;
   font-size: 1.1rem;
 }
+
 /* small text under login form */
 .small {
   font-size: 0.9rem;
@@ -1015,116 +1042,255 @@ button:hover {
 
 /* ——— Mobile Nav Tweaks ——— */
 
-  .header-inner {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-  }
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
 
-  .hamburger {
-    display: block;
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 10;
-  }
+.hamburger {
+  display: block;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+}
 
-  /* hide desktop‑style menu until toggled */
-  .main-nav {
-    display: none;
-  }
-  
-  .main-nav.open {
-    display: flex;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 2000;
-    /* no centering—panel itself will define its layout */
-  }
-  
-  .main-nav.open ul {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 60%;            /* shrink the panel width from 75% → 60% */
-    max-width: 300px;
-    margin: 0;
-    /* add extra left‑padding so items aren’t flush to the edge */
-    padding: 4.5rem 1rem 1rem 2rem;
-    background: #fff;
-    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
-    overflow-y: auto;
-    border-radius: 0 8px 8px 0;
-  
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;  /* left‑align the flex items */
-    gap: 1rem; 
-    list-style: none;
-  }
-  .main-nav.open ul li + li {
-    margin-top: 0.5rem;
-  }
-  .main-nav.open ul li {
-    margin: 0;
-    width: 100%;
-    border-bottom: 1px solid #e5e5e5;
-    padding-bottom: 0.75rem;
-  }
-  .main-nav.open ul li:last-child {
-    border-bottom: none;     /* no border on last */
-    padding-bottom: 0;       /* optional: remove extra padding */
-  }
-  .main-nav.open ul a {
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
-    transition: background 0.2s ease;
-    color: #333;
-    text-align: left;
-    display: block;
-    font-weight: 500;
-    font-size: 1.2rem;
-  }
-  .main-nav.open ul a:hover {
-    background: #F0F0F0;
-  }
-  .nav-close {
-    display: block;
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    background: transparent;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #333;
-    z-index: 2100;
-  }
-  .main-nav.open .nav-close {
-    color: #333;
-  }
-  .main-nav.open::before {
-    content: '';
-    position: absolute;
-    top: 3.75rem; left: 0;
-    width: 100%;
-    height: 1px;
-    /* background: #e5e5e5; */
-  }
+/* hide desktop‑style menu until toggled */
+.main-nav {
+  display: none;
+}
 
-  .faq-answer {
-    color: #444;
-    background-color: #F6F4EF;
-    padding: 10px;
-    border-radius: 5px;
-  }
+.main-nav.open {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2000;
+  /* no centering—panel itself will define its layout */
+}
+
+.main-nav.open ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 60%;
+  /* shrink the panel width from 75% → 60% */
+  max-width: 300px;
+  margin: 0;
+  /* add extra left‑padding so items aren’t flush to the edge */
+  padding: 4.5rem 1rem 1rem 2rem;
+  background: #fff;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  border-radius: 0 8px 8px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* left‑align the flex items */
+  gap: 1rem;
+  list-style: none;
+}
+
+.main-nav.open ul li+li {
+  margin-top: 0.5rem;
+}
+
+.main-nav.open ul li {
+  margin: 0;
+  width: 100%;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 0.75rem;
+}
+
+.main-nav.open ul li:last-child {
+  border-bottom: none;
+  /* no border on last */
+  padding-bottom: 0;
+  /* optional: remove extra padding */
+}
+
+.main-nav.open ul a {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+  color: #333;
+  text-align: left;
+  display: block;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.main-nav.open ul a:hover {
+  background: #F0F0F0;
+}
+
+.nav-close {
+  display: block;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+  z-index: 2100;
+}
+
+.main-nav.open .nav-close {
+  color: #333;
+}
+
+.main-nav.open::before {
+  content: '';
+  position: absolute;
+  top: 3.75rem;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  /* background: #e5e5e5; */
+}
+
+.faq-answer {
+  color: #444;
+  background-color: #F6F4EF;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* -------------- Modal login (re-use existing login styles) -------------- */
+#login-modal .modal-content {
+  background: #fff;                          /* pure white */
+  border-radius: 12px;                       /* softer corners */
+  padding: 2rem 1.5rem;                      /* roomier inner padding */
+  max-width: 380px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);    /* gentle lift */
+}
+
+/* Close button “✕” */
+#login-modal .close-btn {
+  color: #666;                               /* softer grey */
+  font-size: 1.2rem;
+}
+#login-modal .close-btn:hover {
+  color: #333;
+}
+
+/* Title */
+#login-modal h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 1.25rem;
+  font-size: 1.4rem;
+}
+
+/* Labels */
+#login-modal .input-group label {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.3rem;
+}
+
+/* Inputs */
+#login-modal .input-group input {
+  width: 90%;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fafafa;
+  transition: border-color 0.2s;
+
+}
+#login-modal .input-group input:focus {
+  border-color: #007bff;   /* your brand accent */
+  outline: none;
+  background: #fff;
+}
+
+/* Error text */
+#login-modal .error-message {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  min-height: 1em;
+  margin-top: 0.25rem;
+}
+
+/* Primary button */
+#login-modal .login-btn {
+  display: block;
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: #007bff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(0,123,255,0.15);
+  transition: background 0.2s, transform 0.1s;
+}
+#login-modal .login-btn:hover {
+  background: #006ae6;
+}
+#login-modal .login-btn:active {
+  background: #005bb5;
+  transform: translateY(1px);
+}
+
+/* “Don’t have…” link */
+#login-modal .small {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 1rem;
+}
+#login-modal .small a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
+}
+#login-modal .small a:hover {
+  text-decoration: underline;
+}
+
+/* remember-me inline checkbox */
+#login-modal .remember-wrap {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.25rem;
+  cursor: pointer;
+}
+/* optional: prettified square */
+#login-modal .remember-wrap input[type="checkbox"] {
+  accent-color: #007bff;   /* same blue as button */
+  background-color: #ddd;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.checkbox {
+  color: #ddd;
+}
+
+

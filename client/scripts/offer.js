@@ -1,3 +1,16 @@
+const userId = localStorage.getItem('userId');
+
+async function simulatePurchase(purchaseType) {
+  const res = await fetch('/api/update-purchase', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ userId, purchaseType })
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error||'Purchase failed');
+  return data;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const name = localStorage.getItem("name");
   const dob = localStorage.getItem("dob");
@@ -1105,6 +1118,9 @@ document.addEventListener("DOMContentLoaded", function () {
       currentlySelected = card;
       localStorage.setItem("selectedProgram", card.dataset.program);
 
+      const planName = card.querySelector('.duration strong').textContent;
+      localStorage.setItem("planName", planName);
+
       // For the special card, always auto-expand; for others, call toggleDetails as before.
       if (card.dataset.program === "new") {
         toggleDetails(card, true);
@@ -1230,19 +1246,56 @@ document.addEventListener("DOMContentLoaded", function () {
   const finishBtn = document.getElementById("offerFinishBtn");
   if (!finishBtn) return;
 
-  finishBtn.addEventListener("click", function () {
-    const selectedProgram = localStorage.getItem("selectedProgram");
-    const discountActive = document.body.classList.contains("discount-active");
-
-    // if they picked the 1-Week deal while the 10-minute discount is live…
-    if (selectedProgram === "1-week" && discountActive) {
-      window.location.href = "sign-up.html";
-      return;
+  finishBtn.addEventListener("click", () => {
+    const selected = localStorage.getItem("selectedProgram");
+    const map = {
+      "1-week":  "oneWeek",
+      "4-week":  "fourWeek",
+      "12-week": "twelveWeek",
+      "new":     "subscription"
+    };
+    const purchaseType = map[selected];
+    if (!purchaseType) return alert("Please select a program first.");
+  
+    // Check if the 10-minute discount is still active
+    const discountEnd = Number(localStorage.getItem("discountEndTime") || 0);
+    const isDiscountActive = discountEnd > Date.now();
+  
+    // SPECIAL CASE: 1-Week
+    if (purchaseType === "oneWeek") {
+      localStorage.setItem("pendingPurchaseType", purchaseType);
+  
+      if (isDiscountActive) {
+        // free
+        localStorage.setItem("planPrice", "FREE!");
+        return window.location.href = "sign-up.html";
+      } else {
+        // no longer free → paid at £24.99
+        localStorage.setItem("planPrice", "£24.99");
+        return window.location.href = `sign-up-checkout.html?plan=${selected}`;
+      }
     }
-
-    // otherwise, fall back to your normal flow
-    console.log("Finish button clicked. Proceed to checkout or next step…");
-    // e.g. window.location.href = "checkout.html";
+  
+    // All other plans always go through checkout
+    localStorage.setItem("pendingPurchaseType", purchaseType);
+  
+    // save whatever price was showing on the card
+    (function savePlanPrice() {
+      const card = document.querySelector(`.offer-card[data-program="${selected}"]`);
+      let priceText = "";
+      if (card) {
+        const disc = card.querySelector(".discount-price");
+        if (disc && getComputedStyle(disc).display !== "none") {
+          priceText = disc.textContent.trim();
+        } else {
+          priceText = (card.querySelector(".full-price span") || card.querySelector(".full-price"))
+                        .textContent.trim();
+        }
+      }
+      localStorage.setItem("planPrice", priceText);
+    })();
+  
+    window.location.href = `sign-up-checkout.html?plan=${selected}`;
   });
 });
 

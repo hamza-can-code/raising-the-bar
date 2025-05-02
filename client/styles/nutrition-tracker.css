@@ -582,6 +582,18 @@ exercise-btn,
 }
 
 /* Week Selector Frame */
+
+.week-box.locked {
+  opacity: 0.45;
+  pointer-events: none;      /* disables clicks */
+  cursor: default;
+}
+
+.week-box.locked .icon-lock {
+  margin-right: 4px;
+  font-size: 0.9em;          /* tweak to taste */
+}
+
 .week-selector-frame {
   position: relative;
   border-radius: 6px;
