@@ -1373,7 +1373,7 @@ body.xp-cap #stickyXpBarFill  { background:#bdbdbd; }
   /* Just a simple chevron icon; you can also set the text via JavaScript. */
   transform: rotate(180deg);
   /* rotate the chevron by 180° */
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: #fff;
 }
 
