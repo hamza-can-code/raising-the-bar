@@ -62,6 +62,31 @@ router.get('/access', protect, async (req, res) => {
   }
 });
 
+const User = require('../models/User');
+router.post('/send-confirmation', async (req, res) => {
+  console.log('✅ /send-confirmation HIT!', req.headers);
+  try {
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ error: 'Email is required' });
+
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    const access = await UserAccess.findOne({ userId: user._id });
+    if (!access) return res.status(404).json({ error: 'No UserAccess found for this user' });
+
+    res.json({
+      email: user.email,
+      subscriptionStatus: access.subscriptionStatus,
+      unlockedWeeks: access.unlockedWeeks,
+      renewalDate: access.renewalDate,
+    });
+  } catch (err) {
+    console.error('❌ Error in /send-confirmation:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 console.log(
   '🗺️ Registered API routes:',
   router.stack

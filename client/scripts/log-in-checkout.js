@@ -3,23 +3,47 @@
  *  ---------------------------------------------------------------
  *  1) Validate credentials → /api/auth/login
  *  2) Save JWT in localStorage
- *  3) (Optional) run post-login onboarding
+ *  3) Restore preferences if they exist (otherwise run onboarding save)
  *  4) Create Stripe Checkout session for the plan saved earlier
  *  5) Redirect to Stripe
  *******************************************************************/
 import { savePreferencesAfterLogin } from "../scripts/savePreferencesAfterLogin.js";
 
+/* -----------------------------------------------------------------
+ * Restore any preferences already stored on the server
+ * ----------------------------------------------------------------*/
+async function fetchAndStorePreferences() {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) return false;
+
+    const res  = await fetch("/api/getUserPreferences", {
+      method : "GET",
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const data = await res.json();
+    if (!res.ok || !data.preferences) return false;
+
+    Object.keys(data.preferences).forEach(k => {
+      const v = data.preferences[k];
+      localStorage.setItem(k, typeof v === "object" ? JSON.stringify(v) : v);
+    });
+    console.log("✅ Preferences restored from server");
+    return true;
+  } catch (err) {
+    console.error("❌ Failed to fetch preferences:", err);
+    return false;
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  /* -------------------------------------------------------------
-   * Grab the pending purchase the visitor chose on the pricing page
-   * ----------------------------------------------------------- */
-  const pending     = localStorage.getItem("pendingPurchaseType"); // set by your pricing buttons
+  /* ------------------------------------------------------------- */
+  const pending     = localStorage.getItem("pendingPurchaseType");
   const planName    = localStorage.getItem("planName")  || "Unknown plan";
   const planPrice   = localStorage.getItem("planPrice") || "";
   const discountEnd = Number(localStorage.getItem("discountEndTime") || 0);
   const discounted  = discountEnd > Date.now();
 
-  /* Map pretty names → backend plan keys (same map as sign-up-checkout.js) */
   const planMap = {
     "1-Week Program"          : "1-week",
     "4-Week Program"          : "4-week",
@@ -28,9 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   const plan = planMap[planName];
 
-  /* -------------------------------------------------------------
-   * UI Updates
-   * ----------------------------------------------------------- */
+  /* ------------------------------------------------------------- */
   const planSummary = document.getElementById("planSummary");
   const payBtn      = document.getElementById("paySubmitBtn");
 
@@ -41,17 +63,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   planSummary.textContent = `${planName} – ${planPrice}`;
 
-  /* -------------------------------------------------------------
-   * Form submission
-   * ----------------------------------------------------------- */
+  /* ------------------------------------------------------------- */
   const form = document.getElementById("loginCheckoutForm");
-  form.addEventListener("submit", async (e) => {
+  form.addEventListener("submit", async e => {
     e.preventDefault();
     clearErrors();
 
     const { email, password } = form;
-
-    /* 1) Front-end validation */
     let valid = true;
     if (!email.checkValidity()) {
       showError("email-error", "Please enter a valid email.");
@@ -64,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!valid) return;
 
     try {
-      /* 2)  Log in */
+      /* 1)  Log in */
       const res  = await fetch("/api/auth/login", {
         method : "POST",
         headers: { "Content-Type": "application/json" },
@@ -73,24 +91,23 @@ document.addEventListener("DOMContentLoaded", () => {
       const body = await res.json();
       if (!res.ok) throw new Error(body.message || "Login failed");
 
-      /* 3)  Store token & run optional onboarding */
+      /* 2)  Store token */
       localStorage.setItem("token", body.token);
-      await savePreferencesAfterLogin();
 
-      /* 4)  Kick off Stripe session */
+      /* 3)  Restore existing prefs (or save fresh ones) */
+      const restored = await fetchAndStorePreferences();
+      if (!restored) await savePreferencesAfterLogin();   // first-time purchase
+
+      /* 4)  Start Stripe Checkout */
       const sessionRes = await fetch("/api/create-checkout-session", {
         method : "POST",
         headers: { "Content-Type": "application/json" },
-        body   : JSON.stringify({
-          email : email.value,
-          plan,
-          discounted
-        })
+        body   : JSON.stringify({ email: email.value, plan, discounted })
       });
       const sessBody = await sessionRes.json();
       if (!sessionRes.ok) throw new Error(sessBody.error || "Unable to start checkout");
 
-      /* 5)  Redirect to Stripe */
+      /* 5)  Redirect to Stripe */
       window.location.href = sessBody.url;
 
     } catch (err) {
@@ -99,9 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* -------------------------------------------------------------
-   * Helpers
-   * ----------------------------------------------------------- */
+  /* ------------------------------------------------------------- */
   function showError(id, msg) {
     const el = document.getElementById(id);
     if (el) el.textContent = msg;

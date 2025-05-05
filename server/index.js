@@ -67,7 +67,7 @@ const path      = require('path');
 const express   = require('express');
 const connectDB = require('./db');
 
-const webhookRouter   = require('./routes/webhook');      // <─ ONE import
+const webhookRouter   = require('./routes/webhook');
 const stripeRoutes    = require('./routes/stripeRoutes');
 const apiRoutes       = require('./routes/api');
 const workoutRoutes   = require('./routes/workoutRoutes');

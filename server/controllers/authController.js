@@ -2,6 +2,7 @@
 
 const jwt  = require('jsonwebtoken');
 const User = require('../models/User');
+const addToBrevoList = require('../utils/addToBrevoList');
 
 // @desc    Register a new user
 // @route   POST /api/auth/register
@@ -9,7 +10,7 @@ const User = require('../models/User');
 exports.registerUser = async (req, res) => {
   console.log('🔐 registerUser called with body:', req.body);
   try {
-    const { email, password } = req.body;
+    const { email, password, isFree1Week } = req.body;
 
     // 1️⃣ Basic validation
     if (!email || !password) {
@@ -23,6 +24,9 @@ exports.registerUser = async (req, res) => {
 
     // 3️⃣ Create & respond
     const user = await User.create({ email, password });
+    if (isFree1Week) {
+      await addToBrevoList(email);
+    }
     return res.status(201).json({
       _id:     user._id,
       email:   user.email,

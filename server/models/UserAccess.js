@@ -7,7 +7,10 @@ const userAccessSchema = new mongoose.Schema(
     subscriptionId:    { type: String },       // Stripe subscription id (optional)
     unlockedWeeks:     { type: Number, default: 0 },
     subscriptionStatus:{ type: String, enum: ['active','canceled','past_due'], default: 'active' },
-    renewalDate:       { type: Date }          // date the current billing cycle started
+    renewalDate:       { type: Date },          // date the current billing cycle started
+    productName:        { type: String },
+    productPrice:       { type: Number },
+    purchaseDate:       { type: Date }
   },
   { timestamps: true }
 );

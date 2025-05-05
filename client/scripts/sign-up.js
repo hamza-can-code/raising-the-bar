@@ -35,7 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: email.value,
-          password: pw.value
+          password: pw.value,
+          isFree1Week: true
         })
       });
 
@@ -50,7 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: email.value,
-          password: pw.value
+          password: pw.value,
+          isFree1Week: true
         })
       });
 
@@ -64,6 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Step 4: Now save preferences
       await savePreferencesAfterLogin();
+
+      localStorage.setItem("signupTimestamp", Date.now());
 
       // Step 5: Redirect to dashboard
       window.location.href = "dashboard.html";

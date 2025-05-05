@@ -2463,12 +2463,14 @@ function renderWeekSelector() {
     weekWrapper.style.overflowX = "auto";
   }
 
+  // ensure at least week 1 is always unlocked
+  const unlocked = Math.max(1, getPurchasedWeeks());
+
   for (let i = 0; i < twelveWeekProgram.length; i++) {
     const weekNumber = i + 1;
     const div = document.createElement("div");
     div.classList.add("week-box");
 
-    const unlocked = getPurchasedWeeks();
     if (i >= unlocked) {
       // LOCKED
       div.classList.add("locked");
@@ -2503,9 +2505,6 @@ function updateWeekBoxes() {
     }
   });
 }
-
-// Call once on load
-renderWeekSelector();
 
 /***************************************
  * 8) DAY SELECTION
@@ -6714,7 +6713,7 @@ function buildMiniTestimonial() {
       beforeImg = "../assets/halima_back_before.jpg";
       afterImg = "../assets/halima_back_after.jpg";
     } else {
-      name = "Bob";
+      name = "Lee";
       txt = "I’ve dropped the weight, feel sharper, and finally feel like myself again.";
       beforeImg = "../assets/lynn_before.JPEG";
       afterImg = "../assets/lynn_after.png";

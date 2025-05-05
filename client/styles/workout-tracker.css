@@ -618,9 +618,9 @@ body.xp-cap #stickyXpBarFill  { background:#bdbdbd; }
   border-bottom: 2px solid #007bff;
 }
 
-.tab:hover {
-  /* background-color: #ddd; */
-}
+/* .tab:hover {
+
+} */
 
 .tab-content {
   width: 100%;

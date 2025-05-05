@@ -927,73 +927,86 @@ document.addEventListener("DOMContentLoaded", () => {
 /* A) DISCOUNT TIMER LOGIC (with indefinite)  */
 /**********************************************/
 document.addEventListener("DOMContentLoaded", function () {
-  let discountEndTime = localStorage.getItem("offerResumeEnd");
-  if (discountEndTime) {
-    discountEndTime = Number(discountEndTime);
-    // only use it once
-    localStorage.removeItem("offerResumeEnd");
+  const now      = Date.now();
+  const signupTs = Number(localStorage.getItem("signupTimestamp")   || 0);
+  let   comebackEnd = Number(localStorage.getItem("sevenDayDiscountEnd") || 0);
+
+  // If 7 days have passed since sign-up and no comeback window is running, start a 24h window
+  if (signupTs && !comebackEnd && now >= signupTs + 7 * 24 * 60 * 60 * 1000) {
+    comebackEnd = now + 24 * 60 * 60 * 1000;
+    localStorage.setItem("sevenDayDiscountEnd", comebackEnd);
+  }
+
+  let discountEndTime;
+  if (comebackEnd && comebackEnd > now) {
+    // Use the 7-day comeback window
+    discountEndTime = comebackEnd;
+    localStorage.setItem("discountEndTime", comebackEnd);
   } else {
-    // 2) fallback to your existing 10‑minute‑from‑first‑visit logic
-    discountEndTime = localStorage.getItem("discountEndTime");
-    const now = Date.now();
-    if (!discountEndTime) {
-      discountEndTime = now + 10 * 60 * 1000;
-      localStorage.setItem("discountEndTime", discountEndTime);
+    // Fallback to your existing “offerResumeEnd” / 10-minute logic
+    const storedResume = localStorage.getItem("offerResumeEnd");
+    if (storedResume) {
+      discountEndTime = Number(storedResume);
+      localStorage.removeItem("offerResumeEnd");
     } else {
-      discountEndTime = Number(discountEndTime);
+      const stored = localStorage.getItem("discountEndTime");
+      if (!stored) {
+        discountEndTime = now + 10 * 60 * 1000;
+        localStorage.setItem("discountEndTime", discountEndTime);
+      } else {
+        discountEndTime = Number(stored);
+      }
     }
   }
 
-  // If there's NO existing discountEndTime, set a new one for 10 minutes from now.
-  if (!discountEndTime) {
-    discountEndTime = now + 10 * 60 * 1000; // 10 minutes
-    localStorage.setItem("discountEndTime", discountEndTime);
-  } else {
-    discountEndTime = Number(discountEndTime);
-  }
-
-  // Ensure discount styling is active while the discount is live.
-  if (discountEndTime > Date.now()) {
+  // Activate or deactivate the discount style immediately
+  if (discountEndTime > now) {
     document.body.classList.add("discount-active");
   } else {
     document.body.classList.remove("discount-active");
   }
 
-  const timerContainer = document.getElementById("timerContainer");
-  const countdownTimerEl = document.getElementById("countdownTimer");
+  const timerContainer     = document.getElementById("timerContainer");
+  const countdownTimerEl   = document.getElementById("countdownTimer");
 
   function updateTimer() {
-    const now = Date.now();
+    const now  = Date.now();
     const diff = discountEndTime - now;
-
-    // If diff <= 0 => discount is expired
+  
+    // If the discount has expired…
     if (diff <= 0) {
-      // Remove discount styling
       document.body.classList.remove("discount-active");
-
-      // Hide timer container
-      if (timerContainer) {
-        timerContainer.style.display = "none";
-      }
-      // Remove discount pricing (updates price to full price for both 1-week & special cards)
+      localStorage.removeItem("sevenDayDiscountEnd");
+      if (timerContainer) timerContainer.style.display = "none";
       removeDiscountPricing();
-      // Optionally remove a card-subtext element
       const cardSubtext = document.querySelector(".card-subtext");
-      if (cardSubtext) {
-        cardSubtext.remove();
-      }
+      if (cardSubtext) cardSubtext.remove();
       return;
-    } else {
-      // Keep the discount-active class while time remains
-      document.body.classList.add("discount-active");
     }
-
-    // Otherwise, update the countdown timer
-    const minutes = Math.floor(diff / 1000 / 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-    const formattedSec = seconds < 10 ? `0${seconds}` : seconds;
+  
+    // Keep the discount styling active
+    document.body.classList.add("discount-active");
+  
+    // Break diff into h/m/s
+    const totalSeconds = Math.floor(diff / 1000);
+    const hours        = Math.floor(totalSeconds / 3600);
+    const minutes      = Math.floor((totalSeconds % 3600) / 60);
+    const seconds      = totalSeconds % 60;
+  
+    // Zero-pad helper
+    const pad = n => n.toString().padStart(2, "0");
+  
+    // Build the display string
+    let display;
+    if (hours > 0) {
+      display = `${hours}:${pad(minutes)}:${pad(seconds)}`;
+    } else {
+      display = `${pad(minutes)}:${pad(seconds)}`;
+    }
+  
+    // Update the DOM
     if (countdownTimerEl) {
-      countdownTimerEl.textContent = `${minutes}:${formattedSec}`;
+      countdownTimerEl.textContent = display;
     }
 
     // For 1-Week Program: while the timer is active, force discount pricing
