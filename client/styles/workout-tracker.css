@@ -1374,7 +1374,7 @@ body.xp-cap #stickyXpBarFill  { background:#bdbdbd; }
   transform: rotate(180deg);
   /* rotate the chevron by 180° */
   font-size: 1.1rem;
-  margin-top: 2px;
+  margin-top: 6px;
   color: #fff;
 }
 
