@@ -18,6 +18,7 @@ const COUPON_ID = process.env.COUPON_ID;             // £9.99-first-month
 
 /* ─── Helper → build the Checkout session config ─────────── */
 function buildCheckoutConfig({ plan, discounted, email }) {
+  console.log('✅ BUILDING CHECKOUT: FRONTEND_URL is:', FRONTEND_URL);
   if (!PRICE[plan]) throw new Error(`Unknown plan: ${plan}`);
 
   const isSub = plan === 'subscription';
