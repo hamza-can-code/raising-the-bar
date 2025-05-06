@@ -3532,7 +3532,8 @@ function buildShoppingListHTML(weekIdx) {
     const mealsObj = dayItem.meals || {};
     Object.keys(mealsObj).forEach(catKey => {
       const meal = mealsObj[catKey];
-      if (meal.ingredients && Array.isArray(meal.ingredients)) {
+      // First ensure meal is a real object, then that ingredients is an array
+      if (meal && Array.isArray(meal.ingredients)) {
         meal.ingredients.forEach(ing => {
           const ingCat = ing.category || "misc";
           addOrMergeIngredient(ingCat, ing);
@@ -3540,6 +3541,7 @@ function buildShoppingListHTML(weekIdx) {
       }
     });
   });
+  
 
   // Build the HTML string
   let html = "";
