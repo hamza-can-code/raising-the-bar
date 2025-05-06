@@ -276,12 +276,12 @@ fetchPurchasedWeeks();
 
 window.addEventListener('DOMContentLoaded', fetchPurchasedWeeks);
 
-// if (localStorage.getItem("hasAWTSubscription") !== "true") {
-//   localStorage.setItem("hasAWTSubscription", "true");
-// }
-// if (localStorage.getItem("hasPOSAddOnForAWT") !== "true") {
-//   localStorage.setItem("hasPOSAddOnForAWT", "true");
-// }
+if (localStorage.getItem("hasAWTSubscription") !== "true") {
+  localStorage.setItem("hasAWTSubscription", "true");
+}
+if (localStorage.getItem("hasPOSAddOnForAWT") !== "true") {
+  localStorage.setItem("hasPOSAddOnForAWT", "true");
+}
 
 const sub = (localStorage.getItem("hasAWTSubscription") === "true");
 const pos = (localStorage.getItem("hasPOSAddOnForAWT") === "true");
@@ -3378,16 +3378,20 @@ function showMealPrepModePopup(weekIndex) {
     }, 300);
   }
   // Add swipe gesture detection to switch tabs
-  let touchstartX = 0;
-  let touchendX = 0;
-  const gestureZone = popup; // attach to the entire popup
+  let touchstartX = 0, touchstartY = 0;
+  let touchendX   = 0, touchendY   = 0;
+  const MIN_SWIPE_DISTANCE = 75;  // bump up from 50px to 75px (or more)
 
-  gestureZone.addEventListener('touchstart', function (event) {
-    touchstartX = event.changedTouches[0].screenX;
+  gestureZone.addEventListener('touchstart', function(event) {
+    const t = event.changedTouches[0];
+    touchstartX = t.screenX;
+    touchstartY = t.screenY;
   }, false);
 
-  gestureZone.addEventListener('touchend', function (event) {
-    touchendX = event.changedTouches[0].screenX;
+  gestureZone.addEventListener('touchend', function(event) {
+    const t = event.changedTouches[0];
+    touchendX = t.screenX;
+    touchendY = t.screenY;
     handleGesture();
   }, false);
 
