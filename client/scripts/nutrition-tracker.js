@@ -25,7 +25,7 @@ function buildUserProgress() {
   const userProgress = {
     xp: Number(localStorage.getItem('currentXP')) || 0,
     currentLevel: Number(localStorage.getItem('currentLevel')) || 1,
-    progressScore:Number(localStorage.getItem('progressScore')),
+    progressScore: Number(localStorage.getItem('progressScore')),
     streak: {
       count: Number(localStorage.getItem('streakCount')) || 0,
       startDate: localStorage.getItem('streakStartDate') || null,
@@ -46,11 +46,11 @@ function buildUserProgress() {
     upsells: {
       ctUpsellFirstWorkout: localStorage.getItem('ctUpsell_shown_firstWorkout') === 'true'
     },
-      profile: {
-      goalWeight:        parseFloat(localStorage.getItem('userGoalWeight')       || '0'),
-      goalDate:          localStorage.getItem('userGoalDate')                 || '',
-      currentWeight:     parseFloat(localStorage.getItem('userCurrentWeight')  || '0'),
-      currentWeightDate: localStorage.getItem('userCurrentWeightDate')        || ''
+    profile: {
+      goalWeight: parseFloat(localStorage.getItem('userGoalWeight') || '0'),
+      goalDate: localStorage.getItem('userGoalDate') || '',
+      currentWeight: parseFloat(localStorage.getItem('userCurrentWeight') || '0'),
+      currentWeightDate: localStorage.getItem('userCurrentWeightDate') || ''
     },
     bodyWeightLogs: JSON.parse(localStorage.getItem('bodyWeightLogs') || '[]'),
 
@@ -93,26 +93,26 @@ function buildNutritionProgress() {
 
   const prog = {
     /* ---------- VALUES SHARED ACROSS ALL TRACKERS ---------- */
-    currentXP:      Number(localStorage.getItem('currentXP'))      || 0,
-    currentLevel:   Number(localStorage.getItem('currentLevel'))   || 1,
-    progressScore:  Number(localStorage.getItem('progressScore'))  || 0,
+    currentXP: Number(localStorage.getItem('currentXP')) || 0,
+    currentLevel: Number(localStorage.getItem('currentLevel')) || 1,
+    progressScore: Number(localStorage.getItem('progressScore')) || 0,
 
     /* ---------- NUTRITION-ONLY STREAK ---------- */
     nutritionStreakCount: Number(localStorage.getItem('nutritionStreakCount')) || 0,
 
     /* ---------- PROGRAM ---------- */
     program: {
-      startDate:   localStorage.getItem('programStartDate')           || null,
-      activeWeek:  Number(localStorage.getItem('activeNutritionWeek'))|| 1
+      startDate: localStorage.getItem('programStartDate') || null,
+      activeWeek: Number(localStorage.getItem('activeNutritionWeek')) || 1
     },
 
     /* ---------- OTHER STATE ---------- */
     savedMeals: JSON.parse(localStorage.getItem('savedMealsList') || '[]'),
 
     uiState: {
-      tip:      localStorage.getItem('todaysTip_NT'),
-      tipDate:  localStorage.getItem('todaysTipDate_NT'),
-      lastTab:  localStorage.getItem('lastSelectedNutritionTab')
+      tip: localStorage.getItem('todaysTip_NT'),
+      tipDate: localStorage.getItem('todaysTipDate_NT'),
+      lastTab: localStorage.getItem('lastSelectedNutritionTab')
     },
 
     nt_onboarding_complete: localStorage.getItem('nt_onboarding_complete') || '0'
@@ -172,24 +172,24 @@ async function saveMyProgressToServer() {
   }
 }
 
-function normaliseXPandLevel () {
-  let xp  = Number(localStorage.getItem('currentXP'))   || 0;
-  let lvl = Number(localStorage.getItem('currentLevel'))|| 0;
+function normaliseXPandLevel() {
+  let xp = Number(localStorage.getItem('currentXP')) || 0;
+  let lvl = Number(localStorage.getItem('currentLevel')) || 0;
 
   while (xp >= xpNeededForLevel(lvl)) {          // “carry” overflow XP upward
-    xp  -= xpNeededForLevel(lvl);
+    xp -= xpNeededForLevel(lvl);
     lvl++;
   }
 
-  localStorage.setItem('currentXP',   xp);
+  localStorage.setItem('currentXP', xp);
   localStorage.setItem('currentLevel', lvl);
 
   return { xp, lvl };                            // feed the result back
 }
 
 function renderXPBar() {
-  const xp  = Number(localStorage.getItem('currentXP'))   || 0;
-  const lvl = Number(localStorage.getItem('currentLevel'))|| 0;
+  const xp = Number(localStorage.getItem('currentXP')) || 0;
+  const lvl = Number(localStorage.getItem('currentLevel')) || 0;
   const needed = xpNeededForLevel(lvl);
   const pct = Math.min(xp / needed, 1) * 100;
 
@@ -197,7 +197,7 @@ function renderXPBar() {
   if (fill) fill.style.width = pct + '%';
 }
 
-async function loadNutritionProgress () {
+async function loadNutritionProgress() {
   const token = localStorage.getItem('token');
   if (!token) return;
 
@@ -212,12 +212,12 @@ async function loadNutritionProgress () {
     /* 1 ▸ copy ONLY nutrition-specific keys back to localStorage */
     Object.entries(prog).forEach(([k, v]) => {
       /* ignore the three “global” keys so we don’t stomp on WT/Dashboard */
-      if (k === 'currentXP'      ||
-          k === 'currentLevel'   ||
-          k === 'progressScore') return;
+      if (k === 'currentXP' ||
+        k === 'currentLevel' ||
+        k === 'progressScore') return;
 
       if (typeof v === 'object') localStorage.setItem(k, JSON.stringify(v));
-      else                       localStorage.setItem(k, v);
+      else localStorage.setItem(k, v);
     });
 
     /* 2 ▸ refresh nutrition-streak counter in memory & redraw message */
@@ -231,19 +231,19 @@ async function loadNutritionProgress () {
   }
 }
 
-const mealPlanData   = JSON.parse(localStorage.getItem('twelveWeekMealPlan') || '[]');
-let   totalWeeks     = Math.min(mealPlanData.length, 12);
+const mealPlanData = JSON.parse(localStorage.getItem('twelveWeekMealPlan') || '[]');
+let totalWeeks = Math.min(mealPlanData.length, 12);
 
-let   purchasedWeeks;            // runtime value (filled below)
+let purchasedWeeks;            // runtime value (filled below)
 const planName = localStorage.getItem('planName') || '';
 
-function getPurchasedWeeks () {
+function getPurchasedWeeks() {
   return typeof purchasedWeeks === 'number'
     ? purchasedWeeks
     : Number(localStorage.getItem('purchasedWeeks') || 0);
 }
 
-async function fetchPurchasedWeeks () {
+async function fetchPurchasedWeeks() {
   try {
     const token = localStorage.getItem("token");
     if (!token) throw new Error("No auth token");
@@ -258,7 +258,7 @@ async function fetchPurchasedWeeks () {
 
     /* ── SINGLE-PAY 12-WEEK PROGRAM ───────────────────────────────── */
     const twelveWeek = (planName === "12-Week Program");
-    purchasedWeeks   = twelveWeek ? 12 : (Number(unlockedWeeks) || 0);
+    purchasedWeeks = twelveWeek ? 12 : (Number(unlockedWeeks) || 0);
 
   } catch (err) {
     /* very unlikely now – only runs when the call itself fails */
@@ -757,9 +757,9 @@ async function updateNutritionProgressScore() {
   const storedPS = Number(localStorage.getItem("progressScore") || "0");
 
   /* 2 | update the UI */
-  const psEl     = document.getElementById("nutritionProgressScoreValue");
-  const trackEl  = document.getElementById("nutritionProgressTrackStatus");
-  const dailyEl  = document.getElementById("nutritionProgressDailyMessage");
+  const psEl = document.getElementById("nutritionProgressScoreValue");
+  const trackEl = document.getElementById("nutritionProgressTrackStatus");
+  const dailyEl = document.getElementById("nutritionProgressDailyMessage");
   if (!psEl || !trackEl || !dailyEl) return;      // elements not on this page
 
   psEl.textContent = storedPS.toString();
@@ -1208,7 +1208,7 @@ if (totalWeeks > 12) totalWeeks = 12;
 let currentWeekIndex = parseInt(localStorage.getItem("currentNutritionWeekIndex") || "0", 10);
 let currentDayIndex = parseInt(localStorage.getItem("currentNutritionDayIndex") || "0", 10);
 
-function renderWeekSelector () {
+function renderWeekSelector() {
   const weekSelector = document.getElementById("weekSelector");
   if (!weekSelector) return;
 
@@ -1216,9 +1216,9 @@ function renderWeekSelector () {
   if (totalWeeks === 0) return;
 
   for (let i = 0; i < totalWeeks; i++) {
-    const wObj  = mealPlanData[i];
-    const wBox  = document.createElement("div");
-    const wNum  = wObj?.week || (i + 1);
+    const wObj = mealPlanData[i];
+    const wBox = document.createElement("div");
+    const wNum = wObj?.week || (i + 1);
 
     wBox.classList.add("week-box");
 
@@ -1230,15 +1230,15 @@ function renderWeekSelector () {
     } else {
       /* ── UNLOCKED ────────────────────── */
       wBox.textContent = `Week ${wNum}`;
-      if (i <  currentWeekIndex) wBox.classList.add("completed");
+      if (i < currentWeekIndex) wBox.classList.add("completed");
       if (i === currentWeekIndex) wBox.classList.add("active");
 
       wBox.addEventListener("click", () => {
         currentWeekIndex = i;
-        currentDayIndex  = 0;
+        currentDayIndex = 0;
 
         localStorage.setItem("currentNutritionWeekIndex", String(i));
-        localStorage.setItem("currentNutritionDayIndex",  "0");
+        localStorage.setItem("currentNutritionDayIndex", "0");
 
         updateWeekBoxes();
         renderDaySelector();
@@ -3368,6 +3368,8 @@ function showMealPrepModePopup(weekIndex) {
     popup.style.transform = "translateY(0)";
   });
 
+  const gestureZone = popup;  
+
   function closeMealPrepModePopup() {
     popup.style.transform = "translateY(100%)";
     setTimeout(() => {
@@ -3380,35 +3382,38 @@ function showMealPrepModePopup(weekIndex) {
   // Add swipe gesture detection to switch tabs
   let touchstartX = 0, touchstartY = 0;
   let touchendX   = 0, touchendY   = 0;
-  const MIN_SWIPE_DISTANCE = 75;  // bump up from 50px to 75px (or more)
+  const MIN_SWIPE_DISTANCE = 40;   // adjust to taste
 
-  gestureZone.addEventListener('touchstart', function(event) {
-    const t = event.changedTouches[0];
+  gestureZone.addEventListener('touchstart', e => {
+    const t = e.changedTouches[0];
     touchstartX = t.screenX;
     touchstartY = t.screenY;
   }, false);
 
-  gestureZone.addEventListener('touchend', function(event) {
-    const t = event.changedTouches[0];
+  gestureZone.addEventListener('touchend', e => {
+    const t = e.changedTouches[0];
     touchendX = t.screenX;
     touchendY = t.screenY;
     handleGesture();
   }, false);
 
   function handleGesture() {
-    const delta = touchendX - touchstartX;
-    const swipeThreshold = 50; // minimum px required for a swipe
-    if (Math.abs(delta) > swipeThreshold) {
-      if (delta < 0 && activeTab === "summary") {
-        // Swipe left on summary tab: switch to shopping tab
-        shoppingTab.click();
-      } else if (delta > 0 && activeTab === "shopping") {
-        // Swipe right on shopping tab: switch to summary tab
-        summaryTab.click();
-      }
+    const deltaX = touchendX - touchstartX;
+    const deltaY = touchendY - touchstartY;
+
+    // must move enough horizontally…
+    if (Math.abs(deltaX) < MIN_SWIPE_DISTANCE) return;
+    // …and not be too vertical
+    if (Math.abs(deltaY) > Math.abs(deltaX) * 0.7) return;
+
+    if (deltaX < 0 && activeTab === "summary") {
+      shoppingTab.click();
+    } else if (deltaX > 0 && activeTab === "shopping") {
+      summaryTab.click();
     }
   }
 }
+
 /********************************************
  * (NEW) Build "Weekly Summary" HTML
  ********************************************/
@@ -3545,7 +3550,7 @@ function buildShoppingListHTML(weekIdx) {
       }
     });
   });
-  
+
 
   // Build the HTML string
   let html = "";
@@ -6239,7 +6244,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 window.addEventListener("load", async () => {
   await loadNutritionProgress();
-  showNutritionOnboardingOverlay(); 
+  showNutritionOnboardingOverlay();
   // Retrieve the user's name (with a default)
   const userName = localStorage.getItem("name") || "User";
   // Check if the user has visited before
