@@ -1,17 +1,17 @@
 import { savePreferencesAfterLogin } from "../scripts/savePreferencesAfterLogin.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const pending      = localStorage.getItem("pendingPurchaseType");   // ← already saved by your pricing buttons
-  const planName     = localStorage.getItem("planName")  || "Unknown plan";
-  const planPrice    = localStorage.getItem("planPrice") || "";
-  const discountEnd  = Number(localStorage.getItem("discountEndTime") || 0);
-  const discounted   = discountEnd > Date.now();        // ← rename (matches back-end key)
+  const pending = localStorage.getItem("pendingPurchaseType");   // ← already saved by your pricing buttons
+  const planName = localStorage.getItem("planName") || "Unknown plan";
+  const planPrice = localStorage.getItem("planPrice") || "";
+  const discountEnd = Number(localStorage.getItem("discountEndTime") || 0);
+  const discounted = discountEnd > Date.now();        // ← rename (matches back-end key)
 
   /* ——— 1. map the pretty plan name → back-end key ——— */
   const planMap = {
-    "1-Week Program"          : "1-week",
-    "4-Week Program"          : "4-week",
-    "12-Week Program"         : "12-week",
+    "1-Week Program": "1-week",
+    "4-Week Program": "4-week",
+    "12-Week Program": "12-week",
     "Pro Tracker Subscription": "subscription"
   };
   const plan = planMap[planName];   // may be undefined if dev added new plans later
@@ -31,31 +31,31 @@ document.addEventListener("DOMContentLoaded", () => {
     clearErrors();
 
     /* 1)  simple email / pw validation (unchanged) */
-    const emailEl    = form.email;
+    const emailEl = form.email;
     const passwordEl = form.password;
-    const confirmEl  = form.confirmPassword;
-    let   valid      = true;
+    const confirmEl = form.confirmPassword;
+    let valid = true;
 
-    if (!emailEl.checkValidity())  { showError("email-error",   "Please enter a valid email.");  valid = false; }
-    if (passwordEl.value.length < 8){showError("password-error","Password must be at least 8 characters."); valid=false;}
-    if (passwordEl.value !== confirmEl.value){showError("confirm-error","Passwords do not match."); valid=false;}
+    if (!emailEl.checkValidity()) { showError("email-error", "Please enter a valid email."); valid = false; }
+    if (passwordEl.value.length < 8) { showError("password-error", "Password must be at least 8 characters."); valid = false; }
+    if (passwordEl.value !== confirmEl.value) { showError("confirm-error", "Passwords do not match."); valid = false; }
     if (!valid) return;
 
     try {
       /* 2)  register */
-      const regRes  = await fetch("/api/auth/register", {
-        method : "POST",
+      const regRes = await fetch("/api/auth/register", {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body   : JSON.stringify({ email: emailEl.value, password: passwordEl.value })
+        body: JSON.stringify({ email: emailEl.value, password: passwordEl.value })
       });
       const regBody = await regRes.json();
       if (!regRes.ok) throw new Error(regBody.message || "Signup failed");
 
       /* 3)  login */
-      const logRes  = await fetch("/api/auth/login", {
-        method : "POST",
+      const logRes = await fetch("/api/auth/login", {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body   : JSON.stringify({ email: emailEl.value, password: passwordEl.value })
+        body: JSON.stringify({ email: emailEl.value, password: passwordEl.value })
       });
       const logBody = await logRes.json();
       if (!logRes.ok) throw new Error(logBody.message || "Login failed");
@@ -67,16 +67,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       /* 5)  CREATE CHECKOUT SESSION ——► SEND plan & discounted  */
       const sessionRes = await fetch("/api/create-checkout-session", {
-        method : "POST",
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body   : JSON.stringify({
-          email      : emailEl.value,
+        body: JSON.stringify({
+          email: emailEl.value,
           plan,               // '1-week' | '4-week' | '12-week' | 'subscription'
           discounted          // true/false — only matters for subscription
         })
       });
       const sessBody = await sessionRes.json();
       if (!sessionRes.ok) throw new Error(sessBody.error || "Unable to start checkout");
+
+      localStorage.removeItem('pendingPurchaseType');
+      localStorage.removeItem('planPrice');      // wipe the FREE! 
 
       /* 6)  off to Stripe */
       window.location.href = sessBody.url;
