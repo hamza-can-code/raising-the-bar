@@ -34,41 +34,34 @@
 })();
 
 async function decideProStatus (token) {
-  /* 0 · quick front-end guess so the UI doesn’t flash blank  */
-  const plan  = localStorage.getItem('planName') || '';
-  let   isPro = plan === '12-Week Program' || plan === 'Pro Tracker Subscription';
+  const plan = localStorage.getItem('planName') || '';
 
-  /* 1 · ask the back-end for the real access record          */
+  /* 1) quick front-end guess so the UI doesn’t flash blank */
+  let isPro = plan === '12-Week Program' || plan === 'Pro Tracker Subscription';
+
+  /* 2) call the backend (handles cancelled subscriptions, etc.) */
   try {
     const res = await fetch('/api/access', {
       headers: { Authorization: `Bearer ${token}` }
     });
-
     if (res.ok) {
       const { unlockedWeeks = 0, subscriptionActive = false } = await res.json();
 
-      /*   ── key rule ────────────────────────────────────────
-       *   You’re Pro if you have ANY weeks unlocked, even if
-       *   the purchase was a one-off 1- / 4- / 12-week plan.
-       *   A subscription simply keeps adding weeks every
-       *   renewal, but isn’t the only path to Pro.
-       *   --------------------------------------------------*/
-      if (unlockedWeeks > 0) {
-        isPro = true;
-      } else if (plan === 'Pro Tracker Subscription') {
-        isPro = subscriptionActive;   // cancelled sub? → Core
+      if (plan === 'Pro Tracker Subscription') {
+        isPro = subscriptionActive;          // only while the sub is active
+      } else if (plan === '12-Week Program') {
+        isPro = true;                        // always Pro
       } else {
-        isPro = false;                // free 1-week, etc.
+        isPro = false;                       // 1-Week or 4-Week
       }
 
-      /* make the week-allowance available to the trackers */
+      /* handy for the workout-tracker later on */
       localStorage.setItem('purchasedWeeks', String(unlockedWeeks));
     }
   } catch (err) {
-    console.warn('[decideProStatus] /api/access unreachable – using front-end guess:', err.message);
+    console.warn('[decideProStatus] backend unreachable – using best guess:', err.message);
   }
 
-  /* 2 · persist the flag for the rest of the SPA            */
   localStorage.setItem('hasProTracker', isPro ? 'true' : 'false');
   console.log('🔧 Pro-Tracker flag set →', isPro);
 }
