@@ -1,3 +1,24 @@
+/* ───── loader utilities (shared) ───── */
+function setLoaderScale(rawPct = 0){
+  /* ease + small overshoot */
+  const eased = rawPct < 1
+    ? 0.8 + 0.6 * rawPct                // grows 0.8 → 1.4
+    : 1.4 - 0.4 * Math.min((rawPct - 1)*6, 1);
+  document.documentElement.style.setProperty('--scale', eased.toFixed(3));
+}
+function startIdlePulse(){
+  document.querySelector('.loader-logo')?.classList.add('pulsing');
+}
+function stopIdlePulse(){
+  document.querySelector('.loader-logo')?.classList.remove('pulsing');
+}
+function fadeOutLoader(){
+  const overlay = document.getElementById('loaderOverlay');
+  if(!overlay) return;
+  overlay.classList.add('fade-out');
+  overlay.addEventListener('transitionend', () => overlay.remove(), { once:true });
+}
+
 async function sendWorkoutLog(workoutData) {
   const token = localStorage.getItem('token');
 
@@ -479,6 +500,57 @@ fetchPurchasedWeeks();
 
 /* Fire once on load */
 window.addEventListener('DOMContentLoaded', fetchPurchasedWeeks);
+
+(async function bootWorkoutTracker(){
+
+  /* 0 · splash immediately */
+  startIdlePulse();
+
+  const token = localStorage.getItem('token');
+  if(!token){ location.href = 'log-in.html'; return; }
+
+  try{
+    /* 1 · auth-check once */
+    const res = await fetch('/api/auth/me', {
+      headers:{ Authorization:`Bearer ${token}` }
+    });
+    if(!res.ok) throw new Error('Invalid token');
+
+    /* 2 · long-running tasks we want to track */
+    const tasks = [
+      loadUserProgress(),   // your existing fn (already declared)
+      fetchPurchasedWeeks() // existing fn
+    ];
+
+    /* 2A · animated progress */
+    let target = 0, current = 0;
+    const bump = () => { target += 1 / tasks.length; };
+
+    (function raf(){
+      current += (target - current) * 0.12;
+      setLoaderScale(current);
+      if(current < 1.01) requestAnimationFrame(raf);
+    })();
+
+    await Promise.all(tasks.map(p => p.then(bump, bump)));
+    stopIdlePulse();
+
+    /* 3 · now that data is ready, call any render/setup functions
+           (if yours live elsewhere, invoke them here) */
+    if(typeof renderWeekSelector   === 'function') renderWeekSelector();
+    if(typeof renderDaySelector    === 'function') renderDaySelector();
+    if(typeof renderWorkoutDisplay === 'function') renderWorkoutDisplay();
+
+    /* 4 · graceful exit */
+    setLoaderScale(1.05);
+    setTimeout(fadeOutLoader, 180);
+
+  }catch(err){
+    console.error('[WT boot]', err);
+    localStorage.removeItem('token');
+    location.href = 'log-in.html';
+  }
+})();
 
 let exerciseExpansionState = JSON.parse(localStorage.getItem("exerciseExpansionState") || "{}");
 let currentWeekIndex = parseInt(localStorage.getItem("currentWeekIndex") || "0", 10);

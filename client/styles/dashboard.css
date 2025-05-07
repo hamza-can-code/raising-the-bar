@@ -65,6 +65,66 @@ h6,
   max-height: 80px;
 }
 
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F9F4EB;
+  z-index: 2500;
+  /* prepare fade + lift when we hide */
+  transition: opacity .5s ease, transform .5s ease;
+}
+
+.loader-overlay.fade-out {
+  opacity: 0;
+  /* dissolve */
+  transform: translateY(-20px);
+  /* gently lift out of view */
+  pointer-events: none;
+  /* ignore clicks while fading */
+}
+
+.loader-overlay.hidden {
+  /* we add this class in JS */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-logo {
+  --scale: 0.8;
+  /* driven by JS */
+  width: 120px;
+  max-width: 60vw;
+  transform-origin: center;
+  transform: scale(var(--scale));
+  /* smooth any manual changes */
+  transition: transform .2s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* @keyframes pulse {
+  0% {
+    transform: scale(.8);
+    opacity: .4;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(.8);
+    opacity: .4;
+  }
+}
+
+.loader-logo.pulsing {
+  animation: pulse 2s ease-in-out infinite;
+} */
+
 /* ——— Header & Nav ——— */
 .header-inner {
   display: flex;
@@ -72,40 +132,57 @@ h6,
   justify-content: space-between;
   padding: 10px 20px;
 }
+
 .main-nav ul {
   display: flex;
   gap: 20px;
   list-style: none;
   margin: 0;
 }
+
 .main-nav a {
   text-decoration: none;
   font-weight: 600;
   color: #fff;
   transition: color 0.2s;
 }
+
 .main-nav a:hover {
-  color: #A855F7;  /* pro purple hover */
+  color: #A855F7;
+  /* pro purple hover */
 }
+
 /* hide desktop nav on mobile, show hamburger */
 @media (max-width: 768px) {
-  .main-nav { display: none; }
-  .hamburger { display: block; }
+  .main-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
 }
+
 @media (min-width: 769px) {
-  .hamburger { display: none; }
+  .hamburger {
+    display: none;
+  }
 }
 
 /* ——— Modal Overlay & Content ——— */
 .faq-modal {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
   display: none;
-  align-items: center; justify-content: center;
+  align-items: center;
+  justify-content: center;
   z-index: 3000;
 }
+
 .faq-modal-content {
   background: #fff;
   padding: 2rem;
@@ -114,27 +191,33 @@ h6,
   border-radius: 8px;
   position: relative;
 }
+
 .close-btn {
   position: absolute;
-  top: 12px; right: 12px;
+  top: 12px;
+  right: 12px;
   background: transparent;
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
 }
+
 .faq-modal-content h2 {
   margin-top: 0;
 }
+
 .faq-modal-content form {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
 }
+
 .faq-modal-content input[type="email"] {
   padding: 0.6rem;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
 .faq-modal-content button[type="submit"] {
   padding: 0.8rem;
   background: #007bff;
@@ -143,18 +226,22 @@ h6,
   border-radius: 4px;
   cursor: pointer;
 }
+
 .faq-modal-content button[type="submit"]:hover {
   background: #0056b3;
 }
+
 .faq-list details {
   margin-bottom: 1rem;
 }
+
 .faq-list summary {
   cursor: pointer;
   font-weight: 600;
   color: #333;
   font-size: 1.1rem;
 }
+
 /* small text under login form */
 .small {
   font-size: 0.9rem;
@@ -164,126 +251,142 @@ h6,
 
 /* ——— Mobile Nav Tweaks ——— */
 
-  .header-inner {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-  }
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
 
-  .header .hamburger {
-    position: absolute;
-    top: 7%;                /* halfway down the header */
-    left: 20px;
-    transform: translateY(-50%);
-  }
+.header .hamburger {
+  position: absolute;
+  top: 7%;
+  /* halfway down the header */
+  left: 20px;
+  transform: translateY(-50%);
+}
 
-  .hamburger {
-    display: block;
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 10;
-  }
+.hamburger {
+  display: block;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+}
 
-  /* hide desktop‑style menu until toggled */
-  .main-nav {
-    display: none;
-  }
-  
-  .main-nav.open {
-    display: flex;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 2000;
-    /* no centering—panel itself will define its layout */
-  }
-  
-  .main-nav.open ul {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 60%;            /* shrink the panel width from 75% → 60% */
-    max-width: 300px;
-    margin: 0;
-    /* add extra left‑padding so items aren’t flush to the edge */
-    padding: 4.5rem 1rem 1rem 2rem;
-    background: #fff;
-    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
-    overflow-y: auto;
-    border-radius: 0 8px 8px 0;
-  
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;  /* left‑align the flex items */
-    gap: 1rem; 
-    list-style: none;
-  }
-  .main-nav.open ul li + li {
-    margin-top: 0.5rem;
-  }
-  .main-nav.open ul li {
-    margin: 0;
-    width: 100%;
-    border-bottom: 1px solid #e5e5e5;
-    padding-bottom: 0.75rem;
-  }
-  .main-nav.open ul li:last-child {
-    border-bottom: none;     /* no border on last */
-    padding-bottom: 0;       /* optional: remove extra padding */
-  }
-  .main-nav.open ul a {
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
-    transition: background 0.2s ease;
-    color: #333;
-    text-align: left;
-    display: block;
-    font-weight: 500;
-    font-size: 1.2rem;
-  }
-  .main-nav.open ul a:hover {
-    background: #F0F0F0;
-  }
-  .nav-close {
-    display: block;
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    background: transparent;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #333;
-    z-index: 2100;
-  }
-  .main-nav.open .nav-close {
-    color: #333;
-  }
-  .main-nav.open::before {
-    content: '';
-    position: absolute;
-    top: 3.75rem; left: 0;
-    width: 100%;
-    height: 1px;
-    /* background: #e5e5e5; */
-  }
+/* hide desktop‑style menu until toggled */
+.main-nav {
+  display: none;
+}
 
-  .faq-answer {
-    color: #444;
-    background-color: #F6F4EF;
-    padding: 10px;
-    border-radius: 5px;
-  }
+.main-nav.open {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2000;
+  /* no centering—panel itself will define its layout */
+}
+
+.main-nav.open ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 60%;
+  /* shrink the panel width from 75% → 60% */
+  max-width: 300px;
+  margin: 0;
+  /* add extra left‑padding so items aren’t flush to the edge */
+  padding: 4.5rem 1rem 1rem 2rem;
+  background: #fff;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  border-radius: 0 8px 8px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* left‑align the flex items */
+  gap: 1rem;
+  list-style: none;
+}
+
+.main-nav.open ul li+li {
+  margin-top: 0.5rem;
+}
+
+.main-nav.open ul li {
+  margin: 0;
+  width: 100%;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 0.75rem;
+}
+
+.main-nav.open ul li:last-child {
+  border-bottom: none;
+  /* no border on last */
+  padding-bottom: 0;
+  /* optional: remove extra padding */
+}
+
+.main-nav.open ul a {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+  color: #333;
+  text-align: left;
+  display: block;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.main-nav.open ul a:hover {
+  background: #F0F0F0;
+}
+
+.nav-close {
+  display: block;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+  z-index: 2100;
+}
+
+.main-nav.open .nav-close {
+  color: #333;
+}
+
+.main-nav.open::before {
+  content: '';
+  position: absolute;
+  top: 3.75rem;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  /* background: #e5e5e5; */
+}
+
+.faq-answer {
+  color: #444;
+  background-color: #F6F4EF;
+  padding: 10px;
+  border-radius: 5px;
+}
 
 /* -------- Greeting -------- */
 .welcome {
@@ -824,6 +927,7 @@ h6,
 }
 
 @media (min-width: 768px) {
+
   /* make sure the card is a column flex so margin-auto works */
   #wtCard {
     display: flex;
@@ -881,9 +985,12 @@ h6,
 /* ─────────  Compare‑Plans modal  ───────── */
 
 .table-wrapper {
-  margin-bottom: 20px;     /* space before the testimonial */
-  overflow-x: auto;        /* allow side‑scroll on small viewports */
-  -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+  margin-bottom: 20px;
+  /* space before the testimonial */
+  overflow-x: auto;
+  /* allow side‑scroll on small viewports */
+  -webkit-overflow-scrolling: touch;
+  /* smooth scroll on iOS */
 }
 
 #compareModal {
@@ -940,24 +1047,35 @@ h6,
 }
 
 .compare-table {
-  width: max-content;      /* table will size to its content */
-  max-width: 100%;         /* but never exceed its wrapper */
+  width: max-content;
+  /* table will size to its content */
+  max-width: 100%;
+  /* but never exceed its wrapper */
   border-collapse: collapse;
-  table-layout: fixed; 
+  table-layout: fixed;
   margin-bottom: 20px;
 }
 
-.compare-table .col-feature { width: 55%; }  /* ~half the table for the labels */
+.compare-table .col-feature {
+  width: 55%;
+}
+
+/* ~half the table for the labels */
 .compare-table .col-ct,
-.compare-table .col-pt { width: 22.5%; }     /* split remainder evenly */
+.compare-table .col-pt {
+  width: 22.5%;
+}
+
+/* split remainder evenly */
 
 .compare-table th,
 .compare-table td {
   padding: 10px 6px;
   border-bottom: 1px solid #e0e0e0;
   text-align: center;
-  white-space: normal;       /* allow wrapping at spaces */
-  word-break: break-word;   
+  white-space: normal;
+  /* allow wrapping at spaces */
+  word-break: break-word;
 }
 
 .compare-table th:first-child,
@@ -966,6 +1084,7 @@ h6,
 }
 
 @media (max-width: 480px) {
+
   .compare-table th,
   .compare-table td {
     font-size: 0.9rem;

@@ -1,6 +1,23 @@
-/*********************************************
- * NUTRITION TRACKER 
- *********************************************/
+/* ───── loader utilities (shared) ───── */
+function setLoaderScale(rawPct = 0){
+  /* ease + small overshoot */
+  const eased = rawPct < 1
+    ? 0.8 + 0.6 * rawPct                // grows 0.8 → 1.4
+    : 1.4 - 0.4 * Math.min((rawPct - 1)*6, 1);
+  document.documentElement.style.setProperty('--scale', eased.toFixed(3));
+}
+function startIdlePulse(){
+  document.querySelector('.loader-logo')?.classList.add('pulsing');
+}
+function stopIdlePulse(){
+  document.querySelector('.loader-logo')?.classList.remove('pulsing');
+}
+function fadeOutLoader(){
+  const overlay = document.getElementById('loaderOverlay');
+  if(!overlay) return;
+  overlay.classList.add('fade-out');
+  overlay.addEventListener('transitionend', () => overlay.remove(), { once:true });
+}
 
 async function sendMealLog(mealData) {
   const token = localStorage.getItem('token');
@@ -275,6 +292,53 @@ async function fetchPurchasedWeeks() {
 fetchPurchasedWeeks();
 
 window.addEventListener('DOMContentLoaded', fetchPurchasedWeeks);
+
+/* ───── Nutrition-Tracker boot sequence ───── */
+(async function bootNutritionTracker(){
+
+  startIdlePulse();
+
+  const token = localStorage.getItem('token');
+  if(!token){ location.href = 'log-in.html'; return; }
+
+  try{
+    const res = await fetch('/api/auth/me', {
+      headers:{ Authorization:`Bearer ${token}` }
+    });
+    if(!res.ok) throw new Error('Invalid token');
+
+    const tasks = [
+      loadNutritionProgress(), // your existing fn
+      fetchPurchasedWeeks()    // already declared
+    ];
+
+    let target = 0, current = 0;
+    const bump = () => { target += 1 / tasks.length; };
+
+    (function raf(){
+      current += (target - current) * 0.12;
+      setLoaderScale(current);
+      if(current < 1.01) requestAnimationFrame(raf);
+    })();
+
+    await Promise.all(tasks.map(p => p.then(bump, bump)));
+    stopIdlePulse();
+
+    /* fire initial UI renders (if you have them) */
+    if(typeof renderWeekSelector   === 'function') renderWeekSelector();
+    if(typeof renderDaySelector    === 'function') renderDaySelector();
+    if(typeof renderDailyMealDisplay === 'function') renderDailyMealDisplay();
+    if(typeof renderXPBar          === 'function') renderXPBar();
+
+    setLoaderScale(1.05);
+    setTimeout(fadeOutLoader, 180);
+
+  }catch(err){
+    console.error('[NT boot]', err);
+    localStorage.removeItem('token');
+    location.href = 'log-in.html';
+  }
+})();
 
 if (localStorage.getItem("hasAWTSubscription") !== "true") {
   localStorage.setItem("hasAWTSubscription", "true");

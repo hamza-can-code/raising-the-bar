@@ -1,35 +1,79 @@
-(async function protectAndInit() {
+/* ───── loader utilities ───── */
+function setLoaderScale(rawPct = 0){
+  // ease & overshoot: convert 0-1 to a nicer curve
+  const eased = rawPct < 1
+    ? 0.8 + 0.6 * rawPct              // 0.8 → 1.4
+    : 1.4 - 0.4 * Math.min((rawPct - 1) * 6, 1);  // overshoot then settle
+
+  document.documentElement
+          .style.setProperty('--scale', eased.toFixed(3));
+}
+
+function startIdlePulse(){
+  document.querySelector('.loader-logo')?.classList.add('pulsing');
+}
+
+function stopIdlePulse(){
+  document.querySelector('.loader-logo')?.classList.remove('pulsing');
+}
+
+function fadeOutLoader(){
+  const overlay = document.getElementById('loaderOverlay');
+  if(!overlay) return;
+  overlay.classList.add('fade-out');
+  overlay.addEventListener('transitionend', () => overlay.remove(),
+                           { once:true });
+}
+
+
+(async function protectAndInit(){
+
+  /* 0 · show splash instantly */
+  startIdlePulse();
+
   const token = localStorage.getItem('token');
-  if (!token) {
-    window.location.href = 'log-in.html';
-    return;
-  }
+  if(!token){ location.href = 'log-in.html'; return; }
 
-  try {
+  try{
     const res = await fetch('/api/auth/me', {
-      headers: { Authorization: `Bearer ${token}` }
+      headers:{ Authorization:`Bearer ${token}` }
     });
-    if (!res.ok) throw new Error('Invalid token');
+    if(!res.ok) throw new Error('Invalid token');
 
-    // load everything into localStorage first
-    await Promise.all([
+    /* 1 · kick off work + smooth progress ****************************************/
+    const tasks = [
       decideProStatus(token),
       fetchAndStorePreferences(token),
       loadUserProgressSafe()
-    ]);
+    ];
+    let target = 0, current = 0;
+    const bump = () => { target += 1 / tasks.length; };
+
+    /* animation loop */
+    (function raf(){
+      // lerp toward target
+      current += (target - current) * 0.12;
+      setLoaderScale(current);
+      if(current < 1.01) requestAnimationFrame(raf);
+    })();
+
+    await Promise.all(tasks.map(p => p.then(bump, bump)));
+    stopIdlePulse();   // progress has taken over
 
     console.log('✅ Preferences and Progress loaded');
 
-    // **run the overlay here (flags are now correct)**
+    /* 2 · render dashboard *******************************************************/
     runDsOnboarding();
-
-    // then build the rest of the dashboard UI
     initDashboard();
 
-  } catch (err) {
-    console.error('❌ Auth error:', err);
+    /* 3 · graceful exit **********************************************************/
+    setLoaderScale(1.05);          // overshoot a hair
+    setTimeout(fadeOutLoader, 180); // let the bounce settle first
+
+  }catch(err){
+    console.error('❌ Boot error:', err);
     localStorage.removeItem('token');
-    window.location.href = 'log-in.html';
+    location.href = 'log-in.html';
   }
 })();
 
