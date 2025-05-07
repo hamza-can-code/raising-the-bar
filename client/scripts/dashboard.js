@@ -33,29 +33,37 @@
   }
 })();
 
-async function decideProStatus (token) {
-  const plan = localStorage.getItem('planName') || '';
+async function decideProStatus(token) {
+  const planFromLS = localStorage.getItem('planName') || '';
 
-  /* 1) quick front-end guess so the UI doesn’t flash blank */
-  let isPro = plan === '12-Week Program' || plan === 'Pro Tracker Subscription';
+  /* 1)  quick front-end guess so the UI doesn’t flash blank  */
+  let isPro = planFromLS === '12-Week Program' || planFromLS === 'Pro Tracker Subscription';
 
-  /* 2) call the backend (handles cancelled subscriptions, etc.) */
+  /* 2) hit the backend for the real numbers                  */
   try {
     const res = await fetch('/api/access', {
       headers: { Authorization: `Bearer ${token}` }
     });
+
     if (res.ok) {
       const { unlockedWeeks = 0, subscriptionActive = false } = await res.json();
 
-      if (plan === 'Pro Tracker Subscription') {
-        isPro = subscriptionActive;          // only while the sub is active
-      } else if (plan === '12-Week Program') {
-        isPro = true;                        // always Pro
-      } else {
-        isPro = false;                       // 1-Week or 4-Week
+      /* ---------- infer the plan if none stored ---------- */
+      let plan = planFromLS;
+      if (!plan) {
+        if (subscriptionActive)          plan = 'Pro Tracker Subscription';
+        else if (unlockedWeeks >= 12)    plan = '12-Week Program';
+        else if (unlockedWeeks >= 4)     plan = '4-Week Program';
+        else if (unlockedWeeks >= 1)     plan = '1-Week Program';
+        localStorage.setItem('planName', plan);
       }
 
-      /* handy for the workout-tracker later on */
+      /* ---------- final Pro decision --------------------- */
+      if (plan === 'Pro Tracker Subscription')      isPro = subscriptionActive;
+      else if (plan === '12-Week Program')          isPro = true;
+      else                                          isPro = false;
+
+      /* expose weeks to the workout tracker                */
       localStorage.setItem('purchasedWeeks', String(unlockedWeeks));
     }
   } catch (err) {

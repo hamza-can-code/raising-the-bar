@@ -257,7 +257,10 @@ router.post(
      *****************************************************************/
     if (event.type === 'invoice.payment_succeeded') {
       const invoice        = event.data.object;
-      const subscriptionId = invoice.subscription;   // always present
+      const subscriptionId = invoice.subscription;   // will be undefined for one-off invoices
+    
+      /* ignore one-off (non-subscription) invoices */
+      if (!subscriptionId) return res.sendStatus(200);
 
       console.log('🔄  invoice.payment_succeeded →', subscriptionId);
 
