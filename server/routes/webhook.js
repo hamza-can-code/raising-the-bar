@@ -149,133 +149,130 @@
 // module.exports = router;
 
 // server/routes/webhook.js
-const express   = require('express');
-const Stripe    = require('stripe');
-const router    = express.Router();
+const express = require('express');
+const Stripe  = require('stripe');
+const router  = express.Router();
 
 const User       = require('../models/User');
 const UserAccess = require('../models/UserAccess');
 const sendOrderConfirmationEmail = require('../utils/sendOrderConfirmationEmail');
 
-const stripe          = new Stripe(process.env.STRIPE_SECRET_KEY);
-const endpointSecret  = process.env.STRIPE_WEBHOOK_SECRET;
+const stripe         = new Stripe(process.env.STRIPE_SECRET_KEY);
+const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
-/* raw body because Stripe needs it exactly as-sent */
+/* Stripe requires the raw body exactly as it arrives */
 router.post(
   '/webhook',
   express.raw({ type: 'application/json' }),
   async (req, res) => {
-    const sig = req.headers['stripe-signature'];
+    /* 0️⃣ Verify signature */
     let event;
-
     try {
-      event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+      event = stripe.webhooks.constructEvent(
+        req.body,
+        req.headers['stripe-signature'],
+        endpointSecret
+      );
     } catch (err) {
-      console.error('❌ Webhook signature verification failed:', err.message);
+      console.error('❌  Bad webhook signature:', err.message);
       return res.sendStatus(400);
     }
 
-    /* ───────────────── 1 · CHECKOUT COMPLETE ─────────────────────── */
+    /******************************************************************
+     * 1️⃣  CHECKOUT COMPLETE  (new purchase)
+     *****************************************************************/
     if (event.type === 'checkout.session.completed') {
-      const session = event.data.object;                // basic session
-      /* get the expanded session with line_items so we can read priceId */
-      const fullSession = await stripe.checkout.sessions.retrieve(session.id, {
-        expand: ['line_items']
+      /* A) Pull full session (need price + subscription id) */
+      const session = await stripe.checkout.sessions.retrieve(event.data.object.id, {
+        expand: ['line_items', 'subscription']
       });
 
-      const customerEmail =
-        fullSession.customer_email ||
-        fullSession.customer_details?.email ||
-        '(unknown)';
+      const email = session.customer_details?.email || session.customer_email;
+      console.log('✅ checkout.session.completed →', email);
 
-      console.log('✅ checkout.session.completed for', customerEmail);
-
-      /* mark user as paid (if you still store that flag) */
+      /* B) mark user “paid”, if you still track that */
       const user = await User.findOneAndUpdate(
-        { email: customerEmail },
+        { email },
         { isPaid: true },
         { new: true }
       );
-
       if (!user) {
-        console.warn('⚠️ No User found for', customerEmail);
+        console.warn('⚠️  No user found for', email);
         return res.sendStatus(200);
       }
 
-      /* ---------- what product did they buy? -------------------- */
-      const priceId = fullSession.line_items?.data?.[0]?.price?.id;
-      let unlockedWeeks   = 0;
-      let isSubscription  = false;
+      /* C) work out WHAT they bought */
+      const priceId = session.line_items.data[0].price.id;
+      let unlockedWeeks  = 0;
+      let isSubscription = false;
 
-      if (priceId === process.env.PRICE_1_WEEK)       unlockedWeeks = 1;
-      else if (priceId === process.env.PRICE_4_WEEK)  unlockedWeeks = 4;
-      else if (priceId === process.env.PRICE_12_WEEK) unlockedWeeks = 12;
+      if (priceId === process.env.PRICE_1_WEEK)        unlockedWeeks = 1;
+      else if (priceId === process.env.PRICE_4_WEEK)   unlockedWeeks = 4;
+      else if (priceId === process.env.PRICE_12_WEEK)  unlockedWeeks = 12;
       else if (priceId === process.env.FULL_PRICE_ID) {
-        unlockedWeeks  = 4;            // first 4 weeks on initial charge
+        unlockedWeeks  = 4;          // first block on sign-up
         isSubscription = true;
       } else {
-        console.warn('⚠️ Unknown priceId:', priceId);
+        console.warn('⚠️  Unknown priceId:', priceId);
       }
 
-      /* ---------- upsert UserAccess ----------------------------- */
-      const updates = {
+      /* D) Upsert UserAccess  */
+      const update = {
         $inc: { unlockedWeeks },
         $set: {}
       };
-
       if (isSubscription) {
-        updates.$set.subscriptionId     = fullSession.subscription;
-        updates.$set.subscriptionStatus = 'active';
-        updates.$set.renewalDate        = new Date();   // now; adjust if preferred
+        update.$set.subscriptionId     = session.subscription.id;
+        update.$set.subscriptionStatus = 'active';
+        update.$set.renewalDate        = new Date();          // now
       }
 
       const ua = await UserAccess.findOneAndUpdate(
         { userId: user._id },
-        updates,
-        { upsert: true, new: true }
+        update,
+        { upsert: true, new: true, setDefaultsOnInsert: true }
       );
 
-      console.log(
-        ua.isNew ? '✅ UserAccess created' : '✅ UserAccess updated',
-        '→ total weeks:', ua.unlockedWeeks
-      );
+      console.log('🔐 UserAccess saved → weeks:', ua.unlockedWeeks,
+                  'subId:', ua.subscriptionId);
 
-      /* ---------- confirmation e-mail --------------------------- */
+      /* E) confirmation e-mail (optional) */
       try {
         await sendOrderConfirmationEmail({
-          email        : customerEmail,
-          programName  : isSubscription
+          email,
+          programName : isSubscription
             ? 'Pro Tracker Subscription'
             : `${unlockedWeeks}-Week Program`,
           unlockedWeeks,
-          renewalDate  : isSubscription ? ua.renewalDate : null
+          renewalDate : isSubscription ? ua.renewalDate : null
         });
-        console.log('📧 Confirmation e-mail sent');
+        console.log('📧  Confirmation e-mail sent');
       } catch (err) {
-        console.error('❌ sendOrderConfirmationEmail:', err.message);
+        console.error('📧  sendOrderConfirmationEmail failed:', err.message);
       }
     }
 
-    /* ───────────────── 2 · SUBSCRIPTION RENEWAL ────────────────── */
-    if (event.type === 'invoice.paid') {
-      const invoice         = event.data.object;
-      const subscriptionId  = invoice.subscription || invoice.id;
+    /******************************************************************
+     * 2️⃣  SUBSCRIPTION RENEWAL  (Stripe fires invoice.payment_succeeded)
+     *****************************************************************/
+    if (event.type === 'invoice.payment_succeeded') {
+      const invoice        = event.data.object;
+      const subscriptionId = invoice.subscription;   // always present
 
-      console.log('🔄 Subscription renewal for', subscriptionId);
+      console.log('🔄  invoice.payment_succeeded →', subscriptionId);
 
       const ua = await UserAccess.findOne({ subscriptionId });
-
       if (!ua) {
-        console.warn('⚠️ No UserAccess for subscription', subscriptionId);
+        console.warn('⚠️  No UserAccess for', subscriptionId);
       } else {
-        ua.unlockedWeeks  += 4;                                   // add 4 weeks
-        ua.renewalDate     = new Date(invoice.lines.data[0].period.end * 1000);
+        ua.unlockedWeeks += 4;
+        ua.renewalDate    = new Date(invoice.lines.data[0].period.end * 1000);
         await ua.save();
-        console.log('✅ Added 4 weeks →', ua.unlockedWeeks, 'total');
+        console.log('➕  Added 4 weeks → now', ua.unlockedWeeks);
       }
     }
 
-    /* Stripe only needs a 200 to stop retrying */
+    /* Stripe expects only 2xx so it won’t retry */
     res.sendStatus(200);
   }
 );
