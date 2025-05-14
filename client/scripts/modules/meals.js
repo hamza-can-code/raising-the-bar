@@ -2365,6 +2365,6858 @@ export const mealDatabase = [
       "Toast the bread, slice frittata into wedges, and serve with toast drizzled with remaining oil."
     ],
     "mealNotes": []
+  },
+    {
+    "mealName": "Tuna & White Bean Salad",
+    "calories": 320,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.35,
+      "fats": 0.30
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish"],
+    "ingredients": [
+      {
+        "name": "canned tuna in water",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cannellini beans",
+        "quantity": 50,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "mixed lettuce",
+        "quantity": 40,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cherry tomatoes",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 7,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Drain and flake the tuna into a bowl.",
+      "Add beans, lettuce, and tomatoes.",
+      "Drizzle with olive oil and lemon juice, toss gently, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Chicken & Avocado Salad",
+    "calories": 322,
+    "macroRatio": {
+      "protein": 0.42,
+      "carbs": 0.23,
+      "fats": 0.35
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "cooked chicken breast",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 30,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "mixed greens",
+        "quantity": 40,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cucumber",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 7,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toss chicken, avocado, greens, and cucumber in a bowl.",
+      "Whisk olive oil and lemon juice, pour over salad, toss, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Hummus & Veggie Tortilla",
+    "calories": 318,
+    "macroRatio": {
+      "protein": 0.18,
+      "carbs": 0.60,
+      "fats": 0.22
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["gluten", "sesame"],
+    "ingredients": [
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "hummus",
+        "quantity": 60,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "cucumber",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 20,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Spread hummus over the tortilla.",
+      "Layer cucumber, pepper, and spinach, drizzle oil, wrap up, and slice in half."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Turkey & Cheese Sandwich",
+    "calories": 320,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.50,
+      "fats": 0.20
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole-grain bread",
+        "quantity": 2,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "turkey breast slices",
+        "quantity": 50,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 15,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "lettuce",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "mustard",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Layer turkey, cheese, and lettuce between bread slices, spread mustard, and cut in half."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Grilled Chicken Caesar Wrap",
+    "calories": 370,
+    "macroRatio": {
+      "protein": 0.40,
+      "carbs": 0.32,
+      "fats": 0.28
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "grilled chicken breast",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "Romaine lettuce",
+        "quantity": 40,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 15,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "Caesar dressing",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Warm the tortilla briefly in a skillet.",
+      "Layer grilled chicken, lettuce, Parmesan, and dressing down the center of the tortilla.",
+      "Roll up tightly, slice in half, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Quinoa & Black Bean Salad",
+    "calories": 375,
+    "macroRatio": {
+      "protein": 0.20,
+      "carbs": 0.60,
+      "fats": 0.20
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "cooked quinoa",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "black beans",
+        "quantity": 60,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "red bell pepper",
+        "quantity": 40,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "corn kernels",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 7,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lime juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Combine quinoa, beans, pepper, and corn in a bowl.",
+      "Whisk olive oil and lime juice, drizzle over salad, toss gently, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Turkey & Hummus Pita",
+    "calories": 365,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.48,
+      "fats": 0.24
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian Safe Option"],
+    "allergens": ["gluten", "sesame"],
+    "ingredients": [
+      {
+        "name": "whole wheat pita",
+        "quantity": 1,
+        "singular": "pita",
+        "plural": "pitas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "turkey breast slices",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "hummus",
+        "quantity": 40,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "cucumber",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "tomato",
+        "quantity": 40,
+        "unit": "g",
+        "category": "vegetables"
+      }
+    ],
+    "recipe": [
+      "Cut the pita in half and open pocket.",
+      "Spread hummus inside, then layer turkey, cucumber, and tomato.",
+      "Serve assembled."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Spinach & Feta Stuffed Sweet Potato",
+    "calories": 370,
+    "macroRatio": {
+      "protein": 0.22,
+      "carbs": 0.55,
+      "fats": 0.23
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "sweet potato",
+        "quantity": 200,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "feta cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 7,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Roast or microwave the sweet potato until tender, then slice open lengthwise.",
+      "Sauté spinach in olive oil until wilted, spoon into potato.",
+      "Top with crumbled feta and serve."
+    ],
+    "mealNotes": []
+  },
+    {
+    "mealName": "Grilled Chicken Caesar Salad",
+    "calories": 420,
+    "macroRatio": {
+      "protein": 0.40,
+      "carbs": 0.25,
+      "fats": 0.35
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "grilled chicken breast",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "Romaine lettuce",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "croutons",
+        "quantity": 20,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "Caesar dressing",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toss lettuce and croutons in a bowl.",
+      "Top with sliced grilled chicken and Parmesan.",
+      "Drizzle with Caesar dressing, toss gently, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Turkey Avocado Wrap",
+    "calories": 420,
+    "macroRatio": {
+      "protein": 0.33,
+      "carbs": 0.33,
+      "fats": 0.34
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten"],
+    "ingredients": [
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "turkey breast slices",
+        "quantity": 70,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 30,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "tomato",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "mayonnaise",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Spread mayonnaise onto the tortilla.",
+      "Layer turkey, avocado, spinach, and tomato.",
+      "Roll up tightly, slice in half, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Mediterranean Chickpea & Quinoa Bowl",
+    "calories": 420,
+    "macroRatio": {
+      "protein": 0.22,
+      "carbs": 0.44,
+      "fats": 0.34
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "cooked chickpeas",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cooked quinoa",
+        "quantity": 50,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "cucumber",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "tomato",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "feta cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "kalamata olives",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 7,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Combine chickpeas, quinoa, cucumber, tomato, feta, and olives in a bowl.",
+      "Drizzle with olive oil and lemon juice, toss gently, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Tuna Niçoise Salad",
+    "calories": 420,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.30,
+      "fats": 0.35
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish", "egg", "gluten"],
+    "ingredients": [
+      {
+        "name": "canned tuna in water",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "boiled potato",
+        "quantity": 70,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "green beans",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "mixed lettuce",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 7,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "croutons",
+        "quantity": 20,
+        "unit": "g",
+        "category": "carbs"
+      }
+    ],
+    "recipe": [
+      "Arrange lettuce, green beans, and potato on a plate.",
+      "Top with tuna and sliced egg.",
+      "Sprinkle croutons, drizzle olive oil, toss lightly, and serve."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "Grilled Salmon & Sweet Potato Salad",
+    "calories": 470,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.40,
+      "fats": 0.25
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish"],
+    "ingredients": [
+      {
+        "name": "grilled salmon",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "sweet potato",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cooked quinoa",
+        "quantity": 50,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "avocado",
+        "quantity": 25,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "mixed greens",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Arrange mixed greens on a plate.",
+      "Top with grilled salmon, sweet potato cubes, quinoa, and avocado slices.",
+      "Drizzle olive oil and lemon juice, toss gently, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Chicken Pesto Pasta Salad",
+    "calories": 470,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.45,
+      "fats": 0.23
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy", "nuts"],
+    "ingredients": [
+      {
+        "name": "cooked pasta",
+        "quantity": 75,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "grilled chicken breast",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "pesto sauce",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "mozzarella",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "pine nuts",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Combine pasta and chicken in a bowl.",
+      "Stir in pesto, drizzle with olive oil, and sprinkle mozzarella and pine nuts.",
+      "Toss gently and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Beef & Brown Rice Power Bowl",
+    "calories": 470,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.45,
+      "fats": 0.25
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "lean beef strips",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cooked brown rice",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "broccoli florets",
+        "quantity": 75,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "avocado",
+        "quantity": 30,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "sesame seeds",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Arrange rice, beef, broccoli, and avocado in a bowl.",
+      "Drizzle with olive oil, sprinkle sesame seeds, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Veggie Chickpea Curry Wrap",
+    "calories": 470,
+    "macroRatio": {
+      "protein": 0.25,
+      "carbs": 0.50,
+      "fats": 0.25
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "canned chickpeas",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "Greek yogurt",
+        "quantity": 60,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "carrot",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 7,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "curry powder",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Warm tortilla, spread Greek yogurt mixed with curry powder.",
+      "Layer chickpeas, bell pepper, and carrot; drizzle olive oil, wrap up, and serve."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "Grilled Chicken Caesar Sandwich",
+    "calories": 520,
+    "macroRatio": {
+      "protein": 0.40,
+      "carbs": 0.29,
+      "fats": 0.31
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole-grain bread",
+        "quantity": 2,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "grilled chicken breast",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "Romaine lettuce",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 15,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "croutons",
+        "quantity": 20,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "Caesar dressing",
+        "quantity": 25,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toast the bread slices if desired.",
+      "Layer lettuce, grilled chicken, and Parmesan between the bread.",
+      "Scatter croutons, drizzle with Caesar dressing and olive oil, then close sandwich and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Beef Burrito Bowl",
+    "calories": 520,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.45,
+      "fats": 0.25
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "cooked brown rice",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "lean beef strips",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "black beans",
+        "quantity": 50,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 30,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "salsa",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "shredded cheddar cheese",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "sour cream",
+        "quantity": 15,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Layer rice, beef, and beans in a bowl.",
+      "Top with avocado, salsa, cheese, and sour cream.",
+      "Drizzle olive oil and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Salmon Avocado Sushi Bowl",
+    "calories": 520,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.42,
+      "fats": 0.23
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish", "gluten"],
+    "ingredients": [
+      {
+        "name": "cooked sushi rice",
+        "quantity": 150,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "smoked salmon",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "cucumber",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "nori seaweed",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "sesame oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "soy sauce",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "pickled ginger",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Place rice in a bowl and top with salmon, avocado, and cucumber.",
+      "Scatter seaweed, drizzle sesame oil and soy sauce, add ginger, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Turkey Club Sandwich",
+    "calories": 520,
+    "macroRatio": {
+      "protein": 0.33,
+      "carbs": 0.29,
+      "fats": 0.38
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole-grain bread",
+        "quantity": 2,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "turkey breast slices",
+        "quantity": 70,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "bacon",
+        "quantity": 2,
+        "singular": "strip",
+        "plural": "strips",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "mayonnaise",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lettuce",
+        "quantity": 20,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "tomato",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      }
+    ],
+    "recipe": [
+      "Spread mayonnaise on each bread slice.",
+      "Layer turkey, bacon, avocado, lettuce, and tomato.",
+      "Close sandwich, slice in half, and serve."
+    ],
+    "mealNotes": []
+  },
+    {
+    "mealName": "Chicken Burrito Bowl Deluxe",
+    "calories": 570,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.42,
+      "fats": 0.26
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "cooked brown rice",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "grilled chicken breast",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "black beans",
+        "quantity": 60,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "corn kernels",
+        "quantity": 40,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "avocado",
+        "quantity": 40,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "salsa",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "shredded cheddar cheese",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "sour cream",
+        "quantity": 10,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Layer rice, beans, corn, and chicken in a bowl.",
+      "Top with avocado, salsa, cheese, and sour cream.",
+      "Drizzle olive oil and toss lightly before serving."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Steak & Roasted Veggie Bowl",
+    "calories": 570,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.40,
+      "fats": 0.30
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "lean steak strips",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "roasted sweet potato",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "steamed broccoli",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cooked quinoa",
+        "quantity": 50,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "avocado",
+        "quantity": 30,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "seasoning",
+        "quantity": 2,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Arrange quinoa, sweet potato, broccoli, and steak in a bowl.",
+      "Drizzle with olive oil, season to taste, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Pesto Chicken Pasta Salad",
+    "calories": 565,
+    "macroRatio": {
+      "protein": 0.33,
+      "carbs": 0.45,
+      "fats": 0.22
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy", "nuts"],
+    "ingredients": [
+      {
+        "name": "cooked pasta",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "grilled chicken breast",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "pesto sauce",
+        "quantity": 20,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "cherry tomatoes",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 15,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toss pasta with pesto in a bowl.",
+      "Add chicken, tomatoes, and spinach; drizzle olive oil.",
+      "Sprinkle Parmesan, toss gently, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Salmon & Farro Power Bowl",
+    "calories": 575,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.40,
+      "fats": 0.30
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish"],
+    "ingredients": [
+      {
+        "name": "smoked salmon",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cooked farro",
+        "quantity": 80,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "cucumber",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "mixed greens",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "avocado",
+        "quantity": 30,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Layer farro, greens, cucumber, salmon, and avocado in a bowl.",
+      "Drizzle olive oil and lemon juice, toss lightly, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Grilled Steak Burrito",
+    "calories": 625,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.40,
+      "fats": 0.30
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "lean steak strips",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "onion",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "black beans",
+        "quantity": 60,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "avocado",
+        "quantity": 40,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "salsa",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat olive oil in a skillet over medium heat; sauté onion and bell pepper until softened, about 3 minutes.",
+      "Add steak strips and black beans; cook until steak is done, about 4 minutes.",
+      "Warm tortilla, layer meat mixture, sprinkle cheese and avocado slices, top with salsa, roll up, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Shrimp Pesto Pasta Salad",
+    "calories": 620,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.50,
+      "fats": 0.20
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy", "nuts", "shellfish"],
+    "ingredients": [
+      {
+        "name": "cooked pasta",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "shrimp",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "pesto sauce",
+        "quantity": 20,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "cherry tomatoes",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 15,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "pine nuts",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toss pasta with pesto in a large bowl.",
+      "Sauté shrimp in olive oil until pink and cooked through, about 3 minutes each side; let cool slightly.",
+      "Add shrimp and tomatoes to pasta, sprinkle with cheese and pine nuts, toss gently, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Turkey Bacon Avocado Sandwich",
+    "calories": 630,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.30,
+      "fats": 0.38
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole-grain bread",
+        "quantity": 2,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "turkey breast slices",
+        "quantity": 70,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "turkey bacon",
+        "quantity": 30,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "mayonnaise",
+        "quantity": 20,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lettuce",
+        "quantity": 20,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "tomato",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      }
+    ],
+    "recipe": [
+      "Cook bacon until crispy; drain on paper towels.",
+      "Spread mayonnaise on both bread slices.",
+      "Layer turkey, bacon, avocado, lettuce, and tomato; close sandwich and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Quinoa Chicken Veggie Power Bowl",
+    "calories": 625,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.40,
+      "fats": 0.25
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "cooked quinoa",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "grilled chicken breast",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "steamed broccoli",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "shredded carrot",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "edamame",
+        "quantity": 50,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 7,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "soy sauce",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Layer quinoa, chicken, broccoli, carrot, and edamame in a bowl.",
+      "Drizzle olive oil and soy sauce, toss gently, and serve."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "BBQ Chicken Panini",
+    "calories": 670,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.40,
+      "fats": 0.30
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "ciabatta slice",
+        "quantity": 2,
+        "singular": "ciabatta slice",
+        "plural": "ciabatta slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "grilled chicken breast",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "BBQ sauce",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "red onion",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat half the olive oil in a skillet over medium heat. Add sliced red onion and cook until soft and golden, about 5 minutes; remove and set aside.",
+      "In the same skillet, add the chicken and warm through, about 2–3 minutes. Stir back in the onions, add BBQ sauce, and toss to coat.",
+      "Preheat a panini press. Assemble the sandwich: layer chicken mixture and cheese between the ciabatta slices, brush outsides with remaining oil, press until golden and cheese is melted.",
+      "Slice in half and serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Steak Fajita Wrap",
+    "calories": 670,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.35,
+      "fats": 0.35
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "lean steak strips",
+        "quantity": 140,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "onion",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "black beans",
+        "quantity": 60,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "shredded cheddar cheese",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "guacamole",
+        "quantity": 30,
+        "unit": "g",
+        "category": "misc"
+      },
+      {
+        "name": "sour cream",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat olive oil in a skillet over medium heat. Add steak strips and cook until browned, about 3–4 minutes; remove and set aside.",
+      "Add onion and bell pepper to the skillet and sauté until tender, about 3 minutes. Return steak and stir in black beans to warm through.",
+      "Warm the tortilla, layer the filling mixture down the center, sprinkle with cheese, add guacamole and sour cream, wrap up tightly, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Salmon & Quinoa Power Bowl",
+    "calories": 675,
+    "macroRatio": {
+      "protein": 0.25,
+      "carbs": 0.45,
+      "fats": 0.30
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish"],
+    "ingredients": [
+      {
+        "name": "grilled salmon",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cooked quinoa",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "roasted sweet potato",
+        "quantity": 120,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "mixed greens",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "avocado",
+        "quantity": 40,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "chia seeds",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Place mixed greens in a bowl.",
+      "Top with salmon, quinoa, sweet potato, and avocado.",
+      "Drizzle with olive oil and lemon juice, sprinkle chia seeds, toss lightly, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Roast Beef & Horseradish Sandwich",
+    "calories": 670,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.30,
+      "fats": 0.40
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole-grain bread",
+        "quantity": 2,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "roast beef slices",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "horseradish mayonnaise",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "lettuce",
+        "quantity": 20,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "tomato",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      }
+    ],
+    "recipe": [
+      "Spread horseradish mayonnaise on each bread slice.",
+      "Layer roast beef, cheese, lettuce, and tomato between the slices.",
+      "Close sandwich, slice in half, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Steak & Avocado Burrito Deluxe",
+    "calories": 720,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.45,
+      "fats": 0.25
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "lean steak strips",
+        "quantity": 140,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cooked brown rice",
+        "quantity": 120,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "black beans",
+        "quantity": 60,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "shredded cheddar cheese",
+        "quantity": 25,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "salsa",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat olive oil in a skillet over medium heat; sauté steak strips until browned, about 4 minutes.",
+      "Warm the tortilla briefly in the same pan.",
+      "Layer steak, rice, beans, cheese, avocado slices, and salsa down the center of the tortilla.",
+      "Roll up tightly, slice in half, and serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Chicken Alfredo Penne",
+    "calories": 725,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.48,
+      "fats": 0.20
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "penne pasta",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "grilled chicken breast",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "broccoli florets",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "alfredo sauce",
+        "quantity": 60,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 15,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Cook penne according to package instructions; drain and set aside.",
+      "In a skillet, heat olive oil over medium heat; add broccoli and cook 2–3 minutes.",
+      "Add chicken and alfredo sauce; stir to combine and heat through.",
+      "Toss in pasta, sprinkle Parmesan, and serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "BBQ Pulled Pork Sandwich",
+    "calories": 715,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.42,
+      "fats": 0.28
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten"],
+    "ingredients": [
+      {
+        "name": "whole-grain bun",
+        "quantity": 1,
+        "singular": "bun",
+        "plural": "buns",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "pulled pork",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "BBQ sauce",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "coleslaw",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "butter",
+        "quantity": 5,
+        "unit": "g",
+        "category": "dairy"
+      }
+    ],
+    "recipe": [
+      "Warm the bun and lightly butter each half; set aside.",
+      "Heat pulled pork in a saucepan with BBQ sauce until hot, about 3 minutes.",
+      "Pile the pork onto the bun bottom, top with coleslaw, close with the top bun and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Salmon & Quinoa Power Bowl",
+    "calories": 730,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.44,
+      "fats": 0.28
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish"],
+    "ingredients": [
+      {
+        "name": "grilled salmon",
+        "quantity": 140,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cooked quinoa",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "roasted vegetables",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "avocado",
+        "quantity": 40,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Arrange quinoa and roasted vegetables in a bowl.",
+      "Top with grilled salmon and avocado slices.",
+      "Drizzle olive oil and lemon juice, toss lightly, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Beef & Bean Burrito Deluxe",
+    "calories": 770,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.45,
+      "fats": 0.23
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","dairy"],
+    "ingredients": [
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "lean beef strips",
+        "quantity": 160,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "black beans",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cooked brown rice",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "shredded cheddar cheese",
+        "quantity": 25,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "avocado",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "salsa",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "sour cream",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 7,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat olive oil in a skillet over medium heat; sauté beef strips until browned, about 4 minutes.",
+      "Warm tortilla in the pan briefly.",
+      "Layer beef, beans, rice, cheese, avocado, salsa, and sour cream down the center of the tortilla.",
+      "Roll up tightly, slice in half, and serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Creamy Chicken Alfredo Bake",
+    "calories": 775,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.50,
+      "fats": 0.20
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","dairy"],
+    "ingredients": [
+      {
+        "name": "penne pasta",
+        "quantity": 120,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "grilled chicken breast",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "alfredo sauce",
+        "quantity": 80,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "broccoli florets",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 180°C (350°F). Cook pasta al dente, drain and place in a baking dish.",
+      "Toss chicken and broccoli with olive oil, then arrange over pasta.",
+      "Pour alfredo sauce on top, sprinkle Parmesan, bake 15–20 minutes until bubbly and golden.",
+      "Let rest 2 minutes before serving."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Smoked Salmon & Avocado Bagel Plate",
+    "calories": 765,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.47,
+      "fats": 0.25
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","dairy","fish"],
+    "ingredients": [
+      {
+        "name": "everything bagel",
+        "quantity": 1,
+        "singular": "bagel",
+        "plural": "bagels",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "light cream cheese",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "smoked salmon",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 60,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "capers",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "fresh dill",
+        "quantity": 1,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Slice and toast the bagel until golden.",
+      "Spread cream cheese on each half, top one with avocado slices tossed in lemon juice and dill, the other with smoked salmon and capers.",
+      "Drizzle both with olive oil and serve side by side."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "BBQ Chicken Rice Bowl",
+    "calories": 770,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.48,
+      "fats": 0.22
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "cooked brown rice",
+        "quantity": 120,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "grilled chicken breast",
+        "quantity": 140,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "BBQ sauce",
+        "quantity": 40,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "corn kernels",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "black beans",
+        "quantity": 50,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "shredded cheddar cheese",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "jalapeños",
+        "quantity": 10,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toss chicken in BBQ sauce and warm through.",
+      "Layer rice, corn, beans, chicken, cheese, and jalapeños in a bowl.",
+      "Drizzle olive oil and serve."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "Chicken Bacon Ranch Wrap",
+    "calories": 820,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.45,
+      "fats": 0.23
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "grilled chicken breast",
+        "quantity": 140,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "bacon",
+        "quantity": 50,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "ranch dressing",
+        "quantity": 40,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "avocado",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat olive oil in a skillet over medium heat and crisp the bacon; remove and chop.",
+      "In the same pan, warm the tortilla briefly, then layer chicken, bacon, spinach, cheese, avocado, and ranch.",
+      "Roll up tightly, slice in half, and serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Loaded Beef Nachos Bowl",
+    "calories": 820,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.48,
+      "fats": 0.22
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "tortilla chips",
+        "quantity": 70,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "lean beef strips",
+        "quantity": 140,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "black beans",
+        "quantity": 60,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "salsa",
+        "quantity": 40,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "sour cream",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "avocado",
+        "quantity": 30,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "jalapeños",
+        "quantity": 10,
+        "unit": "g",
+        "category": "vegetables"
+      }
+    ],
+    "recipe": [
+      "Layer tortilla chips in a bowl.",
+      "Top with warm beef, beans, cheese, salsa, sour cream, avocado, and jalapeños.",
+      "Serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Shrimp Fried Rice",
+    "calories": 820,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.50,
+      "fats": 0.22
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["egg", "soy", "sesame"],
+    "ingredients": [
+      {
+        "name": "cooked jasmine rice",
+        "quantity": 200,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "shrimp",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "peas & carrots mix",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "egg white",
+        "quantity": 1,
+        "singular": "egg white",
+        "plural": "egg whites",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "soy sauce",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "sesame oil",
+        "quantity": 7,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat olive oil in a wok over medium-high heat. Add shrimp and stir-fry until pink; remove and set aside.",
+      "Add sesame oil, then peas & carrots; cook 2 minutes.",
+      "Push veggies aside, scramble egg and egg white until set.",
+      "Add rice, shrimp, and soy sauce; stir-fry until heated through, then serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Salmon Alfredo Pasta Bake",
+    "calories": 820,
+    "macroRatio": {
+      "protein": 0.26,
+      "carbs": 0.47,
+      "fats": 0.27
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy", "fish"],
+    "ingredients": [
+      {
+        "name": "cooked penne pasta",
+        "quantity": 120,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "smoked salmon",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "alfredo sauce",
+        "quantity": 80,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "broccoli florets",
+        "quantity": 70,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "garlic",
+        "quantity": 3,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "fresh parsley",
+        "quantity": 2,
+        "unit": "g",
+        "category": "misc"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 180°C (350°F). In a baking dish, combine pasta, alfredo sauce, salmon, broccoli, garlic, and olive oil.",
+      "Top with Parmesan, bake 12–15 minutes until bubbly.",
+      "Garnish with parsley and serve warm."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Beef & Broccoli Stir-Fry with Rice Noodles",
+    "calories": 870,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.45,
+      "fats": 0.25
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["soy"],
+    "ingredients": [
+      {
+        "name": "rice noodles",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "lean beef strips",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "broccoli florets",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "onion",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "soy sauce",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "sesame oil",
+        "quantity": 7,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "garlic",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "ginger",
+        "quantity": 3,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Soak rice noodles according to package directions; drain and set aside.",
+      "Heat olive oil and sesame oil in a wok over high heat. Add garlic and ginger; stir-fry 30 seconds.",
+      "Add beef strips; cook until browned, about 3 minutes. Remove and set aside.",
+      "Add broccoli, pepper, and onion; stir-fry 2–3 minutes until tender-crisp.",
+      "Return beef and noodles to the wok; pour in soy sauce, toss to coat, and serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Chicken Parmesan Sandwich & Kale Salad",
+    "calories": 870,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.40,
+      "fats": 0.28
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "Italian roll",
+        "quantity": 1,
+        "singular": "roll",
+        "plural": "rolls",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "breaded chicken breast",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "marinara sauce",
+        "quantity": 60,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "mozzarella",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "kale",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cherry tomatoes",
+        "quantity": 40,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 7,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "balsamic vinegar",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toast roll lightly under the broiler; set aside.",
+      "Cook breaded chicken according to package, then top with marinara and mozzarella; bake 3–4 minutes until cheese melts.",
+      "Toss kale and tomatoes with olive oil and balsamic; serve alongside open-faced sandwich."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Loaded Steak Fajita Quesadilla",
+    "calories": 870,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.40,
+      "fats": 0.30
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "lean steak strips",
+        "quantity": 140,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "onion",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "black beans",
+        "quantity": 60,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "guacamole",
+        "quantity": 30,
+        "unit": "g",
+        "category": "misc"
+      },
+      {
+        "name": "sour cream",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat olive oil in a skillet; sauté steak, pepper, and onion until tender, about 4 minutes; remove and set aside.",
+      "Place tortilla in pan, sprinkle half the cheese, top with steak mixture, guacamole, sour cream, and remaining cheese.",
+      "Cover with second tortilla, cook 2–3 minutes per side until golden and cheese melts; slice and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Shrimp & Avocado Cajun Rice Bowl",
+    "calories": 870,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.45,
+      "fats": 0.27
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["shellfish"],
+    "ingredients": [
+      {
+        "name": "cooked jasmine rice",
+        "quantity": 150,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "shrimp",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "black beans",
+        "quantity": 50,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "corn kernels",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "avocado",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "cajun seasoning",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 7,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "scallions",
+        "quantity": 10,
+        "unit": "g",
+        "category": "vegetables"
+      }
+    ],
+    "recipe": [
+      "Toss shrimp with cajun seasoning; sauté in olive oil until pink, about 3 minutes; remove.",
+      "Layer rice, beans, corn, shrimp, and avocado in a bowl.",
+      "Drizzle with lemon juice, sprinkle scallions, and serve."
+    ],
+    "mealNotes": []
+  },
+    {
+    "mealName": "BBQ Pulled Pork Rice & Slaw Bowl",
+    "calories": 920,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.47,
+      "fats": 0.25
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "cooked brown rice",
+        "quantity": 150,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "pulled pork",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "BBQ sauce",
+        "quantity": 40,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "coleslaw mix",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "avocado",
+        "quantity": 40,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat the pulled pork with BBQ sauce in a saucepan until warmed through, about 3–4 minutes.",
+      "Place rice in a bowl, top with BBQ pulled pork and coleslaw mix.",
+      "Sprinkle cheddar and avocado slices over the top, drizzle with olive oil, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Chicken Alfredo Ravioli Bake",
+    "calories": 925,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.50,
+      "fats": 0.20
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","dairy"],
+    "ingredients": [
+      {
+        "name": "cheese ravioli",
+        "quantity": 200,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "grilled chicken breast",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "alfredo sauce",
+        "quantity": 80,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "mozzarella",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 180 °C (350 °F). Toss ravioli and spinach with olive oil in a baking dish.",
+      "Top with chicken and alfredo sauce; sprinkle mozzarella.",
+      "Bake 12–15 minutes until bubbly and cheese is golden. Serve warm."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Surf & Turf Fajita Burrito",
+    "calories": 920,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.43,
+      "fats": 0.25
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","shellfish"],
+    "ingredients": [
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "lean steak strips",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "shrimp",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cooked rice",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "onion",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 25,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "salsa",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "guacamole",
+        "quantity": 30,
+        "unit": "g",
+        "category": "misc"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat olive oil in a skillet; sauté steak and shrimp with peppers and onion until cooked through, about 4 min.",
+      "Warm tortilla, layer rice, steak–shrimp mixture, cheese, salsa, and guacamole.",
+      "Roll up burrito-style, slice in half, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Salmon & Avocado Toast Feast",
+    "calories": 915,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.42,
+      "fats": 0.28
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","dairy","fish"],
+    "ingredients": [
+      {
+        "name": "whole-grain bread",
+        "quantity": 3,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "smoked salmon",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 60,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "cream cheese",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "cucumber",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "capers",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toast bread until golden.",
+      "Spread cream cheese on each slice; top one with mashed avocado, cucumber, and lemon juice, the others with salmon and capers.",
+      "Drizzle olive oil over all slices and serve as a platter."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "Surf & Turf Fajita Burrito Supreme",
+    "calories": 970,
+    "macroRatio": {
+      "protein": 0.33,
+      "carbs": 0.44,
+      "fats": 0.23
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","dairy","shellfish"],
+    "ingredients": [
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "lean steak strips",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "shrimp",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "black beans",
+        "quantity": 60,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cooked brown rice",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "shredded cheddar cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "guacamole",
+        "quantity": 40,
+        "unit": "g",
+        "category": "misc"
+      },
+      {
+        "name": "sour cream",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "salsa",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat olive oil in a skillet over medium heat; sauté steak strips until browned, about 4 minutes.",
+      "Add shrimp and cook until pink, about 3 minutes; stir in beans and rice to warm through.",
+      "Warm the tortilla briefly, layer the filling down the center, roll up tightly, slice in half, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Creamy Shrimp Alfredo Penne Bake",
+    "calories": 975,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.50,
+      "fats": 0.20
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","dairy","shellfish"],
+    "ingredients": [
+      {
+        "name": "penne pasta",
+        "quantity": 120,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "shrimp",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "alfredo sauce",
+        "quantity": 100,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "mozzarella",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "garlic",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 180°C (350°F). Cook pasta al dente, drain and toss with olive oil.",
+      "Stir shrimp, spinach, garlic, and alfredo sauce into the pasta; transfer to a baking dish.",
+      "Top with mozzarella and bake 12–15 minutes until bubbly and golden, then serve warm."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Triple-Decker Turkey Bacon Club",
+    "calories": 970,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.30,
+      "fats": 0.40
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","dairy"],
+    "ingredients": [
+      {
+        "name": "whole-grain bread",
+        "quantity": 3,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "turkey breast slices",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "bacon",
+        "quantity": 50,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 60,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "mayonnaise",
+        "quantity": 25,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "lettuce",
+        "quantity": 20,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "tomato",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      }
+    ],
+    "recipe": [
+      "Toast bread slices lightly.",
+      "Spread mayonnaise on each slice; layer turkey, bacon, avocado, cheese, lettuce, and tomato between slices to form a triple-decker.",
+      "Secure with toothpicks, slice in half, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Salmon & Power Grain Nourish Bowl",
+    "calories": 965,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.43,
+      "fats": 0.25
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish"],
+    "ingredients": [
+      {
+        "name": "grilled salmon",
+        "quantity": 140,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cooked farro",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "roasted sweet potato",
+        "quantity": 120,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "edamame",
+        "quantity": 60,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "kale",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "avocado",
+        "quantity": 40,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Place farro, sweet potato, edamame, and kale in a bowl.",
+      "Top with salmon and avocado.",
+      "Drizzle olive oil and lemon juice, toss gently, and serve."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "Ultimate Steak & Shrimp Surf & Turf Burrito",
+    "calories": 1015,
+    "macroRatio": {
+      "protein": 0.34,
+      "carbs": 0.43,
+      "fats": 0.23
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","shellfish"],
+    "ingredients": [
+      {
+        "name": "large flour tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "lean steak strips",
+        "quantity": 140,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "shrimp",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cooked brown rice",
+        "quantity": 120,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "black beans",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "shredded Monterey Jack cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "guacamole",
+        "quantity": 50,
+        "unit": "g",
+        "category": "misc"
+      },
+      {
+        "name": "sour cream",
+        "quantity": 25,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "salsa verde",
+        "quantity": 40,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat olive oil in a skillet over medium-high heat; sauté steak strips until browned, about 4 minutes.",
+      "Add shrimp and cook until pink and opaque, about 3 minutes; stir in beans and rice to warm through.",
+      "Warm the tortilla, layer the filling, then top with cheese, guacamole, sour cream, and salsa verde.",
+      "Roll up burrito-style, slice in half, and serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "BBQ Ribs Plate with Sweet Potato Mash & Slaw",
+    "calories": 1015,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.45,
+      "fats": 0.25
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "pork ribs (boneless)",
+        "quantity": 180,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "BBQ sauce",
+        "quantity": 50,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "sweet potato mash",
+        "quantity": 200,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "coleslaw mix",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "Greek yogurt",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 160 °C (320 °F). Brush ribs with BBQ sauce, wrap in foil, and bake 1 hour until tender.",
+      "Steam or bake sweet potatoes, mash with a touch of oil and seasoning.",
+      "Toss coleslaw mix with Greek yogurt and a drizzle of olive oil; serve alongside ribs and mash."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Lamb Gyro Plate with Tzatziki & Pita",
+    "calories": 1020,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.44,
+      "fats": 0.28
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","dairy"],
+    "ingredients": [
+      {
+        "name": "pita bread",
+        "quantity": 1,
+        "singular": "pita",
+        "plural": "pitas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "ground lamb",
+        "quantity": 160,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "mixed lettuce",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "tomato",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "red onion",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "tzatziki sauce",
+        "quantity": 50,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Sauté lamb in olive oil over medium heat until browned and cooked, about 6 minutes; season with oregano and garlic.",
+      "Warm pita, then layer lettuce, tomato, onion, and lamb.",
+      "Drizzle tzatziki over top, fold pita, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Pasta Carbonara with Pancetta & Peas",
+    "calories": 1025,
+    "macroRatio": {
+      "protein": 0.27,
+      "carbs": 0.50,
+      "fats": 0.23
+    },
+    "category": "Lunch",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","dairy","egg"],
+    "ingredients": [
+      {
+        "name": "spaghetti",
+        "quantity": 120,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "pancetta",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "egg yolk",
+        "quantity": 1,
+        "category": "protein"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "frozen peas",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "black pepper",
+        "quantity": 2,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Cook spaghetti until al dente; reserve 60 ml pasta water and drain.",
+      "Sauté pancetta in olive oil until crisp; add peas, cook 1 minute.",
+      "Whisk egg, yolk, cheese, and pepper in a bowl.",
+      "Return pasta to pot off heat; quickly stir in egg mixture, adding pasta water a splash at a time until creamy.",
+      "Fold in pancetta and peas, adjust seasoning, and serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Lemon Herb Grilled Chicken & Asparagus",
+    "calories": 500,
+    "macroRatio": {
+      "protein": 0.45,
+      "carbs": 0.15,
+      "fats": 0.40
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "chicken breast",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "asparagus spears",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon",
+        "quantity": 1,
+        "singular": "lemon",
+        "plural": "lemons",
+        "wholeItem": true,
+        "category": "fruits"
+      },
+      {
+        "name": "garlic",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "mixed herbs",
+        "quantity": 2,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Marinate chicken in olive oil, lemon juice, minced garlic, and herbs for 15 minutes.",
+      "Grill chicken over medium heat 6–7 minutes per side until cooked through.",
+      "Toss asparagus with a drizzle of oil and a squeeze of lemon; grill 3–4 minutes until tender-crisp.",
+      "Slice chicken, plate with asparagus, and garnish with lemon wedges."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Turkey & Veggie Stir-Fry with Cauliflower Rice",
+    "calories": 500,
+    "macroRatio": {
+      "protein": 0.40,
+      "carbs": 0.20,
+      "fats": 0.40
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["soy"],
+    "ingredients": [
+      {
+        "name": "ground turkey",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "mixed bell peppers",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "onion",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "soy sauce",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "sesame oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "cauliflower rice",
+        "quantity": 200,
+        "unit": "g",
+        "category": "vegetables"
+      }
+    ],
+    "recipe": [
+      "Heat sesame oil in a skillet over medium-high; sauté onion and peppers 3–4 minutes.",
+      "Add turkey and soy sauce; cook until turkey is no longer pink, about 5 minutes.",
+      "In a separate pan, lightly sauté cauliflower rice 2–3 minutes.",
+      "Serve stir-fry over cauliflower rice."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Salmon Poke Bowl",
+    "calories": 500,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.40,
+      "fats": 0.25
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish", "soy"],
+    "ingredients": [
+      {
+        "name": "sushi-grade salmon",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cooked sushi rice",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "cucumber",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "edamame",
+        "quantity": 50,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "soy sauce",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "sesame seeds",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Arrange rice in a bowl.",
+      "Top with diced salmon, cucumber, edamame, and avocado.",
+      "Drizzle soy sauce and sprinkle sesame seeds before serving."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Beef & Sweet Potato Skillet",
+    "calories": 500,
+    "macroRatio": {
+      "protein": 0.38,
+      "carbs": 0.32,
+      "fats": 0.30
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "lean ground beef",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "sweet potato",
+        "quantity": 150,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "spinach",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "onion",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "garlic",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat half the oil in a skillet; sauté onion, garlic, and diced sweet potato until tender, about 8 minutes.",
+      "Push veggies aside; add beef and cook until browned, about 5 minutes; stir to combine.",
+      "Add spinach and remaining oil; cook until wilted, then serve hot."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Garlic Lemon Butter Cod & Broccoli",
+    "calories": 550,
+    "macroRatio": {
+      "protein": 0.40,
+      "carbs": 0.10,
+      "fats": 0.50
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish", "dairy"],
+    "ingredients": [
+      {
+        "name": "cod fillet",
+        "quantity": 180,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "broccoli florets",
+        "quantity": 150,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "butter",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "lemon",
+        "quantity": 1,
+        "singular": "lemon",
+        "plural": "lemons",
+        "wholeItem": true,
+        "category": "fruits"
+      },
+      {
+        "name": "garlic",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 200°C (400°F). Place cod on a lined baking sheet.",
+      "Melt butter with minced garlic and lemon juice; brush over cod.",
+      "Toss broccoli in olive oil, salt, and pepper; spread beside fish.",
+      "Bake 12–15 minutes until cod flakes and broccoli is tender. Serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Turkey Meatballs with Zucchini Noodles",
+    "calories": 550,
+    "macroRatio": {
+      "protein": 0.45,
+      "carbs": 0.20,
+      "fats": 0.35
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["egg", "dairy"],
+    "ingredients": [
+      {
+        "name": "ground turkey",
+        "quantity": 180,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "zucchini",
+        "quantity": 200,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "marinara sauce",
+        "quantity": 100,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 190°C (375°F). In a bowl, mix turkey, egg, Parmesan, salt, and pepper; form into 8 meatballs.",
+      "Bake meatballs 15–18 minutes until cooked through.",
+      "Meanwhile, spiralize zucchini and sauté in olive oil 2–3 minutes until just tender.",
+      "Top zucchini noodles with meatballs and warmed marinara sauce. Serve hot."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Beef & Black Bean Chili",
+    "calories": 550,
+    "macroRatio": {
+      "protein": 0.40,
+      "carbs": 0.30,
+      "fats": 0.30
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "lean ground beef",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "black beans",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "diced tomatoes",
+        "quantity": 120,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "onion",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "chili powder",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat oil in a pot over medium heat; sauté onion and pepper until soft, 4 minutes.",
+      "Add beef and chili powder; cook until beef browns, 5 minutes.",
+      "Stir in beans and tomatoes; simmer 10–12 minutes. Serve hot."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Shrimp & Vegetable Skewers with Quinoa",
+    "calories": 550,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.35,
+      "fats": 0.30
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["shellfish"],
+    "ingredients": [
+      {
+        "name": "shrimp",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "zucchini",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "mixed herbs",
+        "quantity": 3,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "cooked quinoa",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      }
+    ],
+    "recipe": [
+      "Preheat grill or broiler. Thread shrimp, pepper, and zucchini onto skewers; brush with oil and herbs.",
+      "Grill or broil 2–3 minutes per side until shrimp are pink and veggies are charred.",
+      "Serve skewers over warm quinoa."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Grilled Salmon with Sweet Potato & Asparagus",
+    "calories": 600,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.30,
+      "fats": 0.42
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish"],
+    "ingredients": [
+      {
+        "name": "salmon fillet",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "sweet potato",
+        "quantity": 150,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "asparagus spears",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon",
+        "quantity": 1,
+        "singular": "lemon",
+        "plural": "lemons",
+        "wholeItem": true,
+        "category": "fruits"
+      },
+      {
+        "name": "garlic",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat grill to medium-high. Toss sweet potato cubes in half the olive oil; roast or grill 10–12 minutes until tender.",
+      "Brush salmon and asparagus with remaining oil, minced garlic, and lemon juice; grill salmon 4–5 minutes per side and asparagus 3–4 minutes.",
+      "Plate salmon alongside sweet potato and asparagus; garnish with lemon wedges and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Turkey & Black Bean Chili over Brown Rice",
+    "calories": 600,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.38,
+      "fats": 0.30
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "ground turkey",
+        "quantity": 140,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "black beans",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "diced tomatoes",
+        "quantity": 100,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "onion",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "chili powder",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "cooked brown rice",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      }
+    ],
+    "recipe": [
+      "Heat olive oil in a pot; sauté chopped onion 3–4 minutes until translucent.",
+      "Add turkey and chili powder; cook until browned, about 5 minutes.",
+      "Stir in beans and tomatoes; simmer 10 minutes.",
+      "Serve chili over brown rice."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Chicken & Veggie Stir-Fry with Jasmine Rice",
+    "calories": 600,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.40,
+      "fats": 0.25
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["soy"],
+    "ingredients": [
+      {
+        "name": "chicken breast",
+        "quantity": 140,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "mixed vegetables",
+        "quantity": 150,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "soy sauce",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "sesame oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "garlic",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "cooked jasmine rice",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      }
+    ],
+    "recipe": [
+      "Heat sesame oil in a wok or skillet; add minced garlic and stir-fry 30 seconds.",
+      "Add chicken strips; cook until no longer pink, about 5 minutes.",
+      "Toss in vegetables and soy sauce; stir-fry 3–4 minutes until crisp-tender.",
+      "Serve stir-fry over jasmine rice."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Shrimp Scampi with Zucchini Noodles",
+    "calories": 600,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.25,
+      "fats": 0.45
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["shellfish", "dairy"],
+    "ingredients": [
+      {
+        "name": "shrimp",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "zucchini",
+        "quantity": 200,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "butter",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "garlic",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon",
+        "quantity": 1,
+        "singular": "lemon",
+        "plural": "lemons",
+        "wholeItem": true,
+        "category": "fruits"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Spiralize zucchini into noodles; set aside.",
+      "Melt butter and oil in a skillet; add garlic and cook 30 seconds.",
+      "Add shrimp; cook 2–3 minutes per side until pink.",
+      "Remove shrimp; toss zucchini in skillet 1–2 minutes.",
+      "Return shrimp, squeeze lemon juice over, toss gently, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Honey Mustard Pork Chops with Roasted Vegetables",
+    "calories": 650,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.25,
+      "fats": 0.40
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "pork chop",
+        "quantity": 180,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "honey mustard sauce",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "sweet potato",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "brussels sprouts",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "rosemary",
+        "quantity": 2,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 200°C (400°F). Toss sweet potato cubes and halved Brussels sprouts in half the olive oil and rosemary; roast 20–25 minutes.",
+      "Season pork chop with salt and pepper; grill or pan-sear in remaining oil 4–5 minutes per side.",
+      "Brush chops with honey mustard sauce during last minute of cooking.",
+      "Serve pork chops alongside roasted vegetables."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Beef Stroganoff over Egg Noodles",
+    "calories": 650,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.45,
+      "fats": 0.25
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "lean beef strips",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg noodles",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "mushrooms",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "onion",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "Greek yogurt",
+        "quantity": 50,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "paprika",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Cook egg noodles according to package; drain and set aside.",
+      "Heat oil in a skillet; sauté onion and mushrooms until soft, 4 minutes.",
+      "Add beef and paprika; cook until beef is browned.",
+      "Stir in Greek yogurt off heat to create a creamy sauce; serve over noodles."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Teriyaki Salmon with Stir-Fry Veggies",
+    "calories": 650,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.28,
+      "fats": 0.40
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish", "soy"],
+    "ingredients": [
+      {
+        "name": "salmon fillet",
+        "quantity": 180,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "teriyaki sauce",
+        "quantity": 40,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "broccoli florets",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "snap peas",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "carrot",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "sesame seeds",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Brush salmon with teriyaki sauce; grill or broil 4–5 minutes per side.",
+      "Heat oil in a wok; stir-fry broccoli, peas, and sliced carrot 3–4 minutes.",
+      "Slice salmon, place atop veggies, drizzle extra sauce, and sprinkle sesame seeds."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Chicken Parmesan with Zucchini Noodles",
+    "calories": 650,
+    "macroRatio": {
+      "protein": 0.34,
+      "carbs": 0.25,
+      "fats": 0.41
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy", "egg", "gluten"],
+    "ingredients": [
+      {
+        "name": "chicken breast",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "marinara sauce",
+        "quantity": 80,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "mozzarella",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "zucchini",
+        "quantity": 200,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 190°C (375°F). Pound chicken, dredge in beaten egg and Parmesan, then bake or pan-sear 6 minutes per side.",
+      "Top chicken with marinara and mozzarella; bake 3–4 minutes until cheese melts.",
+      "Spiralize zucchini and sauté in olive oil 2–3 minutes; serve chicken over zucchini noodles."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Beef Fajitas with Tortillas",
+    "calories": 700,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.40,
+      "fats": 0.30
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten"],
+    "ingredients": [
+      {
+        "name": "lean steak strips",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "onion",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 2,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "guacamole",
+        "quantity": 50,
+        "unit": "g",
+        "category": "misc"
+      },
+      {
+        "name": "sour cream",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      }
+    ],
+    "recipe": [
+      "Heat olive oil in a skillet over medium-high heat. Sauté steak, peppers, and onion until cooked through, about 5–6 minutes.",
+      "Warm tortillas in a dry pan for 30 seconds per side.",
+      "Serve steak mixture in tortillas topped with guacamole and sour cream."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Baked Chicken Alfredo Penne",
+    "calories": 700,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.45,
+      "fats": 0.27
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","dairy"],
+    "ingredients": [
+      {
+        "name": "penne pasta",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "grilled chicken breast",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "alfredo sauce",
+        "quantity": 100,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "broccoli florets",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 180°C (350°F). Cook pasta until al dente; drain and place in a baking dish.",
+      "Toss pasta with chicken, broccoli, alfredo sauce, and half the Parmesan.",
+      "Sprinkle remaining Parmesan on top and bake 12–15 minutes until golden and bubbly."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Seared Tuna Steak with Quinoa Salad",
+    "calories": 700,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.40,
+      "fats": 0.25
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish","gluten"],
+    "ingredients": [
+      {
+        "name": "tuna steak",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cooked quinoa",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "cherry tomatoes",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cucumber",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Season tuna with salt and pepper; sear in a hot skillet with half the oil 2–3 minutes per side for medium-rare.",
+      "Toss quinoa, tomatoes, and cucumber with remaining oil and lemon juice.",
+      "Slice tuna, serve atop quinoa salad."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Herb-Crusted Lamb Chops with Roasted Potatoes & Beans",
+    "calories": 700,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.37,
+      "fats": 0.35
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "lamb chops",
+        "quantity": 160,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "potato",
+        "quantity": 150,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "green beans",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "mixed herbs",
+        "quantity": 3,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "garlic",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 200°C (400°F). Toss potato cubes and green beans with half the oil, garlic, and herbs; roast 20–25 minutes.",
+      "Brush lamb chops with remaining oil, season, and pan-sear 3–4 minutes per side.",
+      "Serve lamb chops alongside roasted potatoes and beans."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Chicken Fettuccine Alfredo with Broccoli",
+    "calories": 750,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.50,
+      "fats": 0.20
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "penne pasta",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "chicken breast",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "alfredo sauce",
+        "quantity": 80,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "broccoli florets",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "butter",
+        "quantity": 10,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "garlic",
+        "quantity": 3,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Cook penne according to package directions; drain and set aside.",
+      "In a skillet, melt butter with olive oil; sauté minced garlic 1 minute.",
+      "Add chicken and cook until no longer pink, about 5 minutes.",
+      "Stir in alfredo sauce and broccoli; simmer 3–4 minutes.",
+      "Toss in pasta, sprinkle Parmesan, and serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Grilled Sirloin Steak with Garlic Mashed Potatoes & Green Beans",
+    "calories": 750,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.40,
+      "fats": 0.25
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "sirloin steak",
+        "quantity": 160,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "potato",
+        "quantity": 150,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "green beans",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "butter",
+        "quantity": 15,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "milk",
+        "quantity": 30,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "garlic",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "rosemary",
+        "quantity": 2,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Boil potatoes until tender, mash with butter, milk, garlic, salt, and pepper.",
+      "Toss green beans with half the olive oil and roast or sauté until crisp-tender, about 5 minutes.",
+      "Season steak, grill or pan-sear in remaining oil 4–5 minutes per side to desired doneness.",
+      "Serve steak with mashed potatoes and green beans."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Cajun Shrimp & Chicken Jambalaya",
+    "calories": 750,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.45,
+      "fats": 0.23
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["shellfish"],
+    "ingredients": [
+      {
+        "name": "shrimp",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "chicken breast",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "brown rice",
+        "quantity": 120,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "onion",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "celery",
+        "quantity": 40,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "tomato paste",
+        "quantity": 20,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "cajun seasoning",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "garlic",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat oil in a pot; sauté onion, pepper, celery, and garlic 3–4 minutes.",
+      "Add chicken, shrimp, and seasoning; cook until shrimp turn pink, about 5 minutes.",
+      "Stir in rice and tomato paste, cover with water, simmer 15–20 minutes until rice is tender.",
+      "Fluff and serve hot."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Vegetarian Chickpea Coconut Curry with Jasmine Rice",
+    "calories": 750,
+    "macroRatio": {
+      "protein": 0.20,
+      "carbs": 0.55,
+      "fats": 0.25
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "chickpeas",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "coconut milk",
+        "quantity": 100,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "spinach",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "carrot",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "onion",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "curry powder",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "ginger",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "jasmine rice",
+        "quantity": 120,
+        "unit": "g",
+        "category": "carbs"
+      }
+    ],
+    "recipe": [
+      "Heat oil in a pot; sauté onion, carrot, and ginger 3–4 minutes.",
+      "Add curry powder and chickpeas; stir to coat.",
+      "Pour in coconut milk, simmer 8–10 minutes until thickened.",
+      "Stir in spinach until wilted; serve over cooked jasmine rice."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Grilled Ribeye Steak with Garlic Butter & Roasted Potatoes",
+    "calories": 800,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.32,
+      "fats": 0.36
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "ribeye steak",
+        "quantity": 200,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "potato",
+        "quantity": 180,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "butter",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "garlic",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "rosemary",
+        "quantity": 2,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 200°C (400°F). Toss potato wedges in olive oil, salt, pepper, and rosemary; roast 25 minutes until golden.",
+      "Season steak with salt and pepper; grill or pan-sear to desired doneness (≈4–5 minutes per side for medium).",
+      "Melt butter with minced garlic; brush over steak before serving.",
+      "Plate steak alongside potatoes and spoon any garlic butter over potatoes."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Seafood Paella",
+    "calories": 800,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.42,
+      "fats": 0.28
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["shellfish"],
+    "ingredients": [
+      {
+        "name": "saffron rice",
+        "quantity": 150,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "shrimp",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "mussels",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "chicken thigh",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "peas",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "tomato",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "paprika",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat oil in a paella pan; sauté chicken pieces until golden, remove and set aside.",
+      "Add bell pepper, tomato, and paprika; cook 2 minutes.",
+      "Stir in rice and saffron-infused broth; bring to a simmer.",
+      "Nestle shrimp, mussels, and chicken into the rice; sprinkle peas on top.",
+      "Cook without stirring over medium-low until liquid is absorbed (≈15 minutes); rest 5 minutes before serving."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Chicken Tikka Masala with Basmati Rice & Naan",
+    "calories": 800,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.50,
+      "fats": 0.22
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy","gluten"],
+    "ingredients": [
+      {
+        "name": "chicken breast",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "tikka masala sauce",
+        "quantity": 120,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "Greek yogurt",
+        "quantity": 50,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "basmati rice",
+        "quantity": 120,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "naan bread",
+        "quantity": 1,
+        "singular": "piece",
+        "plural": "pieces",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Marinate chicken in half the yogurt and spices for 15 minutes; grill or sauté until cooked.",
+      "Heat tikka sauce in a pan; stir in remaining yogurt and cooked chicken; simmer 5 minutes.",
+      "Cook rice according to package.",
+      "Warm naan in oven; serve curry over rice with naan on the side."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "BBQ Glazed Pork Tenderloin with Corn on the Cob & Slaw",
+    "calories": 800,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.40,
+      "fats": 0.30
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "pork tenderloin",
+        "quantity": 180,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "BBQ sauce",
+        "quantity": 40,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "corn on the cob",
+        "quantity": 150,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "coleslaw mix",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "Greek yogurt",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "apple cider vinegar",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 200°C (400°F). Brush tenderloin with BBQ sauce; roast 20–25 minutes until 65°C internal.",
+      "Boil or grill corn until tender, brush with butter if desired.",
+      "Toss slaw mix with yogurt, vinegar, oil, salt, and pepper.",
+      "Slice pork, serve with corn and slaw."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Teriyaki Beef & Pineapple Rice Bowl",
+    "calories": 850,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.50,
+      "fats": 0.20
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["soy","gluten"],
+    "ingredients": [
+      {
+        "name": "lean beef strips",
+        "quantity": 140,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "pineapple chunks",
+        "quantity": 100,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "cooked jasmine rice",
+        "quantity": 180,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "teriyaki sauce",
+        "quantity": 40,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "broccoli florets",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "sesame oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "green onion",
+        "quantity": 10,
+        "unit": "g",
+        "category": "vegetables"
+      }
+    ],
+    "recipe": [
+      "Heat sesame oil in a skillet over medium-high heat. Add beef and stir-fry until browned, about 4 minutes.",
+      "Stir in teriyaki sauce, pineapple, and broccoli; cook 3–4 minutes until heated through.",
+      "Serve over jasmine rice, garnish with sliced green onion."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Cajun Chicken Alfredo Bake",
+    "calories": 850,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.45,
+      "fats": 0.27
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy","gluten"],
+    "ingredients": [
+      {
+        "name": "penne pasta",
+        "quantity": 120,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "grilled chicken breast",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "alfredo sauce",
+        "quantity": 100,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "cajun seasoning",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "mozzarella",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 180°C (350°F). Toss cooked penne, chicken, sauce, cajun seasoning, and pepper in a baking dish.",
+      "Sprinkle mozzarella on top and bake 12–15 minutes until cheese is melted and bubbly.",
+      "Rest 2 minutes before serving."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Apple Cider-Glazed Pork Chops & Sweet Potato Mash",
+    "calories": 850,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.45,
+      "fats": 0.25
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "pork chop",
+        "quantity": 180,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "apple cider",
+        "quantity": 60,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "sweet potato",
+        "quantity": 200,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "rosemary",
+        "quantity": 2,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Boil sweet potato until tender, mash with half the oil, salt, and pepper; keep warm.",
+      "Season pork and sear in remaining oil 4–5 minutes per side until cooked.",
+      "Deglaze pan with apple cider, reduce to a glaze consistency, then brush over chops.",
+      "Serve chops alongside sweet potato mash."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Shrimp Pad Thai",
+    "calories": 850,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.52,
+      "fats": 0.20
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["shellfish","peanuts","egg","soy"],
+    "ingredients": [
+      {
+        "name": "rice noodles",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "shrimp",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "bean sprouts",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "green onion",
+        "quantity": 20,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "peanuts",
+        "quantity": 15,
+        "unit": "g",
+        "category": "misc"
+      },
+      {
+        "name": "pad thai sauce",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Soak noodles per package instructions; drain and set aside.",
+      "Heat oil in a wok; scramble egg, then add shrimp and cook until pink.",
+      "Add noodles and pad thai sauce; toss to coat.",
+      "Stir in sprouts and onion; cook 1–2 minutes, then top with peanuts and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Spinach & Ricotta Stuffed Shells",
+    "calories": 900,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.50,
+      "fats": 0.18
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["dairy", "gluten", "egg"],
+    "ingredients": [
+      {
+        "name": "jumbo pasta shells",
+        "quantity": 150,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "ricotta cheese",
+        "quantity": 120,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "spinach",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "mozzarella",
+        "quantity": 50,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "marinara sauce",
+        "quantity": 150,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "garlic",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 180°C (350°F). Cook shells until al dente; drain.",
+      "Sauté garlic in olive oil, add spinach until wilted; cool slightly.",
+      "Mix spinach, ricotta, and egg; fill shells and place in baking dish.",
+      "Cover with marinara and mozzarella; bake 20 minutes until bubbly."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Beef & Vegetable Stir-Fry with Brown Rice",
+    "calories": 900,
+    "macroRatio": {
+      "protein": 0.38,
+      "carbs": 0.42,
+      "fats": 0.20
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["soy"],
+    "ingredients": [
+      {
+        "name": "lean beef strips",
+        "quantity": 180,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "mixed stir-fry vegetables",
+        "quantity": 200,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "brown rice",
+        "quantity": 150,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "soy sauce",
+        "quantity": 20,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "sesame oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "garlic",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "ginger",
+        "quantity": 3,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Cook brown rice per package; keep warm.",
+      "Heat sesame oil in a wok; stir-fry garlic and ginger 30 seconds.",
+      "Add beef; cook 3–4 minutes until browned.",
+      "Add vegetables and soy sauce; stir-fry 4–5 minutes until tender-crisp.",
+      "Serve over brown rice."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Shrimp & Chicken Paella",
+    "calories": 900,
+    "macroRatio": {
+      "protein": 0.34,
+      "carbs": 0.44,
+      "fats": 0.22
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["shellfish"],
+    "ingredients": [
+      {
+        "name": "paella rice",
+        "quantity": 150,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "shrimp",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "chicken thigh",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "peas",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "saffron threads",
+        "quantity": 0.5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "paprika",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat oil in paella pan; brown chicken pieces, remove.",
+      "Sauté pepper, then stir in rice, saffron, paprika, and stock.",
+      "Nestle chicken and shrimp in rice; sprinkle peas.",
+      "Simmer without stirring until liquid is absorbed (~20 min); rest 5 min before serving."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Tofu & Vegetable Red Curry with Jasmine Rice",
+    "calories": 900,
+    "macroRatio": {
+      "protein": 0.25,
+      "carbs": 0.55,
+      "fats": 0.20
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["soy"],
+    "ingredients": [
+      {
+        "name": "firm tofu",
+        "quantity": 200,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "mixed curry vegetables",
+        "quantity": 200,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "red curry paste",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "coconut milk",
+        "quantity": 150,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "bamboo shoots",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "jasmine rice",
+        "quantity": 150,
+        "unit": "g",
+        "category": "carbs"
+      }
+    ],
+    "recipe": [
+      "Cook jasmine rice per package; keep warm.",
+      "Sauté curry paste in oil 1 minute; add tofu and vegetables, stir 2–3 minutes.",
+      "Pour in coconut milk and bamboo shoots; simmer 5–7 minutes.",
+      "Serve curry over jasmine rice."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Honey Garlic Glazed Salmon with Quinoa & Broccoli",
+    "calories": 950,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.38,
+      "fats": 0.30
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish"],
+    "ingredients": [
+      {
+        "name": "salmon fillet",
+        "quantity": 200,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "quinoa",
+        "quantity": 120,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "broccoli florets",
+        "quantity": 150,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "honey",
+        "quantity": 20,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "soy sauce",
+        "quantity": 20,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "garlic",
+        "quantity": 6,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Cook quinoa according to package instructions; keep warm.",
+      "Whisk honey, soy sauce, and minced garlic; brush over salmon.",
+      "Heat oil in a skillet over medium-high heat; sear salmon 4–5 minutes per side until glazed and cooked.",
+      "Steam or sauté broccoli until tender-crisp.",
+      "Serve salmon atop quinoa with broccoli on the side."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Steak Frites with Garlic Herb Butter",
+    "calories": 950,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.45,
+      "fats": 0.25
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "sirloin steak",
+        "quantity": 200,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "potato",
+        "quantity": 200,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "butter",
+        "quantity": 25,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "parsley",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "garlic",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Cut potatoes into fries, toss with oil, salt, and pepper; bake at 200°C (400°F) for 25–30 minutes until golden.",
+      "Mix softened butter with minced garlic and parsley; set aside.",
+      "Season steak, sear in a hot skillet 4–5 minutes per side for medium-rare.",
+      "Top steak with garlic herb butter and serve alongside fries."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Creamy Tuscan Chicken with Sun-Dried Tomatoes & Spinach",
+    "calories": 950,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.30,
+      "fats": 0.42
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "chicken breast",
+        "quantity": 180,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "sun-dried tomatoes",
+        "quantity": 40,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "spinach",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "heavy cream",
+        "quantity": 80,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "garlic",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Season chicken and sear in oil 5–6 minutes per side; remove and set aside.",
+      "Sauté garlic and sun-dried tomatoes in the same pan, add cream and bring to simmer.",
+      "Stir in cheese until melted, then add spinach until wilted.",
+      "Return chicken to sauce, coat well, and simmer 2 minutes before serving."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Lamb Biryani with Yogurt Raita",
+    "calories": 950,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.50,
+      "fats": 0.20
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "basmati rice",
+        "quantity": 150,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "lamb chunks",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "onion",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "biryani spice mix",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "Greek yogurt",
+        "quantity": 50,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "cucumber",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "mint",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Sauté onion and lamb in oil until browned; stir in spice mix.",
+      "Add rice and water (1:1.5 ratio), cover, and simmer 15–18 minutes until rice is tender.",
+      "Mix yogurt with diced cucumber and chopped mint for raita.",
+      "Serve biryani with a side of raita."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Beef Wellington with Truffle Mashed Potatoes",
+    "calories": 1000,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.45,
+      "fats": 0.25
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","dairy","egg"],
+    "ingredients": [
+      {
+        "name": "beef tenderloin",
+        "quantity": 200,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "puff pastry",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "mushroom duxelles",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "prosciutto",
+        "quantity": 50,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "potatoes",
+        "quantity": 200,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "truffle oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "butter",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "cream",
+        "quantity": 30,
+        "unit": "ml",
+        "category": "dairy"
+      }
+    ],
+    "recipe": [
+      "Season beef, sear quickly on all sides; cool and wrap in prosciutto over mushroom duxelles.",
+      "Encase in puff pastry, brush with beaten egg; bake at 200°C (400°F) for 25–30 minutes.",
+      "Boil potatoes, mash with butter, cream, and truffle oil until smooth.",
+      "Slice Wellington, serve atop truffle mash."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Duck Breast with Cherry Port Sauce & Dauphinoise Potatoes",
+    "calories": 1000,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.40,
+      "fats": 0.32
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "duck breast",
+        "quantity": 180,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cherries",
+        "quantity": 80,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "port wine",
+        "quantity": 50,
+        "unit": "ml",
+        "category": "pantry"
+      },
+      {
+        "name": "potato",
+        "quantity": 200,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cream",
+        "quantity": 100,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "garlic",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "butter",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      }
+    ],
+    "recipe": [
+      "Score duck skin, season; sear skin-side down 6–7 minutes until crispy, flip and cook 3–4 minutes; rest.",
+      "Simmer cherries and port until syrupy for sauce.",
+      "Thinly slice potatoes; layer in buttered dish with cream and garlic; bake at 180°C (350°F) 45 minutes until golden.",
+      "Slice duck, drizzle with cherry sauce, serve with potatoes."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Lobster Mac & Cheese",
+    "calories": 1000,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.50,
+      "fats": 0.20
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","dairy","shellfish"],
+    "ingredients": [
+      {
+        "name": "elbow macaroni",
+        "quantity": 120,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "lobster meat",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 60,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "Gruyère cheese",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "butter",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "flour",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "milk",
+        "quantity": 150,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "breadcrumbs",
+        "quantity": 20,
+        "unit": "g",
+        "category": "carbs"
+      }
+    ],
+    "recipe": [
+      "Cook pasta al dente; drain.",
+      "Make roux: melt butter, whisk in flour, slowly add milk to thicken.",
+      "Stir in cheeses until melted, fold in lobster and pasta.",
+      "Transfer to baking dish, top with breadcrumbs, bake at 180°C (350°F) 15 minutes until golden."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Moussaka with Greek Salad",
+    "calories": 1000,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.40,
+      "fats": 0.32
+    },
+    "category": "Dinner",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "ground lamb",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "eggplant",
+        "quantity": 150,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "potato",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "tomato sauce",
+        "quantity": 100,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "béchamel sauce",
+        "quantity": 80,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "feta cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "cucumber",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "tomato",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Layer sliced eggplant and potato in a dish; bake until tender, 20 minutes.",
+      "Cook lamb with tomato sauce; pour over vegetables.",
+      "Top with béchamel and feta; bake 25 minutes until golden.",
+      "Toss cucumber and tomato with olive oil and herbs for Greek salad; serve on side."
+    ],
+    "mealNotes": []
   }
 ]
 
