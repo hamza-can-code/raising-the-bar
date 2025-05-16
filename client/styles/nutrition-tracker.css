@@ -2393,3 +2393,15 @@ exercise-btn,
 .nt-dot.active {
   background: #333;
 }
+
+#nutritionWeeklyRecapCards {       /* the OUTER shell */
+  scroll-snap-type: none;          /* <- kill auto-scroll */
+  touch-action: pan-y;             /* <- let vertical page scroll through */
+}
+
+#nutritionWeeklyRecapWrapper,
+#areasImprovementWrapper,
+#nutritionTrendsWrapper{
+  scroll-snap-type: none;   /* stops the auto-snap that was hijacking touches   */
+  touch-action:  pan-y;     /* allow vertical page scroll, block horizontal UA */
+}

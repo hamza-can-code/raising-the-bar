@@ -3918,6 +3918,38 @@ function renderWeeklyRecap() {
   showImprovementsSection(improvements);
 }
 
+function makeSwipeableRail(rail, dots){
+  if (!rail) return;
+
+  const total   = rail.children.length;
+  const stepW   = () => rail.parentElement.getBoundingClientRect().width;
+  let   index   = 0;
+  let   startX  = 0;
+
+  const paint = () => {
+    rail.style.transform = `translateX(-${index * stepW()}px)`;
+    dots?.querySelectorAll('.recap-dot')
+        .forEach((d,i)=>d.classList.toggle('active', i===index));
+  };
+
+  const opts   = { passive:true, capture:true };        // capture ⇒ children can’t swallow the event
+  rail.addEventListener('touchstart', e => startX = e.touches[0].clientX, opts);
+  rail.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) < 40) return;                      // ignore micro-drags
+    index = (dx < 0) ? (index + 1) % total              // left  swipe ⇒ next
+                     : (index - 1 + total) % total;     // right swipe ⇒ prev
+    paint();
+  }, opts);
+
+  window.addEventListener('resize', paint, {passive:true});
+
+  dots?.querySelectorAll('.recap-dot').forEach((d,i)=>
+    d.addEventListener('click', ()=>{ index=i; paint(); }));
+
+  paint();                                              // initial position
+}
+
 function makeSwipeableNT(rail, dots) {
   if (!rail) return;
 
@@ -3976,7 +4008,7 @@ function makeSwipeableNT(rail, dots) {
 }
 
 // Add this function to your NT script
-function initNutritionSwipeableRecapCards() {
+function initNutritionSwipeableRecapCards(){
   makeSwipeableNT(
     document.getElementById('nutritionWeeklyRecapCards'),
     document.getElementById('nutritionWeeklyRecapDots')
@@ -5265,24 +5297,27 @@ function applyCellColor(cell, color) {
 }
 
 /** Setup swipe logic for the trend cards container with “dots.” */
-function initSwipeableNutritionTrendCards() {
+function initSwipeableNutritionTrendCards(){
   const rail = document.getElementById('nutritionTrendsCards');
   const dots = document.getElementById('nutritionTrendsDots');
-  if (!rail || !dots) return;
 
-  const cardCount = rail.children.length;
-  if (cardCount <= 1) return;
+  if (!rail || rail.children.length <= 1) return;   // nothing to swipe
 
-  // rebuild dots so the count always matches the cards
+  /* rebuild dot indicators to match current card count */
   dots.innerHTML = '';
-  for (let i = 0; i < cardCount; i++) {
+  [...rail.children].forEach((_, i)=>{
     const dot = document.createElement('span');
-    dot.className = 'recap-dot' + (i === 0 ? ' active' : '');
+    dot.className = 'recap-dot' + (i ? '' : ' active');
     dots.appendChild(dot);
-  }
+  });
 
   makeSwipeableNT(rail, dots);
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  initNutritionSwipeableRecapCards();
+  initSwipeableNutritionTrendCards();
+});
 
 function generateNutritionCoachInsight(selection) {
   // If the user has chosen "Program to Date", aggregate data from all completed weeks.
