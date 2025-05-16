@@ -3813,8 +3813,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-  // initNutritionSwipeableRecapCards();
-  // initSwipeableNutritionTrendCards();
 });
 
 function renderWeeklyRecap() {
@@ -3920,52 +3918,69 @@ function renderWeeklyRecap() {
   showImprovementsSection(improvements);
 }
 
+function makeSwipeableNT(rail, dots) {
+  if (!rail) return;
+
+  const stepW  = () => rail.parentElement.getBoundingClientRect().width;
+  const total  = rail.children.length;
+  let index    = 0;
+  let startX   = 0;
+
+  const update = () => {
+    rail.style.transform = `translateX(-${index * stepW()}px)`;
+    if (dots) {
+      dots.querySelectorAll('.recap-dot').forEach((d, i) =>
+        d.classList.toggle('active', i === index));
+    }
+  };
+
+  const opts = { passive: true, capture: true };
+
+  /* ---------- touch ----------- */
+  rail.addEventListener('touchstart',  e => { startX = e.touches[0].clientX; }, opts);
+  rail.addEventListener('touchend',    e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) < 40) return;              // ignore micro-drags
+    index = (diff < 0)
+      ? (index + 1) % total                       // swipe left  → next
+      : (index - 1 + total) % total;             // swipe right → prev
+    update();
+  }, opts);
+
+  /* ---------- mouse (desktop dev-tools / fallback) ---------- */
+  rail.addEventListener('mousedown', e => {
+    startX = e.clientX;
+    const onUp = ev => {
+      const diff = ev.clientX - startX;
+      if (Math.abs(diff) >= 40) {
+        index = (diff < 0)
+          ? (index + 1) % total
+          : (index - 1 + total) % total;
+        update();
+      }
+      document.removeEventListener('mouseup', onUp, true);
+    };
+    document.addEventListener('mouseup', onUp, true);
+  }, opts);
+
+  /* ---------- resize keeps card centred ---------- */
+  window.addEventListener('resize', update, { passive:true });
+
+  /* ---------- dots click ---------- */
+  if (dots) {
+    dots.querySelectorAll('.recap-dot').forEach((d, i) =>
+      d.addEventListener('click', () => { index = i; update(); }));
+  }
+
+  update(); // initial position
+}
+
 // Add this function to your NT script
 function initNutritionSwipeableRecapCards() {
-  const wrap     = document.getElementById("nutritionWeeklyRecapCards");
-  const dotsWrap = document.getElementById("nutritionWeeklyRecapDots");
-  if (!wrap || !dotsWrap) return;
-
-  const cards      = Array.from(wrap.querySelectorAll(".recap-card"));
-  const cardCount  = cards.length;
-  if (cardCount <= 1) return;
-
-  let current = 0;
-  let startX  = 0;
-
-  /* ---- dots --------------------------------------------------- */
-  dotsWrap.innerHTML = "";
-  cards.forEach((_, i) => {
-    const dot = document.createElement("span");
-    dot.className = "recap-dot" + (i === 0 ? " active" : "");
-    dot.addEventListener("click", () => jumpTo(i));
-    dotsWrap.appendChild(dot);
-  });
-
-  const cardW = () => cards[0].offsetWidth;
-
-  function jumpTo(idx) {
-    current = (idx + cardCount) % cardCount;
-    wrap.style.transform = `translateX(-${current * cardW()}px)`;
-    dotsWrap.querySelectorAll(".recap-dot").forEach((d, i) =>
-      d.classList.toggle("active", i === current));
-  }
-
-  /* ---- pointer / touch swipe --------------------------------- */
-  function onStart(e) {
-    startX = (e.touches ? e.touches[0] : e).clientX;
-    wrap.addEventListener(e.type === "touchstart" ? "touchend" : "mouseup", onEnd, { once:true });
-  }
-  function onEnd(e) {
-    const endX = (e.changedTouches ? e.changedTouches[0] : e).clientX;
-    const dx   = endX - startX;
-    if (Math.abs(dx) > 50) jumpTo(current + (dx < 0 ? 1 : -1));
-  }
-  wrap.addEventListener("mousedown",  onStart, { passive:true, capture:true });
-  wrap.addEventListener("touchstart", onStart, { passive:true, capture:true });
-
-  /* ---- keep aligned on resize -------------------------------- */
-  window.addEventListener("resize", () => jumpTo(current));
+  makeSwipeableNT(
+    document.getElementById('nutritionWeeklyRecapCards'),
+    document.getElementById('nutritionWeeklyRecapDots')
+  );
 }
 
 function getNutritionWeekStats(weekNum) {
@@ -5251,49 +5266,22 @@ function applyCellColor(cell, color) {
 
 /** Setup swipe logic for the trend cards container with “dots.” */
 function initSwipeableNutritionTrendCards() {
-  const wrap     = document.getElementById("nutritionTrendsCards");
-  const dotsWrap = document.getElementById("nutritionTrendsDots");
-  if (!wrap || !dotsWrap) return;
+  const rail = document.getElementById('nutritionTrendsCards');
+  const dots = document.getElementById('nutritionTrendsDots');
+  if (!rail || !dots) return;
 
-  const cards      = Array.from(wrap.querySelectorAll(".trend-card"));
-  const cardCount  = cards.length;
+  const cardCount = rail.children.length;
   if (cardCount <= 1) return;
 
-  let current = 0;
-  let startX  = 0;
-
-  /* ---- dots --------------------------------------------------- */
-  dotsWrap.innerHTML = "";
-  cards.forEach((_, i) => {
-    const dot = document.createElement("span");
-    dot.className = "recap-dot" + (i === 0 ? " active" : "");
-    dot.addEventListener("click", () => jumpTo(i));
-    dotsWrap.appendChild(dot);
-  });
-
-  const cardW = () => cards[0].offsetWidth;
-
-  function jumpTo(idx) {
-    current = (idx + cardCount) % cardCount;
-    wrap.style.transform = `translateX(-${current * cardW()}px)`;
-    dotsWrap.querySelectorAll(".recap-dot").forEach((d, i) =>
-      d.classList.toggle("active", i === current));
+  // rebuild dots so the count always matches the cards
+  dots.innerHTML = '';
+  for (let i = 0; i < cardCount; i++) {
+    const dot = document.createElement('span');
+    dot.className = 'recap-dot' + (i === 0 ? ' active' : '');
+    dots.appendChild(dot);
   }
 
-  /* ---- pointer / touch swipe --------------------------------- */
-  function onStart(e) {
-    startX = (e.touches ? e.touches[0] : e).clientX;
-    wrap.addEventListener(e.type === "touchstart" ? "touchend" : "mouseup", onEnd, { once:true });
-  }
-  function onEnd(e) {
-    const endX = (e.changedTouches ? e.changedTouches[0] : e).clientX;
-    const dx   = endX - startX;
-    if (Math.abs(dx) > 50) jumpTo(current + (dx < 0 ? 1 : -1));
-  }
-  wrap.addEventListener("mousedown",  onStart, { passive:true, capture:true });
-  wrap.addEventListener("touchstart", onStart, { passive:true, capture:true });
-
-  window.addEventListener("resize", () => jumpTo(current));
+  makeSwipeableNT(rail, dots);
 }
 
 function generateNutritionCoachInsight(selection) {
