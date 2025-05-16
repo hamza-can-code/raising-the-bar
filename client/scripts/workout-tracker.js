@@ -1,22 +1,22 @@
 /* ───── loader utilities (shared) ───── */
-function setLoaderScale(rawPct = 0){
+function setLoaderScale(rawPct = 0) {
   /* ease + small overshoot */
   const eased = rawPct < 1
     ? 0.8 + 0.6 * rawPct                // grows 0.8 → 1.4
-    : 1.4 - 0.4 * Math.min((rawPct - 1)*6, 1);
+    : 1.4 - 0.4 * Math.min((rawPct - 1) * 6, 1);
   document.documentElement.style.setProperty('--scale', eased.toFixed(3));
 }
-function startIdlePulse(){
+function startIdlePulse() {
   document.querySelector('.loader-logo')?.classList.add('pulsing');
 }
-function stopIdlePulse(){
+function stopIdlePulse() {
   document.querySelector('.loader-logo')?.classList.remove('pulsing');
 }
-function fadeOutLoader(){
+function fadeOutLoader() {
   const overlay = document.getElementById('loaderOverlay');
-  if(!overlay) return;
+  if (!overlay) return;
   overlay.classList.add('fade-out');
-  overlay.addEventListener('transitionend', () => overlay.remove(), { once:true });
+  overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
 }
 
 async function sendWorkoutLog(workoutData) {
@@ -219,6 +219,30 @@ function normaliseXPandLevel() {
   return { xp, lvl };                            // feed the result back
 }
 
+function migrateCheckboxStateKeys(state) {
+  const migrated = { ...state };             // keep originals
+
+  Object.keys(state).forEach(k => {
+    // old pattern has 3 underscores before the exercise name
+    // new pattern has 4 (type_section_week_day_name …)
+    const parts = k.split('_');
+    if (parts[0] === 'exercise' && parts.length === 4) {
+      const [type, week, day, name] = parts;
+      migrated[`${type}_mainWork_${week}_${day}_${name}`] = state[k];
+    }
+    if (parts[0] === 'set' && parts.length === 5) {
+      const [type, week, day, name, setId] = parts;
+      migrated[`${type}_mainWork_${week}_${day}_${name}_${setId}`] = state[k];
+    }
+    if (parts[0] === 'cardio' && parts.length === 4) {
+      const [type, week, day, name] = parts;
+      migrated[`${type}_mainWork_${week}_${day}_${name}`] = state[k];
+    }
+  });
+
+  return migrated;
+}
+
 async function loadUserProgress() {
   const token = localStorage.getItem('token');
 
@@ -270,6 +294,10 @@ async function loadUserProgress() {
     localStorage.setItem('activeNutritionWeek', progress.program.activeNutritionWeek);
     localStorage.setItem('completedThisWeek', progress.program.completedThisWeek);
 
+    currentWeekIndex = Math.max(0, (progress.program.activeWorkoutWeek || 1) - 1);
+    localStorage.setItem('currentWeekIndex', String(currentWeekIndex));
+    currentDayIndex = Math.max(0, parseInt(localStorage.getItem('currentDayIndex') || '0', 10));
+
     for (let week in progress.program.weeklyStats) {
       const stats = progress.program.weeklyStats[week];
       localStorage.setItem(`${week}_workoutsDone`, stats.workoutsDone);
@@ -287,6 +315,12 @@ async function loadUserProgress() {
     if (progress.checkboxState) {
       const local = JSON.parse(localStorage.getItem('checkboxState') || '{}');
       const merged = { ...progress.checkboxState, ...local }; // local wins
+      localStorage.setItem('checkboxState', JSON.stringify(merged));
+    }
+    if (progress.checkboxState) {
+      const remote = migrateCheckboxStateKeys(progress.checkboxState);
+      const local = JSON.parse(localStorage.getItem('checkboxState') || '{}');
+      const merged = { ...remote, ...local };   // local still wins
       localStorage.setItem('checkboxState', JSON.stringify(merged));
     }
     if (progress.workoutStarted) {
@@ -501,20 +535,20 @@ fetchPurchasedWeeks();
 /* Fire once on load */
 window.addEventListener('DOMContentLoaded', fetchPurchasedWeeks);
 
-(async function bootWorkoutTracker(){
+(async function bootWorkoutTracker() {
 
   /* 0 · splash immediately */
   startIdlePulse();
 
   const token = localStorage.getItem('token');
-  if(!token){ location.href = 'log-in.html'; return; }
+  if (!token) { location.href = 'log-in.html'; return; }
 
-  try{
+  try {
     /* 1 · auth-check once */
     const res = await fetch('/api/auth/me', {
-      headers:{ Authorization:`Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` }
     });
-    if(!res.ok) throw new Error('Invalid token');
+    if (!res.ok) throw new Error('Invalid token');
 
     /* 2 · long-running tasks we want to track */
     const tasks = [
@@ -526,10 +560,10 @@ window.addEventListener('DOMContentLoaded', fetchPurchasedWeeks);
     let target = 0, current = 0;
     const bump = () => { target += 1 / tasks.length; };
 
-    (function raf(){
+    (function raf() {
       current += (target - current) * 0.12;
       setLoaderScale(current);
-      if(current < 1.01) requestAnimationFrame(raf);
+      if (current < 1.01) requestAnimationFrame(raf);
     })();
 
     await Promise.all(tasks.map(p => p.then(bump, bump)));
@@ -537,15 +571,15 @@ window.addEventListener('DOMContentLoaded', fetchPurchasedWeeks);
 
     /* 3 · now that data is ready, call any render/setup functions
            (if yours live elsewhere, invoke them here) */
-    if(typeof renderWeekSelector   === 'function') renderWeekSelector();
-    if(typeof renderDaySelector    === 'function') renderDaySelector();
-    if(typeof renderWorkoutDisplay === 'function') renderWorkoutDisplay();
+    if (typeof renderWeekSelector === 'function') renderWeekSelector();
+    if (typeof renderDaySelector === 'function') renderDaySelector();
+    if (typeof renderWorkoutDisplay === 'function') renderWorkoutDisplay();
 
     /* 4 · graceful exit */
     setLoaderScale(1.05);
     setTimeout(fadeOutLoader, 180);
 
-  }catch(err){
+  } catch (err) {
     console.error('[WT boot]', err);
     localStorage.removeItem('token');
     location.href = 'log-in.html';
@@ -1106,8 +1140,12 @@ function isSetsBased(ex) {
 }
 
 function loadCheckboxState(key) {
-  const state = JSON.parse(localStorage.getItem("checkboxState") || "{}");
-  return state[key] === true;
+  const state = JSON.parse(localStorage.getItem('checkboxState') || '{}');
+  if (state[key] === true) return true;
+
+  // fallback to legacy key (strip the section field)
+  const legacyKey = key.replace(/^(exercise|set|cardio)_[^_]+_/, '$1_');
+  return state[legacyKey] === true;
 }
 
 function saveCheckboxState(key, value) {
@@ -5507,6 +5545,35 @@ function showCapPopup(type) {
 /*      Weekly Recap & Areas for Improvement                  */
 /**************************************************************/
 
+function makeSwipeable(rail, dots) {
+  const stepW = () => rail.parentElement.getBoundingClientRect().width; // 1-card width
+  const total = rail.children.length;
+  let startX = 0;
+  let index = 0;
+
+  const update = () => {
+    rail.style.transform = `translateX(-${index * stepW()}px)`;
+    dots?.querySelectorAll('.recap-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === index));
+  };
+
+  // capture = true ⇒ listener runs before any child can cancel it
+  const opts = { passive: true, capture: true };
+
+  rail.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+  }, opts);
+
+  rail.addEventListener('touchend', e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) < 40) return;           // ignore tiny drags
+    index += (diff < 0) ? 1 : -1;
+    index = Math.max(0, Math.min(index, total - 1));
+    update();
+  }, opts);
+
+  update();                                    // set initial position
+}
 
 
 /****************************************************************************
@@ -5532,6 +5599,24 @@ function showTodaysTipIfAny() {
     const useGoalSpecific = Math.random() < 0.30;
     const userGoal = localStorage.getItem("goal") || "Weight Loss";
     let tipArray;
+
+    const generalTrainingTips = [
+      "Consistent technique beats heavier weight lifted poorly.",
+      "Sleep is the most under-rated performance enhancer—aim for 7-9 hrs.",
+      "Finish each rep with intent; mind–muscle connection matters.",
+      "Small warm-ups and mobility drills pay off in injury-free training.",
+      "Progress comes from recovery as much as from effort in the gym.",
+      "Keep a training log—it turns ‘I feel stronger’ into measurable proof.",
+      "Good nutrition starts at the grocery store; stock what supports your goals.",
+      "Deload weeks let adaptations catch up—don’t skip them.",
+      "You don’t need to feel wrecked after every workout to make gains.",
+      "Track your lifts—it’s hard to improve what you don’t measure.",
+      "Your form under fatigue reveals your true habits—train smart.",
+      "Never underestimate the power of consistency over intensity.",
+      "Make progressive overload your long-term best friend.",
+      "Rest between sets isn't wasted time—it's part of the plan.",
+      "Don’t chase soreness—chase progress."
+    ];
 
     if (useGoalSpecific) {
       "Form first, weight second — clean reps lead to real results.",

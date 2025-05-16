@@ -73,6 +73,7 @@ const apiRoutes       = require('./routes/api');
 const workoutRoutes   = require('./routes/workoutRoutes');
 const nutritionRoutes = require('./routes/nutritionRoutes');
 const accessRoutes    = require('./routes/accessRoutes');
+const bodyWeightRoutes = require('./routes/bodyWeightRoutes');
 
 const app  = express();
 const PORT = process.env.PORT || 5001;
@@ -103,6 +104,7 @@ app.use('/api', apiRoutes);
 app.use('/api', workoutRoutes);
 app.use('/api', nutritionRoutes);
 app.use('/api', accessRoutes);
+app.use('/api', bodyWeightRoutes);
 
 /* 7) Stripe checkout route (normal JSON)                       */
 app.use('/api', stripeRoutes);

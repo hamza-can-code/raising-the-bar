@@ -253,9 +253,9 @@ const questions = [
   {
     question: "How many meals per day do you prefer?",
     options: [
-      { display: "🍽️ 2 meals", value: "2 meals" },
-      { display: "🍽️🍽️ 3 meals", value: "3 meals" },
-      { display: "🍽️🍽️🍽️ 4 meals", value: "4 meals" },
+      // { display: "🍽️ 2 meals", value: "2 meals" },
+      { display: "🍽️ 3 meals", value: "3 meals" },
+      { display: "🍽️🍽️ 4 meals", value: "4 meals" },
     ],
     type: "radio",
     key: "mealFrequency",

@@ -1,22 +1,22 @@
 /* ───── loader utilities (shared) ───── */
-function setLoaderScale(rawPct = 0){
+function setLoaderScale(rawPct = 0) {
   /* ease + small overshoot */
   const eased = rawPct < 1
     ? 0.8 + 0.6 * rawPct                // grows 0.8 → 1.4
-    : 1.4 - 0.4 * Math.min((rawPct - 1)*6, 1);
+    : 1.4 - 0.4 * Math.min((rawPct - 1) * 6, 1);
   document.documentElement.style.setProperty('--scale', eased.toFixed(3));
 }
-function startIdlePulse(){
+function startIdlePulse() {
   document.querySelector('.loader-logo')?.classList.add('pulsing');
 }
-function stopIdlePulse(){
+function stopIdlePulse() {
   document.querySelector('.loader-logo')?.classList.remove('pulsing');
 }
-function fadeOutLoader(){
+function fadeOutLoader() {
   const overlay = document.getElementById('loaderOverlay');
-  if(!overlay) return;
+  if (!overlay) return;
   overlay.classList.add('fade-out');
-  overlay.addEventListener('transitionend', () => overlay.remove(), { once:true });
+  overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
 }
 
 async function sendMealLog(mealData) {
@@ -216,36 +216,108 @@ function renderXPBar() {
 
 async function loadNutritionProgress() {
   const token = localStorage.getItem('token');
-  if (!token) return;
+  if (!token) return;                       // not signed-in (shouldn’t happen)
 
   try {
     const res = await fetch('/api/nutrition/getUserProgress', {
-      headers: { 'Authorization': `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` }
     });
-    if (!res.ok) return;                 // first-time user ⇒ nothing to restore
+    if (!res.ok) return;                    // first-time NT user → nothing to load
 
     const prog = await res.json();
 
-    /* 1 ▸ copy ONLY nutrition-specific keys back to localStorage */
-    Object.entries(prog).forEach(([k, v]) => {
-      /* ignore the three “global” keys so we don’t stomp on WT/Dashboard */
-      if (k === 'currentXP' ||
-        k === 'currentLevel' ||
-        k === 'progressScore') return;
+    /* 1 ▸ flatten the “program” blob so NT gets the same loose keys
+           the Workout-tracker snapshot writes                         */
+    if (prog.program) {
+      if (prog.program.startDate) {
+        localStorage.setItem('programStartDate', prog.program.startDate);
+      }
+      if (typeof prog.program.activeWeek === 'number' &&
+        prog.program.activeWeek > 0) {
+        localStorage.setItem('activeNutritionWeek', String(prog.program.activeWeek));
+        localStorage.setItem('activeWorkoutWeek', String(prog.program.activeWeek));
+      }
+    }
 
-      if (typeof v === 'object') localStorage.setItem(k, JSON.stringify(v));
-      else localStorage.setItem(k, v);
+    /* 2 ▸ store everything else (unchanged from your original) */
+    Object.entries(prog).forEach(([k, v]) => {
+      // XP / Level live in the workout snapshot → ignore
+      if (k === 'currentXP' || k === 'currentLevel') return;
+
+      // progressScore: only overwrite if the server’s copy is higher
+      if (k === 'progressScore') {
+        const local = Number(localStorage.getItem('progressScore') || '0');
+        const incoming = Number(v || 0);
+        if (!local || incoming > local) {
+          localStorage.setItem('progressScore', String(incoming));
+        }
+        return;
+      }
+
+      // everything else
+      localStorage.setItem(
+        k,
+        typeof v === 'object' ? JSON.stringify(v) : String(v)
+      );
     });
 
-    /* 2 ▸ refresh nutrition-streak counter in memory & redraw message */
-    nutritionStreakCount =
-      Number(localStorage.getItem('nutritionStreakCount')) || 0;
+    /* 3 ▸ refresh any run-time caches that rely on LS */
+    nutritionStreakCount = Number(localStorage.getItem('nutritionStreakCount') || '0');
     updateNutritionStreakDisplay();
 
-    console.log('✅ Nutrition progress restored (XP/PS left untouched)');
+    console.log('[NT] snapshot restored – activeWeek =',
+      localStorage.getItem('activeNutritionWeek'));
   } catch (err) {
     console.error('❌ loadNutritionProgress:', err.message);
   }
+}
+
+
+
+/* ──────────────────────────────────────────────────────────
+   2. updateActiveWeek        (fully replaced)
+   ────────────────────────────────────────────────────────── */
+function updateActiveWeek() {
+  /* 0 ▸ page-load short-circuit: if LS already has a week > 0,
+         keep it and bail out – this stops the “Week 1 reset”.      */
+  if (!arguments.length) {                         // no args = initial call
+    const preset = Number(localStorage.getItem('activeNutritionWeek') || '0');
+    if (preset > 0) return preset;
+  }
+
+  /* 1 ▸ make sure programStartDate exists */
+  let rawStart = localStorage.getItem('programStartDate');
+  if (!rawStart) {
+    const today = new Date();
+    setToMidnight(today);
+    rawStart = today.toISOString();
+    localStorage.setItem('programStartDate', rawStart);
+  }
+
+  /* 2 ▸ calendar-week calculation */
+  const startDate = new Date(rawStart);
+  const now = new Date();
+  const diffDays = Math.floor((now - startDate) / 86_400_000);   // ms→days
+  let calendarWk = Math.floor(diffDays / 7) + 1;
+  if (calendarWk < 1) calendarWk = 1;
+  if (calendarWk > 12) calendarWk = 12;
+
+  /* 3 ▸ honour a locked Week 2 (your existing logic) */
+  const locked = Number(localStorage.getItem('lockedActiveWeek') || '0');
+  let activeWeek;
+  if (locked && calendarWk < 3) {
+    activeWeek = locked;
+  } else {
+    activeWeek = calendarWk;
+    if (calendarWk >= 3) localStorage.removeItem('lockedActiveWeek');
+  }
+
+  /* 4 ▸ persist for BOTH trackers */
+  localStorage.setItem('activeNutritionWeek', String(activeWeek));
+  localStorage.setItem('activeWorkoutWeek', String(activeWeek));
+
+  console.log(`[NT] Active week recalculated → Week ${activeWeek}`);
+  return activeWeek;
 }
 
 const mealPlanData = JSON.parse(localStorage.getItem('twelveWeekMealPlan') || '[]');
@@ -294,18 +366,18 @@ fetchPurchasedWeeks();
 window.addEventListener('DOMContentLoaded', fetchPurchasedWeeks);
 
 /* ───── Nutrition-Tracker boot sequence ───── */
-(async function bootNutritionTracker(){
+(async function bootNutritionTracker() {
 
   startIdlePulse();
 
   const token = localStorage.getItem('token');
-  if(!token){ location.href = 'log-in.html'; return; }
+  if (!token) { location.href = 'log-in.html'; return; }
 
-  try{
+  try {
     const res = await fetch('/api/auth/me', {
-      headers:{ Authorization:`Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` }
     });
-    if(!res.ok) throw new Error('Invalid token');
+    if (!res.ok) throw new Error('Invalid token');
 
     const tasks = [
       loadNutritionProgress(), // your existing fn
@@ -315,25 +387,25 @@ window.addEventListener('DOMContentLoaded', fetchPurchasedWeeks);
     let target = 0, current = 0;
     const bump = () => { target += 1 / tasks.length; };
 
-    (function raf(){
+    (function raf() {
       current += (target - current) * 0.12;
       setLoaderScale(current);
-      if(current < 1.01) requestAnimationFrame(raf);
+      if (current < 1.01) requestAnimationFrame(raf);
     })();
 
     await Promise.all(tasks.map(p => p.then(bump, bump)));
     stopIdlePulse();
 
     /* fire initial UI renders (if you have them) */
-    if(typeof renderWeekSelector   === 'function') renderWeekSelector();
-    if(typeof renderDaySelector    === 'function') renderDaySelector();
-    if(typeof renderDailyMealDisplay === 'function') renderDailyMealDisplay();
-    if(typeof renderXPBar          === 'function') renderXPBar();
+    if (typeof renderWeekSelector === 'function') renderWeekSelector();
+    if (typeof renderDaySelector === 'function') renderDaySelector();
+    if (typeof renderDailyMealDisplay === 'function') renderDailyMealDisplay();
+    if (typeof renderXPBar === 'function') renderXPBar();
 
     setLoaderScale(1.05);
     setTimeout(fadeOutLoader, 180);
 
-  }catch(err){
+  } catch (err) {
     console.error('[NT boot]', err);
     localStorage.removeItem('token');
     location.href = 'log-in.html';
@@ -1978,30 +2050,43 @@ function renderMealCard(parent, mealData, mealIndex, totalMealsToday, wNum, dayN
   // If not swapped, show ingredients and recipe
   if (!hideIngAndRecipe) {
     // Ingredients sub-collapse
-    const ingRow = createSubCollapse("🧂Ingredients", () => {
-      let html = "";
-      if (Array.isArray(mealData.ingredients)) {
-        mealData.ingredients.forEach(item => {
-          if (typeof item === "object") {
-            html += `${item.name} ${item.quantity || ""}${item.unit || ""}<br>`;
-          } else {
-            html += item + "<br>";
-          }
-        });
+    const ingRow = createSubCollapse("🧂 Ingredients", () => {
+      if (!Array.isArray(mealData.ingredients) || mealData.ingredients.length === 0) {
+        return "No ingredients data.";
       }
-      return html || "No ingredients data.";
+
+      const cap = s => s.replace(/\b\w/g, c => c.toUpperCase()); // Beef Tenderloin
+
+      const list = mealData.ingredients.map(item => {
+        if (typeof item === "object") {
+          const name = cap(item.name);
+          const qty = item.quantity != null ? ` – ${item.quantity}${item.unit || ""}` : "";
+          return `<li>${name}${qty}</li>`;
+        }
+        return `<li>${cap(String(item))}</li>`;
+      }).join("");
+
+      /*   • list   aligned left, no extra margin   */
+      return `<ul style="padding-left:1.2em;margin:0;text-align:left;">${list}</ul>`;
     });
     details.appendChild(ingRow);
 
     // Recipe sub-collapse
     const recipeRow = createSubCollapse("📝 Recipe", () => {
-      let html = "";
-      if (Array.isArray(mealData.recipe)) {
-        mealData.recipe.forEach(step => {
-          html += step + "<br>";
-        });
+      if (!Array.isArray(mealData.recipe) || mealData.recipe.length === 0) {
+        return "No recipe data.";
       }
-      return html || "No recipe data.";
+
+      const steps = mealData.recipe
+        .map((step, idx) =>
+          `<li style="margin-bottom:8px;">
+         <span style="font-weight:700;">${idx + 1}.</span> ${step}
+       </li>`
+        )
+        .join("");
+
+      /* left-aligned, our own numbers (so we can bold them) */
+      return `<ol style="padding-left:0;margin:0;text-align:left;list-style:none;">${steps}</ol>`;
     });
     details.appendChild(recipeRow);
   }
@@ -3066,7 +3151,7 @@ function showSummaryPopup() {
           (streakCount) =>
             `⏳ ${streakCount} ${streakCount === 1 ? 'day' : 'days'} of progress. Every meal has moved you forward.`
         ];
-        streakMessage = activeStreakMessages[Math.floor(Math.random() * activeStreakMessages.length)];
+        streakMessage = activeStreakMessages[Math.floor(Math.random() * activeStreakMessages.length)](dayStreak);
       }
       // Freeze the message for this day
       localStorage.setItem(streakMsgKey, streakMessage);
@@ -3432,7 +3517,7 @@ function showMealPrepModePopup(weekIndex) {
     popup.style.transform = "translateY(0)";
   });
 
-  const gestureZone = popup;  
+  const gestureZone = popup;
 
   function closeMealPrepModePopup() {
     popup.style.transform = "translateY(100%)";
@@ -3445,7 +3530,7 @@ function showMealPrepModePopup(weekIndex) {
   }
   // Add swipe gesture detection to switch tabs
   let touchstartX = 0, touchstartY = 0;
-  let touchendX   = 0, touchendY   = 0;
+  let touchendX = 0, touchendY = 0;
   const MIN_SWIPE_DISTANCE = 40;   // adjust to taste
 
   gestureZone.addEventListener('touchstart', e => {
@@ -3837,45 +3922,45 @@ function renderWeeklyRecap() {
 function initNutritionSwipeableRecapCards() {
   const cardsContainer = document.getElementById("nutritionWeeklyRecapCards");
   const dotsContainer = document.getElementById("nutritionWeeklyRecapDots");
-  if (!cardsContainer) return;
+  if (!cardsContainer || !dotsContainer) return;
 
   let startX = 0;
   let currentIndex = 0;
-  const cardElements = cardsContainer.querySelectorAll(".recap-card");
-  const totalCards = cardElements.length;
+  const totalCards = cardsContainer.querySelectorAll(".recap-card").length;
 
-  // Ensure the container starts at index 0.
-  cardsContainer.style.transform = `translateX(0px)`;
+  /* start position */
+  cardsContainer.style.transform = "translateX(0px)";
 
-  cardsContainer.addEventListener("touchstart", (e) => {
-    if (e.touches && e.touches.length > 0) {
-      startX = e.touches[0].clientX;
-    }
-  });
+  /* capture-phase listeners so canvas/Chart children can’t swallow the events */
+  cardsContainer.addEventListener(
+    "touchstart",
+    e => {
+      if (e.touches.length) startX = e.touches[0].clientX;
+    },
+    { passive: true, capture: true }
+  );
 
-  cardsContainer.addEventListener("touchend", (e) => {
-    let endX = e.changedTouches[0].clientX;
-    let diff = endX - startX;
-    // Threshold
-    if (Math.abs(diff) > 50) {
-      if (diff < 0) {
-        // Swiped left => next card
-        currentIndex = (currentIndex + 1) % totalCards;
-      } else {
-        // Swiped right => previous card
-        currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+  cardsContainer.addEventListener(
+    "touchend",
+    e => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = endX - startX;
+
+      if (Math.abs(diff) > 50) {
+        currentIndex = diff < 0
+          ? (currentIndex + 1) % totalCards   // swipe left → next
+          : (currentIndex - 1 + totalCards) % totalCards; // swipe right → prev
+
+        const w = cardsContainer.clientWidth;
+        cardsContainer.style.transform = `translateX(-${currentIndex * w}px)`;
+
+        dotsContainer.querySelectorAll(".recap-dot").forEach(d => d.classList.remove("active"));
+        const allDots = Array.from(dotsContainer.querySelectorAll(".recap-dot"));
+        if (allDots[currentIndex]) allDots[currentIndex].classList.add("active");
       }
-      let containerWidth = cardsContainer.clientWidth;
-      cardsContainer.style.transform = `translateX(-${currentIndex * containerWidth}px)`;
-
-      // Update dots
-      dotsContainer.querySelectorAll(".recap-dot").forEach(d => d.classList.remove("active"));
-      let dotArray = Array.from(dotsContainer.querySelectorAll(".recap-dot"));
-      if (dotArray[currentIndex]) {
-        dotArray[currentIndex].classList.add("active");
-      }
-    }
-  });
+    },
+    { passive: true, capture: true }
+  );
 }
 
 function getNutritionWeekStats(weekNum) {
@@ -5165,48 +5250,56 @@ function initSwipeableNutritionTrendCards() {
   const dotsContainer = document.getElementById("nutritionTrendsDots");
   if (!cardsContainer || !dotsContainer) return;
 
-  let cardCount = cardsContainer.querySelectorAll(".trend-card").length;
-  if (cardCount <= 1) return; // no swipe needed if only 1
+  const cardCount = cardsContainer.querySelectorAll(".trend-card").length;
+  if (cardCount <= 1) return;
 
-  // Build dot elements
+  /* build dot indicators */
   dotsContainer.innerHTML = "";
   for (let i = 0; i < cardCount; i++) {
-    let dot = document.createElement("div");
+    const dot = document.createElement("div");
     dot.classList.add("recap-dot");
     if (i === 0) dot.classList.add("active");
     dot.addEventListener("click", () => {
-      let w = cardsContainer.clientWidth;
+      const w = cardsContainer.clientWidth;
       cardsContainer.style.transform = `translateX(-${i * w}px)`;
-      // update active dot
       dotsContainer.querySelectorAll(".recap-dot").forEach(d => d.classList.remove("active"));
       dot.classList.add("active");
     });
     dotsContainer.appendChild(dot);
   }
 
-  // Implement the typical “touchstart/touchend” approach:
   let startX = 0;
   let currentIndex = 0;
-  cardsContainer.addEventListener("touchstart", (e) => {
-    if (e.touches.length > 0) startX = e.touches[0].clientX;
-  });
-  cardsContainer.addEventListener("touchend", (e) => {
-    let endX = e.changedTouches[0].clientX;
-    let diff = endX - startX;
-    if (Math.abs(diff) > 50) {
-      if (diff < 0) {
-        // left swipe => next
-        currentIndex = (currentIndex + 1) % cardCount;
-      } else {
-        currentIndex = (currentIndex - 1 + cardCount) % cardCount;
+
+  cardsContainer.addEventListener(
+    "touchstart",
+    e => {
+      if (e.touches.length) startX = e.touches[0].clientX;
+    },
+    { passive: true, capture: true }
+  );
+
+  cardsContainer.addEventListener(
+    "touchend",
+    e => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = endX - startX;
+
+      if (Math.abs(diff) > 50) {
+        currentIndex = diff < 0
+          ? (currentIndex + 1) % cardCount
+          : (currentIndex - 1 + cardCount) % cardCount;
+
+        const w = cardsContainer.clientWidth;
+        cardsContainer.style.transform = `translateX(-${currentIndex * w}px)`;
+
+        const allDots = Array.from(dotsContainer.querySelectorAll(".recap-dot"));
+        allDots.forEach(d => d.classList.remove("active"));
+        if (allDots[currentIndex]) allDots[currentIndex].classList.add("active");
       }
-      let w = cardsContainer.clientWidth;
-      cardsContainer.style.transform = `translateX(-${currentIndex * w}px)`;
-      dotsContainer.querySelectorAll(".recap-dot").forEach(d => d.classList.remove("active"));
-      let dotArr = [...dotsContainer.querySelectorAll(".recap-dot")];
-      if (dotArr[currentIndex]) dotArr[currentIndex].classList.add("active");
-    }
-  });
+    },
+    { passive: true, capture: true }
+  );
 }
 
 function generateNutritionCoachInsight(selection) {
@@ -5490,17 +5583,72 @@ function buildNutritionCoachInsights(selection) {
  *  BODY COMPOSITION & GOAL PROGRESS LOGIC
  ****************************************************************************/
 
+/* ---------------------------------------------------------------
+   Helpers to sync logs with the API
+----------------------------------------------------------------*/
+async function fetchBodyWeightLogsFromServer() {
+  const token = localStorage.getItem('token');
+  if (!token) return null;
+
+  try {
+    const res = await fetch('/api/bodyWeightLogs', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error('Fetch failed');
+    const data = await res.json();
+
+    // Shape them like the existing localStorage array
+    return data.map(l => ({
+      date: l.date.slice(0, 10),   // YYYY-MM-DD
+      weight: l.weight               // already kg
+    }));
+  } catch (err) {
+    console.error('Could not fetch weight logs:', err);
+    return null;
+  }
+}
+
+async function saveBodyWeightLogToServer(date, weightKg) {
+  const token = localStorage.getItem('token');
+  if (!token) return;                       // silently skip if not signed in
+
+  try {
+    await fetch('/api/bodyWeightLogs', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({ date, weight: weightKg })
+    });
+  } catch (err) {
+    console.error('Could not save weight log:', err);
+  }
+}
+
+/* Pull the server copy ↓ and prime localStorage before the chart is drawn */
+async function syncBodyWeightLogsFromServer() {
+  const serverLogs = await fetchBodyWeightLogsFromServer();
+  if (serverLogs && serverLogs.length) {
+    bodyWeightDataPoints = serverLogs;
+    localStorage.setItem('bodyWeightLogs', JSON.stringify(serverLogs));
+  }
+}
+
 let bodyWeightChartInstance = null;
 let bodyWeightDataPoints = [];
 // This will store objects: { date: 'YYYY-MM-DD', weight: number }
 
-function showBodyCompositionSection() {
+async function showBodyCompositionSection() {
   const container = document.getElementById("bodyCompositionSection");
   if (!container) return;
 
-  // If user has AWT, show the section:
   if (hasPurchasedAWT) {
     container.style.display = "block";
+
+    /* NEW: pull any server logs first, THEN build the chart */
+    await syncBodyWeightLogsFromServer();
+
     initBodyWeightChart();
     loadGoalProgressInputs();
     updateGoalProgressUI();
@@ -5715,6 +5863,7 @@ async function handleLogWeight() {
 
   // Today's date for logging
   const today = new Date().toISOString().slice(0, 10);
+  const nowIso = new Date().toISOString();
 
   // Persist
   localStorage.setItem("userGoalWeight", goalKg.toString());
@@ -5743,6 +5892,7 @@ async function handleLogWeight() {
   checkRecentMilestones();
   showBodyCompCoachInsights();
   await saveNutritionProgressToServer();
+  await saveBodyWeightLogToServer(nowIso, currKg);
   await saveMyProgressToServer();
 }
 

@@ -156,10 +156,21 @@ async function loadUserProgressSafe() {
     console.error('❌ Error fetching progress/getUserProgress:', err);
   }
 
+    let nutritionProgress = {};
+  try {
+    const res = await fetch('/api/nutrition/getUserProgress', { headers });
+    if (res.ok)       nutritionProgress = await res.json();
+    else if (res.status !== 404)
+      console.error('❌ /api/nutrition/getUserProgress failed:', res.statusText);
+  } catch (err) {
+    console.error('❌ Error fetching nutrition/getUserProgress:', err);
+  }
+
   // 3) Merge them (dashboardProgress wins on flags)
   const progress = {
     ...workoutProgress,
-    ...dashboardProgress
+    ...dashboardProgress,
+    ...nutritionProgress
   };
 
   // 4) Write core fields
@@ -167,6 +178,21 @@ async function loadUserProgressSafe() {
   localStorage.setItem('currentLevel',     progress.currentLevel ?? 1);
   localStorage.setItem('streakCount',      progress.streak?.count ?? 0);
   localStorage.setItem('streakStartDate',  progress.streak?.startDate ?? '');
+
+  localStorage.setItem(
+    'nutritionStreakCount',
+        progress.nutritionStreakCount
+     ?? progress.streakCount              // in case it’s flat
+     ?? progress.nutritionStreak?.count
+     ?? 0
+  );
+  localStorage.setItem(
+    'nutritionStreakStartDate',
+        progress.nutritionStreakStartDate
+     ?? progress.streakStartDate
+     ?? progress.nutritionStreak?.startDate
+     ?? ''
+  );
 
   localStorage.setItem('programStartDate', progress.program?.startDate ?? '');
   localStorage.setItem('activeWorkoutWeek',

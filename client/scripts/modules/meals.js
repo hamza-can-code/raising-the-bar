@@ -2366,6 +2366,2230 @@ export const mealDatabase = [
     ],
     "mealNotes": []
   },
+  {
+    "mealName": "Spinach & Mushroom Frittata with Goat Cheese & Sourdough Toast",
+    "calories": 650,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.30,
+      "fats": 0.40
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["egg", "dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "egg",
+        "quantity": 4,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "egg white",
+        "quantity": 2,
+        "singular": "egg white",
+        "plural": "egg whites",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "mushrooms",
+        "quantity": 70,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "goat cheese",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "sourdough bread",
+        "quantity": 2,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 180°C (350°F). In an ovenproof skillet, heat olive oil and sauté mushrooms 3–4 minutes until golden.",
+      "Add spinach and cook until wilted. Whisk eggs and egg whites, pour into skillet; cook over medium until edges set, ~3 minutes.",
+      "Crumble goat cheese on top, transfer to oven, bake 8–10 minutes until frittata is fully set.",
+      "Toast sourdough slices and serve alongside frittata."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Protein-Packed Overnight Oats with Almond Butter & Mixed Berries",
+    "calories": 650,
+    "macroRatio": {
+      "protein": 0.25,
+      "carbs": 0.55,
+      "fats": 0.20
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["nuts", "dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "rolled oats",
+        "quantity": 80,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "Greek yogurt",
+        "quantity": 100,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "whey protein powder",
+        "quantity": 30,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "almond butter",
+        "quantity": 25,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "mixed berries",
+        "quantity": 100,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "chia seeds",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "almond milk",
+        "quantity": 150,
+        "unit": "ml",
+        "category": "dairy"
+      }
+    ],
+    "recipe": [
+      "In a jar, combine oats, yogurt, protein powder, chia, almond butter, and almond milk; stir until smooth.",
+      "Cover and refrigerate overnight (≥6 hours).",
+      "In morning, top with mixed berries and enjoy chilled."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Savory Sweet Potato Hash with Turkey Sausage & Avocado",
+    "calories": 650,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.45,
+      "fats": 0.25
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "sweet potato",
+        "quantity": 200,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "turkey sausage",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": 70,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "onion",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "avocado",
+        "quantity": 80,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Dice sweet potato; sauté in half the oil over medium heat 8–10 minutes until tender.",
+      "Add diced sausage, onion, and pepper; cook 4–5 minutes until sausage browns and veggies soften.",
+      "Slice avocado; serve hash topped with avocado slices."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Smoked Salmon & Cream Cheese Bagel with Tomato & Cucumber",
+    "calories": 650,
+    "macroRatio": {
+      "protein": 0.26,
+      "carbs": 0.34,
+      "fats": 0.40
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish", "gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole wheat bagel",
+        "quantity": 1,
+        "singular": "bagel",
+        "plural": "bagels",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "light cream cheese",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "smoked salmon",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "tomato",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cucumber",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toast bagel halves until golden.",
+      "Spread cream cheese on each half; top with salmon, tomato slices, and cucumber ribbons.",
+      "Drizzle lightly with lemon juice and serve."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "Steak & Egg Breakfast Burrito",
+    "calories": 700,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.40,
+      "fats": 0.25
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","egg","dairy"],
+    "ingredients": [
+      {
+        "name": "large flour tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "lean flank steak",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg",
+        "quantity": 2,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "egg white",
+        "quantity": 2,
+        "singular": "egg white",
+        "plural": "egg whites",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "shredded cheddar",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "sautéed bell peppers",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "salsa",
+        "quantity": 50,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat half the oil in a skillet, season and sear steak 2–3 min/side; rest and slice thinly.",
+      "In same pan, sauté peppers 2 min in remaining oil; set aside.",
+      "Whisk eggs and whites, scramble in pan until just set.",
+      "Layer tortilla with steak, eggs, peppers, cheese, and salsa; wrap burrito-style."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Croissant French Toast with Berry Compote & Mascarpone",
+    "calories": 700,
+    "macroRatio": {
+      "protein": 0.20,
+      "carbs": 0.50,
+      "fats": 0.30
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","dairy","egg"],
+    "ingredients": [
+      {
+        "name": "buttery croissant",
+        "quantity": 1,
+        "singular": "croissant",
+        "plural": "croissants",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "egg",
+        "quantity": 2,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "skim milk",
+        "quantity": 60,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "mixed berries",
+        "quantity": 120,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "mascarpone cheese",
+        "quantity": 50,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "maple syrup",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Whisk eggs and milk; dip croissant halves to coat.",
+      "Cook on griddle 2–3 min/side until golden.",
+      "Simmer berries with half the syrup until saucy.",
+      "Top toast with berry compote, dollop mascarpone, drizzle remaining syrup."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Salmon & Avocado Breakfast Grain Bowl",
+    "calories": 700,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.40,
+      "fats": 0.30
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish"],
+    "ingredients": [
+      {
+        "name": "cooked quinoa",
+        "quantity": 120,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "smoked salmon",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 100,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toss quinoa with oil, lemon juice, salt and pepper.",
+      "Top with spinach, salmon slices, and avocado cubes.",
+      "Serve bowl-style, gently mixing before eating."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Quiche Lorraine with Mixed Green Side Salad",
+    "calories": 700,
+    "macroRatio": {
+      "protein": 0.25,
+      "carbs": 0.35,
+      "fats": 0.40
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","dairy","egg"],
+    "ingredients": [
+      {
+        "name": "shortcrust pastry",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "egg",
+        "quantity": 3,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "bacon",
+        "quantity": 60,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "gruyère cheese",
+        "quantity": 50,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "cream",
+        "quantity": 80,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "mixed salad greens",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "vinaigrette",
+        "quantity": 20,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Prebake pastry-lined tart tin 10 min at 180°C (350°F).",
+      "Cook bacon until crisp; chop and layer in shell with cheese.",
+      "Whisk eggs with cream, season; pour into shell and bake 25–30 min until set.",
+      "Toss greens with vinaigrette and serve alongside quiche."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "Three-Egg Veggie Omelet with Turkey Bacon & Avocado Toast",
+    "calories": 750,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.28,
+      "fats": 0.40
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["egg", "gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "egg",
+        "quantity": 3,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "egg white",
+        "quantity": 1,
+        "singular": "egg white",
+        "plural": "egg whites",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "mushrooms",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "turkey bacon",
+        "quantity": 50,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "sourdough bread",
+        "quantity": 2,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "avocado",
+        "quantity": 60,
+        "unit": "g",
+        "category": "fruits"
+      }
+    ],
+    "recipe": [
+      "Heat olive oil in a nonstick skillet over medium heat and sauté mushrooms and spinach until tender, about 2–3 minutes.",
+      "Whisk eggs and egg white, pour into skillet, and cook until set, folding once into an omelet.",
+      "In a separate pan, cook turkey bacon until crisp.",
+      "Toast sourdough slices and top with mashed avocado.",
+      "Serve omelet alongside bacon-topped avocado toast."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Protein Banana Blueberry Waffles",
+    "calories": 750,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.45,
+      "fats": 0.25
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["egg", "dairy", "gluten", "nuts"],
+    "ingredients": [
+      {
+        "name": "rolled oats",
+        "quantity": 60,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "whey protein powder",
+        "quantity": 30,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "egg white",
+        "quantity": 2,
+        "singular": "egg white",
+        "plural": "egg whites",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "banana",
+        "quantity": 80,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "blueberries",
+        "quantity": 60,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "almond milk",
+        "quantity": 100,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "coconut oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Blend oats, protein powder, egg, egg whites, banana, and almond milk until smooth.",
+      "Heat coconut oil in a waffle iron; cook batter until golden and crisp.",
+      "Top waffles with fresh blueberries and serve warm."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Mexican Breakfast Burrito",
+    "calories": 750,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.48,
+      "fats": 0.24
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["egg", "gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "large flour tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "egg",
+        "quantity": 2,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "egg white",
+        "quantity": 2,
+        "singular": "egg white",
+        "plural": "egg whites",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "black beans",
+        "quantity": 60,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "sweet potato",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "shredded cheddar",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "salsa",
+        "quantity": 50,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toss diced sweet potato in olive oil; roast at 200°C (400°F) for 15 min until tender.",
+      "Scramble eggs and whites in a skillet until just set.",
+      "Warm tortilla; fill with potatoes, beans, eggs, cheese, and salsa.",
+      "Fold burrito-style and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Savory Quinoa & Feta Breakfast Bowl",
+    "calories": 750,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.40,
+      "fats": 0.30
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "cooked quinoa",
+        "quantity": 150,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cherry tomatoes",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "feta cheese",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "cooked chicken breast",
+        "quantity": 70,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "poached egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toss warm quinoa with olive oil, spinach, and tomatoes.",
+      "Top with crumbled feta, sliced chicken breast, and a poached egg.",
+      "Serve bowl-style, mixing ingredients before eating."
+    ],
+    "mealNotes": []
+  },
+    {
+    "mealName": "Protein Pancake Stack with Greek Yogurt, Berries & Maple Syrup",
+    "calories": 800,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.50,
+      "fats": 0.20
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["egg", "dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "rolled oats",
+        "quantity": 80,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "whey protein powder",
+        "quantity": 30,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg",
+        "quantity": 2,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "egg white",
+        "quantity": 2,
+        "singular": "egg white",
+        "plural": "egg whites",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "Greek yogurt",
+        "quantity": 100,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "mixed berries",
+        "quantity": 100,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "maple syrup",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Blend oats, protein powder, eggs, and egg whites until smooth.",
+      "Heat oil in a nonstick skillet and cook 3 medium pancakes, 2–3 minutes per side.",
+      "Stack pancakes, top with yogurt and berries, drizzle with maple syrup."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Steak & Egg Breakfast Burrito with Sweet Potato Hash",
+    "calories": 800,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.45,
+      "fats": 0.20
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "egg", "dairy"],
+    "ingredients": [
+      {
+        "name": "large flour tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "lean steak",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg",
+        "quantity": 2,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "sweet potato",
+        "quantity": 150,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "shredded cheddar",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "salsa",
+        "quantity": 50,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Dice sweet potato and toss with half the oil; roast at 200°C for 20 minutes until crisp.",
+      "Season and sear steak in remaining oil 3 minutes per side; slice thin.",
+      "Scramble eggs in the skillet until set.",
+      "Warm tortilla, fill with steak, eggs, cheese, potato hash, and salsa; wrap and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Shakshuka with Feta & Whole Grain Flatbread",
+    "calories": 800,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.40,
+      "fats": 0.30
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["egg", "dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": 70,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "onion",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "crushed tomatoes",
+        "quantity": 200,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "egg",
+        "quantity": 3,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "feta cheese",
+        "quantity": 50,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "whole grain flatbread",
+        "quantity": 1,
+        "singular": "flatbread",
+        "plural": "flatbreads",
+        "wholeItem": true,
+        "category": "carbs"
+      }
+    ],
+    "recipe": [
+      "Heat oil in a skillet; sauté pepper and onion 5 minutes until soft.",
+      "Add tomatoes and simmer 8 minutes.",
+      "Make 3 wells, crack eggs into them; cover and cook until whites set.",
+      "Sprinkle feta on top, serve with warm flatbread."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Salmon & Cream Cheese Bagel Benedict with Spinach",
+    "calories": 800,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.38,
+      "fats": 0.30
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish", "gluten", "dairy", "egg"],
+    "ingredients": [
+      {
+        "name": "whole wheat bagel",
+        "quantity": 1,
+        "singular": "bagel",
+        "plural": "bagels",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "smoked salmon",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "egg white",
+        "quantity": 2,
+        "singular": "egg white",
+        "plural": "egg whites",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "cream cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toast bagel; spread cream cheese on each half.",
+      "Sauté spinach in oil until wilted; set aside.",
+      "Poach whole egg and whites; place on bagel halves over salmon and spinach."
+    ],
+    "mealNotes": []
+  },
+    {
+    "mealName": "Loaded Avocado Toast with Poached Eggs & Turkey Bacon",
+    "calories": 850,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.35,
+      "fats": 0.35
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "egg", "dairy"],
+    "ingredients": [
+      {
+        "name": "sourdough bread",
+        "quantity": 2,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "avocado",
+        "quantity": 100,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "egg",
+        "quantity": 2,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "egg white",
+        "quantity": 2,
+        "singular": "egg white",
+        "plural": "egg whites",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "turkey bacon",
+        "quantity": 60,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cherry tomatoes",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toast sourdough slices until golden brown.",
+      "Mash avocado and season with salt and pepper; spread evenly over toast.",
+      "Poach eggs to preferred doneness and place on top of avocado.",
+      "In a skillet, cook turkey bacon until crisp and lay over eggs.",
+      "Garnish with halved cherry tomatoes and a drizzle of olive oil before serving."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Berry Protein Pancakes with Almond Butter & Banana",
+    "calories": 850,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.50,
+      "fats": 0.22
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["egg", "dairy", "nuts", "gluten"],
+    "ingredients": [
+      {
+        "name": "rolled oats",
+        "quantity": 80,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "whey protein powder",
+        "quantity": 30,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "egg white",
+        "quantity": 2,
+        "singular": "egg white",
+        "plural": "egg whites",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "banana",
+        "quantity": 80,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "mixed berries",
+        "quantity": 80,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "almond butter",
+        "quantity": 25,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Blend oats, protein powder, eggs, banana, and a splash of water until smooth.",
+      "Heat oil in a nonstick pan and pour batter to form three medium pancakes; cook 2–3 minutes per side.",
+      "Stack pancakes, drizzle almond butter over top, and scatter mixed berries before serving."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Spinach, Feta & Mushroom Omelet with Whole Grain Waffle",
+    "calories": 850,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.40,
+      "fats": 0.30
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["egg", "dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "egg",
+        "quantity": 3,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "egg white",
+        "quantity": 2,
+        "singular": "egg white",
+        "plural": "egg whites",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "mushrooms",
+        "quantity": 70,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "feta cheese",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "whole grain waffle",
+        "quantity": 1,
+        "singular": "waffle",
+        "plural": "waffles",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat oil in a skillet, sauté mushrooms and spinach until tender, about 3 minutes.",
+      "Whisk eggs and whites, pour into skillet; cook until almost set, then sprinkle feta and fold omelet.",
+      "Toast waffle and serve alongside the omelet."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Quinoa Breakfast Bowl with Chicken Sausage, Kale & Poached Egg",
+    "calories": 850,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.40,
+      "fats": 0.25
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["egg"],
+    "ingredients": [
+      {
+        "name": "cooked quinoa",
+        "quantity": 150,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "chicken sausage",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "kale",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "avocado",
+        "quantity": 80,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toss quinoa and kale with olive oil, lemon juice, salt, and pepper.",
+      "Pan-sear sliced sausage until browned; set atop quinoa mixture.",
+      "Poach the egg and place on top; garnish with avocado slices."
+    ],
+    "mealNotes": []
+  },
+    {
+    "mealName": "Chicken, Spinach & Feta Breakfast Quesadilla",
+    "calories": 900,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.40,
+      "fats": 0.25
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy", "egg"],
+    "ingredients": [
+      {
+        "name": "large whole wheat tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "cooked chicken breast",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "egg",
+        "quantity": 3,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "shredded cheddar",
+        "quantity": 50,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "feta cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat oil in a skillet; sauté spinach until wilted, then set aside.",
+      "Whisk eggs and scramble in the same skillet until just set; remove.",
+      "Layer tortilla with chicken, spinach, eggs, cheddar, and feta.",
+      "Fold into a quesadilla; cook each side 2–3 minutes until golden and cheese melts.",
+      "Slice into wedges and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Savory Oatmeal Bowl with Sausage, Egg & Avocado",
+    "calories": 900,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.45,
+      "fats": 0.25
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["egg", "dairy"],
+    "ingredients": [
+      {
+        "name": "rolled oats",
+        "quantity": 80,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "chicken sausage",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg",
+        "quantity": 2,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 100,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "Greek yogurt",
+        "quantity": 100,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "spinach",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Cook oats with water or broth until creamy; stir in yogurt and set aside.",
+      "Slice and pan-fry sausage in oil until browned; set aside.",
+      "Sauté spinach until wilted and top oatmeal.",
+      "Top with sausage slices, poached or fried eggs, and sliced avocado."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Almond Flour Pancakes with Ricotta & Berry Compote",
+    "calories": 900,
+    "macroRatio": {
+      "protein": 0.25,
+      "carbs": 0.50,
+      "fats": 0.25
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian", "Gluten-Free"],
+    "allergens": ["egg", "dairy", "nuts"],
+    "ingredients": [
+      {
+        "name": "almond flour",
+        "quantity": 80,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "ricotta cheese",
+        "quantity": 100,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "egg",
+        "quantity": 2,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "almond milk",
+        "quantity": 80,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "mixed berries",
+        "quantity": 120,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "maple syrup",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "coconut oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Whisk almond flour, eggs, ricotta, and almond milk until smooth.",
+      "Heat coconut oil in skillet; cook 3–4 small pancakes until golden, ~2–3 min per side.",
+      "Warm berries with syrup until saucy; serve over pancakes."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Breakfast Power Bowl with Quinoa, Black Beans, Egg & Avocado",
+    "calories": 900,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.48,
+      "fats": 0.24
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["egg"],
+    "ingredients": [
+      {
+        "name": "cooked quinoa",
+        "quantity": 150,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "black beans",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg",
+        "quantity": 2,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 100,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "cherry tomatoes",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cilantro",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lime juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toss quinoa and beans with oil, lime juice, salt, and pepper.",
+      "Top with halved tomatoes and sliced avocado.",
+      "Fry or poach eggs and place on top; garnish with cilantro."
+    ],
+    "mealNotes": []
+  },
+    {
+    "mealName": "Steak & Egg Breakfast Burrito Deluxe",
+    "calories": 950,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.45,
+      "fats": 0.20
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","egg","dairy"],
+    "ingredients": [
+      {
+        "name": "large flour tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "lean flank steak",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg",
+        "quantity": 3,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "shredded cheddar",
+        "quantity": 50,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "breakfast potatoes",
+        "quantity": 150,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "black beans",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "salsa",
+        "quantity": 50,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toss potatoes with half the oil, roast at 200 °C for 20 min until golden.",
+      "Season steak and sear in remaining oil 3 min each side; slice thinly.",
+      "Scramble eggs in the same pan until just set.",
+      "Warm tortilla; layer steak, eggs, potatoes, beans, cheese, and salsa; wrap burrito-style."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Protein French Toast Casserole with Berries & Yogurt",
+    "calories": 950,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.50,
+      "fats": 0.20
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["egg","dairy","gluten"],
+    "ingredients": [
+      {
+        "name": "whole grain bread",
+        "quantity": 6,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "egg",
+        "quantity": 4,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "skim milk",
+        "quantity": 200,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "whey protein powder",
+        "quantity": 40,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "mixed berries",
+        "quantity": 150,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "Greek yogurt",
+        "quantity": 150,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "maple syrup",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Whisk eggs, milk, and protein powder; pour over bread cubes in a baking dish.",
+      "Cover and refrigerate 30 min (or overnight).",
+      "Bake uncovered at 180 °C for 25 min until set.",
+      "Serve topped with berries, dollops of yogurt, and drizzle of syrup."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Smoked Salmon Eggs Benedict with Hash Browns",
+    "calories": 950,
+    "macroRatio": {
+      "protein": 0.28,
+      "carbs": 0.42,
+      "fats": 0.30
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","egg","dairy","fish"],
+    "ingredients": [
+      {
+        "name": "English muffin",
+        "quantity": 2,
+        "singular": "muffin",
+        "plural": "muffins",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "smoked salmon",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg",
+        "quantity": 2,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "egg white",
+        "quantity": 2,
+        "singular": "egg white",
+        "plural": "egg whites",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "hollandaise sauce",
+        "quantity": 60,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "hash browns",
+        "quantity": 200,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "butter",
+        "quantity": 15,
+        "unit": "g",
+        "category": "dairy"
+      }
+    ],
+    "recipe": [
+      "Toast muffins and top each half with salmon.",
+      "Poach eggs; place atop salmon and spoon sauce over.",
+      "Pan-fry hash browns in butter until golden and serve alongside."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Breakfast Flatbread Pizza with Eggs, Bacon & Veggies",
+    "calories": 950,
+    "macroRatio": {
+      "protein": 0.32,
+      "carbs": 0.40,
+      "fats": 0.28
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","egg","dairy"],
+    "ingredients": [
+      {
+        "name": "whole wheat flatbread",
+        "quantity": 1,
+        "singular": "flatbread",
+        "plural": "flatbreads",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "egg",
+        "quantity": 2,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "egg white",
+        "quantity": 1,
+        "singular": "egg white",
+        "plural": "egg whites",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "turkey bacon",
+        "quantity": 60,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "spinach",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "shredded mozzarella",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 200 °C. Brush flatbread with oil; bake 5 min until crisp.",
+      "Top with sautéed peppers, spinach, bacon pieces, and cheese.",
+      "Crack eggs on top; return to oven 7–8 min until whites set.",
+      "Slice and serve hot."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "Ultimate Breakfast Burrito with Steak, Eggs, Potatoes & Cheese",
+    "calories": 1000,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.45,
+      "fats": 0.20
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "egg", "dairy"],
+    "ingredients": [
+      {
+        "name": "large flour tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "lean flank steak",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg",
+        "quantity": 3,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "breakfast potatoes",
+        "quantity": 200,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "black beans",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "shredded cheddar",
+        "quantity": 60,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "salsa",
+        "quantity": 50,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toss potatoes with half the olive oil, roast at 200 °C for 20 min until golden and crisp.",
+      "Season and sear steak in remaining oil 3 min per side; slice thinly.",
+      "Scramble eggs until just set.",
+      "Warm tortilla; layer steak, eggs, potatoes, beans, cheese, and salsa; wrap burrito-style."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Loaded French Toast Casserole with Sausage & Berry Compote",
+    "calories": 1050,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.50,
+      "fats": 0.20
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["egg", "dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "whole grain bread",
+        "quantity": 8,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "egg",
+        "quantity": 5,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "skim milk",
+        "quantity": 300,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "breakfast sausage links",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "mixed berries",
+        "quantity": 200,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "Greek yogurt",
+        "quantity": 150,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "maple syrup",
+        "quantity": 40,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Cube bread and place in baking dish; whisk eggs and milk, pour over bread and refrigerate 30 min.",
+      "Cook sausage links until browned and slice; layer on top of soaked bread.",
+      "Bake at 180 °C for 30 min until set and golden.",
+      "Serve with warmed berries, dollops of yogurt, and maple syrup."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Savory Waffle Sandwich with Bacon, Egg & Cheese",
+    "calories": 1100,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.45,
+      "fats": 0.25
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["egg", "dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "whole wheat waffle",
+        "quantity": 2,
+        "singular": "waffle",
+        "plural": "waffles",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "egg",
+        "quantity": 3,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "bacon strips",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "shredded cheddar",
+        "quantity": 60,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Cook bacon until crisp and set aside; retain a little fat.",
+      "Scramble eggs in reserved bacon fat until just set, stir in spinach; remove.",
+      "Toast waffles or reheat in toaster.",
+      "Layer one waffle with eggs, bacon pieces, cheese, then top with second waffle."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Breakfast Power Plate with Chicken, Quinoa, Avocado & Eggs",
+    "calories": 1150,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.40,
+      "fats": 0.25
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["egg"],
+    "ingredients": [
+      {
+        "name": "cooked quinoa",
+        "quantity": 200,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "grilled chicken breast",
+        "quantity": 200,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 120,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "egg",
+        "quantity": 2,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "egg white",
+        "quantity": 2,
+        "singular": "egg white",
+        "plural": "egg whites",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toss quinoa and spinach with oil, lemon juice, salt, and pepper.",
+      "Top with sliced chicken and avocado slices.",
+      "Fry or poach eggs and place on top."
+    ],
+    "mealNotes": []
+  },
     {
     "mealName": "Tuna & White Bean Salad",
     "calories": 320,
@@ -9215,6 +11439,2683 @@ export const mealDatabase = [
       "Cook lamb with tomato sauce; pour over vegetables.",
       "Top with béchamel and feta; bake 25 minutes until golden.",
       "Toss cucumber and tomato with olive oil and herbs for Greek salad; serve on side."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "Carrot Sticks & Hummus",
+    "calories": 100,
+    "macroRatio": {
+      "protein": 0.07,
+      "carbs": 0.51,
+      "fats": 0.42
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["sesame"],
+    "ingredients": [
+      {
+        "name": "carrot sticks",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "hummus",
+        "quantity": 20,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Arrange carrot sticks on a plate.",
+      "Serve with hummus for dipping."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Apple & Almond Butter",
+    "calories": 100,
+    "macroRatio": {
+      "protein": 0.08,
+      "carbs": 0.39,
+      "fats": 0.53
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["nuts"],
+    "ingredients": [
+      {
+        "name": "apple slices",
+        "quantity": 70,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "almond butter",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Core and slice the apple.",
+      "Serve with almond butter spread on top of each slice."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Rice Cake with Peanut Butter",
+    "calories": 100,
+    "macroRatio": {
+      "protein": 0.10,
+      "carbs": 0.50,
+      "fats": 0.40
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["peanuts"],
+    "ingredients": [
+      {
+        "name": "plain rice cake",
+        "quantity": 1,
+        "singular": "rice cake",
+        "plural": "rice cakes",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "natural peanut butter",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Spread peanut butter evenly over the rice cake.",
+      "Enjoy immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Hard-Boiled Egg & Clementine",
+    "calories": 100,
+    "macroRatio": {
+      "protein": 0.22,
+      "carbs": 0.37,
+      "fats": 0.41
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["egg"],
+    "ingredients": [
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "clementine",
+        "quantity": 30,
+        "unit": "g",
+        "category": "fruits"
+      }
+    ],
+    "recipe": [
+      "Boil the egg for 10 minutes; peel and let cool.",
+      "Peel the clementine and segment.",
+      "Serve egg alongside clementine segments."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Greek Yogurt & Berry Parfait",
+    "calories": 150,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.45,
+      "fats": 0.25
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "Greek yogurt",
+        "quantity": 100,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "mixed berries",
+        "quantity": 40,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "honey",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Layer Greek yogurt and mixed berries in a small glass or bowl.",
+      "Drizzle honey on top and serve chilled."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Whole Grain Crackers & Cheese",
+    "calories": 150,
+    "macroRatio": {
+      "protein": 0.20,
+      "carbs": 0.40,
+      "fats": 0.40
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole grain crackers",
+        "quantity": 30,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      }
+    ],
+    "recipe": [
+      "Arrange crackers on a plate.",
+      "Top each with a slice of cheddar and enjoy."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Cottage Cheese & Pineapple Bowl",
+    "calories": 150,
+    "macroRatio": {
+      "protein": 0.40,
+      "carbs": 0.40,
+      "fats": 0.20
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "cottage cheese",
+        "quantity": 100,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "pineapple chunks",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      }
+    ],
+    "recipe": [
+      "Spoon cottage cheese into a small bowl.",
+      "Top with pineapple chunks and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Mixed Nuts Snack Pack",
+    "calories": 150,
+    "macroRatio": {
+      "protein": 0.10,
+      "carbs": 0.10,
+      "fats": 0.80
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["nuts"],
+    "ingredients": [
+      {
+        "name": "almonds",
+        "quantity": 15,
+        "unit": "g",
+        "category": "misc"
+      },
+      {
+        "name": "walnuts",
+        "quantity": 10,
+        "unit": "g",
+        "category": "misc"
+      },
+      {
+        "name": "cashews",
+        "quantity": 10,
+        "unit": "g",
+        "category": "misc"
+      }
+    ],
+    "recipe": [
+      "Combine all nuts in a small bowl or pouch.",
+      "Enjoy as a crunchy snack."
+    ],
+    "mealNotes": []
+  },
+    {
+    "mealName": "Avocado Toast",
+    "calories": 200,
+    "macroRatio": {
+      "protein": 0.05,
+      "carbs": 0.40,
+      "fats": 0.55
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten"],
+    "ingredients": [
+      {
+        "name": "whole grain bread",
+        "quantity": 1,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "avocado",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toast the bread until golden brown.",
+      "Mash avocado with a pinch of salt and spread evenly on toast.",
+      "Drizzle with olive oil and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Chocolate Banana Protein Smoothie",
+    "calories": 200,
+    "macroRatio": {
+      "protein": 0.45,
+      "carbs": 0.40,
+      "fats": 0.15
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "whey protein powder",
+        "quantity": 20,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "banana",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "skim milk",
+        "quantity": 150,
+        "unit": "ml",
+        "category": "dairy"
+      }
+    ],
+    "recipe": [
+      "Combine protein powder, banana, and milk in a blender.",
+      "Blend on high until smooth and creamy.",
+      "Pour into a glass and enjoy immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Turkey & Cheese Roll-Ups",
+    "calories": 200,
+    "macroRatio": {
+      "protein": 0.50,
+      "carbs": 0.05,
+      "fats": 0.45
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "deli turkey breast",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "lettuce leaf",
+        "quantity": 1,
+        "singular": "leaf",
+        "plural": "leaves",
+        "wholeItem": true,
+        "category": "vegetables"
+      }
+    ],
+    "recipe": [
+      "Lay turkey slices flat and place cheese on top.",
+      "Roll up each slice, securing with a lettuce leaf.",
+      "Serve immediately or chill briefly."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Homemade Trail Mix",
+    "calories": 200,
+    "macroRatio": {
+      "protein": 0.10,
+      "carbs": 0.50,
+      "fats": 0.40
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["nuts"],
+    "ingredients": [
+      {
+        "name": "almonds",
+        "quantity": 15,
+        "unit": "g",
+        "category": "misc"
+      },
+      {
+        "name": "walnuts",
+        "quantity": 10,
+        "unit": "g",
+        "category": "misc"
+      },
+      {
+        "name": "dried cranberries",
+        "quantity": 20,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "pumpkin seeds",
+        "quantity": 10,
+        "unit": "g",
+        "category": "misc"
+      }
+    ],
+    "recipe": [
+      "Combine all ingredients in a small bowl or snack bag.",
+      "Toss gently and enjoy."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Greek Yogurt with Granola & Honey",
+    "calories": 250,
+    "macroRatio": {
+      "protein": 0.25,
+      "carbs": 0.55,
+      "fats": 0.20
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "Greek yogurt",
+        "quantity": 150,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "granola",
+        "quantity": 40,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "honey",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Spoon yogurt into a bowl.",
+      "Top with granola and drizzle honey on top.",
+      "Serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Peanut Butter Banana Rice Cake",
+    "calories": 250,
+    "macroRatio": {
+      "protein": 0.15,
+      "carbs": 0.65,
+      "fats": 0.20
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["peanuts", "gluten"],
+    "ingredients": [
+      {
+        "name": "rice cake",
+        "quantity": 2,
+        "singular": "rice cake",
+        "plural": "rice cakes",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "natural peanut butter",
+        "quantity": 20,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "banana",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      }
+    ],
+    "recipe": [
+      "Spread peanut butter evenly on each rice cake.",
+      "Top with banana slices.",
+      "Enjoy immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Veggie Sticks & Black Bean Dip",
+    "calories": 250,
+    "macroRatio": {
+      "protein": 0.20,
+      "carbs": 0.50,
+      "fats": 0.30
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "carrot sticks",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cucumber sticks",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "black bean dip",
+        "quantity": 60,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Arrange vegetable sticks on a plate.",
+      "Serve with black bean dip on the side.",
+      "Dip and enjoy."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Chocolate Protein Pudding",
+    "calories": 250,
+    "macroRatio": {
+      "protein": 0.40,
+      "carbs": 0.35,
+      "fats": 0.25
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "casein protein powder",
+        "quantity": 30,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "unsweetened almond milk",
+        "quantity": 200,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "cocoa powder",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Mix protein powder and cocoa with almond milk until smooth.",
+      "Refrigerate 10 minutes to thicken.",
+      "Stir and serve chilled."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "Protein Power Smoothie",
+    "calories": 300,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.45,
+      "fats": 0.20
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "whey protein powder",
+        "quantity": 30,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "banana",
+        "quantity": 80,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "rolled oats",
+        "quantity": 20,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "almond milk",
+        "quantity": 150,
+        "unit": "ml",
+        "category": "dairy"
+      }
+    ],
+    "recipe": [
+      "Combine protein powder, banana, oats, and almond milk in a blender.",
+      "Blend on high until smooth and creamy.",
+      "Pour into a glass and enjoy immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Edamame & Hummus Plate",
+    "calories": 300,
+    "macroRatio": {
+      "protein": 0.40,
+      "carbs": 0.30,
+      "fats": 0.30
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["soy","sesame"],
+    "ingredients": [
+      {
+        "name": "edamame (in pod)",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "hummus",
+        "quantity": 60,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Steam or boil edamame until tender, drain and lightly salt.",
+      "Serve edamame alongside hummus for dipping."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Pita & Tzatziki Snack",
+    "calories": 300,
+    "macroRatio": {
+      "protein": 0.20,
+      "carbs": 0.50,
+      "fats": 0.30
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["gluten","dairy"],
+    "ingredients": [
+      {
+        "name": "whole wheat pita",
+        "quantity": 1,
+        "singular": "pita",
+        "plural": "pitas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "tzatziki",
+        "quantity": 80,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "cucumber slices",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      }
+    ],
+    "recipe": [
+      "Warm pita briefly in a toaster or oven.",
+      "Cut into wedges and serve with tzatziki and cucumber slices."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Cheese & Crackers Duo",
+    "calories": 300,
+    "macroRatio": {
+      "protein": 0.20,
+      "carbs": 0.40,
+      "fats": 0.40
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy","gluten"],
+    "ingredients": [
+      {
+        "name": "whole grain crackers",
+        "quantity": 40,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      }
+    ],
+    "recipe": [
+      "Arrange crackers on a plate.",
+      "Top each with a slice of cheddar cheese.",
+      "Serve and enjoy."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "Turkey & Avocado Wrap",
+    "calories": 350,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.35,
+      "fats": 0.35
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten"],
+    "ingredients": [
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "deli turkey breast",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "lettuce",
+        "quantity": 20,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "light mayonnaise",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Lay tortilla flat and spread mayonnaise evenly.",
+      "Layer turkey, avocado slices, and lettuce.",
+      "Roll up tightly, slice in half, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Cottage Cheese & Fruit Bowl with Granola",
+    "calories": 350,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.45,
+      "fats": 0.20
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy", "nuts"],
+    "ingredients": [
+      {
+        "name": "cottage cheese",
+        "quantity": 150,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "pineapple chunks",
+        "quantity": 60,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "mixed berries",
+        "quantity": 40,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "granola",
+        "quantity": 30,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "almonds",
+        "quantity": 10,
+        "unit": "g",
+        "category": "misc"
+      }
+    ],
+    "recipe": [
+      "Spoon cottage cheese into a bowl.",
+      "Top with pineapple, berries, and granola.",
+      "Sprinkle almonds on top and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Quinoa & Chickpea Salad",
+    "calories": 350,
+    "macroRatio": {
+      "protein": 0.25,
+      "carbs": 0.50,
+      "fats": 0.25
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "cooked quinoa",
+        "quantity": 80,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "chickpeas",
+        "quantity": 70,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cucumber",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cherry tomatoes",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Combine quinoa, chickpeas, cucumber, and tomatoes in a bowl.",
+      "Drizzle with olive oil and lemon juice; toss gently.",
+      "Season with salt and pepper and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Fruit & Nut Trail Mix",
+    "calories": 350,
+    "macroRatio": {
+      "protein": 0.10,
+      "carbs": 0.60,
+      "fats": 0.30
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["nuts"],
+    "ingredients": [
+      {
+        "name": "almonds",
+        "quantity": 20,
+        "unit": "g",
+        "category": "misc"
+      },
+      {
+        "name": "walnuts",
+        "quantity": 15,
+        "unit": "g",
+        "category": "misc"
+      },
+      {
+        "name": "dried cranberries",
+        "quantity": 30,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "pumpkin seeds",
+        "quantity": 20,
+        "unit": "g",
+        "category": "misc"
+      },
+      {
+        "name": "dark chocolate chips",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Combine all ingredients in a small bowl or pouch.",
+      "Toss gently and enjoy."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Tuna & Whole Grain Crackers with Cheese",
+    "calories": 400,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.35,
+      "fats": 0.30
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish", "gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "canned tuna (in water)",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "whole grain crackers",
+        "quantity": 40,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "light mayonnaise",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Drain tuna and mix with mayonnaise in a small bowl.",
+      "Arrange crackers on a plate and top with tuna salad.",
+      "Add a slice of cheddar on every second cracker and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Black Bean & Corn Salad",
+    "calories": 400,
+    "macroRatio": {
+      "protein": 0.20,
+      "carbs": 0.60,
+      "fats": 0.20
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "black beans",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "corn kernels",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cherry tomatoes",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "avocado",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "lime juice",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Combine beans, corn, and halved tomatoes in a bowl.",
+      "Dice avocado and gently fold in.",
+      "Drizzle with olive oil and lime juice, toss and season to taste."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "No-Bake Peanut Butter Energy Balls",
+    "calories": 400,
+    "macroRatio": {
+      "protein": 0.15,
+      "carbs": 0.50,
+      "fats": 0.35
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["peanuts"],
+    "ingredients": [
+      {
+        "name": "rolled oats",
+        "quantity": 60,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "natural peanut butter",
+        "quantity": 40,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "honey",
+        "quantity": 20,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "chia seeds",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Mix oats, peanut butter, honey, and chia in a bowl until combined.",
+      "Roll mixture into 6–8 bite-sized balls.",
+      "Chill 10 minutes before serving to firm up."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Green Smoothie Bowl",
+    "calories": 400,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.45,
+      "fats": 0.25
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "Greek yogurt",
+        "quantity": 100,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "spinach",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "banana",
+        "quantity": 80,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "chia seeds",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "granola",
+        "quantity": 30,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "almond milk",
+        "quantity": 50,
+        "unit": "ml",
+        "category": "dairy"
+      }
+    ],
+    "recipe": [
+      "Blend yogurt, spinach, banana, and almond milk until smooth.",
+      "Pour into a bowl; top with chia seeds and granola.",
+      "Serve immediately."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "Turkey Meatball Skewers with Tzatziki",
+    "calories": 450,
+    "macroRatio": {
+      "protein": 0.40,
+      "carbs": 0.30,
+      "fats": 0.30
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy", "egg"],
+    "ingredients": [
+      {
+        "name": "ground turkey",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "breadcrumbs",
+        "quantity": 20,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "tzatziki sauce",
+        "quantity": 60,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "cucumber",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 200°C (400°F). Mix turkey, egg, breadcrumbs, salt and pepper; form into 6 small meatballs.",
+      "Place on a baking sheet, drizzle with olive oil, and bake 15–18 minutes until cooked through.",
+      "Serve skewered with cucumber slices and tzatziki on the side for dipping."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Avocado Banana Peanut Butter Smoothie",
+    "calories": 450,
+    "macroRatio": {
+      "protein": 0.20,
+      "carbs": 0.50,
+      "fats": 0.30
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["peanuts", "dairy"],
+    "ingredients": [
+      {
+        "name": "banana",
+        "quantity": 100,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "avocado",
+        "quantity": 80,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "natural peanut butter",
+        "quantity": 20,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "Greek yogurt",
+        "quantity": 100,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "almond milk",
+        "quantity": 100,
+        "unit": "ml",
+        "category": "dairy"
+      }
+    ],
+    "recipe": [
+      "Combine banana, avocado, peanut butter, yogurt, and almond milk in a blender.",
+      "Blend on high until completely smooth.",
+      "Pour into a glass and serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "No-Bake Oat & Date Energy Bars",
+    "calories": 450,
+    "macroRatio": {
+      "protein": 0.15,
+      "carbs": 0.60,
+      "fats": 0.25
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["nuts"],
+    "ingredients": [
+      {
+        "name": "rolled oats",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "pitted dates",
+        "quantity": 80,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "almonds",
+        "quantity": 30,
+        "unit": "g",
+        "category": "misc"
+      },
+      {
+        "name": "peanut butter",
+        "quantity": 40,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "chia seeds",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Pulse dates in a food processor until a paste forms.",
+      "Combine date paste with oats, chopped almonds, peanut butter, and chia seeds; mix well.",
+      "Press mixture firmly into a lined pan; chill ≥1 hour, then cut into 4 bars."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Chicken Salad Lettuce Cups",
+    "calories": 450,
+    "macroRatio": {
+      "protein": 0.45,
+      "carbs": 0.20,
+      "fats": 0.35
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "cooked chicken breast",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "Greek yogurt",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "celery",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "green onion",
+        "quantity": 20,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "butter lettuce leaf",
+        "quantity": 4,
+        "singular": "leaf",
+        "plural": "leaves",
+        "wholeItem": true,
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Chop chicken, celery, and green onion; toss with yogurt, olive oil, salt, and pepper.",
+      "Spoon chicken salad into lettuce leaves to form cups.",
+      "Serve chilled or at room temperature."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "Smoked Salmon & Avocado Bagel",
+    "calories": 500,
+    "macroRatio": {
+      "protein": 0.25,
+      "carbs": 0.40,
+      "fats": 0.35
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["fish", "gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole wheat bagel",
+        "quantity": 1,
+        "singular": "bagel",
+        "plural": "bagels",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "smoked salmon",
+        "quantity": 70,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "light cream cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "avocado",
+        "quantity": 30,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toast the bagel until golden brown.",
+      "Spread cream cheese evenly on each half.",
+      "Top with avocado slices and smoked salmon.",
+      "Drizzle lightly with olive oil and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Chicken & Cheese Quesadilla",
+    "calories": 500,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.35,
+      "fats": 0.30
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "grilled chicken breast",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "salsa",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat oil in a skillet over medium heat.",
+      "Place tortilla in pan, layer chicken, cheese, and salsa on half.",
+      "Fold tortilla over filling and cook 2–3 minutes per side until golden and cheese melts.",
+      "Slice into wedges and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Mini Charcuterie Snack Plate",
+    "calories": 500,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.25,
+      "fats": 0.45
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy", "nuts"],
+    "ingredients": [
+      {
+        "name": "prosciutto",
+        "quantity": 50,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "salami",
+        "quantity": 30,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "brie cheese",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "grapes",
+        "quantity": 60,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "whole grain crackers",
+        "quantity": 40,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "almonds",
+        "quantity": 10,
+        "unit": "g",
+        "category": "misc"
+      }
+    ],
+    "recipe": [
+      "Arrange prosciutto, salami, and brie on a small plate.",
+      "Add grapes, crackers, and almonds as accompaniments.",
+      "Serve as a composed snack platter."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Protein Waffle with Peanut Butter & Banana",
+    "calories": 500,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.45,
+      "fats": 0.25
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy", "egg", "nuts"],
+    "ingredients": [
+      {
+        "name": "whole wheat waffle",
+        "quantity": 1,
+        "singular": "waffle",
+        "plural": "waffles",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "whey protein powder",
+        "quantity": 20,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "peanut butter",
+        "quantity": 20,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "banana",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      }
+    ],
+    "recipe": [
+      "Prepare waffle batter with protein powder per package or recipe; cook waffle.",
+      "Spread peanut butter on warm waffle.",
+      "Top with banana slices and serve immediately."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "Hummus & Pita Chips with Carrot Sticks",
+    "calories": 550,
+    "macroRatio": {
+      "protein": 0.15,
+      "carbs": 0.55,
+      "fats": 0.30
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["sesame", "gluten"],
+    "ingredients": [
+      {
+        "name": "hummus",
+        "quantity": 100,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "pita chips",
+        "quantity": 80,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "carrot sticks",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      }
+    ],
+    "recipe": [
+      "Arrange pita chips and carrot sticks on a plate.",
+      "Serve with hummus in a small bowl for dipping."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Peanut Butter Chocolate Overnight Oats",
+    "calories": 550,
+    "macroRatio": {
+      "protein": 0.20,
+      "carbs": 0.50,
+      "fats": 0.30
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["nuts", "dairy"],
+    "ingredients": [
+      {
+        "name": "rolled oats",
+        "quantity": 60,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "skim milk",
+        "quantity": 100,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "natural peanut butter",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "cocoa powder",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "chia seeds",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "In a jar, combine oats, milk, peanut butter, cocoa, and chia seeds; stir well.",
+      "Cover and refrigerate overnight (≥6 hours).",
+      "Stir before serving."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Mini Turkey Club Sandwiches",
+    "calories": 550,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.30,
+      "fats": 0.35
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole grain bread",
+        "quantity": 2,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "deli turkey breast",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "bacon",
+        "quantity": 30,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "lettuce",
+        "quantity": 20,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "light mayonnaise",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toast bread slices lightly.",
+      "Spread mayonnaise on each slice; layer turkey, bacon, and lettuce.",
+      "Cut each sandwich in half and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Greek Yogurt Protein Smoothie Bowl",
+    "calories": 550,
+    "macroRatio": {
+      "protein": 0.40,
+      "carbs": 0.40,
+      "fats": 0.20
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["dairy", "nuts"],
+    "ingredients": [
+      {
+        "name": "Greek yogurt",
+        "quantity": 150,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "whey protein powder",
+        "quantity": 20,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "mixed berries",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "rolled oats",
+        "quantity": 20,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "almond butter",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Blend yogurt, protein powder, and berries until smooth.",
+      "Pour into a bowl and top with oats and a drizzle of almond butter.",
+      "Serve immediately."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "Chicken Caesar Mini Pita",
+    "calories": 600,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.40,
+      "fats": 0.25
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy", "egg", "fish"],
+    "ingredients": [
+      {
+        "name": "mini pita",
+        "quantity": 2,
+        "singular": "piece",
+        "plural": "pieces",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "grilled chicken strips",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "romaine lettuce",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "Caesar dressing",
+        "quantity": 40,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 20,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "anchovy paste",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Warm pitas briefly in toaster or oven.",
+      "Toss chicken and lettuce with Caesar dressing and anchovy paste.",
+      "Divide mixture into pitas and sprinkle Parmesan on top."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Loaded Sweet Potato Skins",
+    "calories": 600,
+    "macroRatio": {
+      "protein": 0.20,
+      "carbs": 0.50,
+      "fats": 0.30
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "sweet potato",
+        "quantity": 300,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 50,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "cooked bacon bits",
+        "quantity": 30,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "Greek yogurt",
+        "quantity": 50,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "chives",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Halve sweet potato, scoop out flesh leaving a shell; roast shells 15 min at 200 °C (400 °F).",
+      "Mix scooped flesh with cheddar, bacon, and yogurt; fill skins.",
+      "Return to oven 10 min until cheese melts; garnish with chives."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Chocolate Protein Brownie & Berries",
+    "calories": 600,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.45,
+      "fats": 0.25
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy", "egg"],
+    "ingredients": [
+      {
+        "name": "protein brownie",
+        "quantity": 1,
+        "singular": "piece",
+        "plural": "pieces",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "Greek yogurt",
+        "quantity": 100,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "mixed berries",
+        "quantity": 100,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "dark chocolate shavings",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Place brownie on plate.",
+      "Top with Greek yogurt and mixed berries.",
+      "Sprinkle with chocolate shavings and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Shrimp Cocktail & Avocado Toast",
+    "calories": 600,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.40,
+      "fats": 0.25
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["shellfish", "gluten"],
+    "ingredients": [
+      {
+        "name": "shrimp (cooked)",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cocktail sauce",
+        "quantity": 40,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "whole grain bread",
+        "quantity": 2,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "avocado",
+        "quantity": 60,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "lemon juice",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toast bread slices; mash avocado with lemon juice, salt, and pepper; spread on toast.",
+      "Arrange shrimp around a dish of cocktail sauce.",
+      "Serve shrimp alongside avocado toast."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "Steak Crostini with Arugula & Parmesan",
+    "calories": 650,
+    "macroRatio": {
+      "protein": 0.40,
+      "carbs": 0.40,
+      "fats": 0.20
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","dairy"],
+    "ingredients": [
+      {
+        "name": "baguette slices",
+        "quantity": 4,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "lean steak",
+        "quantity": 140,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "arugula",
+        "quantity": 40,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Toast baguette slices brushed with half the olive oil until golden.",
+      "Season and sear steak in remaining oil to desired doneness; slice thinly.",
+      "Top each crostini with steak, a handful of arugula, and a sprinkle of Parmesan."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Loaded Chicken Nachos",
+    "calories": 650,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.45,
+      "fats": 0.20
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy","gluten"],
+    "ingredients": [
+      {
+        "name": "tortilla chips",
+        "quantity": 80,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "shredded chicken breast",
+        "quantity": 120,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "black beans",
+        "quantity": 60,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "shredded cheddar",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "salsa",
+        "quantity": 50,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "guacamole",
+        "quantity": 40,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Spread chips on a baking sheet, top with chicken and beans.",
+      "Sprinkle with cheddar and bake at 180°C (350°F) until cheese melts, about 5–7 minutes.",
+      "Serve with salsa and guacamole on the side."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Chocolate Avocado Protein Pudding",
+    "calories": 650,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.40,
+      "fats": 0.30
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["dairy","nuts"],
+    "ingredients": [
+      {
+        "name": "ripe avocado",
+        "quantity": 200,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "casein protein powder",
+        "quantity": 40,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cocoa powder",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "almond milk",
+        "quantity": 200,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "honey",
+        "quantity": 20,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Blend avocado, protein powder, cocoa, honey, and milk until smooth.",
+      "Chill 15 minutes before serving."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Peanut Butter Banana French Toast Bites",
+    "calories": 650,
+    "macroRatio": {
+      "protein": 0.25,
+      "carbs": 0.50,
+      "fats": 0.25
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten","dairy","egg","peanuts"],
+    "ingredients": [
+      {
+        "name": "whole grain bread",
+        "quantity": 2,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "egg",
+        "quantity": 2,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "skim milk",
+        "quantity": 60,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "banana",
+        "quantity": 100,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "natural peanut butter",
+        "quantity": 30,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Whisk eggs and milk; dip bread, cut into bite-sized pieces.",
+      "Cook bites in a nonstick pan until golden on all sides.",
+      "Top with banana slices and drizzle peanut butter before serving."
+    ],
+    "mealNotes": []
+  },
+   {
+    "mealName": "Grilled Steak & Sweet Potato Fries",
+    "calories": 700,
+    "macroRatio": {
+      "protein": 0.40,
+      "carbs": 0.35,
+      "fats": 0.25
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": [],
+    "ingredients": [
+      {
+        "name": "lean flank steak",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "sweet potato",
+        "quantity": 200,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 15,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "garlic powder",
+        "quantity": 2,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "paprika",
+        "quantity": 2,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 220°C (425°F). Toss sweet potato wedges with half the oil, garlic powder, and paprika; bake 25–30 minutes until crispy.",
+      "Season steak with salt and pepper; grill or pan-sear 3–4 minutes per side for medium-rare.",
+      "Slice steak, serve alongside fries."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Chicken Shawarma Pita Pocket",
+    "calories": 700,
+    "macroRatio": {
+      "protein": 0.45,
+      "carbs": 0.35,
+      "fats": 0.20
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten", "dairy"],
+    "ingredients": [
+      {
+        "name": "mini pita",
+        "quantity": 2,
+        "singular": "piece",
+        "plural": "pieces",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "chicken thigh (seasoned shawarma)",
+        "quantity": 150,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "tomato",
+        "quantity": 60,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cucumber",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "tzatziki",
+        "quantity": 60,
+        "unit": "g",
+        "category": "dairy"
+      }
+    ],
+    "recipe": [
+      "Warm pitas briefly. Stuff each with sliced chicken, diced tomato, and cucumber.",
+      "Drizzle tzatziki inside pockets and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "BBQ Pulled Pork Sliders",
+    "calories": 700,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.40,
+      "fats": 0.25
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["gluten"],
+    "ingredients": [
+      {
+        "name": "slider buns",
+        "quantity": 3,
+        "singular": "bun",
+        "plural": "buns",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "pulled pork (with BBQ sauce)",
+        "quantity": 180,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "coleslaw",
+        "quantity": 80,
+        "unit": "g",
+        "category": "vegetables"
+      }
+    ],
+    "recipe": [
+      "Fill each slider bun with pulled pork and a spoonful of coleslaw.",
+      "Serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Buffalo Chicken Celery Boats",
+    "calories": 700,
+    "macroRatio": {
+      "protein": 0.50,
+      "carbs": 0.15,
+      "fats": 0.35
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "cooked chicken breast",
+        "quantity": 200,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "buffalo sauce",
+        "quantity": 50,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "celery stalks",
+        "quantity": 100,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "blue cheese dressing",
+        "quantity": 60,
+        "unit": "g",
+        "category": "dairy"
+      }
+    ],
+    "recipe": [
+      "Mix shredded chicken with buffalo sauce.",
+      "Fill celery stalks with buffalo chicken mixture.",
+      "Drizzle blue cheese dressing over top and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "BBQ Beef Nachos",
+    "calories": 750,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.45,
+      "fats": 0.20
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "tortilla chips",
+        "quantity": 100,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "ground beef",
+        "quantity": 100,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 60,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "black beans",
+        "quantity": 50,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "salsa",
+        "quantity": 50,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "sour cream",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "guacamole",
+        "quantity": 50,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 180°C (350°F).",
+      "Spread chips on a baking sheet; top with beef, beans, and cheese.",
+      "Bake 5–7 minutes until cheese melts.",
+      "Serve with salsa, sour cream, and guacamole."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Turkey Bacon Avocado Flatbread",
+    "calories": 750,
+    "macroRatio": {
+      "protein": 0.40,
+      "carbs": 0.35,
+      "fats": 0.25
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "whole wheat flatbread",
+        "quantity": 1,
+        "singular": "flatbread",
+        "plural": "flatbreads",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "turkey bacon",
+        "quantity": 80,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 80,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "mozzarella cheese",
+        "quantity": 40,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 20,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Preheat oven to 200°C (400°F).",
+      "Brush flatbread with half the olive oil; bake 5 minutes until crisp.",
+      "Top with bacon, sliced avocado, and mozzarella.",
+      "Return to oven 3–4 minutes until cheese melts."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Greek Yogurt & Nut Fruit Bowl",
+    "calories": 750,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.50,
+      "fats": 0.20
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy", "nuts", "gluten"],
+    "ingredients": [
+      {
+        "name": "Greek yogurt",
+        "quantity": 200,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "granola",
+        "quantity": 50,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "almonds",
+        "quantity": 20,
+        "unit": "g",
+        "category": "misc"
+      },
+      {
+        "name": "blueberries",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "honey",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Spoon yogurt into a bowl.",
+      "Top with granola, nuts, berries, and honey.",
+      "Serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Protein Oat Pancake Stack with Berry Compote",
+    "calories": 750,
+    "macroRatio": {
+      "protein": 0.35,
+      "carbs": 0.45,
+      "fats": 0.20
+    },
+    "category": "Snack",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["No Restrictions"],
+    "allergens": ["dairy", "egg", "gluten"],
+    "ingredients": [
+      {
+        "name": "rolled oats",
+        "quantity": 60,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "egg",
+        "quantity": 2,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "whey protein powder",
+        "quantity": 20,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "blueberries",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "maple syrup",
+        "quantity": 20,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Blend oats, eggs, and protein powder until smooth.",
+      "Cook three small pancakes in a nonstick pan over medium heat, 2–3 minutes per side.",
+      "Warm blueberries with maple syrup until saucy; spoon over stack."
     ],
     "mealNotes": []
   }

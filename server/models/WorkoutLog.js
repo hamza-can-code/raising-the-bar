@@ -1,3 +1,5 @@
+// server/models/WorkoutLog.js
+
 const mongoose = require('mongoose');
 
 const WorkoutLogSchema = new mongoose.Schema({
