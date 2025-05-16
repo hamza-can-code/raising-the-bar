@@ -3813,6 +3813,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+  // initNutritionSwipeableRecapCards();
+  // initSwipeableNutritionTrendCards();
 });
 
 function renderWeeklyRecap() {
@@ -3920,47 +3922,50 @@ function renderWeeklyRecap() {
 
 // Add this function to your NT script
 function initNutritionSwipeableRecapCards() {
-  const cardsContainer = document.getElementById("nutritionWeeklyRecapCards");
-  const dotsContainer = document.getElementById("nutritionWeeklyRecapDots");
-  if (!cardsContainer || !dotsContainer) return;
+  const wrap     = document.getElementById("nutritionWeeklyRecapCards");
+  const dotsWrap = document.getElementById("nutritionWeeklyRecapDots");
+  if (!wrap || !dotsWrap) return;
 
-  let startX = 0;
-  let currentIndex = 0;
-  const totalCards = cardsContainer.querySelectorAll(".recap-card").length;
+  const cards      = Array.from(wrap.querySelectorAll(".recap-card"));
+  const cardCount  = cards.length;
+  if (cardCount <= 1) return;
 
-  /* start position */
-  cardsContainer.style.transform = "translateX(0px)";
+  let current = 0;
+  let startX  = 0;
 
-  /* capture-phase listeners so canvas/Chart children can’t swallow the events */
-  cardsContainer.addEventListener(
-    "touchstart",
-    e => {
-      if (e.touches.length) startX = e.touches[0].clientX;
-    },
-    { passive: true, capture: true }
-  );
+  /* ---- dots --------------------------------------------------- */
+  dotsWrap.innerHTML = "";
+  cards.forEach((_, i) => {
+    const dot = document.createElement("span");
+    dot.className = "recap-dot" + (i === 0 ? " active" : "");
+    dot.addEventListener("click", () => jumpTo(i));
+    dotsWrap.appendChild(dot);
+  });
 
-  cardsContainer.addEventListener(
-    "touchend",
-    e => {
-      const endX = e.changedTouches[0].clientX;
-      const diff = endX - startX;
+  const cardW = () => cards[0].offsetWidth;
 
-      if (Math.abs(diff) > 50) {
-        currentIndex = diff < 0
-          ? (currentIndex + 1) % totalCards   // swipe left → next
-          : (currentIndex - 1 + totalCards) % totalCards; // swipe right → prev
+  function jumpTo(idx) {
+    current = (idx + cardCount) % cardCount;
+    wrap.style.transform = `translateX(-${current * cardW()}px)`;
+    dotsWrap.querySelectorAll(".recap-dot").forEach((d, i) =>
+      d.classList.toggle("active", i === current));
+  }
 
-        const w = cardsContainer.clientWidth;
-        cardsContainer.style.transform = `translateX(-${currentIndex * w}px)`;
+  /* ---- pointer / touch swipe --------------------------------- */
+  function onStart(e) {
+    startX = (e.touches ? e.touches[0] : e).clientX;
+    wrap.addEventListener(e.type === "touchstart" ? "touchend" : "mouseup", onEnd, { once:true });
+  }
+  function onEnd(e) {
+    const endX = (e.changedTouches ? e.changedTouches[0] : e).clientX;
+    const dx   = endX - startX;
+    if (Math.abs(dx) > 50) jumpTo(current + (dx < 0 ? 1 : -1));
+  }
+  wrap.addEventListener("mousedown",  onStart, { passive:true, capture:true });
+  wrap.addEventListener("touchstart", onStart, { passive:true, capture:true });
 
-        dotsContainer.querySelectorAll(".recap-dot").forEach(d => d.classList.remove("active"));
-        const allDots = Array.from(dotsContainer.querySelectorAll(".recap-dot"));
-        if (allDots[currentIndex]) allDots[currentIndex].classList.add("active");
-      }
-    },
-    { passive: true, capture: true }
-  );
+  /* ---- keep aligned on resize -------------------------------- */
+  window.addEventListener("resize", () => jumpTo(current));
 }
 
 function getNutritionWeekStats(weekNum) {
@@ -5246,60 +5251,49 @@ function applyCellColor(cell, color) {
 
 /** Setup swipe logic for the trend cards container with “dots.” */
 function initSwipeableNutritionTrendCards() {
-  const cardsContainer = document.getElementById("nutritionTrendsCards");
-  const dotsContainer = document.getElementById("nutritionTrendsDots");
-  if (!cardsContainer || !dotsContainer) return;
+  const wrap     = document.getElementById("nutritionTrendsCards");
+  const dotsWrap = document.getElementById("nutritionTrendsDots");
+  if (!wrap || !dotsWrap) return;
 
-  const cardCount = cardsContainer.querySelectorAll(".trend-card").length;
+  const cards      = Array.from(wrap.querySelectorAll(".trend-card"));
+  const cardCount  = cards.length;
   if (cardCount <= 1) return;
 
-  /* build dot indicators */
-  dotsContainer.innerHTML = "";
-  for (let i = 0; i < cardCount; i++) {
-    const dot = document.createElement("div");
-    dot.classList.add("recap-dot");
-    if (i === 0) dot.classList.add("active");
-    dot.addEventListener("click", () => {
-      const w = cardsContainer.clientWidth;
-      cardsContainer.style.transform = `translateX(-${i * w}px)`;
-      dotsContainer.querySelectorAll(".recap-dot").forEach(d => d.classList.remove("active"));
-      dot.classList.add("active");
-    });
-    dotsContainer.appendChild(dot);
+  let current = 0;
+  let startX  = 0;
+
+  /* ---- dots --------------------------------------------------- */
+  dotsWrap.innerHTML = "";
+  cards.forEach((_, i) => {
+    const dot = document.createElement("span");
+    dot.className = "recap-dot" + (i === 0 ? " active" : "");
+    dot.addEventListener("click", () => jumpTo(i));
+    dotsWrap.appendChild(dot);
+  });
+
+  const cardW = () => cards[0].offsetWidth;
+
+  function jumpTo(idx) {
+    current = (idx + cardCount) % cardCount;
+    wrap.style.transform = `translateX(-${current * cardW()}px)`;
+    dotsWrap.querySelectorAll(".recap-dot").forEach((d, i) =>
+      d.classList.toggle("active", i === current));
   }
 
-  let startX = 0;
-  let currentIndex = 0;
+  /* ---- pointer / touch swipe --------------------------------- */
+  function onStart(e) {
+    startX = (e.touches ? e.touches[0] : e).clientX;
+    wrap.addEventListener(e.type === "touchstart" ? "touchend" : "mouseup", onEnd, { once:true });
+  }
+  function onEnd(e) {
+    const endX = (e.changedTouches ? e.changedTouches[0] : e).clientX;
+    const dx   = endX - startX;
+    if (Math.abs(dx) > 50) jumpTo(current + (dx < 0 ? 1 : -1));
+  }
+  wrap.addEventListener("mousedown",  onStart, { passive:true, capture:true });
+  wrap.addEventListener("touchstart", onStart, { passive:true, capture:true });
 
-  cardsContainer.addEventListener(
-    "touchstart",
-    e => {
-      if (e.touches.length) startX = e.touches[0].clientX;
-    },
-    { passive: true, capture: true }
-  );
-
-  cardsContainer.addEventListener(
-    "touchend",
-    e => {
-      const endX = e.changedTouches[0].clientX;
-      const diff = endX - startX;
-
-      if (Math.abs(diff) > 50) {
-        currentIndex = diff < 0
-          ? (currentIndex + 1) % cardCount
-          : (currentIndex - 1 + cardCount) % cardCount;
-
-        const w = cardsContainer.clientWidth;
-        cardsContainer.style.transform = `translateX(-${currentIndex * w}px)`;
-
-        const allDots = Array.from(dotsContainer.querySelectorAll(".recap-dot"));
-        allDots.forEach(d => d.classList.remove("active"));
-        if (allDots[currentIndex]) allDots[currentIndex].classList.add("active");
-      }
-    },
-    { passive: true, capture: true }
-  );
+  window.addEventListener("resize", () => jumpTo(current));
 }
 
 function generateNutritionCoachInsight(selection) {
