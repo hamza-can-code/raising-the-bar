@@ -1,7 +1,14 @@
 // server/utils/sendOrderConfirmationEmail.js
 const SibApiV3Sdk = require('sib-api-v3-sdk');
 
-const sendOrderConfirmationEmail = async ({ email, programName, unlockedWeeks, renewalDate }) => {
+const sendOrderConfirmationEmail = async ({ email, programName, unlockedWeeks, renewalDate, firstName }) => {
+  console.log('🧪 Confirmation email params:', {
+    email,
+    programName,
+    unlockedWeeks,
+    renewalDate,
+    firstName
+  });  
   const apiKey = process.env.BREVO_API_KEY;
   const templateId = Number(process.env.ORDER_CONFIRMATION_TEMPLATE_ID); // ✅ get templateId from env
 
@@ -47,6 +54,7 @@ const sendOrderConfirmationEmail = async ({ email, programName, unlockedWeeks, r
   } catch (error) {
     console.error('❌ Error sending order confirmation email:', error.response ? error.response.text : error);
   }
+  
 };
 
 module.exports = sendOrderConfirmationEmail;
