@@ -5,6 +5,8 @@ const router = express.Router();
 
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
+console.log('🔐 Stripe key in use:', process.env.STRIPE_SECRET_KEY);
+
 // const FRONTEND_URL = process.env.FRONTEND_URL;
 
 /* ─── Stripe Price IDs (from your .env) ───────────────────── */

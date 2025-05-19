@@ -97,6 +97,7 @@ router.post(
           renewalDate: isSubscription ? ua.renewalDate : null,
           firstName: user.name?.split(' ')[0] || 'There' // ✅ extract first name here
         });
+        console.log('📨 Attempting to send order confirmation to:', email);
         console.log('📧  Confirmation e-mail sent');
       } catch (err) {
         console.error('📧  sendOrderConfirmationEmail failed:', err.message);
