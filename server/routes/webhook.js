@@ -34,8 +34,14 @@ router.post(
     if (event.type === 'checkout.session.completed') {
       /* A) Pull full session (need price + subscription id) */
       const session = await stripe.checkout.sessions.retrieve(event.data.object.id, {
-        expand: ['line_items', 'subscription']
+        expand: ['subscription']
       });
+
+      // Step B: Retrieve line items separately
+      const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
+        limit: 1
+      });
+      const priceId = lineItems.data[0].price.id;
 
       const email = session.customer_details?.email || session.customer_email;
       console.log('✅ checkout.session.completed →', email);
@@ -52,7 +58,7 @@ router.post(
       }
 
       /* C) work out WHAT they bought */
-      const priceId = session.line_items.data[0].price.id;
+      // const priceId = session.line_items.data[0].price.id;
       let unlockedWeeks = 0;
       let isSubscription = false;
 
