@@ -27,6 +27,9 @@ function buildCheckoutConfig({ plan, discounted, email }) {
 
   const isSub = plan === 'subscription';
 
+console.log('🧾 Stripe Checkout → plan:', plan);
+console.log('💸 Using price ID:', PRICE[plan]);
+
   const config = {
     payment_method_types: ['card'],
     mode: isSub ? 'subscription' : 'payment',

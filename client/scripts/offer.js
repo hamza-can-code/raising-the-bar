@@ -163,47 +163,47 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       goalDriver: "A wedding or special event",
       met: "Make sure you feel amazing, lean, and confident when your big day arrives in {eventMonth}. All with a smart tracker that asks how you feel and adapts your plan around it.",
-      notMet: "This plan will help you feel stronger and more in control — this is still your moment with a smart tracker that asks how you feel and adapts your plan around it.."
+      notMet: "This plan will help you feel stronger and more in control — this is still your moment with a smart tracker that asks how you feel and adapts your plan around it"
     },
     {
       goalDriver: "An upcoming holiday",
-      met: "Make this your best transformation yet — ready for the sun, the camera, and the mirror by {eventMonth}. All with a smart tracker that asks how you feel and adapts your plan around it..",
-      notMet: "Feel lighter, stronger, and proud of how far you’ve come by the time you go. All with a smart tracker that asks how you feel and adapts your plan around it.."
+      met: "Make this your best transformation yet — ready for the sun, the camera, and the mirror by {eventMonth}. All with a smart tracker that asks how you feel and adapts your plan around it.",
+      notMet: "Feel lighter, stronger, and proud of how far you’ve come by the time you go. All with a smart tracker that asks how you feel and adapts your plan around it."
     },
     {
       goalDriver: "A recent breakup or life change",
-      met: "Rebuild strength, confidence, and control with a smart tracker that asks how you feel and adapts your plan around it..",
-      notMet: "Rebuild strength, confidence, and control with a smart tracker that asks how you feel and adapts your plan around it.."
+      met: "Rebuild strength, confidence, and control with a smart tracker that asks how you feel and adapts your plan around it.",
+      notMet: "Rebuild strength, confidence, and control with a smart tracker that asks how you feel and adapts your plan around it."
     },
     {
       goalDriver: "I want to feel confident in my body again",
-      met: "Feel proud of what you see in the mirror — and how far you've come. All with a smart tracker that asks how you feel and adapts your plan around it..",
-      notMet: "Feel proud of what you see in the mirror — and how far you've come. All with a smart tracker that asks how you feel and adapts your plan around it.."
+      met: "Feel proud of what you see in the mirror — and how far you've come. All with a smart tracker that asks how you feel and adapts your plan around it.",
+      notMet: "Feel proud of what you see in the mirror — and how far you've come. All with a smart tracker that asks how you feel and adapts your plan around it."
     },
     {
       goalDriver: "I'm tired of feeling tired or unmotivated",
-      met: "Finally feel energized, clear-headed, and back in control again with a smart tracker that asks how you feel and adapts your plan around it..",
-      notMet: "Finally feel energized, clear-headed, and back in control again with a smart tracker that asks how you feel and adapts your plan around it.."
+      met: "Finally feel energized, clear-headed, and back in control again with a smart tracker that asks how you feel and adapts your plan around it.",
+      notMet: "Finally feel energized, clear-headed, and back in control again with a smart tracker that asks how you feel and adapts your plan around it."
     },
     {
       goalDriver: "I’m doing this for my mental and emotional health",
-      met: "Feel calmer, stronger, and more grounded — this is about more than just your body. All with a smart tracker that asks how you feel and adapts your plan around it..",
-      notMet: "Feel calmer, stronger, and more grounded — this is about more than just your body. All with a smart tracker that asks how you feel and adapts your plan around it.."
+      met: "Feel calmer, stronger, and more grounded — this is about more than just your body. All with a smart tracker that asks how you feel and adapts your plan around it.",
+      notMet: "Feel calmer, stronger, and more grounded — this is about more than just your body. All with a smart tracker that asks how you feel and adapts your plan around it."
     },
     {
       goalDriver: "I’ve let things slip and want to get back on track",
-      met: "Get back in control — with momentum, structure, and progress you can feel by {eventMonth}. All with a smart tracker that asks how you feel and adapts your plan around it..",
-      notMet: "Take back control — with small, daily wins that add up to real momentum. All with a smart tracker that asks how you feel and adapts your plan around it.."
+      met: "Get back in control — with momentum, structure, and progress you can feel by {eventMonth}. All with a smart tracker that asks how you feel and adapts your plan around it.",
+      notMet: "Take back control — with small, daily wins that add up to real momentum. All with a smart tracker that asks how you feel and adapts your plan around it."
     },
     {
       goalDriver: "I want to build discipline and stop starting over",
-      met: "No more starting over. Just steady progress, one day at a time, with a smart tracker that asks how you feel and adapts your plan around it..",
-      notMet: "No more starting over. Just steady progress, one day at a time, with a smart tracker that asks how you feel and adapts your plan around it.."
+      met: "No more starting over. Just steady progress, one day at a time, with a smart tracker that asks how you feel and adapts your plan around it.",
+      notMet: "No more starting over. Just steady progress, one day at a time, with a smart tracker that asks how you feel and adapts your plan around it."
     },
     {
       goalDriver: "I just feel ready for a change",
-      met: "Step into something better — and start feeling more like yourself again. All with a smart tracker that asks how you feel and adapts your plan around it..",
-      notMet: "Step into something better — and start feeling more like yourself again. All with a smart tracker that asks how you feel and adapts your plan around it.."
+      met: "Step into something better — and start feeling more like yourself again. All with a smart tracker that asks how you feel and adapts your plan around it.",
+      notMet: "Step into something better — and start feeling more like yourself again. All with a smart tracker that asks how you feel and adapts your plan around it."
     }
   ];
 
