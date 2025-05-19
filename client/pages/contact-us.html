@@ -20,9 +20,11 @@
 
   <main class="container">
     <h1>Contact Us</h1>
-    <p>If you have any questions, feedback, or need support, we’d love to hear from you. Please fill out the form below, and we’ll get back to you as soon as possible.</p>
+    <p>If you have any questions, feedback, or need support, we’d love to hear from you. Please fill out the form below,
+      and we’ll get back to you as soon as possible.</p>
 
-    <form id="contact-form">
+    <form action="https://formspree.io/f/mjkwlapp" method="POST">
+      <input type="hidden" name="_subject" value="New message from Raising The Bar contact form!">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" placeholder="Enter your name" required>
 
@@ -34,11 +36,13 @@
 
       <button type="submit" id="submit-button">Submit</button>
     </form>
+    <p style="margin-top: 1rem; font-size: 0.9rem;">You’ll receive a confirmation once your message is submitted.</p>
+
   </main>
 
   <footer class="footer fade-in" id="footer">
     <div class="footer-content">
-      <p>&copy; 2025 Raising The Bar. All rights reserved.</p>
+      <p>&copy; 2025 Raising The Bar App Ltd. All rights reserved.</p>
       <div class="footer-links">
         <a href="index.html">Start Training</a>
         <span class="separator">|</span>

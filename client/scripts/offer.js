@@ -162,48 +162,48 @@ document.addEventListener("DOMContentLoaded", () => {
   const goalDriverMessages = [
     {
       goalDriver: "A wedding or special event",
-      met: "Make sure you feel amazing, lean, and confident when your big day arrives in {eventMonth}. All with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>.",
-      notMet: "This plan will help you feel stronger and more in control — this is still your moment with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>."
+      met: "Make sure you feel amazing, lean, and confident when your big day arrives in {eventMonth}. All with a smart tracker that asks how you feel and adapts your plan around it.",
+      notMet: "This plan will help you feel stronger and more in control — this is still your moment with a smart tracker that asks how you feel and adapts your plan around it.."
     },
     {
       goalDriver: "An upcoming holiday",
-      met: "Make this your best transformation yet — ready for the sun, the camera, and the mirror by {eventMonth}. All with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>.",
-      notMet: "Feel lighter, stronger, and proud of how far you’ve come by the time you go. All with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>."
+      met: "Make this your best transformation yet — ready for the sun, the camera, and the mirror by {eventMonth}. All with a smart tracker that asks how you feel and adapts your plan around it..",
+      notMet: "Feel lighter, stronger, and proud of how far you’ve come by the time you go. All with a smart tracker that asks how you feel and adapts your plan around it.."
     },
     {
       goalDriver: "A recent breakup or life change",
-      met: "Rebuild strength, confidence, and control with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>.",
-      notMet: "Rebuild strength, confidence, and control with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>."
+      met: "Rebuild strength, confidence, and control with a smart tracker that asks how you feel and adapts your plan around it..",
+      notMet: "Rebuild strength, confidence, and control with a smart tracker that asks how you feel and adapts your plan around it.."
     },
     {
       goalDriver: "I want to feel confident in my body again",
-      met: "Feel proud of what you see in the mirror — and how far you've come. All with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>.",
-      notMet: "Feel proud of what you see in the mirror — and how far you've come. All with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>."
+      met: "Feel proud of what you see in the mirror — and how far you've come. All with a smart tracker that asks how you feel and adapts your plan around it..",
+      notMet: "Feel proud of what you see in the mirror — and how far you've come. All with a smart tracker that asks how you feel and adapts your plan around it.."
     },
     {
       goalDriver: "I'm tired of feeling tired or unmotivated",
-      met: "Finally feel energized, clear-headed, and back in control again with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>.",
-      notMet: "Finally feel energized, clear-headed, and back in control again with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>."
+      met: "Finally feel energized, clear-headed, and back in control again with a smart tracker that asks how you feel and adapts your plan around it..",
+      notMet: "Finally feel energized, clear-headed, and back in control again with a smart tracker that asks how you feel and adapts your plan around it.."
     },
     {
       goalDriver: "I’m doing this for my mental and emotional health",
-      met: "Feel calmer, stronger, and more grounded — this is about more than just your body. All with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>.",
-      notMet: "Feel calmer, stronger, and more grounded — this is about more than just your body. All with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>."
+      met: "Feel calmer, stronger, and more grounded — this is about more than just your body. All with a smart tracker that asks how you feel and adapts your plan around it..",
+      notMet: "Feel calmer, stronger, and more grounded — this is about more than just your body. All with a smart tracker that asks how you feel and adapts your plan around it.."
     },
     {
       goalDriver: "I’ve let things slip and want to get back on track",
-      met: "Get back in control — with momentum, structure, and progress you can feel by {eventMonth}. All with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>.",
-      notMet: "Take back control — with small, daily wins that add up to real momentum. All with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>."
+      met: "Get back in control — with momentum, structure, and progress you can feel by {eventMonth}. All with a smart tracker that asks how you feel and adapts your plan around it..",
+      notMet: "Take back control — with small, daily wins that add up to real momentum. All with a smart tracker that asks how you feel and adapts your plan around it.."
     },
     {
       goalDriver: "I want to build discipline and stop starting over",
-      met: "No more starting over. Just steady progress, one day at a time, with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>.",
-      notMet: "No more starting over. Just steady progress, one day at a time, with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>."
+      met: "No more starting over. Just steady progress, one day at a time, with a smart tracker that asks how you feel and adapts your plan around it..",
+      notMet: "No more starting over. Just steady progress, one day at a time, with a smart tracker that asks how you feel and adapts your plan around it.."
     },
     {
       goalDriver: "I just feel ready for a change",
-      met: "Step into something better — and start feeling more like yourself again. All with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>.",
-      notMet: "Step into something better — and start feeling more like yourself again. All with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>."
+      met: "Step into something better — and start feeling more like yourself again. All with a smart tracker that asks how you feel and adapts your plan around it..",
+      notMet: "Step into something better — and start feeling more like yourself again. All with a smart tracker that asks how you feel and adapts your plan around it.."
     }
   ];
 
@@ -247,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
   heroLine2 = heroLine2.replace("{eventMonth}", eventMonthName);
 
   // 9) Line #3 is static
-  const heroLine3 = "- with an <strong>adaptive all-in-one-tracker that removes guesswork</strong>.";
+  const heroLine3 = "- with a smart tracker that asks how you feel and adapts your plan around it.>.";
 
   // 10) Combine everything into the container
   if (dynamicMessageContainer) {
@@ -268,7 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function getBMIDescription(category) {
     switch (category.toLowerCase()) {
       case "obese":
-        return `Your BMI indicates a <b>higher weight category</b>, but your adaptive tracker is designed to support real, lasting progress.`;
+        return `Your BMI indicates a <b>higher weight category</b>, but your tracker adjusts to you — helping you build real, lasting progress without overwhelm.`;
       case "overweight":
         return `Your BMI suggests you're <b>slightly overweight</b>. Don’t worry — your smart tracker is built to deliver long-term success.`;
       case "healthy":
@@ -412,7 +412,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="plan-section">
         <h3 class="plan-heading">${name}'s All-In-One Tracker is Ready!</h3>
         <div class="plan-desc">
-        <p>Your tracker’s ready – flip a card to see what you’ve earned!<p>
+        <p>Your personalized tracker is ready — flip a card to see what makes it yours.<p>
         <div class="plan-grid">
           <!-- 1) Duration -->
         <div class="flip-card" data-description="Your ${sessionDuration} routine is built for results — you’ve earned your crown.">

@@ -2956,6 +2956,47 @@ function renderCollapsibleSection(sectionTitle, exercisesArray, sectionKey) {
   workoutDisplayEl.appendChild(sectionContainer);
 }
 
+function showVideo(link) {
+    if (!link) {
+      alert("Video coming soon!");
+      return;
+    }
+
+    const SEEN_KEY = "seen_video_intro";
+
+    // First visit in this tab → show branded modal
+    if (!sessionStorage.getItem(SEEN_KEY)) {
+      const overlay = document.createElement("div");
+      overlay.id = "video-intro-overlay";
+
+      overlay.innerHTML = `
+      <div class="video-intro-content fade-in">
+        <h3>Just a heads-up!</h3>
+        <p>We’re currently filming our own tutorials.<br>
+           In the meantime, we’ve handpicked a great YouTube video that explains this well.</p>
+      </div>
+    `;
+
+      document.body.appendChild(overlay);
+
+      // Small entrance animation
+      requestAnimationFrame(() => {
+        overlay.querySelector(".fade-in").style.opacity = "1";
+        overlay.querySelector(".fade-in").style.transform = "translateY(0)";
+      });
+
+      // After 2.5 s open the video and remove overlay
+      setTimeout(() => {
+        window.open(link, "_blank");
+        overlay.remove();
+      }, 7500);
+
+      sessionStorage.setItem(SEEN_KEY, "true");
+    } else {
+      window.open(link, "_blank");
+    }
+  }
+
 function renderExercise(ex, parentEl, sectionKey) {
   const currentWeekNumber = twelveWeekProgram[currentWeekIndex].week;
   const dayNumber = currentDayIndex + 1;
@@ -3739,6 +3780,7 @@ function renderExercise(ex, parentEl, sectionKey) {
   }
 
   // =========== Buttons row (Change Exercise / Watch Video) ===========
+
   const isResistanceTraining =
     sectionKey === "mainWork" &&
     !isCardio(ex) &&
@@ -3766,7 +3808,7 @@ function renderExercise(ex, parentEl, sectionKey) {
     const changeExerciseBtn = document.createElement("button");
     changeExerciseBtn.classList.add("exercise-btn");
     changeExerciseBtn.textContent = hasPurchasedAWT
-      ? "Change Exercise"
+      ? "Smart Swap"
       : "Smart Swap";
     // if already upsold this session, lock immediately
     if (!hasPurchasedAWT && sessionStorage.getItem(CHANGE_KEY)) {
@@ -3799,7 +3841,7 @@ function renderExercise(ex, parentEl, sectionKey) {
     watchVideoBtn.addEventListener("click", e => {
       e.preventDefault();
       if (hasPurchasedAWT) {
-        alert("Watch Video not implemented yet.");
+        showVideo(ex.videoUrl);        // 👈 open with helper
       } else {
         showCoreUpsellPopup(
           "Not sure if your form is right?",
@@ -5575,7 +5617,6 @@ function makeSwipeable(rail, dots) {
   update();                                    // set initial position
 }
 
-
 /****************************************************************************
  *  TODAY’S TIP FEATURE
  ****************************************************************************/
@@ -6279,10 +6320,10 @@ function showChangeExercisePopup(ex, details, exerciseRow) {
     if (typeof item === "string") {
       const lookup = getExerciseByName(item);
       if (lookup) {
-        return lookup; // use the object with isTechnical, tutorialUrl, etc.
+        return lookup;// use the object with isTechnical, tutorialUrl, etc.
       } else {
         // If not found, return an object with default isTechnical value (adjust as needed)
-        return { name: item, isTechnical: true, tutorialUrl: "" };
+        return { name: item, isTechnical: true, videoUrl: "" };
       }
     }
     return item;
@@ -6323,7 +6364,7 @@ function showChangeExercisePopup(ex, details, exerciseRow) {
     easier.forEach(item => {
       const row = document.createElement("div");
       row.classList.add("alt-ex-item");
-      row.dataset.tutorialUrl = item.tutorialUrl || "";
+      row.dataset.tutorialUrl = item.videoUrl || item.tutorialUrl || "";
       row.textContent = item.name;
       altListContainer.appendChild(row);
     });
@@ -6337,7 +6378,7 @@ function showChangeExercisePopup(ex, details, exerciseRow) {
     harder.forEach(item => {
       const row = document.createElement("div");
       row.classList.add("alt-ex-item");
-      row.dataset.tutorialUrl = item.tutorialUrl || "";
+      row.dataset.tutorialUrl = item.videoUrl || item.tutorialUrl || "";
       row.textContent = item.name;
       altListContainer.appendChild(row);
     });
@@ -6346,7 +6387,7 @@ function showChangeExercisePopup(ex, details, exerciseRow) {
     altExercises.forEach(item => {
       const row = document.createElement("div");
       row.classList.add("alt-ex-item");
-      row.dataset.tutorialUrl = item.tutorialUrl || "";
+      row.dataset.tutorialUrl = item.videoUrl || item.tutorialUrl || "";
       row.textContent = item.name;
       altListContainer.appendChild(row);
     });
@@ -6364,7 +6405,7 @@ function showChangeExercisePopup(ex, details, exerciseRow) {
   wrap.appendChild(buttonContainer);
 
   const watchBtn = document.createElement("button");
-  watchBtn.textContent = "Watch Tutorial";
+  watchBtn.textContent = "Watch Video";
   watchBtn.classList.add("popup-btn-blue");
   watchBtn.disabled = true;
   buttonContainer.appendChild(watchBtn);
@@ -6418,10 +6459,7 @@ function showChangeExercisePopup(ex, details, exerciseRow) {
 
   // 10) "Watch Tutorial" button action
   watchBtn.addEventListener("click", () => {
-    window.open(
-      selectedTutorialUrl || "https://example.com/tutorial-placeholder",
-      "_blank"
-    );
+    showVideo(selectedTutorialUrl);   // 👈 reuse the same helper
   });
 
   // 11) "Got It!" button: close the pop-up

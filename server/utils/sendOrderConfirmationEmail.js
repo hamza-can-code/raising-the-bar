@@ -31,6 +31,7 @@ const sendOrderConfirmationEmail = async ({ email, programName, unlockedWeeks, r
     program_name: programName,
     unlocked_weeks: unlockedWeeks,
     renewal_date: renewalDate ? renewalDate.toISOString().split('T')[0] : null,
+    firstName: firstName
   };
 
   const sendSmtpEmail = {

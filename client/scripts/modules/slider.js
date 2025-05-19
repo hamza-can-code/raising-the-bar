@@ -5,21 +5,21 @@ export function initTestimonialsSlider() {
     const reviews = [
       {
         name: "David",
-        text: "I used to wing it at the gym… I’ve gained 6kg of muscle — and confidence too.",
+        text: "I used to just guess what to do. This finally gave me structure — I’ve gained 6kg of muscle, and I actually feel confident now.",
         beforeImage: "../assets/harry_chest_before.jpg",
         afterImage:  "../assets/harry_chest_after.jpg",
         testImage:   "../assets/5-stars.png",
       },
       {
-        name: "Maria",
-        text: "Strict plans never worked… For the first time, I feel in control.",
+        name: "Alice",
+        text: "Strict plans always broke down when life got busy. This one adapts — and for the first time, I feel in control.",
         beforeImage: "../assets/halima_back_before.jpg",
         afterImage:  "../assets/halima_back_after.jpg",
         testImage:   "../assets/5-stars.png",
       },
       {
         name: "Lee",
-        text: "Nothing stuck—until this. I lost 8kg and don’t feel lost anymore.",
+        text: "Nothing stuck—until this. I lost 10kg and, more importantly, I stopped feeling lost.",
         beforeImage: "../assets/lynn_before.JPEG",
         afterImage:  "../assets/lynn_after.png",
         testImage:   "../assets/5-stars.png",
