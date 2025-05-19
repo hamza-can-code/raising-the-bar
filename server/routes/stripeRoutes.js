@@ -54,6 +54,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
 
     const sessionConfig = buildCheckoutConfig({ plan, discounted, email });
 
+    console.log('🚨 FINAL CHECKOUT CONFIG:', sessionConfig);
     console.log('⏱️  Creating checkout session with:', sessionConfig);
     const session = await stripe.checkout.sessions.create(sessionConfig);
 
