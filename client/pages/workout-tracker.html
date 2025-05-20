@@ -35,6 +35,321 @@
 />
   <!-- Link to the external CSS file -->
   <link rel="stylesheet" href="../styles/workout-tracker.css">
+  <!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Raising The Bar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
+  rel="stylesheet">
+  <link href="../styles/landing-page.css" rel="stylesheet">
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-W9CSNHSLQQ');
+</script>
+</head>
+
+<body>
+  <div class="header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <img id="logo" src="../assets/rtb-logo-white.png" alt="Raising The Bar Logo">
+      </a>
+  
+      <!-- Desktop nav (inline) -->
+      <nav class="main-nav" id="main-nav">
+        <!-- close btn -->
+        <button class="nav-close" id="nav-close" aria-label="Close Menu">✕</button>
+      
+        <ul>
+          <li><a href="#" id="nav-workouts">My Workouts</a></li>
+          <li><a href="#" id="nav-nutrition">My Nutrition</a></li>
+          <li><a href="#" id="nav-help">Help</a></li>
+        </ul>
+      </nav>
+  
+      <!-- Mobile hamburger -->
+      <button class="hamburger" id="hamburger-btn" aria-label="Toggle Menu">☰</button>
+  
+      <!-- Dark mode toggle -->
+      <div class="dark-mode-button">
+        <img id="darkModeToggle" src="" alt="">
+      </div>
+    </div>
+  </div>
+  
+  <!-- ————— Modals ————— -->
+  
+  <!-- Email‑login / Claim modal -->
+  <div id="login-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
+    <div class="modal-content">
+      <button class="close-btn" data-target="login-modal" aria-label="Close">✕</button>
+  
+      <h2 id="login-title">Log in to your Tracker</h2>
+  
+      <!-- identical field names to main login page -->
+      <form id="modal-login-form" novalidate>
+        <div class="input-group">
+          <label for="modal-email">Email</label>
+          <input type="email"
+                 id="modal-email"
+                 name="email"
+                 placeholder="you@example.com"
+                 required
+                 autocomplete="email">
+          <span class="error-message" id="modal-email-error" role="alert"></span>
+        </div>
+  
+        <div class="input-group">
+          <label for="modal-password">Password</label>
+          <input type="password"
+                 id="modal-password"
+                 name="password"
+                 placeholder="Your password"
+                 required
+                 autocomplete="current-password">
+          <span class="error-message" id="modal-password-error" role="alert"></span>
+        </div>
+
+        <label class="remember-wrap">
+          <input type="checkbox" id="remember-me" class="checkbox">
+          <span class="checkmark"></span>
+          Remember me
+        </label>
+  
+        <button type="submit" class="login-btn">Continue</button>
+      </form>
+  
+      <p class="small">
+        Don’t have a program yet?
+        <a href="pages/forms.html">Claim your program here →</a>
+      </p>
+    </div>
+  </div>  
+  
+  <!-- Help / FAQ modal (Option B) -->
+  <div id="faq-modal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" data-target="faq-modal">✕</button>
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <details>
+          <summary>How do I get started?</summary>
+          <p class="faq-answer">Tap <strong>“Claim Your Program”</strong>, fill out the short form, and your personalised tracker will be ready within minutes.</p>
+        </details>
+    
+        <details>
+          <summary>What if I’ve never followed a program before?</summary>
+          <p class="faq-answer">No problem. This is built for real people — simple steps, flexible tools, and progress at your pace.</p>
+        </details>
+    
+        <details>
+          <summary>Can I change my goals later on?</summary>
+          <p class="faq-answer">Absolutely. Once you're inside your tracker, you can update your goals anytime — your plan will adapt automatically.</p>
+        </details>
+    
+        <details>
+          <summary>What happens after I sign up?</summary>
+          <p class="faq-answer">You'll unlock your own dashboard — filled with workouts, meals, and progress tools tailored to your goals, lifestyle, and experience level. It all connects in one place, ready to use right away.</p>
+        </details>
+    
+        <details>
+          <summary>Still have questions?</summary>
+          <p class="faq-answer"><a href="pages/contact-us.html">Click here</a> to contact us or explore more answers. We're here to support you.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+  <div class="slogan fade-in">
+    <p>We ask how you feel — then adjust your plan around it.</p>
+  </div>
+<div class="dark-mode-button">
+  <img id="darkModeToggle" src="" alt=""
+    height="0px">
+</div>
+
+  <section>
+  <div class="fade-in">
+    <div class="cta-container"> 
+      <a href="pages/forms.html" class="claim-program-btn">Claim Your Program</a>
+    </div>
+    <p class="trust-line">
+      Made for people who actually want to improve.
+      </p>
+  </div>
+</section>
+<section class="mini-testimonial fade-in">
+  <div class="testimonial-card mini">
+    <div class="images">
+      <div class="before">
+        <img src="../assets/lynn_before.JPEG" alt="Before">
+        <p>Before</p>
+      </div>
+      <div class="after">
+        <img src="../assets/lynn_after.png" alt="After">
+        <p>After</p>
+      </div>
+    </div>
+    <p class="review-name">Lee</p>
+    <div class="five-stars">
+      <img src="../assets/5-stars.png" alt="5 Stars">
+    </div>
+    <p class="review-text-mini">
+      Nothing stuck — until this. I lost 10kg and, more than that, I don’t feel lost anymore.
+    </p>
+  </div>
+</section>
+  <section class="tailored-training-plan fade-in">
+    <h2>What You’re Getting</h2>
+    <p class="hero-subheading">
+      This is how you finally stay consistent — and see real progress.
+      </p>
+      <p class="hero-text">
+        <!-- You'll unlock a web-based <strong>adaptive all-in-one-tracker</strong>, tailored to you from the start, designed to <strong>remove guesswork</strong>  and evolve with you. -->
+         You’ll unlock a smart, web-based tracker that’s built around you — adapting to your goals, your performance, and your progress.
+        <p class="hero-text">
+          <!-- When you join, you’ll unlock access to your personal dashboard where <strong>everything connects</strong>: -->
+    </p>
+    <div class="step-by-step">
+      <ul class="steps-list">
+        <li class="step-item">
+          <span class="emoji-box">✅</span>
+          <p style="margin-top: 5px;">
+            <strong>Complete a quick 2-minute form</strong> to share your goals, preferences, and lifestyle.
+          </p>
+        </li>
+        <li class="step-item">
+          <span class="emoji-box">🚀</span>
+          <p>
+            <strong>Unlock your all-in-one-tracker</strong>, packed with tailored workouts, meals, and progress tools, ready instantly.
+          </p>
+        </li>
+        <li class="step-item">
+          <span class="emoji-box">💪</span>
+          <p style="margin-bottom: 5px;">
+            <strong>Stay consistent and build momentum</strong> - with a plan that adapts every step of the way.
+          </p>
+      </ul>
+      <p class="hero-text">
+        No extra apps. No spreadsheets. Just one place to train, eat, and track everything.
+      </p>
+    </div>
+  </section>
+  <section class="habit-building fade-in">
+    <h2>Feel Better, Every Day</h2>
+    <div class="habit-image">
+      <img src="../assets/person_walking_outside.jpg" alt="A person running in nature or doing yoga outdoors" />
+    </div>
+    <p>
+      This is about more than workouts. When your plan adjusts to your life — not the other way around — everything changes. You’ll think clearer, feel more in control, and build the confidence that comes from showing up for yourself — day after day.
+    </p>
+  </section>  
+  <section class="nutrition-section fade-in">
+    <h2>Meals That Work With You</h2>
+    <div class="nutrition-image">
+      <img src="../assets/meal-prep.jpg" alt="A person preparing a healthy meal" />
+    </div>
+    <p>
+      Your meals adapt to your goals, preferences, and schedule — with evolving plans that keep things fresh and easy to follow. No extra apps. No stress. Just simple, balanced nutrition that fits into your life.
+    </p>
+  </section>  
+<!-- Testimonial Section (Landing Page) -->
+<div class="testimonial-section fade-in">
+  <h2>See What Happens When Everything Connects</h2>
+  <p class="hero-text">
+    Progress from real people, using the same system you're about to unlock.
+  </p>
+
+  <div class="testimonial-container">
+    <!-- Desktop Arrows (hidden on mobile) -->
+    <button class="arrow-button prev">❮</button>
+
+    <!-- Slider that holds all testimonial cards -->
+    <div class="testimonial-slider">
+      <!-- Populated by JS -->
+    </div>
+
+    <button class="arrow-button next">❯</button>
+  </div>
+</div>
+
+<!-- Dots / Pagination for slides -->
+<div class="dots-container fade-in"></div>
+
+<div class="cta-container-subtle fade-in">
+  <a href="pages/forms.html" class="claim-program-btn-subtle">Claim Your Program</a>
+</div>
+  <section class="youtube-prompt-section fade-in">
+    <div class="youtube-video-container">
+
+      <!-- Placeholder video -->
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="YouTube video placeholder"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <p class="hero-text">
+      Watch how it works — in under 90 seconds.
+    </p>
+    <div class="join-now-prompt">
+      <h2>Join now</h2>
+      <div class="cta-container">
+        <a href="pages/forms.html" class="claim-program-btn">Claim Your Program</a>
+      </div>
+      <p class="trust-line">
+        Built by a small team of lifters, developers, and designers who’ve been exactly where you are. 
+        </p>
+    </div>
+  </section>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="cookie-banner">
+      <p>We use cookies to enhance your experience, analyze site traffic, and for marketing purposes. By clicking "Accept All," you consent to our use of cookies. Learn more in our <a href="pages/cookie-policy.html">Cookie Policy</a>.</p>
+      <div class="cookie-buttons">
+        <button id="accept-all">Accept All</button>
+        <button id="deny-all">Deny</button>
+      </div>
+    </div>
+  
+    <footer class="footer fade-in" id="footer">
+      <div class="footer-content">
+        <p>&copy; 2025 Raising The Bar App Ltd. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="index.html">Start Training</a>
+          <span class="separator">|</span>
+          <a href="pages/legal-overview.html">Our Policies</a>
+          <span class="separator">|</span>
+          <a href="pages/contact-us.html">Contact Us</a>
+        </div>
+        <div class="social-icons">
+          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+            <img src="../assets/instagram-icon.png" alt="Instagram">
+          </a>
+          <a href="https://www.youtube.com" target="_blank" aria-label="YouTube">
+            <img src="../assets/youtube-icon.png" alt="YouTube">
+          </a>
+          <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok">
+            <img src="../assets/tiktok-icon.png" alt="TikTok">
+          </a>
+        </div>
+      </div>
+    </footer>
+    <script type="module" src="../scripts/landing-page.js"></script>
+</body>
+
+</html>
 </head>
 
 <body>

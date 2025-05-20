@@ -5,6 +5,7 @@ const router = express.Router();
 
 const User = require('../models/User');
 const UserAccess = require('../models/UserAccess');
+const UserPreferences = require('../models/UserPreferences');
 const sendOrderConfirmationEmail = require('../utils/sendOrderConfirmationEmail');
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -94,6 +95,11 @@ router.post(
 
       /* E) confirmation e-mail (optional) */
       try {
+        // ✅ Get name from user preferences BEFORE sending the email
+        const preferencesDoc = await UserPreferences.findOne({ userId: user._id });
+        const fullName = preferencesDoc?.preferences?.name || session.customer_details?.name || 'There';
+        const firstName = fullName.split(' ')[0];
+
         await sendOrderConfirmationEmail({
           email,
           programName: isSubscription
@@ -101,7 +107,7 @@ router.post(
             : `${unlockedWeeks}-Week Program`,
           unlockedWeeks,
           renewalDate: isSubscription ? ua.renewalDate : null,
-          firstName: user.name?.split(' ')[0] || 'There' // ✅ extract first name here
+          firstName
         });
         console.log('📨 Attempting to send order confirmation to:', email);
         console.log('📧  Confirmation e-mail sent');

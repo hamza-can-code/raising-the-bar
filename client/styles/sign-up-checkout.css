@@ -1,11 +1,12 @@
 /* ─── Base, fonts, colours (copied from sign-up.css) ───────────────────────── */
-html,
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-    background-color: #f9f7f2;
-    min-height: 100vh;
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f9f7f2;
 }
 
 h1,

@@ -10,7 +10,7 @@ const sendOrderConfirmationEmail = async ({ email, programName, unlockedWeeks, r
     firstName
   });  
   const apiKey = process.env.BREVO_API_KEY;
-  const templateId = Number(process.env.ORDER_CONFIRMATION_TEMPLATE_ID); // ✅ get templateId from env
+  const templateId = Number(process.env.ORDER_CONFIRMATION_TEMPLATE_ID);
 
   if (!apiKey) {
     console.error('❌ Brevo API key is missing.');
