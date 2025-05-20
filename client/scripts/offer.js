@@ -1,5 +1,8 @@
 const userId = localStorage.getItem('userId');
 
+// Clear the "startedForm" flag on successful form completion
+localStorage.removeItem('startedForm');
+
 async function simulatePurchase(purchaseType) {
   const res = await fetch('/api/update-purchase', {
     method: 'POST',

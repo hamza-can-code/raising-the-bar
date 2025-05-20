@@ -1,5 +1,16 @@
 // client/scripts/modules/slider.js
 
+window.addEventListener('beforeunload', () => {
+  const startedForm = localStorage.getItem('startedForm');
+
+  if (startedForm && window.ttq) {
+    ttq.track('FormAbandon', {
+      content_name: 'Mid-Funnel Exit',
+    });
+    localStorage.removeItem('startedForm'); // Prevent double events
+  }
+});
+
 export function initTestimonialsSlider() {
     // ← Your reviews data must live here
     const reviews = [

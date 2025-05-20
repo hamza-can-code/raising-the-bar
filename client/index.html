@@ -25,7 +25,7 @@
     })(window, document, "clarity", "script", "rmf0p7sik4");
 </script>
 <!-- TikTok Pixel Code Start -->
-<script>
+<!-- <script>
 !function (w, d, t) {
   w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
 var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
@@ -35,7 +35,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   ttq.load('D0M3KORC77UCAFR1EOLG');
   ttq.page();
 }(window, document, 'ttq');
-</script>
+</script> -->
 <!-- TikTok Pixel Code End -->
 </head>
 
@@ -151,7 +151,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     </div>
   </div>
   <div class="slogan fade-in">
-    <p>We ask how you feel — then adjust your plan around it.</p>
+    <p>We create fitness programs that adapt to your performance and how you feel.</p>
   </div>
 <div class="dark-mode-button">
   <img id="darkModeToggle" src="" alt=""
@@ -317,18 +317,35 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
           <a href="pages/contact-us.html">Contact Us</a>
         </div>
         <div class="social-icons">
-          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+          <a href="https://www.instagram.com/raising_the_bar_app/?hl=en" target="_blank" aria-label="Instagram">
             <img src="../assets/instagram-icon.png" alt="Instagram">
           </a>
-          <a href="https://www.youtube.com" target="_blank" aria-label="YouTube">
+          <a href="https://www.youtube.com/@Raising_The_Bar_App" target="_blank" aria-label="YouTube">
             <img src="../assets/youtube-icon.png" alt="YouTube">
           </a>
-          <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok">
+          <a href="https://www.tiktok.com/@raising_the_bar_app" target="_blank" aria-label="TikTok">
             <img src="../assets/tiktok-icon.png" alt="TikTok">
           </a>
         </div>
       </div>
     </footer>
+    <script>
+  let scrollTracked = false;
+
+  window.addEventListener('scroll', () => {
+    const scrollPosition = window.scrollY + window.innerHeight;
+    const pageHeight = document.body.offsetHeight;
+
+    if (!scrollTracked && scrollPosition / pageHeight > 0.75) {
+      scrollTracked = true;
+      if (window.ttq) {
+        ttq.track('ViewContent', {
+          content_name: '75% Scroll - Landing Page'
+        });
+      }
+    }
+  });
+</script>
     <script type="module" src="../scripts/landing-page.js"></script>
 </body>
 

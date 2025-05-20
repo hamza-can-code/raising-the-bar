@@ -5,6 +5,28 @@ fadeInElements.forEach((element, index) => {
   }, index * 500);
 });
 
+// Only set this if it hasn't already been set
+if (!localStorage.getItem('startedForm')) {
+  localStorage.setItem('startedForm', 'true');
+
+  if (window.ttq) {
+    ttq.track('ViewContent', {
+      content_name: 'Form Started',
+    });
+  }
+}
+
+window.addEventListener('beforeunload', () => {
+  const startedForm = localStorage.getItem('startedForm');
+
+  if (startedForm && window.ttq) {
+    ttq.track('FormAbandon', {
+      content_name: 'Mid-Funnel Exit',
+    });
+    localStorage.removeItem('startedForm'); // Prevent double events
+  }
+});
+
 let rotatingMsgInterval;
 let rotatingMessageIndex = 0;
 let obeseGainWarnShown = false;
