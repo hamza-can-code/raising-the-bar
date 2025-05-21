@@ -530,21 +530,21 @@ document.addEventListener("DOMContentLoaded", () => {
   // Determine which review to display.
   if (userGoal === "gain muscle") {
     // Muscle gain review.
-    selectedReviewName = "Max";
-    selectedReviewText = "I always struggled to build muscle — I didn’t know what I was doing wrong. This gave me structure, tracked everything, and just made it click. I actually look forward to training now.";
+    selectedReviewName = "David";
+    selectedReviewText = "I used to wing it at the gym and second-guess everything. Seeing my workouts and progress adapt over time changed everything. I’ve gained 6kg of muscle — and confidence too.";
     beforeImgSrc = "../assets/harry_chest_before.jpg";
     afterImgSrc  = "../assets/harry_chest_after.jpg";
   } else if (userGoal === "lose weight" || userGoal === "improve body composition") {
     if (gender === "male") {
       // Male weight loss review.
-      selectedReviewName = "Bob";
-      selectedReviewText = "At first, I wasn’t sure I could stick with it. But everything’s laid out for you — no guessing. I’ve lost weight, my clothes fit better, and I feel like myself again.";
+      selectedReviewName = "Lee";
+      selectedReviewText = "I wasn’t sure I could stick with it. But everything’s laid out — no guessing. I’ve lost 10kg and finally feel like myself again.";
       beforeImgSrc = "../assets/lynn_before.JPEG";
       afterImgSrc  = "../assets/lynn_after.png";
     } else if (gender === "female") {
       // Female weight loss review.
       selectedReviewName = "Alice";
-      selectedReviewText = "I didn’t expect much, but this actually changed how I see food and fitness. I’ve lost weight, I feel healthier, and I finally enjoy the process.";
+      selectedReviewText = "Strict plans never worked for me. This didn’t just tell me what to do — it fit into my life. I’ve lost weight, feel healthier, and for the first time, I’m in control of the process.";
       beforeImgSrc = "../assets/halima_back_before.jpg";
       afterImgSrc  = "../assets/halima_back_after.jpg";
     }
@@ -1341,22 +1341,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const reviews = [
     {
       name: "Lee",
-      text: "I’d tried bootcamps, meal plans — nothing stuck. This finally made everything click. My workouts, meals, and progress were all in one place. I’ve lost 8kg, but more than that, I don’t feel lost anymore.",
+      text: "I’d tried bootcamps, meal plans — nothing stuck. This finally made everything click. I’ve lost 10kg, but more than that, I finally feel like myself again.",
       beforeImage: "../assets/lynn_before.JPEG",
       afterImage: "../assets/lynn_after.png",
       testImage:  "../assets/5-stars.png",
     },
     {
       name: "David",
-      text: "I used to wing it at the gym. I never knew if I was doing enough. Seeing my workouts and progress adapt over time changed everything. I’ve gained 6kg of muscle — and confidence too.",
+      text: "I used to wing it at the gym and second-guess everything. Seeing my workouts and progress adapt over time changed everything. I’ve gained 6kg of muscle — and confidence too.",
       beforeImage: "../assets/harry_chest_before.jpg",
       afterImage:  "../assets/harry_chest_after.jpg",
       testImage:  "../assets/5-stars.png",
     },
     {
 
-      name: "Maria",
-      text: "Strict plans never worked for me. This didn’t just tell me what to do — it fit into my life. Logging workouts and meals became second nature. For the first time, I feel in control.",
+      name: "Alice",
+      text: "Strict plans never worked for me. This didn’t just tell me what to do — it fit into my life. I’ve lost weight, feel healthier, and for the first time, I’m in control of the process.",
       beforeImage: "../assets/halima_back_before.jpg",
       afterImage:  "../assets/halima_back_after.jpg",
       testImage:  "../assets/5-stars.png",

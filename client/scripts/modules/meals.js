@@ -4590,6 +4590,181 @@ export const mealDatabase = [
     ],
     "mealNotes": []
   },
+  {
+    "mealName": "Greek Yogurt Parfait",
+    "calories": 210,
+    "macroRatio": {
+      "protein": 0.414,
+      "carbs": 0.434,
+      "fats": 0.152
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "0% Greek yogurt",
+        "quantity": 200,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "mixed berries",
+        "quantity": 30,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "granola",
+        "quantity": 18,
+        "unit": "g",
+        "category": "carbs"
+      }
+    ],
+    "recipe": [
+      "Spoon Greek yogurt into a bowl and gently stir in granola until evenly coated.",
+      "Top with mixed berries and serve chilled."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Overnight Oats with Banana",
+    "calories": 210,
+    "macroRatio": {
+      "protein": 0.172,
+      "carbs": 0.728,
+      "fats": 0.100
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "rolled oats",
+        "quantity": 30,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "skim milk",
+        "quantity": 100,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "banana",
+        "quantity": 60,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "ground cinnamon",
+        "quantity": 1,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "In a jar, combine oats, milk, and cinnamon. Stir, seal, and refrigerate overnight (≥6 h).",
+      "In the morning, top with sliced banana and serve cold."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Spinach & Feta Egg White Omelet",
+    "calories": 210,
+    "macroRatio": {
+      "protein": 0.397,
+      "carbs": 0.095,
+      "fats": 0.508
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["egg", "dairy"],
+    "ingredients": [
+      {
+        "name": "egg white",
+        "quantity": 4,
+        "singular": "egg white",
+        "plural": "egg whites",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "feta cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat olive oil in a nonstick skillet over medium heat. Add spinach and sauté until wilted (≈2 min).",
+      "Pour in egg whites and cook, gently stirring, until partially set.",
+      "Sprinkle feta on top, fold omelet in half, and cook 1 min more before serving."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Peanut Butter Banana Toast",
+    "calories": 210,
+    "macroRatio": {
+      "protein": 0.128,
+      "carbs": 0.489,
+      "fats": 0.383
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["gluten", "peanuts"],
+    "ingredients": [
+      {
+        "name": "whole-grain bread",
+        "quantity": 1,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "natural peanut butter",
+        "quantity": 16,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "banana",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      }
+    ],
+    "recipe": [
+      "Toast the bread until golden brown.",
+      "Spread peanut butter evenly over the toast.",
+      "Top with banana slices and serve immediately."
+    ],
+    "mealNotes": []
+  }
+,
     {
     "mealName": "Tuna & White Bean Salad",
     "calories": 320,
@@ -4938,7 +5113,7 @@ export const mealDatabase = [
     "category": "Lunch",
     "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
     "portionSize": 1.0,
-    "dietaryRestrictions": ["Vegetarian Safe Option"],
+    "dietaryRestrictions": ["Vegetarian"],
     "allergens": ["gluten", "sesame"],
     "ingredients": [
       {
@@ -14118,7 +14293,13310 @@ export const mealDatabase = [
       "Warm blueberries with maple syrup until saucy; spoon over stack."
     ],
     "mealNotes": []
-  }
+  },
+  {
+    "mealName": "Avocado Egg Toast",
+    "calories": 260,
+    "macroRatio": {
+      "protein": 0.180,
+      "carbs": 0.280,
+      "fats": 0.540
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["gluten", "egg", "dairy"],
+    "ingredients": [
+      {
+        "name": "whole-grain bread",
+        "quantity": 1,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "avocado",
+        "quantity": 35,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 3,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "feta cheese",
+        "quantity": 12,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "cherry tomatoes",
+        "quantity": 20,
+        "unit": "g",
+        "category": "vegetables"
+      }
+    ],
+    "recipe": [
+      "Toast the bread to golden brown and set aside.",
+      "In a small bowl, mash the avocado with a pinch of salt and pepper.",
+      "Spread avocado mash on the toast. Top with crumbled feta and tomato slices.",
+      "Fry the egg in olive oil to desired doneness and place on top of the toast. Serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Berry Almond Smoothie",
+    "calories": 260,
+    "macroRatio": {
+      "protein": 0.100,
+      "carbs": 0.650,
+      "fats": 0.250
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["nuts"],
+    "ingredients": [
+      {
+        "name": "banana",
+        "quantity": 100,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "strawberries",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "rolled oats",
+        "quantity": 15,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "almond butter",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "almond milk",
+        "quantity": 100,
+        "unit": "ml",
+        "category": "dairy"
+      }
+    ],
+    "recipe": [
+      "Combine banana, strawberries, oats, almond butter, and almond milk in a blender.",
+      "Blend on high until smooth and creamy, adding ice if desired.",
+      "Pour into a glass and enjoy immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Cottage Cheese & Pineapple Toast",
+    "calories": 260,
+    "macroRatio": {
+      "protein": 0.270,
+      "carbs": 0.430,
+      "fats": 0.300
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["dairy", "gluten", "nuts"],
+    "ingredients": [
+      {
+        "name": "whole-grain bread",
+        "quantity": 1,
+        "singular": "slice",
+        "plural": "slices",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "cottage cheese",
+        "quantity": 60,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "pineapple",
+        "quantity": 40,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "honey",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "almonds",
+        "quantity": 8,
+        "unit": "g",
+        "category": "misc"
+      }
+    ],
+    "recipe": [
+      "Toast the bread to your liking.",
+      "Spread cottage cheese evenly over the toast.",
+      "Top with pineapple chunks, drizzle with honey, and sprinkle almonds before serving."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Veggie Egg Breakfast Wrap",
+    "calories": 260,
+    "macroRatio": {
+      "protein": 0.226,
+      "carbs": 0.286,
+      "fats": 0.488
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["egg", "dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "mushrooms",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cherry tomatoes",
+        "quantity": 50,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "cheddar cheese",
+        "quantity": 10,
+        "unit": "g",
+        "category": "dairy"
+      }
+    ],
+    "recipe": [
+      "Heat olive oil in a skillet over medium heat.",
+      "Add mushrooms and spinach; cook until tender, about 3 minutes.",
+      "Whisk the egg and pour into the skillet; scramble gently until just set.",
+      "Stir in tomatoes and cheese, then remove from heat.",
+      "Warm the tortilla briefly, fill with the veggie-egg scramble, roll up, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Blueberry Protein Smoothie",
+    "calories": 310,
+    "macroRatio": {
+      "protein": 0.30,
+      "carbs": 0.48,
+      "fats": 0.22
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["dairy"],
+    "ingredients": [
+      {
+        "name": "whey protein powder",
+        "quantity": 30,
+        "unit": "g",
+        "category": "protein"
+      },
+      {
+        "name": "blueberries",
+        "quantity": 75,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "almond milk",
+        "quantity": 240,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "rolled oats",
+        "quantity": 20,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "honey",
+        "quantity": 7,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Combine all ingredients in a blender.",
+      "Blend on high until smooth and creamy.",
+      "Pour into a glass and serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Chickpea Flour Veggie Pancakes",
+    "calories": 310,
+    "macroRatio": {
+      "protein": 0.25,
+      "carbs": 0.50,
+      "fats": 0.25
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["egg"],
+    "ingredients": [
+      {
+        "name": "chickpea flour",
+        "quantity": 50,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "spinach",
+        "quantity": 40,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "almond milk",
+        "quantity": 100,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 10,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Whisk flour, egg, and almond milk to a smooth batter.",
+      "Stir in chopped spinach.",
+      "Heat oil in a nonstick pan and cook pancakes 2–3 minutes per side until golden.",
+      "Serve warm."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Banana Peanut Butter Oatmeal",
+    "calories": 310,
+    "macroRatio": {
+      "protein": 0.17,
+      "carbs": 0.62,
+      "fats": 0.21
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["nuts", "dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "rolled oats",
+        "quantity": 35,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "skim milk",
+        "quantity": 100,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "banana",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "natural peanut butter",
+        "quantity": 12,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "honey",
+        "quantity": 7,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "In a small saucepan, combine oats and milk. Cook over medium heat, stirring until thickened (∼3 minutes).",
+      "Remove from heat and stir in honey.",
+      "Transfer to a bowl, top with banana slices and peanut butter, and serve warm."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Spinach & Cheese Quesadilla",
+    "calories": 310,
+    "macroRatio": {
+      "protein": 0.25,
+      "carbs": 0.40,
+      "fats": 0.35
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["egg", "dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "whole wheat tortilla",
+        "quantity": 1,
+        "singular": "tortilla",
+        "plural": "tortillas",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "egg",
+        "quantity": 1,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "egg white",
+        "quantity": 1,
+        "singular": "egg white",
+        "plural": "egg whites",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "baby spinach",
+        "quantity": 30,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "shredded cheddar",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat oil in a skillet; scramble eggs and egg white until just set; remove.",
+      "Layer one half of the tortilla with spinach, eggs, and cheddar.",
+      "Fold tortilla and cook 1–2 minutes per side until golden and cheese is melted.",
+      "Slice and serve hot."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Whole Wheat Waffles & Yogurt",
+    "calories": 360,
+    "macroRatio": {
+      "protein": 0.248,
+      "carbs": 0.513,
+      "fats": 0.239
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["dairy", "gluten"],
+    "ingredients": [
+      {
+        "name": "whole wheat waffle",
+        "quantity": 1,
+        "singular": "waffle",
+        "plural": "waffles",
+        "wholeItem": true,
+        "category": "carbs"
+      },
+      {
+        "name": "Greek yogurt",
+        "quantity": 100,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "honey",
+        "quantity": 7,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "mixed berries",
+        "quantity": 60,
+        "unit": "g",
+        "category": "fruits"
+      }
+    ],
+    "recipe": [
+      "Toast the waffle until golden brown.",
+      "Top with Greek yogurt, mixed berries, and a drizzle of honey.",
+      "Serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Veggie Omelet & Cheese",
+    "calories": 360,
+    "macroRatio": {
+      "protein": 0.317,
+      "carbs": 0.159,
+      "fats": 0.524
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["dairy", "egg"],
+    "ingredients": [
+      {
+        "name": "egg",
+        "quantity": 2,
+        "singular": "egg",
+        "plural": "eggs",
+        "wholeItem": true,
+        "category": "protein"
+      },
+      {
+        "name": "mixed veggies",
+        "quantity": 70,
+        "unit": "g",
+        "category": "vegetables"
+      },
+      {
+        "name": "cheese",
+        "quantity": 30,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "olive oil",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Heat olive oil in a nonstick skillet over medium heat.",
+      "Whisk eggs, pour into skillet, add mixed veggies on top.",
+      "Cook until set, sprinkle cheese, fold omelet, and serve."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Greek Yogurt & Granola Fruit Bowl",
+    "calories": 360,
+    "macroRatio": {
+      "protein": 0.38,
+      "carbs": 0.37,
+      "fats": 0.25
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["dairy", "gluten", "nuts"],
+    "ingredients": [
+      {
+        "name": "Greek yogurt",
+        "quantity": 150,
+        "unit": "g",
+        "category": "dairy"
+      },
+      {
+        "name": "granola",
+        "quantity": 30,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "banana",
+        "quantity": 40,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "mixed berries",
+        "quantity": 30,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "honey",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Spoon Greek yogurt into a bowl.",
+      "Top with granola, banana slices, mixed berries, and a drizzle of honey.",
+      "Serve immediately."
+    ],
+    "mealNotes": []
+  },
+  {
+    "mealName": "Berry Almond Overnight Oats",
+    "calories": 360,
+    "macroRatio": {
+      "protein": 0.13,
+      "carbs": 0.61,
+      "fats": 0.26
+    },
+    "category": "Breakfast",
+    "dietaryPhase": ["deficitPhase", "deloadPhase", "surplusPhase"],
+    "portionSize": 1.0,
+    "dietaryRestrictions": ["Vegetarian"],
+    "allergens": ["nuts"],
+    "ingredients": [
+      {
+        "name": "rolled oats",
+        "quantity": 45,
+        "unit": "g",
+        "category": "carbs"
+      },
+      {
+        "name": "almond milk",
+        "quantity": 150,
+        "unit": "ml",
+        "category": "dairy"
+      },
+      {
+        "name": "almond butter",
+        "quantity": 12,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "chia seeds",
+        "quantity": 5,
+        "unit": "g",
+        "category": "pantry"
+      },
+      {
+        "name": "mixed berries",
+        "quantity": 50,
+        "unit": "g",
+        "category": "fruits"
+      },
+      {
+        "name": "honey",
+        "quantity": 7,
+        "unit": "g",
+        "category": "pantry"
+      }
+    ],
+    "recipe": [
+      "Combine oats, almond milk, almond butter, chia seeds, and honey in a jar; stir well.",
+      "Cover and refrigerate overnight (≥6 h).",
+      "In the morning, stir, top with mixed berries, and enjoy chilled."
+    ],
+    "mealNotes": []
+  },
+  {
+  "mealName": "Quinoa & Berry Breakfast Bowl",
+  "calories": 410,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.58,
+    "fats": 0.27
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["dairy","gluten","nuts"],
+  "ingredients": [
+    {
+      "name": "cooked quinoa",
+      "quantity": 100,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "Greek yogurt",
+      "quantity": 100,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "granola",
+      "quantity": 20,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "mixed berries",
+      "quantity": 60,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "almonds",
+      "quantity": 10,
+      "unit": "g",
+      "category": "misc"
+    },
+    {
+      "name": "honey",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "chia seeds",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Place quinoa and yogurt in a bowl; stir to combine.",
+    "Top with granola, berries, almonds, and chia seeds.",
+    "Drizzle honey over the top and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Spinach & Mushroom Frittata with Sourdough Toast",
+  "calories": 410,
+  "macroRatio": {
+    "protein": 0.23,
+    "carbs": 0.38,
+    "fats": 0.39
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["egg","dairy","gluten"],
+  "ingredients": [
+    {
+      "name": "egg",
+      "quantity": 2,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "egg white",
+      "quantity": 1,
+      "singular": "egg white",
+      "plural": "egg whites",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "baby spinach",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "mushrooms",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "shredded cheddar",
+      "quantity": 20,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "sourdough bread",
+      "quantity": 1,
+      "singular": "slice",
+      "plural": "slices",
+      "wholeItem": true,
+      "category": "carbs"
+    }
+  ],
+  "recipe": [
+    "Preheat oven to 180°C (350°F). In an ovenproof skillet, heat oil and sauté mushrooms until golden, then add spinach until wilted.",
+    "Whisk eggs and egg white; pour into skillet and cook until edges set, ~3 minutes.",
+    "Sprinkle cheddar on top and bake 8–10 minutes until fully set.",
+    "Toast sourdough and serve alongside frittata."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Tofu & Veggie Breakfast Wrap",
+  "calories": 410,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.22,
+    "fats": 0.53
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["gluten","soy","dairy","egg"],
+  "ingredients": [
+    {
+      "name": "firm tofu",
+      "quantity": 100,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "egg",
+      "quantity": 1,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "egg white",
+      "quantity": 1,
+      "singular": "egg white",
+      "plural": "egg whites",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "baby spinach",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "bell pepper",
+      "quantity": 30,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "shredded cheddar",
+      "quantity": 20,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 3,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "whole wheat tortilla",
+      "quantity": 1,
+      "singular": "tortilla",
+      "plural": "tortillas",
+      "wholeItem": true,
+      "category": "carbs"
+    }
+  ],
+  "recipe": [
+    "Crumble tofu and sauté in oil until lightly golden, add pepper and spinach until soft.",
+    "Push veggies aside, scramble egg and egg white in pan until just set; stir together.",
+    "Warm tortilla, fill with scramble, sprinkle cheese, wrap, and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Greek Yogurt Banana Pancakes",
+  "calories": 410,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.43,
+    "fats": 0.32
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["egg","dairy","gluten","nuts"],
+  "ingredients": [
+    {
+      "name": "rolled oats",
+      "quantity": 40,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "Greek yogurt",
+      "quantity": 80,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "egg",
+      "quantity": 1,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "banana",
+      "quantity": 50,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "whey protein powder",
+      "quantity": 10,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "natural peanut butter",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Blend oats, yogurt, egg, banana, protein powder, and a splash of water until smooth.",
+    "Heat oil in a nonstick pan; cook three small pancakes 2–3 minutes per side.",
+    "Drizzle peanut butter on top and serve warm."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Veggie & Cheese Quesadilla",
+  "calories": 460,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.35,
+    "fats": 0.40
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["gluten","egg","dairy"],
+  "ingredients": [
+    {
+      "name": "whole wheat tortilla",
+      "quantity": 1,
+      "singular": "tortilla",
+      "plural": "tortillas",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "egg",
+      "quantity": 1,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "egg white",
+      "quantity": 2,
+      "singular": "egg white",
+      "plural": "egg whites",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "bell pepper",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "baby spinach",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "shredded cheddar",
+      "quantity": 40,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Heat oil in a skillet, sauté peppers and spinach until tender, 3–4 minutes.",
+    "Layer tortilla with veggies, eggs/egg whites, and cheese; fold in half.",
+    "Cook 2–3 minutes per side until golden and cheese melts; slice and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Banana Almond Smoothie Bowl",
+  "calories": 460,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.60,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["nuts","dairy"],
+  "ingredients": [
+    {
+      "name": "banana",
+      "quantity": 120,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "Greek yogurt",
+      "quantity": 120,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "rolled oats",
+      "quantity": 30,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "almond butter",
+      "quantity": 20,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "almond milk",
+      "quantity": 100,
+      "unit": "ml",
+      "category": "dairy"
+    }
+  ],
+  "recipe": [
+    "Blend banana, yogurt, oats, almond butter, and milk until smooth.",
+    "Pour into a bowl and top with sliced banana and a sprinkle of oats.",
+    "Enjoy immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Avocado Feta Toast with Scrambled Eggs",
+  "calories": 460,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.30,
+    "fats": 0.50
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["gluten","egg","dairy"],
+  "ingredients": [
+    {
+      "name": "sourdough bread",
+      "quantity": 2,
+      "singular": "slice",
+      "plural": "slices",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "avocado",
+      "quantity": 80,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "egg",
+      "quantity": 2,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "feta cheese",
+      "quantity": 30,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Toast bread and set aside.",
+    "Mash avocado with salt/pepper; spread on toast and sprinkle feta.",
+    "Heat oil, scramble eggs until just set; top toast with eggs and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Sweet Potato & Black Bean Hash with Poached Egg",
+  "calories": 460,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.52,
+    "fats": 0.30
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["egg"],
+  "ingredients": [
+    {
+      "name": "sweet potato",
+      "quantity": 120,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "black beans",
+      "quantity": 80,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "spinach",
+      "quantity": 40,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "poached egg",
+      "quantity": 1,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    }
+  ],
+  "recipe": [
+    "Dice potato and sauté in oil until tender, ~8 minutes.",
+    "Add beans and spinach, cook 2–3 minutes until heated through.",
+    "Top hash with poached egg and serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Protein French Toast with Ricotta & Berries",
+  "calories": 510,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.55,
+    "fats": 0.15
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["egg","dairy","gluten"],
+  "ingredients": [
+    {
+      "name": "whole grain bread",
+      "quantity": 3,
+      "singular": "slice",
+      "plural": "slices",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "egg",
+      "quantity": 2,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "ricotta cheese",
+      "quantity": 80,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "almond milk",
+      "quantity": 100,
+      "unit": "ml",
+      "category": "dairy"
+    },
+    {
+      "name": "mixed berries",
+      "quantity": 100,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "maple syrup",
+      "quantity": 20,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "coconut oil",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Whisk eggs, milk, and ricotta until smooth.",
+    "Dip bread slices in mixture; cook in oiled skillet 2–3 minutes per side.",
+    "Top with berries and drizzle syrup before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Banana Walnut Oatmeal",
+  "calories": 510,
+  "macroRatio": {
+    "protein": 0.14,
+    "carbs": 0.55,
+    "fats": 0.31
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["nuts","dairy","gluten"],
+  "ingredients": [
+    {
+      "name": "rolled oats",
+      "quantity": 80,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "almond milk",
+      "quantity": 200,
+      "unit": "ml",
+      "category": "dairy"
+    },
+    {
+      "name": "banana",
+      "quantity": 1,
+      "singular": "banana",
+      "plural": "bananas",
+      "wholeItem": true,
+      "category": "fruits"
+    },
+    {
+      "name": "walnuts",
+      "quantity": 30,
+      "unit": "g",
+      "category": "misc"
+    },
+    {
+      "name": "honey",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Cook oats with milk until creamy, about 5 minutes.",
+    "Stir in honey, top with walnut pieces and sliced banana.",
+    "Serve warm."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chickpea Flour Scramble Wrap",
+  "calories": 510,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["gluten"],
+  "ingredients": [
+    {
+      "name": "chickpea flour",
+      "quantity": 60,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "water",
+      "quantity": 100,
+      "unit": "ml",
+      "category": "pantry"
+    },
+    {
+      "name": "turmeric",
+      "quantity": 1,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "spinach",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "mushrooms",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "whole wheat tortilla",
+      "quantity": 1,
+      "singular": "tortilla",
+      "plural": "tortillas",
+      "wholeItem": true,
+      "category": "carbs"
+    }
+  ],
+  "recipe": [
+    "Whisk flour, water, and turmeric to a batter.",
+    "Sauté mushrooms and spinach in oil, pour batter, scramble until set.",
+    "Fill tortilla with scramble, wrap, and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Avocado & Feta Breakfast Toast",
+  "calories": 510,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.30,
+    "fats": 0.52
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["gluten","dairy"],
+  "ingredients": [
+    {
+      "name": "multigrain bread",
+      "quantity": 2,
+      "singular": "slice",
+      "plural": "slices",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "avocado",
+      "quantity": 80,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "feta cheese",
+      "quantity": 40,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "lemon juice",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Toast bread slices until golden.",
+    "Mash avocado with lemon juice, salt, and pepper; spread on toast.",
+    "Top with crumbled feta and a drizzle of olive oil; serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegetarian Breakfast Burrito with Tofu Scramble, Black Beans & Cheese",
+  "calories": 560,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.45,
+    "fats": 0.25
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["gluten","soy","dairy"],
+  "ingredients": [
+    {
+      "name": "whole wheat tortilla",
+      "quantity": 1,
+      "singular": "tortilla",
+      "plural": "tortillas",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "firm tofu",
+      "quantity": 100,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "black beans",
+      "quantity": 80,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "baby spinach",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "shredded cheddar",
+      "quantity": 40,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "salsa",
+      "quantity": 30,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Crumble tofu and sauté in olive oil until lightly golden.",
+    "Stir in beans and spinach; cook 2–3 minutes until spinach wilts.",
+    "Warm tortilla, fill with scramble, sprinkle cheese and salsa, wrap, and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Ricotta Protein Pancake Stack with Strawberries & Maple Syrup",
+  "calories": 560,
+  "macroRatio": {
+    "protein": 0.32,
+    "carbs": 0.48,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["egg","dairy","gluten"],
+  "ingredients": [
+    {
+      "name": "rolled oats",
+      "quantity": 60,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "whey protein powder",
+      "quantity": 30,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "ricotta cheese",
+      "quantity": 80,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "egg",
+      "quantity": 1,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "egg white",
+      "quantity": 1,
+      "singular": "egg white",
+      "plural": "egg whites",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "strawberries",
+      "quantity": 80,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "maple syrup",
+      "quantity": 20,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Blend oats, protein powder, ricotta, egg, egg white, and a splash of water until smooth.",
+    "Heat oil in a nonstick pan; cook three small pancakes, 2–3 minutes per side.",
+    "Stack pancakes, top with strawberries and drizzle maple syrup."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Spinach, Feta & Sun-Dried Tomato Omelet with Sourdough Toast",
+  "calories": 560,
+  "macroRatio": {
+    "protein": 0.28,
+    "carbs": 0.30,
+    "fats": 0.42
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["egg","dairy","gluten"],
+  "ingredients": [
+    {
+      "name": "egg",
+      "quantity": 3,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "sun-dried tomatoes",
+      "quantity": 30,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "baby spinach",
+      "quantity": 60,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "feta cheese",
+      "quantity": 40,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "sourdough bread",
+      "quantity": 1,
+      "singular": "slice",
+      "plural": "slices",
+      "wholeItem": true,
+      "category": "carbs"
+    }
+  ],
+  "recipe": [
+    "Heat oil in a skillet; sauté tomatoes 1 minute, add spinach until wilted.",
+    "Whisk eggs; pour into skillet and cook until mostly set.",
+    "Sprinkle feta, fold omelet, cook 1 minute more, serve with toasted sourdough."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Savory Chickpea Flour Pancake Bowl with Mushroom & Kale",
+  "calories": 560,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["egg","soy"],
+  "ingredients": [
+    {
+      "name": "chickpea flour",
+      "quantity": 70,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "egg",
+      "quantity": 1,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "almond milk",
+      "quantity": 80,
+      "unit": "ml",
+      "category": "dairy"
+    },
+    {
+      "name": "mushrooms",
+      "quantity": 60,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "kale",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "Greek yogurt",
+      "quantity": 50,
+      "unit": "g",
+      "category": "dairy"
+    }
+  ],
+  "recipe": [
+    "Whisk flour, egg, and milk into a batter.",
+    "Sauté mushrooms and kale in oil until tender; pour batter and cook pancake until set.",
+    "Spoon cooked veggies into a bowl, top with pancake and dollop yogurt."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Tofu & Spinach Breakfast Bowl with Quinoa",
+  "calories": 610,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.45,
+    "fats": 0.25
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["soy"],
+  "ingredients": [
+    {
+      "name": "firm tofu",
+      "quantity": 150,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "cooked quinoa",
+      "quantity": 120,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "baby spinach",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "avocado",
+      "quantity": 60,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "turmeric",
+      "quantity": 1,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Crumble tofu and sauté in oil with turmeric until golden, ~4 minutes.",
+    "In the same pan, wilt spinach.",
+    "Serve tofu and spinach over quinoa, top with sliced avocado."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Protein-Packed Greek Yogurt & Oat Pancakes",
+  "calories": 610,
+  "macroRatio": {
+    "protein": 0.35,
+    "carbs": 0.45,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["dairy","egg","gluten"],
+  "ingredients": [
+    {
+      "name": "rolled oats",
+      "quantity": 70,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "Greek yogurt",
+      "quantity": 100,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "whey protein powder",
+      "quantity": 25,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "egg",
+      "quantity": 1,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "banana",
+      "quantity": 70,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "honey",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Blend oats, yogurt, protein powder, egg, and banana until smooth.",
+    "Heat oil in a pan and cook pancakes 2–3 minutes per side.",
+    "Drizzle honey over stack before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chia Seed Pudding with Almond Butter & Berries",
+  "calories": 610,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.50,
+    "fats": 0.35
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": ["nuts","dairy"],
+  "ingredients": [
+    {
+      "name": "chia seeds",
+      "quantity": 40,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "almond milk",
+      "quantity": 200,
+      "unit": "ml",
+      "category": "dairy"
+    },
+    {
+      "name": "Greek yogurt",
+      "quantity": 100,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "almond butter",
+      "quantity": 30,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "mixed berries",
+      "quantity": 100,
+      "unit": "g",
+      "category": "fruits"
+    }
+  ],
+  "recipe": [
+    "Stir chia seeds into almond milk; refrigerate ≥4 hours until set.",
+    "Layer pudding with yogurt and drizzle almond butter on top.",
+    "Top with mixed berries and serve chilled."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Savory Sweet Potato & Black Bean Hash with Egg",
+  "calories": 610,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["egg"],
+  "ingredients": [
+    {
+      "name": "sweet potato",
+      "quantity": 150,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "black beans",
+      "quantity": 100,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "spinach",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "egg",
+      "quantity": 1,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "avocado",
+      "quantity": 50,
+      "unit": "g",
+      "category": "fruits"
+    }
+  ],
+  "recipe": [
+    "Dice sweet potato and sauté in oil until tender, ∼8 minutes.",
+    "Add beans and spinach; cook 2 minutes until heated.",
+    "Top with fried or poached egg and sliced avocado."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Sweet Potato & Black Bean Breakfast Tacos",
+  "calories": 660,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["gluten"],
+  "ingredients": [
+    {
+      "name": "small corn tortillas",
+      "quantity": 4,
+      "singular": "tortilla",
+      "plural": "tortillas",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "sweet potato",
+      "quantity": 200,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "black beans",
+      "quantity": 100,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "feta cheese",
+      "quantity": 40,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "avocado",
+      "quantity": 80,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "lime juice",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Dice sweet potato, toss with half the oil, and roast at 200 °C for 20 min.",
+    "Warm beans in remaining oil with lime juice; season to taste.",
+    "Heat tortillas and fill with sweet potato, beans, crumbled feta, and sliced avocado.",
+    "Serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Savory Quinoa Bowl with Tofu, Kale & Mushrooms",
+  "calories": 660,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.40,
+    "fats": 0.30
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["soy"],
+  "ingredients": [
+    {
+      "name": "cooked quinoa",
+      "quantity": 150,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "firm tofu",
+      "quantity": 120,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "kale",
+      "quantity": 70,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "mushrooms",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "soy sauce",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Sauté mushrooms in half the oil until golden; set aside.",
+    "Add tofu to pan with remaining oil and soy sauce; cook until lightly browned.",
+    "Wilt kale in pan 2 min, then combine with quinoa, mushrooms, and tofu in a bowl.",
+    "Serve warm."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chia Seed Pudding Parfait with Mixed Nuts & Fruit",
+  "calories": 660,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.55,
+    "fats": 0.30
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": ["nuts","dairy"],
+  "ingredients": [
+    {
+      "name": "chia seeds",
+      "quantity": 50,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "almond milk",
+      "quantity": 200,
+      "unit": "ml",
+      "category": "dairy"
+    },
+    {
+      "name": "Greek yogurt",
+      "quantity": 100,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "mixed berries",
+      "quantity": 80,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "mixed nuts",
+      "quantity": 30,
+      "unit": "g",
+      "category": "misc"
+    }
+  ],
+  "recipe": [
+    "Combine chia seeds with almond milk; refrigerate ≥4 h until pudding-like.",
+    "Layer pudding, yogurt, berries, and nuts in a glass.",
+    "Serve chilled."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Spinach & Goat Cheese Frittata with Sourdough Toast",
+  "calories": 660,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.30,
+    "fats": 0.45
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["egg","dairy","gluten"],
+  "ingredients": [
+    {
+      "name": "egg",
+      "quantity": 3,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "goat cheese",
+      "quantity": 50,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "baby spinach",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "sourdough bread",
+      "quantity": 1,
+      "singular": "slice",
+      "plural": "slices",
+      "wholeItem": true,
+      "category": "carbs"
+    }
+  ],
+  "recipe": [
+    "Preheat oven to 180 °C. Sauté spinach in oil until wilted.",
+    "Whisk eggs, stir in spinach and goat cheese; pour into ovenproof skillet.",
+    "Bake 12–15 min until set. Serve with toasted sourdough."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Savory Oatmeal Bowl with Halloumi, Spinach & Egg",
+  "calories": 710,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.40,
+    "fats": 0.30
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["dairy","egg","gluten"],
+  "ingredients": [
+    {
+      "name": "rolled oats",
+      "quantity": 60,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "halloumi cheese",
+      "quantity": 80,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "baby spinach",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "egg",
+      "quantity": 2,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Cook oats with water until creamy; keep warm.",
+    "Pan-fry halloumi slices in oil until golden; set aside.",
+    "Sauté spinach in same pan until wilted; scramble eggs until just set.",
+    "Serve oats topped with halloumi, spinach, and eggs."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Protein-Packed Pancake Stack with Greek Yogurt & Nuts",
+  "calories": 760,
+  "macroRatio": {
+    "protein": 0.35,
+    "carbs": 0.45,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["dairy","egg","gluten","nuts"],
+  "ingredients": [
+    {
+      "name": "rolled oats",
+      "quantity": 80,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "Greek yogurt",
+      "quantity": 150,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "whey protein powder",
+      "quantity": 30,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "egg",
+      "quantity": 2,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "mixed nuts",
+      "quantity": 30,
+      "unit": "g",
+      "category": "misc"
+    },
+    {
+      "name": "honey",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Blend oats, yogurt, protein powder, and eggs until smooth.",
+    "Heat oil in skillet; cook pancakes 2–3 minutes per side.",
+    "Stack pancakes, top with yogurt, nuts, and drizzle honey."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Breakfast Grain Bowl with Farro, Roasted Veg & Poached Egg",
+  "calories": 810,
+  "macroRatio": {
+    "protein": 0.28,
+    "carbs": 0.50,
+    "fats": 0.22
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["egg"],
+  "ingredients": [
+    {
+      "name": "cooked farro",
+      "quantity": 150,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "sweet potato",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "broccoli florets",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "poached egg",
+      "quantity": 1,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    }
+  ],
+  "recipe": [
+    "Roast sweet potato and broccoli tossed in oil at 200 °C for 20 min.",
+    "Warm farro and place in a bowl with roasted veggies.",
+    "Top with a poached egg and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Savory French Toast with Goat Cheese & Herbs",
+  "calories": 860,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["egg","dairy","gluten"],
+  "ingredients": [
+    {
+      "name": "sourdough bread",
+      "quantity": 4,
+      "singular": "slice",
+      "plural": "slices",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "egg",
+      "quantity": 3,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "goat cheese",
+      "quantity": 60,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "fresh herbs",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Whisk eggs with herbs and a pinch of salt.",
+    "Dip bread slices in egg mixture, coating both sides.",
+    "Cook in oiled skillet 2–3 minutes per side until golden.",
+    "Spread goat cheese on each slice before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Quinoa & Roasted Veggie Breakfast Bowl with Poached Egg",
+  "calories": 910,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.50,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["egg"],
+  "ingredients": [
+    {
+      "name": "cooked quinoa",
+      "quantity": 150,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "roasted sweet potato",
+      "quantity": 120,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "roasted bell pepper",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "poached egg",
+      "quantity": 1,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "baby spinach",
+      "quantity": 60,
+      "unit": "g",
+      "category": "vegetables"
+    }
+  ],
+  "recipe": [
+    "Toss sweet potato and pepper with half the oil; roast at 200 °C for 20 min.",
+    "Warm quinoa and spinach in remaining oil until spinach wilts.",
+    "Assemble quinoa and veggies in a bowl, top with poached egg and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Blueberry Almond Protein Pancakes with Yogurt Drizzle",
+  "calories": 960,
+  "macroRatio": {
+    "protein": 0.32,
+    "carbs": 0.48,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["dairy","egg","gluten","nuts"],
+  "ingredients": [
+    {
+      "name": "rolled oats",
+      "quantity": 90,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "whey protein powder",
+      "quantity": 30,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "egg",
+      "quantity": 2,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "almond milk",
+      "quantity": 150,
+      "unit": "ml",
+      "category": "dairy"
+    },
+    {
+      "name": "blueberries",
+      "quantity": 100,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "Greek yogurt",
+      "quantity": 100,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "almond slivers",
+      "quantity": 20,
+      "unit": "g",
+      "category": "misc"
+    }
+  ],
+  "recipe": [
+    "Blend oats, protein powder, eggs, and almond milk until smooth.",
+    "Cook pancakes 2–3 min per side on a nonstick pan.",
+    "Top with blueberries, drizzle yogurt, and sprinkle almonds."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Savory Polenta Bowl with Mushrooms, Kale & Fried Egg",
+  "calories": 1010,
+  "macroRatio": {
+    "protein": 0.28,
+    "carbs": 0.50,
+    "fats": 0.22
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["egg","dairy","gluten"],
+  "ingredients": [
+    {
+      "name": "instant polenta",
+      "quantity": 60,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "water",
+      "quantity": 300,
+      "unit": "ml",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "mushrooms",
+      "quantity": 100,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "kale",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "fried egg",
+      "quantity": 1,
+      "singular": "egg",
+      "plural": "eggs",
+      "wholeItem": true,
+      "category": "protein"
+    }
+  ],
+  "recipe": [
+    "Cook polenta in water per package instructions; keep warm.",
+    "Sauté mushrooms and kale in oil until tender.",
+    "Serve veggies over polenta, top with a fried egg."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Bulgur Breakfast Bowl with Halloumi, Tomato & Basil",
+  "calories": 1060,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.45,
+    "fats": 0.25
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["dairy","gluten"],
+  "ingredients": [
+    {
+      "name": "cooked bulgur wheat",
+      "quantity": 150,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "halloumi cheese",
+      "quantity": 100,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "cherry tomatoes",
+      "quantity": 100,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "fresh basil",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Sear halloumi slices in oil until golden on each side.",
+    "Warm bulgur and tomatoes briefly in the same pan.",
+    "Assemble bulgur and tomatoes in a bowl, top with halloumi and basil."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Mediterranean Quinoa Salad",
+  "calories": 350,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.40,
+    "fats": 0.45
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["dairy","gluten"],
+  "ingredients": [
+    {
+      "name": "cooked quinoa",
+      "quantity": 100,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "chickpeas",
+      "quantity": 50,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "feta cheese",
+      "quantity": 20,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "cucumber",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "cherry tomatoes",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "black olives",
+      "quantity": 20,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Toss quinoa, chickpeas, cucumber, tomatoes, olives, and feta in a bowl.",
+    "Drizzle with olive oil and season with salt, pepper, and a squeeze of lemon juice.",
+    "Serve chilled or at room temperature."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Caprese Avocado Sandwich",
+  "calories": 350,
+  "macroRatio": {
+    "protein": 0.14,
+    "carbs": 0.37,
+    "fats": 0.49
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["dairy","gluten"],
+  "ingredients": [
+    {
+      "name": "whole grain bread",
+      "quantity": 2,
+      "singular": "slice",
+      "plural": "slices",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "tomato",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "mozzarella",
+      "quantity": 30,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "avocado",
+      "quantity": 40,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "basil leaves",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Layer bread with sliced tomato, mozzarella, and avocado.",
+    "Scatter basil leaves, drizzle olive oil, and season to taste.",
+    "Close sandwich, slice in half, and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chickpea & Spinach Curry with Rice",
+  "calories": 350,
+  "macroRatio": {
+    "protein": 0.11,
+    "carbs": 0.64,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": ["none"],
+  "ingredients": [
+    {
+      "name": "cooked basmati rice",
+      "quantity": 50,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "chickpeas",
+      "quantity": 50,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "spinach",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "coconut milk",
+      "quantity": 30,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "curry powder",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Heat oil, sauté curry powder for 30 s, add chickpeas and coconut milk; simmer 5 min.",
+    "Stir in spinach until wilted.",
+    "Serve curry over warm rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Veggie Hummus Wrap",
+  "calories": 350,
+  "macroRatio": {
+    "protein": 0.08,
+    "carbs": 0.48,
+    "fats": 0.44
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["gluten","sesame"],
+  "ingredients": [
+    {
+      "name": "whole wheat tortilla",
+      "quantity": 1,
+      "singular": "tortilla",
+      "plural": "tortillas",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "hummus",
+      "quantity": 40,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "cucumber",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "carrot",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "mixed greens",
+      "quantity": 30,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "feta cheese",
+      "quantity": 20,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Spread hummus on tortilla.",
+    "Layer cucumber, carrot, greens, and feta.",
+    "Drizzle oil, roll up tightly, and slice in half."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Hearty Lentil Soup & Whole Grain Roll",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.55,
+    "fats": 0.20
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": [],
+  "ingredients": [
+    {
+      "name": "red lentils",
+      "quantity": 80,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "carrot",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "celery",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "onion",
+      "quantity": 40,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "vegetable broth",
+      "quantity": 300,
+      "unit": "ml",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "whole grain roll",
+      "quantity": 1,
+      "singular": "roll",
+      "plural": "rolls",
+      "wholeItem": true,
+      "category": "carbs"
+    }
+  ],
+  "recipe": [
+    "Heat oil in a pot, sauté onion, carrot, and celery until soft.",
+    "Add lentils and broth, bring to a boil, then simmer 15–20 min until lentils are tender.",
+    "Season with salt, pepper, and a drizzle of olive oil.",
+    "Serve with a warm whole grain roll."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Sweet Potato & Black Bean Quesadilla",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.52,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["gluten","dairy"],
+  "ingredients": [
+    {
+      "name": "whole wheat tortilla",
+      "quantity": 1,
+      "singular": "tortilla",
+      "plural": "tortillas",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "sweet potato",
+      "quantity": 100,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "black beans",
+      "quantity": 80,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "shredded cheddar",
+      "quantity": 30,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Roast diced sweet potato in oil at 200 °C for 15 min until tender.",
+    "Warm tortilla in a skillet, layer potato, beans, and cheese, fold in half.",
+    "Cook 2–3 min per side until golden and cheese melts; slice and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Veggie Pesto Pasta Salad",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.60,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["gluten","nuts"],
+  "ingredients": [
+    {
+      "name": "cooked penne pasta",
+      "quantity": 120,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "basil pesto",
+      "quantity": 30,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "cherry tomatoes",
+      "quantity": 60,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "mozzarella balls",
+      "quantity": 40,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Toss warm pasta with pesto and oil until evenly coated.",
+    "Fold in tomatoes and mozzarella.",
+    "Serve immediately or chilled."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Grilled Halloumi & Veggie Skewers with Couscous",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.45,
+    "fats": 0.35
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["dairy","gluten"],
+  "ingredients": [
+    {
+      "name": "halloumi cheese",
+      "quantity": 80,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "zucchini",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "bell pepper",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "cherry tomatoes",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "cooked couscous",
+      "quantity": 80,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Thread halloumi and veggies onto skewers; brush with oil.",
+    "Grill 4–5 min per side until charred.",
+    "Serve over warm couscous."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Grilled Veggie & Halloumi Salad",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.30,
+    "fats": 0.50
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["dairy"],
+  "ingredients": [
+    {
+      "name": "halloumi cheese",
+      "quantity": 80,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "zucchini",
+      "quantity": 60,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "eggplant",
+      "quantity": 60,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "bell pepper",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "mixed greens",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "balsamic vinaigrette",
+      "quantity": 20,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Brush vegetables and halloumi with olive oil; grill on medium-high heat until charred, ~3 minutes per side.",
+    "Toss mixed greens with vinaigrette in a bowl.",
+    "Arrange grilled veggies and halloumi over greens and serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Falafel Pita with Tzatziki & Veggies",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.50,
+    "fats": 0.35
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["gluten","dairy","sesame"],
+  "ingredients": [
+    {
+      "name": "falafel balls",
+      "quantity": 3,
+      "unit": "pieces",
+      "category": "protein"
+    },
+    {
+      "name": "whole wheat pita",
+      "quantity": 1,
+      "singular": "pita",
+      "plural": "pitas",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "tzatziki",
+      "quantity": 30,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "cucumber",
+      "quantity": 40,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "tomato",
+      "quantity": 40,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "mixed greens",
+      "quantity": 30,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Warm pita briefly in oven or toaster.",
+    "Spread tzatziki inside, fill with falafel, veggies, and greens.",
+    "Drizzle olive oil over filling, wrap, and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Tofu & Broccoli Stir-Fry with Brown Rice",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.40,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": ["soy"],
+  "ingredients": [
+    {
+      "name": "firm tofu",
+      "quantity": 120,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "broccoli florets",
+      "quantity": 100,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "bell pepper",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "soy sauce",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "cooked brown rice",
+      "quantity": 80,
+      "unit": "g",
+      "category": "carbs"
+    }
+  ],
+  "recipe": [
+    "Heat oil in a wok, sauté tofu until lightly browned; remove.",
+    "Stir-fry broccoli and pepper in same wok 3–4 minutes.",
+    "Return tofu, add soy sauce, toss gently.",
+    "Serve stir-fry over brown rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Spinach & Ricotta Stuffed Peppers",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.35,
+    "fats": 0.45
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": ["dairy"],
+  "ingredients": [
+    {
+      "name": "bell pepper",
+      "quantity": 2,
+      "singular": "pepper",
+      "plural": "peppers",
+      "wholeItem": true,
+      "category": "vegetables"
+    },
+    {
+      "name": "ricotta cheese",
+      "quantity": 100,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "baby spinach",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "breadcrumbs",
+      "quantity": 20,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Preheat oven to 180°C. Halve peppers and remove seeds.",
+    "Sauté spinach in oil until wilted; mix with ricotta and breadcrumbs.",
+    "Fill pepper halves, place on baking tray, bake 20 minutes until tender."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Rainbow Buddha Bowl with Tofu & Tahini Dressing",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.45,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": ["soy","sesame"],
+  "ingredients": [
+    {
+      "name": "firm tofu",
+      "quantity": 100,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "cooked brown rice",
+      "quantity": 100,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "roasted sweet potato",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "steamed broccoli",
+      "quantity": 60,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "red cabbage",
+      "quantity": 40,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "tahini",
+      "quantity": 20,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "lemon juice",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Toss tofu cubes in oil and pan-fry until golden.",
+    "Arrange rice, sweet potato, broccoli, cabbage, and tofu in a bowl.",
+    "Whisk tahini with lemon juice, a splash of water, and season; drizzle over bowl."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Warm Lentil & Walnut Salad with Feta",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.28,
+    "carbs": 0.42,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": ["nuts","dairy"],
+  "ingredients": [
+    {
+      "name": "cooked green lentils",
+      "quantity": 120,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "walnuts",
+      "quantity": 30,
+      "unit": "g",
+      "category": "misc"
+    },
+    {
+      "name": "baby spinach",
+      "quantity": 60,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "crumbled feta",
+      "quantity": 40,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "balsamic vinegar",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Warm lentils in a pan with oil and vinegar for 2 min.",
+    "Add spinach until just wilted, remove from heat.",
+    "Top with walnuts and feta; serve warm."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Mushroom, Spinach & Goat Cheese Panini",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.38,
+    "fats": 0.40
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["gluten","dairy"],
+  "ingredients": [
+    {
+      "name": "whole grain bread",
+      "quantity": 2,
+      "singular": "slice",
+      "plural": "slices",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "goat cheese",
+      "quantity": 50,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "mushrooms",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "baby spinach",
+      "quantity": 40,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Sauté mushrooms in oil until browned; set aside.",
+    "Spread goat cheese on bread, top with mushrooms and spinach, close sandwich.",
+    "Grill in a panini press or skillet 3–4 min per side until golden."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Sweet Potato & Black Bean Burrito Bowl",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": [],
+  "ingredients": [
+    {
+      "name": "roasted sweet potato",
+      "quantity": 120,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "black beans",
+      "quantity": 80,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "cooked brown rice",
+      "quantity": 80,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "corn kernels",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "avocado",
+      "quantity": 50,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "salsa",
+      "quantity": 30,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Layer rice, sweet potato, beans, and corn in a bowl.",
+    "Top with avocado slices and salsa; drizzle oil and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Grilled Vegetable & Halloumi Flatbread",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.40,
+    "fats": 0.35
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["dairy","gluten"],
+  "ingredients": [
+    {
+      "name": "whole wheat flatbread",
+      "quantity": 1,
+      "singular": "flatbread",
+      "plural": "flatbreads",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "halloumi cheese",
+      "quantity": 100,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "zucchini",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "eggplant",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "red pepper",
+      "quantity": 60,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "mixed greens",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    }
+  ],
+  "recipe": [
+    "Brush veggies and halloumi with oil, grill until charred (3–4 min per side).",
+    "Warm flatbread, top with greens, grilled veggies, and halloumi.",
+    "Drizzle extra oil and serve folded."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Veggie Burger with Sweet Potato Fries",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.45,
+    "fats": 0.35
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["gluten","dairy"],
+  "ingredients": [
+    {
+      "name": "whole wheat burger bun",
+      "quantity": 1,
+      "singular": "bun",
+      "plural": "buns",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "vegetable burger patty",
+      "quantity": 1,
+      "singular": "patty",
+      "plural": "patties",
+      "wholeItem": true,
+      "category": "protein"
+    },
+    {
+      "name": "sweet potato",
+      "quantity": 150,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "cheddar cheese",
+      "quantity": 20,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "lettuce",
+      "quantity": 20,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "tomato",
+      "quantity": 30,
+      "unit": "g",
+      "category": "vegetables"
+    }
+  ],
+  "recipe": [
+    "Cut sweet potato into fries, toss in oil and bake 20 min at 200 °C until crisp.",
+    "Cook burger patty per package instructions; top with cheese until melted.",
+    "Assemble bun with lettuce, tomato, patty; serve with fries."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Tofu, Quinoa & Edamame Buddha Bowl",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.40,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": ["soy"],
+  "ingredients": [
+    {
+      "name": "cooked quinoa",
+      "quantity": 120,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "firm tofu",
+      "quantity": 100,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "edamame",
+      "quantity": 80,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "avocado",
+      "quantity": 50,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "mixed greens",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "sesame oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "soy sauce",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Pan-fry tofu in sesame oil until golden; set aside.",
+    "Arrange quinoa, edamame, greens, avocado, and tofu in a bowl.",
+    "Drizzle soy sauce and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Spinach & Ricotta Stuffed Pasta Shells",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["dairy","gluten","egg"],
+  "ingredients": [
+    {
+      "name": "jumbo pasta shells",
+      "quantity": 8,
+      "unit": "pieces",
+      "category": "carbs"
+    },
+    {
+      "name": "ricotta cheese",
+      "quantity": 120,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "spinach",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "mozzarella cheese",
+      "quantity": 40,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "tomato sauce",
+      "quantity": 100,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Cook shells per package; drain.",
+    "Sauté spinach in oil until wilted, mix with ricotta.",
+    "Stuff shells with ricotta mix, place in baking dish, top with sauce and mozzarella, bake 15 min at 180 °C."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Creamy Tomato & Spinach Pasta",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.60,
+    "fats": 0.22
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["gluten","dairy"],
+  "ingredients": [
+    {
+      "name": "penne pasta",
+      "quantity": 120,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "fresh spinach",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "tomato passata",
+      "quantity": 120,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "light cream",
+      "quantity": 50,
+      "unit": "ml",
+      "category": "dairy"
+    },
+    {
+      "name": "parmesan cheese",
+      "quantity": 20,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Cook pasta al dente according to package instructions; drain.",
+    "In pan, heat oil, add passata and cream; simmer 3 minutes.",
+    "Stir in spinach until wilted, then toss with pasta.",
+    "Sprinkle parmesan before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Loaded Sweet Potato & Black Bean Nachos",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.55,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["dairy","gluten"],
+  "ingredients": [
+    {
+      "name": "tortilla chips",
+      "quantity": 60,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "roasted sweet potato",
+      "quantity": 120,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "black beans",
+      "quantity": 80,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "shredded cheddar",
+      "quantity": 40,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "salsa",
+      "quantity": 30,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "guacamole",
+      "quantity": 40,
+      "unit": "g",
+      "category": "fruits"
+    }
+  ],
+  "recipe": [
+    "Arrange chips on a baking tray, top with sweet potato, beans, and cheese.",
+    "Bake at 200 °C for 8–10 minutes until cheese melts.",
+    "Serve topped with salsa and guacamole."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Tofu Teriyaki Rice Bowl",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.28,
+    "carbs": 0.52,
+    "fats": 0.20
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": ["soy"],
+  "ingredients": [
+    {
+      "name": "firm tofu",
+      "quantity": 140,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "cooked jasmine rice",
+      "quantity": 100,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "broccoli florets",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "teriyaki sauce",
+      "quantity": 30,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "sesame seeds",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Pan-fry tofu in oil until golden; remove.",
+    "Stir-fry broccoli in same pan 3 minutes, add tofu and teriyaki sauce; cook 2 minutes.",
+    "Serve over rice and sprinkle sesame seeds."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Roasted Veg & Pesto Grain Bowl",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["dairy","gluten","nuts"],
+  "ingredients": [
+    {
+      "name": "cooked farro",
+      "quantity": 120,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "roasted zucchini",
+      "quantity": 60,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "roasted bell pepper",
+      "quantity": 60,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "basil pesto",
+      "quantity": 30,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "parmesan cheese",
+      "quantity": 20,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Toss veg with oil, roast at 200 °C for 15 min.",
+    "Combine farro, veg, and pesto in a bowl; mix well.",
+    "Top with parmesan and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Quinoa & Black Bean Stuffed Peppers",
+  "calories": 650,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.49,
+    "fats": 0.29
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": [],
+  "ingredients": [
+    {
+      "name": "bell peppers",
+      "quantity": 2,
+      "singular": "pepper",
+      "plural": "peppers",
+      "wholeItem": true,
+      "category": "vegetables"
+    },
+    {
+      "name": "cooked quinoa",
+      "quantity": 150,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "black beans",
+      "quantity": 120,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "corn kernels",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "shredded cheddar",
+      "quantity": 50,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "cumin",
+      "quantity": 2,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Preheat oven to 180 °C. Halve and seed peppers.",
+    "Toss quinoa, beans, corn, oil, and cumin; stuff into peppers.",
+    "Top with cheese and bake 20 min until peppers are tender and cheese melts."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Spinach & Ricotta Gnocchi with Sun-Dried Tomatoes",
+  "calories": 650,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.54,
+    "fats": 0.26
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["dairy","gluten","egg"],
+  "ingredients": [
+    {
+      "name": "store-bought gnocchi",
+      "quantity": 200,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "ricotta cheese",
+      "quantity": 80,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "baby spinach",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "sun-dried tomatoes",
+      "quantity": 40,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "parmesan cheese",
+      "quantity": 20,
+      "unit": "g",
+      "category": "dairy"
+    }
+  ],
+  "recipe": [
+    "Cook gnocchi per package; drain.",
+    "In pan, heat oil, add tomatoes and spinach until spinach wilts.",
+    "Stir in gnocchi and ricotta; cook until heated through.",
+    "Sprinkle parmesan and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Thai Peanut Tofu Noodle Salad",
+  "calories": 650,
+  "macroRatio": {
+    "protein": 0.28,
+    "carbs": 0.50,
+    "fats": 0.22
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["soy","nuts","gluten"],
+  "ingredients": [
+    {
+      "name": "rice noodles",
+      "quantity": 120,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "firm tofu",
+      "quantity": 120,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "shredded carrot",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "cucumber",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "peanut butter",
+      "quantity": 25,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "soy sauce",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "lime juice",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Cook noodles per package; drain and rinse.",
+    "Pan-fry tofu until golden.",
+    "Whisk peanut butter, soy sauce, and lime juice to dressing.",
+    "Toss noodles, tofu, and veggies with dressing; serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Eggplant Parmesan Sandwich",
+  "calories": 650,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.45,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["gluten","dairy","egg"],
+  "ingredients": [
+    {
+      "name": "ciabatta roll",
+      "quantity": 1,
+      "singular": "roll",
+      "plural": "rolls",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "eggplant slices",
+      "quantity": 120,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "marinara sauce",
+      "quantity": 80,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "mozzarella",
+      "quantity": 60,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "breadcrumbs",
+      "quantity": 30,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Bread eggplant in breadcrumbs and bake 15 min at 200 °C until tender.",
+    "Spread sauce on roll, layer eggplant and mozzarella; broil 3 min until cheese melts.",
+    "Close sandwich and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chickpea & Sweet Potato Buddha Bowl",
+  "calories": 700,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.55,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": [],
+  "ingredients": [
+    {
+      "name": "roasted sweet potato",
+      "quantity": 150,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "chickpeas",
+      "quantity": 120,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "cooked brown rice",
+      "quantity": 100,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "avocado",
+      "quantity": 60,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "spinach",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "tahini",
+      "quantity": 20,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "lemon juice",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Roast sweet potato at 200 °C for 20 min until tender.",
+    "Arrange rice, sweet potato, chickpeas, spinach, and avocado in a bowl.",
+    "Whisk tahini with lemon juice and a splash of water; drizzle over bowl."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Grilled Portobello & Goat Cheese Panini",
+  "calories": 700,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.45,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["gluten","dairy"],
+  "ingredients": [
+    {
+      "name": "ciabatta roll",
+      "quantity": 1,
+      "singular": "roll",
+      "plural": "rolls",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "portobello mushrooms",
+      "quantity": 2,
+      "unit": "pieces",
+      "category": "vegetables"
+    },
+    {
+      "name": "goat cheese",
+      "quantity": 60,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "roasted red pepper",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "balsamic glaze",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Brush mushrooms with oil and grill until tender, ~5 min per side.",
+    "Split roll, layer goat cheese, mushrooms, and peppers, drizzle glaze.",
+    "Press in panini press or skillet for 3–4 min per side."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Creamy Coconut Lentil & Veggie Curry",
+  "calories": 700,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.58,
+    "fats": 0.24
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": ["none"],
+  "ingredients": [
+    {
+      "name": "red lentils",
+      "quantity": 100,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "coconut milk",
+      "quantity": 150,
+      "unit": "ml",
+      "category": "dairy"
+    },
+    {
+      "name": "mixed vegetables",
+      "quantity": 150,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "curry paste",
+      "quantity": 30,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "cooked jasmine rice",
+      "quantity": 80,
+      "unit": "g",
+      "category": "carbs"
+    }
+  ],
+  "recipe": [
+    "Heat oil, sauté curry paste for 1 min, add lentils and coconut milk; simmer 10 min.",
+    "Stir in vegetables, cook 5 min until tender.",
+    "Serve curry over jasmine rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Soba Noodle Salad with Tofu & Edamame",
+  "calories": 700,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.50,
+    "fats": 0.20
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["soy","gluten"],
+  "ingredients": [
+    {
+      "name": "soba noodles",
+      "quantity": 120,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "firm tofu",
+      "quantity": 140,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "edamame",
+      "quantity": 100,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "cucumber",
+      "quantity": 60,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "sesame oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "soy sauce",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Cook soba per package; drain and rinse under cold water.",
+    "Pan-fry tofu in sesame oil until golden.",
+    "Toss noodles, tofu, edamame, and cucumber with soy sauce.",
+    "Serve chilled or room temperature."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Zucchini Spinach & Ricotta Lasagna",
+  "calories": 750,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.45,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["dairy","gluten","egg"],
+  "ingredients": [
+    {
+      "name": "lasagna noodles",
+      "quantity": 100,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "ricotta cheese",
+      "quantity": 100,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "mozzarella cheese",
+      "quantity": 60,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "zucchini",
+      "quantity": 100,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "baby spinach",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "tomato sauce",
+      "quantity": 150,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Preheat oven to 180 °C. Sauté zucchini and spinach in oil until wilted.",
+    "Layer noodles, vegetables, ricotta, sauce, and mozzarella in a baking dish.",
+    "Repeat layers, top with cheese, bake 25–30 min until golden and bubbling."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Roasted Chickpea & Quinoa Power Bowl",
+  "calories": 800,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": [],
+  "ingredients": [
+    {
+      "name": "cooked quinoa",
+      "quantity": 130,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "roasted chickpeas",
+      "quantity": 120,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "roasted sweet potato",
+      "quantity": 120,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "avocado",
+      "quantity": 70,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "kale",
+      "quantity": 60,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "tahini",
+      "quantity": 20,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "lemon juice",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Toss chickpeas and sweet potato in oil; roast at 200 °C for 20 min.",
+    "Assemble quinoa, kale, roasted veg, and chickpeas in bowl.",
+    "Whisk tahini with lemon juice and a little water; drizzle over bowl, top with avocado."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Paneer Tikka Masala with Basmati Rice",
+  "calories": 850,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.45,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": ["dairy"],
+  "ingredients": [
+    {
+      "name": "paneer cubes",
+      "quantity": 150,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "masala sauce",
+      "quantity": 150,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "light cream",
+      "quantity": 50,
+      "unit": "ml",
+      "category": "dairy"
+    },
+    {
+      "name": "cooke d basmati rice",
+      "quantity": 120,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "peas",
+      "quantity": 60,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Sauté paneer in oil until golden; remove.",
+    "Heat masala sauce, stir in cream and peas; simmer 5 min.",
+    "Return paneer to sauce, warm through, and serve over rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegetarian Burrito Bowl with Tempeh & Black Beans",
+  "calories": 900,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.45,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": ["soy"],
+  "ingredients": [
+    {
+      "name": "cooked brown rice",
+      "quantity": 120,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "tempeh strips",
+      "quantity": 120,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "black beans",
+      "quantity": 100,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "corn kernels",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "avocado",
+      "quantity": 80,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "salsa",
+      "quantity": 40,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "tortilla chips",
+      "quantity": 30,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Pan-sear tempeh in oil until crisp; set aside.",
+    "Layer rice, beans, corn, tempeh, avocado, and salsa in a bowl.",
+    "Top with crushed chips and serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Shepherd’s Pie with Lentils & Mash",
+  "calories": 950,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.60,
+    "fats": 0.20
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Vegan","Gluten-Free"],
+  "allergens": [],
+  "ingredients": [
+    {
+      "name": "green lentils",
+      "quantity": 150,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "mixed vegetables",
+      "quantity": 200,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "vegetable broth",
+      "quantity": 150,
+      "unit": "ml",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "potatoes",
+      "quantity": 300,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "plant-based butter",
+      "quantity": 20,
+      "unit": "g",
+      "category": "dairy"
+    }
+  ],
+  "recipe": [
+    "Preheat oven to 200 °C. Boil potatoes until tender, mash with plant-based butter and a pinch of salt.",
+    "Meanwhile, sauté mixed veg in oil 5 min, add lentils and broth, simmer until thickened.",
+    "Transfer lentil-veg mix to a baking dish, top evenly with mash.",
+    "Bake 20 min until golden; serve hot."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Creamy Spinach & Mushroom Tortellini",
+  "calories": 950,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.55,
+    "fats": 0.20
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["dairy","gluten","egg","nuts"],
+  "ingredients": [
+    {
+      "name": "cheese tortellini",
+      "quantity": 250,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "creme fraiche",
+      "quantity": 80,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "mushrooms",
+      "quantity": 150,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "baby spinach",
+      "quantity": 100,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 15,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "pine nuts",
+      "quantity": 20,
+      "unit": "g",
+      "category": "misc"
+    }
+  ],
+  "recipe": [
+    "Cook tortellini per package; drain.",
+    "In pan, heat oil, sauté mushrooms until golden, add spinach until wilted.",
+    "Stir in creme fraiche and tortellini; warm through.",
+    "Top with toasted pine nuts and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Loaded Veggie Burrito Bowl",
+  "calories": 950,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.50,
+    "fats": 0.20
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Gluten-Free"],
+  "allergens": [],
+  "ingredients": [
+    {
+      "name": "cooked cilantro rice",
+      "quantity": 150,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "black beans",
+      "quantity": 120,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "roasted corn",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "shredded lettuce",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "salsa",
+      "quantity": 50,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "guacamole",
+      "quantity": 60,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "sour cream",
+      "quantity": 40,
+      "unit": "g",
+      "category": "dairy"
+    }
+  ],
+  "recipe": [
+    "Assemble rice, beans, corn, and lettuce in a bowl.",
+    "Top with salsa, guacamole, and sour cream.",
+    "Mix and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Falafel Plate with Hummus, Tabbouleh & Pita",
+  "calories": 950,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.55,
+    "fats": 0.20
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["gluten","sesame"],
+  "ingredients": [
+    {
+      "name": "falafel balls",
+      "quantity": 6,
+      "unit": "pieces",
+      "category": "protein"
+    },
+    {
+      "name": "hummus",
+      "quantity": 80,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "tabbouleh salad",
+      "quantity": 120,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "whole wheat pita",
+      "quantity": 1,
+      "singular": "pita",
+      "plural": "pitas",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "tahini drizzle",
+      "quantity": 20,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Warm pita; place on plate.",
+    "Arrange falafel, hummus, and tabbouleh alongside.",
+    "Drizzle pita with olive oil and tahini; serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegetarian Mac & Cheese Bake with Broccoli",
+  "calories": 1000,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "elbow macaroni", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "cheddar cheese", "quantity": 80, "unit": "g", "category": "dairy" },
+    { "name": "mozzarella cheese", "quantity": 40, "unit": "g", "category": "dairy" },
+    { "name": "milk", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "butter", "quantity": 20, "unit": "g", "category": "dairy" },
+    { "name": "all-purpose flour", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "broccoli florets", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "breadcrumbs", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook macaroni per package instructions; preheat oven to 180 °C.",
+    "In a saucepan, melt butter, whisk in flour to form a roux; gradually whisk in milk until thickened.",
+    "Stir in cheeses until melted, then fold in pasta and broccoli; transfer to a baking dish.",
+    "Mix breadcrumbs with oil, sprinkle on top, and bake 15–20 min until golden and bubbly."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Loaded Veggie Nachos Deluxe",
+  "calories": 1050,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.50,
+    "fats": 0.32
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "tortilla chips", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "black beans", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "shredded cheddar", "quantity": 60, "unit": "g", "category": "dairy" },
+    { "name": "jalapeños", "quantity": 20, "unit": "g", "category": "vegetables" },
+    { "name": "cherry tomatoes", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "sour cream", "quantity": 40, "unit": "g", "category": "dairy" },
+    { "name": "guacamole", "quantity": 60, "unit": "g", "category": "fruits" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "cilantro", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Spread chips on a baking sheet, drizzle with oil, and bake at 200 °C for 5 min.",
+    "Remove, top with beans, tomatoes, jalapeños, and cheese; bake 5 min more until cheese melts.",
+    "Serve topped with sour cream, guacamole, and cilantro."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Buffalo Cauliflower Wrap with Sweet Potato Fries",
+  "calories": 1100,
+  "macroRatio": {
+    "protein": 0.17,
+    "carbs": 0.45,
+    "fats": 0.38
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "cauliflower florets", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "buffalo sauce", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "all-purpose flour", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "tortilla wrap", "quantity": 1, "singular": "wrap", "plural": "wraps", "wholeItem": true, "category": "carbs" },
+    { "name": "blue cheese dressing", "quantity": 30, "unit": "g", "category": "dairy" },
+    { "name": "sweet potato fries", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toss cauliflower in flour and buffalo sauce; bake at 200 °C for 20 min until crispy.",
+    "Meanwhile, toss fries in oil, bake 20 min until golden.",
+    "Warm wrap, fill with cauliflower and drizzle with blue cheese dressing; serve with fries."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Paneer Butter Masala with Rice & Garlic Naan",
+  "calories": 1150,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.45,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "paneer cubes", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "butter masala sauce", "quantity": 150, "unit": "g", "category": "pantry" },
+    { "name": "light cream", "quantity": 50, "unit": "ml", "category": "dairy" },
+    { "name": "cooked basmati rice", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "garlic naan", "quantity": 1, "singular": "piece", "plural": "pieces", "wholeItem": true, "category": "carbs" },
+    { "name": "butter", "quantity": 10, "unit": "g", "category": "dairy" }
+  ],
+  "recipe": [
+    "Heat sauce in a pan, stir in cream, then add paneer; simmer 5 min.",
+    "Warm naan with butter in oven.",
+    "Serve paneer masala over rice with garlic naan on the side."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Grilled Vegetable Skewers with Quinoa Pilaf",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": [],
+  "ingredients": [
+    { "name": "bell pepper", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "zucchini", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "red onion", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "mushrooms", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "quinoa", "quantity": 60, "unit": "g", "category": "carbs" },
+    { "name": "vegetable broth", "quantity": 120, "unit": "ml", "category": "pantry" },
+    { "name": "fresh parsley", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat grill to medium-high. Thread pepper, zucchini, onion and mushrooms onto skewers; brush with half the oil and season with salt and pepper.",
+    "Grill skewers 3–4 minutes per side until charred.",
+    "Meanwhile, rinse quinoa; simmer in broth for 12 minutes until absorbed. Fluff and stir in remaining oil and parsley.",
+    "Serve skewers over quinoa pilaf."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Spinach & Feta Stuffed Portobello Mushrooms",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.30,
+    "fats": 0.45
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy"],
+  "ingredients": [
+    { "name": "portobello mushrooms", "quantity": 2, "unit": "pieces", "category": "vegetables" },
+    { "name": "baby spinach", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "feta cheese", "quantity": 60, "unit": "g", "category": "dairy" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "garlic", "quantity": 2, "unit": "cloves", "category": "pantry" },
+    { "name": "lemon juice", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 180 °C. Remove stems from mushrooms; brush caps with half the oil, season.",
+    "Sauté garlic in remaining oil, add spinach until wilted; mix with crumbled feta and lemon juice.",
+    "Spoon mixture into mushroom caps, place on baking tray; bake 15 min until tender."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Sweet Potato & Black Bean Tacos",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.55,
+    "fats": 0.27
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": [],
+  "ingredients": [
+    { "name": "sweet potato", "quantity": 120, "unit": "g", "category": "vegetables" },
+    { "name": "black beans", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "corn tortillas", "quantity": 2, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "avocado", "quantity": 40, "unit": "g", "category": "fruits" },
+    { "name": "lime juice", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "cilantro", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Roast diced sweet potato tossed in oil at 200 °C for 20 min.",
+    "Warm beans in a pan; season with salt and pepper.",
+    "Heat tortillas, fill with sweet potato, beans, and sliced avocado; drizzle lime juice and sprinkle cilantro."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Tofu & Vegetable Stir-Fry with Brown Rice",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Soy"],
+  "ingredients": [
+    { "name": "firm tofu", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "mixed bell peppers", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "broccoli florets", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "soy sauce", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "garlic", "quantity": 2, "unit": "cloves", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "cooked brown rice", "quantity": 80, "unit": "g", "category": "carbs" }
+  ],
+  "recipe": [
+    "Heat oil in a wok, sauté garlic until fragrant, add tofu cubes; stir-fry until golden.",
+    "Add peppers and broccoli, stir-fry 4 min until crisp-tender.",
+    "Stir in soy sauce; serve over warm brown rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Creamy Butternut Squash Risotto",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.12,
+    "carbs": 0.65,
+    "fats": 0.23
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "arborio rice", "quantity": 75, "unit": "g", "category": "carbs" },
+    { "name": "butternut squash", "quantity": 120, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 300, "unit": "ml", "category": "pantry" },
+    { "name": "Parmesan cheese", "quantity": 30, "unit": "g", "category": "dairy" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "white onion", "quantity": 40, "unit": "g", "category": "vegetables" }
+  ],
+  "recipe": [
+    "Sauté onion in oil until translucent, add diced squash and cook 5 min.",
+    "Stir in rice, toast 1 min, then gradually ladle in broth, stirring until absorbed before adding more (≈18 min).",
+    "Once rice is al dente and squash tender, stir in Parmesan, season, and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Eggplant & Chickpea Curry with Basmati Rice",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.60,
+    "fats": 0.25
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": [],
+  "ingredients": [
+    { "name": "eggplant", "quantity": 120, "unit": "g", "category": "vegetables" },
+    { "name": "chickpeas", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "coconut milk", "quantity": 100, "unit": "ml", "category": "dairy" },
+    { "name": "curry paste", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "cooked basmati rice", "quantity": 80, "unit": "g", "category": "carbs" }
+  ],
+  "recipe": [
+    "Heat oil, fry curry paste 30 s, add eggplant and chickpeas; sauté 5 min.",
+    "Pour in coconut milk, simmer 10 min until eggplant soft.",
+    "Serve curry over rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegetarian Chili with Cornbread",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.62,
+    "fats": 0.20
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Gluten","Dairy"],
+  "ingredients": [
+    { "name": "kidney beans", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "black beans", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "diced tomatoes", "quantity": 100, "unit": "g", "category": "pantry" },
+    { "name": "corn kernels", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "chili powder", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "cornbread slice", "quantity": 1, "unit": "slice", "category": "carbs" }
+  ],
+  "recipe": [
+    "Heat oil, sauté beans, tomatoes, corn, and chili powder; simmer 10 min.",
+    "Toast cornbread separately.",
+    "Serve chili topped with cornbread."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Mushroom Stroganoff with Egg Noodles",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.55,
+    "fats": 0.25
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "cremini mushrooms", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "sour cream", "quantity": 40, "unit": "g", "category": "dairy" },
+    { "name": "vegetable broth", "quantity": 100, "unit": "ml", "category": "pantry" },
+    { "name": "paprika", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "egg noodles", "quantity": 80, "unit": "g", "category": "carbs" }
+  ],
+  "recipe": [
+    "Cook noodles per package; drain.",
+    "Sauté mushrooms in oil until browned, stir in paprika and broth; simmer 5 min.",
+    "Off heat, stir in sour cream; return briefly to warm (do not boil).",
+    "Serve sauce over noodles."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegetable Pad Thai with Tofu",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.52,
+    "fats": 0.26
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Soy","Gluten","Nuts"],
+  "ingredients": [
+    { "name": "rice noodles", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "firm tofu", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "bean sprouts", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "carrot", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "scallions", "quantity": 20, "unit": "g", "category": "vegetables" },
+    { "name": "egg", "quantity": 1, "singular": "egg", "plural": "eggs", "wholeItem": true, "category": "protein" },
+    { "name": "peanut oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "tamarind paste", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "peanuts", "quantity": 15, "unit": "g", "category": "misc" }
+  ],
+  "recipe": [
+    "Cook noodles per package; drain and set aside.",
+    "Heat oil, scramble egg, set aside. Stir-fry tofu until golden, then add carrot and bean sprouts for 2 min.",
+    "Return egg, add noodles, tamarind paste and soy sauce; toss to coat.",
+    "Top with scallions and crushed peanuts before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Black Bean & Sweet Potato Enchiladas",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.55,
+    "fats": 0.25
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "corn tortillas", "quantity": 2, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "black beans", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "roasted sweet potato", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "enchilada sauce", "quantity": 80, "unit": "g", "category": "pantry" },
+    { "name": "cheddar cheese", "quantity": 40, "unit": "g", "category": "dairy" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 180 °C. Mash beans and sweet potato together; season.",
+    "Fill tortillas, roll up, place in baking dish; pour sauce over and sprinkle cheese.",
+    "Bake 15 min until cheese melts; serve hot."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Cauliflower Steak with Herb Quinoa",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.50,
+    "fats": 0.32
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": [],
+  "ingredients": [
+    { "name": "cauliflower steak", "quantity": 1, "singular": "steak", "plural": "steaks", "wholeItem": true, "category": "vegetables" },
+    { "name": "quinoa", "quantity": 60, "unit": "g", "category": "carbs" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "garlic',", "quantity": 2, "unit": "cloves", "category": "pantry" },
+    { "name": "parsley", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Brush cauliflower with oil, grill 5 min per side until tender.",
+    "Cook quinoa in broth per package; stir in minced garlic and parsley.",
+    "Serve cauliflower over quinoa."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Stuffed Acorn Squash with Lentils & Kale",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": [],
+  "ingredients": [
+    { "name": "acorn squash", "quantity": 1, "singular": "half", "plural": "halves", "wholeItem": true, "category": "vegetables" },
+    { "name": "cooked lentils", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "kale", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "breadcrumbs", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 190 °C. Halve and seed squash; brush with oil, roast 25 min until tender.",
+    "Toss kale in oil and toast breadcrumbs until golden.",
+    "Mix lentils with kale and breadcrumbs; fill squash halves and bake 5 min more."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Mushroom & Pea Parmesan Risotto",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.60,
+    "fats": 0.22
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "arborio rice", "quantity": 75, "unit": "g", "category": "carbs" },
+    { "name": "mixed mushrooms", "quantity": 120, "unit": "g", "category": "vegetables" },
+    { "name": "frozen peas", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 400, "unit": "ml", "category": "pantry" },
+    { "name": "Parmesan cheese", "quantity": 40, "unit": "g", "category": "dairy" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "white onion", "quantity": 40, "unit": "g", "category": "vegetables" }
+  ],
+  "recipe": [
+    "Sauté onion in oil until translucent, add mushrooms and cook 3–4 min.",
+    "Stir in rice and toast 1 min, then ladle in hot broth one scoop at a time, stirring until absorbed before adding more (≈18 min).",
+    "Stir in peas and Parmesan off heat, season, and serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chickpea & Spinach Coconut Curry",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.55,
+    "fats": 0.25
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "canned chickpeas", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "baby spinach", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "coconut milk", "quantity": 120, "unit": "ml", "category": "pantry" },
+    { "name": "red curry paste", "quantity": 25, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "cooked jasmine rice", "quantity": 80, "unit": "g", "category": "carbs" }
+  ],
+  "recipe": [
+    "Heat oil, fry curry paste 1 min, add chickpeas and coconut milk; simmer 8 min.",
+    "Stir in spinach until wilted, season, and serve over rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegetable Fajitas with Guacamole",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.50,
+    "fats": 0.32
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "flour tortillas", "quantity": 2, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "bell peppers", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "onion", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "avocado", "quantity": 60, "unit": "g", "category": "fruits" },
+    { "name": "lime juice", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "cilantro", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Slice peppers and onion; sauté in oil with fajita seasoning 5 min until tender.",
+    "Mash avocado with lime juice and cilantro to make guacamole.",
+    "Warm tortillas, fill with veggies and guacamole; serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Eggplant Parmesan with Spaghetti",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.55,
+    "fats": 0.25
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "eggplant slices", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "marinara sauce", "quantity": 100, "unit": "g", "category": "pantry" },
+    { "name": "mozzarella cheese", "quantity": 40, "unit": "g", "category": "dairy" },
+    { "name": "Parmesan cheese", "quantity": 20, "unit": "g", "category": "dairy" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "spaghetti", "quantity": 80, "unit": "g", "category": "carbs" }
+  ],
+  "recipe": [
+    "Preheat oven to 200 °C. Brush eggplant with oil, roast 15 min until tender.",
+    "Cook spaghetti per package; drain.",
+    "Top eggplant with sauce and cheeses, bake 5 min until melted; serve over spaghetti."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Pesto Tortellini with Roasted Vegetables",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.55,
+    "fats": 0.27
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Gluten","Dairy","Nuts"],
+  "ingredients": [
+    { "name": "cheese tortellini", "quantity": 200, "unit": "g", "category": "carbs" },
+    { "name": "basil pesto", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "zucchini", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "red bell pepper", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "cherry tomatoes", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "Parmesan cheese", "quantity": 30, "unit": "g", "category": "dairy" }
+  ],
+  "recipe": [
+    "Preheat oven to 200 °C. Toss zucchini, pepper, and tomatoes in oil; roast 15 min.",
+    "Cook tortellini per package; drain and return to pot.",
+    "Stir in pesto, roasted vegetables, and half the Parmesan; heat gently.",
+    "Serve topped with remaining Parmesan."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chickpea & Spinach Lasagna Rolls",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 4.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten","Egg"],
+  "ingredients": [
+    { "name": "lasagna noodles", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "ricotta cheese", "quantity": 100, "unit": "g", "category": "dairy" },
+    { "name": "canned chickpeas", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "baby spinach", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "marinara sauce", "quantity": 150, "unit": "g", "category": "pantry" },
+    { "name": "mozzarella cheese", "quantity": 40, "unit": "g", "category": "dairy" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 180 °C. Cook noodles until al dente; drain.",
+    "Mash chickpeas and mix with ricotta and spinach.",
+    "Spread sauce in baking dish; roll ¼ of filling into each noodle, place seam-side down.",
+    "Top with remaining sauce and mozzarella; bake 20 min until bubbly."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegetable Jalfrezi with Paneer & Rice",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy"],
+  "ingredients": [
+    { "name": "paneer cubes", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "mixed bell peppers", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "onion", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "jalfrezi sauce", "quantity": 120, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "cooked basmati rice", "quantity": 100, "unit": "g", "category": "carbs" }
+  ],
+  "recipe": [
+    "Heat oil, sauté paneer until golden; remove.",
+    "Sauté onion and peppers 4 min, add sauce and paneer; simmer 5 min.",
+    "Serve hot over rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Lentil & Sweet Potato Shepherd’s Pie",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.53,
+    "fats": 0.25
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Vegan"],
+  "allergens": [],
+  "ingredients": [
+    { "name": "red lentils", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "sweet potato", "quantity": 150, "unit": "g", "category": "carbs" },
+    { "name": "carrot", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "peas", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 100, "unit": "ml", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Boil and mash sweet potato with a pinch of salt.",
+    "Sauté carrot in oil 3 min, add lentils and broth; simmer 10 min, stir in peas.",
+    "Transfer to dish, top with mash; bake 15 min at 180 °C until golden."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Lentil Bolognese with Spaghetti",
+  "calories": 650,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.55,
+    "fats": 0.20
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Gluten","Dairy"],
+  "ingredients": [
+    { "name": "red lentils", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "spaghetti", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "tomato passata", "quantity": 150, "unit": "g", "category": "pantry" },
+    { "name": "carrot", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "celery", "quantity": 40, "unit": "g", "category": "vegetables" },
+    { "name": "onion", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "Parmesan cheese", "quantity": 30, "unit": "g", "category": "dairy" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook spaghetti per package; drain and set aside.",
+    "Heat oil, sauté onion, carrot, and celery until soft (≈5 min).",
+    "Stir in lentils and passata, add 200 ml water, simmer 15 min until lentils tender.",
+    "Season to taste, serve sauce over spaghetti, sprinkle Parmesan."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Butternut Squash & Goat Cheese Galette",
+  "calories": 650,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.50,
+    "fats": 0.35
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Gluten","Dairy"],
+  "ingredients": [
+    { "name": "ready-rolled puff pastry", "quantity": 1, "singular": "sheet", "plural": "sheets", "wholeItem": true, "category": "carbs" },
+    { "name": "butternut squash", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "goat cheese", "quantity": 80, "unit": "g", "category": "dairy" },
+    { "name": "spinach", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "egg", "quantity": 1, "singular": "egg", "plural": "eggs", "wholeItem": true, "category": "protein" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 200 °C. Toss squash in oil, roast 15 min until tender; set aside.",
+    "On pastry, layer spinach, roasted squash, and goat cheese, leaving 2 cm border.",
+    "Fold edges over filling to form galette, brush border with beaten egg.",
+    "Bake 20 min until golden; slice and serve warm."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Paneer & Mixed Vegetable Korma with Rice",
+  "calories": 650,
+  "macroRatio": {
+    "protein": 0.28,
+    "carbs": 0.45,
+    "fats": 0.27
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Nuts"],
+  "ingredients": [
+    { "name": "paneer cubes", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "mixed vegetables", "quantity": 120, "unit": "g", "category": "vegetables" },
+    { "name": "korma sauce", "quantity": 150, "unit": "g", "category": "pantry" },
+    { "name": "light cream", "quantity": 40, "unit": "ml", "category": "dairy" },
+    { "name": "cashew nuts", "quantity": 20, "unit": "g", "category": "misc" },
+    { "name": "cooked basmati rice", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil, fry paneer until golden; remove.",
+    "Sauté vegetables 3 min, stir in korma sauce and cream; simmer 5 min.",
+    "Return paneer, warm through, garnish with cashews, serve over rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegetable Moussaka",
+  "calories": 650,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.48,
+    "fats": 0.34
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten","Egg"],
+  "ingredients": [
+    { "name": "eggplant slices", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "potato slices", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "tomato sauce", "quantity": 120, "unit": "g", "category": "pantry" },
+    { "name": "béchamel sauce", "quantity": 100, "unit": "g", "category": "dairy" },
+    { "name": "grated cheese", "quantity": 40, "unit": "g", "category": "dairy" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 180 °C. Brush aubergine and potato with oil, roast 15 min until just tender.",
+    "Layer potato, eggplant, and sauce in a dish; pour béchamel on top, sprinkle cheese.",
+    "Bake 20 min until golden; rest 5 min before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Spinach & Mushroom Lasagna",
+  "calories": 700,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten","Egg"],
+  "ingredients": [
+    { "name": "lasagna noodles", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "ricotta cheese", "quantity": 100, "unit": "g", "category": "dairy" },
+    { "name": "mozzarella cheese", "quantity": 50, "unit": "g", "category": "dairy" },
+    { "name": "Parmesan cheese", "quantity": 20, "unit": "g", "category": "dairy" },
+    { "name": "baby spinach", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "mushrooms", "quantity": 120, "unit": "g", "category": "vegetables" },
+    { "name": "tomato sauce", "quantity": 150, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 180 °C. Sauté mushrooms in oil until golden, stir in spinach until wilted.",
+    "Spread a little sauce in baking dish, layer noodles, mushroom-spinach mix, ricotta, and mozzarella; repeat.",
+    "Top with remaining sauce and Parmesan, bake 25 min until bubbly and golden."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegetable Enchilada Casserole",
+  "calories": 700,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.52,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "corn tortillas", "quantity": 4, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "black beans", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "roasted red pepper", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "sweet corn", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "enchilada sauce", "quantity": 150, "unit": "g", "category": "pantry" },
+    { "name": "cheddar cheese", "quantity": 60, "unit": "g", "category": "dairy" },
+    { "name": "sour cream", "quantity": 40, "unit": "g", "category": "dairy" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 180 °C. Lightly fry tortillas in oil to soften, drain.",
+    "Layer beans, peppers, corn, sauce, and tortillas in a dish; repeat layers.",
+    "Top with cheese, bake 20 min until melted, garnish with sour cream."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Butternut Squash Mac & Cheese",
+  "calories": 700,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.60,
+    "fats": 0.22
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "macaroni pasta", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "butternut squash puree", "quantity": 120, "unit": "g", "category": "vegetables" },
+    { "name": "cheddar cheese", "quantity": 80, "unit": "g", "category": "dairy" },
+    { "name": "milk", "quantity": 150, "unit": "ml", "category": "dairy" },
+    { "name": "butter", "quantity": 20, "unit": "g", "category": "dairy" },
+    { "name": "all-purpose flour", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "breadcrumbs", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook pasta per package; preheat oven to 180 °C.",
+    "Make roux: melt butter, whisk in flour, gradually add milk and squash puree until smooth.",
+    "Stir in half the cheese, fold in pasta, transfer to dish, top with remaining cheese and breadcrumbs.",
+    "Bake 15 min until golden and bubbly."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Paneer Tikka Masala with Rice",
+  "calories": 700,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.45,
+    "fats": 0.25
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy"],
+  "ingredients": [
+    { "name": "paneer cubes", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "tikka masala sauce", "quantity": 150, "unit": "g", "category": "pantry" },
+    { "name": "light cream", "quantity": 50, "unit": "ml", "category": "dairy" },
+    { "name": "cooked basmati rice", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil, sear paneer until golden; remove.",
+    "Warm sauce in pan, stir in cream, add paneer; simmer 5 min.",
+    "Serve over rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Creamy Spinach & Pea Pasta Bake",
+  "calories": 750,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.55,
+    "fats": 0.25
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "penne pasta", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "fresh spinach", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "frozen peas", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "ricotta cheese", "quantity": 60, "unit": "g", "category": "dairy" },
+    { "name": "mozzarella cheese", "quantity": 40, "unit": "g", "category": "dairy" },
+    { "name": "milk", "quantity": 150, "unit": "ml", "category": "dairy" },
+    { "name": "Parmesan cheese", "quantity": 20, "unit": "g", "category": "dairy" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook pasta al dente; drain and reserve 50 ml cooking water.",
+    "Stir spinach and peas into hot pasta until wilted, mix in ricotta and milk, adding reserved water to loosen.",
+    "Pour into baking dish, top with mozzarella and Parmesan; bake at 180 °C for 15 min until golden.",
+    "Drizzle with oil and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Grilled Halloumi & Vegetable Skewers with Couscous",
+  "calories": 800,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "halloumi cheese", "quantity": 100, "unit": "g", "category": "dairy" },
+    { "name": "couscous", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "zucchini", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "red bell pepper", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "cherry tomatoes", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "lemon juice", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "fresh mint", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Thread halloumi and vegetables onto skewers; brush with oil and lemon juice.",
+    "Grill skewers 3 min per side until charred.",
+    "Prepare couscous with boiling water per package; fluff and stir in mint and a drizzle of oil.",
+    "Serve skewers over couscous."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chickpea & Potato Vegetable Biryani",
+  "calories": 850,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.60,
+    "fats": 0.22
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": [],
+  "ingredients": [
+    { "name": "basmati rice", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "chickpeas", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "diced potato", "quantity": 120, "unit": "g", "category": "vegetables" },
+    { "name": "mixed vegetables", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "biryani spices", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "vegetable broth", "quantity": 200, "unit": "ml", "category": "pantry" },
+    { "name": "yogurt", "quantity": 50, "unit": "g", "category": "dairy" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil, toast spices 30 s, add potatoes and veg; sauté 5 min.",
+    "Stir in rice and chickpeas, pour in broth; cover and simmer 15 min until rice cooked.",
+    "Top with yogurt and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegetarian Meatball Subs with Marinara",
+  "calories": 900,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.55,
+    "fats": 0.25
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Gluten","Dairy","Egg"],
+  "ingredients": [
+    { "name": "vegetarian meatballs", "quantity": 5, "unit": "pieces", "category": "protein" },
+    { "name": "sub roll", "quantity": 1, "singular": "roll", "plural": "rolls", "wholeItem": true, "category": "carbs" },
+    { "name": "marinara sauce", "quantity": 100, "unit": "g", "category": "pantry" },
+    { "name": "mozzarella cheese", "quantity": 60, "unit": "g", "category": "dairy" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Warm meatballs in marinara sauce for 5 min.",
+    "Slice roll, drizzle inside with oil, fill with meatballs and sauce.",
+    "Top with mozzarella and broil 2 min until cheese melts."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegetable Pot Pie with Puff Pastry",
+  "calories": 950,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.50,
+    "fats": 0.35
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "mixed vegetables (peas, carrots, corn)", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "mushrooms", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 200, "unit": "ml", "category": "pantry" },
+    { "name": "cream", "quantity": 50, "unit": "ml", "category": "dairy" },
+    { "name": "butter", "quantity": 20, "unit": "g", "category": "dairy" },
+    { "name": "all-purpose flour", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "puff pastry sheet", "quantity": 1, "singular": "sheet", "plural": "sheets", "wholeItem": true, "category": "carbs" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 200 °C. Sauté mushrooms and mixed veg in oil until softened (5 min).",
+    "Stir in flour and cook 1 min, whisk in broth and cream; simmer until thickened.",
+    "Transfer filling to a pie dish, top with pastry, crimp edges, cut vents.",
+    "Bake 20 min until pastry is golden."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Spinach & Ricotta Cannelloni",
+  "calories": 1000,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 4.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten","Egg"],
+  "ingredients": [
+    { "name": "cannelloni tubes", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "ricotta cheese", "quantity": 200, "unit": "g", "category": "dairy" },
+    { "name": "baby spinach", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "Parmesan cheese", "quantity": 40, "unit": "g", "category": "dairy" },
+    { "name": "marinara sauce", "quantity": 200, "unit": "g", "category": "pantry" },
+    { "name": "egg", "quantity": 1, "singular": "egg", "plural": "eggs", "wholeItem": true, "category": "protein" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 180 °C. Sauté spinach in oil until wilted; let cool.",
+    "Mix spinach with ricotta, Parmesan, and egg; stuff into tubes.",
+    "Spread sauce in dish, arrange cannelloni, top with extra sauce and cheese.",
+    "Bake 25 min until bubbly."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegetable Paella",
+  "calories": 1050,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.60,
+    "fats": 0.22
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": [],
+  "ingredients": [
+    { "name": "paella rice", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "bell peppers", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "artichoke hearts", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "peas", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "saffron", "quantity": 1, "unit": "pinch", "category": "pantry" },
+    { "name": "vegetable broth", "quantity": 300, "unit": "ml", "category": "pantry" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil in paella pan, sauté peppers 3 min.",
+    "Stir in rice and saffron, cook 1 min; add broth and simmer 15 min without stirring.",
+    "Scatter artichokes and peas, cook 5 min more until liquid is absorbed; rest 5 min."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Truffle Mushroom Risotto",
+  "calories": 1100,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.58,
+    "fats": 0.22
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "arborio rice", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "mixed wild mushrooms", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 400, "unit": "ml", "category": "pantry" },
+    { "name": "Parmesan cheese", "quantity": 50, "unit": "g", "category": "dairy" },
+    { "name": "white wine", "quantity": 50, "unit": "ml", "category": "pantry" },
+    { "name": "truffle oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "shallot", "quantity": 40, "unit": "g", "category": "vegetables" }
+  ],
+  "recipe": [
+    "Sauté shallot in oil until translucent.",
+    "Add mushrooms, cook 4 min; stir in rice, toast 1 min.",
+    "Deglaze with wine; gradually add broth stirring until absorbed (≈18 min).",
+    "Off heat, stir in Parmesan and truffle oil; season and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Apple Slices with Almond Butter",
+  "calories": 100,
+  "macroRatio": {
+    "protein": 0.05,
+    "carbs": 0.45,
+    "fats": 0.50
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Nuts"],
+  "ingredients": [
+    {
+      "name": "apple",
+      "quantity": 80,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "almond butter",
+      "quantity": 8,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Core and slice the apple.",
+    "Serve with almond butter for dipping."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Greek Yogurt, Honey & Granola",
+  "calories": 100,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.55,
+    "fats": 0.15
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Nuts"],
+  "ingredients": [
+    {
+      "name": "Greek yogurt",
+      "quantity": 100,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "honey",
+      "quantity": 7,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "granola",
+      "quantity": 5,
+      "unit": "g",
+      "category": "carbs"
+    }
+  ],
+  "recipe": [
+    "Spoon yogurt into a bowl.",
+    "Drizzle with honey and sprinkle granola on top."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Carrot Sticks with Hummus",
+  "calories": 100,
+  "macroRatio": {
+    "protein": 0.10,
+    "carbs": 0.25,
+    "fats": 0.65
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Sesame"],
+  "ingredients": [
+    {
+      "name": "carrot",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "hummus",
+      "quantity": 32,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Peel and cut carrot into sticks.",
+    "Serve with hummus for dipping."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Rice Cake with Peanut Butter",
+  "calories": 100,
+  "macroRatio": {
+    "protein": 0.12,
+    "carbs": 0.28,
+    "fats": 0.60
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Peanuts","Gluten"],
+  "ingredients": [
+    {
+      "name": "rice cake",
+      "quantity": 1,
+      "singular": "rice cake",
+      "plural": "rice cakes",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "natural peanut butter",
+      "quantity": 12,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Spread peanut butter evenly over the rice cake.",
+    "Enjoy immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Banana & Peanut Butter Honey Drizzle",
+  "calories": 150,
+  "macroRatio": {
+    "protein": 0.07,
+    "carbs": 0.62,
+    "fats": 0.31
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Peanuts"],
+  "ingredients": [
+    {
+      "name": "banana",
+      "quantity": 60,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "natural peanut butter",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "honey",
+      "quantity": 7,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Slice the banana.",
+    "Drizzle peanut butter and honey over the slices."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Greek Yogurt & Granola Parfait",
+  "calories": 150,
+  "macroRatio": {
+    "protein": 0.40,
+    "carbs": 0.45,
+    "fats": 0.15
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Nuts"],
+  "ingredients": [
+    {
+      "name": "Greek yogurt",
+      "quantity": 120,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "granola",
+      "quantity": 15,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "blueberries",
+      "quantity": 30,
+      "unit": "g",
+      "category": "fruits"
+    }
+  ],
+  "recipe": [
+    "Layer yogurt, granola, and blueberries in a glass or bowl.",
+    "Serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Cucumber Sticks & Hummus",
+  "calories": 150,
+  "macroRatio": {
+    "protein": 0.10,
+    "carbs": 0.30,
+    "fats": 0.60
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Sesame"],
+  "ingredients": [
+    {
+      "name": "cucumber",
+      "quantity": 100,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "hummus",
+      "quantity": 40,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Slice cucumber into sticks.",
+    "Serve with hummus for dipping."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Mixed Nuts Trail Mix",
+  "calories": 150,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.15,
+    "fats": 0.70
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Nuts"],
+  "ingredients": [
+    {
+      "name": "almonds",
+      "quantity": 10,
+      "unit": "g",
+      "category": "misc"
+    },
+    {
+      "name": "cashews",
+      "quantity": 10,
+      "unit": "g",
+      "category": "misc"
+    },
+    {
+      "name": "walnuts",
+      "quantity": 5,
+      "unit": "g",
+      "category": "misc"
+    }
+  ],
+  "recipe": [
+    "Combine almonds, cashews, and walnuts in a small container.",
+    "Enjoy as a quick snack."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Cottage Cheese & Pineapple Bowl",
+  "calories": 200,
+  "macroRatio": {
+    "protein": 0.40,
+    "carbs": 0.45,
+    "fats": 0.15
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy"],
+  "ingredients": [
+    {
+      "name": "cottage cheese",
+      "quantity": 120,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "pineapple",
+      "quantity": 80,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "honey",
+      "quantity": 7,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Spoon cottage cheese into a bowl.",
+    "Top with pineapple chunks and drizzle with honey."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Dark Chocolate & Almonds",
+  "calories": 200,
+  "macroRatio": {
+    "protein": 0.10,
+    "carbs": 0.20,
+    "fats": 0.70
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Nuts"],
+  "ingredients": [
+    {
+      "name": "dark chocolate",
+      "quantity": 20,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "almonds",
+      "quantity": 15,
+      "unit": "g",
+      "category": "misc"
+    }
+  ],
+  "recipe": [
+    "Break chocolate into squares and serve with almonds."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Avocado Toast Bites",
+  "calories": 200,
+  "macroRatio": {
+    "protein": 0.10,
+    "carbs": 0.45,
+    "fats": 0.45
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    {
+      "name": "whole grain bread",
+      "quantity": 1,
+      "singular": "slice",
+      "plural": "slices",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "avocado",
+      "quantity": 50,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Toast the bread slice until golden.",
+    "Mash avocado with olive oil, spread on toast, cut into bite-sized pieces."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Whey Protein Shake",
+  "calories": 200,
+  "macroRatio": {
+    "protein": 0.60,
+    "carbs": 0.35,
+    "fats": 0.05
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy"],
+  "ingredients": [
+    {
+      "name": "whey protein powder",
+      "quantity": 25,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "skim milk",
+      "quantity": 250,
+      "unit": "ml",
+      "category": "dairy"
+    },
+    {
+      "name": "honey",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Blend protein powder, milk, and honey until smooth."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Trail Mix Energy Bites",
+  "calories": 250,
+  "macroRatio": {
+    "protein": 0.12,
+    "carbs": 0.48,
+    "fats": 0.40
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Nuts","Seeds"],
+  "ingredients": [
+    { "name": "rolled oats", "quantity": 30, "unit": "g", "category": "carbs" },
+    { "name": "almond butter", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "honey", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "chia seeds", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "raisins", "quantity": 15, "unit": "g", "category": "fruits" }
+  ],
+  "recipe": [
+    "Mix all ingredients in a bowl until well combined.",
+    "Form into 3–4 bite-sized balls and refrigerate 30 minutes before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Peanut Butter Banana Rice Cake",
+  "calories": 250,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.55,
+    "fats": 0.30
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Peanuts","Gluten"],
+  "ingredients": [
+    { "name": "rice cake", "quantity": 2, "singular": "rice cake", "plural": "rice cakes", "wholeItem": true, "category": "carbs" },
+    { "name": "banana", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "natural peanut butter", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "honey", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Spread peanut butter on both rice cakes.",
+    "Top with banana slices and drizzle honey."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Mini Caprese Skewers",
+  "calories": 250,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.15,
+    "fats": 0.65
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy"],
+  "ingredients": [
+    { "name": "cherry tomatoes", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "fresh mozzarella balls", "quantity": 60, "unit": "g", "category": "dairy" },
+    { "name": "fresh basil leaves", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "balsamic glaze", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Thread tomato, basil, and mozzarella onto small skewers.",
+    "Drizzle with olive oil and balsamic glaze before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chocolate Protein Pudding",
+  "calories": 250,
+  "macroRatio": {
+    "protein": 0.55,
+    "carbs": 0.30,
+    "fats": 0.15
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy"],
+  "ingredients": [
+    { "name": "chocolate whey protein powder", "quantity": 30, "unit": "g", "category": "pantry" },
+    { "name": "Greek yogurt", "quantity": 200, "unit": "g", "category": "dairy" },
+    { "name": "cocoa powder", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "honey", "quantity": 7, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Blend all ingredients until smooth.",
+    "Chill for 10 minutes before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Strawberry Banana Protein Smoothie",
+  "calories": 300,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.50,
+    "fats": 0.20
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Nuts"],
+  "ingredients": [
+    {
+      "name": "whey protein powder",
+      "quantity": 30,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "banana",
+      "quantity": 80,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "strawberries",
+      "quantity": 100,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "almond milk",
+      "quantity": 200,
+      "unit": "ml",
+      "category": "dairy"
+    }
+  ],
+  "recipe": [
+    "Combine all ingredients in a blender.",
+    "Blend on high until smooth and creamy; serve chilled."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Cheddar & Whole Grain Crackers with Grapes",
+  "calories": 300,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.45,
+    "fats": 0.35
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    {
+      "name": "cheddar cheese",
+      "quantity": 50,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "whole grain crackers",
+      "quantity": 45,
+      "unit": "g",
+      "category": "carbs"
+    },
+    {
+      "name": "grapes",
+      "quantity": 80,
+      "unit": "g",
+      "category": "fruits"
+    }
+  ],
+  "recipe": [
+    "Arrange cheese slices, crackers, and grapes on a plate.",
+    "Enjoy as a balanced snack."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Roasted Edamame with Sea Salt",
+  "calories": 300,
+  "macroRatio": {
+    "protein": 0.40,
+    "carbs": 0.40,
+    "fats": 0.20
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Soy"],
+  "ingredients": [
+    {
+      "name": "shelled edamame",
+      "quantity": 150,
+      "unit": "g",
+      "category": "protein"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "sea salt",
+      "quantity": 2,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Toss edamame with oil and salt.",
+    "Roast at 200 °C for 10–12 minutes until lightly golden."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Avocado & Cottage Cheese on Crispbread",
+  "calories": 300,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.35,
+    "fats": 0.40
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    {
+      "name": "rye crispbread",
+      "quantity": 2,
+      "singular": "crispbread",
+      "plural": "crispbreads",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "cottage cheese",
+      "quantity": 100,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "avocado",
+      "quantity": 70,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "cherry tomatoes",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    }
+  ],
+  "recipe": [
+    "Spread cottage cheese on crispbreads.",
+    "Top with sliced avocado and halved cherry tomatoes."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chocolate Chia Seed Pudding",
+  "calories": 350,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.40,
+    "fats": 0.45
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Nuts","Seeds"],
+  "ingredients": [
+    { "name": "chia seeds", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "almond milk", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "dark chocolate", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "almond butter", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "honey", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Whisk chia seeds with almond milk, honey, and melted dark chocolate.",
+    "Stir in almond butter, refrigerate ≥4 hours until set."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Savory Roasted Chickpeas & Veggie Sticks",
+  "calories": 350,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.35,
+    "fats": 0.40
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": [],
+  "ingredients": [
+    { "name": "canned chickpeas", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "paprika", "quantity": 2, "unit": "g", "category": "pantry" },
+    { "name": "cucumber sticks", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "carrot sticks", "quantity": 80, "unit": "g", "category": "vegetables" }
+  ],
+  "recipe": [
+    "Toss chickpeas with oil and paprika, roast at 200 °C for 20 min until crispy.",
+    "Serve with cucumber and carrot sticks."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Mini Caprese Avocado Toasts",
+  "calories": 350,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.40,
+    "fats": 0.45
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 3.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "whole grain baguette slices", "quantity": 3, "singular": "slice", "plural": "slices", "wholeItem": true, "category": "carbs" },
+    { "name": "avocado", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "cherry tomatoes", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "fresh mozzarella", "quantity": 50, "unit": "g", "category": "dairy" },
+    { "name": "basil leaves", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toast baguette slices; mash avocado and spread on each.",
+    "Top with halved tomatoes, mozzarella, basil, and drizzle oil."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Pumpkin Spice Energy Bars",
+  "calories": 350,
+  "macroRatio": {
+    "protein": 0.12,
+    "carbs": 0.52,
+    "fats": 0.36
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Nuts","Seeds"],
+  "ingredients": [
+    { "name": "rolled oats", "quantity": 40, "unit": "g", "category": "carbs" },
+    { "name": "pumpkin puree", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "almond flour", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "pumpkin seeds", "quantity": 20, "unit": "g", "category": "misc" },
+    { "name": "honey", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "pumpkin spice", "quantity": 2, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Mix all ingredients, press into a small pan, bake at 175 °C for 15 min.",
+    "Cool, cut into 2 bars and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Peanut Butter Banana Wrap",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.14,
+    "carbs": 0.56,
+    "fats": 0.30
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Gluten","Peanuts"],
+  "ingredients": [
+    {
+      "name": "whole wheat tortilla",
+      "quantity": 1,
+      "singular": "tortilla",
+      "plural": "tortillas",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "banana",
+      "quantity": 100,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "natural peanut butter",
+      "quantity": 32,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "honey",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Spread peanut butter evenly over the tortilla.",
+    "Place sliced banana down the center, drizzle with honey, and roll up tightly.",
+    "Slice in half and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Savory Yogurt & Cucumber Dip with Pita Chips",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.45,
+    "fats": 0.30
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    {
+      "name": "Greek yogurt",
+      "quantity": 150,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "cucumber",
+      "quantity": 80,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "dill",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 10,
+      "unit": "g",
+      "category": "pantry"
+    },
+    {
+      "name": "pita chips",
+      "quantity": 30,
+      "unit": "g",
+      "category": "carbs"
+    }
+  ],
+  "recipe": [
+    "Grate cucumber and squeeze out excess water.",
+    "Mix with yogurt, dill, and olive oil to make a dip.",
+    "Serve with pita chips."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Mini Veggie Quesadilla",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.40,
+    "fats": 0.40
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    {
+      "name": "whole wheat tortilla",
+      "quantity": 1,
+      "singular": "tortilla",
+      "plural": "tortillas",
+      "wholeItem": true,
+      "category": "carbs"
+    },
+    {
+      "name": "cheddar cheese",
+      "quantity": 40,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "bell pepper",
+      "quantity": 50,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "onion",
+      "quantity": 30,
+      "unit": "g",
+      "category": "vegetables"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 5,
+      "unit": "g",
+      "category": "pantry"
+    }
+  ],
+  "recipe": [
+    "Heat oil in a skillet; sauté peppers and onions until soft.",
+    "Place tortilla in skillet, sprinkle cheese and veggies on half, fold over.",
+    "Cook 2 min per side until golden and cheese melts."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Fruit & Nut Greek Yogurt Bowl",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.45,
+    "fats": 0.25
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Nuts"],
+  "ingredients": [
+    {
+      "name": "Greek yogurt",
+      "quantity": 120,
+      "unit": "g",
+      "category": "dairy"
+    },
+    {
+      "name": "mixed berries",
+      "quantity": 60,
+      "unit": "g",
+      "category": "fruits"
+    },
+    {
+      "name": "almonds",
+      "quantity": 15,
+      "unit": "g",
+      "category": "misc"
+    },
+    {
+      "name": "walnuts",
+      "quantity": 15,
+      "unit": "g",
+      "category": "misc"
+    }
+  ],
+  "recipe": [
+    "Layer yogurt in a bowl, top with berries, almonds, and walnuts.",
+    "Serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chocolate Avocado Mousse",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.08,
+    "carbs": 0.30,
+    "fats": 0.62
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian","Vegan"],
+  "allergens": ["Nuts"],
+  "ingredients": [
+    { "name": "ripe avocado", "quantity": 120, "unit": "g", "category": "fruits" },
+    { "name": "cocoa powder", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "maple syrup", "quantity": 30, "unit": "g", "category": "pantry" },
+    { "name": "almond milk", "quantity": 50, "unit": "ml", "category": "dairy" },
+    { "name": "almond butter", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Blend avocado, cocoa, maple syrup, almond milk, and almond butter until smooth.",
+    "Chill 30 minutes before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Loaded Sweet Potato Nachos",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.12,
+    "carbs": 0.50,
+    "fats": 0.38
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy"],
+  "ingredients": [
+    { "name": "sweet potato", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "cheddar cheese", "quantity": 50, "unit": "g", "category": "dairy" },
+    { "name": "black beans", "quantity": 60, "unit": "g", "category": "protein" },
+    { "name": "sour cream", "quantity": 30, "unit": "g", "category": "dairy" },
+    { "name": "jalapeño slices", "quantity": 10, "unit": "g", "category": "vegetables" }
+  ],
+  "recipe": [
+    "Slice potato into chips, bake at 200 °C 20 min until crisp.",
+    "Top with beans and cheese, bake 5 min until melted.",
+    "Garnish with sour cream and jalapeños."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Peanut Butter Yogurt Dip with Apple Rings",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.45,
+    "fats": 0.30
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Peanuts"],
+  "ingredients": [
+    { "name": "Greek yogurt", "quantity": 100, "unit": "g", "category": "dairy" },
+    { "name": "natural peanut butter", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "apple", "quantity": 150, "unit": "g", "category": "fruits" },
+    { "name": "honey", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Mix yogurt with peanut butter and honey until smooth.",
+    "Core and slice apple into rings, serve with dip."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Spinach & Feta Pinwheels",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.42,
+    "fats": 0.40
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 4.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "whole wheat tortilla", "quantity": 1, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "cream cheese", "quantity": 50, "unit": "g", "category": "dairy" },
+    { "name": "feta cheese", "quantity": 30, "unit": "g", "category": "dairy" },
+    { "name": "baby spinach", "quantity": 50, "unit": "g", "category": "vegetables" }
+  ],
+  "recipe": [
+    "Spread cream cheese over tortilla, sprinkle with feta and spinach.",
+    "Roll tightly, slice into 4 pinwheels."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Loaded Veggie Quesadilla",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.40,
+    "fats": 0.38
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "whole wheat tortilla", "quantity": 1, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "black beans", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "cheddar cheese", "quantity": 60, "unit": "g", "category": "dairy" },
+    { "name": "bell pepper", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "onion", "quantity": 40, "unit": "g", "category": "vegetables" },
+    { "name": "salsa", "quantity": 40, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté peppers and onions until softened.",
+    "Fill tortilla with beans, veggies, cheese, and salsa; fold and cook 2–3 min per side until cheese melts."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Greek Yogurt Chicken Salad Lettuce Cups",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.45,
+    "carbs": 0.20,
+    "fats": 0.35
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"], 
+  "allergens": ["Dairy"],
+  "ingredients": [
+    { "name": "Greek yogurt", "quantity": 100, "unit": "g", "category": "dairy" },
+    { "name": "canned chickpeas", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "celery", "quantity": 40, "unit": "g", "category": "vegetables" },
+    { "name": "red onion", "quantity": 20, "unit": "g", "category": "vegetables" },
+    { "name": "butter lettuce leaves", "quantity": 3, "singular": "leaf", "plural": "leaves", "wholeItem": true, "category": "vegetables" }
+  ],
+  "recipe": [
+    "Mix yogurt, chickpeas, diced celery, and onion to make salad.",
+    "Spoon into lettuce leaves and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chocolate Protein Overnight Oats",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.50,
+    "fats": 0.20
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "rolled oats", "quantity": 60, "unit": "g", "category": "carbs" },
+    { "name": "chocolate whey protein powder", "quantity": 30, "unit": "g", "category": "pantry" },
+    { "name": "almond milk", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "cocoa powder", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "chia seeds", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Stir oats, protein, cocoa, chia, and milk in a jar; refrigerate overnight.",
+    "Stir before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Mini Falafel Pita Pockets",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.45,
+    "fats": 0.30
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Gluten","Sesame"],
+  "ingredients": [
+    { "name": "mini pita pockets", "quantity": 2, "singular": "pocket", "plural": "pockets", "wholeItem": true, "category": "carbs" },
+    { "name": "falafel balls", "quantity": 4, "unit": "pieces", "category": "protein" },
+    { "name": "tzatziki sauce", "quantity": 40, "unit": "g", "category": "dairy" },
+    { "name": "cucumber", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "tomato", "quantity": 50, "unit": "g", "category": "vegetables" }
+  ],
+  "recipe": [
+    "Warm pita pockets briefly.",
+    "Stuff with falafel, tzatziki, cucumber, and tomato; serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Loaded Sweet Potato Fries & Guacamole",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.10,
+    "carbs": 0.55,
+    "fats": 0.35
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "sweet potato", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "avocado", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "lime juice", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "cilantro", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Slice sweet potato into fries, toss with oil and bake at 200 °C for 25 min until crisp.",
+    "Mash avocado with lime juice and cilantro to make guacamole.",
+    "Serve fries with guacamole on the side."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Greek Yogurt & Berry Smoothie Bowl",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.50,
+    "fats": 0.20
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy"],
+  "ingredients": [
+    { "name": "Greek yogurt", "quantity": 200, "unit": "g", "category": "dairy" },
+    { "name": "mixed berries", "quantity": 150, "unit": "g", "category": "fruits" },
+    { "name": "banana", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "granola", "quantity": 30, "unit": "g", "category": "carbs" },
+    { "name": "honey", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Blend yogurt, berries, and banana until thick and smooth.",
+    "Pour into a bowl, top with granola and drizzle with honey."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Mini Veggie Tacos with Black Beans",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 3.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    { "name": "mini corn tortillas", "quantity": 3, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "black beans", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "bell pepper", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "onion", "quantity": 40, "unit": "g", "category": "vegetables" },
+    { "name": "salsa", "quantity": 40, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Warm tortillas, fill with beans, sautéed peppers & onions, and salsa.",
+    "Serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chocolate Oat Protein Bars",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten","Nuts"],
+  "ingredients": [
+    { "name": "rolled oats", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "whey protein powder", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "dark chocolate chips", "quantity": 30, "unit": "g", "category": "pantry" },
+    { "name": "almond butter", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "honey", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Mix all ingredients until combined, press into a lined tray.",
+    "Chill ≥2 h, cut into 2 bars and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Avocado Chickpea Toast",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.45,
+    "fats": 0.35
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Gluten","None"],
+  "ingredients": [
+    { "name": "whole grain bread", "quantity": 2, "singular": "slice", "plural": "slices", "wholeItem": true, "category": "carbs" },
+    { "name": "avocado", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "canned chickpeas", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "lemon juice", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toast bread slices until golden.",
+    "Mash avocado with chickpeas, oil, and lemon juice; season to taste.",
+    "Spread evenly over toast and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Double Veggie Quesadilla",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.46,
+    "fats": 0.32
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Gluten"],
+  "ingredients": [
+    { "name": "whole wheat tortilla", "quantity": 2, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "black beans", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "cheddar cheese", "quantity": 60, "unit": "g", "category": "dairy" },
+    { "name": "bell pepper", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "onion", "quantity": 40, "unit": "g", "category": "vegetables" },
+    { "name": "salsa", "quantity": 40, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté peppers and onions until soft.",
+    "Place one tortilla in skillet, layer beans, veggies, cheese, and salsa; top with second tortilla.",
+    "Cook 2–3 minutes per side until cheese melts and tortillas are golden."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Hummus & Pita with Crudités",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.42,
+    "fats": 0.43
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Sesame","Gluten"],
+  "ingredients": [
+    { "name": "hummus", "quantity": 80, "unit": "g", "category": "pantry" },
+    { "name": "pita bread", "quantity": 1, "singular": "piece", "plural": "pieces", "wholeItem": true, "category": "carbs" },
+    { "name": "carrot sticks", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "cucumber sticks", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cut pita into wedges and warm briefly.",
+    "Serve with hummus and veggie sticks; drizzle oil over hummus."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chocolate Peanut Butter Protein Bowl",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.50,
+    "fats": 0.20
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegetarian"],
+  "allergens": ["Dairy","Nuts"],
+  "ingredients": [
+    { "name": "whey protein powder", "quantity": 30, "unit": "g", "category": "protein" },
+    { "name": "banana", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "natural peanut butter", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "almond milk", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "granola", "quantity": 30, "unit": "g", "category": "carbs" }
+  ],
+  "recipe": [
+    "Blend protein, banana, peanut butter, and milk until smooth.",
+    "Pour into a bowl, top with granola, and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Avocado Toast on Whole Grain Bread",
+  "calories": 210,
+  "macroRatio": {
+    "protein": 0.10,
+    "carbs": 0.55,
+    "fats": 0.35
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","None"],
+  "ingredients": [
+    { "name": "whole grain bread", "quantity": 1, "singular": "slice", "plural": "slices", "wholeItem": true, "category": "carbs" },
+    { "name": "avocado", "quantity": 50, "unit": "g", "category": "fruits" },
+    { "name": "olive oil", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toast the bread until golden brown.",
+    "Mash avocado with olive oil, spread evenly on toast, and season with salt and pepper."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Berry Chia Seed Pudding",
+  "calories": 210,
+  "macroRatio": {
+    "protein": 0.10,
+    "carbs": 0.60,
+    "fats": 0.30
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Seeds"],
+  "ingredients": [
+    { "name": "chia seeds", "quantity": 25, "unit": "g", "category": "pantry" },
+    { "name": "almond milk", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "mixed berries", "quantity": 50, "unit": "g", "category": "fruits" }
+  ],
+  "recipe": [
+    "Stir chia seeds into almond milk; refrigerate ≥4 hours until thickened.",
+    "Top with mixed berries before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Banana Oat Smoothie",
+  "calories": 210,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.65,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "banana", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "rolled oats", "quantity": 20, "unit": "g", "category": "carbs" },
+    { "name": "soy milk", "quantity": 200, "unit": "ml", "category": "dairy" }
+  ],
+  "recipe": [
+    "Blend banana, oats, and soy milk on high until smooth.",
+    "Pour into a glass and serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Apple Cinnamon Overnight Oats",
+  "calories": 210,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.65,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "rolled oats", "quantity": 30, "unit": "g", "category": "carbs" },
+    { "name": "almond milk", "quantity": 150, "unit": "ml", "category": "dairy" },
+    { "name": "apple", "quantity": 60, "unit": "g", "category": "fruits" },
+    { "name": "ground cinnamon", "quantity": 1, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Combine oats, almond milk, and cinnamon in a jar; stir and refrigerate overnight.",
+    "Stir in diced apple before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Tofu Scramble & Spinach Wrap",
+  "calories": 260,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.45,
+    "fats": 0.30
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten"],
+  "ingredients": [
+    { "name": "firm tofu", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "baby spinach", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "turmeric", "quantity": 1, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "whole wheat tortilla", "quantity": 1, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" }
+  ],
+  "recipe": [
+    "Heat oil, crumble tofu and sauté with turmeric 2 min.",
+    "Add spinach and cook 1–2 min until wilted.",
+    "Fill tortilla with scramble, roll up, and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Peanut Butter Banana Toast",
+  "calories": 260,
+  "macroRatio": {
+    "protein": 0.12,
+    "carbs": 0.60,
+    "fats": 0.28
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Peanuts"],
+  "ingredients": [
+    { "name": "whole grain bread", "quantity": 2, "singular": "slice", "plural": "slices", "wholeItem": true, "category": "carbs" },
+    { "name": "banana", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "natural peanut butter", "quantity": 16, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toast bread until golden.",
+    "Spread peanut butter, top with banana slices, and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Green Protein Smoothie Bowl",
+  "calories": 260,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.55,
+    "fats": 0.25
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "pea protein powder", "quantity": 25, "unit": "g", "category": "protein" },
+    { "name": "spinach", "quantity": 40, "unit": "g", "category": "vegetables" },
+    { "name": "banana", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "almond milk", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "chia seeds", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Blend all ingredients until smooth.",
+    "Pour into a bowl and garnish as desired."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Savory Oatmeal with Mushrooms & Kale",
+  "calories": 260,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.52,
+    "fats": 0.30
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "rolled oats", "quantity": 40, "unit": "g", "category": "carbs" },
+    { "name": "mushrooms", "quantity": 70, "unit": "g", "category": "vegetables" },
+    { "name": "kale", "quantity": 40, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "nutritional yeast", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook oats with water per package; set aside.",
+    "Sauté mushrooms and kale in oil 4 min, stir in nutritional yeast.",
+    "Top oats with veggie mix and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chocolate Peanut Butter Banana Oats",
+  "calories": 310,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.60,
+    "fats": 0.22
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Peanuts","Gluten"],
+  "ingredients": [
+    { "name": "rolled oats", "quantity": 40, "unit": "g", "category": "carbs" },
+    { "name": "banana", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "natural peanut butter", "quantity": 16, "unit": "g", "category": "pantry" },
+    { "name": "cocoa powder", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "almond milk", "quantity": 150, "unit": "ml", "category": "dairy" }
+  ],
+  "recipe": [
+    "Cook oats with almond milk per package instructions.",
+    "Stir in cocoa powder and peanut butter until smooth.",
+    "Top with sliced banana and serve warm."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Savory Chickpea & Spinach Pancakes",
+  "calories": 310,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Legumes"],
+  "ingredients": [
+    { "name": "chickpea flour", "quantity": 60, "unit": "g", "category": "carbs" },
+    { "name": "water", "quantity": 100, "unit": "ml", "category": "pantry" },
+    { "name": "baby spinach", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "turmeric", "quantity": 1, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Whisk chickpea flour with water and turmeric to make batter.",
+    "Stir in spinach.",
+    "Cook 2 small pancakes in oil over medium heat, 3 min per side."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Berry Quinoa Breakfast Bowl",
+  "calories": 310,
+  "macroRatio": {
+    "protein": 0.16,
+    "carbs": 0.64,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "cooked quinoa", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "mixed berries", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "chia seeds", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "almond milk", "quantity": 100, "unit": "ml", "category": "dairy" }
+  ],
+  "recipe": [
+    "Combine quinoa and almond milk in bowl.",
+    "Top with berries and chia seeds; stir gently and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Breakfast Burrito with Tofu & Veggies",
+  "calories": 310,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten"],
+  "ingredients": [
+    { "name": "whole wheat tortilla", "quantity": 1, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "firm tofu", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "bell pepper", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "onion", "quantity": 30, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté tofu, pepper, and onion in oil until golden, about 5 min.",
+    "Fill tortilla with veggie-tofu mix, roll up, and serve warm."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Banana Almond Smoothie Bowl",
+  "calories": 360,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.60,
+    "fats": 0.25
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Nuts"],
+  "ingredients": [
+    { "name": "banana", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "rolled oats", "quantity": 30, "unit": "g", "category": "carbs" },
+    { "name": "almond butter", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "almond milk", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "chia seeds", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Blend banana, oats, almond butter, almond milk, and chia seeds until thick and smooth.",
+    "Pour into a bowl and garnish with sliced banana and a sprinkle of chia seeds."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Tofu Breakfast Sandwich",
+  "calories": 360,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.45,
+    "fats": 0.30
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten"],
+  "ingredients": [
+    { "name": "whole grain English muffin", "quantity": 1, "singular": "muffin", "plural": "muffins", "wholeItem": true, "category": "carbs" },
+    { "name": "firm tofu", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "spinach", "quantity": 40, "unit": "g", "category": "vegetables" },
+    { "name": "vegan cheese slice", "quantity": 1, "singular": "slice", "plural": "slices", "wholeItem": true, "category": "dairy" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil and sauté crumbled tofu until lightly golden.",
+    "Toast muffin halves, layer tofu, spinach, and vegan cheese, then assemble sandwich."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Blueberry Pancakes",
+  "calories": 360,
+  "macroRatio": {
+    "protein": 0.12,
+    "carbs": 0.65,
+    "fats": 0.23
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    { "name": "all-purpose flour", "quantity": 60, "unit": "g", "category": "carbs" },
+    { "name": "almond milk", "quantity": 100, "unit": "ml", "category": "dairy" },
+    { "name": "baking powder", "quantity": 2, "unit": "g", "category": "pantry" },
+    { "name": "blueberries", "quantity": 50, "unit": "g", "category": "fruits" },
+    { "name": "maple syrup", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Mix flour, baking powder, and almond milk to form batter.",
+    "Fold in blueberries.",
+    "Cook two small pancakes on a nonstick pan until bubbles form, flip and cook another minute. Serve drizzled with maple syrup."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Savory Oatmeal with Avocado",
+  "calories": 360,
+  "macroRatio": {
+    "protein": 0.14,
+    "carbs": 0.50,
+    "fats": 0.36
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "rolled oats", "quantity": 40, "unit": "g", "category": "carbs" },
+    { "name": "avocado", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "nutritional yeast", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "water", "quantity": 200, "unit": "ml", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook oats with water according to package instructions.",
+    "Stir in nutritional yeast.",
+    "Top with sliced avocado and drizzle olive oil before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Protein Pancakes with Mixed Berries",
+  "calories": 410,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.55,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Nuts"],
+  "ingredients": [
+    { "name": "oat flour", "quantity": 60, "unit": "g", "category": "carbs" },
+    { "name": "pea protein powder", "quantity": 25, "unit": "g", "category": "pantry" },
+    { "name": "almond milk", "quantity": 150, "unit": "ml", "category": "dairy" },
+    { "name": "baking powder", "quantity": 2, "unit": "g", "category": "pantry" },
+    { "name": "mixed berries", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "maple syrup", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Whisk oat flour, protein powder, baking powder, and almond milk to make batter.",
+    "Cook two medium pancakes on a nonstick pan until bubbles form, flip and cook 1–2 min more.",
+    "Top with berries and a drizzle of maple syrup."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Breakfast Burrito with Tofu & Black Beans",
+  "calories": 410,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.50,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy"],
+  "ingredients": [
+    { "name": "whole wheat tortilla", "quantity": 1, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "firm tofu", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "black beans", "quantity": 60, "unit": "g", "category": "protein" },
+    { "name": "bell pepper", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "spinach", "quantity": 40, "unit": "g", "category": "vegetables" },
+    { "name": "avocado", "quantity": 50, "unit": "g", "category": "fruits" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil, crumble tofu and sauté with peppers until lightly golden (4–5 min).",
+    "Stir in beans and spinach until warm.",
+    "Place mixture on tortilla, top with avocado, roll up, and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Quinoa Porridge with Almonds & Dates",
+  "calories": 410,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.58,
+    "fats": 0.24
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Nuts"],
+  "ingredients": [
+    { "name": "cooked quinoa", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "almond milk", "quantity": 150, "unit": "ml", "category": "dairy" },
+    { "name": "almonds", "quantity": 15, "unit": "g", "category": "misc" },
+    { "name": "medjool dates", "quantity": 30, "unit": "g", "category": "fruits" },
+    { "name": "cinnamon", "quantity": 1, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Warm quinoa and almond milk in a saucepan until thickened (3–4 min).",
+    "Stir in cinnamon, top with chopped dates and almonds before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Tempeh Bacon & Avocado Toast",
+  "calories": 410,
+  "macroRatio": {
+    "protein": 0.24,
+    "carbs": 0.48,
+    "fats": 0.28
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten"],
+  "ingredients": [
+    { "name": "whole grain bread", "quantity": 2, "singular": "slice", "plural": "slices", "wholeItem": true, "category": "carbs" },
+    { "name": "tempeh", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "maple syrup", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "soy sauce", "quantity": 5, "unit": "ml", "category": "pantry" },
+    { "name": "avocado", "quantity": 60, "unit": "g", "category": "fruits" }
+  ],
+  "recipe": [
+    "Slice tempeh thin, marinate 5 min in soy sauce and maple syrup, pan-fry until crisp (3–4 min per side).",
+    "Toast bread, top with mashed avocado and tempeh bacon, and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Blueberry Almond Overnight Oats",
+  "calories": 460,
+  "macroRatio": {
+    "protein": 0.16,
+    "carbs": 0.60,
+    "fats": 0.24
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Nuts"],
+  "ingredients": [
+    { "name": "rolled oats", "quantity": 60, "unit": "g", "category": "carbs" },
+    { "name": "almond milk", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "chia seeds", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "almonds", "quantity": 15, "unit": "g", "category": "misc" },
+    { "name": "blueberries", "quantity": 80, "unit": "g", "category": "fruits" }
+  ],
+  "recipe": [
+    "Combine oats, milk, chia, and almonds in a jar; stir and refrigerate overnight.",
+    "Top with blueberries before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Savory Vegan Breakfast Bowl",
+  "calories": 460,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.45,
+    "fats": 0.33
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "cooked quinoa", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "sautéed mushrooms", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "baby spinach", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "avocado", "quantity": 70, "unit": "g", "category": "fruits" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté mushrooms and spinach in oil until tender.",
+    "Serve over warm quinoa topped with sliced avocado."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Cinnamon Apple Pancakes",
+  "calories": 460,
+  "macroRatio": {
+    "protein": 0.12,
+    "carbs": 0.65,
+    "fats": 0.23
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    { "name": "all-purpose flour", "quantity": 70, "unit": "g", "category": "carbs" },
+    { "name": "almond milk", "quantity": 100, "unit": "ml", "category": "dairy" },
+    { "name": "apple", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "cinnamon", "quantity": 2, "unit": "g", "category": "pantry" },
+    { "name": "baking powder", "quantity": 2, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Mix flour, baking powder, cinnamon, and milk to make batter.",
+    "Fold in diced apple and cook pancakes 2–3 min per side until golden."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Breakfast Taco Trio",
+  "calories": 460,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 3.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    { "name": "mini corn tortillas", "quantity": 3, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "scrambled tofu", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "black beans", "quantity": 60, "unit": "g", "category": "protein" },
+    { "name": "salsa", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "avocado", "quantity": 60, "unit": "g", "category": "fruits" }
+  ],
+  "recipe": [
+    "Fill tortillas with tofu scramble, beans, salsa, and avocado.",
+    "Serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Sweet Potato & Black Bean Hash",
+  "calories": 510,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.50,
+    "fats": 0.32
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "sweet potato", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "black beans", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "onion", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "bell pepper", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté diced sweet potato in half the oil until tender (8–10 minutes).",
+    "Add remaining oil, onion, and pepper; cook 3–4 minutes until softened.",
+    "Stir in black beans, heat through, and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Chickpea Flour Pancakes with Veggies",
+  "calories": 510,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Legumes"],
+  "ingredients": [
+    { "name": "chickpea flour", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "water", "quantity": 120, "unit": "ml", "category": "pantry" },
+    { "name": "zucchini", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "carrot", "quantity": 40, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Whisk chickpea flour and water into a smooth batter.",
+    "Fold in grated zucchini and carrot.",
+    "Cook two pancakes in oil over medium heat, 3–4 minutes per side."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Peanut Butter Banana Overnight Oats",
+  "calories": 510,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.55,
+    "fats": 0.25
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Peanuts","Gluten"],
+  "ingredients": [
+    { "name": "rolled oats", "quantity": 70, "unit": "g", "category": "carbs" },
+    { "name": "almond milk", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "banana", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "natural peanut butter", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "chia seeds", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Combine oats, milk, peanut butter, and chia seeds in a jar.",
+    "Refrigerate overnight, top with sliced banana before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Savory Quinoa & Veggie Bowl",
+  "calories": 510,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.52,
+    "fats": 0.30
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "cooked quinoa", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "broccoli florets", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "baby spinach", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "avocado", "quantity": 60, "unit": "g", "category": "fruits" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Steam broccoli until tender (3–4 minutes).",
+    "Toss quinoa, broccoli, and spinach with olive oil; top with sliced avocado."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Savory Oat & Chickpea Bowl",
+  "calories": 560,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Legumes","Gluten"],
+  "ingredients": [
+    { "name": "rolled oats", "quantity": 60, "unit": "g", "category": "carbs" },
+    { "name": "canned chickpeas", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "spinach", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "nutritional yeast", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "turmeric", "quantity": 1, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook oats in water per package instructions; set aside.",
+    "Heat oil, add turmeric and chickpeas; sauté 3–4 min.",
+    "Stir in spinach until wilted; mix into oats, sprinkle nutritional yeast and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Peanut Butter Banana Pancakes",
+  "calories": 560,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.55,
+    "fats": 0.25
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 3.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Peanuts"],
+  "ingredients": [
+    { "name": "oat flour", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "banana", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "natural peanut butter", "quantity": 30, "unit": "g", "category": "pantry" },
+    { "name": "almond milk", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "baking powder", "quantity": 2, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Whisk oat flour, baking powder, almond milk, and mashed banana into batter.",
+    "Heat a nonstick pan, pour batter to form 3 small pancakes, cook 2–3 min per side.",
+    "Serve stacked with a drizzle of extra peanut butter."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Tofu & Avocado Breakfast Toast",
+  "calories": 560,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.45,
+    "fats": 0.30
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten"],
+  "ingredients": [
+    { "name": "whole grain bread", "quantity": 2, "singular": "slice", "plural": "slices", "wholeItem": true, "category": "carbs" },
+    { "name": "firm tofu", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "avocado", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "turmeric", "quantity": 1, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil and crumble tofu; season with turmeric, sauté 4 min.",
+    "Toast bread, top with mashed avocado and tofu scramble.",
+    "Sprinkle with salt and pepper, serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Breakfast Burrito Bowl",
+  "calories": 560,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Legumes","Gluten"],
+  "ingredients": [
+    { "name": "cooked brown rice", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "black beans", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "tofu scramble", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "salsa", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "avocado", "quantity": 80, "unit": "g", "category": "fruits" }
+  ],
+  "recipe": [
+    "Layer rice, beans, tofu scramble, salsa, and avocado in a bowl.",
+    "Serve warm with a squeeze of lime if desired."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Coconut Yogurt Parfait with Granola & Berries",
+  "calories": 610,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.60,
+    "fats": 0.25
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Nuts","Coconut"],
+  "ingredients": [
+    { "name": "unsweetened coconut yogurt", "quantity": 200, "unit": "g", "category": "dairy" },
+    { "name": "granola", "quantity": 60, "unit": "g", "category": "carbs" },
+    { "name": "mixed berries", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "almond flakes", "quantity": 15, "unit": "g", "category": "misc" },
+    { "name": "maple syrup", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Layer half the yogurt, granola, and berries in a glass.",
+    "Repeat layers, top with almond flakes and drizzle maple syrup."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Savory Polenta & Mushroom Bowl",
+  "calories": 610,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "instant polenta", "quantity": 70, "unit": "g", "category": "carbs" },
+    { "name": "water", "quantity": 300, "unit": "ml", "category": "pantry" },
+    { "name": "mushrooms", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "baby spinach", "quantity": 80, "unit": "g", "category": "vegetables" }
+  ],
+  "recipe": [
+    "Cook polenta in water per package until thickened.",
+    "Sauté mushrooms in oil until golden, add spinach until wilted.",
+    "Serve veggies over polenta."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Chickpea & Avocado Breakfast Sandwich",
+  "calories": 610,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Legumes","Sesame"],
+  "ingredients": [
+    { "name": "whole grain bagel", "quantity": 1, "singular": "bagel", "plural": "bagels", "wholeItem": true, "category": "carbs" },
+    { "name": "canned chickpeas", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "avocado", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "lettuce", "quantity": 30, "unit": "g", "category": "vegetables" },
+    { "name": "sesame seeds", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toast bagel halves.",
+    "Mash chickpeas and avocado together, season to taste.",
+    "Spread on bagel, top with lettuce and sprinkle sesame seeds."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Quinoa Pancakes with Berry Compote",
+  "calories": 610,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.58,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 3.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    { "name": "cooked quinoa", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "all-purpose flour", "quantity": 50, "unit": "g", "category": "carbs" },
+    { "name": "baking powder", "quantity": 2, "unit": "g", "category": "pantry" },
+    { "name": "almond milk", "quantity": 100, "unit": "ml", "category": "dairy" },
+    { "name": "mixed berries", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "maple syrup", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Blend quinoa, flour, baking powder, and milk to batter.",
+    "Cook 3 small pancakes until golden, about 2–3 min per side.",
+    "Simmer berries with maple syrup 5 min to make compote; spoon over pancakes."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Tofu & Sweet Potato Hash",
+  "calories": 660,
+  "macroRatio": {
+    "protein": 0.28,
+    "carbs": 0.48,
+    "fats": 0.24
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy"],
+  "ingredients": [
+    { "name": "sweet potato", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "firm tofu", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "baby spinach", "quantity": 70, "unit": "g", "category": "vegetables" },
+    { "name": "onion", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 25, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat half the oil, cook diced sweet potato until tender (≈10 min).",
+    "Add remaining oil, tofu cubes, onion, and spinach; sauté until tofu is golden and spinach wilts.",
+    "Season with salt, pepper, and serve hot."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Tempeh & Veggie Breakfast Burrito",
+  "calories": 660,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.50,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten"],
+  "ingredients": [
+    { "name": "whole wheat tortilla", "quantity": 1, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "tempeh strips", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "black beans", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "bell pepper", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "avocado", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "olive oil", "quantity": 25, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté tempeh in half the oil until crisp, then set aside.",
+    "In same pan, sauté pepper and beans in remaining oil until warmed.",
+    "Fill tortilla with tempeh, veggies, and sliced avocado; roll up and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chocolate Banana Almond Overnight Oats",
+  "calories": 660,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.58,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Nuts","Gluten"],
+  "ingredients": [
+    { "name": "rolled oats", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "almond milk", "quantity": 250, "unit": "ml", "category": "dairy" },
+    { "name": "banana", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "cocoa powder", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "almond butter", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "chia seeds", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Mix oats, milk, cocoa, almond butter, and chia seeds in a jar.",
+    "Refrigerate overnight; top with sliced banana before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Savory Lentil & Veggie Pancakes",
+  "calories": 660,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Legumes","Gluten"],
+  "ingredients": [
+    { "name": "red lentil flour", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "water", "quantity": 150, "unit": "ml", "category": "pantry" },
+    { "name": "zucchini", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "carrot", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Whisk flour and water into batter, stir in grated zucchini and carrot.",
+    "Cook two medium pancakes in oil over medium heat, 3–4 min per side until golden."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Breakfast Burger",
+  "calories": 710,
+  "macroRatio": {
+    "protein": 0.28,
+    "carbs": 0.45,
+    "fats": 0.27
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy","Sesame"],
+  "ingredients": [
+    { "name": "whole grain burger bun", "quantity": 1, "singular": "bun", "plural": "buns", "wholeItem": true, "category": "carbs" },
+    { "name": "firm tofu patty", "quantity": 1, "singular": "patty", "plural": "patties", "wholeItem": true, "category": "protein" },
+    { "name": "avocado", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "tomato", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "lettuce", "quantity": 30, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "sesame seeds", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat olive oil, cook tofu patty until golden, about 4–5 minutes per side.",
+    "Toast bun, layer lettuce, tomato, avocado slices, and tofu patty. Sprinkle sesame seeds and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Savory Polenta & Tempeh Breakfast Bowl",
+  "calories": 710,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy"],
+  "ingredients": [
+    { "name": "instant polenta", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "water", "quantity": 350, "unit": "ml", "category": "pantry" },
+    { "name": "tempeh", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "mushrooms", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "baby spinach", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook polenta in water until thickened per package instructions.",
+    "Sauté tempeh and mushrooms in oil until golden; add spinach until wilted.",
+    "Serve veggie-tempeh mix over polenta."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Chickpea Waffles with Banana & Maple",
+  "calories": 710,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.58,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Legumes"],
+  "ingredients": [
+    { "name": "chickpea flour", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "almond milk", "quantity": 150, "unit": "ml", "category": "dairy" },
+    { "name": "banana", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "baking powder", "quantity": 3, "unit": "g", "category": "pantry" },
+    { "name": "maple syrup", "quantity": 30, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Whisk flour, baking powder, and milk into batter; fold in mashed banana.",
+    "Heat waffle iron, cook batter according to manufacturer until crisp.",
+    "Drizzle with maple syrup and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Protein Smoothie Bowl Deluxe",
+  "calories": 710,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.50,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Nuts"],
+  "ingredients": [
+    { "name": "pea protein powder", "quantity": 30, "unit": "g", "category": "pantry" },
+    { "name": "frozen mixed berries", "quantity": 150, "unit": "g", "category": "fruits" },
+    { "name": "banana", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "almond milk", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "granola", "quantity": 50, "unit": "g", "category": "carbs" },
+    { "name": "almond butter", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Blend protein, berries, banana, and milk until thick and smooth.",
+    "Pour into a bowl, top with granola and dollops of almond butter."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Tofu Benedict on English Muffin",
+  "calories": 760,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.45,
+    "fats": 0.25
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy","Sesame"],
+  "ingredients": [
+    { "name": "whole grain English muffin", "quantity": 1, "singular": "muffin", "plural": "muffins", "wholeItem": true, "category": "carbs" },
+    { "name": "firm tofu", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "vegan hollandaise sauce", "quantity": 60, "unit": "g", "category": "pantry" },
+    { "name": "avocado", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "sesame seeds", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toast the English muffin until golden.",
+    "Pan-fry tofu in oil until lightly crisp, then top muffin halves.",
+    "Drizzle with vegan hollandaise, layer avocado slices, and sprinkle sesame seeds."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Pancake Stack with Almond Butter & Banana",
+  "calories": 760,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.60,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 3.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Nuts"],
+  "ingredients": [
+    { "name": "oat flour", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "baking powder", "quantity": 4, "unit": "g", "category": "pantry" },
+    { "name": "almond milk", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "tea spoon flaxseed meal", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "banana", "quantity": 120, "unit": "g", "category": "fruits" },
+    { "name": "almond butter", "quantity": 40, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Whisk oat flour, baking powder, flaxseed, and milk into batter; fold half the banana slices in.",
+    "Cook three pancakes on a nonstick pan 2–3 min per side until golden.",
+    "Stack pancakes, spread almond butter, top with remaining banana slices."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Quinoa & Nut Breakfast Bowl",
+  "calories": 760,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.55,
+    "fats": 0.23
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Nuts"],
+  "ingredients": [
+    { "name": "cooked quinoa", "quantity": 150, "unit": "g", "category": "carbs" },
+    { "name": "almond milk", "quantity": 150, "unit": "ml", "category": "dairy" },
+    { "name": "almonds", "quantity": 20, "unit": "g", "category": "misc" },
+    { "name": "walnuts", "quantity": 20, "unit": "g", "category": "misc" },
+    { "name": "maple syrup", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "mixed berries", "quantity": 80, "unit": "g", "category": "fruits" }
+  ],
+  "recipe": [
+    "Warm quinoa and almond milk in a saucepan until creamy, about 3 min.",
+    "Transfer to a bowl, stir in syrup, top with nuts and berries."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Sweet Potato & Black Bean Breakfast Burrito",
+  "calories": 760,
+  "macroRatio": {
+    "protein": 0.28,
+    "carbs": 0.52,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    { "name": "large whole wheat tortilla", "quantity": 1, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "roasted sweet potato", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "black beans", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "sautéed spinach", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "avocado", "quantity": 60, "unit": "g", "category": "fruits" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toss sweet potato in oil, roast at 200 °C 20 min until tender.",
+    "Warm tortilla, layer sweet potato, beans, spinach, and avocado, roll up and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Tofu & Potato Breakfast Skillet",
+  "calories": 810,
+  "macroRatio": {
+    "protein": 0.28,
+    "carbs": 0.58,
+    "fats": 0.14
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy"],
+  "ingredients": [
+    { "name": "firm tofu", "quantity": 200, "unit": "g", "category": "protein" },
+    { "name": "baby potatoes", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "bell pepper", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "onion", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "avocado", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Parboil potatoes until tender, then cube.",
+    "Heat oil, sauté potatoes, onions, and peppers until golden.",
+    "Crumble tofu into pan, cook 4–5 min, season to taste.",
+    "Top with sliced avocado and serve hot."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Breakfast Flatbread Pizza",
+  "calories": 810,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.60,
+    "fats": 0.20
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Sesame"],
+  "ingredients": [
+    { "name": "whole wheat flatbread", "quantity": 1, "singular": "flatbread", "plural": "flatbreads", "wholeItem": true, "category": "carbs" },
+    { "name": "tomato sauce", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "vegan mozzarella", "quantity": 80, "unit": "g", "category": "dairy" },
+    { "name": "mushrooms", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "spinach", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "sesame seeds", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 200 °C.",
+    "Spread sauce on flatbread, top with vegan cheese, mushrooms, and spinach.",
+    "Bake 10–12 min until crust is crisp and cheese melts.",
+    "Drizzle oil and sprinkle sesame seeds before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Protein Smoothie Bowl Supreme",
+  "calories": 810,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.55,
+    "fats": 0.15
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Nuts"],
+  "ingredients": [
+    { "name": "pea protein powder", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "frozen berries", "quantity": 200, "unit": "g", "category": "fruits" },
+    { "name": "banana", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "almond milk", "quantity": 250, "unit": "ml", "category": "dairy" },
+    { "name": "granola", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "almond butter", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Blend protein, berries, banana, and milk until thick and smooth.",
+    "Pour into bowl, top with granola and almond butter."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan French Toast with Coconut Cream & Berries",
+  "calories": 810,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.65,
+    "fats": 0.17
+  },
+  "category": "Breakfast",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Coconut"],
+  "ingredients": [
+    { "name": "vegan brioche slices", "quantity": 2, "singular": "slice", "plural": "slices", "wholeItem": true, "category": "carbs" },
+    { "name": "chickpea flour", "quantity": 40, "unit": "g", "category": "carbs" },
+    { "name": "almond milk", "quantity": 150, "unit": "ml", "category": "dairy" },
+    { "name": "ground cinnamon", "quantity": 2, "unit": "g", "category": "pantry" },
+    { "name": "coconut cream", "quantity": 50, "unit": "g", "category": "dairy" },
+    { "name": "mixed berries", "quantity": 100, "unit": "g", "category": "fruits" }
+  ],
+  "recipe": [
+    "Whisk flour, milk, and cinnamon into batter; soak bread slices 1 min per side.",
+    "Cook on griddle until golden, 2–3 min per side.",
+    "Top with coconut cream and berries before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chickpea & Avocado Salad Wrap",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.45,
+    "fats": 0.35
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "whole wheat tortilla", "quantity": 1, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "canned chickpeas", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "avocado", "quantity": 70, "unit": "g", "category": "fruits" },
+    { "name": "mixed salad greens", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "cherry tomatoes", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "lemon juice", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Mash chickpeas and avocado together with olive oil and lemon juice.",
+    "Spread mixture into tortilla, top with greens and tomatoes, wrap tightly and slice in half."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Lentil & Vegetable Soup",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.5,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "dry red lentils", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "carrot", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "celery", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "onion", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 400, "unit": "ml", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil, sauté chopped onion, carrot, and celery until softened (4–5 min).",
+    "Add lentils and broth, bring to boil, then simmer 20 min until lentils tender.",
+    "Season with salt and pepper and serve hot."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Tofu & Broccoli Stir-Fry Bowl",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.23,
+    "carbs": 0.45,
+    "fats": 0.32
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten"],
+  "ingredients": [
+    { "name": "firm tofu", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "broccoli florets", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "bell pepper", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "brown rice", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "soy sauce", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook rice according to package instructions; set aside.",
+    "Heat oil, stir-fry tofu until golden, then add veggies and soy sauce; cook 4–5 min.",
+    "Serve stir-fry over rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Quinoa & Black Bean Salad",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "cooked quinoa", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "black beans", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "corn kernels", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "red onion", "quantity": 30, "unit": "g", "category": "vegetables" },
+    { "name": "cilantro", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "lime juice", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Combine quinoa, beans, corn, onion, and cilantro in a bowl.",
+    "Whisk lime juice and olive oil; pour over salad, toss and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Mediterranean Quinoa & Chickpea Salad",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.55,
+    "fats": 0.27
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "cooked quinoa", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "canned chickpeas", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "cucumber", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "cherry tomatoes", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "red onion", "quantity": 30, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "lemon juice", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "fresh parsley", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Combine quinoa, chickpeas, cucumber, tomatoes, and onion in a bowl.",
+    "Whisk olive oil, lemon juice, and parsley; toss with salad and serve chilled."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "BBQ Jackfruit Pulled Sandwich",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.60,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy"],
+  "ingredients": [
+    { "name": "canned jackfruit", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "BBQ sauce", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "whole grain bun", "quantity": 1, "singular": "bun", "plural": "buns", "wholeItem": true, "category": "carbs" },
+    { "name": "coleslaw mix", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "vegan mayo", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Shred jackfruit and toss with BBQ sauce; heat gently until warmed through.",
+    "Toast bun, layer jackfruit and coleslaw dressed with mayo, then serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Tempeh Buddha Bowl",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Sesame"],
+  "ingredients": [
+    { "name": "cooked brown rice", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "tempeh", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "steamed broccoli", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "carrot ribbons", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "sesame dressing", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "sesame seeds", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Pan-fry tempeh until golden and crisp.",
+    "Assemble rice, broccoli, carrots, and tempeh in a bowl; drizzle with sesame dressing and sprinkle seeds."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Pasta Primavera",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.60,
+    "fats": 0.20
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    { "name": "whole grain pasta", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "zucchini", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "bell pepper", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "cherry tomatoes", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "garlic", "quantity": 2, "unit": "g", "category": "pantry" },
+    { "name": "fresh basil", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook pasta until al dente; drain.",
+    "Sauté garlic in oil, add vegetables and cook until tender.",
+    "Toss veggies with pasta, garnish with basil and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Hummus & Tofu Veggie Wrap",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.45,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Sesame","Gluten"],
+  "ingredients": [
+    { "name": "whole wheat tortilla", "quantity": 1, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "firm tofu", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "hummus", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "mixed salad greens", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "shredded carrot", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Warm tortilla briefly in a pan.",
+    "Spread hummus evenly, layer tofu, greens, and carrot.",
+    "Drizzle oil, wrap tightly, slice in half and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Sushi Bowl",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Sesame"],
+  "ingredients": [
+    { "name": "sushi rice", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "edamame", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "avocado", "quantity": 70, "unit": "g", "category": "fruits" },
+    { "name": "cucumber", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "nori sheets (shredded)", "quantity": 2, "wholeItem": true, "category": "misc" },
+    { "name": "soy sauce", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "sesame oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook rice; let cool slightly.",
+    "Arrange rice in bowl, top with edamame, avocado, cucumber, and shredded nori.",
+    "Drizzle soy and sesame oil before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chickpea Coconut Curry Bowl",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Coconut"],
+  "ingredients": [
+    { "name": "canned chickpeas", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "coconut milk", "quantity": 100, "unit": "ml", "category": "dairy" },
+    { "name": "spinach", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "cooked basmati rice", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "curry powder", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil, add curry powder and chickpeas; sauté 2 min.",
+    "Pour in coconut milk, simmer 5 min, stir in spinach until wilted.",
+    "Serve over rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Falafel & Tabbouleh Grain Bowl",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Sesame"],
+  "ingredients": [
+    { "name": "store-bought falafel", "quantity": 3, "wholeItem": true, "category": "protein" },
+    { "name": "bulgur wheat tabbouleh", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "mixed salad greens", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "tomato", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "tahini dressing", "quantity": 30, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Warm falafel according to package instructions.",
+    "Arrange tabbouleh, greens, and tomato in bowl; top with falafel and drizzle dressing."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan BBQ Jackfruit Tacos",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.60,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy"],
+  "ingredients": [
+    { "name": "small corn tortillas", "quantity": 2, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "canned jackfruit (drained)", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "BBQ sauce", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "red cabbage slaw", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "avocado", "quantity": 60, "unit": "g", "category": "fruits" },
+    { "name": "cilantro", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Shred jackfruit, toss with BBQ sauce, and heat in a pan until warmed through (3–4 min).",
+    "Fill tortillas with jackfruit, top with slaw and avocado slices, garnish with cilantro."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Tempeh Banh Mi Bowl",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten"],
+  "ingredients": [
+    { "name": "cooked jasmine rice", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "tempeh slices", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "pickled carrot & daikon", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "cucumber", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "vegan mayo", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "sriracha", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Pan-fry tempeh until golden (4–5 min per side).",
+    "Assemble rice in bowl, top with tempeh, pickled veggies, cucumber, mayo, and sriracha."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Thai Peanut Noodle Salad",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.55,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Peanuts","Gluten","Soy"],
+  "ingredients": [
+    { "name": "rice noodles", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "red bell pepper", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "shredded carrot", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "edamame", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "peanut sauce", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "lime wedges", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook noodles per package; drain and rinse under cold water.",
+    "Toss noodles with veggies, edamame, and peanut sauce; serve with lime wedges."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Burrito Bowl",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "cooked brown rice", "quantity": 90, "unit": "g", "category": "carbs" },
+    { "name": "black beans", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "corn", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "salsa", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "guacamole", "quantity": 60, "unit": "g", "category": "fruits" },
+    { "name": "mixed greens", "quantity": 50, "unit": "g", "category": "vegetables" }
+  ],
+  "recipe": [
+    "Layer rice, beans, corn, and greens in a bowl.",
+    "Top with salsa and guacamole; serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Thai Green Curry & Tofu Bowl",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.45,
+    "fats": 0.35
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Coconut"],
+  "ingredients": [
+    { "name": "firm tofu", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "coconut milk", "quantity": 150, "unit": "ml", "category": "dairy" },
+    { "name": "green curry paste", "quantity": 30, "unit": "g", "category": "pantry" },
+    { "name": "mixed vegetables (bell pepper, zucchini, carrot)", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "jasmine rice (cooked)", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "basil leaves", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté curry paste in a little oil for 1 min, add coconut milk and bring to simmer.",
+    "Stir in tofu and vegetables; cook 5–7 min until veggies are tender.",
+    "Serve over rice and garnish with basil."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan BBQ Jackfruit Burrito",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.50,
+    "fats": 0.32
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy"],
+  "ingredients": [
+    { "name": "whole wheat tortilla", "quantity": 1, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "BBQ jackfruit", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "brown rice (cooked)", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "black beans", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "corn kernels", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "avocado", "quantity": 50, "unit": "g", "category": "fruits" }
+  ],
+  "recipe": [
+    "Heat jackfruit until warm.",
+    "Layer tortilla with rice, beans, jackfruit, corn, and avocado.",
+    "Roll tightly, slice in half and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Creamy Mushroom & Pea Pasta",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    { "name": "whole wheat penne", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "oat cream", "quantity": 100, "unit": "ml", "category": "dairy" },
+    { "name": "mushrooms", "quantity": 120, "unit": "g", "category": "vegetables" },
+    { "name": "frozen peas", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "nutritional yeast", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook pasta; reserve 50 ml cooking water and drain.",
+    "Sauté mushrooms in oil until golden, add peas and oat cream; simmer 2 min.",
+    "Stir in pasta, cooking water, and nutritional yeast; toss and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Lentil Shepherd’s Pie",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.45,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "red lentils", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "mashed potatoes", "quantity": 150, "unit": "g", "category": "carbs" },
+    { "name": "mixed vegetables (peas, carrot, corn)", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 100, "unit": "ml", "category": "pantry" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté vegetables in oil 3 min; add lentils and broth, cook until lentils soften (10 min).",
+    "Transfer mix to dish, top with mashed potatoes.",
+    "Bake 15 min at 180 °C until top is golden."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Jackfruit & Sweet Potato Bowl",
+  "calories": 650,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.55,
+    "fats": 0.27
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "roasted sweet potato", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "BBQ jackfruit", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "quinoa", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "avocado", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "mixed greens", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toss sweet potato and jackfruit with olive oil; roast at 200 °C for 20 min.",
+    "Serve over cooked quinoa with mixed greens and sliced avocado."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Chickpea Tikka Masala with Rice",
+  "calories": 650,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "canned chickpeas", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "coconut milk", "quantity": 100, "unit": "ml", "category": "dairy" },
+    { "name": "tikka masala paste", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "tomato sauce", "quantity": 100, "unit": "g", "category": "pantry" },
+    { "name": "brown rice", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "cilantro", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté tikka paste in a pan, add tomato sauce and coconut milk; simmer 5 min.",
+    "Stir in chickpeas and cook until heated through (3 min).",
+    "Serve over brown rice and garnish with cilantro."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Tempeh & Avocado Grain Bowl",
+  "calories": 650,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.48,
+    "fats": 0.27
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy"],
+  "ingredients": [
+    { "name": "tempeh", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "cooked farro", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "avocado", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "roasted red peppers", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "spinach", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Pan-fry tempeh in oil until crisp (4 min per side).",
+    "Assemble farro, spinach, peppers, tempeh, and avocado in bowl."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Peanut Satay Buddha Bowl",
+  "calories": 650,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Peanuts","Soy"],
+  "ingredients": [
+    { "name": "rice noodles", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "tofu", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "mixed vegetables", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "peanut satay sauce", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "lime wedge", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook noodles per package; drain.",
+    "Pan-fry tofu until golden and set aside.",
+    "Toss noodles, veggies, and tofu with satay sauce; serve with lime wedge."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Protein-Packed Burrito",
+  "calories": 700,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten"],
+  "ingredients": [
+    { "name": "large whole wheat tortilla", "quantity": 1, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "cooked brown rice", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "black beans", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "tofu scramble", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "avocado", "quantity": 60, "unit": "g", "category": "fruits" },
+    { "name": "salsa", "quantity": 40, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Warm the tortilla briefly in a skillet.",
+    "Layer rice, beans, tofu scramble, avocado, and salsa in the center.",
+    "Fold sides in and roll tightly; slice in half and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Pesto Chickpea Pasta Salad",
+  "calories": 700,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.52,
+    "fats": 0.26
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Nuts","Gluten"],
+  "ingredients": [
+    { "name": "whole wheat penne", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "canned chickpeas", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "vegan pesto", "quantity": 30, "unit": "g", "category": "pantry" },
+    { "name": "cherry tomatoes", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "baby spinach", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook penne until al dente; drain and cool slightly.",
+    "Toss pasta with pesto, chickpeas, tomatoes, spinach, and oil.",
+    "Serve chilled or at room temperature."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Thai Peanut Noodle Bowl Deluxe",
+  "calories": 700,
+  "macroRatio": {
+    "protein": 0.24,
+    "carbs": 0.50,
+    "fats": 0.26
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Peanuts","Soy","Gluten"],
+  "ingredients": [
+    { "name": "rice noodles", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "firm tofu", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "peanut sauce", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "broccoli florets", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "shredded carrot", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "lime wedge", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook noodles per package; drain and rinse under cold water.",
+    "Pan-fry tofu until golden, set aside.",
+    "Toss noodles, tofu, veggies, and peanut sauce; serve with lime wedge."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Chickpea, Sweet Potato & Kale Bowl",
+  "calories": 700,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "roasted sweet potato cubes", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "canned chickpeas", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "kale", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "cooked quinoa", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "tahini dressing", "quantity": 30, "unit": "g", "category": "pantry" },
+    { "name": "lemon juice", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Roast sweet potato with a drizzle of oil at 200 °C for 20 min.",
+    "Massage kale with lemon juice until slightly wilted.",
+    "Assemble quinoa, kale, sweet potato, chickpeas; drizzle with tahini dressing."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Buddha Quinoa Bowl",
+  "calories": 750,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Sesame","Soy"],
+  "ingredients": [
+    { "name": "cooked quinoa", "quantity": 150, "unit": "g", "category": "carbs" },
+    { "name": "roasted chickpeas", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "avocado", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "steamed broccoli", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "shredded carrot", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "tahini dressing", "quantity": 40, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Arrange quinoa, chickpeas, broccoli, carrot, and avocado in a bowl.",
+    "Drizzle with tahini dressing and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Red Lentil Dahl with Rice",
+  "calories": 750,
+  "macroRatio": {
+    "protein": 0.24,
+    "carbs": 0.52,
+    "fats": 0.24
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.5,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "red lentils", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "coconut milk", "quantity": 150, "unit": "ml", "category": "dairy" },
+    { "name": "tomato puree", "quantity": 80, "unit": "g", "category": "pantry" },
+    { "name": "spinach", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "basmati rice (cooked)", "quantity": 180, "unit": "g", "category": "carbs" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté spices and tomato puree in oil, add lentils and coconut milk; simmer until thick (15 min).",
+    "Stir in spinach until wilted; serve over rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Tofu Teriyaki Rice Bowl",
+  "calories": 750,
+  "macroRatio": {
+    "protein": 0.26,
+    "carbs": 0.48,
+    "fats": 0.26
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Sesame"],
+  "ingredients": [
+    { "name": "firm tofu", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "teriyaki sauce", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "brown rice (cooked)", "quantity": 150, "unit": "g", "category": "carbs" },
+    { "name": "snap peas", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "red pepper", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "sesame seeds", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Pan-fry tofu until golden, add teriyaki sauce and cook 2 min.",
+    "Serve over rice with snap peas and pepper, sprinkle sesame seeds."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Black Bean Burger & Sweet Potato Fries",
+  "calories": 750,
+  "macroRatio": {
+    "protein": 0.24,
+    "carbs": 0.50,
+    "fats": 0.26
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy"],
+  "ingredients": [
+    { "name": "vegan black bean patty", "quantity": 1, "singular": "patty", "plural": "patties", "wholeItem": true, "category": "protein" },
+    { "name": "whole wheat bun", "quantity": 1, "singular": "bun", "plural": "buns", "wholeItem": true, "category": "carbs" },
+    { "name": "sweet potato fries", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "lettuce", "quantity": 30, "unit": "g", "category": "vegetables" },
+    { "name": "tomato slice", "quantity": 30, "unit": "g", "category": "vegetables" },
+    { "name": "vegan mayo", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook fries in oven per package until crisp.",
+    "Cook patty in skillet 4 min per side, assemble on bun with mayo, lettuce, and tomato, serve with fries."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chickpea Shawarma Wrap",
+  "calories": 800,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Sesame"],
+  "ingredients": [
+    { "name": "large flatbread", "quantity": 1, "singular": "flatbread", "plural": "flatbreads", "wholeItem": true, "category": "carbs" },
+    { "name": "canned chickpeas", "quantity": 200, "unit": "g", "category": "protein" },
+    { "name": "hummus", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "cucumber", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "tomato", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "lettuce", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "tahini", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Warm flatbread in a dry pan.",
+    "Mash chickpeas with hummus, olive oil, and tahini; season to taste.",
+    "Spread mixture on flatbread, top with cucumber, tomato, and lettuce.",
+    "Roll up tightly and slice in half."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Tofu Katsu Curry Bowl",
+  "calories": 800,
+  "macroRatio": {
+    "protein": 0.28,
+    "carbs": 0.48,
+    "fats": 0.24
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten"],
+  "ingredients": [
+    { "name": "firm tofu", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "panko breadcrumbs", "quantity": 30, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "Japanese curry sauce", "quantity": 100, "unit": "g", "category": "pantry" },
+    { "name": "cooked basmati rice", "quantity": 150, "unit": "g", "category": "carbs" },
+    { "name": "broccoli florets", "quantity": 80, "unit": "g", "category": "vegetables" }
+  ],
+  "recipe": [
+    "Coat tofu in panko and pan-fry in oil until golden (3–4 min per side).",
+    "Heat curry sauce in a pan, add tofu and broccoli; simmer 5 min.",
+    "Serve over rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Lentil Walnut Loaf Sandwich & Fries",
+  "calories": 800,
+  "macroRatio": {
+    "protein": 0.24,
+    "carbs": 0.48,
+    "fats": 0.28
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Nuts"],
+  "ingredients": [
+    { "name": "lentil walnut loaf slice", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "whole grain bread", "quantity": 2, "singular": "slice", "plural": "slices", "wholeItem": true, "category": "carbs" },
+    { "name": "avocado", "quantity": 50, "unit": "g", "category": "fruits" },
+    { "name": "tomato", "quantity": 40, "unit": "g", "category": "vegetables" },
+    { "name": "sweet potato fries", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toast bread and loaf slice; mash avocado on bread.",
+    "Layer loaf and tomato between slices.",
+    "Toss fries in oil and bake at 200 °C until crisp (20 min)."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Spinach Mushroom Mac & Cheese",
+  "calories": 800,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.52,
+    "fats": 0.28
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    { "name": "elbow pasta", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "oat cream", "quantity": 120, "unit": "ml", "category": "dairy" },
+    { "name": "nutritional yeast", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "mushrooms", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "baby spinach", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook pasta; drain, reserve 50 ml cooking water.",
+    "Sauté mushrooms in oil until golden, add spinach until wilted.",
+    "Stir in oat cream, nutritional yeast, pasta, and cooking water; toss and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan BBQ Cauliflower & Chickpea Bowl",
+  "calories": 850,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "cauliflower florets", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "canned chickpeas", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "barbecue sauce", "quantity": 60, "unit": "g", "category": "pantry" },
+    { "name": "cooked brown rice", "quantity": 150, "unit": "g", "category": "carbs" },
+    { "name": "avocado", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toss cauliflower and chickpeas with olive oil and barbecue sauce; roast at 200 °C for 20 min.",
+    "Serve mixture over brown rice with sliced avocado on top."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Tex-Mex Power Burrito",
+  "calories": 850,
+  "macroRatio": {
+    "protein": 0.24,
+    "carbs": 0.50,
+    "fats": 0.26
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    { "name": "large spinach tortilla", "quantity": 1, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "seasoned black beans", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "brown rice", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "corn", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "salsa", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "guacamole", "quantity": 80, "unit": "g", "category": "fruits" }
+  ],
+  "recipe": [
+    "Warm tortilla, layer rice, beans, corn, salsa, and guacamole.",
+    "Fold sides and roll tightly; slice in half and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Moroccan Chickpea & Couscous Tagine",
+  "calories": 850,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.52,
+    "fats": 0.28
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.2,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "canned chickpeas", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "vegetable broth", "quantity": 200, "unit": "ml", "category": "pantry" },
+    { "name": "couscous", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "diced tomatoes", "quantity": 100, "unit": "g", "category": "pantry" },
+    { "name": "mixed root vegetables", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "cumin & coriander", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté spices in oil for 1 min; add vegetables, chickpeas, tomatoes, and broth; simmer 15 min.",
+    "Prepare couscous per package and fluff; serve tagine over couscous."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Mushroom & Walnut Bolognese over Pasta",
+  "calories": 850,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Nuts"],
+  "ingredients": [
+    { "name": "whole wheat spaghetti", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "mushrooms", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "walnuts", "quantity": 50, "unit": "g", "category": "misc" },
+    { "name": "tomato passata", "quantity": 200, "unit": "g", "category": "pantry" },
+    { "name": "onion", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "herbs (oregano, basil)", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté onion and mushrooms in oil until golden; add crushed walnuts and herbs, cook 2 min.",
+    "Stir in passata, simmer 10 min; season to taste.",
+    "Serve sauce over cooked spaghetti."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Lentil Walnut Meatballs & Polenta",
+  "calories": 900,
+  "macroRatio": {
+    "protein": 0.27,
+    "carbs": 0.55,
+    "fats": 0.18
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Nuts","Gluten"],
+  "ingredients": [
+    { "name": "red lentils", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "walnuts", "quantity": 60, "unit": "g", "category": "misc" },
+    { "name": "breadcrumbs", "quantity": 40, "unit": "g", "category": "carbs" },
+    { "name": "polenta", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "vegetable broth", "quantity": 300, "unit": "ml", "category": "pantry" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook lentils until soft; drain and mash with chopped walnuts and breadcrumbs, form into meatballs.",
+    "Pan-fry meatballs in oil 4–5 min per side until crisp.",
+    "Cook polenta in broth per package instructions; serve meatballs over polenta."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Tofu & Vegetable Katsu Curry",
+  "calories": 900,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten"],
+  "ingredients": [
+    { "name": "firm tofu", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "panko breadcrumbs", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "Japanese curry roux", "quantity": 100, "unit": "g", "category": "pantry" },
+    { "name": "potatoes", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "carrots", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "rice", "quantity": 150, "unit": "g", "category": "carbs" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Coat tofu in breadcrumbs and pan-fry until golden, set aside.",
+    "Sauté potatoes and carrots in oil 5 min; add curry roux and water, simmer until vegetables tender.",
+    "Serve curry over rice topped with tofu katsu."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Buffalo Cauliflower & Chickpea Wrap",
+  "calories": 900,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.5,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "cauliflower florets", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "canned chickpeas", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "buffalo sauce", "quantity": 60, "unit": "g", "category": "pantry" },
+    { "name": "large tortilla wrap", "quantity": 1, "singular": "wrap", "plural": "wraps", "wholeItem": true, "category": "carbs" },
+    { "name": "vegan ranch dressing", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "lettuce", "quantity": 80, "unit": "g", "category": "vegetables" }
+  ],
+  "recipe": [
+    "Toss cauliflower and chickpeas in buffalo sauce; roast at 200 °C for 20 min.",
+    "Fill tortilla with roasted mixture, lettuce, and drizzle ranch dressing; roll up and slice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Tempeh Reuben Sandwich & Slaw",
+  "calories": 900,
+  "macroRatio": {
+    "protein": 0.28,
+    "carbs": 0.45,
+    "fats": 0.27
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy"],
+  "ingredients": [
+    { "name": "rye bread", "quantity": 2, "singular": "slice", "plural": "slices", "wholeItem": true, "category": "carbs" },
+    { "name": "tempeh strips", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "vegan Swiss cheese", "quantity": 40, "unit": "g", "category": "dairy" },
+    { "name": "sauerkraut", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "vegan Thousand Island dressing", "quantity": 30, "unit": "g", "category": "pantry" },
+    { "name": "coleslaw mix", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Pan-fry tempeh in oil until golden, then build sandwich with cheese, sauerkraut, and dressing between bread slices; grill 3 min per side.",
+    "Toss coleslaw mix with remaining dressing to serve alongside."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan BBQ Tempeh Burger & Sweet Potato Wedges",
+  "calories": 950,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten"],
+  "ingredients": [
+    { "name": "whole grain burger bun", "quantity": 1, "singular": "bun", "plural": "buns", "wholeItem": true, "category": "carbs" },
+    { "name": "BBQ tempeh patty", "quantity": 1, "singular": "patty", "plural": "patties", "wholeItem": true, "category": "protein" },
+    { "name": "vegan cheddar slice", "quantity": 1, "singular": "slice", "plural": "slices", "wholeItem": true, "category": "dairy" },
+    { "name": "lettuce", "quantity": 30, "unit": "g", "category": "vegetables" },
+    { "name": "tomato slice", "quantity": 30, "unit": "g", "category": "vegetables" },
+    { "name": "sweet potato wedges", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "BBQ sauce", "quantity": 40, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toss sweet potato wedges in half the oil, bake at 200 °C for 25 min until crisp.",
+    "Pan-fry tempeh patty in remaining oil 4 min per side, brush with BBQ sauce and top with cheese until melted.",
+    "Assemble burger with bun, lettuce, tomato, and patty; serve with wedges."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Loaded Nachos with Black Beans & Guacamole",
+  "calories": 950,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.55,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten","Nuts"],
+  "ingredients": [
+    { "name": "tortilla chips", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "canned black beans", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "vegan nacho cheese sauce", "quantity": 80, "unit": "g", "category": "dairy" },
+    { "name": "guacamole", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "salsa", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "jalapeño slices", "quantity": 20, "unit": "g", "category": "vegetables" },
+    { "name": "cilantro", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Arrange chips on a baking tray; top with beans and cheese sauce.",
+    "Bake at 180 °C for 8 min until cheese is bubbly.",
+    "Top with guacamole, salsa, jalapeños, and cilantro before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Thai Red Curry with Tofu & Jasmine Rice",
+  "calories": 950,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Coconut"],
+  "ingredients": [
+    { "name": "firm tofu", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "Thai red curry paste", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "coconut milk", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "mixed bell peppers", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "bamboo shoots", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "jasmine rice (cooked)", "quantity": 150, "unit": "g", "category": "carbs" },
+    { "name": "basil leaves", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté curry paste in oil for 1 min, add coconut milk and bring to simmer.",
+    "Add tofu, peppers, and bamboo; cook 5–7 min until veggies are tender.",
+    "Serve over jasmine rice, garnish with basil."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Mediterranean Platter: Falafel, Hummus & Pita",
+  "calories": 950,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Sesame"],
+  "ingredients": [
+    { "name": "falafel balls", "quantity": 4, "wholeItem": true, "category": "protein" },
+    { "name": "pita bread", "quantity": 1, "singular": "pita", "plural": "pitas", "wholeItem": true, "category": "carbs" },
+    { "name": "hummus", "quantity": 100, "unit": "g", "category": "pantry" },
+    { "name": "tabbouleh", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "olives", "quantity": 30, "unit": "g", "category": "misc" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Warm falafel per package instructions.",
+    "Arrange falafel, hummus, tabbouleh, olives, and pita on a plate; drizzle oil over tabbouleh.",
+    "Serve as a shared platter or single meal."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Tempeh Gyro Plate with Fries",
+  "calories": 1000,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten","Sesame"],
+  "ingredients": [
+    { "name": "tempeh strips", "quantity": 200, "unit": "g", "category": "protein" },
+    { "name": "pita bread", "quantity": 2, "singular": "pita", "plural": "pitas", "wholeItem": true, "category": "carbs" },
+    { "name": "vegan tzatziki", "quantity": 60, "unit": "g", "category": "pantry" },
+    { "name": "tomato", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "red onion", "quantity": 40, "unit": "g", "category": "vegetables" },
+    { "name": "lettuce", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "frozen fries", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Pan-fry tempeh in half the oil until crisp (4 min per side).",
+    "Toss fries in remaining oil and bake at 220 °C for 25 min.",
+    "Warm pitas, fill with tempeh, tzatziki, tomato, onion, and lettuce.",
+    "Serve with fries on the side."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Cashew Ricotta Lasagna",
+  "calories": 1000,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.52,
+    "fats": 0.26
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Nuts","Gluten","Soy"],
+  "ingredients": [
+    { "name": "lasagna noodles", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "cashew ricotta", "quantity": 150, "unit": "g", "category": "dairy" },
+    { "name": "tomato sauce", "quantity": 200, "unit": "g", "category": "pantry" },
+    { "name": "spinach", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "mushrooms", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 180 °C. Cook noodles per package.",
+    "Sauté mushrooms in oil until soft, wilt spinach in same pan.",
+    "Layer noodles, ricotta, veggies, and sauce in baking dish; repeat layers.",
+    "Bake 30 min until bubbly; let rest 5 min before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Supreme Burrito",
+  "calories": 1000,
+  "macroRatio": {
+    "protein": 0.24,
+    "carbs": 0.50,
+    "fats": 0.26
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy","Tree Nuts"],
+  "ingredients": [
+    { "name": "large spinach tortilla", "quantity": 1, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "brown rice", "quantity": 150, "unit": "g", "category": "carbs" },
+    { "name": "black beans", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "tofu scramble", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "guacamole", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "salsa", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "vegan sour cream", "quantity": 40, "unit": "g", "category": "dairy" },
+    { "name": "vegan cheese shreds", "quantity": 40, "unit": "g", "category": "dairy" }
+  ],
+  "recipe": [
+    "Warm tortilla. Layer rice, beans, tofu scramble, salsa, guacamole, cheese, and sour cream.",
+    "Fold ends and roll tightly; press seam-side down in pan for 1 min per side."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Mac & Cheeze with Chickpea Tenders",
+  "calories": 1000,
+  "macroRatio": {
+    "protein": 0.26,
+    "carbs": 0.50,
+    "fats": 0.24
+  },
+  "category": "Lunch",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy","Tree Nuts"],
+  "ingredients": [
+    { "name": "elbow pasta", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "vegan cheddar sauce", "quantity": 150, "unit": "g", "category": "dairy" },
+    { "name": "chickpea tenders", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "breadcrumbs", "quantity": 40, "unit": "g", "category": "carbs" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook pasta until al dente; drain.",
+    "Heat cheddar sauce with a splash of pasta water until smooth; stir in pasta.",
+    "Bread tenders in breadcrumbs, pan-fry in oil 3–4 min per side; serve alongside mac & cheeze."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Tofu & Vegetable Stir-Fry with Cauliflower Rice",
+  "calories": 350,
+  "macroRatio": {
+    "protein": 0.28,
+    "carbs": 0.35,
+    "fats": 0.37
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy"],
+  "ingredients": [
+    { "name": "firm tofu", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "mixed stir-fry vegetables", "quantity": 120, "unit": "g", "category": "vegetables" },
+    { "name": "cauliflower rice", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "soy sauce", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "sesame oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat sesame oil in a wok, add tofu cubes and cook until golden (4 min).",
+    "Add vegetables, stir-fry 3 min, then stir in soy sauce.",
+    "Serve hot over cauliflower rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Red Lentil Dahl with Spinach",
+  "calories": 350,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.45,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "red lentils", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "coconut milk", "quantity": 80, "unit": "ml", "category": "dairy" },
+    { "name": "spinach", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "curry powder", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil in a pot, sauté curry powder 1 min; add lentils and coconut milk, simmer 12 min.",
+    "Stir in spinach until wilted and serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Quinoa Stuffed Bell Peppers",
+  "calories": 350,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.55,
+    "fats": 0.27
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "bell peppers", "quantity": 2, "singular": "pepper", "plural": "peppers", "wholeItem": true, "category": "vegetables" },
+    { "name": "cooked quinoa", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "black beans", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "corn kernels", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "tomato sauce", "quantity": 40, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 180 °C. Halve peppers, remove seeds.",
+    "Mix quinoa, beans, corn, and sauce; fill pepper halves.",
+    "Bake 20 min until peppers are tender."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chickpea & Sweet Potato Coconut Curry",
+  "calories": 350,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Coconut"],
+  "ingredients": [
+    { "name": "canned chickpeas", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "sweet potato", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "coconut milk", "quantity": 100, "unit": "ml", "category": "dairy" },
+    { "name": "curry powder", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil, sauté curry powder 1 min; add chickpeas, sweet potato, and coconut milk.",
+    "Simmer 10 min until potato is tender; serve hot."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Tempeh & Vegetable Stir-Fry with Brown Rice",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.45,
+    "fats": 0.25
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy"],
+  "ingredients": [
+    { "name": "tempeh", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "mixed stir-fry vegetables", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "cooked brown rice", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "soy sauce", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "sesame oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat sesame oil in a wok, add tempeh cubes and cook until golden (4 min).",
+    "Add vegetables; stir-fry 4 min, then stir in soy sauce.",
+    "Serve immediately over brown rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Lentil & Spinach Soup with Whole-Grain Bread",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    { "name": "red lentils", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "spinach", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 300, "unit": "ml", "category": "pantry" },
+    { "name": "tomato paste", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "whole-grain bread slice", "quantity": 1, "singular": "slice", "plural": "slices", "wholeItem": true, "category": "carbs" }
+  ],
+  "recipe": [
+    "In a pot, combine lentils, broth, and tomato paste; simmer until lentils soften (12 min).",
+    "Stir in spinach until wilted (2 min).",
+    "Serve hot with bread on the side."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Chickpea & Zucchini Curry with Rice",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "canned chickpeas", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "zucchini", "quantity": 120, "unit": "g", "category": "vegetables" },
+    { "name": "coconut milk", "quantity": 80, "unit": "ml", "category": "dairy" },
+    { "name": "curry powder", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "cooked basmati rice", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil, sauté curry powder 1 min; add chickpeas and zucchini, cook 3 min.",
+    "Pour in coconut milk; simmer 5 min until zucchini is tender.",
+    "Serve over rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Mushroom, Pea & Pea Protein Risotto",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.28,
+    "carbs": 0.45,
+    "fats": 0.27
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "arborio rice", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "mushrooms", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "frozen peas", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 300, "unit": "ml", "category": "pantry" },
+    { "name": "pea protein powder", "quantity": 15, "unit": "g", "category": "protein" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté mushrooms in oil until golden (4 min).",
+    "Add rice, stir 1 min, then gradually add broth, stirring until absorbed.",
+    "Stir in peas and protein powder; cook 2 min more and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Lentil Shepherd’s Pie",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "red lentils", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "mashed potatoes", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "mixed vegetables (carrot, peas, corn)", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 100, "unit": "ml", "category": "pantry" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté vegetables in oil 3 min; add lentils and broth, simmer 10 min until lentils soften.",
+    "Transfer mixture to a baking dish, top with mashed potatoes.",
+    "Bake at 180 °C for 15 min until top is golden."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Thai Green Curry with Tofu & Rice",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Coconut"],
+  "ingredients": [
+    { "name": "firm tofu", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "coconut milk", "quantity": 150, "unit": "ml", "category": "dairy" },
+    { "name": "green curry paste", "quantity": 30, "unit": "g", "category": "pantry" },
+    { "name": "mixed bell peppers", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "jasmine rice (cooked)", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "basil leaves", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat curry paste in a little oil 1 min; add coconut milk and bring to simmer.",
+    "Add tofu and peppers; cook 5–7 min until peppers are tender.",
+    "Serve over rice, garnish with basil."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Stuffed Portobello Mushrooms",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.50,
+    "fats": 0.32
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "large portobello mushrooms", "quantity": 2, "singular": "mushroom", "plural": "mushrooms", "wholeItem": true, "category": "vegetables" },
+    { "name": "cooked quinoa", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "baby spinach", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "nutritional yeast", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 180 °C. Remove stems and brush mushrooms with half the oil; roast 8 min.",
+    "Toss quinoa, spinach, yeast, and remaining oil; fill mushroom caps with mixture.",
+    "Bake 10 min more until mushrooms are tender."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Spaghetti Bolognese",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.52,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    { "name": "whole wheat spaghetti", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "lentil walnut sauce", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "tomato passata", "quantity": 100, "unit": "g", "category": "pantry" },
+    { "name": "onion", "quantity": 40, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook spaghetti per package; reserve 50 ml pasta water and drain.",
+    "Sauté onion in oil until translucent; add sauce and passata, simmer 5 min.",
+    "Toss in pasta and pasta water; cook 1 min more and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Chickpea & Vegetable Paella",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "paella rice", "quantity": 90, "unit": "g", "category": "carbs" },
+    { "name": "canned chickpeas", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "bell peppers", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "tomatoes", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "peas", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 200, "unit": "ml", "category": "pantry" },
+    { "name": "saffron", "quantity": 0.1, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil in a wide pan, sauté peppers and tomatoes 4 min.",
+    "Stir in rice, chickpeas, peas, broth, and saffron; simmer 20 min until rice is tender."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Sweet Potato & Black Bean Enchiladas",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.52,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    { "name": "whole wheat tortillas", "quantity": 2, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "sweet potato", "quantity": 120, "unit": "g", "category": "vegetables" },
+    { "name": "black beans", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "enchilada sauce", "quantity": 100, "unit": "g", "category": "pantry" },
+    { "name": "spinach", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Roast diced sweet potato tossed in oil at 200 °C for 15 min.",
+    "Fill tortillas with potato, beans, and spinach; roll and place in baking dish.",
+    "Pour enchilada sauce over, bake 10 min until heated through."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Mushroom Stroganoff over Pasta",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.50,
+    "fats": 0.32
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    { "name": "whole wheat fettuccine", "quantity": 90, "unit": "g", "category": "carbs" },
+    { "name": "mushrooms", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "oat cream", "quantity": 100, "unit": "ml", "category": "dairy" },
+    { "name": "vegetable broth", "quantity": 100, "unit": "ml", "category": "pantry" },
+    { "name": "onion", "quantity": 40, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook pasta until al dente; reserve 50 ml cooking water and drain.",
+    "Sauté onion and mushrooms in oil until golden (5 min).",
+    "Stir in broth and cream; simmer 2 min. Toss with pasta and reserved water."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan BBQ Jackfruit Sandwich & Cole Slaw",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.48,
+    "fats": 0.32
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy"],
+  "ingredients": [
+    { "name": "whole grain bun", "quantity": 1, "singular": "bun", "plural": "buns", "wholeItem": true, "category": "carbs" },
+    { "name": "BBQ jackfruit", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "vegan mayo", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "coleslaw mix", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat jackfruit with 1 Tbsp BBQ sauce until warm (3 min).",
+    "Toss coleslaw mix with mayo and oil.",
+    "Assemble sandwich with jackfruit and slaw in bun."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Thai Peanut Noodle Stir-Fry",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.52,
+    "fats": 0.26
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Peanuts","Soy","Gluten"],
+  "ingredients": [
+    { "name": "rice noodles", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "firm tofu", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "mixed stir-fry vegetables", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "peanut sauce", "quantity": 60, "unit": "g", "category": "pantry" },
+    { "name": "lime wedge", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "sesame oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook rice noodles according to package; drain and set aside.",
+    "Heat sesame oil in a wok, sauté tofu until golden (4 min).",
+    "Add vegetables and cook 3 min. Stir in noodles and peanut sauce; toss well.",
+    "Serve with a lime wedge."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Mushroom & Walnut Bolognese with Polenta",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts","Gluten"],
+  "ingredients": [
+    { "name": "cremini mushrooms", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "walnuts", "quantity": 40, "unit": "g", "category": "misc" },
+    { "name": "tomato passata", "quantity": 150, "unit": "g", "category": "pantry" },
+    { "name": "polenta", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "vegetable broth", "quantity": 200, "unit": "ml", "category": "pantry" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Pulse mushrooms and walnuts in a food processor until meat-like texture.",
+    "Heat oil, sauté mixture 5 min; add passata and broth, simmer 10 min.",
+    "Cook polenta per package; serve Bolognese over polenta."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Chickpea & Spinach Curry with Basmati Rice",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "canned chickpeas", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "spinach", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "coconut milk", "quantity": 100, "unit": "ml", "category": "dairy" },
+    { "name": "curry paste", "quantity": 30, "unit": "g", "category": "pantry" },
+    { "name": "cooked basmati rice", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil, sauté curry paste 1 min; add coconut milk and bring to simmer.",
+    "Stir in chickpeas and cook 5 min; add spinach until wilted.",
+    "Serve over basmati rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan BBQ Jackfruit Nachos",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "tortilla chips", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "BBQ jackfruit", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "vegan cheese sauce", "quantity": 80, "unit": "g", "category": "dairy" },
+    { "name": "jalapeño slices", "quantity": 15, "unit": "g", "category": "vegetables" },
+    { "name": "guacamole", "quantity": 80, "unit": "g", "category": "fruits" }
+  ],
+  "recipe": [
+    "Arrange chips on baking sheet; top with jackfruit and cheese sauce.",
+    "Bake 8 min at 180 °C until sauce is bubbly.",
+    "Garnish with jalapeños and dollops of guacamole."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Thai Peanut Tempeh Bowl",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.24,
+    "carbs": 0.50,
+    "fats": 0.26
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Peanuts","Gluten"],
+  "ingredients": [
+    { "name": "rice noodles", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "tempeh", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "mixed bell peppers", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "broccoli florets", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "peanut sauce", "quantity": 60, "unit": "g", "category": "pantry" },
+    { "name": "sesame oil", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "lime wedge", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook rice noodles according to package; drain and set aside.",
+    "Heat sesame oil in a wok, sauté tempeh pieces until golden (4 min).",
+    "Add peppers and broccoli; stir-fry 4 min. Stir in noodles and peanut sauce; toss well.",
+    "Serve with a lime wedge."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Lentil & Mushroom Shepherd’s Pie",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "red lentils", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "mashed sweet potato", "quantity": 150, "unit": "g", "category": "carbs" },
+    { "name": "mixed vegetables", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 150, "unit": "ml", "category": "pantry" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté vegetables in oil 3 min; add lentils and broth, simmer 12 min until thickened.",
+    "Transfer to baking dish; top with sweet potato mash.",
+    "Bake at 180 °C for 20 min until golden."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Chickpea & Spinach Lasagna",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy"],
+  "ingredients": [
+    { "name": "lasagna noodles", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "chickpeas", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "spinach", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "tomato sauce", "quantity": 150, "unit": "g", "category": "pantry" },
+    { "name": "vegan béchamel (oat milk & flour)", "quantity": 100, "unit": "ml", "category": "dairy" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 180 °C. Cook noodles per package.",
+    "Layer sauce, noodles, chickpeas, spinach, and béchamel in dish; repeat.",
+    "Bake 30 min until set."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan BBQ Jackfruit Pizza on Cauliflower Crust",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.50,
+    "fats": 0.32
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "cauliflower pizza crust", "quantity": 1, "singular": "crust", "plural": "crusts", "wholeItem": true, "category": "carbs" },
+    { "name": "BBQ jackfruit", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "vegan cheese shreds", "quantity": 80, "unit": "g", "category": "dairy" },
+    { "name": "red onion", "quantity": 40, "unit": "g", "category": "vegetables" },
+    { "name": "cilantro", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 200 °C. Spread jackfruit over crust, top with cheese and onion.",
+    "Bake 12 min until cheese melts and crust is crisp.",
+    "Garnish with cilantro."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Chickpea Tikka Masala with Basmati Rice",
+  "calories": 650,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "canned chickpeas", "quantity": 200, "unit": "g", "category": "protein" },
+    { "name": "tikka masala sauce", "quantity": 150, "unit": "g", "category": "pantry" },
+    { "name": "coconut milk", "quantity": 100, "unit": "ml", "category": "dairy" },
+    { "name": "basmati rice (cooked)", "quantity": 180, "unit": "g", "category": "carbs" },
+    { "name": "spinach", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil in a pan, add sauce and coconut milk; simmer 2 min.",
+    "Stir in chickpeas and spinach; cook 5 min until heated and spinach wilts.",
+    "Serve over rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Lentil Walnut “Meatloaf” with Mashed Sweet Potato",
+  "calories": 650,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts","Gluten"],
+  "ingredients": [
+    { "name": "red lentils", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "walnuts", "quantity": 60, "unit": "g", "category": "misc" },
+    { "name": "breadcrumbs", "quantity": 40, "unit": "g", "category": "carbs" },
+    { "name": "sweet potatoes (mashed)", "quantity": 200, "unit": "g", "category": "carbs" },
+    { "name": "onion", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook lentils until soft; mash with chopped walnuts and breadcrumbs, shape into a loaf.",
+    "Pan-fry loaf in oil 4 min per side until crisp.",
+    "Serve with mashed sweet potato on the side."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Cajun Cauliflower & Black Bean Tacos",
+  "calories": 650,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.52,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "corn tortillas", "quantity": 4, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "cauliflower florets", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "black beans", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "avocado", "quantity": 70, "unit": "g", "category": "fruits" },
+    { "name": "cajun seasoning", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toss cauliflower in oil and seasoning; roast at 200 °C for 20 min.",
+    "Warm tortillas, fill with cauliflower and beans, top with avocado slices."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Eggplant Rollatini with Polenta",
+  "calories": 650,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "eggplant slices", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "cashew ricotta", "quantity": 100, "unit": "g", "category": "dairy" },
+    { "name": "tomato sauce", "quantity": 150, "unit": "g", "category": "pantry" },
+    { "name": "polenta", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 180 °C. Grill eggplant slices in oil until tender (3 min per side).",
+    "Spread ricotta on each slice, roll and place in baking dish, top with sauce.",
+    "Bake 15 min. Cook polenta per package; serve alongside."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Three-Bean Chili with Cornbread",
+  "calories": 700,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy"],
+  "ingredients": [
+    { "name": "kidney beans", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "black beans", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "pinto beans", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "diced tomatoes", "quantity": 150, "unit": "g", "category": "pantry" },
+    { "name": "onion", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "bell pepper", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "chili powder", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "vegan cornbread", "quantity": 100, "unit": "g", "category": "carbs" }
+  ],
+  "recipe": [
+    "Heat oil, sauté onion and pepper until soft (4 min).",
+    "Add beans, tomatoes, chili powder and simmer 15 min.",
+    "Serve hot with cornbread on the side."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Pad Thai with Tofu & Peanuts",
+  "calories": 700,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Peanuts","Soy","Gluten"],
+  "ingredients": [
+    { "name": "rice noodles", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "firm tofu", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "bean sprouts", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "green onions", "quantity": 30, "unit": "g", "category": "vegetables" },
+    { "name": "pad Thai sauce", "quantity": 60, "unit": "g", "category": "pantry" },
+    { "name": "peanuts", "quantity": 20, "unit": "g", "category": "misc" },
+    { "name": "oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook noodles per package; drain and set aside.",
+    "Heat oil, pan–fry tofu until golden (4 min).",
+    "Add noodles, sauce, sprouts, and onions; toss 2 min.",
+    "Top with peanuts and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Stuffed Acorn Squash with Quinoa & Cranberries",
+  "calories": 700,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts","Soy"],
+  "ingredients": [
+    { "name": "acorn squash", "quantity": 400, "unit": "g", "category": "vegetables" },
+    { "name": "cooked quinoa", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "dried cranberries", "quantity": 30, "unit": "g", "category": "fruits" },
+    { "name": "toasted pecans", "quantity": 30, "unit": "g", "category": "misc" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "maple syrup", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Halve squash, remove seeds, brush with oil and bake at 190 °C for 25 min.",
+    "Mix quinoa, cranberries, pecans, and syrup; fill squash halves.",
+    "Bake 10 min more and serve warm."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Cauliflower Steak with Chickpea Mash & Greens",
+  "calories": 700,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "cauliflower steaks", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "canned chickpeas", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "garlic", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "lemon juice", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "mixed salad greens", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Roast cauliflower steaks brushed with oil and garlic at 200 °C for 20 min.",
+    "Mash chickpeas with lemon juice, salt, and pepper.",
+    "Serve cauliflower over greens with chickpea mash on the side."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan BBQ Jackfruit & Sweet Potato Bowl",
+  "calories": 750,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.52,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "BBQ jackfruit", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "roasted sweet potato", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "black beans", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "corn kernels", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "avocado", "quantity": 70, "unit": "g", "category": "fruits" },
+    { "name": "cilantro-lime dressing", "quantity": 40, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Roast sweet potato tossed in oil at 200 °C for 25 min.",
+    "Heat jackfruit with beans and dressing until warm (5 min).",
+    "Plate sweet potato, top with jackfruit-bean mix and avocado slices."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Mushroom, Pea & Pea Protein Risotto Deluxe",
+  "calories": 750,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.45,
+    "fats": 0.25
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "arborio rice", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "mushrooms", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "green peas", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "pea protein powder", "quantity": 20, "unit": "g", "category": "protein" },
+    { "name": "vegetable broth", "quantity": 400, "unit": "ml", "category": "pantry" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté mushrooms in oil until golden (5 min).",
+    "Add rice, stir 1 min; gradually add broth, stirring until absorbed.",
+    "Stir in peas and protein powder; cook 2 min more and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Thai Green Curry with Tofu & Jasmine Rice Deluxe",
+  "calories": 750,
+  "macroRatio": {
+    "protein": 0.24,
+    "carbs": 0.50,
+    "fats": 0.26
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Coconut"],
+  "ingredients": [
+    { "name": "firm tofu", "quantity": 200, "unit": "g", "category": "protein" },
+    { "name": "green curry paste", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "coconut milk", "quantity": 300, "unit": "ml", "category": "dairy" },
+    { "name": "mixed bell peppers", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "bamboo shoots", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "jasmine rice (cooked)", "quantity": 150, "unit": "g", "category": "carbs" }
+  ],
+  "recipe": [
+    "Sauté curry paste in oil 1 min; add coconut milk and bring to simmer.",
+    "Add tofu, peppers, and shoots; cook 7 min until veggies are tender.",
+    "Serve over jasmine rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan BBQ Tempeh Pizza with Cashew Cheese",
+  "calories": 750,
+  "macroRatio": {
+    "protein": 0.26,
+    "carbs": 0.48,
+    "fats": 0.26
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts","Gluten","Soy"],
+  "ingredients": [
+    { "name": "whole wheat pizza crust", "quantity": 1, "singular": "crust", "plural": "crusts", "wholeItem": true, "category": "carbs" },
+    { "name": "BBQ tempeh", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "cashew cheese", "quantity": 100, "unit": "g", "category": "dairy" },
+    { "name": "red onion", "quantity": 40, "unit": "g", "category": "vegetables" },
+    { "name": "cilantro", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Preheat oven to 200 °C. Spread BBQ tempeh over crust, top with cashew cheese and onion.",
+    "Bake 12 min until cheese is creamy and crust is crisp.",
+    "Garnish with cilantro."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan BBQ Jackfruit Mac & Cheese",
+  "calories": 800,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.52,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Tree Nuts","Gluten"],
+  "ingredients": [
+    { "name": "elbow pasta", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "BBQ jackfruit", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "cashew cheese sauce", "quantity": 150, "unit": "g", "category": "dairy" },
+    { "name": "breadcrumbs", "quantity": 40, "unit": "g", "category": "carbs" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook pasta until al dente and drain.",
+    "Stir pasta with cheese sauce and jackfruit in a saucepan until warmed.",
+    "Transfer to baking dish, sprinkle breadcrumbs and drizzle oil; bake at 180 °C for 12 min until golden."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Lentil & Chickpea Moussaka",
+  "calories": 800,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Tree Nuts"],
+  "ingredients": [
+    { "name": "eggplant", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "red lentils", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "chickpeas", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "tomato sauce", "quantity": 150, "unit": "g", "category": "pantry" },
+    { "name": "cashew bechamel", "quantity": 150, "unit": "g", "category": "dairy" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Slice eggplant, brush with oil and roast at 200 °C for 15 min.",
+    "Cook lentils in tomato sauce 10 min, stir in chickpeas.",
+    "Layer eggplant, lentil mixture, and béchamel in dish; bake 25 min at 180 °C."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Paella with Artichoke & Peas",
+  "calories": 800,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.52,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "paella rice", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "artichoke hearts", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "frozen peas", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "bell pepper", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 400, "unit": "ml", "category": "pantry" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "smoked paprika", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté pepper and paprika in oil 3 min; stir in rice.",
+    "Add broth, peas, and artichokes; simmer 20 min until liquid is absorbed."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Burrito Bowl with Tempeh & Corn",
+  "calories": 800,
+  "macroRatio": {
+    "protein": 0.24,
+    "carbs": 0.50,
+    "fats": 0.26
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten"],
+  "ingredients": [
+    { "name": "cooked brown rice", "quantity": 150, "unit": "g", "category": "carbs" },
+    { "name": "tempeh", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "black beans", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "roasted corn", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "salsa", "quantity": 60, "unit": "g", "category": "pantry" },
+    { "name": "guacamole", "quantity": 80, "unit": "g", "category": "fruits" }
+  ],
+  "recipe": [
+    "Pan-fry tempeh until browned (4 min per side).",
+    "Layer rice, beans, corn, tempeh, salsa, and guacamole in a bowl."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Massaman Curry with Tofu & Potatoes",
+  "calories": 850,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Coconut"],
+  "ingredients": [
+    { "name": "firm tofu", "quantity": 200, "unit": "g", "category": "protein" },
+    { "name": "Massaman curry paste", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "coconut milk", "quantity": 300, "unit": "ml", "category": "dairy" },
+    { "name": "baby potatoes", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "peanuts", "quantity": 30, "unit": "g", "category": "misc" },
+    { "name": "basmati rice (cooked)", "quantity": 180, "unit": "g", "category": "carbs" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil in a pot, sauté curry paste 1 min until fragrant.",
+    "Stir in coconut milk and bring to simmer.",
+    "Add tofu cubes and potatoes; cook 12 min until potatoes are tender.",
+    "Stir in peanuts, serve over rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan BBQ Jackfruit Burrito Bowl",
+  "calories": 850,
+  "macroRatio": {
+    "protein": 0.24,
+    "carbs": 0.48,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "BBQ jackfruit", "quantity": 200, "unit": "g", "category": "protein" },
+    { "name": "brown rice (cooked)", "quantity": 200, "unit": "g", "category": "carbs" },
+    { "name": "black beans", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "roasted corn", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "guacamole", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "salsa", "quantity": 60, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Layer rice, beans, corn, and jackfruit in a bowl.",
+    "Top with guacamole and salsa; serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Portobello Stroganoff over Pasta",
+  "calories": 850,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy"],
+  "ingredients": [
+    { "name": "whole wheat fettuccine", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "portobello mushrooms", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "oat cream", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "vegetable broth", "quantity": 100, "unit": "ml", "category": "pantry" },
+    { "name": "onion", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook pasta until al dente; reserve 50 ml cooking water; drain.",
+    "Sauté onion and mushrooms in oil until golden (5 min).",
+    "Add broth and cream; simmer 2 min. Toss pasta with sauce and reserved water."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Sweet Potato & Walnut Enchilada Bake",
+  "calories": 850,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts","Gluten"],
+  "ingredients": [
+    { "name": "whole wheat tortillas", "quantity": 4, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "roasted sweet potato", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "black beans", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "enchilada sauce", "quantity": 150, "unit": "g", "category": "pantry" },
+    { "name": "walnuts", "quantity": 60, "unit": "g", "category": "misc" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Fill tortillas with potato, beans, and walnuts; roll and place in dish.",
+    "Pour sauce over tortillas; bake at 180 °C for 20 min until heated through."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Moussaka with Lentils & Cashew Béchamel",
+  "calories": 900,
+  "macroRatio": {
+    "protein": 0.24,
+    "carbs": 0.48,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts","Soy"],
+  "ingredients": [
+    { "name": "eggplant", "quantity": 250, "unit": "g", "category": "vegetables" },
+    { "name": "red lentils", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "tomato sauce", "quantity": 180, "unit": "g", "category": "pantry" },
+    { "name": "cashew béchamel", "quantity": 200, "unit": "g", "category": "dairy" },
+    { "name": "onion", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Roast eggplant slices brushed with oil at 200 °C for 15 min.",
+    "Sauté onion 4 min, add lentils and tomato sauce; simmer 12 min.",
+    "Layer eggplant, lentil mixture, and béchamel in dish; bake 30 min at 180 °C."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Jackfruit & Chickpea Curry with Coconut Rice",
+  "calories": 900,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Coconut","Soy"],
+  "ingredients": [
+    { "name": "BBQ jackfruit", "quantity": 200, "unit": "g", "category": "protein" },
+    { "name": "canned chickpeas", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "green curry paste", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "coconut milk", "quantity": 300, "unit": "ml", "category": "dairy" },
+    { "name": "jasmine rice", "quantity": 200, "unit": "g", "category": "carbs" },
+    { "name": "mixed bell peppers", "quantity": 120, "unit": "g", "category": "vegetables" }
+  ],
+  "recipe": [
+    "Cook rice in coconut milk and water (1:1) until fluffy.",
+    "Sauté curry paste 1 min, add jackfruit, chickpeas, peppers, and coconut milk; simmer 10 min.",
+    "Serve curry over coconut rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Paella with Artichoke, Peas & Tempeh",
+  "calories": 900,
+  "macroRatio": {
+    "protein": 0.24,
+    "carbs": 0.48,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy"],
+  "ingredients": [
+    { "name": "paella rice", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "tempeh", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "artichoke hearts", "quantity": 120, "unit": "g", "category": "vegetables" },
+    { "name": "frozen peas", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 400, "unit": "ml", "category": "pantry" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "saffron", "quantity": 0.2, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté tempeh cubes in oil until golden, set aside.",
+    "Sauté rice with saffron 1 min, add broth, artichokes, and peas; simmer 20 min.",
+    "Stir in tempeh and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Shepherd’s Pie with Lentils & Cauliflower Mash",
+  "calories": 900,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "red lentils", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "mixed vegetables", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 150, "unit": "ml", "category": "pantry" },
+    { "name": "cauliflower", "quantity": 300, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook lentils in broth with vegetables 12 min; season.",
+    "Steam cauliflower and mash with oil until smooth.",
+    "Layer lentil mixture in dish, top with cauliflower mash; bake 20 min at 180 °C."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Moussaka with Lentils & Cashew Béchamel",
+  "calories": 900,
+  "macroRatio": {
+    "protein": 0.24,
+    "carbs": 0.48,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts","Soy"],
+  "ingredients": [
+    { "name": "eggplant", "quantity": 250, "unit": "g", "category": "vegetables" },
+    { "name": "red lentils", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "tomato sauce", "quantity": 180, "unit": "g", "category": "pantry" },
+    { "name": "cashew béchamel", "quantity": 200, "unit": "g", "category": "dairy" },
+    { "name": "onion", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Roast eggplant slices brushed with oil at 200 °C for 15 min.",
+    "Sauté onion 4 min, add lentils and tomato sauce; simmer 12 min.",
+    "Layer eggplant, lentil mixture, and béchamel in dish; bake 30 min at 180 °C."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Jackfruit & Chickpea Curry with Coconut Rice",
+  "calories": 900,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Coconut","Soy"],
+  "ingredients": [
+    { "name": "BBQ jackfruit", "quantity": 200, "unit": "g", "category": "protein" },
+    { "name": "canned chickpeas", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "green curry paste", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "coconut milk", "quantity": 300, "unit": "ml", "category": "dairy" },
+    { "name": "jasmine rice", "quantity": 200, "unit": "g", "category": "carbs" },
+    { "name": "mixed bell peppers", "quantity": 120, "unit": "g", "category": "vegetables" }
+  ],
+  "recipe": [
+    "Cook rice in coconut milk and water (1:1) until fluffy.",
+    "Sauté curry paste 1 min, add jackfruit, chickpeas, peppers, and coconut milk; simmer 10 min.",
+    "Serve curry over coconut rice."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Paella with Artichoke, Peas & Tempeh",
+  "calories": 900,
+  "macroRatio": {
+    "protein": 0.24,
+    "carbs": 0.48,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy"],
+  "ingredients": [
+    { "name": "paella rice", "quantity": 120, "unit": "g", "category": "carbs" },
+    { "name": "tempeh", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "artichoke hearts", "quantity": 120, "unit": "g", "category": "vegetables" },
+    { "name": "frozen peas", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 400, "unit": "ml", "category": "pantry" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "saffron", "quantity": 0.2, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Sauté tempeh cubes in oil until golden, set aside.",
+    "Sauté rice with saffron 1 min, add broth, artichokes, and peas; simmer 20 min.",
+    "Stir in tempeh and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Shepherd’s Pie with Lentils & Cauliflower Mash",
+  "calories": 900,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "red lentils", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "mixed vegetables", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 150, "unit": "ml", "category": "pantry" },
+    { "name": "cauliflower", "quantity": 300, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook lentils in broth with vegetables 12 min; season.",
+    "Steam cauliflower and mash with oil until smooth.",
+    "Layer lentil mixture in dish, top with cauliflower mash; bake 20 min at 180 °C."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Rendang Jackfruit with Coconut Rice",
+  "calories": 950,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Coconut"],
+  "ingredients": [
+    { "name": "jackfruit", "quantity": 200, "unit": "g", "category": "protein" },
+    { "name": "rendang paste", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "coconut milk", "quantity": 300, "unit": "ml", "category": "dairy" },
+    { "name": "jasmine rice (cooked)", "quantity": 200, "unit": "g", "category": "carbs" },
+    { "name": "mixed greens", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil in a pan, sauté rendang paste 1 min; add coconut milk and bring to a simmer.",
+    "Stir in jackfruit; cook 10 min until sauce thickens.",
+    "Serve over rice with greens on the side."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Eggplant & Chickpea Tagine with Couscous",
+  "calories": 950,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "eggplant", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "canned chickpeas", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "Moroccan spice blend", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "tomato puree", "quantity": 150, "unit": "g", "category": "pantry" },
+    { "name": "couscous (cooked)", "quantity": 200, "unit": "g", "category": "carbs" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Heat oil, sauté eggplant and spice blend 4 min until fragrant.",
+    "Add chickpeas and puree; simmer 8 min.",
+    "Serve tagine over couscous."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Black Bean & Sweet Potato Enchilada Casserole",
+  "calories": 950,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    { "name": "whole wheat tortillas", "quantity": 6, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "roasted sweet potato", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "black beans", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "enchilada sauce", "quantity": 200, "unit": "g", "category": "pantry" },
+    { "name": "vegan cheese shreds", "quantity": 100, "unit": "g", "category": "dairy" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Layer tortillas, sweet potato, beans, sauce, and cheese in a casserole dish; repeat layers.",
+    "Bake at 180 °C for 20 min until bubbly."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Creamy Mushroom Stroganoff with Vegan Pasta",
+  "calories": 950,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy"],
+  "ingredients": [
+    { "name": "vegan fettuccine", "quantity": 150, "unit": "g", "category": "carbs" },
+    { "name": "mixed mushrooms", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "oat cream", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "vegetable broth", "quantity": 150, "unit": "ml", "category": "pantry" },
+    { "name": "onion", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook pasta until al dente; reserve 50 ml cooking water and drain.",
+    "Sauté onion and mushrooms in oil until golden (6 min).",
+    "Add broth and cream; simmer 3 min. Toss pasta with sauce and reserved water."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Holiday Nut Roast with Cranberry Sauce",
+  "calories": 1000,
+  "macroRatio": {
+    "protein": 0.24,
+    "carbs": 0.48,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts","Soy","Gluten"],
+  "ingredients": [
+    { "name": "mixed nuts (cashews, walnuts)", "quantity": 100, "unit": "g", "category": "misc" },
+    { "name": "lentils", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "breadcrumbs", "quantity": 80, "unit": "g", "category": "carbs" },
+    { "name": "vegetable broth", "quantity": 200, "unit": "ml", "category": "pantry" },
+    { "name": "cranberry sauce", "quantity": 100, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Pulse nuts in a food processor until coarse; combine with cooked lentils, breadcrumbs, broth, and oil.",
+    "Press mixture into a loaf pan and bake at 180 °C for 30 min until firm.",
+    "Slice and serve with warm cranberry sauce on top."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Black Bean & Jackfruit Burrito Bake",
+  "calories": 1000,
+  "macroRatio": {
+    "protein": 0.26,
+    "carbs": 0.46,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten"],
+  "ingredients": [
+    { "name": "whole wheat tortillas", "quantity": 6, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "black beans", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "BBQ jackfruit", "quantity": 200, "unit": "g", "category": "protein" },
+    { "name": "corn kernels", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "vegan cheese shreds", "quantity": 120, "unit": "g", "category": "dairy" },
+    { "name": "enchilada sauce", "quantity": 150, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Layer tortillas, beans, jackfruit, corn, cheese, and sauce in a baking dish; repeat layers until full.",
+    "Drizzle oil on top and bake at 180 °C for 25 min until bubbly and golden."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Creamy Cashew Alfredo with Mushrooms & Peas",
+  "calories": 1000,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.50,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts","Gluten","Soy"],
+  "ingredients": [
+    { "name": "fettuccine pasta", "quantity": 150, "unit": "g", "category": "carbs" },
+    { "name": "cashew cream sauce", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "mushrooms", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "green peas", "quantity": 100, "unit": "g", "category": "vegetables" },
+    { "name": "nutritional yeast", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook pasta until al dente; reserve 50 ml cooking water and drain.",
+    "Sauté mushrooms in oil until golden (5 min), stir in peas for 2 min.",
+    "Add cashew sauce and yeast, simmer 2 min; toss with pasta and reserved water."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Shepherd’s Pie with Lentils, Chickpeas & Cauliflower Mash",
+  "calories": 1000,
+  "macroRatio": {
+    "protein": 0.24,
+    "carbs": 0.48,
+    "fats": 0.28
+  },
+  "category": "Dinner",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "red lentils", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "canned chickpeas", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "mixed vegetables", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "vegetable broth", "quantity": 200, "unit": "ml", "category": "pantry" },
+    { "name": "cauliflower", "quantity": 400, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Cook lentils in broth with vegetables until tender (12 min), stir in chickpeas.",
+    "Steam cauliflower and mash with oil until smooth.",
+    "Layer lentil-chickpea mix in dish, top with cauliflower mash; bake 25 min at 180 °C."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Almond & Raisin Trail Mix",
+  "calories": 100,
+  "macroRatio": {
+    "protein": 0.10,
+    "carbs": 0.30,
+    "fats": 0.60
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts","Sulfites"],
+  "ingredients": [
+    { "name": "almonds", "quantity": 15, "unit": "g", "category": "misc" },
+    { "name": "raisins", "quantity": 10, "unit": "g", "category": "fruits" }
+  ],
+  "recipe": [
+    "Combine almonds and raisins in a small container or bag.",
+    "Shake gently to mix and enjoy."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Carrot Sticks & Hummus",
+  "calories": 100,
+  "macroRatio": {
+    "protein": 0.09,
+    "carbs": 0.43,
+    "fats": 0.48
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Sesame"],
+  "ingredients": [
+    { "name": "carrot sticks", "quantity": 50, "unit": "g", "category": "vegetables" },
+    { "name": "hummus", "quantity": 30, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Dip carrot sticks into hummus.",
+    "Enjoy immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Peanut Oat Energy Ball",
+  "calories": 100,
+  "macroRatio": {
+    "protein": 0.12,
+    "carbs": 0.40,
+    "fats": 0.48
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Peanuts"],
+  "ingredients": [
+    { "name": "rolled oats", "quantity": 10, "unit": "g", "category": "carbs" },
+    { "name": "peanut butter", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "dates", "quantity": 5, "unit": "g", "category": "fruits" }
+  ],
+  "recipe": [
+    "Pulse oats, peanut butter, and dates in a food processor until combined.",
+    "Roll into a ball and refrigerate 10 min before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Roasted Chickpeas",
+  "calories": 100,
+  "macroRatio": {
+    "protein": 0.19,
+    "carbs": 0.56,
+    "fats": 0.25
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Legumes"],
+  "ingredients": [
+    { "name": "canned chickpeas", "quantity": 30, "unit": "g", "category": "protein" },
+    { "name": "olive oil", "quantity": 3, "unit": "g", "category": "pantry" },
+    { "name": "salt", "quantity": 1, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toss chickpeas with oil and salt; roast at 200 °C for 15 min until crispy.",
+    "Cool slightly and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Avocado Toast Bites",
+  "calories": 150,
+  "macroRatio": {
+    "protein": 0.05,
+    "carbs": 0.30,
+    "fats": 0.65
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    { "name": "whole grain bread", "quantity": 1, "singular": "slice", "plural": "slices", "wholeItem": true, "category": "carbs" },
+    { "name": "avocado", "quantity": 50, "unit": "g", "category": "fruits" },
+    { "name": "lemon juice", "quantity": 2, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toast the bread slice and cut into 4 bite-sized pieces.",
+    "Mash avocado with lemon juice, spread evenly on toast bites.",
+    "Serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Apple Slices with Almond Butter",
+  "calories": 150,
+  "macroRatio": {
+    "protein": 0.05,
+    "carbs": 0.60,
+    "fats": 0.35
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts"],
+  "ingredients": [
+    { "name": "apple", "quantity": 1, "singular": "apple", "plural": "apples", "wholeItem": true, "category": "fruits" },
+    { "name": "almond butter", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Core and slice the apple into wedges.",
+    "Serve with almond butter for dipping."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Yogurt Parfait",
+  "calories": 150,
+  "macroRatio": {
+    "protein": 0.10,
+    "carbs": 0.50,
+    "fats": 0.40
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy"],
+  "ingredients": [
+    { "name": "soy yogurt", "quantity": 100, "unit": "g", "category": "dairy" },
+    { "name": "mixed berries", "quantity": 50, "unit": "g", "category": "fruits" },
+    { "name": "granola", "quantity": 15, "unit": "g", "category": "carbs" }
+  ],
+  "recipe": [
+    "Layer soy yogurt, berries, and granola in a glass or bowl.",
+    "Serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Cucumber & Avocado Sushi Rolls",
+  "calories": 150,
+  "macroRatio": {
+    "protein": 0.05,
+    "carbs": 0.45,
+    "fats": 0.50
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy"],
+  "ingredients": [
+    { "name": "nori sheets", "quantity": 1, "singular": "sheet", "plural": "sheets", "wholeItem": true, "category": "misc" },
+    { "name": "sushi rice", "quantity": 40, "unit": "g", "category": "carbs" },
+    { "name": "cucumber", "quantity": 30, "unit": "g", "category": "vegetables" },
+    { "name": "avocado", "quantity": 30, "unit": "g", "category": "fruits" }
+  ],
+  "recipe": [
+    "Spread rice on nori sheet, leaving an edge.",
+    "Lay cucumber and avocado strips, roll tightly and slice into 6 pieces.",
+    "Serve with soy sauce if desired."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Banana Peanut Butter Oat Cookies (2 pcs)",
+  "calories": 200,
+  "macroRatio": {
+    "protein": 0.12,
+    "carbs": 0.52,
+    "fats": 0.36
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Peanuts"],
+  "ingredients": [
+    { "name": "rolled oats", "quantity": 30, "unit": "g", "category": "carbs" },
+    { "name": "banana", "quantity": 50, "unit": "g", "category": "fruits" },
+    { "name": "natural peanut butter", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Mash banana and peanut butter together in a bowl.",
+    "Stir in oats until combined; shape into two cookies on a baking sheet.",
+    "Bake at 180 °C for 10 min until firm."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Spicy Roasted Almonds & Pumpkin Seeds",
+  "calories": 200,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.14,
+    "fats": 0.68
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts","Seeds"],
+  "ingredients": [
+    { "name": "raw almonds", "quantity": 20, "unit": "g", "category": "misc" },
+    { "name": "pumpkin seeds", "quantity": 15, "unit": "g", "category": "misc" },
+    { "name": "smoked paprika", "quantity": 1, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toss almonds and seeds with oil and paprika.",
+    "Roast at 180 °C for 12 min until golden and fragrant."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Tomato & Basil Bruschetta (4 pcs)",
+  "calories": 200,
+  "macroRatio": {
+    "protein": 0.06,
+    "carbs": 0.56,
+    "fats": 0.38
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten"],
+  "ingredients": [
+    { "name": "baguette slices", "quantity": 4, "singular": "slice", "plural": "slices", "wholeItem": true, "category": "carbs" },
+    { "name": "tomato", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "fresh basil", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toast baguette slices under broiler until golden.",
+    "Top with diced tomato, basil, and drizzle oil."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Edamame with Sea Salt & Lime",
+  "calories": 200,
+  "macroRatio": {
+    "protein": 0.34,
+    "carbs": 0.38,
+    "fats": 0.28
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy"],
+  "ingredients": [
+    { "name": "edamame (shelled)", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "sea salt", "quantity": 1, "unit": "g", "category": "pantry" },
+    { "name": "lime wedge", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Steam or boil edamame for 5 min; drain.",
+    "Sprinkle with salt and squeeze lime over before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Chocolate Overnight Oats",
+  "calories": 250,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.60,
+    "fats": 0.25
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Tree Nuts","Soy"],
+  "ingredients": [
+    { "name": "rolled oats", "quantity": 40, "unit": "g", "category": "carbs" },
+    { "name": "almond milk", "quantity": 120, "unit": "ml", "category": "dairy" },
+    { "name": "cocoa powder", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "chia seeds", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "maple syrup", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "almond butter", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Combine oats, milk, cocoa, chia seeds, and syrup in a jar; stir well.",
+    "Refrigerate overnight (≥6 h). Top with almond butter before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Savory Kale & White Bean Dip with Crackers",
+  "calories": 250,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.45,
+    "fats": 0.35
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Legumes","Tree Nuts"],
+  "ingredients": [
+    { "name": "cannellini beans", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "kale", "quantity": 40, "unit": "g", "category": "vegetables" },
+    { "name": "olive oil", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "lemon juice", "quantity": 5, "unit": "g", "category": "pantry" },
+    { "name": "whole grain crackers", "quantity": 30, "unit": "g", "category": "carbs" }
+  ],
+  "recipe": [
+    "Blend beans, kale, oil, and lemon into a smooth dip.",
+    "Serve with crackers."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Cinnamon Apple & Walnut Salad",
+  "calories": 250,
+  "macroRatio": {
+    "protein": 0.05,
+    "carbs": 0.60,
+    "fats": 0.35
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts"],
+  "ingredients": [
+    { "name": "apple", "quantity": 1, "singular": "apple", "plural": "apples", "wholeItem": true, "category": "fruits" },
+    { "name": "walnuts", "quantity": 25, "unit": "g", "category": "misc" },
+    { "name": "cinnamon", "quantity": 2, "unit": "g", "category": "pantry" },
+    { "name": "lemon juice", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Chop apple and toss with lemon and cinnamon.",
+    "Sprinkle walnuts on top and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Peanut Butter Banana Smoothie",
+  "calories": 250,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.55,
+    "fats": 0.25
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Peanuts","Soy"],
+  "ingredients": [
+    { "name": "banana", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "peanut butter", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "soy milk", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "ice cubes", "quantity": 5, "unit": "pcs", "category": "misc" }
+  ],
+  "recipe": [
+    "Blend all ingredients until smooth.",
+    "Serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Chickpea Salad Lettuce Cups",
+  "calories": 300,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.45,
+    "fats": 0.35
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 4.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Legumes","Soy"],
+  "ingredients": [
+    { "name": "canned chickpeas", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "diced bell pepper", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "diced cucumber", "quantity": 60, "unit": "g", "category": "vegetables" },
+    { "name": "vegan mayo", "quantity": 20, "unit": "g", "category": "pantry" },
+    { "name": "butter lettuce leaves", "quantity": 4, "singular": "leaf", "plural": "leaves", "wholeItem": true, "category": "vegetables" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Mash chickpeas lightly and mix with mayo, oil, peppers, and cucumber.",
+    "Spoon mixture into lettuce leaves and serve as cups."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Protein-Packed Smoothie Bowl",
+  "calories": 300,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.45,
+    "fats": 0.25
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy"],
+  "ingredients": [
+    { "name": "frozen mixed berries", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "banana", "quantity": 50, "unit": "g", "category": "fruits" },
+    { "name": "pea protein powder", "quantity": 20, "unit": "g", "category": "protein" },
+    { "name": "soy yogurt", "quantity": 80, "unit": "g", "category": "dairy" },
+    { "name": "almond milk", "quantity": 100, "unit": "ml", "category": "dairy" }
+  ],
+  "recipe": [
+    "Blend all ingredients until smooth and thick.",
+    "Pour into a bowl and enjoy with a spoon."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Sweet Potato Hummus & Pita",
+  "calories": 300,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.50,
+    "fats": 0.35
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Sesame","Legumes"],
+  "ingredients": [
+    { "name": "sweet potato hummus", "quantity": 100, "unit": "g", "category": "pantry" },
+    { "name": "whole wheat pita", "quantity": 1, "singular": "pita", "plural": "pitas", "wholeItem": true, "category": "carbs" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "smoked paprika", "quantity": 2, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Warm pita briefly in oven or toaster.",
+    "Spread hummus on pita, drizzle oil and sprinkle paprika; cut into wedges."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Peanut Butter & Jelly Rice Cakes",
+  "calories": 300,
+  "macroRatio": {
+    "protein": 0.12,
+    "carbs": 0.60,
+    "fats": 0.28
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Peanuts","Soy","Gluten"],
+  "ingredients": [
+    { "name": "rice cakes", "quantity": 2, "singular": "cake", "plural": "cakes", "wholeItem": true, "category": "carbs" },
+    { "name": "natural peanut butter", "quantity": 30, "unit": "g", "category": "pantry" },
+    { "name": "berry jam", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Spread peanut butter evenly on rice cakes.",
+    "Top with jam and serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Chocolate Almond Protein Shake",
+  "calories": 350,
+  "macroRatio": {
+    "protein": 0.30,
+    "carbs": 0.40,
+    "fats": 0.30
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts","Soy"],
+  "ingredients": [
+    { "name": "pea protein powder", "quantity": 30, "unit": "g", "category": "protein" },
+    { "name": "almond milk", "quantity": 250, "unit": "ml", "category": "dairy" },
+    { "name": "cocoa powder", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "banana", "quantity": 50, "unit": "g", "category": "fruits" },
+    { "name": "almond butter", "quantity": 15, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Blend all ingredients until smooth and creamy.",
+    "Serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Spinach & Artichoke Dip with Pretzels",
+  "calories": 350,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.45,
+    "fats": 0.40
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy"],
+  "ingredients": [
+    { "name": "spinach", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "artichoke hearts", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "vegan mayo", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "pretzel sticks", "quantity": 50, "unit": "g", "category": "carbs" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Blend spinach, artichoke, mayo, and oil until well combined.",
+    "Serve dip with pretzel sticks."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Mango Coconut Chia Pudding",
+  "calories": 350,
+  "macroRatio": {
+    "protein": 0.10,
+    "carbs": 0.55,
+    "fats": 0.35
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts","Coconut","Soy"],
+  "ingredients": [
+    { "name": "chia seeds", "quantity": 30, "unit": "g", "category": "pantry" },
+    { "name": "coconut milk", "quantity": 150, "unit": "ml", "category": "dairy" },
+    { "name": "mango puree", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "agave syrup", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Mix chia seeds, coconut milk, puree, and syrup in a jar.",
+    "Refrigerate ≥4 h until thick; stir and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Sweet Potato & Black Bean Nachos",
+  "calories": 350,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.50,
+    "fats": 0.32
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "tortilla chips", "quantity": 60, "unit": "g", "category": "carbs" },
+    { "name": "roasted sweet potato", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "black beans", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "salsa", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "guacamole", "quantity": 40, "unit": "g", "category": "fruits" }
+  ],
+  "recipe": [
+    "Layer chips, sweet potato, and beans on a plate; microwave 1 min to warm.",
+    "Top with salsa and guacamole before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Peanut Butter Banana Wrap",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.55,
+    "fats": 0.30
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Peanuts","Soy"],
+  "ingredients": [
+    { "name": "whole wheat tortilla", "quantity": 1, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "ripe banana", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "natural peanut butter", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "maple syrup", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Spread peanut butter and drizzle maple syrup over the tortilla.",
+    "Place banana on top, roll up tightly, slice in half and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Savory Tofu & Avocado Rice Cake Stack",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.40,
+    "fats": 0.35
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten"],
+  "ingredients": [
+    { "name": "rice cakes", "quantity": 2, "singular": "cake", "plural": "cakes", "wholeItem": true, "category": "carbs" },
+    { "name": "firm tofu", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "avocado", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "tamari", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "sesame oil", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Pan-fry tofu in sesame oil and tamari until golden, slice thinly.",
+    "Top rice cakes with avocado slices and tofu pieces, serve immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Chocolate Date Bars",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.10,
+    "carbs": 0.65,
+    "fats": 0.25
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts"],
+  "ingredients": [
+    { "name": "pitted dates", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "raw almonds", "quantity": 40, "unit": "g", "category": "misc" },
+    { "name": "cocoa powder", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "oats", "quantity": 30, "unit": "g", "category": "carbs" }
+  ],
+  "recipe": [
+    "Blend dates, almonds, oats, and cocoa into a sticky mixture.",
+    "Press into a small dish, chill 1 h, then cut into two bars."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Falafel & Tzatziki Dip",
+  "calories": 400,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.45,
+    "fats": 0.30
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 4.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Legumes","Gluten","Soy"],
+  "ingredients": [
+    { "name": "store-bought falafel balls", "quantity": 4, "singular": "ball", "plural": "balls", "wholeItem": true, "category": "protein" },
+    { "name": "vegan tzatziki", "quantity": 60, "unit": "g", "category": "dairy" },
+    { "name": "olive oil", "quantity": 10, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Warm falafel balls in oven or air-fryer until crispy.",
+    "Serve with tzatziki dip alongside."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Maple Pecan Greek-Style Yogurt",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.45,
+    "fats": 0.35
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts","Soy"],
+  "ingredients": [
+    { "name": "soy Greek-style yogurt", "quantity": 200, "unit": "g", "category": "dairy" },
+    { "name": "pecans", "quantity": 30, "unit": "g", "category": "misc" },
+    { "name": "maple syrup", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Spoon yogurt into a bowl.",
+    "Top with pecans and drizzle maple syrup."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Spiced Sweet Potato Fries & Aioli",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.10,
+    "carbs": 0.55,
+    "fats": 0.35
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy"],
+  "ingredients": [
+    { "name": "sweet potato fries", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "vegan aioli", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "smoked paprika", "quantity": 2, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Bake fries at 200 °C for 20 min, tossing halfway.",
+    "Serve with aioli and a dusting of paprika."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Berry Quinoa Parfait",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.52,
+    "fats": 0.30
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "cooked quinoa", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "mixed berries", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "coconut yogurt", "quantity": 100, "unit": "g", "category": "dairy" },
+    { "name": "almond slivers", "quantity": 20, "unit": "g", "category": "misc" }
+  ],
+  "recipe": [
+    "Layer quinoa, yogurt, and berries in a glass.",
+    "Top with almond slivers and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Buffalo Cauliflower Bites",
+  "calories": 450,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.45,
+    "fats": 0.40
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "cauliflower florets", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "buffalo sauce", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "vegan ranch dip", "quantity": 50, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Toss cauliflower in buffalo sauce; bake at 200 °C for 15 min.",
+    "Serve with ranch dip."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Peanut Butter Chocolate Smoothie Bowl",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Peanuts","Soy","Tree Nuts"],
+  "ingredients": [
+    { "name": "frozen banana", "quantity": 100, "unit": "g", "category": "fruits" },
+    { "name": "peanut butter", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "cocoa powder", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "pea protein powder", "quantity": 30, "unit": "g", "category": "protein" },
+    { "name": "almond milk", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "granola", "quantity": 30, "unit": "g", "category": "carbs" }
+  ],
+  "recipe": [
+    "Blend banana, peanut butter, cocoa, protein powder, and milk until smooth.",
+    "Pour into a bowl and top with granola."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Loaded Sweet Potato Fries",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.10,
+    "carbs": 0.55,
+    "fats": 0.35
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy"],
+  "ingredients": [
+    { "name": "sweet potato fries", "quantity": 250, "unit": "g", "category": "vegetables" },
+    { "name": "black beans", "quantity": 80, "unit": "g", "category": "protein" },
+    { "name": "guacamole", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "vegan cheese shreds", "quantity": 40, "unit": "g", "category": "dairy" },
+    { "name": "cilantro", "quantity": 5, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Bake fries at 200 °C for 20 min.",
+    "Top with beans, cheese, and bake 5 min more.",
+    "Garnish with guacamole and cilantro."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Chickpea Caesar Salad Cups",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.45,
+    "fats": 0.35
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 4.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy","Gluten"],
+  "ingredients": [
+    { "name": "butter lettuce leaves", "quantity": 4, "singular": "leaf", "plural": "leaves", "wholeItem": true, "category": "vegetables" },
+    { "name": "roasted chickpeas", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "vegan Caesar dressing", "quantity": 60, "unit": "g", "category": "pantry" },
+    { "name": "vegan Parmesan", "quantity": 20, "unit": "g", "category": "dairy" }
+  ],
+  "recipe": [
+    "Fill lettuce leaves with chickpeas.",
+    "Drizzle with dressing and sprinkle cheese."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Fruit & Nut Chocolate Bark",
+  "calories": 500,
+  "macroRatio": {
+    "protein": 0.10,
+    "carbs": 0.50,
+    "fats": 0.40
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 4.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts","Soy"],
+  "ingredients": [
+    { "name": "dark vegan chocolate", "quantity": 100, "unit": "g", "category": "pantry" },
+    { "name": "mixed nuts", "quantity": 60, "unit": "g", "category": "misc" },
+    { "name": "dried cranberries", "quantity": 40, "unit": "g", "category": "fruits" },
+    { "name": "sea salt", "quantity": 1, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Melt chocolate, spread on parchment.",
+    "Sprinkle nuts, cranberries, and salt; chill until set.",
+    "Break into 4 pieces and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Peanut Butter Banana Chocolate Smoothie",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.25,
+    "carbs": 0.50,
+    "fats": 0.25
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Peanuts","Soy"],
+  "ingredients": [
+    { "name": "banana", "quantity": 150, "unit": "g", "category": "fruits" },
+    { "name": "peanut butter", "quantity": 60, "unit": "g", "category": "pantry" },
+    { "name": "cocoa powder", "quantity": 15, "unit": "g", "category": "pantry" },
+    { "name": "pea protein powder", "quantity": 40, "unit": "g", "category": "protein" },
+    { "name": "oat milk", "quantity": 250, "unit": "ml", "category": "dairy" }
+  ],
+  "recipe": [
+    "Blend all ingredients until smooth and creamy.",
+    "Pour into a glass and enjoy immediately."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Loaded Nachos with Black Beans & Guacamole",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.52,
+    "fats": 0.30
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "tortilla chips", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "black beans", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "vegan cheese shreds", "quantity": 50, "unit": "g", "category": "dairy" },
+    { "name": "guacamole", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "salsa", "quantity": 60, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Layer chips, beans, and cheese on a baking sheet.",
+    "Bake at 180 °C for 8 min until cheese melts.",
+    "Top with guacamole and salsa before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Sweet Potato & Chickpea Buddha Bowl",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "roasted sweet potato", "quantity": 150, "unit": "g", "category": "vegetables" },
+    { "name": "canned chickpeas", "quantity": 100, "unit": "g", "category": "protein" },
+    { "name": "mixed greens", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "quinoa (cooked)", "quantity": 100, "unit": "g", "category": "carbs" },
+    { "name": "tahini dressing", "quantity": 40, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Arrange sweet potato, chickpeas, greens, and quinoa in a bowl.",
+    "Drizzle with tahini dressing and serve."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Protein-Packed Peanut Butter Oat Bars (2 pcs)",
+  "calories": 550,
+  "macroRatio": {
+    "protein": 0.28,
+    "carbs": 0.48,
+    "fats": 0.24
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 2.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Peanuts","Gluten","Soy"],
+  "ingredients": [
+    { "name": "rolled oats", "quantity": 60, "unit": "g", "category": "carbs" },
+    { "name": "pea protein powder", "quantity": 40, "unit": "g", "category": "protein" },
+    { "name": "natural peanut butter", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "maple syrup", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Mix oats, protein powder, peanut butter, and syrup into a dough.",
+    "Press into a small pan, refrigerate 1 h, then cut into two bars."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Buffalo Cauliflower & Quinoa Bowl",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.20,
+    "carbs": 0.50,
+    "fats": 0.30
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Soy"],
+  "ingredients": [
+    { "name": "cauliflower florets", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "buffalo sauce", "quantity": 60, "unit": "g", "category": "pantry" },
+    { "name": "cooked quinoa", "quantity": 150, "unit": "g", "category": "carbs" },
+    { "name": "vegan ranch dressing", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "green onions", "quantity": 20, "unit": "g", "category": "vegetables" }
+  ],
+  "recipe": [
+    "Toss cauliflower in buffalo sauce; roast at 200 °C for 15 min until crispy.",
+    "Serve over quinoa, drizzle ranch, and garnish with green onions."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Loaded Sweet Potato Nachos",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.18,
+    "carbs": 0.52,
+    "fats": 0.30
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["None"],
+  "ingredients": [
+    { "name": "sweet potato rounds", "quantity": 200, "unit": "g", "category": "vegetables" },
+    { "name": "black beans", "quantity": 120, "unit": "g", "category": "protein" },
+    { "name": "vegan cheese shreds", "quantity": 60, "unit": "g", "category": "dairy" },
+    { "name": "guacamole", "quantity": 80, "unit": "g", "category": "fruits" },
+    { "name": "salsa verde", "quantity": 50, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Roast sweet potato rounds at 200 °C for 20 min until tender.",
+    "Top with beans and cheese; bake 5 min until cheese melts.",
+    "Finish with guacamole and salsa verde."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan Peanut Butter Chocolate Chia Pudding",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.15,
+    "carbs": 0.55,
+    "fats": 0.30
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 1.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Tree Nuts","Soy"],
+  "ingredients": [
+    { "name": "chia seeds", "quantity": 40, "unit": "g", "category": "pantry" },
+    { "name": "cocoa powder", "quantity": 10, "unit": "g", "category": "pantry" },
+    { "name": "almond milk", "quantity": 200, "unit": "ml", "category": "dairy" },
+    { "name": "peanut butter", "quantity": 30, "unit": "g", "category": "pantry" },
+    { "name": "maple syrup", "quantity": 20, "unit": "g", "category": "pantry" }
+  ],
+  "recipe": [
+    "Whisk chia, cocoa, milk, peanut butter, and syrup until smooth.",
+    "Refrigerate ≥4 h until set; stir before serving."
+  ],
+  "mealNotes": []
+},
+{
+  "mealName": "Vegan BBQ Jackfruit Taco Cups",
+  "calories": 600,
+  "macroRatio": {
+    "protein": 0.22,
+    "carbs": 0.48,
+    "fats": 0.30
+  },
+  "category": "Snack",
+  "dietaryPhase": ["deficitPhase","deloadPhase","surplusPhase"],
+  "portionSize": 4.0,
+  "dietaryRestrictions": ["Vegan"],
+  "allergens": ["Gluten","Soy"],
+  "ingredients": [
+    { "name": "mini tortillas", "quantity": 4, "singular": "tortilla", "plural": "tortillas", "wholeItem": true, "category": "carbs" },
+    { "name": "BBQ jackfruit", "quantity": 150, "unit": "g", "category": "protein" },
+    { "name": "shredded cabbage", "quantity": 80, "unit": "g", "category": "vegetables" },
+    { "name": "vegan crema", "quantity": 50, "unit": "g", "category": "pantry" },
+    { "name": "cilantro", "quantity": 10, "unit": "g", "category": "vegetables" }
+  ],
+  "recipe": [
+    "Crumple and crisp mini tortillas in oven at 180 °C for 5 min.",
+    "Fill cups with jackfruit and cabbage; top with crema and cilantro."
+  ],
+  "mealNotes": []
+}
 ]
 
 

@@ -6897,19 +6897,19 @@ function buildMiniTestimonial() {
 
   let name, txt, beforeImg, afterImg;
   if (userGoal.includes("gain")) {
-    name = "Max";
-    txt = "Nothing worked until this. Now I train with confidence — and real progress.";
+    name = "David";
+    txt = "Used to guess everything. Now I train with confidence — and real results.";
     beforeImg = "../assets/harry_chest_before.jpg";
     afterImg = "../assets/harry_chest_after.jpg";
   } else {
     if (gender === "female") {
       name = "Alice";
-      txt = "This changed everything. I feel lighter, healthier, and in control for once.";
+      txt = "Strict plans failed me. This fits into my life — and I finally feel in control.";
       beforeImg = "../assets/halima_back_before.jpg";
       afterImg = "../assets/halima_back_after.jpg";
     } else {
       name = "Lee";
-      txt = "I’ve dropped the weight, feel sharper, and finally feel like myself again.";
+      txt = "Lost 10kg, feel sharper — and for the first time in years, like myself again.";
       beforeImg = "../assets/lynn_before.JPEG";
       afterImg = "../assets/lynn_after.png";
     }

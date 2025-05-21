@@ -2642,22 +2642,22 @@ Helpers to sync logs with the API
     const reviews = [
       {
         name: "David",
-        text: "The strength graphs showed me I was improving even on the weeks I felt off. That feedback gave me confidence — and helped me stay consistent long enough to gain real muscle.",
+        text: "Even on off weeks, the strength graphs showed I was improving. That feedback gave me confidence — and helped me stay consistent long enough to gain real muscle.",
         beforeImage: "../assets/harry_chest_before.jpg",
         afterImage: "../assets/harry_chest_after.jpg",
         testImage: "../assets/5-stars.png",
       },
       {
 
-        name: "Maria",
-        text: "Seeing my streaks and Progress Score tick up each week made all the difference. I wasn’t just guessing anymore — I could actually see myself improving.",
+        name: "Alice",
+        text: "Watching my streaks and Progress Score climb each week made it real. I wasn’t just guessing anymore — I could actually see myself improving.",
         beforeImage: "../assets/halima_back_before.jpg",
         afterImage: "../assets/halima_back_after.jpg",
         testImage: "../assets/5-stars.png",
       },
       {
         name: "Lee",
-        text: "The Coach Insights and milestone tracking kept me grounded. I’d see a new lowest weight logged or a consistency badge, and it reminded me this was actually working.",
+        text: "The milestone tracking and Coach Insights kept me grounded. Seeing a new low weight or a consistency badge reminded me this was actually working.",
         beforeImage: "../assets/lynn_before.JPEG",
         afterImage: "../assets/lynn_after.png",
         testImage: "../assets/5-stars.png",

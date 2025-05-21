@@ -16,21 +16,21 @@ export function initTestimonialsSlider() {
     const reviews = [
       {
         name: "David",
-        text: "I used to just guess what to do. This finally gave me structure — I’ve gained 6kg of muscle, and I actually feel confident now.",
+        text: "I used to wing it at the gym and second-guess everything. Seeing my workouts and progress adapt over time changed everything. I’ve gained 6kg of muscle — and confidence too.",
         beforeImage: "../assets/harry_chest_before.jpg",
         afterImage:  "../assets/harry_chest_after.jpg",
         testImage:   "../assets/5-stars.png",
       },
       {
         name: "Alice",
-        text: "Strict plans always broke down when life got busy. This one adapts — and for the first time, I feel in control.",
+        text: "Strict plans never worked for me. This didn’t just tell me what to do — it fit into my life. I’ve lost weight, feel healthier, and for the first time, I’m in control of the process.",
         beforeImage: "../assets/halima_back_before.jpg",
         afterImage:  "../assets/halima_back_after.jpg",
         testImage:   "../assets/5-stars.png",
       },
       {
         name: "Lee",
-        text: "Nothing stuck—until this. I lost 10kg and, more importantly, I stopped feeling lost.",
+        text: "I’d tried bootcamps, meal plans — nothing stuck. This finally made everything click. I’ve lost 10kg, but more than that, I finally feel like myself again.",
         beforeImage: "../assets/lynn_before.JPEG",
         afterImage:  "../assets/lynn_after.png",
         testImage:   "../assets/5-stars.png",
