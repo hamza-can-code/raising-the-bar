@@ -472,14 +472,14 @@ function calculateBMI() {
     else if (bmi < 24.9) category = "Healthy";
     else if (bmi < 29.9) category = "Overweight";
     else category = "Obese";
-    console.log(`BMI: ${bmi}, Category: ${category}`);
+    // console.log(`BMI: ${bmi}, Category: ${category}`);
     localStorage.setItem("userBMI", bmi);
     localStorage.setItem("bmiCategory", category);
     localStorage.setItem("weight", weight);
     localStorage.setItem("height", height);
     return { bmi, category };
   } else {
-    console.warn("Weight or height missing for BMI calc.");
+    // console.warn("Weight or height missing for BMI calc.");
     return null;
   }
 }
@@ -501,7 +501,7 @@ function calculateMaintenanceCalories() {
 
   // If ANY are missing, exit without calculating.
   if (!w || !h || !a || !g || !act) {
-    console.log("Missing data for maintenance cals calc. Will try again later.");
+    // console.log("Missing data for maintenance cals calc. Will try again later.");
     return null;
   }
 
@@ -511,18 +511,18 @@ function calculateMaintenanceCalories() {
   } else if (g.toLowerCase() === "female") {
     bmr = 10 * w + 6.25 * h - 5 * a - 161;
   } else {
-    console.error("Gender not recognized.");
+    // console.error("Gender not recognized.");
     return null;
   }
 
   const multi = activityMultipliers[act.toLowerCase()];
   if (!multi) {
-    console.error(`Invalid activity level: "${act}"`);
+    // console.error(`Invalid activity level: "${act}"`);
     return null;
   }
 
   const maintenance = Math.round(bmr * multi);
-  console.log(`BMR: ${bmr.toFixed(1)}, Multi: ${multi} => Maintenance: ${maintenance}`);
+  // console.log(`BMR: ${bmr.toFixed(1)}, Multi: ${multi} => Maintenance: ${maintenance}`);
 
   localStorage.setItem("maintenanceCalories", maintenance);
   return maintenance;
@@ -536,7 +536,7 @@ function calculateGoalCalories() {
     localStorage.setItem("gender", gender);
   }
   if (!maintenance || !fitnessGoal) {
-    console.error("Missing maintenance or goal for cals.");
+    // console.error("Missing maintenance or goal for cals.");
     return;
   }
   fitnessGoal = fitnessGoal.toLowerCase();
@@ -562,7 +562,7 @@ function calculateGoalCalories() {
       };
       break;
     default:
-      console.error(`Unknown goal: ${fitnessGoal}`);
+      // console.error(`Unknown goal: ${fitnessGoal}`);
       return;
   }
   localStorage.setItem("goalCalories", JSON.stringify(out));
@@ -580,7 +580,7 @@ function calculateGoalCalories() {
     }
   }
   localStorage.setItem("selectedCalories", selected);
-  console.log(`Selected Calories for effort "${eLevel}": ${selected}`);
+  // console.log(`Selected Calories for effort "${eLevel}": ${selected}`);
   return out;
 }
 
@@ -598,7 +598,7 @@ function calculateBaseProjections() {
   const g = formData.goal ? formData.goal.toLowerCase() : "improve body composition (build muscle & lose fat)";
 
   if (!mCals || !bmiCat || !g) {
-    console.error("Missing maintenance cals, BMI cat, or goal for base projections.");
+    // console.error("Missing maintenance cals, BMI cat, or goal for base projections.");
     return null;
   }
 
@@ -611,7 +611,7 @@ function calculateBaseProjections() {
 
   // Adjust for underweight users aiming to lose weight.
   if (bmiCat === "Underweight" && g === "lose weight") {
-    console.warn("User underweight => restricting weight loss => forcing muscle gain instead.");
+    // console.warn("User underweight => restricting weight loss => forcing muscle gain instead.");
     baseFat = 0;
     baseMuscle = 2.0;
     formData.goal = "gain muscle";
@@ -636,7 +636,7 @@ function calculateBaseProjections() {
   const minWeight = 18.5 * Math.pow(formData.height / 100, 2);
 
   if (projectedWeight < minWeight) {
-    console.warn("Projected weight < safe BMI => adjusting fat loss down.");
+    // console.warn("Projected weight < safe BMI => adjusting fat loss down.");
     adjFat = roundToOneDecimal(Math.max(formData.weight - minWeight, 0));
   }
 
@@ -661,14 +661,14 @@ function handleInputUpdate(currentQuestion) {
   return (e) => {
     formData[currentQuestion.key] =
       currentQuestion.type === "number" ? parseFloat(e.target.value) || 0 : e.target.value;
-    console.log(`Updated ${currentQuestion.key}:`, formData[currentQuestion.key]);
+    // console.log(`Updated ${currentQuestion.key}:`, formData[currentQuestion.key]);
 
     // Only call BMI calc if weight and height are set (and non-zero)
     if (["weight", "height"].includes(currentQuestion.key)) {
       if (formData.weight && formData.height) {
         calculateBMI();
       } else {
-        console.warn("Weight or height missing for BMI calc.");
+        // console.warn("Weight or height missing for BMI calc.");
       }
     }
 
@@ -679,7 +679,7 @@ function handleInputUpdate(currentQuestion) {
         calculateMaintenanceCalories();
         calculateBaseProjections();
       } else {
-        console.log("Waiting for all fields (weight, height, age, gender, activityLevel) before calculating maintenance.");
+        // console.log("Waiting for all fields (weight, height, age, gender, activityLevel) before calculating maintenance.");
       }
     }
   };
@@ -687,12 +687,12 @@ function handleInputUpdate(currentQuestion) {
 
 function calculateAge(dob, validate = true) {
   if (!dob) {
-    console.error("DOB missing/invalid.");
+    // console.error("DOB missing/invalid.");
     return { valid: false, age: null };
   }
   const birth = new Date(dob);
   if (isNaN(birth)) {
-    console.error("Invalid DOB format.");
+    // console.error("Invalid DOB format.");
     return { valid: false, age: null };
   }
   const now = new Date();
@@ -839,11 +839,11 @@ function loadQuestion(i) {
         const dob = e.target.value;
         const { valid, age } = calculateAge(dob);
         if (!valid) {
-          console.warn(`Invalid age: ${age}`);
+          // console.warn(`Invalid age: ${age}`);
           return;
         }
         formData.age = age;
-        console.log(`DOB: ${dob}, Age: ${age}`);
+        // console.log(`DOB: ${dob}, Age: ${age}`);
         // calculateMaintenanceCalories();
       });
     } else {
@@ -851,7 +851,7 @@ function loadQuestion(i) {
       input.addEventListener("input", (e) => {
         // Just store the selected date
         formData[currentQ.key] = e.target.value;
-        console.log(`${currentQ.key} =`, e.target.value);
+        // console.log(`${currentQ.key} =`, e.target.value);
       });
     }
 
@@ -952,7 +952,7 @@ function handleOptionClick(selectedOption, type) {
       }
       formData.gender = selectedGender;
       localStorage.setItem("gender", selectedGender);
-      console.log(`Gender saved: ${selectedGender}`);
+      // console.log(`Gender saved: ${selectedGender}`);
       // no need to fall through to the generic case below
       optionsContainer.querySelectorAll("li").forEach(li => li.classList.remove("selected"));
       selectedOption.classList.add("selected");
@@ -973,7 +973,7 @@ function handleOptionClick(selectedOption, type) {
       formData.goal = selectedGoal;
       localStorage.setItem("goal", selectedGoal);
 
-      console.log(`User Goal saved: ${selectedGoal}`);
+      // console.log(`User Goal saved: ${selectedGoal}`);
 
       // calculateGoalCalories();
       // calculateBaseProjections();
@@ -982,7 +982,7 @@ function handleOptionClick(selectedOption, type) {
       const selectedActivityLevel = clickedText.toLowerCase();
       formData.activityLevel = selectedActivityLevel;
       localStorage.setItem("activityLevel", selectedActivityLevel);
-      console.log(`Activity Level saved: ${selectedActivityLevel}`);
+      // console.log(`Activity Level saved: ${selectedActivityLevel}`);
 
       // calculateMaintenanceCalories();
     }
@@ -990,7 +990,7 @@ function handleOptionClick(selectedOption, type) {
       const selectedFitnessLevel = clickedText.toLowerCase();
       formData.fitnessLevel = selectedFitnessLevel;
       localStorage.setItem("fitnessLevel", selectedFitnessLevel);
-      console.log(`Fitness Level saved: ${selectedFitnessLevel}`);
+      // console.log(`Fitness Level saved: ${selectedFitnessLevel}`);
 
       // calculateBaseProjections();
     }
@@ -998,7 +998,7 @@ function handleOptionClick(selectedOption, type) {
       const selectedWorkoutDays = parseInt(clickedText, 10);
       formData.workoutDays = selectedWorkoutDays;
       localStorage.setItem("workoutDays", selectedWorkoutDays);
-      console.log(`Workout Days saved: ${selectedWorkoutDays}`);
+      // console.log(`Workout Days saved: ${selectedWorkoutDays}`);
 
       // calculateBaseProjections();
     }
@@ -1006,24 +1006,24 @@ function handleOptionClick(selectedOption, type) {
       const selectedsessionDuration = clickedText.toLowerCase();
       formData.sessionDuration = selectedsessionDuration;
       localStorage.setItem("sessionDuration", selectedsessionDuration);
-      console.log(`Workout Duration saved: ${selectedsessionDuration}`);
+      // console.log(`Workout Duration saved: ${selectedsessionDuration}`);
     }
     else if (questionKey === "workoutLocation") {
       const selectedWorkoutLocation = clickedText.toLowerCase();
       formData.workoutLocation = selectedWorkoutLocation;
       localStorage.setItem("workoutLocation", selectedWorkoutLocation);
-      console.log(`Workout Location saved: ${selectedWorkoutLocation}`);
+      // console.log(`Workout Location saved: ${selectedWorkoutLocation}`);
     }
     else if (questionKey === "effortLevel") {
       const normalized = clickedText.toLowerCase().split(" ")[0];
       formData.effortLevel = normalized;
       localStorage.setItem("effortLevel", normalized);
-      console.log(`Effort Level saved: ${normalized}`);
+      // console.log(`Effort Level saved: ${normalized}`);
     }
     else if (questionKey === "goalDriver") {
       formData.goalDriver = clickedText;
       localStorage.setItem("goalDriver", clickedText);
-      console.log(`Goal Driver saved: ${clickedText}`);
+      // console.log(`Goal Driver saved: ${clickedText}`);
     }
   }
   else if (type === "checkbox") {
@@ -1042,7 +1042,7 @@ function handleOptionClick(selectedOption, type) {
     }
     const selectedTexts = Array.from(optionsContainer.querySelectorAll("li.selected")).map(li => li.textContent.trim());
     formData[questionKey] = selectedTexts.map(txt => txt.toLowerCase());
-    console.log("Current selected checkboxes =>", formData[questionKey]);
+    // console.log("Current selected checkboxes =>", formData[questionKey]);
   }
 }
 
@@ -1280,17 +1280,17 @@ function getMaxRPEByAge(age) {
 }
 
 function generateAllPrograms() {
-  console.log("Generating 1-,4-,12-week programs...");
+  // console.log("Generating 1-,4-,12-week programs...");
 
   let wd = parseInt(formData.workoutDays || 3, 10);
   if (isGroupB() && wd > 5) {
-    console.warn("GroupB => clamping days to 5");
+    // console.warn("GroupB => clamping days to 5");
     formData.workoutDays = 5;
   }
 
   const filtered = filterExercisesForUser(EXERCISE_DATABASE);
   if (!filtered.length) {
-    console.warn("No valid eq => fallback to bodyweight.");
+    // console.warn("No valid eq => fallback to bodyweight.");
     filtered.push(...BODYWEIGHT_EXERCISES);
   }
 
@@ -1298,7 +1298,7 @@ function generateAllPrograms() {
   const fourW = buildMultiWeekProgram(filtered, 4);
   const twelveW = buildMultiWeekProgram(filtered, 12);
 
-  console.log("12-week program:", twelveW);   // <--- ADDED for visibility
+  // console.log("12-week program:", twelveW);
 
   localStorage.setItem("oneWeekProgram", JSON.stringify(oneW));
   localStorage.setItem("fourWeekProgram", JSON.stringify(fourW));
@@ -1614,7 +1614,7 @@ function pickPullDay(exList, wNum) {
 
 function pickPullDayNoVertical(exList) {
   const arr = [...exList];
-  console.log("Fallback pull day exercise list:", arr);
+  // console.log("Fallback pull day exercise list:", arr);
 
   // Arch movement
   let arch = arr.filter(e =>
@@ -1625,15 +1625,15 @@ function pickPullDayNoVertical(exList) {
       (e.movementPlane && e.movementPlane.toLowerCase() === "arch")
     )
   );
-  console.log("Arch candidates:", arch);
+  // console.log("Arch candidates:", arch);
 
   let slot1 = pickRandom(arch);
-  console.log("Selected arch movement (slot1):", slot1);
+  // console.log("Selected arch movement (slot1):", slot1);
 
   if (!slot1) {
     const backH = arr.filter(e => e.muscleGroup === "back" && e.movementPlane === "horizontal");
     slot1 = pickRandom(backH);
-    console.log("Fallback to horizontal movement (slot1):", slot1);
+    // console.log("Fallback to horizontal movement (slot1):", slot1);
   }
 
   if (slot1) {
@@ -1643,28 +1643,28 @@ function pickPullDayNoVertical(exList) {
   // Horizontal movement
   const backH2 = arr.filter(e => e.muscleGroup === "back" && e.movementPlane === "horizontal");
   const slot2 = pickRandom(backH2);
-  console.log("Selected horizontal movement (slot2):", slot2);
+  // console.log("Selected horizontal movement (slot2):", slot2);
   if (slot2) arr.splice(arr.indexOf(slot2), 1);
 
   // Biceps
   const biceps = arr.filter(e => e.muscleGroup === "biceps");
   const slot3 = pickRandom(biceps);
-  console.log("Selected biceps movement:", slot3);
+  // console.log("Selected biceps movement:", slot3);
   if (slot3) arr.splice(arr.indexOf(slot3), 1);
 
   // Traps
   const traps = arr.filter(e => e.muscleGroup === "traps");
   const slot4 = pickRandom(traps);
-  console.log("Selected traps movement:", slot4);
+  // console.log("Selected traps movement:", slot4);
   if (slot4) arr.splice(arr.indexOf(slot4), 1);
 
   // Forearms
   const forearms = arr.filter(e => e.muscleGroup === "forearms");
   const slot5 = pickRandom(forearms);
-  console.log("Selected forearms movement:", slot5);
+  // console.log("Selected forearms movement:", slot5);
 
   const result = [slot1, slot2, slot3, slot4, slot5].filter(Boolean);
-  console.log("Final fallback pull day selection:", result);
+  // console.log("Final fallback pull day selection:", result);
   return result;
 }
 
@@ -1932,11 +1932,11 @@ function filterExercisesForUser(exList) {
 
   // 6) Ensure no duplicates and fallback to bodyweight if empty
   if (!arr.length) {
-    console.warn("No valid equipment found => fallback to bodyweight only.");
+    // console.warn("No valid equipment found => fallback to bodyweight only.");
     arr = BODYWEIGHT_EXERCISES.slice();
   }
 
-  console.log("Filtered exercise list for user:", arr);
+  // console.log("Filtered exercise list for user:", arr);
   return arr;
 }
 
@@ -4239,10 +4239,10 @@ function calculateWeeklyCaloriesAndMacros12Week() {
     localStorage.setItem(`week${w}_carbsWMCO`, String(c));
     localStorage.setItem(`week${w}_fatsWMCO`, String(f));
 
-    console.log(`Week ${w}: ${dailyCals} kcals | Protein=${p}g, Carbs=${c}g, Fats=${f}g`);
+    // console.log(`Week ${w}: ${dailyCals} kcals | Protein=${p}g, Carbs=${c}g, Fats=${f}g`);
   }
 
-  console.log("✅ Finished calculating and storing 12-week calorie & macro figures!");
+  // console.log("✅ Finished calculating and storing 12-week calorie & macro figures!");
 }
 
 /*********************************************************
@@ -4263,7 +4263,7 @@ function getMealFrequency() {
 // For debugging if “mealFrequency” never got stored properly
 function debugCheckMealFreq() {
   const raw = localStorage.getItem("mealFrequency");
-  console.log("DEBUG: localStorage mealFrequency=", raw, " => parsed=", getMealFrequency());
+  // console.log("DEBUG: localStorage mealFrequency=", raw, " => parsed=", getMealFrequency());
 }
 
 function calculateMacros(totalCals, macroRatio) {
@@ -4335,8 +4335,8 @@ function scaleIngredient(ingredient, multiplier) {
 }
 
 function portionScaleMeal(meal, newCalorieTarget) {
-  console.log("\n--- portionScaleMeal START ---");
-  console.log("Original Meal:", meal.mealName);
+  // console.log("\n--- portionScaleMeal START ---");
+  // console.log("Original Meal:", meal.mealName);
 
   // 1) If the meal’s current .calories is X, 
   //    the scale factor = newCalorieTarget / X
@@ -4345,7 +4345,7 @@ function portionScaleMeal(meal, newCalorieTarget) {
 
   // Constrain to 0.9..1.1 or your chosen range
   const portionMultiplier = Math.max(0.9, Math.min(1.1, rawScale));
-  console.log(`Target cals=${newCalorieTarget}, base cals=${baseCals}, rawScale=${rawScale.toFixed(3)}, final multiplier=${portionMultiplier.toFixed(2)}`);
+  // console.log(`Target cals=${newCalorieTarget}, base cals=${baseCals}, rawScale=${rawScale.toFixed(3)}, final multiplier=${portionMultiplier.toFixed(2)}`);
 
   // 2) Recompute the "actual" final total cals 
   //    after we clamp the portionMultiplier:
@@ -4354,16 +4354,16 @@ function portionScaleMeal(meal, newCalorieTarget) {
   // 3) Recompute macros from macroRatio * finalCals
   const macrosObj = calculateMacros(finalCals, meal.macroRatio);
 
-  console.log("New totalCals:", finalCals, " => macros:", macrosObj);
+  // console.log("New totalCals:", finalCals, " => macros:", macrosObj);
 
   // 4) Scale the portionSize
   const newPortionSize = parseFloat((meal.portionSize * portionMultiplier).toFixed(2));
-  console.log("Old portionSize=", meal.portionSize, " => new portionSize=", newPortionSize);
+  // console.log("Old portionSize=", meal.portionSize, " => new portionSize=", newPortionSize);
 
   // 5) Scale each ingredient
   const updatedIngredients = meal.ingredients.map(origIng => {
     const scaled = scaleIngredient(origIng, portionMultiplier);
-    console.log(`  Ingredient "${origIng.name}" => old qty=${origIng.quantity} new qty=${scaled.quantity}`);
+    // console.log(`  Ingredient "${origIng.name}" => old qty=${origIng.quantity} new qty=${scaled.quantity}`);
     return scaled;
   });
 
@@ -4378,7 +4378,7 @@ function portionScaleMeal(meal, newCalorieTarget) {
     ingredients: updatedIngredients
   };
 
-  console.log("--- portionScaleMeal END ---\n");
+  // console.log("--- portionScaleMeal END ---\n");
   return updatedMeal;
 }
 
@@ -4389,7 +4389,7 @@ function pickMealForCategory(category, mealTarget, database) {
   const lowerBound = 0.9 * mealTarget;
   const upperBound = 1.1 * mealTarget;
 
-  console.log(`\n[pickMealForCategory] Cat=${category} target=${mealTarget}, range=[${Math.round(lowerBound)}..${Math.round(upperBound)}]`);
+  // console.log(`\n[pickMealForCategory] Cat=${category} target=${mealTarget}, range=[${Math.round(lowerBound)}..${Math.round(upperBound)}]`);
 
   // filter
   const possibleMeals = database.filter(m => {
@@ -4398,10 +4398,10 @@ function pickMealForCategory(category, mealTarget, database) {
     return (m.calories >= lowerBound && m.calories <= upperBound);
   });
 
-  console.log(`  -> Found ${possibleMeals.length} possible meal(s) for "${category}"`, possibleMeals.map(m => m.mealName));
+  // console.log(`  -> Found ${possibleMeals.length} possible meal(s) for "${category}"`, possibleMeals.map(m => m.mealName));
 
   if (!possibleMeals.length) {
-    console.warn(`No ${category} meal found in ±10% range for target ${mealTarget}`);
+    // console.warn(`No ${category} meal found in ±10% range for target ${mealTarget}`);
     return null;
   }
 
@@ -4501,7 +4501,7 @@ function generateTwelveWeekMealPlan() {
 
   // store in localStorage
   localStorage.setItem("twelveWeekMealPlan", JSON.stringify(allWeeks));
-  console.log("✅ 12-week meal plan generated & saved!");
+  // console.log("✅ 12-week meal plan generated & saved!");
 }
 
 /***********************************************************************
@@ -4696,7 +4696,7 @@ function calculateProjectedGoalDate() {
 
   // Validate that weights are valid numbers and nonzero.
   if (isNaN(currWeight) || isNaN(goalWeight) || currWeight === 0 || goalWeight === 0) {
-    console.log("Goal weight or current weight is not properly set.");
+    // console.log("Goal weight or current weight is not properly set.");
     return;
   }
 
@@ -4771,7 +4771,7 @@ function calculateProjectedGoalDate() {
     cumulativeChange += weeklyChangeKg;
 
     if (weeklyChangeKg === 0) {
-      console.log("No caloric difference detected; cannot compute projected goal date.");
+      // console.log("No caloric difference detected; cannot compute projected goal date.");
       break;
     }
   }
@@ -4801,8 +4801,8 @@ function calculateProjectedGoalDate() {
     statusMsg = `Projected to achieve goal on ${projectedDateStr}.`;
   }
 
-  console.log("Projected Goal Date:", projectedDateStr);
-  console.log(statusMsg);
+  // console.log("Projected Goal Date:", projectedDateStr);
+  // console.log(statusMsg);
 
   // Save the projected date and status message.
   localStorage.setItem("projectedGoalDate", projectedDateStr);
@@ -4869,7 +4869,7 @@ nextButton.addEventListener("click", () => {
         "dumbbells", "barbells", "bench", "rack", "kettlebells", "cables",
         "machines", "smith machine", "pull-up bar", "dip station"
       ];
-      console.log("Auto-filled eq for gym => removed Q13 from array.");
+      // console.log("Auto-filled eq for gym => removed Q13 from array.");
     }
   }
 
@@ -4938,7 +4938,7 @@ nextButton.addEventListener("click", () => {
     const selLi = optionsContainer.querySelector("li.selected");
     const val = selLi ? selLi.textContent.trim() : "None";
     localStorage.setItem("dietaryRestrictions", val);
-    console.log("dietaryRestrictions saved at Next =>", val);
+    // console.log("dietaryRestrictions saved at Next =>", val);
   }
   if (currentQ.key === "userGoalWeight") {
     // grab the input element and parse their goal entry
@@ -5021,14 +5021,14 @@ nextButton.addEventListener("click", () => {
       allergies = ["None"];
     }
     localStorage.setItem("foodAllergies", JSON.stringify(allergies));
-    console.log("foodAllergies saved at Next =>", allergies);
+    // console.log("foodAllergies saved at Next =>", allergies);
   }
   if (currentQ.key === "mealFrequency") {
     const selectedOption = optionsContainer.querySelector("li.selected");
     if (selectedOption) {
       const mealFrequency = selectedOption.textContent.trim();
       localStorage.setItem("mealFrequency", mealFrequency);
-      console.log("Meal Frequency saved =>", mealFrequency);
+      // console.log("Meal Frequency saved =>", mealFrequency);
     }
   }
   if (currentQ.key === "ultimateGoal") {
@@ -5036,7 +5036,7 @@ nextButton.addEventListener("click", () => {
     if (goalInput && goalInput.value.trim()) {
       const ultimateGoal = goalInput.value.trim();
       localStorage.setItem("ultimateGoal", ultimateGoal);
-      console.log("Ultimate Goal saved =>", ultimateGoal);
+      // console.log("Ultimate Goal saved =>", ultimateGoal);
     } else {
       displayWarning("Please enter your ultimate goal before proceeding.");
       return;

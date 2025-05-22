@@ -44,36 +44,36 @@ document.addEventListener("DOMContentLoaded", () => {
   userGoal = userGoal ? userGoal.trim().toLowerCase() : ""; // Trim and normalize
 
   // Debugging logs
-  console.log("Name:", name);
-  console.log("Date of Birth:", dob);
-  console.log("Age:", age);
-  console.log("Gender:", gender);
-  console.log("Height:", height);
-  console.log("Weight:", weight);
-  console.log("Activity Level:", activityLevel);
-  console.log("BMI Value:", userBMI);
-  console.log("BMI Category:", bmiCategory);
-  console.log("Maintenance Calories", maintenanceCalories);
-  console.log("Goal-Based Projections Data:", goalBasedProjections);
-  console.log("Goal Calories:", goalCalories);
-  console.log("Selected Calories:", selectedCalories);
-  console.log("Effort Level:", effortLevel);
-  console.log("session Duration:", sessionDuration);
-  console.log("Fitness Level:", fitnessLevel);
-  console.log("Workout Location:", workoutLocation);
-  console.log("Workout Frequency:", workoutFrequency);
-  console.log("1-week program:", oneWeekProgram);
-  console.log("4-week program:", fourWeekProgram);
-  console.log("12-week program:", twelveWeekProgram);
+  // console.log("Name:", name);
+  // console.log("Date of Birth:", dob);
+  // console.log("Age:", age);
+  // console.log("Gender:", gender);
+  // console.log("Height:", height);
+  // console.log("Weight:", weight);
+  // console.log("Activity Level:", activityLevel);
+  // console.log("BMI Value:", userBMI);
+  // console.log("BMI Category:", bmiCategory);
+  // console.log("Maintenance Calories", maintenanceCalories);
+  // console.log("Goal-Based Projections Data:", goalBasedProjections);
+  // console.log("Goal Calories:", goalCalories);
+  // console.log("Selected Calories:", selectedCalories);
+  // console.log("Effort Level:", effortLevel);
+  // console.log("session Duration:", sessionDuration);
+  // console.log("Fitness Level:", fitnessLevel);
+  // console.log("Workout Location:", workoutLocation);
+  // console.log("Workout Frequency:", workoutFrequency);
+  // console.log("1-week program:", oneWeekProgram);
+  // console.log("4-week program:", fourWeekProgram);
+  // console.log("12-week program:", twelveWeekProgram);
 
   // Set default goal if missing or invalid
   if (!userGoal || !["lose weight", "gain muscle", "improve body composition"].includes(userGoal)) {
-    console.warn("User Goal is missing or invalid. Defaulting to 'improve body composition'.");
+    // console.warn("User Goal is missing or invalid. Defaulting to 'improve body composition'.");
     userGoal = "improve body composition";
     localStorage.setItem("goal", userGoal); // Save the default goal
   }
 
-  console.log("User Goal retrieved:", userGoal);
+  // console.log("User Goal retrieved:", userGoal);
 
   function kgToLbs(kg) {
     return kg * 2.20462;
@@ -83,15 +83,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (userGoal === "improve body composition") {
     const maintenanceCalories = localStorage.getItem("maintenanceCalories");
     if (maintenanceCalories) {
-      console.log("Maintenance Calories for Body Composition:", maintenanceCalories);
+      // console.log("Maintenance Calories for Body Composition:", maintenanceCalories);
     } else {
-      console.warn("Maintenance calories not found in localStorage.");
+      // console.warn("Maintenance calories not found in localStorage.");
     }
   }
 
   // Handle missing critical data
   if (!name || !bmiCategory || !goalBasedProjections) {
-    console.warn("Missing data for the dynamic message. Ensure all necessary information is saved.");
+    // console.warn("Missing data for the dynamic message. Ensure all necessary information is saved.");
     const dynamicMessageContainer = document.getElementById("dynamicMessageContainer");
     if (dynamicMessageContainer) {
       dynamicMessageContainer.innerHTML = `
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 1) If critical data is missing, fallback message (keep this check from above if you like)
   if (!name || !localStorage.getItem("userGoalDate") || !localStorage.getItem("projectedGoalDate")) {
-    console.warn("Missing data for the dynamic hero message. Showing basic fallback.");
+    // console.warn("Missing data for the dynamic hero message. Showing basic fallback.");
     if (dynamicMessageContainer) {
       dynamicMessageContainer.innerHTML = `
       <p><strong>${name || "User"}</strong>, we’ve created a personalized program for you. Let’s get started!</p>
@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <p class="hero-subheadline">${heroLine2}</p>
   `;
   } else {
-    console.error("Dynamic message container (#dynamicMessageContainer) not found in the DOM.");
+    // console.error("Dynamic message container (#dynamicMessageContainer) not found in the DOM.");
   }
 
   // 3) Create the summary container (BMI / Daily Cal / Water / Plan)
@@ -399,7 +399,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Log and store the adjusted water intake for the program
     const programWaterIntake = currentWaterIntake * 1.1; // Increase by 10% for the workout program
     localStorage.setItem("programWaterIntake", programWaterIntake.toFixed(2));  // Save program water intake
-    console.log(`Adjusted Water Intake for Program: ${programWaterIntake.toFixed(2)} L`);
+    // console.log(`Adjusted Water Intake for Program: ${programWaterIntake.toFixed(2)} L`);
 
     return `
       <div class="water-section">
@@ -574,16 +574,16 @@ document.addEventListener("DOMContentLoaded", () => {
     afterImageEl.src = afterImgSrc;
   }
 
-  console.log("Testimonial updated:");
-  console.log("Name:", selectedReviewName);
-  console.log("Review Text:", selectedReviewText);
-  console.log("Before Image Source:", beforeImgSrc);
-  console.log("After Image Source:", afterImgSrc);
+  // console.log("Testimonial updated:");
+  // console.log("Name:", selectedReviewName);
+  // console.log("Review Text:", selectedReviewText);
+  // console.log("Before Image Source:", beforeImgSrc);
+  // console.log("After Image Source:", afterImgSrc);
 });
 
 // Data array
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("[JS] Setting up subheading-based scrolling...");
+  // console.log("[JS] Setting up subheading-based scrolling...");
 
   const items = document.querySelectorAll(".wi2-left .wi2-item");
   const pinnedImage = document.getElementById("wi2-image");
@@ -591,7 +591,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // If not found, we bail
   if (!items.length || !pinnedImage || !pinnedDesc) {
-    console.warn("[JS] Required elements not found. Check your HTML IDs/classes.");
+    // console.warn("[JS] Required elements not found. Check your HTML IDs/classes.");
     return;
   }
 
@@ -651,11 +651,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // If any element is missing, we log an error and stop (#1)
   if (!wi2Items.length) {
-    console.error("[JS] No subheadings found under .wi2-left .wi2-item! Check your HTML.");
+    // console.error("[JS] No subheadings found under .wi2-left .wi2-item! Check your HTML.");
     return;
   }
   if (!wi2Image || !wi2Desc) {
-    console.error("[JS] #wi2-image or #wi2-desc is missing in the DOM! Check your HTML IDs.");
+    // console.error("[JS] #wi2-image or #wi2-desc is missing in the DOM! Check your HTML IDs.");
     return;
   }
 
@@ -673,7 +673,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function setActiveContent(newIndex) {
     if (newIndex === currentIndex) return; // no change
     if (newIndex < 0 || newIndex >= whatsIncludedData.length) {
-      console.warn("[JS] Invalid newIndex:", newIndex);
+      // console.warn("[JS] Invalid newIndex:", newIndex);
       return;
     }
     // if pinnedPanel doesn’t exist, just do an immediate swap
@@ -809,7 +809,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const claimProgramBtn = document.getElementById('claimProgramBtn');
 
   if (!floatingCTA || !ctaContainer || !ctaStop) {
-    console.warn("Missing CTA elements. Check #floating-cta, #floatingCtaContainer, #ctaStopContainer");
+    // console.warn("Missing CTA elements. Check #floating-cta, #floatingCtaContainer, #ctaStopContainer");
     return;
   }
 
@@ -878,7 +878,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // CTA button click
   if (claimProgramBtn) {
     claimProgramBtn.addEventListener('click', () => {
-      console.log("CTA clicked!");
+      // console.log("CTA clicked!");
       // e.g. scroll to checkout, open modal, etc.
     });
   }
@@ -913,16 +913,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const floatingCTA = document.getElementById("floating-cta");
 
   if (!floatingCTA) {
-    console.error("Floating CTA not found in the DOM.");
+    // console.error("Floating CTA not found in the DOM.");
     return;
   }
 
-  console.log("Floating CTA script loaded successfully.");
+  // console.log("Floating CTA script loaded successfully.");
 
   // Wait 1500ms and then add the unique class to make it visible
   setTimeout(() => {
     floatingCTA.classList.add("cta-visible");
-    console.log("Floating CTA faded in.");
+    // console.log("Floating CTA faded in.");
   }, 1000);
 });
 

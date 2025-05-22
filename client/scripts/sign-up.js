@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "dashboard.html";
 
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       showError("email-error", err.message);
     }
   });

@@ -21,7 +21,8 @@ function fadeOutLoader() {
 
 async function sendMealLog(mealData) {
   const token = localStorage.getItem('token');
-  if (!token) return console.error('No token, cannot log meal');
+  if (!token) return
+  //  console.error('No token, cannot log meal');
   try {
     const res = await fetch('/api/logMeal', {
       method: 'POST',
@@ -32,9 +33,9 @@ async function sendMealLog(mealData) {
       body: JSON.stringify(mealData)
     });
     if (!res.ok) throw new Error(await res.text());
-    console.log('✅ Meal log saved');
+    // console.log('✅ Meal log saved');
   } catch (err) {
-    console.error('❌ Error logging meal:', err.message);
+    // console.error('❌ Error logging meal:', err.message);
   }
 }
 
@@ -145,7 +146,8 @@ function buildNutritionProgress() {
 
 async function saveNutritionProgressToServer() {
   const token = localStorage.getItem('token');
-  if (!token) return console.error('No token, cannot save progress');
+  if (!token) return
+  //  console.error('No token, cannot save progress');
   const progress = buildNutritionProgress();
   try {
     const res = await fetch('/api/nutrition/saveUserProgress', {
@@ -157,9 +159,9 @@ async function saveNutritionProgressToServer() {
       body: JSON.stringify(progress)
     });
     if (!res.ok) throw new Error(await res.text());
-    console.log('✅ Nutrition progress snapshot saved');
+    // console.log('✅ Nutrition progress snapshot saved');
   } catch (err) {
-    console.error('❌ Error saving nutrition progress:', err.message);
+    // console.error('❌ Error saving nutrition progress:', err.message);
   }
 }
 
@@ -180,12 +182,12 @@ async function saveMyProgressToServer() {
       body: JSON.stringify(payload)
     });
     if (!res.ok) {
-      console.error('❌ saveMyProgressToServer:', await res.text());
+      // console.error('❌ saveMyProgressToServer:', await res.text());
     } else {
-      console.log('✅ Workout-side snapshot updated (streak preserved)');
+      // console.log('✅ Workout-side snapshot updated (streak preserved)');
     }
   } catch (err) {
-    console.error('❌ saveMyProgressToServer:', err.message);
+    // console.error('❌ saveMyProgressToServer:', err.message);
   }
 }
 
@@ -265,10 +267,10 @@ async function loadNutritionProgress() {
     nutritionStreakCount = Number(localStorage.getItem('nutritionStreakCount') || '0');
     updateNutritionStreakDisplay();
 
-    console.log('[NT] snapshot restored – activeWeek =',
-      localStorage.getItem('activeNutritionWeek'));
+    // console.log('[NT] snapshot restored – activeWeek =',
+    //   localStorage.getItem('activeNutritionWeek'));
   } catch (err) {
-    console.error('❌ loadNutritionProgress:', err.message);
+    // console.error('❌ loadNutritionProgress:', err.message);
   }
 }
 
@@ -316,7 +318,7 @@ function updateActiveWeek() {
   localStorage.setItem('activeNutritionWeek', String(activeWeek));
   localStorage.setItem('activeWorkoutWeek', String(activeWeek));
 
-  console.log(`[NT] Active week recalculated → Week ${activeWeek}`);
+  // console.log(`[NT] Active week recalculated → Week ${activeWeek}`);
   return activeWeek;
 }
 
@@ -351,7 +353,7 @@ async function fetchPurchasedWeeks() {
 
   } catch (err) {
     /* very unlikely now – only runs when the call itself fails */
-    console.warn("[NT Access] falling back –", err.message);
+    // console.warn("[NT Access] falling back –", err.message);
     purchasedWeeks = (planName === "12-Week Program") ? 12 : 0;
   }
 
@@ -406,7 +408,7 @@ window.addEventListener('DOMContentLoaded', fetchPurchasedWeeks);
     setTimeout(fadeOutLoader, 180);
 
   } catch (err) {
-    console.error('[NT boot]', err);
+    // console.error('[NT boot]', err);
     localStorage.removeItem('token');
     location.href = 'log-in.html';
   }
@@ -518,7 +520,7 @@ function updateActiveWeek() {
     setToMidnight(today);
     rawStart = today.toISOString();
     localStorage.setItem("programStartDate", rawStart);
-    console.log("Program start date set to today:", today.toString());
+    // console.log("Program start date set to today:", today.toString());
   }
 
   // 2. Calculate the calendar week based on programStartDate
@@ -553,12 +555,12 @@ function updateActiveWeek() {
   localStorage.setItem("activeWorkoutWeek", activeWeek.toString());
   localStorage.setItem("activeNutritionWeek", activeWeek.toString());
 
-  console.log(`Active week updated: Week ${activeWeek}`);
-  console.log("12 Week Calendar Dates:");
+  // console.log(`Active week updated: Week ${activeWeek}`);
+  // console.log("12 Week Calendar Dates:");
   for (let w = 1; w <= 12; w++) {
     let weekStart = new Date(startDate);
     weekStart.setDate(startDate.getDate() + (w - 1) * 7);
-    console.log(`Week ${w} starts on ${weekStart.toLocaleDateString()}`);
+    // console.log(`Week ${w} starts on ${weekStart.toLocaleDateString()}`);
   }
   return activeWeek;
 }
@@ -573,7 +575,7 @@ function updateActiveWeekOnLog() {
     let now = new Date();
     setToMidnight(now);
     localStorage.setItem("programStartDate", now.toISOString());
-    console.log("Program start date set to:", now.toString());
+    // console.log("Program start date set to:", now.toString());
   }
   // Always use current time (at midnight)
   let now = new Date();
@@ -592,11 +594,11 @@ function updateActiveWeekOnLog() {
       // lock Week 2 to now (the early log date)
       if (now < expectedWeek2Start) {
         localStorage.setItem("week2LockedDate", now.toISOString());
-        console.log("Locked Week 2 start to (early log):", now.toString());
+        // console.log("Locked Week 2 start to (early log):", now.toString());
       } else {
         // Otherwise, lock it to the expected date
         localStorage.setItem("week2LockedDate", expectedWeek2Start.toISOString());
-        console.log("Locked Week 2 start to expected date:", expectedWeek2Start.toString());
+        // console.log("Locked Week 2 start to expected date:", expectedWeek2Start.toString());
       }
     }
   } else {
@@ -605,7 +607,7 @@ function updateActiveWeekOnLog() {
     let lockedDate = new Date(localStorage.getItem("week2LockedDate"));
     if (now < lockedDate) {
       localStorage.setItem("week2LockedDate", now.toISOString());
-      console.log("Updated locked Week 2 start to an earlier time:", now.toString());
+      // console.log("Updated locked Week 2 start to an earlier time:", now.toString());
     }
   }
 
@@ -628,7 +630,7 @@ function updateActiveWeekOnLog() {
   // 7. For debugging: print the complete 12‑week calendar using the locked Week 2 date.
   print12WeekCalendar();
 
-  console.log("Active week updated to:", activeWeek);
+  // console.log("Active week updated to:", activeWeek);
 }
 
 
@@ -713,7 +715,7 @@ function print12WeekCalendar() {
     setToMidnight(temp);
     lines.push(`Week ${w} starts on ${temp.toLocaleDateString()}`);
   }
-  console.log("12 Week Calendar Dates:\n" + lines.join("\n"));
+  // console.log("12 Week Calendar Dates:\n" + lines.join("\n"));
 }
 
 ///////////////////////////
@@ -910,7 +912,7 @@ async function updateNutritionProgressScore() {
   }
 
   /* 3 | console log (same as WT) */
-  console.log("[PS] Done updating. Final PS =", storedPS);
+  // console.log("[PS] Done updating. Final PS =", storedPS);
 
   /* 4 | push unchanged score to both snapshots so all pages share it */
   await saveNutritionProgressToServer();   // nutrition document
@@ -1826,7 +1828,7 @@ function calculateDayDateString(weekNumber, dayNumber) {
   const wNum = parseInt(weekNumber, 10);
   const dNum = parseInt(dayNumber, 10);
   if (isNaN(wNum) || isNaN(dNum)) {
-    console.warn("Invalid week/day:", weekNumber, dayNumber);
+    // console.warn("Invalid week/day:", weekNumber, dayNumber);
     return "Invalid Date";
   }
   const rawStart = localStorage.getItem("programStartDate") || "2025-04-01";
@@ -1869,7 +1871,7 @@ function calculateDayDateStringNoYear(weekNumber, dayNumber) {
   const wNum = parseInt(weekNumber, 10);
   const dNum = parseInt(dayNumber, 10);
   if (isNaN(wNum) || isNaN(dNum)) {
-    console.warn("Invalid week/day:", weekNumber, dayNumber);
+    // console.warn("Invalid week/day:", weekNumber, dayNumber);
     return "Invalid Date";
   }
   const rawStart = localStorage.getItem("programStartDate") || "2025-04-01";
@@ -3483,7 +3485,7 @@ function showMealPrepModePopup(weekIndex) {
         closeMealPrepModePopup();
       }, 1000);
     } catch (err) {
-      console.error("Copy failed:", err);
+      // console.error("Copy failed:", err);
     }
   });
 
@@ -4150,16 +4152,16 @@ function getLockedNutritionRecap(weekNumber) {
   let storedData = localStorage.getItem(storageKey);
   if (storedData) {
     try {
-      console.log(`[getLockedNutritionRecap] Using locked data for Week ${weekNumber}`);
+      // console.log(`[getLockedNutritionRecap] Using locked data for Week ${weekNumber}`);
       return JSON.parse(storedData);
     } catch (e) {
-      console.warn("[getLockedNutritionRecap] Error parsing locked data; recalculating...");
+      // console.warn("[getLockedNutritionRecap] Error parsing locked data; recalculating...");
     }
   }
   // No locked data exists—compute and then lock it.
   const stats = getNutritionWeekStats(weekNumber);
   localStorage.setItem(storageKey, JSON.stringify(stats));
-  console.log(`[getLockedNutritionRecap] Locked data generated for Week ${weekNumber}`);
+  // console.log(`[getLockedNutritionRecap] Locked data generated for Week ${weekNumber}`);
   return stats;
 }
 
@@ -4665,16 +4667,16 @@ function getLockedMacroBreakdown(weekNum) {
   let storedData = localStorage.getItem(storageKey);
   if (storedData) {
     try {
-      console.log(`[getLockedMacroBreakdown] Using locked data for Week ${weekNum}`);
+      // console.log(`[getLockedMacroBreakdown] Using locked data for Week ${weekNum}`);
       return JSON.parse(storedData);
     } catch (e) {
-      console.warn("[getLockedMacroBreakdown] Error parsing locked data; recalculating...");
+      // console.warn("[getLockedMacroBreakdown] Error parsing locked data; recalculating...");
     }
   }
   // Compute and lock the data for future use.
   const data = computeMacroBreakdown(weekNum);
   localStorage.setItem(storageKey, JSON.stringify(data));
-  console.log(`[getLockedMacroBreakdown] Locked data generated for Week ${weekNum}`);
+  // console.log(`[getLockedMacroBreakdown] Locked data generated for Week ${weekNum}`);
   return data;
 }
 
@@ -5563,7 +5565,7 @@ function buildNutritionCoachInsights(selection) {
   // Find the container that will hold our Coach Insights card.
   const coachContainer = document.getElementById("nutritionCoachInsightsContainer");
   if (!coachContainer) {
-    console.warn("nutritionCoachInsightsContainer not found in DOM.");
+    // console.warn("nutritionCoachInsightsContainer not found in DOM.");
     return;
   }
 
@@ -5620,7 +5622,7 @@ async function fetchBodyWeightLogsFromServer() {
       weight: l.weight               // already kg
     }));
   } catch (err) {
-    console.error('Could not fetch weight logs:', err);
+    // console.error('Could not fetch weight logs:', err);
     return null;
   }
 }
@@ -5639,7 +5641,7 @@ async function saveBodyWeightLogToServer(date, weightKg) {
       body: JSON.stringify({ date, weight: weightKg })
     });
   } catch (err) {
-    console.error('Could not save weight log:', err);
+    // console.error('Could not save weight log:', err);
   }
 }
 
@@ -6527,7 +6529,7 @@ window.addEventListener("load", async () => {
   });
 
   const activeWeek = updateActiveWeek();
-  console.log(`Nutrition Tracker active week: ${activeWeek}`);
+  // console.log(`Nutrition Tracker active week: ${activeWeek}`);
 
   // Initialize XP bar, streak display, selectors, daily display, etc.
   updateLevelLabel(currentLevel);

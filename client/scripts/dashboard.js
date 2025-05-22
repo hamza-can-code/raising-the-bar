@@ -1,44 +1,44 @@
 /* ───── loader utilities ───── */
-function setLoaderScale(rawPct = 0){
+function setLoaderScale(rawPct = 0) {
   // ease & overshoot: convert 0-1 to a nicer curve
   const eased = rawPct < 1
     ? 0.8 + 0.6 * rawPct              // 0.8 → 1.4
     : 1.4 - 0.4 * Math.min((rawPct - 1) * 6, 1);  // overshoot then settle
 
   document.documentElement
-          .style.setProperty('--scale', eased.toFixed(3));
+    .style.setProperty('--scale', eased.toFixed(3));
 }
 
-function startIdlePulse(){
+function startIdlePulse() {
   document.querySelector('.loader-logo')?.classList.add('pulsing');
 }
 
-function stopIdlePulse(){
+function stopIdlePulse() {
   document.querySelector('.loader-logo')?.classList.remove('pulsing');
 }
 
-function fadeOutLoader(){
+function fadeOutLoader() {
   const overlay = document.getElementById('loaderOverlay');
-  if(!overlay) return;
+  if (!overlay) return;
   overlay.classList.add('fade-out');
   overlay.addEventListener('transitionend', () => overlay.remove(),
-                           { once:true });
+    { once: true });
 }
 
 
-(async function protectAndInit(){
+(async function protectAndInit() {
 
   /* 0 · show splash instantly */
   startIdlePulse();
 
   const token = localStorage.getItem('token');
-  if(!token){ location.href = 'log-in.html'; return; }
+  if (!token) { location.href = 'log-in.html'; return; }
 
-  try{
+  try {
     const res = await fetch('/api/auth/me', {
-      headers:{ Authorization:`Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` }
     });
-    if(!res.ok) throw new Error('Invalid token');
+    if (!res.ok) throw new Error('Invalid token');
 
     /* 1 · kick off work + smooth progress ****************************************/
     const tasks = [
@@ -50,17 +50,17 @@ function fadeOutLoader(){
     const bump = () => { target += 1 / tasks.length; };
 
     /* animation loop */
-    (function raf(){
+    (function raf() {
       // lerp toward target
       current += (target - current) * 0.12;
       setLoaderScale(current);
-      if(current < 1.01) requestAnimationFrame(raf);
+      if (current < 1.01) requestAnimationFrame(raf);
     })();
 
     await Promise.all(tasks.map(p => p.then(bump, bump)));
     stopIdlePulse();   // progress has taken over
 
-    console.log('✅ Preferences and Progress loaded');
+    // console.log('✅ Preferences and Progress loaded');
 
     /* 2 · render dashboard *******************************************************/
     runDsOnboarding();
@@ -70,8 +70,8 @@ function fadeOutLoader(){
     setLoaderScale(1.05);          // overshoot a hair
     setTimeout(fadeOutLoader, 180); // let the bounce settle first
 
-  }catch(err){
-    console.error('❌ Boot error:', err);
+  } catch (err) {
+    // console.error('❌ Boot error:', err);
     localStorage.removeItem('token');
     location.href = 'log-in.html';
   }
@@ -95,27 +95,27 @@ async function decideProStatus(token) {
       /* ---------- infer the plan if none stored ---------- */
       let plan = planFromLS;
       if (!plan) {
-        if (subscriptionActive)          plan = 'Pro Tracker Subscription';
-        else if (unlockedWeeks >= 12)    plan = '12-Week Program';
-        else if (unlockedWeeks >= 4)     plan = '4-Week Program';
-        else if (unlockedWeeks >= 1)     plan = '1-Week Program';
+        if (subscriptionActive) plan = 'Pro Tracker Subscription';
+        else if (unlockedWeeks >= 12) plan = '12-Week Program';
+        else if (unlockedWeeks >= 4) plan = '4-Week Program';
+        else if (unlockedWeeks >= 1) plan = '1-Week Program';
         localStorage.setItem('planName', plan);
       }
 
       /* ---------- final Pro decision --------------------- */
-      if (plan === 'Pro Tracker Subscription')      isPro = subscriptionActive;
-      else if (plan === '12-Week Program')          isPro = true;
-      else                                          isPro = false;
+      if (plan === 'Pro Tracker Subscription') isPro = subscriptionActive;
+      else if (plan === '12-Week Program') isPro = true;
+      else isPro = false;
 
       /* expose weeks to the workout tracker                */
       localStorage.setItem('purchasedWeeks', String(unlockedWeeks));
     }
   } catch (err) {
-    console.warn('[decideProStatus] backend unreachable – using best guess:', err.message);
+    // console.warn('[decideProStatus] backend unreachable – using best guess:', err.message);
   }
 
   localStorage.setItem('hasProTracker', isPro ? 'true' : 'false');
-  console.log('🔧 Pro-Tracker flag set →', isPro);
+  // console.log('🔧 Pro-Tracker flag set →', isPro);
 }
 
 async function loadUserProgressSafe() {
@@ -134,10 +134,10 @@ async function loadUserProgressSafe() {
     if (res.ok) {
       workoutProgress = await res.json();
     } else if (res.status !== 404) {
-      console.error('❌ /api/workouts/getUserProgress failed:', res.statusText);
+      // console.error('❌ /api/workouts/getUserProgress failed:', res.statusText);
     }
   } catch (err) {
-    console.error('❌ Error fetching workouts/getUserProgress:', err);
+    // console.error('❌ Error fetching workouts/getUserProgress:', err);
   }
 
   // 2) Fetch the Dashboard snapshot (for ds_onboarding_complete)
@@ -150,20 +150,21 @@ async function loadUserProgressSafe() {
     if (res.ok) {
       dashboardProgress = await res.json();
     } else if (res.status !== 404) {
-      console.error('❌ /api/progress/getUserProgress failed:', res.statusText);
+      // console.error('❌ /api/progress/getUserProgress failed:', res.statusText);
     }
   } catch (err) {
-    console.error('❌ Error fetching progress/getUserProgress:', err);
+    // console.error('❌ Error fetching progress/getUserProgress:', err);
   }
 
-    let nutritionProgress = {};
+  let nutritionProgress = {};
   try {
     const res = await fetch('/api/nutrition/getUserProgress', { headers });
-    if (res.ok)       nutritionProgress = await res.json();
-    else if (res.status !== 404)
-      console.error('❌ /api/nutrition/getUserProgress failed:', res.statusText);
+    if (res.ok) nutritionProgress = await res.json();
+    else if (res.status !== 404) {
+      // console.error('❌ /api/nutrition/getUserProgress failed:', res.statusText);
+    }
   } catch (err) {
-    console.error('❌ Error fetching nutrition/getUserProgress:', err);
+    // console.error('❌ Error fetching nutrition/getUserProgress:', err);
   }
 
   // 3) Merge them (dashboardProgress wins on flags)
@@ -174,42 +175,42 @@ async function loadUserProgressSafe() {
   };
 
   // 4) Write core fields
-  localStorage.setItem('currentXP',        progress.xp ?? 0);
-  localStorage.setItem('currentLevel',     progress.currentLevel ?? 1);
-  localStorage.setItem('streakCount',      progress.streak?.count ?? 0);
-  localStorage.setItem('streakStartDate',  progress.streak?.startDate ?? '');
+  localStorage.setItem('currentXP', progress.xp ?? 0);
+  localStorage.setItem('currentLevel', progress.currentLevel ?? 1);
+  localStorage.setItem('streakCount', progress.streak?.count ?? 0);
+  localStorage.setItem('streakStartDate', progress.streak?.startDate ?? '');
 
   localStorage.setItem(
     'nutritionStreakCount',
-        progress.nutritionStreakCount
-     ?? progress.streakCount              // in case it’s flat
-     ?? progress.nutritionStreak?.count
-     ?? 0
+    progress.nutritionStreakCount
+    ?? progress.streakCount              // in case it’s flat
+    ?? progress.nutritionStreak?.count
+    ?? 0
   );
   localStorage.setItem(
     'nutritionStreakStartDate',
-        progress.nutritionStreakStartDate
-     ?? progress.streakStartDate
-     ?? progress.nutritionStreak?.startDate
-     ?? ''
+    progress.nutritionStreakStartDate
+    ?? progress.streakStartDate
+    ?? progress.nutritionStreak?.startDate
+    ?? ''
   );
 
   localStorage.setItem('programStartDate', progress.program?.startDate ?? '');
   localStorage.setItem('activeWorkoutWeek',
-                       progress.program?.activeWorkoutWeek ?? 1);
+    progress.program?.activeWorkoutWeek ?? 1);
   localStorage.setItem('activeNutritionWeek',
-                       progress.program?.activeNutritionWeek ?? 1);
+    progress.program?.activeNutritionWeek ?? 1);
   localStorage.setItem('completedThisWeek',
-                       progress.program?.completedThisWeek ?? 0);
+    progress.program?.completedThisWeek ?? 0);
 
   if (progress.program?.weeklyStats) {
     for (const wk in progress.program.weeklyStats) {
       const s = progress.program.weeklyStats[wk];
       if (!s) continue;
       localStorage.setItem(`${wk}_workoutsDone`, s.workoutsDone ?? 0);
-      localStorage.setItem(`${wk}_totalReps`,    s.totalReps    ?? 0);
-      localStorage.setItem(`${wk}_totalSets`,    s.totalSets    ?? 0);
-      localStorage.setItem(`${wk}_totalWeight`,  s.totalWeight  ?? 0);
+      localStorage.setItem(`${wk}_totalReps`, s.totalReps ?? 0);
+      localStorage.setItem(`${wk}_totalSets`, s.totalSets ?? 0);
+      localStorage.setItem(`${wk}_totalWeight`, s.totalWeight ?? 0);
     }
   }
 
@@ -236,7 +237,7 @@ async function loadUserProgressSafe() {
   }
   if (progress.recapShown) {
     localStorage.setItem('currentWorkoutRecapShown',
-                         JSON.stringify(progress.recapShown));
+      JSON.stringify(progress.recapShown));
   }
   if (progress.setValues) {
     for (const k in progress.setValues) {
@@ -252,9 +253,9 @@ async function loadUserProgressSafe() {
     localStorage.setItem('wt_onboarding_complete', '1');
   }
 
-  console.log('✅ Full user progress restored (merged endpoints)');
+  // console.log('✅ Full user progress restored (merged endpoints)');
   const { xp, lvl } = normaliseXPandLevel();
-  console.log(`🔄 Normalised to XP=${xp}, Level=${lvl}`);
+  // console.log(`🔄 Normalised to XP=${xp}, Level=${lvl}`);
 }
 
 // ✨ New helper
@@ -274,13 +275,13 @@ async function fetchAndStorePreferences(token) {
     const data = await res.json();
 
     // Store fields in localStorage (match your existing system)
-    if (data.goal)            localStorage.setItem('goal', data.goal);
-    if (data.goalDriver)      localStorage.setItem('goalDriver', data.goalDriver);
-    if (data.units)           localStorage.setItem('weightUnit', data.units);
-    if (data.startWeight)     localStorage.setItem('weight', data.startWeight);
-    if (data.goalWeight)      localStorage.setItem('userGoalWeight', data.goalWeight);
-    if (data.goalDate)        localStorage.setItem('userGoalDate', data.goalDate);
-    if (data.activityLevel)   localStorage.setItem('activityLevel', data.activityLevel);
+    if (data.goal) localStorage.setItem('goal', data.goal);
+    if (data.goalDriver) localStorage.setItem('goalDriver', data.goalDriver);
+    if (data.units) localStorage.setItem('weightUnit', data.units);
+    if (data.startWeight) localStorage.setItem('weight', data.startWeight);
+    if (data.goalWeight) localStorage.setItem('userGoalWeight', data.goalWeight);
+    if (data.goalDate) localStorage.setItem('userGoalDate', data.goalDate);
+    if (data.activityLevel) localStorage.setItem('activityLevel', data.activityLevel);
     if (data.workoutExperience) localStorage.setItem('fitnessLevel', data.workoutExperience);
     if (Array.isArray(data.dietaryPreferences)) {
       localStorage.setItem('dietaryRestrictions', data.dietaryPreferences[0] || '');
@@ -289,9 +290,9 @@ async function fetchAndStorePreferences(token) {
       localStorage.setItem('mealFrequency', data.mealsPerDay.toString());
     }
 
-    console.log('✅ Preferences loaded into localStorage');
+    // console.log('✅ Preferences loaded into localStorage');
   } catch (err) {
-    console.error('❌ Failed to fetch/store preferences:', err);
+    // console.error('❌ Failed to fetch/store preferences:', err);
     alert('Could not load your preferences. Please try re-logging in.');
   }
 }
@@ -463,16 +464,16 @@ const xpLevels = [10, 20, 40, 70, 100, 130, 160, 190, 220, 250];
 const xpNeeded = lvl => (lvl < xpLevels.length ? xpLevels[lvl] : 250);
 
 function normaliseXPandLevel() {
-  let xp  = Number(localStorage.getItem('currentXP'))   || 0;
-  let lvl = Number(localStorage.getItem('currentLevel'))|| 0;
+  let xp = Number(localStorage.getItem('currentXP')) || 0;
+  let lvl = Number(localStorage.getItem('currentLevel')) || 0;
 
   // carry overflow XP upward
   while (xp >= xpNeeded(lvl)) {
-    xp  -= xpNeeded(lvl);
+    xp -= xpNeeded(lvl);
     lvl++;
   }
 
-  localStorage.setItem('currentXP',   xp);
+  localStorage.setItem('currentXP', xp);
   localStorage.setItem('currentLevel', lvl);
 
   return { xp, lvl };
@@ -726,23 +727,23 @@ function reveal() {
 /* ---------- 6. Init ---------- */
 
 function initDashboard() {
-    populateGreeting();
-    renderXP();
-    populateWorkoutCard();
-    populateNutritionCard();
-    populateMotivation();
-    reveal();
-    wireUpCardClicks();
-    addTrackerBadge();           // badge in the corner
-    applyCoreDashboardChanges(); // only runs if user is on Core
-    setUpCompareModal();         // modal listeners
-    if (isProUser()) {
-      const ntSub = document.querySelector('.nt-subtext');
-      if (ntSub) ntSub.remove();
-      document
-        .querySelectorAll('#wtCard a.cta, #ntCard a.cta')
-        .forEach(btn => btn.classList.add('pt-cta'));
-    }
+  populateGreeting();
+  renderXP();
+  populateWorkoutCard();
+  populateNutritionCard();
+  populateMotivation();
+  reveal();
+  wireUpCardClicks();
+  addTrackerBadge();           // badge in the corner
+  applyCoreDashboardChanges(); // only runs if user is on Core
+  setUpCompareModal();         // modal listeners
+  if (isProUser()) {
+    const ntSub = document.querySelector('.nt-subtext');
+    if (ntSub) ntSub.remove();
+    document
+      .querySelectorAll('#wtCard a.cta, #ntCard a.cta')
+      .forEach(btn => btn.classList.add('pt-cta'));
+  }
 }
 
 // ───────────────────────────────────────────────────────────
@@ -926,7 +927,7 @@ function runDsOnboarding() {
       `Stronger, leaner, more focused — one step at a time.`
     ]
   };
-  
+
 
   // early‑out if already seen
   // const overlay = document.getElementById('wtOnboardingOverlay');
@@ -1004,19 +1005,19 @@ function runDsOnboarding() {
   // when you click the Close button, mark complete + dismiss
   overlay.addEventListener('click', async e => {
     if (!e.target.matches('.wt-close-btn')) return;
-  
+
     /* mark locally */
     localStorage.setItem('ds_onboarding_complete', '1');
-  
+
     /* persist to backend immediately */
     await fetch('/api/dashboard/setOnboardingComplete', {
       method: 'POST',
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-    }).catch(() => {});
-  
+    }).catch(() => { });
+
     overlay.classList.add('closing');
     overlay.addEventListener('transitionend', () => overlay.remove(),
-                             { once: true });
+      { once: true });
   });
 
   // show it

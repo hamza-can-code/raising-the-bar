@@ -1,8 +1,8 @@
 export async function savePreferencesAfterLogin() {
-  console.log("🧠 Running savePreferencesAfterLogin()...");
+  // console.log("🧠 Running savePreferencesAfterLogin()...");
   const token = localStorage.getItem("token");
   if (!token) {
-    console.error("No token found — cannot save preferences.");
+    // console.error("No token found — cannot save preferences.");
     return;
   }
 
@@ -28,14 +28,14 @@ export async function savePreferencesAfterLogin() {
         preferences.startWeight = weightRaw.value;
       }
     } catch (e) {
-      console.error("❌ Error parsing weightRaw:", e);
+      // console.error("❌ Error parsing weightRaw:", e);
     }
   }
 
   preferences.savedAt = new Date().toISOString();
 
   // ✅ Now safe to log
-  console.log("✅ Preferences object built:", preferences);
+  // console.log("✅ Preferences object built:", preferences);
 
   try {
     const res = await fetch("/api/saveUserPreferences", {
@@ -52,9 +52,9 @@ export async function savePreferencesAfterLogin() {
       throw new Error(body.message || "Failed to save preferences");
     }
 
-    console.log("✅ Preferences saved successfully after login/signup!");
+    // console.log("✅ Preferences saved successfully after login/signup!");
   } catch (err) {
-    console.error("❌ Failed to save preferences after login:", err);
+    // console.error("❌ Failed to save preferences after login:", err);
     alert("There was a problem saving your preferences. Please try again later.");
   }
 }

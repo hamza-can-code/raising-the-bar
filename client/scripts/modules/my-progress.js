@@ -83,7 +83,7 @@
 
     // 2) The “previous” week we want to recap is (activeWeek - 1)
     const lastWeekNumber = activeWeek - 1;
-    console.log(`[renderWeeklyRecapAndImprovements] Preparing recap for Week ${lastWeekNumber}`);
+    // console.log(`[renderWeeklyRecapAndImprovements] Preparing recap for Week ${lastWeekNumber}`);
 
     // 3) Get the locked recap stats for that week (if already generated, they remain unchanged)
     const stats = getLockedWeeklyRecap(lastWeekNumber);
@@ -150,7 +150,7 @@
     }
 
     if (weekIndex === -1) {
-      console.warn(`[getWeeklyStats] No data found for week ${weekNumber}.`);
+      // console.warn(`[getWeeklyStats] No data found for week ${weekNumber}.`);
       // Fallback: no data available.
       return {
         workoutsCompleted: 0,
@@ -308,10 +308,10 @@
       dayCompletionPercents.push(dayPct);
 
       // **Console log** the day’s total sets vs. sets ticked and the percentage
-      console.log(
-        `[getWeeklyStats] Day ${dIndex + 1} - Planned Sets: ${daySetsCount}, Completed Sets: ${daySetsCompleted}, ` +
-        `Completion: ${dayPct.toFixed(2)}%`
-      );
+      // console.log(
+      //   `[getWeeklyStats] Day ${dIndex + 1} - Planned Sets: ${daySetsCount}, Completed Sets: ${daySetsCompleted}, ` +
+      //   `Completion: ${dayPct.toFixed(2)}%`
+      // );
     });
 
     let averageCompletionPct = 0;
@@ -320,12 +320,12 @@
       averageCompletionPct = Math.round(sumPct / dayCompletionPercents.length);
     }
 
-    console.log(
-      `[getWeeklyStats] For week ${weekNumber} - Average Completion Percentage: ${averageCompletionPct}%`
-    );
-    console.log(
-      `[getWeeklyStats] Total Planned Sets: ${totalSetsPlanned}, Total Completed Sets: ${totalSetsCompleted}`
-    );
+    // console.log(
+    //   `[getWeeklyStats] For week ${weekNumber} - Average Completion Percentage: ${averageCompletionPct}%`
+    // );
+    // console.log(
+    //   `[getWeeklyStats] Total Planned Sets: ${totalSetsPlanned}, Total Completed Sets: ${totalSetsCompleted}`
+    // );
 
     return {
       weekNumber: weekNumber,
@@ -693,10 +693,10 @@
    *  - Returns an object like { exerciseName: "...", weeksStagnant: 2 } or null if none qualifies.
    */
   function getLowestImprovedLiftName(thisWeekNumber) {
-    console.log(`[getLowestImprovedLiftName] Checking for stagnant lifts up to week ${thisWeekNumber}...`);
+    // console.log(`[getLowestImprovedLiftName] Checking for stagnant lifts up to week ${thisWeekNumber}...`);
 
     if (thisWeekNumber < 3) {
-      console.log("[getLowestImprovedLiftName] Not enough prior weeks to check (need at least 3).");
+      // console.log("[getLowestImprovedLiftName] Not enough prior weeks to check (need at least 3).");
       return null;
     }
 
@@ -709,7 +709,7 @@
     const statsW3 = getWeeklyStats(w3);
 
     if (!statsW1 || !statsW2 || !statsW3) {
-      console.log(`[getLowestImprovedLiftName] Missing data for weeks ${w1}, ${w2}, or ${w3}.`);
+      // console.log(`[getLowestImprovedLiftName] Missing data for weeks ${w1}, ${w2}, or ${w3}.`);
       return null;
     }
 
@@ -750,7 +750,7 @@
       localStorage.setItem(diffKey, w2toW3_diff.toFixed(2));
       localStorage.setItem(pctKey, w2toW3_pct.toFixed(2));
 
-      console.log(`[getLowestImprovedLiftName] => ${exName}, from week${w2} to week${w3}: diff=${w2toW3_diff}, pct=${w2toW3_pct.toFixed(1)}% (saved to localStorage)`);
+      // console.log(`[getLowestImprovedLiftName] => ${exName}, from week${w2} to week${w3}: diff=${w2toW3_diff}, pct=${w2toW3_pct.toFixed(1)}% (saved to localStorage)`);
 
       // If there's no improvement this interval:
       const noImprovementFromW2toW3 = (w3Weight <= w2Weight);
@@ -772,14 +772,14 @@
       localStorage.setItem(diffKey2, w1toW2_diff.toFixed(2));
       localStorage.setItem(pctKey2, w1toW2_pct.toFixed(2));
 
-      console.log(`[getLowestImprovedLiftName] => ${exName}, from week${w1} to week${w2}: diff=${w1toW2_diff}, pct=${w1toW2_pct.toFixed(1)}% (saved to localStorage)`);
+      // console.log(`[getLowestImprovedLiftName] => ${exName}, from week${w1} to week${w2}: diff=${w1toW2_diff}, pct=${w1toW2_pct.toFixed(1)}% (saved to localStorage)`);
 
       const noImprovementFromW1toW2 = (w2Weight <= w1Weight);
 
       // If we have 2 consecutive intervals of no improvement:
       if (noImprovementFromW1toW2 && noImprovementFromW2toW3) {
         // That means at least 2+ weeks of stagnation
-        console.log(`[getLowestImprovedLiftName] => ${exName} is STAGNANT in weeks [${w1},${w2},${w3}]!`);
+        // console.log(`[getLowestImprovedLiftName] => ${exName} is STAGNANT in weeks [${w1},${w2},${w3}]!`);
         // We can call this "weeksStagnant=2"
         stagnantCandidates.push({
           exerciseName: exName,
@@ -789,7 +789,7 @@
     }
 
     if (stagnantCandidates.length === 0) {
-      console.log("[getLowestImprovedLiftName] => No multi-week stagnation found.");
+      // console.log("[getLowestImprovedLiftName] => No multi-week stagnation found.");
       return null;
     }
 
@@ -799,7 +799,7 @@
     const topCandidates = stagnantCandidates.filter(c => c.weeksStagnant === maxStagnant);
 
     const finalPick = topCandidates[Math.floor(Math.random() * topCandidates.length)];
-    console.log(`[getLowestImprovedLiftName] => Returning stagnant lift: ${finalPick.exerciseName}, weeksStagnant=${finalPick.weeksStagnant}`);
+    // console.log(`[getLowestImprovedLiftName] => Returning stagnant lift: ${finalPick.exerciseName}, weeksStagnant=${finalPick.weeksStagnant}`);
     return finalPick;
   }
 
@@ -875,16 +875,16 @@
     let storedData = localStorage.getItem(storageKey);
     if (storedData) {
       try {
-        console.log(`[getLockedWeeklyRecap] Using locked data for Week ${weekNumber}`);
+        // console.log(`[getLockedWeeklyRecap] Using locked data for Week ${weekNumber}`);
         return JSON.parse(storedData);
       } catch (e) {
-        console.warn("[getLockedWeeklyRecap] Error parsing locked data; recalculating...");
+        // console.warn("[getLockedWeeklyRecap] Error parsing locked data; recalculating...");
       }
     }
     // If no locked data exists, compute and save it.
     const stats = getWeeklyStats(weekNumber);
     localStorage.setItem(storageKey, JSON.stringify(stats));
-    console.log(`[getLockedWeeklyRecap] Locked data generated for Week ${weekNumber}`);
+    // console.log(`[getLockedWeeklyRecap] Locked data generated for Week ${weekNumber}`);
     return stats;
   }
 
@@ -892,7 +892,7 @@
    *  WEEKLY TOTALS CALCULATION (REVISED)
    *******************************************/
   function updateWeeklyTotals() {
-    console.log("[updateWeeklyTotals] Recalculating weekly totals...");
+    // console.log("[updateWeeklyTotals] Recalculating weekly totals...");
 
     const program = JSON.parse(localStorage.getItem("twelveWeekProgram") || "[]");
     if (!Array.isArray(program) || program.length === 0) return;
@@ -958,16 +958,16 @@
       localStorage.setItem(`week${wNum}_totalReps`, totalReps.toString());
       localStorage.setItem(`week${wNum}_totalSets`, totalSetsDone.toString());
       localStorage.setItem(`week${wNum}_workoutsDone`, completedWorkoutsCount.toString());
-      console.log(`[updateWeeklyTotals] Week ${wNum} - Workouts Done: ${completedWorkoutsCount} (Assigned: ${assignedWorkoutsPerWeek})`);
+      // console.log(`[updateWeeklyTotals] Week ${wNum} - Workouts Done: ${completedWorkoutsCount} (Assigned: ${assignedWorkoutsPerWeek})`);
 
 
       // ❸ Also store how many workouts were assigned (e.g. 4 or 5) for that week
       localStorage.setItem(`week${wNum}_workoutsAssigned`, assignedWorkoutsPerWeek.toString());
 
-      console.log(`[updateWeeklyTotals] Week ${wNum}: Weight=${totalWeight}, Reps=${totalReps}, Sets=${totalSetsDone}, Done=${completedWorkoutsCount}/${assignedWorkoutsPerWeek}`);
+      // console.log(`[updateWeeklyTotals] Week ${wNum}: Weight=${totalWeight}, Reps=${totalReps}, Sets=${totalSetsDone}, Done=${completedWorkoutsCount}/${assignedWorkoutsPerWeek}`);
     });
     // checkAndResetWorkoutStreak(); TODO
-    console.log("[updateWeeklyTotals] Completed update and streak check.");
+    // console.log("[updateWeeklyTotals] Completed update and streak check.");
   }
 
   function getTop3Lifts(stats) {
@@ -1946,7 +1946,7 @@ Helpers to sync logs with the API
         weight: l.weight               // already kg
       }));
     } catch (err) {
-      console.error('Could not fetch weight logs:', err);
+      // console.error('Could not fetch weight logs:', err);
       return null;
     }
   }
@@ -1965,7 +1965,7 @@ Helpers to sync logs with the API
         body: JSON.stringify({ date, weight: weightKg })
       });
     } catch (err) {
-      console.error('Could not save weight log:', err);
+      // console.error('Could not save weight log:', err);
     }
   }
 

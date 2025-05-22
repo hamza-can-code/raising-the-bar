@@ -76,7 +76,7 @@ async function fetchAndStorePreferences() {
   try {
     const token = localStorage.getItem("token");
     if (!token) {
-      console.error("No token found.");
+      // console.error("No token found.");
       return;
     }
 
@@ -86,10 +86,10 @@ async function fetchAndStorePreferences() {
     });
 
     const data = await res.json();
-    console.log("✅ Full server preferences received:", data);
+    // console.log("✅ Full server preferences received:", data);
 
     if (!data.preferences) {
-      console.error("❌ No preferences found on server.");
+      // console.error("❌ No preferences found on server.");
       return;
     }
 
@@ -103,9 +103,9 @@ async function fetchAndStorePreferences() {
       }
     });
 
-    console.log("✅ Preferences loaded into localStorage");
+    // console.log("✅ Preferences loaded into localStorage");
   } catch (error) {
-    console.error("❌ Failed to fetch/store preferences:", error);
+    // console.error("❌ Failed to fetch/store preferences:", error);
   }
 }
 

@@ -22,9 +22,10 @@ function fadeOutLoader() {
 async function sendWorkoutLog(workoutData) {
   const token = localStorage.getItem('token');
 
-  if (!token) return console.error('No token found, cannot log workout.');
+  if (!token) return
+  //  console.error('No token found, cannot log workout.');
   if (!workoutData || !workoutData.exercises || workoutData.exercises.length === 0) {
-    console.warn('⚠️ No exercises found, skipping workout log.');
+    // console.warn('⚠️ No exercises found, skipping workout log.');
     return;
   }
 
@@ -42,9 +43,9 @@ async function sendWorkoutLog(workoutData) {
       throw new Error('Failed to log workout');
     }
 
-    console.log('✅ Workout log saved to backend');
+    // console.log('✅ Workout log saved to backend');
   } catch (err) {
-    console.error('❌ Error saving workout log:', err.message);
+    // console.error('❌ Error saving workout log:', err.message);
   }
 }
 
@@ -130,7 +131,7 @@ function buildUserProgress() {
 async function saveMyProgressToServer(progressOverride = null) {
   const token = localStorage.getItem('token');
   if (!token) {
-    console.warn('[saveMyProgressToServer] No auth token – aborting');
+    // console.warn('[saveMyProgressToServer] No auth token – aborting');
     return;
   }
 
@@ -148,13 +149,13 @@ async function saveMyProgressToServer(progressOverride = null) {
     });
 
     if (!res.ok) {
-      console.error('❌ saveMyProgressToServer:', await res.text());
+      // console.error('❌ saveMyProgressToServer:', await res.text());
     } else {
-      console.log('✅ Workout-side snapshot updated',
-        new Date().toLocaleTimeString());
+      // console.log('✅ Workout-side snapshot updated',
+      //   new Date().toLocaleTimeString());
     }
   } catch (err) {
-    console.error('❌ saveMyProgressToServer:', err.message);
+    // console.error('❌ saveMyProgressToServer:', err.message);
   }
 }
 
@@ -162,7 +163,7 @@ async function saveUserProgress(userProgress) {
   const token = localStorage.getItem('token');
 
   if (!token) {
-    console.error('No token found, cannot save user progress.');
+    // console.error('No token found, cannot save user progress.');
     return;
   }
 
@@ -180,9 +181,9 @@ async function saveUserProgress(userProgress) {
       throw new Error('Failed to save user progress');
     }
 
-    console.log('✅ User progress saved to backend');
+    // console.log('✅ User progress saved to backend');
   } catch (err) {
-    console.error('❌ Error saving user progress:', err.message);
+    // console.error('❌ Error saving user progress:', err.message);
   }
 }
 
@@ -247,7 +248,7 @@ async function loadUserProgress() {
   const token = localStorage.getItem('token');
 
   if (!token) {
-    console.error('❌ No token found.');
+    // console.error('❌ No token found.');
     return;
   }
 
@@ -260,7 +261,7 @@ async function loadUserProgress() {
     });
 
     if (!res.ok) {
-      console.warn('⚠️ No user progress found.');
+      // console.warn('⚠️ No user progress found.');
       return;
     }
 
@@ -340,7 +341,7 @@ async function loadUserProgress() {
       localStorage.setItem('ctUpsell_shown_firstWorkout', 'true');
     }
 
-    console.log('✅ User progress restored from server');
+    // console.log('✅ User progress restored from server');
     const { xp, lvl } = normaliseXPandLevel();
     currentXP = xp;
     currentLevel = lvl;
@@ -369,7 +370,7 @@ async function loadUserProgress() {
       });
     }
   } catch (err) {
-    console.error('❌ Error loading user progress:', err);
+    // console.error('❌ Error loading user progress:', err);
   }
 }
 
@@ -515,7 +516,7 @@ async function fetchPurchasedWeeks() {
     else purchasedWeeks = 0;
 
     hasPurchasedAWT = isTwelve || isProSub;
-    console.warn('[Access-fetch] Fallback →', purchasedWeeks, 'weeks –', err.message);
+    // console.warn('[Access-fetch] Fallback →', purchasedWeeks, 'weeks –', err.message);
   }
 
   /* 4) persist + tell the rest of the page --------------------------- */
@@ -580,7 +581,7 @@ window.addEventListener('DOMContentLoaded', fetchPurchasedWeeks);
     setTimeout(fadeOutLoader, 180);
 
   } catch (err) {
-    console.error('[WT boot]', err);
+    // console.error('[WT boot]', err);
     localStorage.removeItem('token');
     location.href = 'log-in.html';
   }
@@ -685,7 +686,7 @@ function updateActiveWeekOnLog() {
     let now = new Date();
     setToMidnight(now);
     localStorage.setItem("programStartDate", now.toISOString());
-    console.log("Program start date set to:", now.toString());
+    // console.log("Program start date set to:", now.toString());
   }
   // Always use current time (at midnight)
   let now = new Date();
@@ -704,11 +705,11 @@ function updateActiveWeekOnLog() {
       // lock Week 2 to now (the early log date)
       if (now < expectedWeek2Start) {
         localStorage.setItem("week2LockedDate", now.toISOString());
-        console.log("Locked Week 2 start to (early log):", now.toString());
+        // console.log("Locked Week 2 start to (early log):", now.toString());
       } else {
         // Otherwise, lock it to the expected date
         localStorage.setItem("week2LockedDate", expectedWeek2Start.toISOString());
-        console.log("Locked Week 2 start to expected date:", expectedWeek2Start.toString());
+        // console.log("Locked Week 2 start to expected date:", expectedWeek2Start.toString());
       }
     }
   } else {
@@ -717,7 +718,7 @@ function updateActiveWeekOnLog() {
     let lockedDate = new Date(localStorage.getItem("week2LockedDate"));
     if (now < lockedDate) {
       localStorage.setItem("week2LockedDate", now.toISOString());
-      console.log("Updated locked Week 2 start to an earlier time:", now.toString());
+      // console.log("Updated locked Week 2 start to an earlier time:", now.toString());
     }
   }
 
@@ -740,7 +741,7 @@ function updateActiveWeekOnLog() {
   // 7. For debugging: print the complete 12‑week calendar using the locked Week 2 date.
   print12WeekCalendar();
 
-  console.log("Active week updated to:", activeWeek);
+  // console.log("Active week updated to:", activeWeek);
 }
 
 
@@ -825,7 +826,7 @@ function print12WeekCalendar() {
     setToMidnight(temp);
     lines.push(`Week ${w} starts on ${temp.toLocaleDateString()}`);
   }
-  console.log("12 Week Calendar Dates:\n" + lines.join("\n"));
+  // console.log("12 Week Calendar Dates:\n" + lines.join("\n"));
 }
 
 /************************************************/
@@ -1072,11 +1073,11 @@ function getDefaultSuggestedWeight(exObj, currentWeekNumber, dayNumber, setIndex
   // 2) If that’s missing or zero => forcibly recalc from progressive overload
   //    But first ensure exObj has muscleGroup, typeOfMovement, etc.
   if (!exObj.muscleGroup || exObj.muscleGroup.trim() === "") {
-    console.warn(`[getDefaultSuggestedWeight] Missing muscleGroup for "${exObj.name}", using "chest" fallback.`);
+    // console.warn(`[getDefaultSuggestedWeight] Missing muscleGroup for "${exObj.name}", using "chest" fallback.`);
     exObj.muscleGroup = "chest"; // fallback
   }
   if (!exObj.typeOfMovement || exObj.typeOfMovement.trim() === "") {
-    console.warn(`[getDefaultSuggestedWeight] Missing typeOfMovement for "${exObj.name}", using "compound" fallback.`);
+    // console.warn(`[getDefaultSuggestedWeight] Missing typeOfMovement for "${exObj.name}", using "compound" fallback.`);
     exObj.typeOfMovement = "compound"; // fallback
   }
 
@@ -1096,7 +1097,7 @@ function getDefaultSuggestedWeight(exObj, currentWeekNumber, dayNumber, setIndex
 function cascadeSuggestedWeightForward(ex, currentWeekNumber, dayNumber, fromSetIndex, newSuggested, isManualOverride = false) {
   const totalSets = ex.sets || 1;
   const multiplier = isDeloadWeek(currentWeekNumber) ? 1 : 1; // no extra multiplier in deload week
-  console.log(`[cascadeSuggestedWeightForward] ${ex.name} week ${currentWeekNumber}: cascading from set ${fromSetIndex} value ${newSuggested} with multiplier ${multiplier}`);
+  // console.log(`[cascadeSuggestedWeightForward] ${ex.name} week ${currentWeekNumber}: cascading from set ${fromSetIndex} value ${newSuggested} with multiplier ${multiplier}`);
   for (let s = fromSetIndex + 1; s <= totalSets; s++) {
     saveSetValue(ex.name, currentWeekNumber, dayNumber, s, "suggestedWeight", newSuggested * multiplier);
   }
@@ -1106,11 +1107,11 @@ function finalizeLastSetAsBaseline(ex, finalSetTypedWeight, currentWeekNumber, p
   if (!canUseAdaptiveWeights()) return false;
   // Retrieve active workout week from localStorage.
   const activeWorkoutWeek = parseInt(localStorage.getItem("activeWorkoutWeek") || "0", 10);
-  console.log(`[finalizeLastSetAsBaseline] Active workout week from storage: ${activeWorkoutWeek}`);
+  // console.log(`[finalizeLastSetAsBaseline] Active workout week from storage: ${activeWorkoutWeek}`);
 
   // Only update the baseline if the override comes from the active workout week or later.
   if (currentWeekNumber < activeWorkoutWeek) {
-    console.log(`[finalizeLastSetAsBaseline] ${ex.name}: override in week ${currentWeekNumber} ignored because active workout is in week ${activeWorkoutWeek}.`);
+    // console.log(`[finalizeLastSetAsBaseline] ${ex.name}: override in week ${currentWeekNumber} ignored because active workout is in week ${activeWorkoutWeek}.`);
     return false; // Baseline update ignored.
   }
 
@@ -1130,7 +1131,7 @@ function finalizeLastSetAsBaseline(ex, finalSetTypedWeight, currentWeekNumber, p
   fullyPrecomputeAllWeeks();
   clearSameWeekSubsequentDaysSuggestedWeights(ex.name, currentWeekNumber, dayNumber);
 
-  console.log(`[finalizeLastSetAsBaseline] ${ex.name}: final set => ${finalSetTypedWeight} kg (active workout), new baseline applied`);
+  // console.log(`[finalizeLastSetAsBaseline] ${ex.name}: final set => ${finalSetTypedWeight} kg (active workout), new baseline applied`);
   return true; // Baseline updated.
 }
 
@@ -1196,11 +1197,11 @@ function getProgressiveWeight(ex, isIsolation, currentWeekNumber) {
       // Recalculate the display weight using the stored baseline
       const baseline = progression[exKey][currentWeekNumber];
       const deloaded = roundToNearestHalfKg(baseline * 0.85);
-      console.log(`[getProgressiveWeight] (Deload week) Using stored baseline for ${exKey} in week ${currentWeekNumber}: baseline=${baseline} => display=${deloaded}`);
+      // console.log(`[getProgressiveWeight] (Deload week) Using stored baseline for ${exKey} in week ${currentWeekNumber}: baseline=${baseline} => display=${deloaded}`);
       return deloaded;
     } else {
       const rounded = roundToNearestHalfKg(progression[exKey][currentWeekNumber]);
-      console.log(`[getProgressiveWeight] Using existing weight for ${exKey} in week ${currentWeekNumber}: ${rounded} kg`);
+      // console.log(`[getProgressiveWeight] Using existing weight for ${exKey} in week ${currentWeekNumber}: ${rounded} kg`);
       return rounded;
     }
   }
@@ -1214,7 +1215,7 @@ function getProgressiveWeight(ex, isIsolation, currentWeekNumber) {
     }
     progression[exKey][1] = base;
     localStorage.setItem("exerciseProgression", JSON.stringify(progression));
-    console.log(`[getProgressiveWeight] For ${exKey} in week 1, storing base => ${base}`);
+    // console.log(`[getProgressiveWeight] For ${exKey} in week 1, storing base => ${base}`);
     return roundToNearestHalfKg(base);
   }
 
@@ -1224,7 +1225,7 @@ function getProgressiveWeight(ex, isIsolation, currentWeekNumber) {
     progression = JSON.parse(localStorage.getItem("exerciseProgression") || "{}");
   }
   let prevWeekWeight = progression[exKey][currentWeekNumber - 1] || 0;
-  console.log(`[getProgressiveWeight] Found previous week's data for ${exKey} in week ${currentWeekNumber - 1}: ${prevWeekWeight}`);
+  // console.log(`[getProgressiveWeight] Found previous week's data for ${exKey} in week ${currentWeekNumber - 1}: ${prevWeekWeight}`);
 
   // --- Deload week logic ---
   if (isDeloadWeek(currentWeekNumber)) {
@@ -1232,7 +1233,7 @@ function getProgressiveWeight(ex, isIsolation, currentWeekNumber) {
     progression[exKey][currentWeekNumber] = prevWeekWeight;
     localStorage.setItem("exerciseProgression", JSON.stringify(progression));
     const displayWeight = roundToNearestHalfKg(prevWeekWeight * 0.85);
-    console.log(`[getProgressiveWeight] Deload week for ${exKey} in week ${currentWeekNumber}: baseline=${prevWeekWeight}, display=${displayWeight}`);
+    // console.log(`[getProgressiveWeight] Deload week for ${exKey} in week ${currentWeekNumber}: baseline=${prevWeekWeight}, display=${displayWeight}`);
     return displayWeight;
   }
 
@@ -1243,7 +1244,7 @@ function getProgressiveWeight(ex, isIsolation, currentWeekNumber) {
     : basePO[phase]["compound"].ratePct;
   let finalUnrounded = prevWeekWeight * (1 + ratePct / 100);
   if (finalUnrounded > MAX_WEIGHT_CAP) {
-    console.warn(`[getProgressiveWeight] Computed weight ${finalUnrounded} exceeds cap (${MAX_WEIGHT_CAP} kg). Reverting to previous week’s weight.`);
+    // console.warn(`[getProgressiveWeight] Computed weight ${finalUnrounded} exceeds cap (${MAX_WEIGHT_CAP} kg). Reverting to previous week’s weight.`);
     // Alternatively, you could cap the weight:
     // finalUnrounded = MAX_WEIGHT_CAP;
     // Or simply not update the progression:
@@ -1254,7 +1255,7 @@ function getProgressiveWeight(ex, isIsolation, currentWeekNumber) {
   progression[exKey][currentWeekNumber] = finalUnrounded;
   localStorage.setItem("exerciseProgression", JSON.stringify(progression));
   const finalRounded = roundToNearestHalfKg(finalUnrounded);
-  console.log(`[getProgressiveWeight] Final (rounded) for ${exKey}, week ${currentWeekNumber} => ${finalRounded} kg`);
+  // console.log(`[getProgressiveWeight] Final (rounded) for ${exKey}, week ${currentWeekNumber} => ${finalRounded} kg`);
   return finalRounded;
 }
 
@@ -1448,7 +1449,7 @@ function computePOForExercise(ex, weekNumber) {
         getPhaseFromWeek(currentWeekNumber)
       );
     }
-    console.log(`[computePOForExercise] Before processing ${ex.name} in week ${weekNumber}, manualWeightOverrides =`, ex.manualWeightOverrides);
+    // console.log(`[computePOForExercise] Before processing ${ex.name} in week ${weekNumber}, manualWeightOverrides =`, ex.manualWeightOverrides);
 
     const hasManualOverrides =
       ex.manualWeightOverrides && Object.keys(ex.manualWeightOverrides).length > 0;
@@ -1543,7 +1544,7 @@ function clearSameWeekSubsequentDaysSuggestedWeights(exName, currentWeekNumber, 
       const key = `${safeName}_week${currentWeekNumber}_day${d}_set${s}_suggestedWeight`;
       if (localStorage.getItem(key)) {
         localStorage.removeItem(key);
-        console.log(`[clearSameWeekSubsequentDaysSuggestedWeights] Removed ${key}`);
+        // console.log(`[clearSameWeekSubsequentDaysSuggestedWeights] Removed ${key}`);
       }
     }
   }
@@ -1778,7 +1779,7 @@ if (Array.isArray(twelveWeekProgram)) {
     });
   });
 }
-console.log("On reload, twelveWeekProgram =", twelveWeekProgram);
+// console.log("On reload, twelveWeekProgram =", twelveWeekProgram);
 
 localStorage.setItem("twelveWeekProgram", JSON.stringify(twelveWeekProgram));
 // The crucial line: precompute *all* weeks in ascending order:
@@ -1886,7 +1887,7 @@ function checkAndResetWorkoutStreak() {
     const workoutsDone = parseInt(localStorage.getItem("week" + prevWeek + "_workoutsDone") || "0", 10);
     const workoutsAssigned = parseInt(localStorage.getItem("week" + prevWeek + "_workoutsAssigned") || "0", 10);
 
-    console.log("[Streak Check] For week", prevWeek, "- Workouts done:", workoutsDone, "Assigned:", workoutsAssigned);
+    // console.log("[Streak Check] For week", prevWeek, "- Workouts done:", workoutsDone, "Assigned:", workoutsAssigned);
 
     if (workoutsDone < workoutsAssigned) {
       // User did not complete all assigned workouts – reset the streak.
@@ -1989,7 +1990,7 @@ const animationSpeed = 0.05; // try 0.05 for a slower fill, 0.2 was faster
  * - Starts (or continues) the dynamic animation loop.
  */
 function addXP(amount) {
-  console.log("addXP called with amount =", amount);
+  // console.log("addXP called with amount =", amount);
   if (amount <= 0) return;
 
   // Trigger the "+XP" popup.
@@ -1999,7 +2000,7 @@ function addXP(amount) {
   const oldXP = currentXP;
   currentXP += amount;
   localStorage.setItem("currentXP", currentXP.toString());
-  console.log("XP updated immediately from", oldXP, "to", currentXP);
+  // console.log("XP updated immediately from", oldXP, "to", currentXP);
 
   xpRecentlyGained = true;
 
@@ -2166,7 +2167,7 @@ window.addEventListener("load", () => {
 
   // >>> NEW: Log the current active workout week for debugging
   const activeWeek = localStorage.getItem("activeWorkoutWeek") || "1";
-  console.log("Active Workout Week on page load:", activeWeek);
+  // console.log("Active Workout Week on page load:", activeWeek);
 });
 
 
@@ -2450,7 +2451,7 @@ function updateProgressScoreAndMessages() {
     : getRandomOffTrackMessage();
 
   dailyMsgEl.textContent = dailyMsg;
-  console.log("[PS] Done updating. Final PS =", finalPS);
+  // console.log("[PS] Done updating. Final PS =", finalPS);
 }
 
 // Helper: check if user met last week's required workouts
@@ -3187,7 +3188,7 @@ function renderExercise(ex, parentEl, sectionKey) {
       }
 
       // debug: verify you’re using the new key
-      console.log(`[Cardio] checkbox key: ${setKey}`);
+      // console.log(`[Cardio] checkbox key: ${setKey}`);
 
       // award XP once
       if (!loadXPAwarded(setKey)) {
@@ -3216,7 +3217,7 @@ function renderExercise(ex, parentEl, sectionKey) {
         if (!isNaN(num)) {
           durationInput.value = num + unit;
           saveSetValue(ex.name, currentWeekNumber, dayNumber, 1, "actualDuration", num);
-          console.log(`[Cardio] Duration solidified to ${num}${unit}`);
+          // console.log(`[Cardio] Duration solidified to ${num}${unit}`);
         }
       }
 
@@ -3355,13 +3356,13 @@ function renderExercise(ex, parentEl, sectionKey) {
                 refreshSetPlaceholdersForExercise(ex);
                 return;
               }
-              console.log(`[ManualOverride] Set #${s} for "${ex.name}" changed to ${formatWeight(userW)}`);
+              // console.log(`[ManualOverride] Set #${s} for "${ex.name}" changed to ${formatWeight(userW)}`);
 
               // Retrieve the active workout week from localStorage.
               let activeWorkoutWeek = parseInt(localStorage.getItem("activeWorkoutWeek") || "0", 10);
               // If currentWeekNumber is less than the active workout week, ignore this override.
               if (currentWeekNumber < activeWorkoutWeek) {
-                console.log(`[ManualOverride] Override in week ${currentWeekNumber} ignored because active workout is in week ${activeWorkoutWeek}`);
+                // console.log(`[ManualOverride] Override in week ${currentWeekNumber} ignored because active workout is in week ${activeWorkoutWeek}`);
                 return;
               }
 
@@ -3373,18 +3374,18 @@ function renderExercise(ex, parentEl, sectionKey) {
                 if (finalSetVal === userW) {
                   const updated = finalizeLastSetAsBaseline(ex, userW, currentWeekNumber, purchasedWeeks, dayNumber);
                   if (updated) {
-                    console.log(`[finalizeLastSetAsBaseline] ${ex.name}: cascade override – new baseline => ${userW} kg`);
+                    // console.log(`[finalizeLastSetAsBaseline] ${ex.name}: cascade override – new baseline => ${userW} kg`);
                   } else {
-                    console.log(`[finalizeLastSetAsBaseline] ${ex.name}: cascade override ignored (inactive workout)`);
+                    // console.log(`[finalizeLastSetAsBaseline] ${ex.name}: cascade override ignored (inactive workout)`);
                   }
                 }
               } else if (s === totalSets) {
                 // For the final set in the workout, update the baseline directly.
                 const updated = finalizeLastSetAsBaseline(ex, userW, currentWeekNumber, purchasedWeeks, dayNumber);
                 if (updated) {
-                  console.log(`[finalizeLastSetAsBaseline] ${ex.name}: final set => ${userW} kg => new baseline`);
+                  // console.log(`[finalizeLastSetAsBaseline] ${ex.name}: final set => ${userW} kg => new baseline`);
                 } else {
-                  console.log(`[finalizeLastSetAsBaseline] ${ex.name}: final set override ignored (inactive workout)`);
+                  // console.log(`[finalizeLastSetAsBaseline] ${ex.name}: final set override ignored (inactive workout)`);
                 }
               }
 
@@ -3484,11 +3485,11 @@ function renderExercise(ex, parentEl, sectionKey) {
         const key = setKey;
 
         if (setCheckbox.checked) {
-          console.log(`[Checkbox] Set checkbox for "${ex.name}", set #${s} was just checked.`);
+          // console.log(`[Checkbox] Set checkbox for "${ex.name}", set #${s} was just checked.`);
 
           // (1) Save the checkbox state immediately so it remains checked.
           if (!loadCheckboxState(key)) {
-            console.log(`[Checkbox] Saving checkbox state in localStorage => ${key}: true`);
+            // console.log(`[Checkbox] Saving checkbox state in localStorage => ${key}: true`);
             saveCheckboxState(key, true);
           }
 
@@ -3496,7 +3497,7 @@ function renderExercise(ex, parentEl, sectionKey) {
           let storedActiveWeek = parseInt(localStorage.getItem("activeWorkoutWeek") || "0", 10);
           if (currentWeekNumber > storedActiveWeek) {
             localStorage.setItem("activeWorkoutWeek", currentWeekNumber.toString());
-            console.log(`[Checkbox] Updated activeWorkoutWeek to ${currentWeekNumber}`);
+            // console.log(`[Checkbox] Updated activeWorkoutWeek to ${currentWeekNumber}`);
           }
 
           // Force the reps input to lose focus so its value is current.
@@ -3517,10 +3518,10 @@ function renderExercise(ex, parentEl, sectionKey) {
           // 5) now save/solidify that value
           saveSetValue(ex.name, currentWeekNumber, dayNumber, s, "actualReps", repValNew);
           repsInput.value = repValNew;
-          console.log("[Checkbox] repVal:", repValNew, "defaultSuggestedReps:", defaultSuggestedReps);
+          // console.log("[Checkbox] repVal:", repValNew, "defaultSuggestedReps:", defaultSuggestedReps);
 
           let phase = getPhaseFromWeek(currentWeekNumber);
-          console.log("[Checkbox] Current phase:", phase);
+          // console.log("[Checkbox] Current phase:", phase);
 
           // Determine the weight value used for the set.
           let actualWKg = NaN;
@@ -3546,10 +3547,10 @@ function renderExercise(ex, parentEl, sectionKey) {
             // 3) only accept sane positive numbers
             if (!isNaN(actualWKg) && actualWKg > 0) {
               weightValNew = actualWKg;
-              console.log(
-                `[Checkbox] Normalized actualWeight=${actualWKg.toFixed(2)} kg` +
-                ` (from ${rawVal} ${unit})`
-              );
+              // console.log(
+              //   `[Checkbox] Normalized actualWeight=${actualWKg.toFixed(2)} kg` +
+              //   ` (from ${rawVal} ${unit})`
+              // );
 
               // 4) save it in kg
               saveSetValue(
@@ -3567,7 +3568,7 @@ function renderExercise(ex, parentEl, sectionKey) {
                 s,
                 "actualWeight"
               );
-              console.log(`Saved: ${awKey} = ${localStorage.getItem(awKey)}`);
+              // console.log(`Saved: ${awKey} = ${localStorage.getItem(awKey)}`);
               const displayUnit = getPreferredWeightUnit();
               const displayNumber = displayUnit === "lbs"
                 ? kgToLbs(actualWKg).toFixed(1)
@@ -3596,9 +3597,9 @@ function renderExercise(ex, parentEl, sectionKey) {
             if (range) {
               repsInput.value = range.min;
               saveSetValue(ex.name, currentWeekNumber, dayNumber, s, "actualReps", range.min);
-              console.log(`[Checkbox] Automatically solidified reps for set #${s} to ${range.min}`);
+              // console.log(`[Checkbox] Automatically solidified reps for set #${s} to ${range.min}`);
               const arKey = getSetStorageKey(ex.name, currentWeekNumber, dayNumber, s, "actualReps");
-              console.log(`Saved: ${arKey} = ${localStorage.getItem(arKey)}`);
+              // console.log(`Saved: ${arKey} = ${localStorage.getItem(arKey)}`);
             }
           }
 
@@ -3612,7 +3613,7 @@ function renderExercise(ex, parentEl, sectionKey) {
 
             // ── 2a) Pro users: advanced‑logic popup once ──
             if (hasPurchasedAWT && !localStorage.getItem(awtShownKey)) {
-              console.log("[Checkbox] AWT not yet shown for this set, triggering advanced logic popup.");
+              // console.log("[Checkbox] AWT not yet shown for this set, triggering advanced logic popup.");
               if (currentRestTimerElement?.classList.contains("visible")) {
                 currentRestTimerElement.classList.remove("visible");
                 setTimeout(() => {
@@ -3657,27 +3658,27 @@ function renderExercise(ex, parentEl, sectionKey) {
           };
 
           if (currentRestTimerElement && currentRestTimerElement.classList.contains("visible")) {
-            console.log("[Checkbox] Normal flow => pop-away current rest timer first.");
+            // console.log("[Checkbox] Normal flow => pop-away current rest timer first.");
             currentRestTimerElement.classList.remove("visible");
             setTimeout(() => {
               cancelRestTimer();
               setTimeout(() => {
-                console.log("[Checkbox] Proceeding with normal flow after timer cancellation.");
+                // console.log("[Checkbox] Proceeding with normal flow after timer cancellation.");
                 proceed();
               }, 300);
             }, 300);
           } else {
-            console.log("[Checkbox] No active rest timer => proceed immediately.");
+            // console.log("[Checkbox] No active rest timer => proceed immediately.");
             proceed();
           }
           refreshSetPlaceholdersForExercise(ex);
           if (s === totalSets && !isNaN(weightValNew) && weightValNew > 0) {
-            console.log(`[Checkbox] Final set #${s} => finalize baseline with weight=${weightValNew}`);
+            // console.log(`[Checkbox] Final set #${s} => finalize baseline with weight=${weightValNew}`);
             finalizeLastSetAsBaseline(ex, weightValNew, currentWeekNumber, purchasedWeeks);
           }
         } else {
           // UNCHECKED branch: revert checkbox state to allow user editing.
-          console.log(`[Checkbox] Unchecked => removing checkbox state from localStorage => ${key}`);
+          // console.log(`[Checkbox] Unchecked => removing checkbox state from localStorage => ${key}`);
           saveCheckboxState(key, false);
           repsInput.readOnly = false;
           repsInput.style.color = "";
@@ -4032,7 +4033,7 @@ function autoCheckExerciseIfAllSets(exCheckbox, detailsSection) {
   }
 
   if (!detailsSection) {
-    console.warn("autoCheckExerciseIfAllSets called with null detailsSection");
+    // console.warn("autoCheckExerciseIfAllSets called with null detailsSection");
     return;
   }
 
@@ -4073,10 +4074,10 @@ function recheckExerciseAuto() {
         autoCheckExerciseIfAllSets(newExerciseCheckbox, newDetails);
         // autoCheckDayIfAllExercisesAreChecked();
       } else {
-        console.warn("Recheck: New exercise row found but details or checkbox missing.");
+        // console.warn("Recheck: New exercise row found but details or checkbox missing.");
       }
     } else {
-      console.warn("Recheck: New exercise row not found using selector:", selector);
+      // console.warn("Recheck: New exercise row not found using selector:", selector);
     }
   }, 50);
 }
@@ -4088,24 +4089,24 @@ renderWorkoutDisplay();
  *  handleIntraWorkoutRepLogic WITH AWT POP-UP
  ***************************************/
 function handleIntraWorkoutRepLogic(exerciseObj, userReps, currentSetIndex, defaultSuggestedReps, userWeight = 0, exerciseCheckbox, details) {
-  console.log("[handleIntraWorkoutRepLogic] Checking AWT status for", exerciseObj.name);
+  // console.log("[handleIntraWorkoutRepLogic] Checking AWT status for", exerciseObj.name);
   if (!hasPurchasedAWT) {
-    console.log(`User has NOT purchased AWT. Skipping advanced rep logic for "${exerciseObj.name}".`);
+    // console.log(`User has NOT purchased AWT. Skipping advanced rep logic for "${exerciseObj.name}".`);
     return;
   }
 
   if (!exerciseObj.suggestedReps) {
     exerciseObj.suggestedReps = defaultSuggestedReps || exerciseObj.reps || "12-15";
-    console.log(`[handleIntraWorkoutRepLogic] Defaulting suggestedReps to ${exerciseObj.suggestedReps} for "${exerciseObj.name}".`);
+    // console.log(`[handleIntraWorkoutRepLogic] Defaulting suggestedReps to ${exerciseObj.suggestedReps} for "${exerciseObj.name}".`);
   }
 
-  console.log(`[handleIntraWorkoutRepLogic] AWT enabled. Checking rep performance for "${exerciseObj.name}" with rep value ${userReps}.`);
+  // console.log(`[handleIntraWorkoutRepLogic] AWT enabled. Checking rep performance for "${exerciseObj.name}" with rep value ${userReps}.`);
   let suggestedRange = parseSuggestedReps(exerciseObj.suggestedReps);
   let isInsideRange = suggestedRange && userReps >= suggestedRange.min && userReps <= suggestedRange.max;
-  console.log(`User input: ${userReps}. Suggested range: ${exerciseObj.suggestedReps}. Inside range? ${isInsideRange}`);
+  // console.log(`User input: ${userReps}. Suggested range: ${exerciseObj.suggestedReps}. Inside range? ${isInsideRange}`);
 
   if (isInsideRange) {
-    console.log(`No pop-up needed for "${exerciseObj.name}"—User matched suggested range.`);
+    // console.log(`No pop-up needed for "${exerciseObj.name}"—User matched suggested range.`);
     return;
   }
 
@@ -4121,15 +4122,15 @@ function handleIntraWorkoutRepLogic(exerciseObj, userReps, currentSetIndex, defa
   }
   // If userReps is between (hardLimit + 1) and (easyLimit - 1), bail out:
   if (userReps > hardLimit && userReps < easyLimit) {
-    console.log(
-      `[handleIntraWorkoutRepLogic] Rep=${userReps} in ` +
-      `mid-range for phase ${phase}; skipping popup.`
-    );
+    // console.log(
+    //   `[handleIntraWorkoutRepLogic] Rep=${userReps} in ` +
+    //   `mid-range for phase ${phase}; skipping popup.`
+    // );
     return;
   }
 
   let recommendedAdjustment = getAWTChangesForRepResult(exerciseObj, userReps, userWeight);
-  console.log(`[handleIntraWorkoutRepLogic] Outside range—will trigger XP animation then popup for "${exerciseObj.name}". Recommendation:`, recommendedAdjustment);
+  // console.log(`[handleIntraWorkoutRepLogic] Outside range—will trigger XP animation then popup for "${exerciseObj.name}". Recommendation:`, recommendedAdjustment);
 
   // Trigger XP first
   addXP(3);
@@ -4231,9 +4232,9 @@ function getAWTChangesForRepResult(exerciseObj, userReps, userWeight = 0) {
     reason: ""
   };
 
-  console.log(`[getAWTChangesForRepResult] Starting.
-    phase=${phase}, isCompound=${isCompound},
-    baseSuggestedWeight=${baseSuggestedWeight}, userReps=${userReps}`);
+  // console.log(`[getAWTChangesForRepResult] Starting.
+  //   phase=${phase}, isCompound=${isCompound},
+  //   baseSuggestedWeight=${baseSuggestedWeight}, userReps=${userReps}`);
 
   switch (phase) {
     case 1: // Foundational
@@ -4364,12 +4365,12 @@ function getAWTChangesForRepResult(exerciseObj, userReps, userWeight = 0) {
   const rounded = roundToNearestHalfKg(safeValue);
   recommendation.newWeight = (isNaN(rounded) || rounded < 1) ? 1 : rounded;
 
-  console.log(`[getAWTChangesForRepResult] Proposed => 
-    newReps: ${recommendation.suggestedReps}, 
-    newWeight: ${recommendation.newWeight} kg, 
-    restTime: ${recommendation.restTime}, 
-    reason: ${recommendation.reason}, 
-    direction: ${recommendation.direction}`);
+  // console.log(`[getAWTChangesForRepResult] Proposed => 
+  //   newReps: ${recommendation.suggestedReps}, 
+  //   newWeight: ${recommendation.newWeight} kg, 
+  //   restTime: ${recommendation.restTime}, 
+  //   reason: ${recommendation.reason}, 
+  //   direction: ${recommendation.direction}`);
 
   return recommendation;
 }
@@ -4511,7 +4512,7 @@ function solidifySetValuesForExercise(exerciseObj) {
             input.value = durationVal + " minutes";
             // Save to localStorage with a field name of "actualDuration"
             saveSetValue(exerciseObj.name, currentWeekNumber, dayNumber, sIndex, "actualDuration", durationVal);
-            console.log(`[solidifySetValuesForExercise] Set #${sIndex} duration solidified to ${durationVal} minutes`);
+            // console.log(`[solidifySetValuesForExercise] Set #${sIndex} duration solidified to ${durationVal} minutes`);
           }
         }
       }
@@ -4524,7 +4525,7 @@ function solidifySetValuesForExercise(exerciseObj) {
           if (repRange) {
             input.value = repRange.min;
             saveSetValue(exerciseObj.name, currentWeekNumber, dayNumber, sIndex, "actualReps", repRange.min);
-            console.log(`[solidifySetValuesForExercise] Set #${sIndex} reps solidified to ${repRange.min}`);
+            // console.log(`[solidifySetValuesForExercise] Set #${sIndex} reps solidified to ${repRange.min}`);
           }
         }
         // For weight input (assumed to be the second number input)
@@ -4534,7 +4535,7 @@ function solidifySetValuesForExercise(exerciseObj) {
           if (!isNaN(weightVal)) {
             input.value = weightVal;
             saveSetValue(exerciseObj.name, currentWeekNumber, dayNumber, sIndex, "actualWeight", weightVal);
-            console.log(`[solidifySetValuesForExercise] Set #${sIndex} weight solidified to ${weightVal} kg`);
+            // console.log(`[solidifySetValuesForExercise] Set #${sIndex} weight solidified to ${weightVal} kg`);
           }
         }
       }
@@ -4650,7 +4651,7 @@ function showRestTimer(seconds) {
 
   let timerEl = document.getElementById("restTimer");
   if (!timerEl) {
-    console.log("[showRestTimer] Timer element not found. Creating new one.");
+    // console.log("[showRestTimer] Timer element not found. Creating new one.");
     timerEl = document.createElement("div");
     timerEl.id = "restTimer";
     timerEl.innerHTML = `
@@ -4689,7 +4690,7 @@ function showRestTimer(seconds) {
       </div>
     `;
     document.body.appendChild(timerEl);
-    console.log("[showRestTimer] Timer element created and appended.");
+    // console.log("[showRestTimer] Timer element created and appended.");
   }
 
   // Track the timer element
@@ -4828,7 +4829,7 @@ function cancelRestTimer() {
     const elementToRemove = currentRestTimerElement;
     setTimeout(() => {
       if (elementToRemove && !elementToRemove.classList.contains("visible")) {
-        console.log("[cancelRestTimer] Timer hidden.");
+        // console.log("[cancelRestTimer] Timer hidden.");
         // Optionally: elementToRemove.remove();
       }
     }, 300);
@@ -4874,9 +4875,9 @@ function adjustRestTimer(delta) {
 }
 
 function startRestTimerImmediately(newTime) {
-  console.log("[startRestTimerImmediately] Starting new rest timer with time:", newTime);
+  // console.log("[startRestTimerImmediately] Starting new rest timer with time:", newTime);
   if (currentRestTimerElement && currentRestTimerElement.classList.contains("visible")) {
-    console.log("[startRestTimerImmediately] Active rest timer found. Triggering pop-away animation.");
+    // console.log("[startRestTimerImmediately] Active rest timer found. Triggering pop-away animation.");
     // Remove the "visible" class to trigger the pop-away (fade out) animation.
     currentRestTimerElement.classList.remove("visible");
     // Wait for the pop-away animation to finish.
@@ -4897,14 +4898,14 @@ function startRestTimerImmediately(newTime) {
  * Optional “shouldStartRestTimerForExercise” + delayed start
  ***************************************/
 function shouldStartRestTimerForExercise(ex) {
-  console.log("[shouldStartRestTimerForExercise] Checking:", ex.name, "rest:", ex.rest);
+  // console.log("[shouldStartRestTimerForExercise] Checking:", ex.name, "rest:", ex.rest);
   if (!ex.rest) return false;
   const restSeconds = parseInt(ex.rest, 10);
   if (isNaN(restSeconds)) return false;
 
   const dayKey = `day_${currentWeekIndex}_${currentDayIndex}`;
   if (loadCheckboxState(dayKey)) {
-    console.log("[shouldStartRestTimerForExercise] Day is fully checked => skip timer.");
+    // console.log("[shouldStartRestTimerForExercise] Day is fully checked => skip timer.");
     return false;
   }
 
@@ -4916,12 +4917,12 @@ function shouldStartRestTimerForExercise(ex) {
 
 
 function startRestTimerWithDelay(ex) {
-  console.log("[startRestTimerWithDelay] Scheduling a 3500ms delay for:", ex.name);
+  // console.log("[startRestTimerWithDelay] Scheduling a 3500ms delay for:", ex.name);
   if (restTimerDelayTimeout) clearTimeout(restTimerDelayTimeout);
   restTimerDelayTimeout = setTimeout(() => {
-    console.log("[startRestTimerWithDelay] Timeout fired for:", ex.name);
+    // console.log("[startRestTimerWithDelay] Timeout fired for:", ex.name);
     if (shouldStartRestTimerForExercise(ex) && !activeRestTimerExercise) {
-      console.log("[startRestTimerWithDelay] => showRestTimer called for:", ex.name);
+      // console.log("[startRestTimerWithDelay] => showRestTimer called for:", ex.name);
       activeRestTimerExercise = ex.name;
       const restSeconds = parseInt(ex.rest, 10) || 45;
       showRestTimer(restSeconds);
@@ -4942,7 +4943,7 @@ function showPerformancePopup(exerciseObj, userReps, currentSetIndex, recommenda
     return;
   }
 
-  console.log(`[showPerformancePopup] Scheduling for "${exerciseObj.name}". userReps=${userReps}. Recommendation=`, recommendation);
+  // console.log(`[showPerformancePopup] Scheduling for "${exerciseObj.name}". userReps=${userReps}. Recommendation=`, recommendation);
 
   performancePopupSchedule = setTimeout(() => {
     performancePopupSchedule = null;    // clear the schedule handle
@@ -5031,14 +5032,14 @@ function actuallyShowPopup(exerciseObj, userReps, currentSetIndex, recommendatio
       clearInterval(performancePopupTimer);
       performancePopupTimer = null;
       if (!fallbackYesNoActive) {
-        console.log("[Popup] No user interaction, auto-applying recommended changes...");
+        // console.log("[Popup] No user interaction, auto-applying recommended changes...");
         applyAWTChanges(exerciseObj, recommendation);
         closePerformancePopup(() => {
           if (exerciseObj.rest) {
             if (restTimerDelayTimeout) {
               clearTimeout(restTimerDelayTimeout);
               restTimerDelayTimeout = null;
-              console.log("[Pop-up logic] Cleared delayed timer so it won't re-fire.");
+              // console.log("[Pop-up logic] Cleared delayed timer so it won't re-fire.");
             }
             startRestTimerImmediately(recommendation.restTime);
           }
@@ -5148,9 +5149,9 @@ function randomText(arr) {
 
 // The main click handler for TE / JF / TH:
 function handlePerformanceClick(buttonType, exerciseObj, userReps, currentSetIndex, recommendation, exerciseCheckbox, details) {
-  console.log("[handlePerformanceClick] NEW VERSION: user pressed=", buttonType);
-  console.log("🚨 I am in the new handlePerformanceClick function 🚨");
-  console.log(`[handlePerformanceClick] recommendation.direction = ${recommendation.direction}`);
+  // console.log("[handlePerformanceClick] NEW VERSION: user pressed=", buttonType);
+  // console.log("🚨 I am in the new handlePerformanceClick function 🚨");
+  // console.log(`[handlePerformanceClick] recommendation.direction = ${recommendation.direction}`);
 
   // IMPORTANT: cancel the fallback timer so it won't auto-apply changes later
   if (performancePopupTimer) {
@@ -5215,17 +5216,17 @@ function handlePerformanceClick(buttonType, exerciseObj, userReps, currentSetInd
   }
 
   if (buttonType === "TE" && recommendation.direction === "increase") {
-    console.log("[Popup] User pressed Too Easy and recommendation indicates increase => applying changes");
+    // console.log("[Popup] User pressed Too Easy and recommendation indicates increase => applying changes");
     applyAWTChanges(exerciseObj, recommendation);
     closePerformancePopup(() => {
       if (exerciseObj.rest) {
         if (restTimerDelayTimeout) {
           clearTimeout(restTimerDelayTimeout);
           restTimerDelayTimeout = null;
-          console.log("[Pop-up logic] Cleared delayed timer so it won't re-fire.");
+          // console.log("[Pop-up logic] Cleared delayed timer so it won't re-fire.");
         }
         exerciseObj.rest = null;
-        console.log("[Pop-up logic] ex.rest set to null => skipping normal delayed timer");
+        // console.log("[Pop-up logic] ex.rest set to null => skipping normal delayed timer");
         startRestTimerImmediately(recommendation.restTime);
       }
       renderWorkoutDisplay();
@@ -5243,17 +5244,17 @@ function handlePerformanceClick(buttonType, exerciseObj, userReps, currentSetInd
   }
 
   if (buttonType === "TH" && recommendation.direction === "decrease") {
-    console.log("[Popup] User pressed Too Hard and recommendation indicates decrease => applying changes");
+    // console.log("[Popup] User pressed Too Hard and recommendation indicates decrease => applying changes");
     applyAWTChanges(exerciseObj, recommendation);
     closePerformancePopup(() => {
       if (exerciseObj.rest) {
         if (restTimerDelayTimeout) {
           clearTimeout(restTimerDelayTimeout);
           restTimerDelayTimeout = null;
-          console.log("[Pop-up logic] Cleared delayed timer so it won't re-fire.");
+          // console.log("[Pop-up logic] Cleared delayed timer so it won't re-fire.");
         }
         exerciseObj.rest = null;
-        console.log("[Pop-up logic] ex.rest set to null => skipping normal delayed timer");
+        // console.log("[Pop-up logic] ex.rest set to null => skipping normal delayed timer");
         startRestTimerImmediately(recommendation.restTime);
       }
       renderWorkoutDisplay();
@@ -5271,14 +5272,14 @@ function handlePerformanceClick(buttonType, exerciseObj, userReps, currentSetInd
   }
 
   // Otherwise, if there's a mismatch between what the user pressed and what is recommended, show the fallback.
-  console.log("[Popup] Mismatch detected => showing fallback yes/no");
+  // console.log("[Popup] Mismatch detected => showing fallback yes/no");
   showFallbackYesNo(exerciseObj, userReps, currentSetIndex, recommendation, exerciseCheckbox, details);
 }
 
 // “Are you sure?” fallback
 function showFallbackYesNo(exerciseObj, userReps, currentSetIndex, recommendation, exerciseCheckbox, details) {
   fallbackYesNoActive = true;
-  console.log("[Popup] Mismatch detected => showing fallback question...");
+  // console.log("[Popup] Mismatch detected => showing fallback question...");
 
   const popup = document.getElementById("performancePopup");
   if (!popup) return;
@@ -5310,16 +5311,16 @@ function showFallbackYesNo(exerciseObj, userReps, currentSetIndex, recommendatio
   btnNo.textContent = "No, Thanks";
 
   btnYes.addEventListener("click", () => {
-    console.log("[Popup Fallback] User chose YES => applying recommended changes");
+    // console.log("[Popup Fallback] User chose YES => applying recommended changes");
     applyAWTChanges(exerciseObj, recommendation);
     setAWTShownForSet(currentWeekIndex, currentDayIndex, exerciseObj.name, currentSetIndex);
     closePerformancePopup(() => {
       if (exerciseObj.rest) {
-        console.log("[Popup Fallback] Starting rest timer after 'Yes, Please'.");
+        // console.log("[Popup Fallback] Starting rest timer after 'Yes, Please'.");
         if (restTimerDelayTimeout) {
           clearTimeout(restTimerDelayTimeout);
           restTimerDelayTimeout = null;
-          console.log("[Pop-up logic] Cleared delayed timer so it won't re-fire.");
+          // console.log("[Pop-up logic] Cleared delayed timer so it won't re-fire.");
         }
         startRestTimerImmediately(recommendation.restTime);
       }
@@ -5337,10 +5338,10 @@ function showFallbackYesNo(exerciseObj, userReps, currentSetIndex, recommendatio
   });
 
   btnNo.addEventListener("click", () => {
-    console.log("[Popup Fallback] User chose NO => retaining manual override and resetting UI");
+    // console.log("[Popup Fallback] User chose NO => retaining manual override and resetting UI");
     closePerformancePopup(() => {
       if (exerciseObj.rest) {
-        console.log("[Popup Fallback] Starting rest timer after 'No, Thanks' with old rest time:", exerciseObj.rest);
+        // console.log("[Popup Fallback] Starting rest timer after 'No, Thanks' with old rest time:", exerciseObj.rest);
         const oldRest = parseInt(exerciseObj.rest, 10) || 45;
         startRestTimerImmediately(oldRest);
       }
@@ -5372,8 +5373,8 @@ function showFallbackYesNo(exerciseObj, userReps, currentSetIndex, recommendatio
 // & save them to localStorage so future sets/workouts see them
 function applyAWTChanges(exerciseObj, recommendation) {
   const oldWeight = getCurrentSuggestedWeight(exerciseObj);
-  console.log(`[applyAWTChanges] Called for ${exerciseObj.name}. 
-    oldWeight=${oldWeight}, newWeight=${recommendation.newWeight}, newReps=${recommendation.suggestedReps}`);
+  // console.log(`[applyAWTChanges] Called for ${exerciseObj.name}. 
+  //   oldWeight=${oldWeight}, newWeight=${recommendation.newWeight}, newReps=${recommendation.suggestedReps}`);
 
   // Update the exercise-level fields (in-memory)
   exerciseObj.suggestedReps = recommendation.suggestedReps;
@@ -5427,7 +5428,7 @@ function applyAWTChanges(exerciseObj, recommendation) {
  *   to show the new suggestedWeight, _unless_ a user typed an actualWeight override.
  */
 function cascadeWeightWithinCurrentWorkout(exerciseObj, newWeight) {
-  console.log(`[cascadeWeightWithinCurrentWorkout] Updating subsequent sets in the same workout to weight=${newWeight}`);
+  // console.log(`[cascadeWeightWithinCurrentWorkout] Updating subsequent sets in the same workout to weight=${newWeight}`);
   const currentWeekData = twelveWeekProgram[currentWeekIndex];
   if (!currentWeekData) return;
 
@@ -5450,7 +5451,7 @@ function cascadeWeightWithinCurrentWorkout(exerciseObj, newWeight) {
             }
             // Otherwise, update the localStorage "suggestedWeight"
             const suggWeightKey = getSetStorageKey(exItem.name, currentWeekData.week, currentDayIndex + 1, sIndex, "suggestedWeight");
-            console.log(`   [cascadeWeight] localStorage["${suggWeightKey}"] = ${newWeight}`);
+            // console.log(`   [cascadeWeight] localStorage["${suggWeightKey}"] = ${newWeight}`);
             localStorage.setItem(suggWeightKey, newWeight.toString());
           }
         }
@@ -5460,7 +5461,7 @@ function cascadeWeightWithinCurrentWorkout(exerciseObj, newWeight) {
 }
 
 function cascadeRepsWithinCurrentWorkout(exerciseObj, newRepRange) {
-  console.log(`[cascadeRepsWithinCurrentWorkout] Updating subsequent sets in the same workout to repRange="${newRepRange}"`);
+  // console.log(`[cascadeRepsWithinCurrentWorkout] Updating subsequent sets in the same workout to repRange="${newRepRange}"`);
   const currentWeekData = twelveWeekProgram[currentWeekIndex];
   if (!currentWeekData) return;
 
@@ -5482,7 +5483,7 @@ function cascadeRepsWithinCurrentWorkout(exerciseObj, newRepRange) {
             // Otherwise, store the new recommended rep range as "suggestedReps"
             // so we can read it in refreshSetPlaceholdersForExercise
             const suggRepsKey = getSetStorageKey(exItem.name, currentWeekData.week, currentDayIndex + 1, sIndex, "suggestedReps");
-            console.log(`   [cascadeReps] localStorage["${suggRepsKey}"] = "${newRepRange}"`);
+            // console.log(`   [cascadeReps] localStorage["${suggRepsKey}"] = "${newRepRange}"`);
             localStorage.setItem(suggRepsKey, newRepRange);
           }
         }
@@ -5516,7 +5517,7 @@ function closePerformancePopup(callback) {
     if (popup.parentNode) {
       popup.parentNode.removeChild(popup);
     }
-    console.log("[Popup] Pop-up closed.");
+    // console.log("[Popup] Pop-up closed.");
     if (callback) callback();
   }, 500);
 }
@@ -6260,7 +6261,7 @@ function showChangeExercisePopup(ex, details, exerciseRow) {
     existing.remove();
   }
 
-  console.log("[showChangeExercisePopup] Called with ex =", ex);
+  // console.log("[showChangeExercisePopup] Called with ex =", ex);
 
   // 2) Build the container
   const popup = document.createElement("div");
@@ -6300,7 +6301,7 @@ function showChangeExercisePopup(ex, details, exerciseRow) {
     ? ex.alternativeExercises.slice()
     : [];
 
-  console.log("[showChangeExercisePopup] raw altExercises (before filter) =", altExercises);
+  // console.log("[showChangeExercisePopup] raw altExercises (before filter) =", altExercises);
 
   // Filter out any alternative that matches the current exercise name
   altExercises = altExercises.filter(item => {
@@ -6313,7 +6314,7 @@ function showChangeExercisePopup(ex, details, exerciseRow) {
     return itemName.toLowerCase() !== ex.name.toLowerCase();
   });
 
-  console.log("[showChangeExercisePopup] altExercises (after filter) =", altExercises);
+  // console.log("[showChangeExercisePopup] altExercises (after filter) =", altExercises);
 
   // Convert items that are strings into objects using a lookup (if available)
   altExercises = altExercises.map(item => {
@@ -6333,7 +6334,7 @@ function showChangeExercisePopup(ex, details, exerciseRow) {
   const hasTechnicalFlag =
     altExercises.length > 0 &&
     altExercises.every(item => typeof item === "object" && "isTechnical" in item);
-  console.log("[showChangeExercisePopup] hasTechnicalFlag =", hasTechnicalFlag);
+  // console.log("[showChangeExercisePopup] hasTechnicalFlag =", hasTechnicalFlag);
 
   // Prepare arrays for grouping alternatives
   let easier = [];
@@ -6347,8 +6348,8 @@ function showChangeExercisePopup(ex, details, exerciseRow) {
         harder.push(item);
       }
     });
-    console.log("[showChangeExercisePopup] easier =", easier);
-    console.log("[showChangeExercisePopup] harder =", harder);
+    // console.log("[showChangeExercisePopup] easier =", easier);
+    // console.log("[showChangeExercisePopup] harder =", harder);
   }
 
   const hasMix = easier.length > 0 && harder.length > 0;

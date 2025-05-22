@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = sessBody.url;
 
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       showError("card-error", err.message || "Something went wrong");
     }
   });
@@ -98,5 +98,5 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".error-message").forEach(e => (e.textContent = ""));
   }
 
-  console.log("[checkout] ready — plan:", plan, "discounted?", discounted);
+  // console.log("[checkout] ready — plan:", plan, "discounted?", discounted);
 });
