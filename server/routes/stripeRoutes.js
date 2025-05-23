@@ -21,14 +21,14 @@ const COUPON_ID = process.env.COUPON_ID;             // £9.99-first-month
 
 /* ─── Helper → build the Checkout session config ─────────── */
 function buildCheckoutConfig({ plan, discounted, email }) {
-  const FRONTEND_URL = process.env.FRONTEND_URL; 
+  const FRONTEND_URL = process.env.FRONTEND_URL;
   console.log('✅ BUILDING CHECKOUT: FRONTEND_URL is:', FRONTEND_URL);
   if (!PRICE[plan]) throw new Error(`Unknown plan: ${plan}`);
 
   const isSub = plan === 'subscription';
 
-console.log('🧾 Stripe Checkout → plan:', plan);
-console.log('💸 Using price ID:', PRICE[plan]);
+  console.log('🧾 Stripe Checkout → plan:', plan);
+  console.log('💸 Using price ID:', PRICE[plan]);
 
   const config = {
     payment_method_types: ['card'],
@@ -36,8 +36,9 @@ console.log('💸 Using price ID:', PRICE[plan]);
     customer_email: email,
     line_items: [{ price: PRICE[plan], quantity: 1 }],
 
-    success_url: `https://raising-the-bar.vercel.app/pages/dashboard.html?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `https://raising-the-bar.vercel.app/pages/offer.html`
+    success_url: `${process.env.FRONTEND_URL}/pages/dashboard.html?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.FRONTEND_URL}/pages/offer.html`
+
   };
 
   // Intro discount applies only to the subscription
@@ -102,5 +103,5 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
 
 module.exports = router;
 
-    // success_url: `${FRONTEND_URL}/pages/dashboard.html?session_id={CHECKOUT_SESSION_ID}`,
-    // cancel_url: `${FRONTEND_URL}/pages/offer.html`
+// success_url: `${FRONTEND_URL}/pages/dashboard.html?session_id={CHECKOUT_SESSION_ID}`,
+// cancel_url: `${FRONTEND_URL}/pages/offer.html`
