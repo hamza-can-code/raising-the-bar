@@ -1,4 +1,7 @@
+// client/scripts/sign-up-checkout.js
+
 import { savePreferencesAfterLogin } from "../scripts/savePreferencesAfterLogin.js";
+import { showGlobalLoader, hideGlobalLoader } from "../scripts/loadingOverlay.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const pending = localStorage.getItem("pendingPurchaseType");   // ← already saved by your pricing buttons
@@ -40,6 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (passwordEl.value.length < 8) { showError("password-error", "Password must be at least 8 characters."); valid = false; }
     if (passwordEl.value !== confirmEl.value) { showError("confirm-error", "Passwords do not match."); valid = false; }
     if (!valid) return;
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    showGlobalLoader("Finalizing your setup, this won't take long...");
 
     try {
       /* 2)  register */
@@ -87,6 +94,8 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (err) {
       // console.error(err);
       showError("card-error", err.message || "Something went wrong");
+      submitBtn.disabled = false;
+      hideGlobalLoader();
     }
   });
 

@@ -1,6 +1,7 @@
 // client/scripts/sign-up.js
 
 import { savePreferencesAfterLogin } from "../scripts/savePreferencesAfterLogin.js";
+import { showGlobalLoader, hideGlobalLoader } from "../scripts/loadingOverlay.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("signup-form");
@@ -27,6 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
       valid = false;
     }
     if (!valid) return;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    showGlobalLoader("Finalizing your setup, this won't take long...");
 
     try {
       // Step 1: Register user
@@ -75,6 +79,8 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (err) {
       // console.error(err);
       showError("email-error", err.message);
+      submitBtn.disabled = false;
+      hideGlobalLoader();
     }
   });
 
@@ -85,6 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function clearErrors() {
     document.querySelectorAll(".error-message")
-            .forEach(el => (el.textContent = ""));
+      .forEach(el => (el.textContent = ""));
   }
 });

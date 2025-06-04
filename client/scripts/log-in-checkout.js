@@ -1,15 +1,15 @@
-/********************************************************************
- *  Log-in-and-Pay flow
- *******************************************************************/
+// client/scripts/log-in-checkout.js
+
 import { savePreferencesAfterLogin } from "../scripts/savePreferencesAfterLogin.js";
+import { showGlobalLoader, hideGlobalLoader } from "../scripts/loadingOverlay.js";
 
 async function fetchAndStorePreferences() {
   try {
     const token = localStorage.getItem("token");
     if (!token) return false;
 
-    const res  = await fetch("/api/getUserPreferences", {
-      method : "GET",
+    const res = await fetch("/api/getUserPreferences", {
+      method: "GET",
       headers: { Authorization: `Bearer ${token}` }
     });
     const data = await res.json();
@@ -28,22 +28,22 @@ async function fetchAndStorePreferences() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const pending     = localStorage.getItem("pendingPurchaseType");
-  const planName    = localStorage.getItem("planName")  || "Unknown plan";
-  const planPrice   = localStorage.getItem("planPrice") || "";
+  const pending = localStorage.getItem("pendingPurchaseType");
+  const planName = localStorage.getItem("planName") || "Unknown plan";
+  const planPrice = localStorage.getItem("planPrice") || "";
   const discountEnd = Number(localStorage.getItem("discountEndTime") || 0);
-  const discounted  = discountEnd > Date.now();
+  const discounted = discountEnd > Date.now();
 
   const planMap = {
-    "1-Week Program"          : "1-week",
-    "4-Week Program"          : "4-week",
-    "12-Week Program"         : "12-week",
+    "1-Week Program": "1-week",
+    "4-Week Program": "4-week",
+    "12-Week Program": "12-week",
     "Pro Tracker Subscription": "subscription"
   };
   const plan = planMap[planName];
 
   const planSummary = document.getElementById("planSummary");
-  const payBtn      = document.getElementById("paySubmitBtn");
+  const payBtn = document.getElementById("paySubmitBtn");
 
   if (!pending || !plan) {
     planSummary.textContent = "⚠️  No plan selected.";
@@ -69,12 +69,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (!valid) return;
 
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    showGlobalLoader("Logging you in...");
+
     try {
       /* 1 -- login */
-      const res  = await fetch("/api/auth/login", {
-        method : "POST",
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body   : JSON.stringify({ email: email.value, password: password.value })
+        body: JSON.stringify({ email: email.value, password: password.value })
       });
       const body = await res.json();
       if (!res.ok) throw new Error(body.message || "Login failed");
@@ -88,9 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       /* 4 -- create Checkout session */
       const sessionRes = await fetch("/api/create-checkout-session", {
-        method : "POST",
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body   : JSON.stringify({ email: email.value, plan, discounted })
+        body: JSON.stringify({ email: email.value, plan, discounted })
       });
       const sessBody = await sessionRes.json();
       if (!sessionRes.ok) throw new Error(sessBody.error || "Unable to start checkout");
@@ -103,6 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = sessBody.url;
 
     } catch (err) {
+      submitBtn.disabled = false;
+      hideGlobalLoader();
       // console.error(err);
       showError("password-error", err.message || "Something went wrong");
     }
@@ -114,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   function clearErrors() {
     document.querySelectorAll(".error-message")
-            .forEach(el => (el.textContent = ""));
+      .forEach(el => (el.textContent = ""));
   }
 
   // console.log("[login-checkout] ready — plan:", plan, "discounted?", discounted);

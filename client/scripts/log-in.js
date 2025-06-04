@@ -1,6 +1,8 @@
 // client/scripts/log-in.js
 
 import { savePreferencesAfterLogin } from "../scripts/savePreferencesAfterLogin.js";
+import { showGlobalLoader, hideGlobalLoader } from "../scripts/loadingOverlay.js";
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("login-form");
@@ -11,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let valid = true;
     const email = form.email;
-    const pw    = form.password;
+    const pw = form.password;
 
     // 1) Email validity
     if (!email.checkValidity()) {
@@ -24,6 +26,10 @@ document.addEventListener("DOMContentLoaded", () => {
       valid = false;
     }
     if (!valid) return;
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    showGlobalLoader("Logging you in...");
 
     try {
       const res = await fetch("/api/auth/login", {
@@ -57,6 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         showError("password-error", msg);
       }
+      submitBtn.disabled = false;
+      hideGlobalLoader();
     }
   });
 
@@ -67,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function clearErrors() {
     document.querySelectorAll(".error-message")
-            .forEach(el => (el.textContent = ""));
+      .forEach(el => (el.textContent = ""));
   }
 });
 
