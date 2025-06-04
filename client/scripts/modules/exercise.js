@@ -817,7 +817,7 @@ export const EXERCISE_DATABASE = [
   {
     name: "Barbell Front Raise",
     muscleGroup: "shoulders",
-    equipmentNeeded: ["Barbell"],
+    equipmentNeeded: ["Barbells"],
     splitTag: "push",
     isTechnical: false,
     advancedVariant: false,
@@ -831,7 +831,7 @@ export const EXERCISE_DATABASE = [
   {
     name: "Barbell Upright Row",
     muscleGroup: "traps",
-    equipmentNeeded: ["Barbell"],
+    equipmentNeeded: ["Barbells"],
     splitTag: "pull",
     isTechnical: false,
     advancedVariant: false,
@@ -844,7 +844,7 @@ export const EXERCISE_DATABASE = [
   {
     name: "Barbell Bicep Curl",
     muscleGroup: "biceps",
-    equipmentNeeded: ["Barbell"],
+    equipmentNeeded: ["Barbells"],
     splitTag: "pull",
     isTechnical: false,
     advancedVariant: false,
@@ -861,7 +861,7 @@ export const EXERCISE_DATABASE = [
   {
     name: "Barbell Bench Press (Floor Press)",
     muscleGroup: "chest",
-    equipmentNeeded: ["Barbell"],
+    equipmentNeeded: ["Barbells"],
     splitTag: "push",
     isTechnical: false,
     advancedVariant: false,
@@ -876,7 +876,7 @@ export const EXERCISE_DATABASE = [
   {
     name: "Barbell Walking Lunge",
     muscleGroup: "quads",
-    equipmentNeeded: ["Barbell"],
+    equipmentNeeded: ["Barbells"],
     splitTag: "legs",
     isTechnical: true,
     advancedVariant: false,
@@ -895,7 +895,7 @@ export const EXERCISE_DATABASE = [
   {
     name: "Barbell Calf Raise",
     muscleGroup: "calves",
-    equipmentNeeded: ["Barbell"],
+    equipmentNeeded: ["Barbells"],
     splitTag: "legs",
     isTechnical: false,
     advancedVariant: false,
@@ -908,7 +908,7 @@ export const EXERCISE_DATABASE = [
   {
     name: "Barbell Hip Thrust",
     muscleGroup: "glutes",
-    equipmentNeeded: ["Barbell"],
+    equipmentNeeded: ["Barbells"],
     splitTag: "legs",
     isTechnical: true,
     advancedVariant: false,

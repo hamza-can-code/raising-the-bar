@@ -5316,10 +5316,10 @@ function initSwipeableNutritionTrendCards(){
   makeSwipeableNT(rail, dots);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  initNutritionSwipeableRecapCards();
-  initSwipeableNutritionTrendCards();
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//   initNutritionSwipeableRecapCards();
+//   initSwipeableNutritionTrendCards();
+// });
 
 function generateNutritionCoachInsight(selection) {
   // If the user has chosen "Program to Date", aggregate data from all completed weeks.

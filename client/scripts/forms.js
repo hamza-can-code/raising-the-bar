@@ -1042,6 +1042,9 @@ function handleOptionClick(selectedOption, type) {
     }
     const selectedTexts = Array.from(optionsContainer.querySelectorAll("li.selected")).map(li => li.textContent.trim());
     formData[questionKey] = selectedTexts.map(txt => txt.toLowerCase());
+      if (questionKey === "equipment") {
+      localStorage.setItem("equipment", JSON.stringify(formData.equipment));
+    }
     // console.log("Current selected checkboxes =>", formData[questionKey]);
   }
 }
@@ -2727,7 +2730,7 @@ function sequenceAndFinalize(exArray, splitCode, wNum) {
   let allocated = Math.min(blocks.rt, 60);
 
   // 2) How many total exercises we can fit (1 per 8 minutes, max 6)
-  const totalSlots = Math.min(Math.floor(allocated / 8), 6);
+  const totalSlots = Math.min(Math.floor(allocated / 7), 6);
 
   // 3) Actually do your original sequence logic on exArray
   let seq = sequenceExercises(splitCode, exArray, allocated);
@@ -2999,7 +3002,7 @@ function buildDayWorkout(exList, splitType, wNum, dayIndex) {
   let chosen = getCachedOrBuildDay(splitType, exList, wNum, dayIndex);
 
   // 1 exercise / 8 min logic
-  let totalSlots = Math.min(Math.floor(blocks.rt / 8), 6);
+  let totalSlots = Math.min(Math.floor(blocks.rt / 7), 6);
   let filtered = chosen.slice();
 
   // 1) If location is gym => try removing isHomeOnly
@@ -4859,18 +4862,18 @@ nextButton.addEventListener("click", () => {
   // If currentQ is "Where do you plan to work out?" => we check if user has selected "gym",
   // and if so, THEN do the auto-fill + skip eq question
   if (currentQ.key === "workoutLocation") {
-    if ((formData.workoutLocation || "").toLowerCase() === "gym") {
-      // [ADDED logic => auto fill & remove Q13 only NOW if still present]
-      if (equipmentQuestionIndex !== -1) {
-        // remove it from the array
-        questions.splice(equipmentQuestionIndex, 1);
-      }
-      formData.equipment = [
-        "dumbbells", "barbells", "bench", "rack", "kettlebells", "cables",
-        "machines", "smith machine", "pull-up bar", "dip station"
-      ];
-      // console.log("Auto-filled eq for gym => removed Q13 from array.");
-    }
+    // if ((formData.workoutLocation || "").toLowerCase() === "gym") {
+    //   // [ADDED logic => auto fill & remove Q13 only NOW if still present]
+    //   if (equipmentQuestionIndex !== -1) {
+    //     // remove it from the array
+    //     questions.splice(equipmentQuestionIndex, 1);
+    //   }
+    //   formData.equipment = [
+    //     "dumbbells", "barbells", "bench", "rack", "kettlebells", "cables",
+    //     "machines", "smith machine", "pull-up bar", "dip station"
+    //   ];
+    //   // console.log("Auto-filled eq for gym => removed Q13 from array.");
+    // }
   }
 
   // Standard validations
