@@ -67,7 +67,7 @@ function loadTikTokPixel() {
 
   // 2️⃣ Load your Pixel and call .page()
   ttq.load('D0M3KORC77UCAFR1EOLG');
-  ttq.page({
+  ttq.track('ViewContent', {
     content_id: 'landing-page'
   });
 }
