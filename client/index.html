@@ -22,10 +22,22 @@
   <meta name="twitter:image" content="https://raisingthebarapp.com/assets/og-preview.jpg">
 
   <title>Raising The Bar</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fonts -->
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
-    rel="stylesheet">
+    rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
+      rel="stylesheet">
+  </noscript>
+
+  <!-- Main CSS -->
+  <link rel="preload" as="style" href="../styles/landing-page.css">
   <link href="../styles/landing-page.css" rel="stylesheet">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ"></script>
@@ -264,8 +276,13 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   <section class="habit-building">
     <h2>Feel Better, Every Day</h2>
     <div class="habit-image">
-      <img src="../assets/person_walking_outside.jpg" alt="A person running in nature or doing yoga outdoors"
-        loading="lazy" />
+      <picture style="display:block; margin:0 auto; max-width:100%;">
+        <source srcset="../assets/person_walking_outside.webp" type="image/webp">
+        <source srcset="../assets/person_walking_outside.jpg" type="image/jpeg">
+        <img src="../assets/person_walking_outside.webp" alt="A person running in nature or doing yoga outdoors"
+          width="600" height="400" loading="lazy" decoding="async"
+          style="display:block; margin:0 auto; width:100%; max-width:600px;">
+      </picture>
     </div>
     <p>
       This is about more than workouts. When your plan adjusts to your life — not the other way around — everything
@@ -275,88 +292,96 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   </section>
   <section class="nutrition-section">
     <h2>Meals That Work With You</h2>
-    <div class="nutrition-image">
-      <img src="../assets/meal-prep.jpg" alt="A person preparing a healthy meal" loading="lazy" />
-    </div>
-    <p>
-      Your meals adapt to your goals, preferences, and schedule — with evolving plans that keep things fresh and easy to
-      follow. No extra apps. No stress. Just simple, balanced nutrition that fits into your life.
-    </p>
-  </section>
-  <!-- Testimonial Section (Landing Page) -->
-  <div class="testimonial-section">
-    <h2>See What Happens When Everything Connects</h2>
-    <p class="hero-text">
-      Progress from real people, using the same system you're about to unlock.
-    </p>
-
-    <div class="testimonial-container">
-      <!-- Desktop Arrows (hidden on mobile) -->
-      <button class="arrow-button prev">❮</button>
-
-      <!-- Slider that holds all testimonial cards -->
-      <div class="testimonial-slider">
-        <!-- Populated by JS -->
+      <div class="nutrition-image">
+        <picture style="display:block; margin:0 auto; max-width:100%;">
+          <source srcset="../assets/meal-prep.webp" type="image/webp">
+          <source srcset="../assets/meal-prep.jpg" type="image/jpeg">
+          <img src="../assets/meal-prep.webp" alt="A person preparing a healthy meal" width="600" height="400"
+            loading="lazy" decoding="async" style="display:block; margin:0 auto; width:100%; max-width:600px;">
+        </picture>
       </div>
+      <p>
+        Your meals adapt to your goals, preferences, and schedule — with evolving plans that keep things fresh and easy
+        to
+        follow. No extra apps. No stress. Just simple, balanced nutrition that fits into your life.
+      </p>
+    </section>
+    <!-- Testimonial Section (Landing Page) -->
+    <div class="testimonial-section">
+      <h2>See What Happens When Everything Connects</h2>
+      <p class="hero-text">
+        Progress from real people, using the same system you're about to unlock.
+      </p>
 
-      <button class="arrow-button next">❯</button>
+      <div class="testimonial-container">
+        <!-- Desktop Arrows (hidden on mobile) -->
+        <button class="arrow-button prev">❮</button>
+
+        <!-- Slider that holds all testimonial cards -->
+        <div class="testimonial-slider">
+          <!-- Populated by JS -->
+        </div>
+
+        <button class="arrow-button next">❯</button>
+      </div>
     </div>
-  </div>
 
-  <!-- Dots / Pagination for slides -->
-  <div class="dots-container"></div>
+    <!-- Dots / Pagination for slides -->
+    <div class="dots-container"></div>
 
-  <div class="cta-container-subtle">
-    <a href="pages/forms.html" class="claim-program-btn-subtle">Claim Your Program</a>
-  </div>
-  <section class="youtube-prompt-section">
-    <div class="youtube-video-container" style="position: relative; padding-top: 56.25%; height: 0; overflow: hidden;">
-      <div id="youtube-placeholder"
-        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; background: url('https://img.youtube.com/vi/MPevL0xPZ9c/hqdefault.jpg') center center / cover no-repeat;">
-        <div
-          style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0,0,0,0.6); border-radius: 50%; padding: 12px;">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 5v14l11-7z" />
-          </svg>
+    <div class="cta-container-subtle">
+      <a href="pages/forms.html" class="claim-program-btn-subtle">Claim Your Program</a>
+    </div>
+    <section class="youtube-prompt-section">
+      <div class="youtube-video-container"
+        style="position: relative; padding-top: 56.25%; height: 0; overflow: hidden;">
+        <div id="youtube-placeholder"
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; background: url('https://img.youtube.com/vi/MPevL0xPZ9c/hqdefault.jpg') center center / cover no-repeat;">
+          <div
+            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0,0,0,0.6); border-radius: 50%; padding: 12px;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </div>
         </div>
       </div>
-    </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const placeholder = document.getElementById("youtube-placeholder");
-        placeholder.addEventListener("click", function () {
-          const iframe = document.createElement("iframe");
-          iframe.setAttribute("src", "https://www.youtube.com/embed/MPevL0xPZ9c?autoplay=1");
-          iframe.setAttribute("frameborder", "0");
-          iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
-          iframe.setAttribute("allowfullscreen", "");
-          iframe.style.width = "100%";
-          iframe.style.height = "100%";
-          iframe.style.position = "absolute";
-          iframe.style.top = "0";
-          iframe.style.left = "0";
-          placeholder.replaceWith(iframe);
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const placeholder = document.getElementById("youtube-placeholder");
+          placeholder.addEventListener("click", function () {
+            const iframe = document.createElement("iframe");
+            iframe.setAttribute("src", "https://www.youtube.com/embed/MPevL0xPZ9c?autoplay=1");
+            iframe.setAttribute("frameborder", "0");
+            iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+            iframe.setAttribute("allowfullscreen", "");
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.style.position = "absolute";
+            iframe.style.top = "0";
+            iframe.style.left = "0";
+            placeholder.replaceWith(iframe);
+          });
         });
-      });
-    </script>
-    <p class="hero-text">
-      Watch how it works — in under 60 seconds.
-    </p>
-    <div class="join-now-prompt">
-      <h2>Join now</h2>
-      <div class="cta-container">
-        <a href="pages/forms.html" class="claim-program-btn">Claim Your Program</a>
-      </div>
-      <p class="trust-line">
-        Built by a small team of lifters, developers, and designers who’ve been exactly where you are.
+      </script>
+      <p class="hero-text">
+        Watch how it works — in under 60 seconds.
       </p>
-    </div>
-  </section>
+      <div class="join-now-prompt">
+        <h2>Join now</h2>
+        <div class="cta-container">
+          <a href="pages/forms.html" class="claim-program-btn">Claim Your Program</a>
+        </div>
+        <p class="trust-line">
+          Built by a small team of lifters, developers, and designers who’ve been exactly where you are.
+        </p>
+      </div>
+    </section>
 
   <!-- Cookie Banner -->
   <div id="cookie-banner" class="cookie-banner">
-    <p>We use cookies to enhance your experience, analyze site traffic, and for marketing purposes. By clicking "Accept
+    <p>We use cookies to enhance your experience, analyze site traffic, and for marketing purposes. By clicking
+      "Accept
       All," you consent to our use of cookies. Learn more in our <a href="pages/cookie-policy.html">Cookie Policy</a>.
     </p>
     <div class="cookie-buttons">
@@ -377,13 +402,14 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       </div>
       <div class="social-icons">
         <a href="https://www.instagram.com/raising_the_bar_app/?hl=en" target="_blank" aria-label="Instagram">
-          <img src="../assets/instagram-icon.png" alt="Instagram">
+          <img src="../assets/instagram-icon.webp" alt="Instagram" width="24" height="24" loading="lazy"
+            decoding="async">
         </a>
         <a href="https://www.youtube.com/@Raising_The_Bar_App" target="_blank" aria-label="YouTube">
-          <img src="../assets/youtube-icon.png" alt="YouTube">
+          <img src="../assets/youtube-icon.webp" alt="YouTube" width="24" height="24" loading="lazy" decoding="async">
         </a>
         <a href="https://www.tiktok.com/@raising_the_bar_app" target="_blank" aria-label="TikTok">
-          <img src="../assets/tiktok-icon.png" alt="TikTok">
+          <img src="../assets/tiktok-icon.webp" alt="TikTok" width="24" height="24" loading="lazy" decoding="async">
         </a>
       </div>
     </div>
