@@ -40,20 +40,34 @@
   <link rel="preload" as="style" href="../styles/landing-page.css">
   <link href="../styles/landing-page.css" rel="stylesheet">
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+    window.addEventListener('load', () => {
+      const s = document.createElement('script');
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ';
+      s.async = true;
+      document.head.appendChild(s);
 
-    gtag('config', 'G-W9CSNHSLQQ');
+      s.onload = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-W9CSNHSLQQ');
+      };
+    });
   </script>
-  <script type="text/javascript">
-    (function (c, l, a, r, i, t, y) {
-      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
-    })(window, document, "clarity", "script", "rmf0p7sik4");
+  <script>
+    window.addEventListener('load', () => {
+      // 1) Stub clarity() so queued calls work before the real script arrives
+      window.clarity = window.clarity || function () {
+        (window.clarity.q = window.clarity.q || []).push(arguments);
+      };
+
+      // 2) Load the real Clarity library asynchronously
+      const c = document.createElement('script');
+      c.src = 'https://www.clarity.ms/tag/rmf0p7sik4';
+      c.async = true;
+      document.head.appendChild(c);
+    });
   </script>
   <!-- TikTok Pixel Code Start -->
   <!-- <script>
@@ -70,22 +84,20 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   <!-- TikTok Pixel Code End -->
   <!-- Meta Pixel Code -->
   <script>
-    !function (f, b, e, v, n, t, s) {
-      if (f.fbq) return; n = f.fbq = function () {
-        n.callMethod ?
-          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+    window.addEventListener('load', () => {
+      const f = document.createElement('script');
+      f.src = 'https://connect.facebook.net/en_US/fbevents.js';
+      f.async = true;
+      document.head.appendChild(f);
+      f.onload = () => {
+        fbq('init', '1217477006533345');
+        fbq('track', 'PageView');
       };
-      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-      n.queue = []; t = b.createElement(e); t.async = !0;
-      t.src = v; s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s)
-    }(window, document, 'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1217477006533345');
-    fbq('track', 'PageView');
+    });
   </script>
-  <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1217477006533345&ev=PageView&noscript=1" /></noscript>
+  <noscript>
+    <img src="https://www.facebook.com/tr?id=1217477006533345&ev=PageView&noscript=1" alt="">
+  </noscript>
   <!-- End Meta Pixel Code -->
 </head>
 
@@ -93,7 +105,12 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   <div class="header">
     <div class="header-inner">
       <a href="../index.html" class="logo">
-        <img id="logo" src="../assets/rtb-logo-white.png" alt="Raising The Bar Logo">
+        <picture>
+          <source srcset="../assets/rtb-logo-white.webp" type="image/webp">
+          <source srcset="../assets/rtb-logo-white.png" type="image/png">
+          <img id="logo" src="../assets/rtb-logo-white.png" alt="Raising The Bar Logo" width="auto" height="100"
+            loading="lazy" decoding="async">
+        </picture>
       </a>
 
       <!-- Desktop nav (inline) -->
@@ -218,17 +235,44 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     <div class="testimonial-card mini">
       <div class="images">
         <div class="before">
-          <img src="../assets/lynn_before.JPEG" alt="Before">
+          <picture>
+            <source srcset="
+    ../assets/lynn_before.webp 60w,
+    ../assets/lynn_before.webp 120w
+  " sizes="(max-width:120px) 100vw, 120px" type="image/webp">
+            <source srcset="
+    ../assets/lynn_before.jpeg 60w,
+    ../assets/lynn_before.jpeg 120w
+  " sizes="(max-width:120px) 100vw, 120px" type="image/jpeg">
+            <img src="../assets/lynn_before-120.webp" alt="Before" width="120" height="120" loading="lazy"
+              decoding="async" style="display:block; margin:0 auto;">
+          </picture>
           <p>Before</p>
         </div>
         <div class="after">
-          <img src="../assets/lynn_after.png" alt="After">
+          <picture>
+            <source srcset="
+    ../assets/lynn_after.webp 60w,
+    ../assets/lynn_after.webp 120w
+  " sizes="(max-width:120px) 100vw, 120px" type="image/webp">
+            <source srcset="
+    ../assets/lynn_after.png 60w,
+    ../assets/lynn_after.png 120w
+  " sizes="(max-width:120px) 100vw, 120px" type="image/png">
+            <img src="../assets/lynn_after-120.webp" alt="After" width="120" height="120" loading="lazy"
+              decoding="async" style="display:block; margin:0 auto;">
+          </picture>
           <p>After</p>
         </div>
       </div>
       <p class="review-name">Lee</p>
       <div class="five-stars">
-        <img src="../assets/5-stars.png" alt="5 Stars">
+        <picture>
+          <source srcset="../assets/5-stars.webp" type="image/webp">
+          <source srcset="../assets/5-stars.png" type="image/png">
+          <img src="../assets/5-stars.png" alt="5 Stars" width="100" height="20" loading="lazy" decoding="async"
+            style="display:block; margin:0 auto;">
+        </picture>
       </div>
       <p class="review-text-mini">
         Nothing worked — until this. I’ve lost 10kg, but more than that, I finally feel like myself again.
@@ -277,11 +321,18 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     <h2>Feel Better, Every Day</h2>
     <div class="habit-image">
       <picture style="display:block; margin:0 auto; max-width:100%;">
-        <source srcset="../assets/person_walking_outside.webp" type="image/webp">
-        <source srcset="../assets/person_walking_outside.jpg" type="image/jpeg">
-        <img src="../assets/person_walking_outside.webp" alt="A person running in nature or doing yoga outdoors"
-          width="600" height="400" loading="lazy" decoding="async"
-          style="display:block; margin:0 auto; width:100%; max-width:600px;">
+        <!-- WebP hero at 320 & 600 -->
+        <source srcset="
+      ../assets/person_walking_outside.webp 320w,
+      ../assets/person_walking_outside.webp 600w
+    " sizes="(max-width:600px) 100vw, 600px" type="image/webp">
+        <!-- JPEG fallback at 320 & 600 -->
+        <source srcset="
+      ../assets/person_walking_outside.jpg 320w,
+      ../assets/person_walking_outside.jpg 600w
+    " sizes="(max-width:600px) 100vw, 600px" type="image/jpeg">
+        <img src="../assets/person_walking_outside-600.webp" alt="A person running in nature or doing yoga outdoors"
+          width="600" height="400" loading="lazy" decoding="async" style="display:block; margin:0 auto;">
       </picture>
     </div>
     <p>
@@ -292,91 +343,98 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   </section>
   <section class="nutrition-section">
     <h2>Meals That Work With You</h2>
-      <div class="nutrition-image">
-        <picture style="display:block; margin:0 auto; max-width:100%;">
-          <source srcset="../assets/meal-prep.webp" type="image/webp">
-          <source srcset="../assets/meal-prep.jpg" type="image/jpeg">
-          <img src="../assets/meal-prep.webp" alt="A person preparing a healthy meal" width="600" height="400"
-            loading="lazy" decoding="async" style="display:block; margin:0 auto; width:100%; max-width:600px;">
-        </picture>
+    <div class="nutrition-image">
+      <picture style="display:block; margin:0 auto; max-width:100%;">
+        <!-- WebP hero at 320 & 600 -->
+        <source srcset="
+      ../assets/meal-prep.webp 320w,
+      ../assets/meal-prep.webp 600w
+    " sizes="(max-width:600px) 100vw, 600px" type="image/webp">
+        <!-- JPEG fallback at 320 & 600 -->
+        <source srcset="
+      ../assets/meal-prep.jpg 320w,
+      ../assets/meal-prep.jpg 600w
+    " sizes="(max-width:600px) 100vw, 600px" type="image/jpeg">
+        <img src="../assets/meal-prep-600.webp" alt="A person preparing a healthy meal" width="600" height="400"
+          loading="lazy" decoding="async" style="display:block; margin:0 auto;">
+      </picture>
+    </div>
+    <p>
+      Your meals adapt to your goals, preferences, and schedule — with evolving plans that keep things fresh and easy
+      to
+      follow. No extra apps. No stress. Just simple, balanced nutrition that fits into your life.
+    </p>
+  </section>
+  <!-- Testimonial Section (Landing Page) -->
+  <div class="testimonial-section">
+    <h2>See What Happens When Everything Connects</h2>
+    <p class="hero-text">
+      Progress from real people, using the same system you're about to unlock.
+    </p>
+
+    <div class="testimonial-container">
+      <!-- Desktop Arrows (hidden on mobile) -->
+      <button class="arrow-button prev">❮</button>
+
+      <!-- Slider that holds all testimonial cards -->
+      <div class="testimonial-slider">
+        <!-- Populated by JS -->
       </div>
-      <p>
-        Your meals adapt to your goals, preferences, and schedule — with evolving plans that keep things fresh and easy
-        to
-        follow. No extra apps. No stress. Just simple, balanced nutrition that fits into your life.
-      </p>
-    </section>
-    <!-- Testimonial Section (Landing Page) -->
-    <div class="testimonial-section">
-      <h2>See What Happens When Everything Connects</h2>
-      <p class="hero-text">
-        Progress from real people, using the same system you're about to unlock.
-      </p>
 
-      <div class="testimonial-container">
-        <!-- Desktop Arrows (hidden on mobile) -->
-        <button class="arrow-button prev">❮</button>
+      <button class="arrow-button next">❯</button>
+    </div>
+  </div>
 
-        <!-- Slider that holds all testimonial cards -->
-        <div class="testimonial-slider">
-          <!-- Populated by JS -->
+  <!-- Dots / Pagination for slides -->
+  <div class="dots-container"></div>
+
+  <div class="cta-container-subtle">
+    <a href="pages/forms.html" class="claim-program-btn-subtle">Claim Your Program</a>
+  </div>
+  <section class="youtube-prompt-section">
+    <div class="youtube-video-container" style="position: relative; padding-top: 56.25%; height: 0; overflow: hidden;">
+      <div id="youtube-placeholder"
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; background: url('https://img.youtube.com/vi/MPevL0xPZ9c/hqdefault.jpg') center center / cover no-repeat;">
+        <div
+          style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0,0,0,0.6); border-radius: 50%; padding: 12px;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 5v14l11-7z" />
+          </svg>
         </div>
-
-        <button class="arrow-button next">❯</button>
       </div>
     </div>
 
-    <!-- Dots / Pagination for slides -->
-    <div class="dots-container"></div>
-
-    <div class="cta-container-subtle">
-      <a href="pages/forms.html" class="claim-program-btn-subtle">Claim Your Program</a>
-    </div>
-    <section class="youtube-prompt-section">
-      <div class="youtube-video-container"
-        style="position: relative; padding-top: 56.25%; height: 0; overflow: hidden;">
-        <div id="youtube-placeholder"
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; background: url('https://img.youtube.com/vi/MPevL0xPZ9c/hqdefault.jpg') center center / cover no-repeat;">
-          <div
-            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0,0,0,0.6); border-radius: 50%; padding: 12px;">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          const placeholder = document.getElementById("youtube-placeholder");
-          placeholder.addEventListener("click", function () {
-            const iframe = document.createElement("iframe");
-            iframe.setAttribute("src", "https://www.youtube.com/embed/MPevL0xPZ9c?autoplay=1");
-            iframe.setAttribute("frameborder", "0");
-            iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
-            iframe.setAttribute("allowfullscreen", "");
-            iframe.style.width = "100%";
-            iframe.style.height = "100%";
-            iframe.style.position = "absolute";
-            iframe.style.top = "0";
-            iframe.style.left = "0";
-            placeholder.replaceWith(iframe);
-          });
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const placeholder = document.getElementById("youtube-placeholder");
+        placeholder.addEventListener("click", function () {
+          const iframe = document.createElement("iframe");
+          iframe.setAttribute("src", "https://www.youtube.com/embed/MPevL0xPZ9c?autoplay=1");
+          iframe.setAttribute("frameborder", "0");
+          iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+          iframe.setAttribute("allowfullscreen", "");
+          iframe.style.width = "100%";
+          iframe.style.height = "100%";
+          iframe.style.position = "absolute";
+          iframe.style.top = "0";
+          iframe.style.left = "0";
+          placeholder.replaceWith(iframe);
         });
-      </script>
-      <p class="hero-text">
-        Watch how it works — in under 60 seconds.
-      </p>
-      <div class="join-now-prompt">
-        <h2>Join now</h2>
-        <div class="cta-container">
-          <a href="pages/forms.html" class="claim-program-btn">Claim Your Program</a>
-        </div>
-        <p class="trust-line">
-          Built by a small team of lifters, developers, and designers who’ve been exactly where you are.
-        </p>
+      });
+    </script>
+    <p class="hero-text">
+      Watch how it works — in under 60 seconds.
+    </p>
+    <div class="join-now-prompt">
+      <h2>Join now</h2>
+      <div class="cta-container">
+        <a href="pages/forms.html" class="claim-program-btn">Claim Your Program</a>
       </div>
-    </section>
+      <p class="trust-line">
+        Built by a small team of lifters, developers, and designers who’ve been exactly where you are.
+      </p>
+    </div>
+  </section>
 
   <!-- Cookie Banner -->
   <div id="cookie-banner" class="cookie-banner">
@@ -402,14 +460,26 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       </div>
       <div class="social-icons">
         <a href="https://www.instagram.com/raising_the_bar_app/?hl=en" target="_blank" aria-label="Instagram">
-          <img src="../assets/instagram-icon.webp" alt="Instagram" width="24" height="24" loading="lazy"
-            decoding="async">
+          <picture>
+            <source srcset="../assets/instagram-icon.webp" type="image/webp">
+            <source srcset="../assets/instagram-icon.png" type="image/png">
+            <img src="../assets/instagram-icon.png" alt="Instagram" width="24" height="24" loading="lazy"
+              decoding="async">
+          </picture>
         </a>
         <a href="https://www.youtube.com/@Raising_The_Bar_App" target="_blank" aria-label="YouTube">
-          <img src="../assets/youtube-icon.webp" alt="YouTube" width="24" height="24" loading="lazy" decoding="async">
+          <picture>
+            <source srcset="../assets/youtube-icon.webp" type="image/webp">
+            <source srcset="../assets/youtube-icon.png" type="image/png">
+            <img src="../assets/youtube-icon.png" alt="YouTube" width="24" height="24" loading="lazy" decoding="async">
+          </picture>
         </a>
         <a href="https://www.tiktok.com/@raising_the_bar_app" target="_blank" aria-label="TikTok">
-          <img src="../assets/tiktok-icon.webp" alt="TikTok" width="24" height="24" loading="lazy" decoding="async">
+          <picture>
+            <source srcset="../assets/tiktok-icon.webp" type="image/webp">
+            <source srcset="../assets/tiktok-icon.png" type="image/png">
+            <img src="../assets/tiktok-icon.png" alt="TikTok" width="24" height="24" loading="lazy" decoding="async">
+          </picture>
         </a>
       </div>
     </div>
