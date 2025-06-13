@@ -25,6 +25,64 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+  <style>
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      /* make sure it’s flush to the left edge */
+      right: 0;
+      /* …and the right edge */
+      width: 100%;
+      /* now includes padding, thanks to border-box */
+      box-sizing: border-box;
+      background-color: #2c3e50;
+      color: #fff;
+      padding: 1rem;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      z-index: 1000;
+    }
+
+    .cookie-banner p {
+      margin: 0 0 1rem 0;
+      font-size: 0.9rem;
+    }
+
+    .cookie-banner a {
+      color: #f5a623;
+      text-decoration: underline;
+    }
+
+    .cookie-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .cookie-buttons button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    #accept-all {
+      background-color: #28a745;
+      color: #fff;
+    }
+
+    #deny-all {
+      background-color: #dc3545;
+      color: #fff;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
+
   <!-- Fonts -->
   <link rel="preload" as="style"
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap">
@@ -83,7 +141,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 </script> -->
   <!-- TikTok Pixel Code End -->
   <!-- Meta Pixel Code -->
-  <script>
+  <!-- <script>
     window.addEventListener('load', () => {
       const f = document.createElement('script');
       f.src = 'https://connect.facebook.net/en_US/fbevents.js';
@@ -97,7 +155,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   </script>
   <noscript>
     <img src="https://www.facebook.com/tr?id=1217477006533345&ev=PageView&noscript=1" alt="">
-  </noscript>
+  </noscript> -->
   <!-- End Meta Pixel Code -->
 </head>
 
