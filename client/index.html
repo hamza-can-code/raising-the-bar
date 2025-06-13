@@ -25,6 +25,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+  <link rel="preload" as="image" href="/assets/person_walking_outside-600.webp"
+    imagesrcset="/assets/person_walking_outside.webp 320w, /assets/person_walking_outside.webp 600w"
+    imagesizes="(max-width:600px) 100vw, 600px">
+
   <style>
     .cookie-banner {
       position: fixed;
@@ -98,7 +102,7 @@
   <link rel="preload" as="style" href="../styles/landing-page.css">
   <link href="../styles/landing-page.css" rel="stylesheet">
   <!-- Google tag (gtag.js) -->
-  <script>
+  <!-- <script>
     window.addEventListener('load', () => {
       const s = document.createElement('script');
       s.src = 'https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ';
@@ -126,7 +130,7 @@
       c.async = true;
       document.head.appendChild(c);
     });
-  </script>
+  </script> -->
   <!-- TikTok Pixel Code Start -->
   <!-- <script>
 !function (w, d, t) {
@@ -170,6 +174,55 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             loading="lazy" decoding="async">
         </picture>
       </a>
+
+      <template id="tmpl-cookie-banner">
+        <div id="cookie-banner" class="cookie-banner" style="display:none;">
+          <p>
+            We use cookies to enhance your experience, analyze site traffic,
+            and for marketing purposes. By clicking <strong>Accept All</strong>,
+            you consent to our use of cookies. Learn more in our
+            <a href="/pages/cookie-policy.html">Cookie Policy</a>.
+          </p>
+          <div class="cookie-buttons">
+            <button id="accept-all">Accept All</button>
+            <button id="deny-all">Deny</button>
+          </div>
+        </div>
+      </template>
+      <script type="module" src="./scripts/modules/cookieBanner.js"></script>
+      <script type="module">
+        import { initCookieBanner } from './scripts/modules/cookieBanner.js';
+        initCookieBanner();
+      </script>
+
+      <!-- <script>
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(() => {
+            const s = document.createElement('script');
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ';
+            document.head.appendChild(s);
+            s.onload = () => {
+              window.dataLayer = window.dataLayer || [];
+              function gtag() { dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'G-W9CSNHSLQQ');
+            };
+          });
+        } else {
+          // fallback to regular load‐listener
+          window.addEventListener('load', () => {
+            const s = document.createElement('script');
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ';
+            document.head.appendChild(s);
+            s.onload = () => {
+              window.dataLayer = window.dataLayer || [];
+              function gtag() { dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'G-W9CSNHSLQQ');
+            };
+          });
+        }
+      </script> -->
 
       <!-- Desktop nav (inline) -->
       <nav class="main-nav" id="main-nav">
@@ -495,7 +548,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   </section>
 
   <!-- Cookie Banner -->
-  <div id="cookie-banner" class="cookie-banner">
+  <!-- <div id="cookie-banner" class="cookie-banner">
     <p>We use cookies to enhance your experience, analyze site traffic, and for marketing purposes. By clicking
       "Accept
       All," you consent to our use of cookies. Learn more in our <a href="pages/cookie-policy.html">Cookie Policy</a>.
@@ -504,7 +557,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       <button id="accept-all">Accept All</button>
       <button id="deny-all">Deny</button>
     </div>
-  </div>
+  </div> -->
 
   <footer class="footer" id="footer">
     <div class="footer-content">
