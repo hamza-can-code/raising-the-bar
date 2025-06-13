@@ -176,26 +176,67 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       </a>
 
       <template id="tmpl-cookie-banner">
-        <div id="cookie-banner" class="cookie-banner" style="display:none;">
+        <div id="cookie-banner" class="cookie-banner" hidden>
           <p>
-            We use cookies to enhance your experience, analyze site traffic,
+            We use cookies to enhance your experience, analyse site traffic,
             and for marketing purposes. By clicking <strong>Accept All</strong>,
-            you consent to our use of cookies. Learn more in our
-            <a href="/pages/cookie-policy.html">Cookie Policy</a>.
+            you consent to our use of cookies.
+            Learn more in our <a href="/pages/cookie-policy.html">Cookie Policy</a>.
           </p>
           <div class="cookie-buttons">
             <button id="accept-all">Accept All</button>
             <button id="deny-all">Deny</button>
           </div>
         </div>
-      </template>
-      <script type="module" src="./scripts/modules/cookieBanner.js"></script>
-      <script type="module">
-        import { initCookieBanner } from './scripts/modules/cookieBanner.js';
-        initCookieBanner();
-      </script>
+        </template>
+        <!-- 2) tiny blocking script executed while HTML is still parsing -->
+        <script>
+          /* helpers kept tiny to avoid blocking for long */
+          function loadGoogleAnalytics() {
+            const s = document.createElement('script');
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ';
+            s.async = true;
+            document.head.appendChild(s);
+            s.onload = () => {
+              window.dataLayer = window.dataLayer || [];
+              function gtag() { dataLayer.push(arguments); }
+              gtag('js', new Date()); gtag('config', 'G-W9CSNHSLQQ');
+            };
+          }
+          function loadClarity() {
+            window.clarity = window.clarity || function () { (clarity.q = clarity.q || []).push(arguments); };
+            const s = document.createElement('script');
+            s.src = 'https://www.clarity.ms/tag/rmf0p7sik4';
+            s.async = true; document.head.appendChild(s);
+          }
+          function loadTikTokPixel() { /* …same pattern… */ }
 
-      <!-- <script>
+          /* privacy logic */
+          (function () {
+            const consent = document.cookie.match(/(^|;)\s*userConsent=([^;]+)/)?.[2];
+            const banner = document.getElementById('cookie-banner');
+
+            if (consent === 'allow') {
+              loadGoogleAnalytics(); loadClarity(); loadTikTokPixel();
+            } else if (consent !== 'deny') {
+              banner.hidden = false;                      // show banner immediately
+              const accept = banner.querySelector('#accept-all');
+              const deny = banner.querySelector('#deny-all');
+
+              accept.addEventListener('click', () => {
+                document.cookie = 'userConsent=allow; max-age=' + 60 * 60 * 24 * 180 + '; path=/';
+                banner.remove();
+                loadGoogleAnalytics(); loadClarity(); loadTikTokPixel();
+              });
+              deny.addEventListener('click', () => {
+                document.cookie = 'userConsent=deny; max-age=' + 60 * 60 * 24 * 180 + '; path=/';
+                banner.remove();
+              });
+            }
+          })();
+        </script>
+
+        <!-- <script>
         if ('requestIdleCallback' in window) {
           requestIdleCallback(() => {
             const s = document.createElement('script');
@@ -224,23 +265,23 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         }
       </script> -->
 
-      <!-- Desktop nav (inline) -->
-      <nav class="main-nav" id="main-nav">
-        <!-- close btn -->
-        <button class="nav-close" id="nav-close" aria-label="Close Menu">✕</button>
+        <!-- Desktop nav (inline) -->
+        <nav class="main-nav" id="main-nav">
+          <!-- close btn -->
+          <button class="nav-close" id="nav-close" aria-label="Close Menu">✕</button>
 
-        <ul>
-          <li><a href="#" id="nav-workouts">My Workouts</a></li>
-          <li><a href="#" id="nav-nutrition">My Nutrition</a></li>
-          <li><a href="#" id="nav-help">Help</a></li>
-        </ul>
-      </nav>
+          <ul>
+            <li><a href="#" id="nav-workouts">My Workouts</a></li>
+            <li><a href="#" id="nav-nutrition">My Nutrition</a></li>
+            <li><a href="#" id="nav-help">Help</a></li>
+          </ul>
+        </nav>
 
-      <!-- Mobile hamburger -->
-      <button class="hamburger" id="hamburger-btn" aria-label="Toggle Menu">☰</button>
+        <!-- Mobile hamburger -->
+        <button class="hamburger" id="hamburger-btn" aria-label="Toggle Menu">☰</button>
 
-      <!-- Dark mode toggle -->
-      <!-- <div class="dark-mode-button">
+        <!-- Dark mode toggle -->
+        <!-- <div class="dark-mode-button">
         <img id="darkModeToggle" src="" alt="">
       </div> -->
     </div>
