@@ -22,6 +22,8 @@
   <meta name="twitter:image" content="https://raisingthebarapp.com/assets/og-preview.jpg">
 
   <title>Raising The Bar</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
     rel="stylesheet">
   <link href="../styles/landing-page.css" rel="stylesheet">
@@ -59,7 +61,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     !function (f, b, e, v, n, t, s) {
       if (f.fbq) return; n = f.fbq = function () {
         n.callMethod ?
-        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
       };
       if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
       n.queue = []; t = b.createElement(e); t.async = !0;
@@ -98,9 +100,9 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       <button class="hamburger" id="hamburger-btn" aria-label="Toggle Menu">☰</button>
 
       <!-- Dark mode toggle -->
-      <div class="dark-mode-button">
+      <!-- <div class="dark-mode-button">
         <img id="darkModeToggle" src="" alt="">
-      </div>
+      </div> -->
     </div>
   </div>
 
@@ -262,7 +264,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   <section class="habit-building">
     <h2>Feel Better, Every Day</h2>
     <div class="habit-image">
-      <img src="../assets/person_walking_outside.jpg" alt="A person running in nature or doing yoga outdoors" />
+      <img src="../assets/person_walking_outside.jpg" alt="A person running in nature or doing yoga outdoors"
+        loading="lazy" />
     </div>
     <p>
       This is about more than workouts. When your plan adjusts to your life — not the other way around — everything
@@ -273,7 +276,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   <section class="nutrition-section">
     <h2>Meals That Work With You</h2>
     <div class="nutrition-image">
-      <img src="../assets/meal-prep.jpg" alt="A person preparing a healthy meal" />
+      <img src="../assets/meal-prep.jpg" alt="A person preparing a healthy meal" loading="lazy" />
     </div>
     <p>
       Your meals adapt to your goals, preferences, and schedule — with evolving plans that keep things fresh and easy to
@@ -307,36 +310,36 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     <a href="pages/forms.html" class="claim-program-btn-subtle">Claim Your Program</a>
   </div>
   <section class="youtube-prompt-section">
-<div class="youtube-video-container" style="position: relative; padding-top: 56.25%; height: 0; overflow: hidden;">
-  <div id="youtube-placeholder"
-    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; background: url('https://img.youtube.com/vi/MPevL0xPZ9c/hqdefault.jpg') center center / cover no-repeat;">
-    <div
-      style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0,0,0,0.6); border-radius: 50%; padding: 12px;">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 5v14l11-7z"/>
-      </svg>
+    <div class="youtube-video-container" style="position: relative; padding-top: 56.25%; height: 0; overflow: hidden;">
+      <div id="youtube-placeholder"
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; background: url('https://img.youtube.com/vi/MPevL0xPZ9c/hqdefault.jpg') center center / cover no-repeat;">
+        <div
+          style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0,0,0,0.6); border-radius: 50%; padding: 12px;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const placeholder = document.getElementById("youtube-placeholder");
-    placeholder.addEventListener("click", function () {
-      const iframe = document.createElement("iframe");
-      iframe.setAttribute("src", "https://www.youtube.com/embed/MPevL0xPZ9c?autoplay=1");
-      iframe.setAttribute("frameborder", "0");
-      iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
-      iframe.setAttribute("allowfullscreen", "");
-      iframe.style.width = "100%";
-      iframe.style.height = "100%";
-      iframe.style.position = "absolute";
-      iframe.style.top = "0";
-      iframe.style.left = "0";
-      placeholder.replaceWith(iframe);
-    });
-  });
-</script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const placeholder = document.getElementById("youtube-placeholder");
+        placeholder.addEventListener("click", function () {
+          const iframe = document.createElement("iframe");
+          iframe.setAttribute("src", "https://www.youtube.com/embed/MPevL0xPZ9c?autoplay=1");
+          iframe.setAttribute("frameborder", "0");
+          iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+          iframe.setAttribute("allowfullscreen", "");
+          iframe.style.width = "100%";
+          iframe.style.height = "100%";
+          iframe.style.position = "absolute";
+          iframe.style.top = "0";
+          iframe.style.left = "0";
+          placeholder.replaceWith(iframe);
+        });
+      });
+    </script>
     <p class="hero-text">
       Watch how it works — in under 60 seconds.
     </p>
