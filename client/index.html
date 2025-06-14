@@ -481,19 +481,18 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     <h2>Feel Better, Every Day</h2>
     <div class="habit-image">
       <picture style="display:block; margin:0 auto; max-width:100%;">
-        <!-- WebP hero at 320 & 600 -->
-        <source srcset="
-      ../assets/person_walking_outside.webp 320w,
-      ../assets/person_walking_outside.webp 600w
-    " sizes="(max-width:600px) 100vw, 600px" type="image/webp">
-        <!-- JPEG fallback at 320 & 600 -->
-        <source srcset="
-      ../assets/person_walking_outside.jpg 320w,
-      ../assets/person_walking_outside.jpg 600w
-    " sizes="(max-width:600px) 100vw, 600px" type="image/jpeg">
-        <img src="../assets/person_walking_outside-600.webp" alt="A person running in nature or doing yoga outdoors"
-          width="600" height="400" loading="eager" fetchpriority="high" decoding="async"
-          style="display:block; margin:0 auto;">
+        <!-- WebP for best compression -->
+        <source type="image/webp" srcset="
+      ../assets/person_walking_outside_360.webp 360w,
+      ../assets/person_walking_outside_600.webp 600w" sizes="(max-width:600px) 100vw, 600px">
+
+        <!-- JPEG fallback -->
+        <source type="image/webp" srcset="
+      ../assets/person_walking_outside_360.webp 360w,
+      ../assets/person_walking_outside_600.webp 600w" sizes="(max-width:600px) 100vw, 600px">
+
+        <img src="../assets/person_walking_outside_600.webp" width="600" height="400" loading="eager"
+          fetchpriority="high" decoding="async" alt="A person running in nature or doing yoga outdoors">
       </picture>
     </div>
     <p>
@@ -506,18 +505,18 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     <h2>Meals That Work With You</h2>
     <div class="nutrition-image">
       <picture style="display:block; margin:0 auto; max-width:100%;">
-        <!-- WebP hero at 320 & 600 -->
-        <source srcset="
-      ../assets/meal-prep.webp 320w,
-      ../assets/meal-prep.webp 600w
-    " sizes="(max-width:600px) 100vw, 600px" type="image/webp">
-        <!-- JPEG fallback at 320 & 600 -->
-        <source srcset="
-      ../assets/meal-prep.jpg 320w,
-      ../assets/meal-prep.jpg 600w
-    " sizes="(max-width:600px) 100vw, 600px" type="image/jpeg">
-        <img src="../assets/meal-prep-600.webp" alt="A person preparing a healthy meal" width="600" height="400"
-          loading="lazy" decoding="async" style="display:block; margin:0 auto;">
+        <!-- WebP for best compression -->
+        <source type="image/webp" srcset="
+      ../assets/meal-prep-360.webp 360w,
+      ../assets/meal-prep-600.webp 600w" sizes="(max-width:600px) 100vw, 600px">
+
+        <!-- JPEG fallback -->
+        <source type="image/jpeg" srcset="
+      ../assets/meal-prep-360.jpg 360w,
+      ../assets/meal-prep-600.jpg 600w" sizes="(max-width:600px) 100vw, 600px">
+
+        <img src="../assets/meal-prep-600.webp" width="600" height="400" loading="lazy" decoding="async"
+          alt="A person preparing a healthy meal">
       </picture>
     </div>
     <p>
