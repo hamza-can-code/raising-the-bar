@@ -29,6 +29,8 @@
     imagesrcset="/assets/person_walking_outside.webp 320w, /assets/person_walking_outside.webp 600w"
     imagesizes="(max-width:600px) 100vw, 600px">
 
+  <link rel="preload" as="image" href="/assets/rtb-logo-white.webp" fetchpriority="high">
+
   <style>
     .cookie-banner {
       position: fixed;
@@ -178,8 +180,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <picture>
           <source srcset="../assets/rtb-logo-white.webp" type="image/webp">
           <source srcset="../assets/rtb-logo-white.png" type="image/png">
-          <img id="logo" src="../assets/rtb-logo-white.png" alt="Raising The Bar Logo" width="auto" height="100"
-            loading="lazy" decoding="async">
+          <img id="logo" src="../assets/rtb-logo-white.webp" alt="Raising The Bar Logo" width="224" height="100"
+            loading="eager" fetchpriority="high" decoding="async">
         </picture>
       </a>
 
