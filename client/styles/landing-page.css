@@ -89,12 +89,12 @@ h6 {
   max-height: 100px;
 }
 
-@media (max-width: 389px) {
+/* @media (max-width: 389px) {
 
   .logo img {
     height: 75px;
   }
-}
+} */
 
 .dark-mode-button {
   position: absolute;
