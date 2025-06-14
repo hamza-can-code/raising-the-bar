@@ -1,13 +1,10 @@
-/* scripts/landing-page.js
- * ----------------------------------------------------------
- * Critical code first → extra features only when the browser
- * is idle so they never delay Largest Contentful Paint.
- */
+/*  ---------------------------------------------------------
+ *  scripts/landing-page.js
+ *  --------------------------------------------------------- */
 
 import { initCookieBanner } from './modules/cookieBanner.js';
 
-function loadDeferred() {
-  // Dynamic imports split the bundle automatically
+function loadNonCritical() {
   Promise.all([
     import('./modules/slider.js'),
     import('./modules/navModal.js'),
@@ -22,13 +19,13 @@ function loadDeferred() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1 – paint the banner ASAP so the user can interact
+  /* 1 — banner logic first (cheap, < 4 ms) */
   initCookieBanner();
 
-  // 2 – load everything else when we’re no longer blocking render
+  /* 2 — defer everything else */
   if ('requestIdleCallback' in window) {
-    requestIdleCallback(loadDeferred, { timeout: 3000 });
+    requestIdleCallback(loadNonCritical, { timeout: 3000 });
   } else {
-    window.addEventListener('load', loadDeferred);
+    window.addEventListener('load', loadNonCritical);
   }
 });
