@@ -46,6 +46,14 @@
       box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
       text-align: center;
       z-index: 1000;
+      transform: translateY(100%);
+      opacity: 0;
+      transition: transform .35s ease, opacity .35s;
+    }
+
+    .cookie-banner.is-visible {
+      transform: none;
+      opacity: 1;
     }
 
     .cookie-banner p {
@@ -175,68 +183,66 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         </picture>
       </a>
 
-      <template id="tmpl-cookie-banner">
-        <div id="cookie-banner" class="cookie-banner" hidden>
-          <p>
-            We use cookies to enhance your experience, analyse site traffic,
-            and for marketing purposes. By clicking <strong>Accept All</strong>,
-            you consent to our use of cookies.
-            Learn more in our <a href="/pages/cookie-policy.html">Cookie Policy</a>.
-          </p>
-          <div class="cookie-buttons">
-            <button id="accept-all">Accept All</button>
-            <button id="deny-all">Deny</button>
-          </div>
+      <div id="cookie-banner" class="cookie-banner" hidden>
+        <p>
+          We use cookies to enhance your experience, analyse site traffic,
+          and for marketing purposes. By clicking <strong>Accept All</strong>,
+          you consent to our use of cookies.
+          Learn more in our <a href="/pages/cookie-policy.html">Cookie Policy</a>.
+        </p>
+        <div class="cookie-buttons">
+          <button id="accept-all">Accept All</button>
+          <button id="deny-all">Deny</button>
         </div>
-        </template>
-        <!-- 2) tiny blocking script executed while HTML is still parsing -->
-        <script>
-          /* helpers kept tiny to avoid blocking for long */
-          function loadGoogleAnalytics() {
-            const s = document.createElement('script');
-            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ';
-            s.async = true;
-            document.head.appendChild(s);
-            s.onload = () => {
-              window.dataLayer = window.dataLayer || [];
-              function gtag() { dataLayer.push(arguments); }
-              gtag('js', new Date()); gtag('config', 'G-W9CSNHSLQQ');
-            };
-          }
-          function loadClarity() {
-            window.clarity = window.clarity || function () { (clarity.q = clarity.q || []).push(arguments); };
-            const s = document.createElement('script');
-            s.src = 'https://www.clarity.ms/tag/rmf0p7sik4';
-            s.async = true; document.head.appendChild(s);
-          }
-          function loadTikTokPixel() { /* …same pattern… */ }
+      </div>
+      <!-- 2) tiny blocking script executed while HTML is still parsing -->
+      <script>
+        /* helpers kept tiny to avoid blocking for long */
+        function loadGoogleAnalytics() {
+          const s = document.createElement('script');
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ';
+          s.async = true;
+          document.head.appendChild(s);
+          s.onload = () => {
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date()); gtag('config', 'G-W9CSNHSLQQ');
+          };
+        }
+        function loadClarity() {
+          window.clarity = window.clarity || function () { (clarity.q = clarity.q || []).push(arguments); };
+          const s = document.createElement('script');
+          s.src = 'https://www.clarity.ms/tag/rmf0p7sik4';
+          s.async = true; document.head.appendChild(s);
+        }
+        function loadTikTokPixel() { /* …same pattern… */ }
 
-          /* privacy logic */
-          (function () {
-            const consent = document.cookie.match(/(^|;)\s*userConsent=([^;]+)/)?.[2];
-            const banner = document.getElementById('cookie-banner');
+        /* privacy logic */
+        (function () {
+          const consent = document.cookie.match(/(^|;)\s*userConsent=([^;]+)/)?.[2];
+          const banner = document.getElementById('cookie-banner');
 
-            if (consent === 'allow') {
+          if (consent === 'allow') {
+            loadGoogleAnalytics(); loadClarity(); loadTikTokPixel();
+          } else if (consent !== 'deny') {
+            banner.hidden = false;                      // show banner immediately
+            const accept = banner.querySelector('#accept-all');
+            const deny = banner.querySelector('#deny-all');
+
+            accept.addEventListener('click', () => {
+              document.cookie = 'userConsent=allow; max-age=' + 60 * 60 * 24 * 180 + '; path=/';
+              banner.remove();
               loadGoogleAnalytics(); loadClarity(); loadTikTokPixel();
-            } else if (consent !== 'deny') {
-              banner.hidden = false;                      // show banner immediately
-              const accept = banner.querySelector('#accept-all');
-              const deny = banner.querySelector('#deny-all');
+            });
+            deny.addEventListener('click', () => {
+              document.cookie = 'userConsent=deny; max-age=' + 60 * 60 * 24 * 180 + '; path=/';
+              banner.remove();
+            });
+          }
+        })();
+      </script>
 
-              accept.addEventListener('click', () => {
-                document.cookie = 'userConsent=allow; max-age=' + 60 * 60 * 24 * 180 + '; path=/';
-                banner.remove();
-                loadGoogleAnalytics(); loadClarity(); loadTikTokPixel();
-              });
-              deny.addEventListener('click', () => {
-                document.cookie = 'userConsent=deny; max-age=' + 60 * 60 * 24 * 180 + '; path=/';
-                banner.remove();
-              });
-            }
-          })();
-        </script>
-
-        <!-- <script>
+      <!-- <script>
         if ('requestIdleCallback' in window) {
           requestIdleCallback(() => {
             const s = document.createElement('script');
@@ -265,23 +271,23 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         }
       </script> -->
 
-        <!-- Desktop nav (inline) -->
-        <nav class="main-nav" id="main-nav">
-          <!-- close btn -->
-          <button class="nav-close" id="nav-close" aria-label="Close Menu">✕</button>
+      <!-- Desktop nav (inline) -->
+      <nav class="main-nav" id="main-nav">
+        <!-- close btn -->
+        <button class="nav-close" id="nav-close" aria-label="Close Menu">✕</button>
 
-          <ul>
-            <li><a href="#" id="nav-workouts">My Workouts</a></li>
-            <li><a href="#" id="nav-nutrition">My Nutrition</a></li>
-            <li><a href="#" id="nav-help">Help</a></li>
-          </ul>
-        </nav>
+        <ul>
+          <li><a href="#" id="nav-workouts">My Workouts</a></li>
+          <li><a href="#" id="nav-nutrition">My Nutrition</a></li>
+          <li><a href="#" id="nav-help">Help</a></li>
+        </ul>
+      </nav>
 
-        <!-- Mobile hamburger -->
-        <button class="hamburger" id="hamburger-btn" aria-label="Toggle Menu">☰</button>
+      <!-- Mobile hamburger -->
+      <button class="hamburger" id="hamburger-btn" aria-label="Toggle Menu">☰</button>
 
-        <!-- Dark mode toggle -->
-        <!-- <div class="dark-mode-button">
+      <!-- Dark mode toggle -->
+      <!-- <div class="dark-mode-button">
         <img id="darkModeToggle" src="" alt="">
       </div> -->
     </div>
@@ -484,7 +490,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       ../assets/person_walking_outside.jpg 600w
     " sizes="(max-width:600px) 100vw, 600px" type="image/jpeg">
         <img src="../assets/person_walking_outside-600.webp" alt="A person running in nature or doing yoga outdoors"
-          width="600" height="400" loading="lazy" decoding="async" style="display:block; margin:0 auto;">
+          width="600" height="400" loading="eager" fetchpriority="high" decoding="async"
+          style="display:block; margin:0 auto;">
       </picture>
     </div>
     <p>

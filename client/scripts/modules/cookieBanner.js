@@ -1,14 +1,129 @@
-// cookie-banner.js
+// // cookie-banner.js
 
-// ———————————————————————————————————————————————————————
-// 1) loader functions for each tag
-// ———————————————————————————————————————————————————————
+// // ———————————————————————————————————————————————————————
+// // 1) loader functions for each tag
+// // ———————————————————————————————————————————————————————
+// function loadGoogleAnalytics() {
+//   const s = document.createElement("script");
+//   s.src = "https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ";
+//   s.async = true;
+//   document.head.appendChild(s);
+
+//   s.onload = () => {
+//     window.dataLayer = window.dataLayer || [];
+//     function gtag() { dataLayer.push(arguments); }
+//     gtag('js', new Date());
+//     gtag('config', 'G-W9CSNHSLQQ');
+//   };
+// }
+
+// function loadClarity() {
+//   window.clarity = window.clarity || function() {
+//     (window.clarity.q = window.clarity.q || []).push(arguments);
+//   };
+//   const s = document.createElement("script");
+//   s.src = "https://www.clarity.ms/tag/rmf0p7sik4";
+//   s.async = true;
+//   document.head.appendChild(s);
+// }
+
+// function loadTikTokPixel() {
+//   window.TiktokAnalyticsObject = 'ttq';
+//   const ttq = window.ttq = window.ttq || [];
+//   ttq.methods = ["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"];
+//   ttq.setAndDefer = function(t,e){ t[e]=function(){ t.push([e].concat(Array.prototype.slice.call(arguments,0))) }; };
+//   for (let m of ttq.methods) ttq.setAndDefer(ttq, m);
+
+//   ttq.load = function(e,n){
+//     const url = "https://analytics.tiktok.com/i18n/pixel/events.js";
+//     ttq._i = ttq._i || {}; ttq._i[e]=[]; ttq._i[e]._u=url;
+//     ttq._t = ttq._t || {}; ttq._t[e]=+new Date;
+//     ttq._o = ttq._o || {}; ttq._o[e]=n||{};
+//     const s = document.createElement("script");
+//     s.src = url + "?sdkid=" + e + "&lib=ttq";
+//     s.async = true;
+//     document.head.appendChild(s);
+//   };
+
+//   ttq.load('D0M3KORC77UCAFR1EOLG');
+//   ttq.track('ViewContent', { content_id: 'landing-page' });
+// }
+
+// // ———————————————————————————————————————————————————————
+// // 2) cookie helpers
+// // ———————————————————————————————————————————————————————
+// function setCookie(name, value, days = 180) {
+//   const d = new Date();
+//   d.setTime(d.getTime() + days*24*60*60*1000);
+//   document.cookie = `${name}=${value}; expires=${d.toUTCString()}; path=/`;
+// }
+
+// function getCookie(name) {
+//   return document.cookie
+//     .split('; ')
+//     .find(r => r.startsWith(name+'='))
+//     ?.split('=')[1];
+// }
+
+// // ———————————————————————————————————————————————————————
+// // 3) render + consent logic
+// // ———————————————————————————————————————————————————————
+// export function initCookieBanner() {
+//   // Only inject banner after load + one RAF (so LCP can happen first)
+//   window.addEventListener('load', () => {
+//     requestAnimationFrame(() => {
+//       // pull banner out of a <template id="tmpl-cookie-banner">…</template>
+//       const tpl = document.getElementById('tmpl-cookie-banner');
+//       if (!tpl) return;
+//       const bannerNode = tpl.content.cloneNode(true);
+//       document.body.appendChild(bannerNode);
+
+//       const banner = document.getElementById("cookie-banner");
+//       const accept = document.getElementById("accept-all");
+//       const deny   = document.getElementById("deny-all");
+//       if (!banner || !accept || !deny) return;
+
+//       // check existing consent
+//       const consent = getCookie("userConsent");
+//       if (consent === "allow") {
+//         banner.remove();
+//         loadGoogleAnalytics();
+//         loadClarity();
+//         loadTikTokPixel();
+//       }
+//       else if (consent === "deny") {
+//         banner.remove();
+//       }
+//       else {
+//         // show banner and wire up
+//         banner.style.display = "block";
+//         accept.addEventListener("click", () => {
+//           setCookie("userConsent", "allow");
+//           banner.remove();
+//           loadGoogleAnalytics();
+//           loadClarity();
+//           loadTikTokPixel();
+//         });
+//         deny.addEventListener("click", () => {
+//           setCookie("userConsent", "deny");
+//           banner.remove();
+//         });
+//       }
+//     });
+//   });
+// }
+
+/* modules/cookieBanner.js
+ * ----------------------------------------------------------
+ * Tiny (≈2 kB gzipped) and completely self-contained.
+ */
+
+/* ── third-party loader helpers ──────────────────────────── */
 function loadGoogleAnalytics() {
-  const s = document.createElement("script");
-  s.src = "https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ";
+  const s = document.createElement('script');
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ';
   s.async = true;
   document.head.appendChild(s);
-
   s.onload = () => {
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
@@ -18,11 +133,11 @@ function loadGoogleAnalytics() {
 }
 
 function loadClarity() {
-  window.clarity = window.clarity || function() {
+  window.clarity = window.clarity || function () {
     (window.clarity.q = window.clarity.q || []).push(arguments);
   };
-  const s = document.createElement("script");
-  s.src = "https://www.clarity.ms/tag/rmf0p7sik4";
+  const s = document.createElement('script');
+  s.src = 'https://www.clarity.ms/tag/rmf0p7sik4';
   s.async = true;
   document.head.appendChild(s);
 }
@@ -30,85 +145,67 @@ function loadClarity() {
 function loadTikTokPixel() {
   window.TiktokAnalyticsObject = 'ttq';
   const ttq = window.ttq = window.ttq || [];
-  ttq.methods = ["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"];
-  ttq.setAndDefer = function(t,e){ t[e]=function(){ t.push([e].concat(Array.prototype.slice.call(arguments,0))) }; };
-  for (let m of ttq.methods) ttq.setAndDefer(ttq, m);
+  ttq.methods = [
+    'page','track','identify','instances','debug','on','off','once','ready',
+    'alias','group','enableCookie','disableCookie','holdConsent','revokeConsent',
+    'grantConsent'
+  ];
+  ttq.setAndDefer = (t, e) => { t[e] = (...a) => t.push([e, ...a]); };
+  ttq.methods.forEach(m => ttq.setAndDefer(ttq, m));
 
-  ttq.load = function(e,n){
-    const url = "https://analytics.tiktok.com/i18n/pixel/events.js";
-    ttq._i = ttq._i || {}; ttq._i[e]=[]; ttq._i[e]._u=url;
-    ttq._t = ttq._t || {}; ttq._t[e]=+new Date;
-    ttq._o = ttq._o || {}; ttq._o[e]=n||{};
-    const s = document.createElement("script");
-    s.src = url + "?sdkid=" + e + "&lib=ttq";
+  ttq.load = id => {
+    const url = 'https://analytics.tiktok.com/i18n/pixel/events.js';
+    ttq._i = ttq._i || {}; ttq._i[id] = [];
+    ttq._t = ttq._t || {}; ttq._t[id] = +new Date();
+    const s = document.createElement('script');
+    s.src = `${url}?sdkid=${id}&lib=ttq`;
     s.async = true;
     document.head.appendChild(s);
   };
 
   ttq.load('D0M3KORC77UCAFR1EOLG');
-  ttq.track('ViewContent', { content_id: 'landing-page' });
+  ttq.page();
 }
 
-// ———————————————————————————————————————————————————————
-// 2) cookie helpers
-// ———————————————————————————————————————————————————————
-function setCookie(name, value, days = 180) {
-  const d = new Date();
-  d.setTime(d.getTime() + days*24*60*60*1000);
-  document.cookie = `${name}=${value}; expires=${d.toUTCString()}; path=/`;
-}
+/* ── tiny cookie helpers ─────────────────────────────────── */
+const setCookie = (n, v, d = 180) => {
+  const expires = new Date(Date.now() + d * 864e5).toUTCString();
+  document.cookie = `${n}=${v}; expires=${expires}; path=/; SameSite=Lax`;
+};
+const getCookie = n =>
+  document.cookie.split('; ').find(c => c.startsWith(n + '='))?.split('=')[1];
 
-function getCookie(name) {
-  return document.cookie
-    .split('; ')
-    .find(r => r.startsWith(name+'='))
-    ?.split('=')[1];
-}
-
-// ———————————————————————————————————————————————————————
-// 3) render + consent logic
-// ———————————————————————————————————————————————————————
+/* ── public API ──────────────────────────────────────────── */
 export function initCookieBanner() {
-  // Only inject banner after load + one RAF (so LCP can happen first)
-  window.addEventListener('load', () => {
-    requestAnimationFrame(() => {
-      // pull banner out of a <template id="tmpl-cookie-banner">…</template>
-      const tpl = document.getElementById('tmpl-cookie-banner');
-      if (!tpl) return;
-      const bannerNode = tpl.content.cloneNode(true);
-      document.body.appendChild(bannerNode);
+  const banner = document.getElementById('cookie-banner');
+  if (!banner) return;                              // markup missing
+  const accept = banner.querySelector('#accept-all');
+  const deny   = banner.querySelector('#deny-all');
 
-      const banner = document.getElementById("cookie-banner");
-      const accept = document.getElementById("accept-all");
-      const deny   = document.getElementById("deny-all");
-      if (!banner || !accept || !deny) return;
+  const consent = getCookie('userConsent');
 
-      // check existing consent
-      const consent = getCookie("userConsent");
-      if (consent === "allow") {
-        banner.remove();
-        loadGoogleAnalytics();
-        loadClarity();
-        loadTikTokPixel();
-      }
-      else if (consent === "deny") {
-        banner.remove();
-      }
-      else {
-        // show banner and wire up
-        banner.style.display = "block";
-        accept.addEventListener("click", () => {
-          setCookie("userConsent", "allow");
-          banner.remove();
-          loadGoogleAnalytics();
-          loadClarity();
-          loadTikTokPixel();
-        });
-        deny.addEventListener("click", () => {
-          setCookie("userConsent", "deny");
-          banner.remove();
-        });
-      }
-    });
+  if (consent === 'allow') {
+    loadGoogleAnalytics(); loadClarity(); loadTikTokPixel();
+    banner.remove();
+    return;
+  }
+  if (consent === 'deny') {
+    banner.remove();
+    return;
+  }
+
+  /* -- no decision yet → show banner immediately ----------- */
+  banner.hidden = false;
+  banner.classList.add('is-visible');               // optional CSS transition
+
+  accept.addEventListener('click', () => {
+    setCookie('userConsent', 'allow');
+    banner.remove();
+    loadGoogleAnalytics(); loadClarity(); loadTikTokPixel();
+  });
+
+  deny.addEventListener('click', () => {
+    setCookie('userConsent', 'deny');
+    banner.remove();
   });
 }
