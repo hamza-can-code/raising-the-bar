@@ -262,7 +262,7 @@ const questions = [
   // Phase 5: Nutrition
   {
     question: "Do you have any dietary restrictions?",
-    options: ["Vegetarian", "Vegan", "Pescatarian", "No Restrictions"],
+    options: ["Vegetarian", "Vegan", "No Restrictions"],
     type: "radio",
     key: "dietaryRestrictions"
   },

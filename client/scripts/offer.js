@@ -522,39 +522,52 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
   // Variables to hold the dynamic testimonial values.
-  let selectedReviewName = "";
-  let selectedReviewText = "";
-  let beforeImgSrc = "#";
-  let afterImgSrc = "#";
+// pick which testimonial to show
+let selectedReviewName = "";
+let selectedReviewText = "";
+let beforeImgSrc = "";
+let afterImgSrc  = "";
 
-  // Determine which review to display.
-  if (userGoal === "gain muscle") {
-    // Muscle gain review.
-    selectedReviewName = "David";
-    selectedReviewText = "I used to wing it at the gym and second-guess everything. Seeing my workouts and progress adapt over time changed everything. I’ve gained 6kg of muscle — and confidence too.";
-    beforeImgSrc = "../assets/harry_chest_before.jpg";
-    afterImgSrc  = "../assets/harry_chest_after.jpg";
-  } else if (userGoal === "lose weight" || userGoal === "improve body composition") {
-    if (gender === "male") {
-      // Male weight loss review.
-      selectedReviewName = "Lee";
-      selectedReviewText = "I wasn’t sure I could stick with it. But everything’s laid out — no guessing. I’ve lost 10kg and finally feel like myself again.";
-      beforeImgSrc = "../assets/lynn_before.JPEG";
-      afterImgSrc  = "../assets/lynn_after.png";
-    } else if (gender === "female") {
-      // Female weight loss review.
-      selectedReviewName = "Alice";
-      selectedReviewText = "Strict plans never worked for me. This didn’t just tell me what to do — it fit into my life. I’ve lost weight, feel healthier, and for the first time, I’m in control of the process.";
-      beforeImgSrc = "../assets/halima_back_before.jpg";
-      afterImgSrc  = "../assets/halima_back_after.jpg";
-    }
+if (userGoal === "gain muscle") {
+  // Muscle gain review.
+  selectedReviewName = "David";
+  selectedReviewText =
+    "I used to wing it at the gym and second-guess everything. Seeing my workouts and progress adapt over time changed everything. I’ve gained 6kg of muscle — and confidence too.";
+  beforeImgSrc = "../assets/harry_chest_before.webp";
+  afterImgSrc  = "../assets/harry_chest_after.webp";
+
+} else if (userGoal === "lose weight" || userGoal === "improve body composition") {
+  if (gender === "male") {
+    // Male weight-loss review.
+    selectedReviewName = "Lee";
+    selectedReviewText =
+      "I wasn’t sure I could stick with it. But everything’s laid out — no guessing. I’ve lost 10kg and finally feel like myself again.";
+    beforeImgSrc = "../assets/lynn_before.webp";
+    afterImgSrc  = "../assets/lynn_after.webp";
+
+  } else if (gender === "female") {
+    // Female weight-loss review.
+    selectedReviewName = "Alice";
+    selectedReviewText =
+      "Strict plans never worked for me. This didn’t just tell me what to do — it fit into my life. I’ve lost weight, feel healthier, and for the first time, I’m in control of the process.";
+    beforeImgSrc = "../assets/halima_back_before.webp";
+    afterImgSrc  = "../assets/halima_back_after.webp";
+
   } else {
-    // Fallback default review.
+    // fallback if gender isn't set
     selectedReviewName = "Sam";
     selectedReviewText = "Default placeholder review: This program truly makes a difference.";
-    beforeImgSrc = "#"; // Replace with the actual path.
-    afterImgSrc = "#";   // Replace with the actual path.
+    beforeImgSrc = "#";
+    afterImgSrc  = "#";
   }
+
+} else {
+  // fallback if no specific goal match
+  selectedReviewName = "Sam";
+  selectedReviewText = "Default placeholder review: This program truly makes a difference.";
+  beforeImgSrc = "#";
+  afterImgSrc  = "#";
+}
 
   // Update the testimonial name and review text.
   const testimonialNameEl = document.querySelector(".testimonial-left strong");
@@ -1341,25 +1354,72 @@ document.addEventListener("DOMContentLoaded", () => {
   const reviews = [
     {
       name: "Lee",
-      text: "I’d tried bootcamps, meal plans — nothing stuck. This finally made everything click. I’ve lost 10kg, but more than that, I finally feel like myself again.",
-      beforeImage: "../assets/lynn_before.JPEG",
-      afterImage: "../assets/lynn_after.png",
-      testImage:  "../assets/5-stars.png",
+      text:
+        "I’d tried bootcamps, meal plans — nothing stuck. This finally made everything click. I’ve lost 10kg, but more than that, I finally feel like myself again.",
+      beforeImage: {
+        src: "../assets/lynn_before.webp",
+        width: 120,
+        height: 120,
+        alt: "Before"
+      },
+      afterImage: {
+        src: "../assets/lynn_after.webp",
+        width: 120,
+        height: 120,
+        alt: "After"
+      },
+      testImage: {
+        src: "../assets/5-stars.webp",
+        width: 100,
+        height: 20,
+        alt: "5 Stars"
+      }
     },
     {
       name: "David",
-      text: "I used to wing it at the gym and second-guess everything. Seeing my workouts and progress adapt over time changed everything. I’ve gained 6kg of muscle — and confidence too.",
-      beforeImage: "../assets/harry_chest_before.jpg",
-      afterImage:  "../assets/harry_chest_after.jpg",
-      testImage:  "../assets/5-stars.png",
+      text:
+        "I used to wing it at the gym and second-guess everything. Seeing my workouts and progress adapt over time changed everything. I’ve gained 6kg of muscle — and confidence too.",
+      beforeImage: {
+        src: "../assets/harry_chest_before.webp",
+        width: 120,
+        height: 120,
+        alt: "Before"
+      },
+      afterImage: {
+        src: "../assets/harry_chest_after.webp",
+        width: 120,
+        height: 120,
+        alt: "After"
+      },
+      testImage: {
+        src: "../assets/5-stars.webp",
+        width: 100,
+        height: 20,
+        alt: "5 Stars"
+      }
     },
     {
-
       name: "Alice",
-      text: "Strict plans never worked for me. This didn’t just tell me what to do — it fit into my life. I’ve lost weight, feel healthier, and for the first time, I’m in control of the process.",
-      beforeImage: "../assets/halima_back_before.jpg",
-      afterImage:  "../assets/halima_back_after.jpg",
-      testImage:  "../assets/5-stars.png",
+      text:
+        "Strict plans never worked for me. This didn’t just tell me what to do — it fit into my life. I’ve lost weight, feel healthier, and for the first time, I’m in control of the process.",
+      beforeImage: {
+        src: "../assets/halima_back_before.webp",
+        width: 120,
+        height: 120,
+        alt: "Before"
+      },
+      afterImage: {
+        src: "../assets/halima_back_after.webp",
+        width: 120,
+        height: 120,
+        alt: "After"
+      },
+      testImage: {
+        src: "../assets/5-stars.webp",
+        width: 100,
+        height: 20,
+        alt: "5 Stars"
+      }
     },
   ];
 
@@ -1375,29 +1435,52 @@ document.addEventListener("DOMContentLoaded", () => {
   let endX         = 0;
 
   // 3) build the slides
-  function createTestimonialCards() {
-    sliderContainer.innerHTML = "";
-    reviews.forEach((review) => {
-      const card = document.createElement("div");
-      card.classList.add("testimonial-card");
-      card.innerHTML = `
-        <div class="images">
-          <div class="before">
-            <img src="${review.beforeImage}" alt="Before"><p>Before</p>
-          </div>
-          <div class="after">
-            <img src="${review.afterImage}" alt="After"><p>After</p>
-          </div>
+function createTestimonialCards() {
+  sliderContainer.innerHTML = "";
+  reviews.forEach((review) => {
+    const card = document.createElement("div");
+    card.classList.add("testimonial-card");
+    card.innerHTML = `
+      <div class="images">
+        <div class="before">
+          <img
+            src="${review.beforeImage.src}"
+            width="${review.beforeImage.width}"
+            height="${review.beforeImage.height}"
+            alt="${review.beforeImage.alt}"
+            loading="lazy"
+            decoding="async"
+          >
+          <p>Before</p>
         </div>
-        <p class="review-name">${review.name}</p>
-        <div class="five-stars">
-          <img src="${review.testImage}" alt="5 Stars">
+        <div class="after">
+          <img
+            src="${review.afterImage.src}"
+            width="${review.afterImage.width}"
+            height="${review.afterImage.height}"
+            alt="${review.afterImage.alt}"
+            loading="lazy"
+            decoding="async"
+          >
+          <p>After</p>
         </div>
-        <p class="review-text">${review.text}</p>
-      `;
-      sliderContainer.appendChild(card);
-    });
-  }
+      </div>
+      <p class="review-name">${review.name}</p>
+      <div class="five-stars">
+        <img
+          src="${review.testImage.src}"
+          width="${review.testImage.width}"
+          height="${review.testImage.height}"
+          alt="${review.testImage.alt}"
+          loading="lazy"
+          decoding="async"
+        >
+      </div>
+      <p class="review-text">${review.text}</p>
+    `;
+    sliderContainer.appendChild(card);
+  });
+}
 
   // 4) build the dots
   function createDots() {
