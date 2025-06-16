@@ -130,7 +130,7 @@ h6 {
 }
 
 .slogan p {
-  font-size: 24px;
+  font-size: 18px;
 }
 
 .hero-subheadline {
@@ -227,6 +227,36 @@ h6 {
   color: #333;
 }
 
+.hero-image-wrapper {
+  max-width: 300px;
+  margin: 30px auto 50px auto;
+  border-radius: 45px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  border: 8px solid #000; /* Black frame */
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-image-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 25px;
+  background-color: #000;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  z-index: 2;
+  top: -8px;
+}
+
+.hero-ui-image {
+  width: 100%;
+  display: block;
+   padding-top: 20px;
+}
 
 /* Optimized Training Plan Section */
 .tailored-training-plan {
