@@ -59,9 +59,12 @@ h6 {
 .cookie-banner {
   position: fixed;
   bottom: 0;
-  left: 0;      /* make sure it’s flush to the left edge */
-  right: 0;     /* …and the right edge */
-  width: 100%;  /* now includes padding, thanks to border-box */
+  left: 0;
+  /* make sure it’s flush to the left edge */
+  right: 0;
+  /* …and the right edge */
+  width: 100%;
+  /* now includes padding, thanks to border-box */
   box-sizing: border-box;
   background-color: #2c3e50;
   color: #fff;
@@ -95,6 +98,20 @@ h6 {
   font-size: 0.9rem;
 }
 
+#accept-all {
+  background-color: #28a745;
+  color: #fff;
+}
+
+#deny-all {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
 .scroll {
   overflow-y: auto;
   max-height: calc(100vh - 160px);
@@ -118,14 +135,18 @@ h6 {
 /* kill the flex */
 .form-container label {
   display: block;
-  text-align: center;       /* keep your centering */
-  line-height: 1.4;         /* your existing style */
-  margin-top: 1rem;         /* optional */
+  text-align: center;
+  /* keep your centering */
+  line-height: 1.4;
+  /* your existing style */
+  margin-top: 1rem;
+  /* optional */
 }
 
 /* ensure each paragraph stacks neatly */
 .form-container label p {
-  margin: 0 0 0.5rem;       /* space them out */
+  margin: 0 0 0.5rem;
+  /* space them out */
 }
 
 
@@ -142,27 +163,35 @@ h6 {
 @media (min-width: 768px) {
   .unit-toggle.pill-toggle {
     display: flex;
-    justify-content: flex-start;    /* keep the pills on the left */
+    justify-content: flex-start;
+    /* keep the pills on the left */
     width: 100%;
-    max-width: 400px;               /* match your .number-input cap */
-    margin: 1rem auto;  
+    max-width: 400px;
+    /* match your .number-input cap */
+    margin: 1rem auto;
     border: none;
   }
 
   .ftin-row {
     display: flex;
-    justify-content: center;    /* or flex-start if you want them flush left under the toggle */
-    gap: 1rem;                   /* ← here’s your “maximum” gap between the two inputs */
-    
+    justify-content: center;
+    /* or flex-start if you want them flush left under the toggle */
+    gap: 1rem;
+    /* ← here’s your “maximum” gap between the two inputs */
+
     /* now make the whole row the same width as your other inputs: */
     width: 100%;
-    max-width: 400px;            /* match your .number-input max-width */
-    margin: 0 auto;              /* center the pair under the question */
+    max-width: 400px;
+    /* match your .number-input max-width */
+    margin: 0 auto;
+    /* center the pair under the question */
   }
-  
+
   .ftin-row .number-input {
-    flex: 1 1 auto;              /* each input will take up half of the 400px minus the gap */
-    min-width: 0;                /* allow them to shrink properly inside flex */
+    flex: 1 1 auto;
+    /* each input will take up half of the 400px minus the gap */
+    min-width: 0;
+    /* allow them to shrink properly inside flex */
   }
 }
 
