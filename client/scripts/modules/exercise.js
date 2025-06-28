@@ -468,6 +468,7 @@ export const EXERCISE_DATABASE = [
     advancedVariant: false,
     typeOfMovement: "compound",
     isHomeOnly: true,
+    isBodyweight: true,
     videoUrl: "https://www.youtube.com/watch?v=xYvRPJ4JG8s",
     alternativeExercises: [
       "Push-Ups",
