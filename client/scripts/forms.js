@@ -42,6 +42,8 @@ function lbsFromKg(kg) { return kg / 0.45359237; }
 let heightUnit = "cm";   // "cm" | "ft"
 let weightUnit = "kg";   // "kg" | "lbs"
 
+const MIN_RT_EXERCISES = 3;
+
 /*******************************************************
  * 1) QUESTION ARRAY + GLOBAL VARIABLES
  *******************************************************/
@@ -426,7 +428,7 @@ const staticCoolDownStretches = [
   { name: "Upper Back Stretch", duration: "30 seconds", rpe: 3 },
 ];
 
-import { mealDatabase }    from './modules/meals.js';
+import { mealDatabase } from './modules/meals.js';
 
 /***********************************************************************
  * 3) BMI / MAINTENANCE / GOAL CALCS
@@ -437,7 +439,7 @@ function updateAnthroMetrics() {
     calculateBMI();
   }
   if (formData.weight && formData.height &&
-      formData.age && formData.gender && formData.activityLevel) {
+    formData.age && formData.gender && formData.activityLevel) {
     calculateMaintenanceCalories();
     calculateBaseProjections();
   }
@@ -727,7 +729,7 @@ function toggleNextButtonState() {
       isInputValid = !!ft && ft.trim() !== "";
     }
 
-  // WEIGHT question (kg ↔ lbs)
+    // WEIGHT question (kg ↔ lbs)
   } else if (currentQ.key === "weight") {
     if (weightUnit === "kg") {
       const v = optionsContainer.querySelector(".w-kg")?.value;
@@ -737,26 +739,26 @@ function toggleNextButtonState() {
       isInputValid = !!v && v.trim() !== "";
     }
 
-  // GOAL WEIGHT question (always number input, with unit toggle handled elsewhere)
+    // GOAL WEIGHT question (always number input, with unit toggle handled elsewhere)
   } else if (currentQ.key === "userGoalWeight") {
     const v = optionsContainer.querySelector(".goal-weight-input")?.value;
     isInputValid = !!v && v.trim() !== "";
 
-  // All other text/number inputs
+    // All other text/number inputs
   } else if (currentQ.type === "text" || currentQ.type === "number") {
     const input = optionsContainer.querySelector("input");
     isInputValid = !!input && input.value.trim() !== "";
 
-  // Date inputs
+    // Date inputs
   } else if (currentQ.type === "date") {
     const input = optionsContainer.querySelector("input[type='date']");
     isInputValid = !!input && input.value.trim() !== "";
 
-  // Radio buttons
+    // Radio buttons
   } else if (currentQ.type === "radio") {
     isInputValid = !!optionsContainer.querySelector("li.selected");
 
-  // Checkboxes
+    // Checkboxes
   } else if (currentQ.type === "checkbox") {
     isInputValid = optionsContainer.querySelectorAll("li.selected").length > 0;
   }
@@ -799,6 +801,13 @@ function loadQuestion(i) {
       }
       return;
     }
+  }
+  if (currentQ.key === "equipment" && formData._equipmentAutoFilled) {
+    currentQuestionIndex++;          // jump to the next real question
+    if (currentQuestionIndex < questions.length) {
+      loadQuestion(currentQuestionIndex);
+    }
+    return;                          // don’t render this page
   }
   questionText.textContent = currentQ.question;
   document.querySelectorAll(".scroll-text").forEach(el => el.remove());
@@ -894,21 +903,21 @@ function loadQuestion(i) {
   if (currentQ.key === "userGoalWeight") {
     // wipe anything that might already be there
     optionsContainer.innerHTML = "";
-  
+
     const gw = document.createElement("input");
     gw.type = "number";
     gw.placeholder = weightUnit === "lbs"
-        ? "Enter your goal weight (lbs)"
-        : "Enter your goal weight (kg)";
+      ? "Enter your goal weight (lbs)"
+      : "Enter your goal weight (kg)";
     gw.classList.add("number-input", "goal-weight-input");
     // if the user typed something then came back, keep it
     gw.value = formData.goalWeightInputTemp || "";
-  
+
     gw.addEventListener("input", e => {
       formData.goalWeightInputTemp = e.target.value;   // temp store
       toggleNextButtonState();
     });
-  
+
     optionsContainer.appendChild(gw);
     toggleNextButtonState();
     return;            // *** important: skip the generic builder ***
@@ -1012,6 +1021,23 @@ function handleOptionClick(selectedOption, type) {
       const selectedWorkoutLocation = clickedText.toLowerCase();
       formData.workoutLocation = selectedWorkoutLocation;
       localStorage.setItem("workoutLocation", selectedWorkoutLocation);
+      // ──► Auto-answer the equipment question when “gym” is chosen
+      if (selectedWorkoutLocation === "gym") {
+        // every option from the equipment question, lower-cased
+        const allEquipment = [
+          "dumbbells", "barbells", "bench", "rack",
+          "kettlebells", "cables", "machines", "smith machine"
+        ];
+
+        formData.equipment = allEquipment;
+        localStorage.setItem("equipment", JSON.stringify(allEquipment));
+
+        // flag so we can skip that screen later
+        formData._equipmentAutoFilled = true;
+      } else {
+        // user picked Home ⇒ clear any previous auto-fill
+        delete formData._equipmentAutoFilled;
+      }
       // console.log(`Workout Location saved: ${selectedWorkoutLocation}`);
     }
     else if (questionKey === "effortLevel") {
@@ -1042,7 +1068,7 @@ function handleOptionClick(selectedOption, type) {
     }
     const selectedTexts = Array.from(optionsContainer.querySelectorAll("li.selected")).map(li => li.textContent.trim());
     formData[questionKey] = selectedTexts.map(txt => txt.toLowerCase());
-      if (questionKey === "equipment") {
+    if (questionKey === "equipment") {
       localStorage.setItem("equipment", JSON.stringify(formData.equipment));
     }
     // console.log("Current selected checkboxes =>", formData[questionKey]);
@@ -1067,10 +1093,10 @@ function buildHeightInput() {
   `;
 
   const unitRadios = optionsContainer.querySelectorAll("input[name='hUnit']");
-  const cmBox     = optionsContainer.querySelector(".h-cm");
-  const ftInRow   = optionsContainer.querySelector(".ftin-row");
-  const ftBox     = ftInRow.querySelector(".h-ft");
-  const inBox     = ftInRow.querySelector(".h-in");
+  const cmBox = optionsContainer.querySelector(".h-cm");
+  const ftInRow = optionsContainer.querySelector(".ftin-row");
+  const ftBox = ftInRow.querySelector(".h-ft");
+  const inBox = ftInRow.querySelector(".h-in");
 
   unitRadios.forEach(radio =>
     radio.addEventListener("change", e => {
@@ -1089,13 +1115,13 @@ function buildHeightInput() {
     })
   );
 
-  [ cmBox, ftBox, inBox ].forEach(el =>
+  [cmBox, ftBox, inBox].forEach(el =>
     el.addEventListener("input", () => {
       if (heightUnit === "cm") {
         formData.height = parseFloat(cmBox.value) || null;
         formData.heightRaw = { unit: "cm", value: cmBox.value };
       } else {
-        const ft   = parseFloat(ftBox.value) || 0;
+        const ft = parseFloat(ftBox.value) || 0;
         const inch = parseFloat(inBox.value) || 0;
         formData.height = cmFromFtIn(ft, inch);
         formData.heightRaw = { unit: "ft/in", ft: ftBox.value, in: inBox.value };
@@ -1125,8 +1151,8 @@ function buildWeightInput() {
   `;
 
   const unitRadios = optionsContainer.querySelectorAll("input[name='wUnit']");
-  const kgBox      = optionsContainer.querySelector(".w-kg");
-  const lbsBox     = optionsContainer.querySelector(".w-lbs");
+  const kgBox = optionsContainer.querySelector(".w-kg");
+  const lbsBox = optionsContainer.querySelector(".w-lbs");
 
   unitRadios.forEach(radio =>
     radio.addEventListener("change", e => {
@@ -1145,7 +1171,7 @@ function buildWeightInput() {
     })
   );
 
-  [ kgBox, lbsBox ].forEach(el =>
+  [kgBox, lbsBox].forEach(el =>
     el.addEventListener("input", () => {
       if (weightUnit === "kg") {
         formData.weight = parseFloat(kgBox.value) || null;
@@ -1879,7 +1905,7 @@ const FBB_WORKOUTS = {
 const HOME_NO_EQUIPMENT_WORKOUTS = [
   // ---------- Day 1 ----------
   {
-   dayLabel: "Day 1 – FULL BODY",
+    dayLabel: "Day 1 – FULL BODY",
     /* -------- Warm-Up (≈5 min total) -------- */
     warmUp: [
       {
@@ -2099,10 +2125,10 @@ const HOME_NO_EQUIPMENT_WORKOUTS = [
 
     /* -------- Warm-Up (≈5 min) -------- */
     warmUp: [
-      { name: "High Knees",            duration: "60 seconds", rpe: 5 },
+      { name: "High Knees", duration: "60 seconds", rpe: 5 },
       { name: "Leg Swings (Front/Side)", duration: "30 seconds / leg", rpe: 4 },
-      { name: "Glute Bridges",         duration: "45 seconds", rpe: 4 },
-      { name: "Air Squats",            duration: "20 reps",    rpe: 4 }
+      { name: "Glute Bridges", duration: "45 seconds", rpe: 4 },
+      { name: "Air Squats", duration: "20 reps", rpe: 4 }
     ],
 
     /* -------- Main Work (≈30 min RT + 5 min cardio) -------- */
@@ -2248,9 +2274,9 @@ const HOME_NO_EQUIPMENT_WORKOUTS = [
 
     /* -------- Cool-Down (≈5 min) -------- */
     coolDown: [
-      { name: "Standing Hamstring Stretch", duration: "45 seconds",      rpe: 3, notes: "" },
-      { name: "Figure-4 Stretch",           duration: "30 seconds / leg", rpe: 3, notes: "" },
-      { name: "Child’s Pose",               duration: "45 seconds",      rpe: 3, notes: "" }
+      { name: "Standing Hamstring Stretch", duration: "45 seconds", rpe: 3, notes: "" },
+      { name: "Figure-4 Stretch", duration: "30 seconds / leg", rpe: 3, notes: "" },
+      { name: "Child’s Pose", duration: "45 seconds", rpe: 3, notes: "" }
     ]
   },
   /* ================= DAY 3 – PULL ================= */
@@ -2259,10 +2285,10 @@ const HOME_NO_EQUIPMENT_WORKOUTS = [
 
     /* -------- Warm-Up (≈5 min) -------- */
     warmUp: [
-      { name: "Jumping Jacks",             duration: "60 seconds",      rpe: 5 },
-      { name: "Shoulder Rolls",            duration: "30 seconds × 2",  rpe: 4 },
-      { name: "Cat-Cow Stretch",           duration: "45 seconds",      rpe: 4 },
-      { name: "Arm Circles (Forward/Back)",duration: "30 seconds each", rpe: 4 }
+      { name: "Jumping Jacks", duration: "60 seconds", rpe: 5 },
+      { name: "Shoulder Rolls", duration: "30 seconds × 2", rpe: 4 },
+      { name: "Cat-Cow Stretch", duration: "45 seconds", rpe: 4 },
+      { name: "Arm Circles (Forward/Back)", duration: "30 seconds each", rpe: 4 }
     ],
 
     /* -------- Main Work (≈30 min RT + 5 min cardio) -------- */
@@ -2408,9 +2434,9 @@ const HOME_NO_EQUIPMENT_WORKOUTS = [
 
     /* -------- Cool-Down (≈5 min) -------- */
     coolDown: [
-      { name: "Child’s Pose",           duration: "45 seconds",      rpe: 3, notes: "" },
+      { name: "Child’s Pose", duration: "45 seconds", rpe: 3, notes: "" },
       { name: "Cross-Body Shoulder Stretch", duration: "30 seconds / arm", rpe: 3, notes: "" },
-      { name: "Thread-the-Needle Stretch",   duration: "45 seconds",      rpe: 3, notes: "" }
+      { name: "Thread-the-Needle Stretch", duration: "45 seconds", rpe: 3, notes: "" }
     ]
   },
   /* ================= DAY 4 – FULL BODY ================= */
@@ -2419,10 +2445,10 @@ const HOME_NO_EQUIPMENT_WORKOUTS = [
 
     /* -------- Warm-Up (≈5 min) -------- */
     warmUp: [
-      { name: "High Knees",                 duration: "45 seconds",      rpe: 5 },
-      { name: "Inchworm Walk-outs",         duration: "6 reps",          rpe: 4 },
-      { name: "World’s Greatest Stretch",   duration: "30 seconds / side", rpe: 4 },
-      { name: "Hip Circles",                duration: "30 seconds each direction", rpe: 4 }
+      { name: "High Knees", duration: "45 seconds", rpe: 5 },
+      { name: "Inchworm Walk-outs", duration: "6 reps", rpe: 4 },
+      { name: "World’s Greatest Stretch", duration: "30 seconds / side", rpe: 4 },
+      { name: "Hip Circles", duration: "30 seconds each direction", rpe: 4 }
     ],
 
     /* -------- Main Work (≈30 min RT + 5 min cardio) -------- */
@@ -2593,9 +2619,9 @@ const HOME_NO_EQUIPMENT_WORKOUTS = [
 
     /* -------- Cool-Down (≈5 min) -------- */
     coolDown: [
-      { name: "Downward Dog",                 duration: "45 seconds",      rpe: 3, notes: "" },
-      { name: "Standing Quad Stretch",        duration: "30 seconds / leg", rpe: 3, notes: "" },
-      { name: "Seated Forward Fold",          duration: "45 seconds",      rpe: 3, notes: "" }
+      { name: "Downward Dog", duration: "45 seconds", rpe: 3, notes: "" },
+      { name: "Standing Quad Stretch", duration: "30 seconds / leg", rpe: 3, notes: "" },
+      { name: "Seated Forward Fold", duration: "45 seconds", rpe: 3, notes: "" }
     ]
   },
   /* ================= DAY 5 – LEGS (Hamstring Focus) ================= */
@@ -2604,10 +2630,10 @@ const HOME_NO_EQUIPMENT_WORKOUTS = [
 
     /* -------- Warm-Up (≈5 min) -------- */
     warmUp: [
-      { name: "Bodyweight Good Mornings",        duration: "45 seconds",        rpe: 5 },
-      { name: "Leg Swings (Front & Side)",       duration: "30 seconds / leg",  rpe: 4 },
-      { name: "Glute Bridges",                   duration: "12 reps",           rpe: 4 },
-      { name: "Hip Circles",                     duration: "30 seconds / side", rpe: 4 }
+      { name: "Bodyweight Good Mornings", duration: "45 seconds", rpe: 5 },
+      { name: "Leg Swings (Front & Side)", duration: "30 seconds / leg", rpe: 4 },
+      { name: "Glute Bridges", duration: "12 reps", rpe: 4 },
+      { name: "Hip Circles", duration: "30 seconds / side", rpe: 4 }
     ],
 
     /* -------- Main Work (≈30 min RT + 5 min cardio) -------- */
@@ -2754,21 +2780,21 @@ const HOME_NO_EQUIPMENT_WORKOUTS = [
 
     /* -------- Cool-Down (≈5 min) -------- */
     coolDown: [
-      { name: "Standing Hamstring Stretch",  duration: "45 seconds",       rpe: 3, notes: "" },
-      { name: "Seated Figure-4 Stretch",     duration: "30 seconds / leg", rpe: 3, notes: "" },
-      { name: "Calf Stretch (Wall)",         duration: "30 seconds / leg", rpe: 3, notes: "" }
+      { name: "Standing Hamstring Stretch", duration: "45 seconds", rpe: 3, notes: "" },
+      { name: "Seated Figure-4 Stretch", duration: "30 seconds / leg", rpe: 3, notes: "" },
+      { name: "Calf Stretch (Wall)", duration: "30 seconds / leg", rpe: 3, notes: "" }
     ]
   },
-    /* ================= DAY 6 – HIIT & CORE ================= */
+  /* ================= DAY 6 – HIIT & CORE ================= */
   {
     dayLabel: "Day 6 – HIIT & CORE",
 
     /* -------- Warm-Up  (≈5 min) -------- */
     warmUp: [
-      { name: "Jumping Jacks",          duration: "45 seconds",         rpe: 5 },
-      { name: "World’s Greatest Stretch", duration: "30 seconds / side",rpe: 4 },
-      { name: "Cat-Cow",                duration: "8 reps",             rpe: 4 },
-      { name: "Bodyweight Squats",      duration: "12 reps",            rpe: 4 }
+      { name: "Jumping Jacks", duration: "45 seconds", rpe: 5 },
+      { name: "World’s Greatest Stretch", duration: "30 seconds / side", rpe: 4 },
+      { name: "Cat-Cow", duration: "8 reps", rpe: 4 },
+      { name: "Bodyweight Squats", duration: "12 reps", rpe: 4 }
     ],
 
     /* -------- Main Work (≈25 min HIIT + 10 min Core) -------- */
@@ -2939,9 +2965,9 @@ const HOME_NO_EQUIPMENT_WORKOUTS = [
 
     /* -------- Cool-Down (≈5 min) -------- */
     coolDown: [
-      { name: "Child’s Pose",              duration: "45 seconds",        rpe: 3, notes: "" },
-      { name: "Seated Forward Fold",       duration: "45 seconds",        rpe: 3, notes: "" },
-      { name: "Figure-4 Glute Stretch",    duration: "30 seconds / side", rpe: 3, notes: "" }
+      { name: "Child’s Pose", duration: "45 seconds", rpe: 3, notes: "" },
+      { name: "Seated Forward Fold", duration: "45 seconds", rpe: 3, notes: "" },
+      { name: "Figure-4 Glute Stretch", duration: "30 seconds / side", rpe: 3, notes: "" }
     ]
   },
   /* ================= DAY 7 – ACTIVE RECOVERY / MOBILITY ================= */
@@ -2950,10 +2976,10 @@ const HOME_NO_EQUIPMENT_WORKOUTS = [
 
     /* -------- Warm-Up (≈5 min) -------- */
     warmUp: [
-      { name: "Marching in Place",             duration: "60 seconds",        rpe: 4 },
-      { name: "Arm Circles (Fwd/Rev)",         duration: "30 seconds / dir",  rpe: 4 },
-      { name: "Hip Circles",                   duration: "30 seconds / dir",  rpe: 3 },
-      { name: "Inchworm Walk-Out",             duration: "6 reps",            rpe: 4 }
+      { name: "Marching in Place", duration: "60 seconds", rpe: 4 },
+      { name: "Arm Circles (Fwd/Rev)", duration: "30 seconds / dir", rpe: 4 },
+      { name: "Hip Circles", duration: "30 seconds / dir", rpe: 3 },
+      { name: "Inchworm Walk-Out", duration: "6 reps", rpe: 4 }
     ],
 
     /* -------- Main Work (≈25 min Mobility Flow) -------- */
@@ -3088,9 +3114,9 @@ const HOME_NO_EQUIPMENT_WORKOUTS = [
 
     /* -------- Cool-Down (≈5 min) -------- */
     coolDown: [
-      { name: "Child’s Pose with Reach",      duration: "60 seconds",         rpe: 2, notes: "" },
-      { name: "Seated Forward Fold",          duration: "45 seconds",         rpe: 2, notes: "" },
-      { name: "Supine Figure-4 Stretch",      duration: "30 seconds / side",  rpe: 2, notes: "" }
+      { name: "Child’s Pose with Reach", duration: "60 seconds", rpe: 2, notes: "" },
+      { name: "Seated Forward Fold", duration: "45 seconds", rpe: 2, notes: "" },
+      { name: "Supine Figure-4 Stretch", duration: "30 seconds / side", rpe: 2, notes: "" }
     ]
   },
 ];
@@ -3944,26 +3970,69 @@ function removeDuplicatesByName(exerciseArray) {
 * sequenceAndFinalize => ensures time-based gating for *all* splits
 ***********************************************************************/
 
+// function sequenceAndFinalize(exArray, splitCode, wNum) {
+//   // 1) Use exArray instead of 'filtered'
+//   const blocks = getTimeBlocksForGoal(
+//     formData.sessionDuration || "30-45 Minutes",
+//     formData.goal || "improve"
+//   );
+//   let allocated = Math.min(blocks.rt, 60);
+
+//   // 2) How many total exercises we can fit (1 per 8 minutes, max 6)
+//   const totalSlots = Math.max(3, Math.min(Math.floor(allocated / 7), 6));
+
+//   // 3) Actually do your original sequence logic on exArray
+//   let seq = sequenceExercises(splitCode, exArray, allocated);
+
+//   // 4) finalize them, slice to totalSlots, remove duplicates
+//   let out = seq.map((ex, i) => finalizeExercise(ex, i, wNum));
+//   out = out.slice(0, totalSlots);
+//   out = removeDuplicatesByName(out);
+
+//   return out;
+// }
+
 function sequenceAndFinalize(exArray, splitCode, wNum) {
-  // 1) Use exArray instead of 'filtered'
+  // -- How much RT time do we have for this day?
   const blocks = getTimeBlocksForGoal(
     formData.sessionDuration || "30-45 Minutes",
     formData.goal || "improve"
   );
-  let allocated = Math.min(blocks.rt, 60);
+  const allocated = Math.min(blocks.rt, 60);
 
-  // 2) How many total exercises we can fit (1 per 8 minutes, max 6)
-  const totalSlots = Math.min(Math.floor(allocated / 7), 6);
+  /* ---------- 1. Build the raw, ordered list ---------- */
+  const totalSlots = Math.max(
+    MIN_RT_EXERCISES,
+    Math.min(Math.floor(allocated / 7), 6)
+  );
 
-  // 3) Actually do your original sequence logic on exArray
-  let seq = sequenceExercises(splitCode, exArray, allocated);
+  const rawSeq = sequenceExercises(splitCode, exArray, allocated);
 
-  // 4) finalize them, slice to totalSlots, remove duplicates
-  let out = seq.map((ex, i) => finalizeExercise(ex, i, wNum));
-  out = out.slice(0, totalSlots);
-  out = removeDuplicatesByName(out);
+  /* ---------- 2. Finalise + de-duplicate ---------- */
+  let final = rawSeq
+    .map((ex, i) => finalizeExercise(ex, i, wNum))
+    .slice(0, totalSlots);         // initial trim
+  final = removeDuplicatesByName(final);        // drop accidental dupes
 
-  return out;
+  /* ---------- 3. **NEW** • top-up if <  MIN_RT_EXERCISES ---------- */
+  if (final.length < MIN_RT_EXERCISES) {
+    // Grab a pool of “spares” that aren’t already in the list
+    const alreadyUsed = new Set(final.map(e => e.name));
+    const spares = exArray.filter(e => !alreadyUsed.has(e.name));
+
+    while (final.length < MIN_RT_EXERCISES && spares.length) {
+      // Pick a random spare, finalise it, push it in
+      const spare = pickRandom(spares);
+      const finalised = finalizeExercise(spare, final.length, wNum);
+      final.push(finalised);
+
+      // remove from spare pool
+      const idx = spares.indexOf(spare);
+      if (idx > -1) spares.splice(idx, 1);
+    }
+  }
+
+  return final;
 }
 
 const musclePriority = ["chest", "back", "quads", "hamstrings", "shoulders", "arms"];
@@ -4040,8 +4109,8 @@ function buildWeekProgram(exList, wNum) {
 
   // If user has no equipment => fullbody-bw
   const eq = (formData.equipment || []).map(x => x.toLowerCase());
-   if (eq.includes("none of the above") || userHasBenchOnly()) {
-    const dayTotal   = parseInt(formData.workoutDays || 3, 10);
+  if (eq.includes("none of the above") || userHasBenchOnly()) {
+    const dayTotal = parseInt(formData.workoutDays || 3, 10);
     const presetsLen = HOME_NO_EQUIPMENT_WORKOUTS.length;
 
     // Always start from the first workout each new 12-week cycle,
@@ -4056,9 +4125,9 @@ function buildWeekProgram(exList, wNum) {
     }
 
     return {
-      week  : wNum,
-      phase : "Home-Bodyweight Phase",
-      days  : chosenDays
+      week: wNum,
+      phase: "Home-Bodyweight Phase",
+      days: chosenDays
     };
   }
 
@@ -4175,6 +4244,7 @@ function buildDayWorkout(exList, splitType, wNum, dayIndex) {
     formData.sessionDuration || "30-45 Minutes",
     formData.goal || "improve"
   );
+  const allocated = Math.min(blocks.rt, 60);
 
   function pickCardioExercise() {
     const loc = (formData.workoutLocation || "home").toLowerCase();
@@ -4195,7 +4265,7 @@ function buildDayWorkout(exList, splitType, wNum, dayIndex) {
       return homeList[Math.floor(Math.random() * homeList.length)];
     }
   }
-  
+
 
   // --- CHANGED: Dynamically select warm-up cardio exercise based on workout location
   let loc = (formData.workoutLocation || "home").toLowerCase();
@@ -4238,7 +4308,10 @@ function buildDayWorkout(exList, splitType, wNum, dayIndex) {
   let chosen = getCachedOrBuildDay(splitType, exList, wNum, dayIndex);
 
   // 1 exercise / 8 min logic
-  let totalSlots = Math.min(Math.floor(blocks.rt / 7), 6);
+  let totalSlots = Math.max(
+    MIN_RT_EXERCISES,
+    Math.min(Math.floor(allocated / 7), 6)
+  );
   let filtered = chosen.slice();
 
   // 1) If location is gym => try removing isHomeOnly
@@ -6170,7 +6243,7 @@ nextButton.addEventListener("click", () => {
     }
     formData.weight = kgVal;
     localStorage.setItem("weight", kgVal.toString());
-    updateAnthroMetrics(); 
+    updateAnthroMetrics();
   }
   if (currentQ.key === "dietaryRestrictions") {
     // The user is expected to select one option.
@@ -6181,22 +6254,22 @@ nextButton.addEventListener("click", () => {
   }
   if (currentQ.key === "userGoalWeight") {
     // grab the input element and parse their goal entry
-    const inp    = optionsContainer.querySelector(".goal-weight-input");
+    const inp = optionsContainer.querySelector(".goal-weight-input");
     const rawVal = parseFloat(inp.value);
-  
+
     // basic validity
     if (isNaN(rawVal) || rawVal <= 0) {
       displayWarning("Please enter a valid number for your goal weight.");
       return;
     }
-  
+
     // pull their *current* raw weight & unit from localStorage
     const savedRaw = JSON.parse(localStorage.getItem("weightRaw") || "null");
     // fallback display if somehow missing
     const currDisplay = savedRaw
       ? `${Math.round(parseFloat(savedRaw.value))} ${savedRaw.unit}`
       : `${Math.round(formData.weight)} kg`;
-  
+
     // if they tried to set the goal == their current
     if (savedRaw && parseFloat(savedRaw.value) === rawVal) {
       displayWarning(
@@ -6204,13 +6277,13 @@ nextButton.addEventListener("click", () => {
       );
       return;
     }
-  
+
     // convert their goal to kg for your lose/gain checks
     const goalKg = (weightUnit === "lbs")
       ? kgFromLbs(rawVal)
       : rawVal;
     const currKg = formData.weight || 0;
-  
+
     // loss‑mode must be strictly below current
     if (formData.goal === "lose weight" && goalKg >= currKg) {
       displayWarning(
@@ -6218,7 +6291,7 @@ nextButton.addEventListener("click", () => {
       );
       return;
     }
-  
+
     // gain‑mode must be strictly above current
     if (formData.goal === "gain muscle" && goalKg <= currKg) {
       displayWarning(
@@ -6226,7 +6299,7 @@ nextButton.addEventListener("click", () => {
       );
       return;
     }
-  
+
     // ✅ everything’s valid — store goal in kg and clear the temp
     formData.userGoalWeight = goalKg;
     delete formData.goalWeightInputTemp;
