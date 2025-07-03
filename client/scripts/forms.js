@@ -1,9 +1,9 @@
-const fadeInElements = document.querySelectorAll(".fade-in");
-fadeInElements.forEach((element, index) => {
-  setTimeout(() => {
-    element.classList.add("visible");
-  }, index * 500);
-});
+// const fadeInElements = document.querySelectorAll(".fade-in");
+// fadeInElements.forEach((element, index) => {
+//   setTimeout(() => {
+//     element.classList.add("visible");
+//   }, index * 500);
+// });
 
 // Only set this if it hasn't already been set
 if (!localStorage.getItem('startedForm')) {
@@ -5825,15 +5825,15 @@ function replaceWithFinalPage() {
   generateTwelveWeekMealPlan();
 
   // Animate the footer out...
-  const fixedFooter = document.querySelector(".fixed-footer");
-  fixedFooter.classList.remove("visible");
-  fixedFooter.classList.add("footer-slide-out");
-  fixedFooter.addEventListener("transitionend", function handleFooterTransition(e) {
-    if (e.propertyName === "transform" || e.propertyName === "opacity") {
-      fixedFooter.style.display = "none";
-      fixedFooter.removeEventListener("transitionend", handleFooterTransition);
-    }
-  });
+  // const fixedFooter = document.querySelector(".fixed-footer");
+  // fixedFooter.classList.remove("visible");
+  // fixedFooter.classList.add("footer-slide-out");
+  // fixedFooter.addEventListener("transitionend", function handleFooterTransition(e) {
+  //   if (e.propertyName === "transform" || e.propertyName === "opacity") {
+  //     fixedFooter.style.display = "none";
+  //     fixedFooter.removeEventListener("transitionend", handleFooterTransition);
+  //   }
+  // });
   progressBarFill.style.width = "0%";
 
   const formContainer = document.querySelector(".form-container");
@@ -6394,12 +6394,26 @@ loadQuestion(currentQuestionIndex);
 updateProgressBar();
 
 // Make the fixed footer pop in once the DOM is ready
-window.addEventListener("DOMContentLoaded", () => {
-  const fixedFooter = document.querySelector(".fixed-footer");
-  if (fixedFooter) {
-    // Delay slightly if you want it to appear after other elements:
-    setTimeout(() => {
-      fixedFooter.classList.add("visible");
-    }, 1500);
-  }
+// window.addEventListener("DOMContentLoaded", () => {
+//   const fixedFooter = document.querySelector(".fixed-footer");
+//   if (fixedFooter) {
+//     // Delay slightly if you want it to appear after other elements:
+//     setTimeout(() => {
+//       fixedFooter.classList.add("visible");
+//     }, 500);
+//   }
+// });
+
+const closeBtn = document.getElementById('incentive-close');
+closeBtn.addEventListener('click', () => {
+  document.getElementById('incentive-box').style.display = 'none';
+});
+
+if (localStorage.getItem("hideBanner")) {
+  document.getElementById("incentive-box").style.display = "none";
+}
+
+document.getElementById("incentive-close").addEventListener("click", () => {
+  document.getElementById("incentive-box").style.display = "none";
+  localStorage.setItem("hideBanner", true);
 });
