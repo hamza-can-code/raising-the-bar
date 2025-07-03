@@ -2146,6 +2146,11 @@ img {
     /* Purple for the special offer card */
 }
 
+.offer-card.highlighted {
+  outline: 2px solid #9333EA;
+    outline-offset: -2px;
+}
+
 .toggle-details {
     width: 75px;
     text-decoration: underline;

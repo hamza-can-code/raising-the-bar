@@ -1114,18 +1114,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // If nothing is saved, automatically select the 4-week card on first load
-  // If nothing is saved, automatically select the 1-week card on first load
   if (!currentlySelected) {
-    const oneWeekCard = document.querySelector('.offer-card[data-program="1-week"]');
-    if (oneWeekCard) {
-      oneWeekCard.classList.add("selected");
-      currentlySelected = oneWeekCard;
-      toggleDetails(oneWeekCard, true);
-      localStorage.setItem("selectedProgram", "1-week");
-      updateCTA(oneWeekCard.dataset.program);
+    const proTrackerCard = document.querySelector('.offer-card[data-program="new"]');
+    if (proTrackerCard) {
+      proTrackerCard.classList.add('highlighted');
+      // ensure it's collapsed
+      proTrackerCard.dataset.expanded = "false";
     }
   }
+
+  // If nothing is saved, automatically select the 4-week card on first load
+  // if (!currentlySelected) {
+  //   const proTrackerCard = document.querySelector('.offer-card[data-program="new"]');
+  //   if (proTrackerCard) {
+  //     proTrackerCard.classList.add("selected");
+  //     currentlySelected = proTrackerCard;
+  //     // leave it collapsed, so no call to toggleDetails here
+  //     // ensure its data-expanded flag is explicitly false:
+  //     proTrackerCard.dataset.expanded = "false";
+  //     localStorage.setItem("selectedProgram", "new");
+  //     updateCTA(proTrackerCard.dataset.program);
+  //   }
+  // }
 
   /* Tell us whether two cards are the linked 4- & 12-week pair  */
   function isSyncedPair(a, b) {
@@ -1165,6 +1175,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
         currentlySelected.classList.remove("selected");
       }
+
+      offerCards.forEach(card => {
+        card.addEventListener('click', function (e) {
+          const proTrackerCard = document.querySelector('.offer-card[data-program="new"]');
+          // 1) always remove the purple outline
+          if (proTrackerCard) proTrackerCard.classList.remove('highlighted');
+
+          // … your existing click-logic here (deselecting/ selecting cards) …
+
+          // 2) if they clicked the Pro Tracker, re-apply the outline
+          if (card.dataset.program === 'new' && proTrackerCard) {
+            proTrackerCard.classList.add('highlighted');
+          }
+        });
+      });
+
 
 
       // Select the new card

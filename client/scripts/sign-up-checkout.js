@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "1-Week Program": "1-week",
     "4-Week Program": "4-week",
     "12-Week Program": "12-week",
-    "Pro Tracker Subscription": "subscription"
+    "Pro Tracker": "subscription"
   };
   const plan = planMap[planName];   // may be undefined if dev added new plans later
 
