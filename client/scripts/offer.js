@@ -10,12 +10,14 @@ async function simulatePurchase(purchaseType) {
     body: JSON.stringify({ userId, purchaseType })
   });
   const data = await res.json();
-  if (!res.ok) throw new Error(data.error||'Purchase failed');
+  if (!res.ok) throw new Error(data.error || 'Purchase failed');
   return data;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const name = localStorage.getItem("name");
+  const fullName = localStorage.getItem("name") || "";
+  // …then split on spaces and take the first chunk
+  const name = fullName.split(" ")[0] || "";
   const dob = localStorage.getItem("dob");
   const age = localStorage.getItem("age");
   const gender = localStorage.getItem("gender");
@@ -522,52 +524,52 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
   // Variables to hold the dynamic testimonial values.
-// pick which testimonial to show
-let selectedReviewName = "";
-let selectedReviewText = "";
-let beforeImgSrc = "";
-let afterImgSrc  = "";
+  // pick which testimonial to show
+  let selectedReviewName = "";
+  let selectedReviewText = "";
+  let beforeImgSrc = "";
+  let afterImgSrc = "";
 
-if (userGoal === "gain muscle") {
-  // Muscle gain review.
-  selectedReviewName = "David";
-  selectedReviewText =
-    "I used to wing it at the gym and second-guess everything. Seeing my workouts and progress adapt over time changed everything. I’ve gained 6kg of muscle — and confidence too.";
-  beforeImgSrc = "../assets/harry_chest_before.webp";
-  afterImgSrc  = "../assets/harry_chest_after.webp";
-
-} else if (userGoal === "lose weight" || userGoal === "improve body composition") {
-  if (gender === "male") {
-    // Male weight-loss review.
-    selectedReviewName = "Lee";
+  if (userGoal === "gain muscle") {
+    // Muscle gain review.
+    selectedReviewName = "David";
     selectedReviewText =
-      "I wasn’t sure I could stick with it. But everything’s laid out — no guessing. I’ve lost 10kg and finally feel like myself again.";
-    beforeImgSrc = "../assets/lynn_before.webp";
-    afterImgSrc  = "../assets/lynn_after.webp";
+      "I used to wing it at the gym and second-guess everything. Seeing my workouts and progress adapt over time changed everything. I’ve gained 6kg of muscle — and confidence too.";
+    beforeImgSrc = "../assets/harry_chest_before.webp";
+    afterImgSrc = "../assets/harry_chest_after.webp";
 
-  } else if (gender === "female") {
-    // Female weight-loss review.
-    selectedReviewName = "Alice";
-    selectedReviewText =
-      "Strict plans never worked for me. This didn’t just tell me what to do — it fit into my life. I’ve lost weight, feel healthier, and for the first time, I’m in control of the process.";
-    beforeImgSrc = "../assets/halima_back_before.webp";
-    afterImgSrc  = "../assets/halima_back_after.webp";
+  } else if (userGoal === "lose weight" || userGoal === "improve body composition") {
+    if (gender === "male") {
+      // Male weight-loss review.
+      selectedReviewName = "Lee";
+      selectedReviewText =
+        "I wasn’t sure I could stick with it. But everything’s laid out — no guessing. I’ve lost 10kg and finally feel like myself again.";
+      beforeImgSrc = "../assets/lynn_before.webp";
+      afterImgSrc = "../assets/lynn_after.webp";
+
+    } else if (gender === "female") {
+      // Female weight-loss review.
+      selectedReviewName = "Alice";
+      selectedReviewText =
+        "Strict plans never worked for me. This didn’t just tell me what to do — it fit into my life. I’ve lost weight, feel healthier, and for the first time, I’m in control of the process.";
+      beforeImgSrc = "../assets/halima_back_before.webp";
+      afterImgSrc = "../assets/halima_back_after.webp";
+
+    } else {
+      // fallback if gender isn't set
+      selectedReviewName = "Sam";
+      selectedReviewText = "Default placeholder review: This program truly makes a difference.";
+      beforeImgSrc = "#";
+      afterImgSrc = "#";
+    }
 
   } else {
-    // fallback if gender isn't set
+    // fallback if no specific goal match
     selectedReviewName = "Sam";
     selectedReviewText = "Default placeholder review: This program truly makes a difference.";
     beforeImgSrc = "#";
-    afterImgSrc  = "#";
+    afterImgSrc = "#";
   }
-
-} else {
-  // fallback if no specific goal match
-  selectedReviewName = "Sam";
-  selectedReviewText = "Default placeholder review: This program truly makes a difference.";
-  beforeImgSrc = "#";
-  afterImgSrc  = "#";
-}
 
   // Update the testimonial name and review text.
   const testimonialNameEl = document.querySelector(".testimonial-left strong");
@@ -943,9 +945,9 @@ document.addEventListener("DOMContentLoaded", () => {
 /* A) DISCOUNT TIMER LOGIC (with indefinite)  */
 /**********************************************/
 document.addEventListener("DOMContentLoaded", function () {
-  const now      = Date.now();
-  const signupTs = Number(localStorage.getItem("signupTimestamp")   || 0);
-  let   comebackEnd = Number(localStorage.getItem("sevenDayDiscountEnd") || 0);
+  const now = Date.now();
+  const signupTs = Number(localStorage.getItem("signupTimestamp") || 0);
+  let comebackEnd = Number(localStorage.getItem("sevenDayDiscountEnd") || 0);
 
   // If 7 days have passed since sign-up and no comeback window is running, start a 24h window
   if (signupTs && !comebackEnd && now >= signupTs + 7 * 24 * 60 * 60 * 1000) {
@@ -982,13 +984,13 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.classList.remove("discount-active");
   }
 
-  const timerContainer     = document.getElementById("timerContainer");
-  const countdownTimerEl   = document.getElementById("countdownTimer");
+  const timerContainer = document.getElementById("timerContainer");
+  const countdownTimerEl = document.getElementById("countdownTimer");
 
   function updateTimer() {
-    const now  = Date.now();
+    const now = Date.now();
     const diff = discountEndTime - now;
-  
+
     // If the discount has expired…
     if (diff <= 0) {
       document.body.classList.remove("discount-active");
@@ -999,19 +1001,19 @@ document.addEventListener("DOMContentLoaded", function () {
       if (cardSubtext) cardSubtext.remove();
       return;
     }
-  
+
     // Keep the discount styling active
     document.body.classList.add("discount-active");
-  
+
     // Break diff into h/m/s
     const totalSeconds = Math.floor(diff / 1000);
-    const hours        = Math.floor(totalSeconds / 3600);
-    const minutes      = Math.floor((totalSeconds % 3600) / 60);
-    const seconds      = totalSeconds % 60;
-  
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
     // Zero-pad helper
     const pad = n => n.toString().padStart(2, "0");
-  
+
     // Build the display string
     let display;
     if (hours > 0) {
@@ -1019,7 +1021,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       display = `${pad(minutes)}:${pad(seconds)}`;
     }
-  
+
     // Update the DOM
     if (countdownTimerEl) {
       countdownTimerEl.textContent = display;
@@ -1125,6 +1127,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  /* Tell us whether two cards are the linked 4- & 12-week pair  */
+  function isSyncedPair(a, b) {
+    if (!a || !b) return false;
+    const p1 = a.dataset.program;
+    const p2 = b.dataset.program;
+    return (
+      (p1 === '4-week' && p2 === '12-week') ||
+      (p1 === '12-week' && p2 === '4-week')
+    );
+  }
+
+
   // Add click listeners to each offer card (ignoring clicks on the toggle button)
   offerCards.forEach(card => {
     card.addEventListener("click", function (e) {
@@ -1132,12 +1146,23 @@ document.addEventListener("DOMContentLoaded", function () {
       if (e.target.classList.contains("toggle-details")) return;
 
       // If this card is already selected, do nothing
-      if (currentlySelected === card) return;
+      if (currentlySelected === card) {
+        // If it’s collapsed, open it
+        if (card.dataset.expanded !== 'true') {
+          toggleDetails(card, true);        // re-open
+        }
+        return;                             // stop, so we don’t collapse it again
+      }
 
       // If a different card is selected...
       if (currentlySelected && currentlySelected !== card) {
-        // For both special and non-special cards, call toggleDetails to collapse.
-        toggleDetails(currentlySelected, false);
+
+        /* NEW: don't collapse if we're just switching
+           between the synced 4- and 12-week cards        */
+        if (!isSyncedPair(currentlySelected, card)) {
+          toggleDetails(currentlySelected, false);   // ← only runs for *other* cards
+        }
+
         currentlySelected.classList.remove("selected");
       }
 
@@ -1161,101 +1186,161 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Attach a separate click listener for the special card’s toggle button (if someone taps directly on it)
-  const specialCard = document.querySelector('.offer-card[data-program="new"]');
-  if (specialCard) {
-    const toggleBtn = specialCard.querySelector(".toggle-details");
-    if (toggleBtn) {
-      toggleBtn.addEventListener("click", function (e) {
-        e.stopPropagation(); // Prevent the card-level click handler from firing
-        if (specialCard.classList.contains("expanded")) {
-          toggleDetails(specialCard, false);
-        } else {
-          toggleDetails(specialCard, true);
-        }
-      });
-    }
-  }
+  // const specialCard = document.querySelector('.offer-card[data-program="new"]');
+  // if (specialCard) {
+  //   const toggleBtn = specialCard.querySelector(".toggle-details");
+  //   if (toggleBtn) {
+  //     toggleBtn.addEventListener("click", function (e) {
+  //       e.stopPropagation(); // Prevent the card-level click handler from firing
+  //       if (specialCard.classList.contains("expanded")) {
+  //         toggleDetails(specialCard, false);
+  //       } else {
+  //         toggleDetails(specialCard, true);
+  //       }
+  //     });
+  //   }
+  // }
 
   /**
    * toggleDetails – (special card branch remains as you already have it)
    */
-  function toggleDetails(card, expand) {
-    const dataProgram = card.dataset.program;
-    if (dataProgram === "new") {
-      const additionalInfo = card.querySelector(".additional-info");
-      const toggleButton = card.querySelector(".toggle-details");
-      if (!additionalInfo || !toggleButton) return;
+  // function toggleDetails(card, expand) {
+  //   const dataProgram = card.dataset.program;
+  //   if (dataProgram === "new") {
+  //     const additionalInfo = card.querySelector(".additional-info");
+  //     const toggleButton = card.querySelector(".toggle-details");
+  //     if (!additionalInfo || !toggleButton) return;
 
-      // Use dataset.expanded to keep track of the current state.
-      const isExpanded = card.dataset.expanded === "true";
-      // If the card is already in the desired state, do nothing.
-      if (expand === isExpanded) {
-        return;
-      }
+  //     // Use dataset.expanded to keep track of the current state.
+  //     const isExpanded = card.dataset.expanded === "true";
+  //     // If the card is already in the desired state, do nothing.
+  //     if (expand === isExpanded) {
+  //       return;
+  //     }
 
-      if (expand) {
-        // Mark the card as expanded.
-        card.dataset.expanded = "true";
-        card.classList.add("expanded");
+  //     if (expand) {
+  //       // Mark the card as expanded.
+  //       card.dataset.expanded = "true";
+  //       card.classList.add("expanded");
 
-        additionalInfo.style.transition = "height 0.5s ease";
-        additionalInfo.style.overflow = "hidden";
-        toggleButton.style.transition = "opacity 0.3s ease";
+  //       additionalInfo.style.transition = "height 0.5s ease";
+  //       additionalInfo.style.overflow = "hidden";
+  //       toggleButton.style.transition = "opacity 0.3s ease";
 
-        // Start the expansion: set display to block and height from 0
-        additionalInfo.style.display = "block";
-        additionalInfo.style.height = "0px";
-        additionalInfo.offsetHeight; // force reflow
-        const fullHeight = additionalInfo.scrollHeight;
-        additionalInfo.style.height = fullHeight + "px";
+  //       // Start the expansion: set display to block and height from 0
+  //       additionalInfo.style.display = "block";
+  //       additionalInfo.style.height = "0px";
+  //       additionalInfo.offsetHeight; // force reflow
+  //       const fullHeight = additionalInfo.scrollHeight;
+  //       additionalInfo.style.height = fullHeight + "px";
 
-        toggleButton.style.display = "block";
-        toggleButton.style.opacity = "1";
-        toggleButton.textContent = "See less";
+  //       toggleButton.style.display = "block";
+  //       toggleButton.style.opacity = "1";
+  //       toggleButton.textContent = "See less";
 
-        // Once the expansion transition finishes, scroll to the disclaimer element.
-        additionalInfo.addEventListener("transitionend", function handler(e) {
-          if (e.propertyName === "height") {
-            additionalInfo.removeEventListener("transitionend", handler);
-            const disclaimerEl = document.getElementById("offerDisclaimer");
-            if (disclaimerEl && !isElementFullyInViewport(disclaimerEl)) {
-              disclaimerEl.scrollIntoView({ behavior: "smooth", block: "end" });
-            }
-          }
-        });
-      } else {
-        // Mark the card as collapsed.
-        card.dataset.expanded = "false";
-        card.classList.remove("expanded");
+  //       // Once the expansion transition finishes, scroll to the disclaimer element.
+  //       additionalInfo.addEventListener("transitionend", function handler(e) {
+  //         if (e.propertyName === "height") {
+  //           additionalInfo.removeEventListener("transitionend", handler);
+  //           const disclaimerEl = document.getElementById("offerDisclaimer");
+  //           if (disclaimerEl && !isElementFullyInViewport(disclaimerEl)) {
+  //             disclaimerEl.scrollIntoView({ behavior: "smooth", block: "end" });
+  //           }
+  //         }
+  //       });
+  //     } else {
+  //       // Mark the card as collapsed.
+  //       card.dataset.expanded = "false";
+  //       card.classList.remove("expanded");
 
-        additionalInfo.style.transition = "height 0.5s ease";
-        additionalInfo.style.height = "0px";
-        toggleButton.style.transition = "opacity 0.3s ease";
-        toggleButton.style.opacity = "0";
+  //       additionalInfo.style.transition = "height 0.5s ease";
+  //       additionalInfo.style.height = "0px";
+  //       toggleButton.style.transition = "opacity 0.3s ease";
+  //       toggleButton.style.opacity = "0";
 
-        additionalInfo.addEventListener("transitionend", function handler(e) {
-          if (e.propertyName === "height") {
-            additionalInfo.removeEventListener("transitionend", handler);
-            additionalInfo.style.display = "none";
-            toggleButton.textContent = "See more";
-            toggleButton.style.opacity = "1";
-          }
-        });
-      }
+  //       additionalInfo.addEventListener("transitionend", function handler(e) {
+  //         if (e.propertyName === "height") {
+  //           additionalInfo.removeEventListener("transitionend", handler);
+  //           additionalInfo.style.display = "none";
+  //           toggleButton.textContent = "See more";
+  //           toggleButton.style.opacity = "1";
+  //         }
+  //       });
+  //     }
+  //   } else {
+  //     // Existing logic for non-special cards...
+  //     const detailsEl = document.getElementById(`details-${dataProgram}`);
+  //     const seeMoreLink = card.querySelector(`[data-target="details-${dataProgram}"]`);
+  //     if (!detailsEl || !seeMoreLink) return;
+  //     if (expand) {
+  //       detailsEl.style.display = "block";
+  //       seeMoreLink.textContent = "See less";
+  //     } else {
+  //       detailsEl.style.display = "none";
+  //       seeMoreLink.textContent = "See more";
+  //     }
+  //   }
+  // }
+
+  function toggleDetails(card, forceExpand = null, skipSync = false) {
+    const info = card.querySelector('.additional-info');
+    const toggleBtn = card.querySelector('.toggle-details');
+    if (!info || !toggleBtn) return;
+
+    const isOpen = info.style.display === 'block';
+    const expandIt = forceExpand === null ? !isOpen : forceExpand;
+
+    if (expandIt) {
+      card.dataset.expanded = 'true';
+      card.classList.add('expanded');
+
+      info.style.display = 'block';
+      info.style.height = '0px';
+      info.style.overflow = 'hidden';
+      info.offsetHeight;                       // re-flow
+      info.style.transition = 'height .4s ease';
+      info.style.height = info.scrollHeight + 'px';
+
+      toggleBtn.textContent = 'See less';
     } else {
-      // Existing logic for non-special cards...
-      const detailsEl = document.getElementById(`details-${dataProgram}`);
-      const seeMoreLink = card.querySelector(`[data-target="details-${dataProgram}"]`);
-      if (!detailsEl || !seeMoreLink) return;
-      if (expand) {
-        detailsEl.style.display = "block";
-        seeMoreLink.textContent = "See less";
-      } else {
-        detailsEl.style.display = "none";
-        seeMoreLink.textContent = "See more";
-      }
+      card.dataset.expanded = 'false';
+      card.classList.remove('expanded');
+
+      info.style.height = '0px';
+      info.addEventListener('transitionend', function h(e) {
+        if (e.propertyName === 'height') {
+          info.style.display = 'none';
+          info.removeEventListener('transitionend', h);
+        }
+      });
+      toggleBtn.textContent = 'See more';
+    }
+
+    /* ► keep 4- & 12-week in sync */
+    if (!skipSync && (card.dataset.program === '4-week' || card.dataset.program === '12-week')) {
+      const partner = document.querySelector(`.offer-card[data-program="${card.dataset.program === '4-week' ? '12-week' : '4-week'}"]`);
+      if (partner) toggleDetails(partner, expandIt, true);
     }
   }
+
+  document.querySelectorAll('.offer-card .toggle-details').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const card = btn.closest('.offer-card');
+      if (!card) return;
+
+      const label = btn.textContent.trim().toLowerCase();
+
+      if (label === 'see less') {
+        /* collapse – behave exactly as before */
+        e.stopPropagation();          // don’t trigger card-select
+        toggleDetails(card, false);   // close it
+      } else {
+        /* “see more” – just select the card (which auto-expands) */
+        e.stopPropagation();          // block the old handler
+        card.click();                 // delegate to the card’s own click-handler
+      }
+    });
+  });
 
   function updateCTA(selectedProgram) {
     const finishBtn = document.getElementById("offerFinishBtn");
@@ -1278,22 +1363,22 @@ document.addEventListener("DOMContentLoaded", function () {
   finishBtn.addEventListener("click", () => {
     const selected = localStorage.getItem("selectedProgram");
     const map = {
-      "1-week":  "oneWeek",
-      "4-week":  "fourWeek",
+      "1-week": "oneWeek",
+      "4-week": "fourWeek",
       "12-week": "twelveWeek",
-      "new":     "subscription"
+      "new": "subscription"
     };
     const purchaseType = map[selected];
     if (!purchaseType) return alert("Please select a program first.");
-  
+
     // Check if the 10-minute discount is still active
     const discountEnd = Number(localStorage.getItem("discountEndTime") || 0);
     const isDiscountActive = discountEnd > Date.now();
-  
+
     // SPECIAL CASE: 1-Week
     if (purchaseType === "oneWeek") {
       localStorage.setItem("pendingPurchaseType", purchaseType);
-  
+
       if (isDiscountActive) {
         // free
         localStorage.setItem("planPrice", "FREE!");
@@ -1304,10 +1389,10 @@ document.addEventListener("DOMContentLoaded", function () {
         return window.location.href = `sign-up-checkout.html?plan=${selected}`;
       }
     }
-  
+
     // All other plans always go through checkout
     localStorage.setItem("pendingPurchaseType", purchaseType);
-  
+
     // save whatever price was showing on the card
     (function savePlanPrice() {
       const card = document.querySelector(`.offer-card[data-program="${selected}"]`);
@@ -1318,12 +1403,12 @@ document.addEventListener("DOMContentLoaded", function () {
           priceText = disc.textContent.trim();
         } else {
           priceText = (card.querySelector(".full-price span") || card.querySelector(".full-price"))
-                        .textContent.trim();
+            .textContent.trim();
         }
       }
       localStorage.setItem("planPrice", priceText);
     })();
-  
+
     window.location.href = `sign-up-checkout.html?plan=${selected}`;
   });
 });
@@ -1424,23 +1509,23 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const testimonialWrapper = document.querySelector(".testimonial-container");
-  const sliderContainer    = document.querySelector(".testimonial-slider");
-  const prevBtn            = document.querySelector(".arrow-button.prev");
-  const nextBtn            = document.querySelector(".arrow-button.next");
-  const dotsContainer      = document.querySelector(".dots-container");
+  const sliderContainer = document.querySelector(".testimonial-slider");
+  const prevBtn = document.querySelector(".arrow-button.prev");
+  const nextBtn = document.querySelector(".arrow-button.next");
+  const dotsContainer = document.querySelector(".dots-container");
 
   // 2) state
   let currentIndex = 0;
-  let startX       = 0;
-  let endX         = 0;
+  let startX = 0;
+  let endX = 0;
 
   // 3) build the slides
-function createTestimonialCards() {
-  sliderContainer.innerHTML = "";
-  reviews.forEach((review) => {
-    const card = document.createElement("div");
-    card.classList.add("testimonial-card");
-    card.innerHTML = `
+  function createTestimonialCards() {
+    sliderContainer.innerHTML = "";
+    reviews.forEach((review) => {
+      const card = document.createElement("div");
+      card.classList.add("testimonial-card");
+      card.innerHTML = `
       <div class="images">
         <div class="before">
           <img
@@ -1478,9 +1563,9 @@ function createTestimonialCards() {
       </div>
       <p class="review-text">${review.text}</p>
     `;
-    sliderContainer.appendChild(card);
-  });
-}
+      sliderContainer.appendChild(card);
+    });
+  }
 
   // 4) build the dots
   function createDots() {
@@ -1521,7 +1606,7 @@ function createTestimonialCards() {
     });
     testimonialWrapper.addEventListener("touchend", e => {
       endX = e.changedTouches[0].clientX;
-      if      (startX - endX > 50) goNext();
+      if (startX - endX > 50) goNext();
       else if (endX - startX > 50) goPrev();
     });
   }
