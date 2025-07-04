@@ -1377,6 +1377,19 @@ document.addEventListener("DOMContentLoaded", function () {
       finishBtn.style.backgroundColor = "#007BFF";
     }
   }
+  document.addEventListener('click', e => {
+    // if the click wasn’t inside an offer-card…
+    if (!e.target.closest('.offer-card')) {
+      offerCards.forEach(card => {
+        // only collapse if currently expanded
+        if (card.dataset.expanded === 'true') {
+          toggleDetails(card, false);
+          card.classList.remove('selected');
+        }
+      });
+      currentlySelected = null;  // reset selection
+    }
+  });
 });
 
 /**********************************************/
@@ -1444,8 +1457,26 @@ document.addEventListener("DOMContentLoaded", function () {
   const discountSection = document.getElementById("discountSection");
 
   if (claimProgramBtn && discountSection) {
-    claimProgramBtn.addEventListener("click", function () {
-      discountSection.scrollIntoView({ behavior: "smooth" });
+    claimProgramBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      // choose target based on screen width
+      const isSmall = window.innerWidth <= 375;
+      const targetId = isSmall
+        ? 'offerCardsContainer'
+        : 'path-to-progress';
+
+      const target = document.getElementById(targetId);
+      if (!target) return;
+
+      // compute top of element
+      const elementTop = target.getBoundingClientRect().top + window.pageYOffset;
+      // tweak this offset px until it “feels” like one wheel-click above
+      const offset = 80;
+
+      window.scrollTo({
+        top: elementTop - offset,
+        behavior: 'smooth'
+      });
     });
   }
 });

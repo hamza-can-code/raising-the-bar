@@ -824,7 +824,7 @@ img {
 .results-section {
     width: 90%;
     max-width: 800px;
-    margin: 5px auto 80px auto;
+    margin: 5px auto 0 auto;
     text-align: center;
     padding: 10px;
 }
@@ -1134,7 +1134,7 @@ img {
     border-radius: 6px;
     padding: 15px;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 
@@ -1213,17 +1213,49 @@ img {
 }
 
 .before-after-images {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;       /* lay out children in a row */
+  justify-content: center;   /* optional: center them horizontally */
+  align-items: flex-start;   /* align the top edges */
+  gap: 1rem;                 /* optional: space between the two blocks */
+}
+
+.review-section .before-after-images {
+  display: flex !important;       /* force flex layout */
+  flex-direction: row !important; /* make children line up in a row */
+  flex-wrap: nowrap;              /* don’t wrap onto a second line */
+  justify-content: center;        /* optional: center them horizontally */
+  align-items: flex-start;        /* align the tops of both blocks */
+  gap: 1rem;                      /* spacing between Before/After */
+}
+.review-section .before-after-images .before-image,
+.review-section .before-after-images .after-image {
+flex: 0 0 140px;    /* each block is exactly 140px wide */
+  max-width: 160px;   /* and never wider */
+}
+
+.review-section .before-after-images img {
+  width: 100%;        /* fill that 140px container */
+  height: auto;
+}
+
+.before-after-images .before-image,
+.before-after-images .after-image {
+  flex: 1;                   /* have them each take up equal space */
+  text-align: center;        /* center the img + label inside each block */
+}
+
+@media (max-width: 375px) {
+  .before-after-images {
+    flex-direction: column;
+    gap: .5rem;
+  }
 }
 
 .before-image,
 .after-image {
     flex: 1 1 200px;
-    max-width: 250px;
+    max-width: 125px;
     text-align: center;
 }
 
@@ -1296,7 +1328,7 @@ img {
 .offer-heading {
     font-size: 1.6rem;
     text-align: center;
-    margin: 40px 0 30px 0;
+    margin: 20px 0 20px 0;
     color: #333;
 }
 
@@ -1600,7 +1632,7 @@ img {
     border: none;
     font-size: 1rem;
     font-weight: bold;
-    padding: 12px 50px;
+    padding: 16px 58px;
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
