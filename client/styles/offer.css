@@ -2410,6 +2410,14 @@ flex: 0 0 140px;    /* each block is exactly 140px wide */
     color: #333;
     margin-top: 10px;
     text-align: center;
+    line-height: 1.4;
+}
+
+.plan-diff-text-0 {
+    color: #333;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 1.4;
 }
 
 .compare-plans {
@@ -2451,12 +2459,11 @@ flex: 0 0 140px;    /* each block is exactly 140px wide */
 }
 
 .table-wrapper {
+  display: flex;
+  justify-content: center;   /* horizontally center its children */
   margin-bottom: 20px;
-  /* space before the testimonial */
   overflow-x: auto;
-  /* allow side‑scroll on small viewports */
   -webkit-overflow-scrolling: touch;
-  /* smooth scroll on iOS */
 }
 
 #compareModal {

@@ -165,8 +165,7 @@ button:hover {
 }
 
 .form-options ol>li:last-child {
-  margin-bottom: 60px;
-  /* Enough space so it can scroll above footer */
+  margin-bottom: 0px;
 }
 
 
@@ -254,7 +253,7 @@ button:hover {
 .form-options ol {
   list-style-type: none;
   padding: 10px;
-  margin: 10px;
+  margin: 10px 10px 0 10px;
 }
 
 .form-options li {
@@ -442,6 +441,14 @@ li.button-like[data-emoji]::before {
 .pill-toggle label:hover {
   background: #f0f0f0;
 } */
+
+.subheading {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
+  margin-top: 10px;
+  text-align: center;
+}
 
 .scroll-text {
   font-size: 18px;
@@ -677,8 +684,8 @@ label a:hover {
 }
 
 .disclaimer {
-  font-size: 0.8rem;
-  color: #555;
+  font-size: 0.9rem;
+  color: #333;
   margin: 0 0 1rem 0;
 }
 
@@ -707,7 +714,7 @@ label a:hover {
   }
 
   .form-options ol>li:last-child {
-    margin-bottom: 30px;
+    margin-bottom: 0px;
     /* Enough space so it can scroll above footer */
   }
 

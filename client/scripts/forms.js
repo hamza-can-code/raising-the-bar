@@ -5872,7 +5872,11 @@ function replaceWithFinalPage() {
   finalMsg.classList.add("final-message");
   finalMsg.innerHTML = `
     <h2>You're all set - your journey starts now.</h2>
-    <p>Building your adaptive all-in-one tracker — this won’t take long.</p>
+    <p>
+  <strong>Did you know?</strong> Other apps just track.  
+      <strong>We use what you track to adapt workouts & meals</strong> so you
+      <strong>get fit faster</strong>.
+  </p>
   `;
   formContainer.appendChild(finalMsg);
 

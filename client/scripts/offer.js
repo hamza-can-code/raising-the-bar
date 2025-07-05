@@ -417,7 +417,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="plan-section">
         <h3 class="plan-heading">${name}'s Plan is Ready!</h3>
         <div class="plan-desc">
-        <p>Your personalized tracker is ready — flip a card to see what makes it yours.<p>
+         <p><strong>No other app does what we do.</strong><br>
         <div class="plan-grid">
           <!-- 1) Duration -->
         <div class="flip-card" data-description="Your ${sessionDuration} routine is built for results — you’ve earned your crown.">
@@ -1848,6 +1848,39 @@ setUpCompareModal();
 
 function setUpCompareModal() {
   const link = document.getElementById("comparePlansLink");
+  const bannerC = document.getElementById("firstWorkoutCompare");  // ← new
+  const modal = document.getElementById("compareModal");
+  if (!modal) return;
+
+  const closeBtn = modal.querySelector(".close");
+
+  // existing “Compare Plans” link
+  if (link) {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      modal.classList.add("show");
+    });
+  }
+
+  // new: banner’s “See What’s Inside” CTA
+  if (bannerC) {
+    bannerC.addEventListener("click", e => {
+      e.preventDefault();
+      modal.classList.add("show");
+    });
+  }
+
+  // close handlers
+  closeBtn.addEventListener("click", () => modal.classList.remove("show"));
+  modal.addEventListener("click", e => {
+    if (e.target === modal) modal.classList.remove("show");
+  });
+}
+
+setUpCompareModal0();
+
+function setUpCompareModal0() {
+  const link = document.getElementById("comparePlansLink0");
   const bannerC = document.getElementById("firstWorkoutCompare");  // ← new
   const modal = document.getElementById("compareModal");
   if (!modal) return;
