@@ -2405,3 +2405,161 @@ flex: 0 0 140px;    /* each block is exactly 140px wide */
         display: none;
     }
 }
+
+.plan-diff-text {
+    color: #333;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.compare-plans {
+  text-align: center;
+  font-size: 0.9rem;
+  margin: 0 0 20px;
+  display: none;
+}
+
+.compare-plans a {
+  text-decoration: underline;
+}
+
+.compare-pill {
+  display: inline-block;
+  background-color: #F3EBFF;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #444;
+  margin-left: 8px;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.compare-pill:hover {
+  background-color: #dcdcdc;
+  transform: scale(1.03);
+}
+
+.compare-pill:focus {
+  outline: 2px solid #9333EA;
+  outline-offset: 2px;
+}
+
+.compare-link-button:hover {
+  background: #e4e4e4;
+}
+
+.table-wrapper {
+  margin-bottom: 20px;
+  /* space before the testimonial */
+  overflow-x: auto;
+  /* allow side‑scroll on small viewports */
+  -webkit-overflow-scrolling: touch;
+  /* smooth scroll on iOS */
+}
+
+#compareModal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, .6);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s, visibility .3s;
+  z-index: 1200;
+}
+
+#compareModal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  position: relative;
+  background: #fff;
+  width: 90%;
+  /* max-width: 500px; */
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  padding: 30px 20px;
+  transform: translateY(30px);
+  transition: transform .3s;
+}
+
+.modal.show .modal-content {
+  transform: none;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.modal-content .subtext {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal-content .close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.compare-table {
+  width: max-content;
+  /* table will size to its content */
+  max-width: 100%;
+  /* but never exceed its wrapper */
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin-bottom: 20px;
+}
+
+.compare-table .col-feature {
+  width: 55%;
+}
+
+/* ~half the table for the labels */
+.compare-table .col-ct,
+.compare-table .col-pt {
+  width: 22.5%;
+}
+
+/* split remainder evenly */
+
+.compare-table th,
+.compare-table td {
+  padding: 10px 6px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+  white-space: normal;
+  /* allow wrapping at spaces */
+  word-break: break-word;
+}
+
+.compare-table th:first-child,
+.compare-table td:first-child {
+  text-align: left;
+}
+
+@media (max-width: 480px) {
+
+  .compare-table th,
+  .compare-table td {
+    font-size: 0.9rem;
+    padding: 8px 6px;
+  }
+}
+
+.testimonial {
+  font-style: italic;
+  font-size: 0.9rem;
+  text-align: center;
+}

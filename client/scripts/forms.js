@@ -49,13 +49,27 @@ const MIN_RT_EXERCISES = 3;
  *******************************************************/
 
 const questions = [
-  // Phase 1: Personal Info & Essentials
   {
-    question: "What is your name?",
-    options: ["(Text Box)"],
-    type: "text",
-    placeholder: "Enter your name here",
-    key: "name",
+    // this becomes the big heading:
+    question: "Let's build your dream body",
+
+    // this gets rendered as the small sub-text under the heading:
+    extraText: "Select your body type",
+
+    // your existing options stay the same:
+    options: ["Slim", "Average", "Heavy"],
+    type: "radio",
+    // (add a `key` here only if you need one for your formData)
+  },
+  {
+    question: "Choose the body you want",
+    options: [
+      "Athlete",
+      "Hero",
+      "Bodybuilder"
+    ],
+    type: "radio",
+    key: "desiredBodyType"
   },
   {
     question: "What is your date of birth?",
@@ -274,16 +288,23 @@ const questions = [
     type: "checkbox",
     key: "foodAllergies"
   },
+  // {
+  //   question: "How many meals per day do you prefer?",
+  //   options: [
+  //     // { display: "🍽️ 2 meals", value: "2 meals" },
+  //     { display: "🍽️ 3 meals", value: "3 meals" },
+  //     { display: "🍽️🍽️ 4 meals", value: "4 meals" },
+  //   ],
+  //   type: "radio",
+  //   key: "mealFrequency",
+  // },
   {
-    question: "How many meals per day do you prefer?",
-    options: [
-      // { display: "🍽️ 2 meals", value: "2 meals" },
-      { display: "🍽️ 3 meals", value: "3 meals" },
-      { display: "🍽️🍽️ 4 meals", value: "4 meals" },
-    ],
-    type: "radio",
-    key: "mealFrequency",
-  }
+    question: "What is your name?",
+    options: ["(Text Box)"],
+    type: "text",
+    placeholder: "Enter your name here",
+    key: "name",
+  },
 ];
 
 const loadingMessagesAll = {
@@ -447,6 +468,10 @@ function updateAnthroMetrics() {
 
 const equipmentQuestionIndex = questions.findIndex(q => q.key === "equipment");
 
+if (!localStorage.getItem("mealFrequency")) {
+  localStorage.setItem("mealFrequency", "4");
+}
+
 const formData = {
   name: "",
   weight: null,
@@ -459,7 +484,8 @@ const formData = {
   heightRaw: null,    // { unit: "cm", value: "172" } or { unit:"ft/in", ft:"5", in:"7" }
   weightRaw: null,    // { unit: "kg", value: "63" } or { unit: "lbs", value: "140" }
   goalWeightInputTemp: "",
-  trainingPreference: "Strength Training"
+  trainingPreference: "Strength Training",
+  mealFrequency: localStorage.getItem("mealFrequency"),
 };
 
 
@@ -656,6 +682,7 @@ const questionText = document.querySelector(".form-question h2");
 const optionsContainer = document.querySelector(".form-options ol");
 const nextButton = document.getElementById("next-button");
 const progressBarFill = document.querySelector(".progress-bar-fill");
+
 
 let currentQuestionIndex = 0;
 
@@ -5825,15 +5852,16 @@ function replaceWithFinalPage() {
   generateTwelveWeekMealPlan();
 
   // Animate the footer out...
-  // const fixedFooter = document.querySelector(".fixed-footer");
-  // fixedFooter.classList.remove("visible");
-  // fixedFooter.classList.add("footer-slide-out");
-  // fixedFooter.addEventListener("transitionend", function handleFooterTransition(e) {
-  //   if (e.propertyName === "transform" || e.propertyName === "opacity") {
-  //     fixedFooter.style.display = "none";
-  //     fixedFooter.removeEventListener("transitionend", handleFooterTransition);
-  //   }
-  // });
+  const fixedFooter = document.querySelector(".fixed-footer");
+  if (fixedFooter) {
+    fixedFooter.classList.add("slide-out");
+    fixedFooter.addEventListener("transitionend", function handleFooterTransition(e) {
+      if (e.propertyName === "transform" || e.propertyName === "opacity") {
+        fixedFooter.style.display = "none";
+        fixedFooter.removeEventListener("transitionend", handleFooterTransition);
+      }
+    });
+  }
   progressBarFill.style.width = "0%";
 
   const formContainer = document.querySelector(".form-container");
@@ -6203,8 +6231,10 @@ nextButton.addEventListener("click", () => {
     }
     localStorage.setItem("dob", dobInput);
   }
-  if (currentQuestionIndex === 0) {
-    if (!input || !input.value.trim()) {
+  const q = questions[currentQuestionIndex];
+
+  if (q.key === "name") {
+    if (!input?.value.trim()) {
       displayWarning("Please enter your name.");
       return;
     }

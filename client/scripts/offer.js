@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Handle missing critical data
-  if (!name || !bmiCategory || !goalBasedProjections) {
+  if (!name || !bmiCategory) {
     // console.warn("Missing data for the dynamic message. Ensure all necessary information is saved.");
     const dynamicMessageContainer = document.getElementById("dynamicMessageContainer");
     if (dynamicMessageContainer) {
@@ -167,48 +167,48 @@ document.addEventListener("DOMContentLoaded", () => {
   const goalDriverMessages = [
     {
       goalDriver: "A wedding or special event",
-      met: "Make sure you feel amazing, lean, and confident when your big day arrives in {eventMonth}. All with a smart tracker that asks how you feel and adapts your plan around it.",
-      notMet: "This plan will help you feel stronger and more in control — this is still your moment with a smart tracker that asks how you feel and adapts your plan around it"
+      met: "Make sure you feel amazing, lean, and confident when your big day arrives in {eventMonth}.",
+      notMet: "This plan will help you feel stronger and more in control — this is still your moment. "
     },
     {
       goalDriver: "An upcoming holiday",
-      met: "Make this your best transformation yet — ready for the sun, the camera, and the mirror by {eventMonth}. All with a smart tracker that asks how you feel and adapts your plan around it.",
-      notMet: "Feel lighter, stronger, and proud of how far you’ve come by the time you go. All with a smart tracker that asks how you feel and adapts your plan around it."
+      met: "Make this your best transformation yet — ready for the sun, the camera, and the mirror by {eventMonth}.",
+      notMet: "Feel lighter, stronger, and proud of how far you've come for your holiday."
     },
     {
       goalDriver: "A recent breakup or life change",
-      met: "Rebuild strength, confidence, and control with a smart tracker that asks how you feel and adapts your plan around it.",
-      notMet: "Rebuild strength, confidence, and control with a smart tracker that asks how you feel and adapts your plan around it."
+      met: "Rebuild strength, confidence, and control.",
+      notMet: "Rebuild strength, confidence, and control."
     },
     {
       goalDriver: "I want to feel confident in my body again",
-      met: "Feel proud of what you see in the mirror — and how far you've come. All with a smart tracker that asks how you feel and adapts your plan around it.",
-      notMet: "Feel proud of what you see in the mirror — and how far you've come. All with a smart tracker that asks how you feel and adapts your plan around it."
+      met: "Feel proud of what you see in the mirror — and how far you've come.",
+      notMet: "Feel proud of what you see in the mirror — and how far you've come."
     },
     {
       goalDriver: "I'm tired of feeling tired or unmotivated",
-      met: "Finally feel energized, clear-headed, and back in control again with a smart tracker that asks how you feel and adapts your plan around it.",
-      notMet: "Finally feel energized, clear-headed, and back in control again with a smart tracker that asks how you feel and adapts your plan around it."
+      met: "Finally feel energized, clear-headed, and back in control again.",
+      notMet: "Finally feel energized, clear-headed, and back in control again."
     },
     {
       goalDriver: "I’m doing this for my mental and emotional health",
-      met: "Feel calmer, stronger, and more grounded — this is about more than just your body. All with a smart tracker that asks how you feel and adapts your plan around it.",
-      notMet: "Feel calmer, stronger, and more grounded — this is about more than just your body. All with a smart tracker that asks how you feel and adapts your plan around it."
+      met: "Feel calmer, stronger, and more grounded — this is about more than just your body.",
+      notMet: "Feel calmer, stronger, and more grounded — this is about more than just your body."
     },
     {
       goalDriver: "I’ve let things slip and want to get back on track",
-      met: "Get back in control — with momentum, structure, and progress you can feel by {eventMonth}. All with a smart tracker that asks how you feel and adapts your plan around it.",
-      notMet: "Take back control — with small, daily wins that add up to real momentum. All with a smart tracker that asks how you feel and adapts your plan around it."
+      met: "Get back in control — with momentum, structure, and progress you can feel by {eventMonth}.",
+      notMet: "Take back control — with small, daily wins that add up to real momentum."
     },
     {
       goalDriver: "I want to build discipline and stop starting over",
-      met: "No more starting over. Just steady progress, one day at a time, with a smart tracker that asks how you feel and adapts your plan around it.",
-      notMet: "No more starting over. Just steady progress, one day at a time, with a smart tracker that asks how you feel and adapts your plan around it."
+      met: "No more starting over. Just steady progress, one day at a time.",
+      notMet: "No more starting over. Just steady progress, one day at a time."
     },
     {
       goalDriver: "I just feel ready for a change",
-      met: "Step into something better — and start feeling more like yourself again. All with a smart tracker that asks how you feel and adapts your plan around it.",
-      notMet: "Step into something better — and start feeling more like yourself again. All with a smart tracker that asks how you feel and adapts your plan around it."
+      met: "Step into something better — and start feeling more like yourself again.",
+      notMet: "Step into something better — and start feeling more like yourself again."
     }
   ];
 
@@ -415,7 +415,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderPlanSection() {
     return `
       <div class="plan-section">
-        <h3 class="plan-heading">${name}'s All-In-One Tracker is Ready!</h3>
+        <h3 class="plan-heading">${name}'s Plan is Ready!</h3>
         <div class="plan-desc">
         <p>Your personalized tracker is ready — flip a card to see what makes it yours.<p>
         <div class="plan-grid">
@@ -484,7 +484,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // === Animate Calorie (5s) ===
   const calNumberEl = document.getElementById("calNumber");
   // Use selectedCalories if present, else fallback
-  const userCals = maintenanceCalories > 0 ? maintenanceCalories : goalCalories;
+  let userCals = parseInt(maintenanceCalories, 10);
+  if (isNaN(userCals)) {
+    const sel = localStorage.getItem("selectedCalories");
+    userCals = sel ? parseInt(sel, 10) : 0;
+  }
   animateNumber({
     element: calNumberEl,
     start: 0,
@@ -1114,12 +1118,41 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // If nothing is saved, auto-select the Pro Tracker (but don't expand it)
+  // If nothing is saved, auto-select the Pro Tracker (but don't expand it)
   if (!currentlySelected) {
     const proTrackerCard = document.querySelector('.offer-card[data-program="new"]');
     if (proTrackerCard) {
-      proTrackerCard.classList.add('highlighted');
-      // ensure it's collapsed
-      proTrackerCard.dataset.expanded = "false";
+      // 1) mark it selected
+      proTrackerCard.classList.add('selected');
+      currentlySelected = proTrackerCard;
+
+      // 2) keep it collapsed
+      proTrackerCard.dataset.expanded = 'false';
+
+      // 3) persist selection
+      localStorage.setItem('selectedProgram', 'new');
+
+      // 4) seed the purchase info
+      localStorage.setItem('pendingPurchaseType', 'subscription');
+
+      // 5) seed the plan name
+      localStorage.setItem('planName', 'Pro Tracker');
+
+      // 6) seed the displayed price
+      let priceText = '';
+      const discEl = proTrackerCard.querySelector('.discount-price');
+      if (discEl && getComputedStyle(discEl).display !== 'none') {
+        priceText = discEl.textContent.trim();
+      } else {
+        const fullEl = proTrackerCard.querySelector('.full-price span')
+          || proTrackerCard.querySelector('.full-price');
+        priceText = fullEl.textContent.trim();
+      }
+      localStorage.setItem('planPrice', priceText);
+
+      // 7) update the CTA styling
+      updateCTA('new');
     }
   }
 
@@ -1462,7 +1495,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // choose target based on screen width
       const isSmall = window.innerWidth <= 375;
       const targetId = isSmall
-        ? 'offerCardsContainer'
+        ? 'path-to-progress'
         : 'path-to-progress';
 
       const target = document.getElementById(targetId);
@@ -1471,7 +1504,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // compute top of element
       const elementTop = target.getBoundingClientRect().top + window.pageYOffset;
       // tweak this offset px until it “feels” like one wheel-click above
-      const offset = 80;
+      const offset = 100;
 
       window.scrollTo({
         top: elementTop - offset,
@@ -1804,3 +1837,42 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+
+const comparePrompt = document.querySelector(".compare-plans");
+if (comparePrompt) {
+  comparePrompt.style.display = "block";
+  motivationSec.parentNode.insertBefore(comparePrompt, motivationSec);
+}
+
+setUpCompareModal();
+
+function setUpCompareModal() {
+  const link = document.getElementById("comparePlansLink");
+  const bannerC = document.getElementById("firstWorkoutCompare");  // ← new
+  const modal = document.getElementById("compareModal");
+  if (!modal) return;
+
+  const closeBtn = modal.querySelector(".close");
+
+  // existing “Compare Plans” link
+  if (link) {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      modal.classList.add("show");
+    });
+  }
+
+  // new: banner’s “See What’s Inside” CTA
+  if (bannerC) {
+    bannerC.addEventListener("click", e => {
+      e.preventDefault();
+      modal.classList.add("show");
+    });
+  }
+
+  // close handlers
+  closeBtn.addEventListener("click", () => modal.classList.remove("show"));
+  modal.addEventListener("click", e => {
+    if (e.target === modal) modal.classList.remove("show");
+  });
+}

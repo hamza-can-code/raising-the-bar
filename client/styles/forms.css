@@ -52,7 +52,7 @@ h6 {
 .header {
   position: relative;
   text-align: center;
-  padding: 10px 15px 20px 15px;
+  padding: 10px 15px 25px 15px;
 }
 
 
@@ -122,11 +122,11 @@ button:hover {
 /* the banner */
 #incentive-box {
   position: absolute;
-  top: 115px;              /* adjust to sit just under your header/logo */
+  top: 110px;
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 32px);
-  background: #EDE9E0;
+  background: #F5B84C;
   padding: 12px 16px;
   border-radius: 4px;
   display: flex;
@@ -139,6 +139,10 @@ button:hover {
   color: #333;
 }
 
+.incentive-text{
+  margin: 0 auto;
+}
+
 /* close button styling */
 #incentive-close {
   background: none;
@@ -147,6 +151,11 @@ button:hover {
   line-height: 1;
   cursor: pointer;
   padding: 0;
+}
+
+.intro-heading {
+  text-align: center;
+  margin: 0 auto 0 auto;
 }
 
 @media (max-width: 375px) {
@@ -189,10 +198,6 @@ button:hover {
 @media (max-width: 389px) {
   .form-container {
     max-height: 50vh;
-  }
-
-  .logo img {
-    height: 75px;
   }
 }
 
@@ -439,9 +444,11 @@ li.button-like[data-emoji]::before {
 } */
 
 .scroll-text {
-  font-size: 12px;
-  color: #888;
-  margin-top: 5px;
+  font-size: 18px;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 10px;
 }
 
 #next-button {

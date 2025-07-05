@@ -244,9 +244,12 @@
 
     <!-- Offer Cards -->
     <h3 class="offer-heading" id="path-to-progress">Pick Your Path to Progress</h3>
-    <p class="catchy-line">
-      One-time plans are tailored from the start. The Pro Tracker adapts as you go to keep results coming.
-    </p>
+<p class="plan-diff-text">
+  1-Week plans are tailored from the start. The Pro Tracker adapts as you go.
+    <a href="#" id="comparePlansLink" class="compare-pill">
+    🔍 Compare plans
+  </a>
+</p>
     <!-- <p class="offer-subtext">Most people never stick to fitness because their plan doesn’t adapt. Yours will.
     </p> -->
 
@@ -286,17 +289,14 @@
       <!-- END 1-WEEK CARD -->
 
       <!-- Row 2: Two Side-by-Side Cards for 4-Week and 12-Week Programs -->
-      <div class="offer-row">
-        <!-- 4-WEEK PROGRAM CARD -->
+      <!-- <div class="offer-row">
         <div class="offer-card half-width" data-program="4-week">
-          <!-- LEFT SIDE: Duration + Full Price -->
           <div class="offer-left">
             <div class="duration"><strong>4-Week Program</strong></div>
             <div class="full-price" data-full-price="£99.99">
               <span id="price4WeekFull">£99.99</span>
             </div>
           </div>
-          <!-- RIGHT SIDE: Price per Day -->
           <div class="offer-right">
             <div class="currency-tag">GBP</div>
             <div class="cost-per-day">
@@ -312,22 +312,15 @@
               <li>📅 One-time payment, no ongoing fees</li>
             </ul>
           </div>
-
-          <!-- ↓ the same toggle link the PTS card already uses -->
           <div class="toggle-details" style="cursor:pointer;">See more</div>
         </div>
-        <!-- END 4-WEEK CARD -->
-
-        <!-- 12-WEEK PROGRAM CARD -->
         <div class="offer-card half-width" data-program="12-week">
-          <!-- LEFT SIDE: Duration + Full Price -->
           <div class="offer-left">
             <div class="duration"><strong>12-Week Program</strong></div>
             <div class="full-price" data-full-price="£149.99">
               <span id="price12WeekFull">£149.99</span>
             </div>
           </div>
-          <!-- RIGHT SIDE: Price per Day -->
           <div class="offer-right">
             <div class="currency-tag">GBP</div>
             <div class="cost-per-day">
@@ -343,14 +336,9 @@
               <li>📅 One-time payment — no ongoing fees</li>
             </ul>
           </div>
-
-          <!-- ↓ the same toggle link the PTS card already uses -->
           <div class="toggle-details" style="cursor:pointer;">See more</div>
         </div>
-        <!-- END 12-WEEK CARD -->
-      </div>
-
-      <!-- END Row 2 -->
+      </div> -->
 
       <!-- Row 3: New Special Offer Card (Full Width) -->
       <div class="offer-card offer-special" data-program="new">
@@ -523,6 +511,44 @@
       </div>
     </div>
   </footer>
+  <div id="compareModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+  
+      <h2>Compare Plans</h2>
+      <p class="subtext">Here's what you unlock when upgrading to Pro.</p>
+  
+      <div class="table-wrapper">
+      <table class="compare-table">
+        <colgroup>
+          <col class="col-feature">
+          <col class="col-ct">
+          <col class="col-pt">
+        </colgroup>
+        <thead>
+          <tr><th>Feature</th><th>Core Tracker</th><th>Pro Tracker</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Workout Logging</td><td>✅</td><td>✅</td></tr>
+          <tr><td>Adaptive Progression</td><td>❌</td><td>✅</td></tr>
+          <tr><td>Progress Score</td><td>❌</td><td>✅</td></tr>
+          <tr><td>My Progress (Trends &amp; Insights)</td><td>❌</td><td>✅</td></tr>
+          <tr><td>Coach Feedback &amp; Weekly Insights</td><td>❌</td><td>✅</td></tr>
+          <tr><td>Nutrition Tracker</td><td>❌</td><td>✅</td></tr>
+          <tr><td>Macro-Matched Meals</td><td>❌</td><td>✅</td></tr>
+          <tr><td>Meal Prep Mode &amp; Shopping List</td><td>❌</td><td>✅</td></tr>
+          <tr><td>XP Bonuses &amp; Weekly Recaps</td><td>❌</td><td>✅</td></tr>
+          <tr><td>Video Tutorials</td><td>❌</td><td>✅</td></tr>
+        </tbody>
+      </table>
+    </div>
+  
+      <p class="testimonial">
+        “I didn’t realize how much I was missing until I unlocked Pro Tracker. It made everything click.”<br>
+        – Alice, lost 7 kg with Pro
+      </p>
+    </div>
+  </div>
   <script>
     let scrollTracked = false;
 
