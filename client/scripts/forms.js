@@ -731,7 +731,7 @@ function calculateAge(dob, validate = true) {
     age--;
   }
   if (validate) {
-    if (age < 18 || age > 110) {
+    if (age > 110) {
       return { valid: false, age };
     }
     localStorage.setItem("age", age);
