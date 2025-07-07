@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("signupTimestamp", Date.now());
 
       // Step 5: Redirect to dashboard
-      window.location.href = "dashboard.html";
+      window.location.href = "offer.html";
 
     } catch (err) {
       // console.error(err);

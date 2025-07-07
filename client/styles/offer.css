@@ -58,13 +58,6 @@ img {
     max-height: 100px;
 }
 
-@media (max-width: 389px) {
-
-    .logo img {
-        height: 75px;
-    }
-}
-
 .fade-in {
     opacity: 0;
     transform: translateY(20px);

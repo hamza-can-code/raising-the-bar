@@ -1481,7 +1481,7 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.setItem("planPrice", priceText);
     })();
 
-    window.location.href = `sign-up-checkout.html?plan=${selected}`;
+    window.location.href = `log-in-checkout.html?plan=${selected}`;
   });
 });
 

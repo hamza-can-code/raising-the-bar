@@ -14,10 +14,32 @@ html, body {
   color: var(--text-color); /* overall text color */
 }
 
+.header {
+    position: relative;
+    text-align: center;
+    padding: 10px 15px;
+}
+
+.logo img {
+    max-height: 100px;
+}
+
 h1 {
+  font-family: poppins, sans-serif;
   text-align: center;
   margin: 1rem 0;
   color: var(--heading-color);
+  text-align: center;
+}
+
+.hero {
+  padding: 1rem 1rem;
+}
+
+.subtext {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
 }
 
 .locked-banner-row,
@@ -26,19 +48,38 @@ h1 {
 }
 
 .buttons {
+  display: flex;
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
-  background-color: #333;
+  background-color: #007bff;
   color: #fff;
-  padding: 0.8rem 1.2rem;
+  padding: 1rem 1.2rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin: 0.2rem;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+  margin: 0 auto;
+  font: 1.1rem 'Poppins', sans-serif;
+  font-weight: 700;
 }
+
 .buttons:hover {
-  background-color: #111;
+  background-color: #007bff;
+  /* Darker blue on hover */
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+  /* Slightly larger shadow */
+  transform: translateY(-2px);
+  /* Lift effect on hover */
+}
+
+.buttons:active {
+  background-color: #003f7f;
+  /* Even darker blue on click */
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+  /* Reduced shadow */
+  transform: translateY(2px);
+  /* Press effect on click */
 }
 
 /* Hide PDF containers initially */
@@ -75,7 +116,6 @@ h1 {
 .cover-slogan {
   font-size: 1rem;
   font-weight: 400;
-  font-style: italic;
   text-align: center;
   margin-bottom: 0.5rem;
   color: var(--text-color);
@@ -197,6 +237,21 @@ h1 {
   color: #007BFF;
   text-decoration: underline;
   font-weight: bold;
+}
+
+.profile-intro-text {
+  text-align: center;
+  font-size: 1.05rem;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  line-height: 1.4;
+  color: #444;
+}
+.page-subheading {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 /* "Log Your Workout" button on main workout pages */
@@ -474,18 +529,99 @@ span {
   font-family: 'Poppins', sans-serif;
   display: block;
   margin: 1rem auto 1rem auto; /* increased bottom margin */
-  padding: 1.15rem 1.5rem;
+  padding: 1.5rem 2rem;
   font-size: 1.1rem;
   font-weight: 600;
-  background-color: #007BFF;  /* solid color */
+  background-color: #9333EA;  /* solid color */
   color: #fff;
   border-radius: 6px;
   text-decoration: none;
   cursor: pointer;
   text-align: center;
 }
-.upgrade-now-btn:hover {
+/* .upgrade-now-btn:hover {
   background: linear-gradient(to bottom, #005FCC, #007AFF);
+} */
+
+.hero-image-wrapper {
+  max-width: 300px;
+  margin: 30px auto 50px auto;
+  border-radius: 45px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  border: 8px solid #000; /* Black frame */
+  overflow: hidden;
+  position: relative;
+}
+
+/* .hero-image-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 25px;
+  background-color: #000;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  z-index: 2;
+} */
+
+.hero-ui-image {
+  width: 100%;
+  display: block;
+  padding-top: 20px;
+}
+
+.upsell-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.upsell-row .hero-image-wrapper {
+  flex: 0 0 auto;
+  margin: 0 20px 0 0;
+}
+
+.upsell-row .subtext {
+  flex: 1 1 300px;
+  text-align: left;
+}
+
+@media (max-width: 600px) {
+  .upsell-row {
+    flex-direction: column;
+  }
+  .upsell-row .hero-image-wrapper {
+    margin: 0 0 20px 0;
+  }
+  .upsell-row .subtext {
+    text-align: center;
+  }
+}
+
+.benefits-list {
+  margin-top: 1rem;
+  padding-left: 1.2rem;
+  list-style: none;
+}
+
+.benefits-list li {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.benefits-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
 }
 
 .locked-banner-row {
@@ -871,4 +1007,13 @@ span {
 
 .pdf-page p {
   line-height: 1.5;
+}
+
+/* style only the glyph, not the entire cell */
+.checkbox-char {
+  display: inline-block;
+  font-size: 1.5rem;    /* <-- bump this up or down to taste */
+  line-height: 1.2;     /* vertically center the character */
+  width: 1.5em;         /* ensures it stays square */
+  text-align: center;
 }

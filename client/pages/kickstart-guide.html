@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../styles/1-week-program.css" />
+  <title>Kickstart Guide</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
+    rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+  <!-- FontAwesome for Lock Icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body>
+  <div class="header">
+    <div class="logo">
+      <a href="../index.html">
+        <img id="logo" class="logo" src="../assets/rtb-logo-white.png" alt="Raising The Bar Logo">
+      </a>
+    </div>
+  </div>
+  <div class="hero">
+    <h1>Your Fitness Kickstart Guide</h1>
+    <p class="subtext">Everything you need to get going — tailored tips on workouts, nutrition, and building long-term
+      results.</p>
+  </div>
+
+  <!-- Buttons to download each program -->
+  <button id="download1WeekBtn" class="buttons">Download Kickstart Guide</button>
+  <!-- <button id="download4WeekBtn" class="buttons">Download 4-Week Program</button>
+  <button id="download12WeekBtn" class="buttons">Download 12-Week Program</button> -->
+
+  <!-- ==============================
+       1-WEEK PDF CONTAINER (Hidden by default)
+       ============================== -->
+  <div id="pdf1WeekContainer" class="pdf-container">
+
+    <!-- COVER PAGE -->
+    <div class="pdf-page cover-page">
+      <img src="../assets/rtb-logo-white.png" alt="RTB Logo" class="cover-logo" style="max-width:300px;" />
+
+      <p id="cover-slogan" class="cover-slogan">
+        <strong>You’re one step away from a smarter fitness journey.</strong><br>
+        This isn’t the full program—but it’s enough to get you started. And once you're ready to go all in, there's a
+        tracker built to move with you.
+      </p>
+
+      <!-- <img src="#" alt="Cover Placeholder" class="cover-placeholder-image" /> -->
+
+      <hr class="divider" />
+      <!-- Title, centered -->
+      <h2 id="oneWeekCoverTitle" class="cover-title"></h2>
+      <hr class="divider" />
+
+      <p class="cover-subtitle">
+        Start strong, fuel right, and stay consistent — here's how.
+      </p>
+    </div>
+
+    <!-- <div class="pdf-page" id="pdfWorkoutNavPage">
+      <div class="page-header-left-logo">
+        <img src="../assets/rtb-logo-white.png" alt="RTB small logo" class="logo-badge" />
+      </div>
+    </div> -->
+
+    <!-- INTRODUCTION PAGE -->
+    <!-- <div class="pdf-page">
+      <div class="page-header-left-logo">
+        <img ssrc="../assets/rtb-logo-white.png" alt="RTB small logo" class="logo-badge" />
+      </div>
+      <h2 class="page-heading with-badge-logo">Introduction</h2>
+
+      <p class="introduction-text">
+        <b>Welcome to your Fitness Kickstart Guide!</b> I'm Hamza, your personal coach — and I help
+        real people get results without the fluff. Inside, you’ll find practical advice on workouts, nutrition, and
+        recovery to help you take action with confidence. Whether you're starting fresh or getting back on track, this
+        guide gives you the clarity and structure to move forward. You don’t need a stricter plan — you need a smarter
+        one. Let’s start making progress that actually sticks.
+      </p>
+      <img src="../assets/meet_your_coach.jpg" alt="Meet Your Coach"
+        style="width:100%; border-radius:8px; margin: 20px 0;" />
+    </div> -->
+
+    <!-- PERSONAL PROFILE PAGE -->
+    <!-- <div class="pdf-page" id="oneWeekProfilePage">
+      <div class="page-header-left-logo">
+        <img src="../assets/rtb-logo-white.png" alt="RTB small logo" class="logo-badge" />
+      </div>
+      <h2 class="page-heading with-badge-logo" id="oneWeekProfileHeading"></h2>
+
+      <div class="profile-container">
+      </div>
+    </div> -->
+
+    <!-- NUTRITION INTRO PAGE -->
+    <!-- <div class="pdf-page" id="nutritionIntroPage">
+    </div> -->
+
+    <!-- WEEKLY CALORIE & MACRO OVERVIEW PAGE (Inserted right after Profile) -->
+    <!-- <div class="pdf-page" id="weeklyCaloriePage">
+    </div> -->
+
+    <!-- ESSENTIAL FOOD GUIDE PAGE (Inserted after Weekly Calorie Page) -->
+    <!-- <div class="pdf-page" id="foodGuidePage">
+    </div> -->
+
+
+
+    <!-- ADDITIONAL ADVICE PAGE -->
+    <!-- <div class="pdf-page">
+      <div class="page-header-left-logo">
+        <img src="../assets/rtb-logo-white.png" alt="RTB small logo" class="logo-badge" />
+      </div>
+      <h3 class="page-heading with-badge-logo">Additional Advice</h3>
+
+      <p>
+        <strong>Exercise</strong><br />
+        Ensure that you are warmed up and stretched before your main resistance movements. Prior to your working sets,
+        perform the movement with a light load for a few repetitions to prepare your body and mind, increase
+        performance, and reduce the risk of injury. During the main sets, choose a challenging weight whilst maintaining
+        correct form. Move the weights in a slow and controlled manner to maximise muscle stimulation and lessen the
+        potential for injuries. Once you have finished your set, rest for for the recommended duration advised in your
+        program before starting your next set. You should feel soreness and discomfort during your workout; however, if
+        you ever feel sharp pain, stop and adjust — in the <strong>Pro Tracker</strong>, we suggest safe alternatives
+        based on your
+        equipment.
+      </p>
+
+      <p>
+        <strong>Nutrition</strong><br />
+        To sustain a healthy lifestyle, fuel your body with the right amount of calories, nutrients, and water. Focus on
+        consistency rather than perfection — small, sustainable changes lead to long-term success. Tracking your food
+        can be incredibly helpful. In the <strong>Pro Tracker</strong>, your meals are generated for you and matched to
+        your macros,
+        making things much simpler. While all nutrients matter, start by monitoring your calories and protein.
+        Supplements can be useful, but they should support — not replace — a balanced, whole-food-based diet.
+      </p>
+
+      <p>
+        <strong>Recovery</strong><br />
+        Recovery is just as important as training. To support muscle growth, reduce stress, and boost overall health,
+        aim to eat well and sleep consistently — especially on rest days. A regular sleep routine makes a big
+        difference: avoid food and screens an hour before bed, and keep your room cool and dark. You can take this
+        further with a relaxing wind-down, like reading for 30 minutes followed by a short meditation. Aim for 7–9 hours
+        of sleep each night — it’s the foundation for long-term progress.
+      </p>
+    </div> -->
+
+    <!-- PROGRAM INTRO PAGE -->
+    <!-- <div class="pdf-page">
+      <div class="page-header-left-logo">
+        <img src="../assets/rtb-logo-white.png" alt="RTB small logo" class="logo-badge" />
+      </div>
+      <h2 class="page-heading with-badge-logo">Your Workout Program</h2>
+      <img src="#" alt="Program Overview Placeholder"
+        style="display:block;margin:1rem auto;object-fit:cover;width:80%;height:20vh;" />
+      <p id="oneWeekDurationText">
+        Welcome to the core of your fitness journey—your customized 1-Week training program! This section provides a
+        structured and comprehensive approach to achieving your fitness goals. Using the information you've shared, our
+        algorithm has crafted a program tailored to your needs while building strength, enhancing endurance, and
+        optimizing performance.
+        <br><br>
+        The full training program is divided into three distinct phases, each lasting four weeks. Each phase builds upon
+        the previous one, progressively increasing in intensity and complexity to ensure continuous improvement and
+        prevent plateaus. You’ll find detailed weekly overviews, including exercise routines, sets, reps, and intensity,
+        along with videos to guide you through your workouts.
+        <br><br>
+        This program is designed not only to challenge you but also to fit seamlessly into your lifestyle. By following
+        it, you'll develop the strength, endurance, and resilience needed to reach your fitness goals and see measurable
+        results.
+        <br><br>
+        Get ready to embark on this transformative journey. By committing to this 1-Week plan, you'll set yourself up
+        for success and make significant strides toward your fitness objectives. Let’s dive in and start building a
+        stronger, fitter you!
+      </p>
+    </div> -->
+
+    <!-- WORKOUT SESSIONS (one .pdf-page per day) -->
+    <div id="oneWeekSessions"></div>
+  </div>
+  <!-- END 1-WEEK PDF CONTAINER -->
+
+  <!-- ==============================
+       4-WEEK PDF 1 (WORKOUT PROGRAM)
+       ============================== -->
+  <div id="pdf4WeekWorkout" class="pdf-container">
+
+    <!-- PDF 1 - Front Cover -->
+    <div class="pdf-page cover-page">
+      <!-- <img src="src/images/rtb-logo-white.png" alt="RTB Logo" class="cover-logo" style="max-width:300px;" /> -->
+      <img src="#" alt="Cover Placeholder" class="cover-placeholder-image" />
+      <hr class="divider" />
+      <h2 id="fourWeekCoverTitle" class="cover-title"></h2>
+      <hr class="divider" />
+      <p class="cover-subtitle">A Step-by-Step Guide to Your Best Health and Fitness Journey</p>
+    </div>
+    <div class="pdf-page" id="pdf4WeekNavPage">
+    </div>
+    <div class="pdf-page" id="pdf4WeekIntroPage">
+    </div>
+    <div class="pdf-page" id="pdf4WeekClientProfilePage">
+    </div>
+    <div class="pdf-page" id="pdf4WeekAdditionalAdvicePage">
+    </div>
+    <div class="pdf-page" id="pdf4WeekYourWorkout">
+      <div id="pdf4WeekAllWeeksContainer">
+      </div>
+    </div>
+    <div class="pdf-page" id="pdf4WeekModifyWorkoutPage">
+    </div>
+    <div class="pdf-page" id="pdf4WeekUpsellPage">
+    </div>
+  </div>
+
+  <div id="pdf4WeekNutrition" class="pdf-container">
+    <div class="pdf-page cover-page">
+      <!-- <img src="src/images/rtb-logo-white.png" alt="RTB Logo" class="cover-logo" style="max-width:300px;" /> -->
+      <img src="#" alt="Cover Placeholder" class="cover-placeholder-image" />
+      <hr class="divider" />
+      <h2 id="fourWeekNutritionCoverTitle" class="cover-title"></h2>
+      <hr class="divider" />
+      <p id="fourWeekNutritionSubtitle" class="cover-subtitle">
+        Fuel Your Body and Maximize Your 4-Week Transformation
+      </p>
+    </div>
+    <div class="pdf-page" id="pdf4WeekNutritionNavPage">
+    </div>
+    <div class="pdf-page" id="pdf4WeekNutritionIntroPage">
+    </div>
+    <div class="pdf-page" id="pdf4WeekCalorieMacroPage">
+    </div>
+    <div class="pdf-page" id="pdf4WeekEssentialFoodGuidePage">
+    </div>
+    <div id="pdf4WeekMealPlansContainer">
+    </div>
+    <div class="pdf-page" id="pdf4WeekNutritionUpsellPage">
+    </div>
+  </div>
+
+  <div id="pdf12WeekContainer" class="pdf-container">
+    <div class="pdf-page cover-page">
+      <!-- <img src="src/images/rtb-logo-white.png" alt="RTB Logo" class="cover-logo" style="max-width:300px;" /> -->
+      <img src="#" alt="Cover Placeholder" class="cover-placeholder-image" />
+      <hr class="divider" />
+      <h2 id="twelveWeekCoverTitle" class="cover-title"></h2>
+      <hr class="divider" />
+      <p class="cover-subtitle">A Step-by-Step Guide to Your Best Health and Fitness Journey</p>
+    </div>
+    <div id="twelveWeekSessions"></div>
+  </div>
+
+  <!-- END 12-WEEK PDF CONTAINER -->
+
+  <!-- Main JS -->
+  <script type="module" src="../scripts/1-week-program.js"></script>
+</body>
+
+</html>
