@@ -591,18 +591,6 @@ span {
   text-align: left;
 }
 
-@media (max-width: 600px) {
-  .upsell-row {
-    flex-direction: column;
-  }
-  .upsell-row .hero-image-wrapper {
-    margin: 0 0 20px 0;
-  }
-  .upsell-row .subtext {
-    text-align: center;
-  }
-}
-
 .benefits-list {
   margin-top: 1rem;
   padding-left: 1.2rem;
