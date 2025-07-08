@@ -1909,3 +1909,49 @@ function setUpCompareModal0() {
     if (e.target === modal) modal.classList.remove("show");
   });
 }
+
+(function () {
+  const modal = document.getElementById('valueModal');
+  if (!modal) return;
+
+  const closeBtn = modal.querySelector('.close');
+  const contBtn  = document.getElementById('valueContinue');
+  const skipLink = document.getElementById('valueSkip');
+  const planAnchor = document.getElementById('path-to-progress');
+  const openBtns = [
+    document.getElementById('claimProgramBtn'),
+    ...document.querySelectorAll('[data-open-value-modal]')
+  ].filter(Boolean);
+
+  function openModal() {
+    modal.classList.add('show');
+    document.body.classList.add('modal-open');
+  }
+  function closeModal() {
+    modal.classList.remove('show');
+    document.body.classList.remove('modal-open');
+  }
+
+  // only open if you haven’t scrolled past pricing
+  openBtns.forEach(btn => {
+    btn.addEventListener('click', e => {
+      const pricingTop = planAnchor.getBoundingClientRect().top + window.scrollY;
+      if (window.scrollY + 150 < pricingTop) {
+        e.preventDefault();
+        openModal();
+      }
+    });
+  });
+
+  // hook up the buttons
+  closeBtn?.addEventListener('click', closeModal);
+  contBtn?.addEventListener('click', closeModal);
+  skipLink?.addEventListener('click', e => { e.preventDefault(); closeModal(); });
+
+  // clicking on the backdrop
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeModal();
+  });
+
+  // ← remove any immediate calls to remove .show or .modal-open here!
+})();

@@ -37,7 +37,7 @@ function buildCheckoutConfig({ plan, discounted, email }) {
     line_items: [{ price: PRICE[plan], quantity: 1 }],
 
     success_url: `${process.env.FRONTEND_URL}/pages/dashboard.html?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.FRONTEND_URL}/pages/offer.html`
+    cancel_url: `${process.env.FRONTEND_URL}/pages/log-in-checkout.html`
 
   };
 
