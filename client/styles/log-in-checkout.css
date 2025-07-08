@@ -10,162 +10,328 @@ body {
   background-color: #f9f7f2;
 }
 
-h1,h2,h3,h4,h5,h6,button,.plan-summary {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+.plan-summary,
+.timer-text,
+.discount-label {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
 }
 
-*{box-sizing:border-box;}
+* {
+  box-sizing: border-box;
+}
 
 /* ─── HEADER ──────────────────────────────────────────────────────────────── */
-.header{
-  text-align:center;
-  padding:10px 15px;
+.header {
+  text-align: center;
+  padding: 10px 15px;
 }
-.logo img{max-height:100px;}
-@media(max-width:389px){.logo img{height:75px;}}
+
+.logo img {
+  max-height: 100px;
+}
+
+@media(max-width:389px) {
+  .logo img {
+    height: 75px;
+  }
+}
 
 /* ─── MAIN ───────────────────────────────────────────────────────────────── */
-.login-container{
-  flex:1;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+
+.discount-section {
+  padding: 40px 12px 40px 12px;
+  margin: 40px auto 80px auto;
+  max-width: 800px;
+  border-radius: 6px;
 }
 
-.login-box{
-  background:#fff;
-  padding:40px;
-  border-radius:8px;
-  box-shadow:0 4px 10px rgba(0,0,0,.1);
-  width:100%;
-  max-width:420px;
-  margin:20px 10px 120px;
+@media (max-width: 768px) {
+
+  .discount-section {
+    margin: 40px auto;
+    padding: 40px 6px 40px 6px;
+  }
 }
 
-.plan-summary{
-  background:#f1f0eb;
-  border:1px solid #ddd;
-  border-radius:6px;
-  padding:12px;
-  text-align:center;
-  margin-bottom:20px;
+@media (min-width: 769px) {
+
+  .discount-section {
+    min-width: 700px;
+  }
 }
 
-.subheading{
-  font-size:14px;
-  color:#666;
-  margin-bottom:20px;
-  text-align:center;
+/******************************************/
+/* B) TIMER CONTAINER                     */
+/******************************************/
+.timer-container {
+  background-color: #e8e4db;
+  border-radius: 6px;
+  padding: 15px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+
+.timer-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.discount-label {
+  color: #333;
+}
+
+.time-remaining {
+  color: #d9534f;
+  /* Reddish hue for urgency, or pick your accent */
+}
+
+.first-1000 {
+  font-size: 0.95rem;
+  margin: 0;
+  color: #444;
+}
+
+/* Make the timer container fixed at the top */
+.timer-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #e8e4db;
+  /* Same as timer background */
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+
+  /* Start hidden (above the viewport) */
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-out;
+}
+
+/* When we add .visible, it slides down into view */
+.timer-fixed.visible {
+  transform: translateY(0);
+}
+
+.login-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box {
+  background: #fff;
+  padding: 40px 20px 20px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .1);
+  width: 100%;
+  max-width: 420px;
+  margin: 20px 10px 30px;
+}
+
+.plan-summary {
+  background: #f1f0eb;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.subheading {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 /* Inputs */
-.input-group{margin-bottom:20px;}
-label{
-  display:block;
-  margin-bottom:5px;
-  font-size:14px;
-  color:#555;
+.input-group {
+  margin-bottom: 20px;
 }
-input{
-  width:100%;
-  padding:12px;
-  font-size:14px;
-  border:1px solid #ddd;
-  border-radius:4px;
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #555;
 }
-input:focus{border-color:#007BFF;outline:none;}
+
+input {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+input:focus {
+  border-color: #007BFF;
+  outline: none;
+}
 
 /* Error messaging */
-.error-message{
-  color:#c00;
-  font-size:.85rem;
-  min-height:1em;
-  margin-top:4px;
-  display:block;
+.error-message {
+  color: #c00;
+  font-size: .85rem;
+  min-height: 1em;
+  margin-top: 4px;
+  display: block;
 }
 
 /* Buttons */
-.login-btn{
-  width:100%;
-  padding:14px;
-  font-size:16px;
-  background:#007BFF;
-  color:#fff;
-  border:none;
-  border-radius:4px;
-  cursor:pointer;
-  margin-top:10px;
-  box-shadow:0 4px 6px rgba(0,0,0,.2);
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  background: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, .2);
 }
-.login-btn:hover{background:#0056b3;}
+
+.login-btn:hover {
+  background: #0056b3;
+}
+
+.trust-line {
+  font-size: 0.85rem;
+  margin-top: 1rem;
+  opacity: 0.75;
+  text-align: center;
+}
 
 /* Links & text */
-.terms{
-  font-size:12px;
-  color:#555;
-  margin-top:12px;
-  text-align:center;
+.terms {
+  font-size: 12px;
+  color: #555;
+  margin-top: 12px;
+  text-align: center;
 }
-.signup-link{
-  text-align:center;
-  margin-top:30px;
+
+.signup-link {
+  text-align: center;
+  margin-top: 30px;
 }
+
 .terms a,
-.signup-link a{
-  color:#007BFF;
-  text-decoration:none;
+.signup-link a {
+  color: #007BFF;
+  text-decoration: none;
 }
+
 .terms a:hover,
-.signup-link a:hover{text-decoration:underline;}
+.signup-link a:hover {
+  text-decoration: underline;
+}
 
 /* ─── FOOTER ─────────────────────────────────────────────────────────────── */
-.footer{
-  margin-top:auto;
-  background:#333;
-  color:#fff;
-  padding:20px;
-  text-align:center;
+.footer {
+  margin-top: auto;
+  background: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
 }
-.footer-content{max-width:600px;margin:0 auto;}
-.footer-content p{margin-bottom:15px;font-size:.9rem;}
-.footer-links{
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  margin-bottom:15px;
-}
-.footer-links a{
-  text-decoration:none;
-  color:#fff;
-  font-size:.9rem;
-}
-.footer-links a:hover{text-decoration:underline;}
-.social-icons{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-}
-.social-icons img{
-  width:24px;height:24px;
-  transition:transform .2s;
-}
-.social-icons img:hover{transform:scale(1.1);}
 
-@media(max-width:768px){
-  .footer{padding:20px 0;}
-  .footer-links{flex-direction:column;gap:10px;padding:5px 0;}
-  .footer-links a{font-size:1.1rem;margin-bottom:10px;text-decoration:underline;}
-  .footer p{font-size:1rem;margin-bottom:20px;}
-  .social-icons img{width:42px;height:42px;margin:0 35px;}
-  .footer span{display:none;}
+.footer-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.footer-content p {
+  margin-bottom: 15px;
+  font-size: .9rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #fff;
+  font-size: .9rem;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.social-icons img {
+  width: 24px;
+  height: 24px;
+  transition: transform .2s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+}
+
+@media(max-width:768px) {
+  .footer {
+    padding: 20px 0;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 10px;
+    padding: 5px 0;
+  }
+
+  .footer-links a {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    text-decoration: underline;
+  }
+
+  .footer p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .social-icons img {
+    width: 42px;
+    height: 42px;
+    margin: 0 35px;
+  }
+
+  .footer span {
+    display: none;
+  }
 }
 
 /* ───────── GLOBAL LOADING OVERLAY ───────── */
 #loadingOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);   /* semi-transparent */
+  background: rgba(0, 0, 0, 0.6);
+  /* semi-transparent */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -191,7 +357,9 @@ input:focus{border-color:#007BFF;outline:none;}
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 #loadingOverlay p {
@@ -201,4 +369,626 @@ input:focus{border-color:#007BFF;outline:none;}
   text-align: center;
   max-width: 260px;
   line-height: 1.4;
+}
+
+.plan-summary .old-price {
+  text-decoration: line-through;
+  color: #666;
+  font-size: 0.9em;
+  /* a bit smaller */
+  margin-right: 4px;
+}
+
+.plan-summary .new-price {
+  color: #000;
+  font-weight: 700;
+}
+
+.testimonial-section {
+  background-color: #cfd8dc;
+  text-align: center;
+  padding: 50px 20px;
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 60px;
+  margin-top: 60px;
+}
+
+@media (min-width: 768px) {
+  .testimonial-section {
+    margin-bottom: 20px;
+  }
+}
+
+.testimonial-container {
+  position: relative;
+  max-width: 750px;
+  margin: 0 auto;
+  overflow: hidden;
+  /* so we can hide the overflowing slides */
+}
+
+.testimonial-section h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0 0 20px 0;
+  color: #222;
+}
+
+.arrow-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #5a7f99;
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.arrow-button:hover {
+  background-color: #6c8ca8;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+.arrow-button:active {
+  background-color: #607d8b;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+}
+
+.arrow-button.prev {
+  left: 16px;
+  /* instead of -20px */
+}
+
+.arrow-button.next {
+  right: 16px;
+  /* instead of -20px */
+}
+
+
+.testimonial-slider {
+  display: flex;
+  flex-wrap: nowrap;
+  transition: transform 0.3s ease;
+  /* for sliding animation */
+}
+
+.testimonial-card {
+  flex: 0 0 100%;
+  /* each card takes up 100% of the container width */
+  box-sizing: border-box;
+  background: #f8f9fa;
+  border-radius: 10px;
+  margin: 0 10px 0 10px;
+  /* slight horizontal margin so slides aren’t jammed */
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Make sure we don’t get weird spacing at small widths */
+@media (max-width: 768px) {
+  .testimonial-card {
+    margin: 0;
+    /* remove margins on mobile, or adjust as you like */
+  }
+}
+
+.before,
+.after {
+  text-align: center;
+}
+
+.before p,
+.after p {
+  margin-top: 5px;
+  /* font-weight: bold; */
+  color: #666;
+  font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  .testimonial-card {
+    /* Subtract the total horizontal margin so the card+margin = container width */
+    flex: 0 0 calc(100% - 20px);
+    margin: 0 10px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .arrow-button {
+    display: none;
+  }
+}
+
+.testimonial-card .images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.testimonial-card .before,
+.testimonial-card .after {
+  text-align: center;
+}
+
+.testimonial-card .before img,
+.testimonial-card .after img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* "Before" and "After" labels */
+.testimonial-card .before p,
+.testimonial-card .after p {
+  margin-top: 5px;
+  /* font-weight: bold; */
+  font-size: 1rem;
+}
+
+.before,
+.after {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+
+  .testimonial-section {
+    margin-bottom: 20px;
+  }
+
+  .arrow-button {
+    display: none;
+  }
+
+  .three-slides-container {
+    /* existing code */
+    overflow-x: auto;
+    overflow-y: hidden;
+    /* <— Add this to avoid vertical scroll */
+  }
+
+  .hero-text {
+    margin-bottom: 15px !important;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #444;
+  }
+
+  .testimonial-slot {
+    flex: 0 0 100% !important;
+    /* Take full width */
+    width: 75% !important;
+    max-width: 100%;
+    scroll-snap-align: center !important;
+    margin: 0 auto !important;
+    /* Center the review */
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+
+  .testimonial-slot img {
+    max-width: 100px;
+    height: auto;
+    margin: 10px auto;
+    display: block;
+    border-radius: 8px;
+  }
+
+  .testimonial-slot .images {
+    gap: 4px !important;
+  }
+
+  .testimonial-slot p {
+    font-size: 12px !important;
+  }
+
+  .five-stars img {
+    width: 120px !important;
+    /* Ensure the size is applied */
+    height: auto !important;
+    /* Maintain aspect ratio */
+    margin: 5px auto;
+    /* Center the image */
+  }
+
+  .testimonial-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .tailored-training-plan h2 {
+    font-size: 1.5rem;
+  }
+
+  .dots-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px auto 40px auto;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+
+  .dot.active {
+    background-color: #007bff;
+  }
+
+  /* neutralize left/center/right classes in mobile */
+  .testimonial-slot.left,
+  .testimonial-slot.center,
+  .testimonial-slot.right {}
+}
+
+.dots-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px auto 40px auto;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.dot.active {
+  background-color: #007bff;
+}
+
+/* The container that holds the 3 testimonial "slots" */
+.three-slides-container {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  /* Adjust height if needed */
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  /* Use flexbox to center slots horizontally */
+  justify-content: center;
+}
+
+/* Each testimonial slot: small, partially opaque by default */
+/* Slot Styling */
+.testimonial-slot {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  width: 28%;
+  max-width: 320px;
+  padding: 10px;
+  opacity: 0.5;
+  box-sizing: border-box;
+  background: #f8f9fa;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-slot p {
+  margin: 0px auto;
+}
+
+/* Center Slot */
+.testimonial-slot.center {
+  transform: translateY(-50%) scale(1.3);
+  opacity: 1;
+  z-index: 2;
+  /* Ensure it stays above other slots */
+}
+
+/* Left Slot */
+.testimonial-slot.left {
+  transform: translateX(-120%) translateY(-50%) scale(0.8);
+  opacity: 0.5;
+  z-index: 1;
+}
+
+/* Right Slot */
+.testimonial-slot.right {
+  transform: translateX(120%) translateY(-50%) scale(0.8);
+  opacity: 0.5;
+  z-index: 1;
+}
+
+/* Tweak images inside the cards */
+.testimonial-slot .images {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+  margin-bottom: 15px;
+}
+
+.testimonial-slot img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.testimonial-slot p {
+  color: #555;
+  font-size: 12px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 4.5em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Style for the 5-stars image */
+.five-stars img {
+  width: 100px;
+  height: auto;
+  margin: 5px auto;
+  display: block;
+}
+
+.review-text {
+  background-color: #f4f4f4;
+  padding: 12px 10px;
+  border-radius: 8px;
+  color: #333;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+
+.review-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #2a2a2a;
+}
+
+.what-to-expect-box h4 {
+  text-align: center;
+  margin: 5px auto;
+}
+
+.what-to-expect-box {
+  background: #FBFAF7;
+  /* or try #F7F5F0 */
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.expect-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1rem;
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.expect-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+@media (max-width: 480px) {
+  .expect-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.plan-diff-text {
+    color: #333;
+    margin-top: 10px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.plan-diff-text-0 {
+    color: #333;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.compare-plans {
+  text-align: center;
+  font-size: 0.9rem;
+  margin: 0 0 20px;
+  display: none;
+}
+
+.compare-plans a {
+  text-decoration: underline;
+}
+
+.compare-pill {
+  display: block; 
+  background-color: #F3EBFF;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #444;
+  margin: 10px auto 0 auto;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.2s ease;
+  text-align: center;
+  width: 225px;
+}
+
+.compare-pill:hover {
+  background-color: #dcdcdc;
+  transform: scale(1.03);
+}
+
+.compare-pill:focus {
+  outline: 2px solid #9333EA;
+  outline-offset: 2px;
+}
+
+.compare-link-button:hover {
+  background: #e4e4e4;
+}
+
+.table-wrapper {
+  display: flex;
+  justify-content: center;   /* horizontally center its children */
+  margin-bottom: 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#compareModal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, .6);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s, visibility .3s;
+  z-index: 1200;
+}
+
+#compareModal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  position: relative;
+  background: #fff;
+  width: 90%;
+  /* max-width: 500px; */
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  padding: 30px 20px;
+  transform: translateY(30px);
+  transition: transform .3s;
+}
+
+.modal.show .modal-content {
+  transform: none;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.modal-content .subtext {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal-content .close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.compare-table {
+  width: max-content;
+  /* table will size to its content */
+  max-width: 100%;
+  /* but never exceed its wrapper */
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin-bottom: 20px;
+}
+
+.compare-table .col-feature {
+  width: 55%;
+}
+
+/* ~half the table for the labels */
+.compare-table .col-ct,
+.compare-table .col-pt {
+  width: 22.5%;
+}
+
+/* split remainder evenly */
+
+.compare-table th,
+.compare-table td {
+  padding: 10px 6px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+  white-space: normal;
+  /* allow wrapping at spaces */
+  word-break: break-word;
+}
+
+.compare-table th:first-child,
+.compare-table td:first-child {
+  text-align: left;
+}
+
+@media (max-width: 480px) {
+
+  .compare-table th,
+  .compare-table td {
+    font-size: 0.9rem;
+    padding: 8px 6px;
+  }
+}
+
+.testimonial {
+  font-style: italic;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.youtube-prompt-section {
+  text-align: center;
+  padding: 20px 10px;
+}
+
+.youtube-prompt-section h3 {
+  text-align: center;
+}
+
+.youtube-video-container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 720px;
+}
+
+.youtube-video-container iframe {
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 }

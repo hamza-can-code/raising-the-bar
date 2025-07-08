@@ -78,7 +78,7 @@
       Other apps just track. <strong>We use what you track to adapt workouts & meals</strong> so you
       <strong>get fit faster</strong>.
       <a href="#compare-plans" id="comparePlansLink0" class="compare-pill">
-        🔍 See how it compares
+        👀 See how it compares
       </a>
     </p>
 
@@ -158,10 +158,10 @@
     <section class="youtube-prompt-section">
       <div class="youtube-video-container"
         style="position: relative; padding-top: 56.25%; height: 0; overflow: hidden;">
-        <div id="youtube-placeholder"
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; background: url('https://img.youtube.com/vi/MPevL0xPZ9c/hqdefault.jpg') center center / cover no-repeat;">
-          <div
-            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0,0,0,0.6); border-radius: 50%; padding: 12px;">
+        <div id="youtube-placeholder" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer;
+             background: url('https://img.youtube.com/vi/zCMqX9A8hmQ/hqdefault.jpg') center center / cover no-repeat;">
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+               background-color: rgba(0,0,0,0.6); border-radius: 50%; padding: 12px;">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
               <path d="M8 5v14l11-7z" />
             </svg>
@@ -174,15 +174,15 @@
           const placeholder = document.getElementById("youtube-placeholder");
           placeholder.addEventListener("click", function () {
             const iframe = document.createElement("iframe");
-            iframe.setAttribute("src", "https://www.youtube.com/embed/MPevL0xPZ9c?autoplay=1");
+            iframe.setAttribute("src", "https://www.youtube.com/embed/zCMqX9A8hmQ?autoplay=1");
             iframe.setAttribute("frameborder", "0");
             iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
             iframe.setAttribute("allowfullscreen", "");
-            iframe.style.width = "100%";
-            iframe.style.height = "100%";
-            iframe.style.position = "absolute";
-            iframe.style.top = "0";
-            iframe.style.left = "0";
+            iframe.style.cssText = `
+          position: absolute;
+          top: 0; left: 0;
+          width: 100%; height: 100%;
+        `;
             placeholder.replaceWith(iframe);
           });
         });
@@ -263,7 +263,7 @@
       <strong>get fit faster</strong>.
 
       <a href="#" id="comparePlansLink" class="compare-pill">
-        🔍 See how it compares
+        👀 See how it compares
       </a>
     </p>
     <!-- <p class="offer-subtext">Most people never stick to fitness because their plan doesn’t adapt. Yours will.
@@ -404,7 +404,8 @@
         By proceeding, you confirm that you’ve read and agree to our
         <a href="tos.html" target="_blank">terms of service</a> and
         <a href="refund-policy.html" target="_blank">refund policy</a>.
-        If you choose the <strong>Pro Tracker</strong>, it renews at £29.99/month unless cancelled. Cancellations take effect at the end of the current billing cycle.
+        If you choose the <strong>Pro Tracker</strong>, it renews at £29.99/month unless cancelled. Cancellations take
+        effect at the end of the current billing cycle.
       </p>
 
   </section>

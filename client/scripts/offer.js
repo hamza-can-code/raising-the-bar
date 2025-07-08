@@ -1458,7 +1458,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         // no longer free → paid at £24.99
         localStorage.setItem("planPrice", "£24.99");
-        return window.location.href = `sign-up-checkout.html?plan=${selected}`;
+        return window.location.href = `log-in-checkout.html?plan=${selected}`;
       }
     }
 
