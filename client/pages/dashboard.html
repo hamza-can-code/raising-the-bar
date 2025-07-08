@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>My Dashboard</title>
 
   <!-- Fonts + stylesheet -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="../styles/dashboard.css">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
   <div id="loaderOverlay" class="loader-overlay">
-    <img src="../assets/rtb-logo-white.png" alt="Raising The Bar logo"
-         class="loader-logo" />
+    <img src="../assets/rtb-logo-white.png" alt="Raising The Bar logo" class="loader-logo" />
   </div>
   <!-- Header / logo -->
   <header class="header">
@@ -35,52 +37,70 @@
 
     <!-- Mobile hamburger -->
     <button class="hamburger" id="hamburger-btn" aria-label="Toggle Menu">☰</button>
-      <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
 
-  gtag('config', 'G-W9CSNHSLQQ');
-</script>
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "rmf0p7sik4");
-</script>
-<!-- TikTok Pixel Code Start -->
-<script>
-!function (w, d, t) {
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+      gtag('config', 'G-W9CSNHSLQQ');
+    </script>
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "rmf0p7sik4");
+    </script>
+    <!-- TikTok Pixel Code Start -->
+    <script>
+      !function (w, d, t) {
+        w.TiktokAnalyticsObject = t; var ttq = w[t] = w[t] || []; ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"], ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } }; for (var i = 0; i < ttq.methods.length; i++)ttq.setAndDefer(ttq, ttq.methods[i]); ttq.instance = function (t) {
+          for (
+            var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++)ttq.setAndDefer(e, ttq.methods[n]); return e
+        }, ttq.load = function (e, n) {
+          var r = "https://analytics.tiktok.com/i18n/pixel/events.js", o = n && n.partner; ttq._i = ttq._i || {}, ttq._i[e] = [], ttq._i[e]._u = r, ttq._t = ttq._t || {}, ttq._t[e] = +new Date, ttq._o = ttq._o || {}, ttq._o[e] = n || {}; n = document.createElement("script")
+            ; n.type = "text/javascript", n.async = !0, n.src = r + "?sdkid=" + e + "&lib=" + t; e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(n, e)
+        };
 
 
-  ttq.load('D0M3KORC77UCAFR1EOLG');
-  ttq.page();
-}(window, document, 'ttq');
-</script>
-<!-- TikTok Pixel Code End -->
- <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1217477006533345');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1217477006533345&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+        ttq.load('D0M3KORC77UCAFR1EOLG');
+        ttq.page();
+      }(window, document, 'ttq');
+    </script>
+    <!-- TikTok Pixel Code End -->
+    <!-- Meta Pixel Code -->
+    <script>
+      !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return; n = f.fbq = function () {
+          n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+        n.queue = []; t = b.createElement(e); t.async = !0;
+        t.src = v; s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+      }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1217477006533345');
+      fbq('track', 'PageView');
+    </script>
+    <script src="https://cdn.brevo.com/js/sdk-loader.js" async></script>
+    <script>
+      // Version: 2.0
+      window.Brevo = window.Brevo || [];
+      Brevo.push([
+        "init",
+        {
+          client_key: "k4unlo92c1oknv6qc7vmxk1o",
+          // Optional: Add other initialization options, see documentation
+        }
+      ]);
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1217477006533345&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
   </header>
   <div id="trackerBadge"></div>
 
@@ -117,7 +137,7 @@ src="https://www.facebook.com/tr?id=1217477006533345&ev=PageView&noscript=1"
         </p>
         <button class="wt-next-btn">Next</button>
       </section>
-      
+
 
       <!-- Screen 3 – motivation ------------------------------------->
       <section class="wt-onboarding-card" data-step="3">
@@ -139,27 +159,27 @@ src="https://www.facebook.com/tr?id=1217477006533345&ev=PageView&noscript=1"
   </section>
 
   <!-- Main XP bar -->
-   <section>
-  <section class="xp-bar-container">
-    <span id="currentLevel">Lvl 0</span>
-    <div class="xp-bar">
-      <div id="xpFill" class="xp-bar-fill"></div>
-    </div>
-    <span id="xpGainAnim">+0 XP</span>
-  </section>
+  <section>
+    <section class="xp-bar-container">
+      <span id="currentLevel">Lvl 0</span>
+      <div class="xp-bar">
+        <div id="xpFill" class="xp-bar-fill"></div>
+      </div>
+      <span id="xpGainAnim">+0 XP</span>
+    </section>
 
 
-  <section id="firstWorkoutBanner" class="first-workout-banner" style="display:none;">
-    <p class="headline">🎉 You’ve just hit your first milestone!</p>
-    <p class="subline">
-      Want to see what Pro unlocks for your strength, nutrition, and progress? Tap below to compare trackers.
-    </p>
-    <a href="#" id="firstWorkoutCompare" class="cta pt-cta">
-      🔍 See What’s Inside
-    </a>
+    <section id="firstWorkoutBanner" class="first-workout-banner" style="display:none;">
+      <p class="headline">🎉 You’ve just hit your first milestone!</p>
+      <p class="subline">
+        Want to see what Pro unlocks for your strength, nutrition, and progress? Tap below to compare trackers.
+      </p>
+      <a href="#" id="firstWorkoutCompare" class="cta pt-cta">
+        🔍 See What’s Inside
+      </a>
+    </section>
+
   </section>
-  
-</section>
 
   <!-- Tracker cards -->
   <main class="cards">
@@ -167,8 +187,8 @@ src="https://www.facebook.com/tr?id=1217477006533345&ev=PageView&noscript=1"
     <article class="tracker-card" id="wtCard">
       <span class="emoji">🏋️</span>
       <h2>My Workouts</h2>
-      <p id="wtStatus"   class="status"></p>
-      <p id="wtStreak"   class="streak"></p>
+      <p id="wtStatus" class="status"></p>
+      <p id="wtStreak" class="streak"></p>
       <a href="workout-tracker.html" class="cta">Go to Workouts</a>
     </article>
 
@@ -176,8 +196,8 @@ src="https://www.facebook.com/tr?id=1217477006533345&ev=PageView&noscript=1"
     <article class="tracker-card" id="ntCard">
       <span class="emoji">🍽️</span>
       <h2>My Nutrition</h2>
-      <p id="ntStatus"   class="status"></p>
-      <p id="ntStreak"   class="streak"></p>
+      <p id="ntStatus" class="status"></p>
+      <p id="ntStreak" class="streak"></p>
       <p class="nt-subtext"><span class="nt-subtext-emoji">🧠</span> Stay on track without tracking stress.</p>
       <a href="nutrition-tracker.html" class="cta">Go to Nutrition</a>
     </article>
@@ -185,17 +205,17 @@ src="https://www.facebook.com/tr?id=1217477006533345&ev=PageView&noscript=1"
     <article class="tracker-card" id="mpCard" style="display:none;">
       <span class="emoji">🚀</span>
       <h2>My Progress</h2>
-    
+
       <div class="pt-extra-container">
         <span class="crown-emoji">👑</span>
         <span class="pt-extra">Pro Tracker Only</span>
       </div>
-    
+
       <p class="streak">
         Track your transformation with strength, body, and habit trends — plus instant feedback that keeps you improving
       </p>
       <p class="mp-subtext"><span class="mp-subtext-emoji">🪞</span> Your progress deserves a full picture.</p>
-    
+
       <a href="soffer.html" class="cta pt-cta">🔓 Unlock Pro Tracker</a>
     </article>
   </main>
@@ -237,35 +257,79 @@ src="https://www.facebook.com/tr?id=1217477006533345&ev=PageView&noscript=1"
   <div id="compareModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-  
+
       <h2>Compare Plans</h2>
       <p class="subtext">Here's what you unlock when upgrading to Pro.</p>
-  
+
       <div class="table-wrapper">
-      <table class="compare-table">
-        <colgroup>
-          <col class="col-feature">
-          <col class="col-ct">
-          <col class="col-pt">
-        </colgroup>
-        <thead>
-          <tr><th>Feature</th><th>Core Tracker</th><th>Pro Tracker</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Workout Logging</td><td>✅</td><td>✅</td></tr>
-          <tr><td>Adaptive Progression</td><td>❌</td><td>✅</td></tr>
-          <tr><td>Progress Score</td><td>❌</td><td>✅</td></tr>
-          <tr><td>My Progress (Trends &amp; Insights)</td><td>❌</td><td>✅</td></tr>
-          <tr><td>Coach Feedback &amp; Weekly Insights</td><td>❌</td><td>✅</td></tr>
-          <tr><td>Nutrition Tracker</td><td>❌</td><td>✅</td></tr>
-          <tr><td>Macro-Matched Meals</td><td>❌</td><td>✅</td></tr>
-          <tr><td>Meal Prep Mode &amp; Shopping List</td><td>❌</td><td>✅</td></tr>
-          <tr><td>XP Bonuses &amp; Weekly Recaps</td><td>❌</td><td>✅</td></tr>
-          <tr><td>Video Tutorials</td><td>❌</td><td>✅</td></tr>
-        </tbody>
-      </table>
-    </div>
-  
+        <table class="compare-table">
+          <colgroup>
+            <col class="col-feature">
+            <col class="col-ct">
+            <col class="col-pt">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Core Tracker</th>
+              <th>Pro Tracker</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Workout Logging</td>
+              <td>✅</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Adaptive Progression</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Progress Score</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>My Progress (Trends &amp; Insights)</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Coach Feedback &amp; Weekly Insights</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Nutrition Tracker</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Macro-Matched Meals</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Meal Prep Mode &amp; Shopping List</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>XP Bonuses &amp; Weekly Recaps</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Video Tutorials</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <p class="testimonial">
         “I didn’t realize how much I was missing until I unlocked Pro Tracker. It made everything click.”<br>
         – Alice, lost 7 kg with Pro
@@ -315,4 +379,5 @@ src="https://www.facebook.com/tr?id=1217477006533345&ev=PageView&noscript=1"
   <!-- Logic -->
   <script src="../scripts/dashboard.js"></script>
 </body>
+
 </html>
