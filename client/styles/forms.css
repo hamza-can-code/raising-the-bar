@@ -34,7 +34,8 @@ h6 {
 }
 
 .logo img {
-  height: 100px;
+  height: 50px;
+  width: auto;
 }
 
 .fade-in {
@@ -52,7 +53,7 @@ h6 {
 .header {
   position: relative;
   text-align: center;
-  padding: 10px 15px 25px 15px;
+  padding: 10px 15px 15px 15px;
 }
 
 
@@ -122,7 +123,7 @@ button:hover {
 /* the banner */
 #incentive-box {
   position: absolute;
-  top: 110px;
+  top: 50px;
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 32px);
@@ -158,11 +159,11 @@ button:hover {
   margin: 0 auto 0 auto;
 }
 
-@media (max-width: 375px) {
+/* @media (max-width: 375px) {
   #incentive-box {
-    top: 90px;
+    top: 50px;
   }
-}
+} */
 
 .form-options ol>li:last-child {
   margin-bottom: 0px;
