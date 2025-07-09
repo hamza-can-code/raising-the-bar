@@ -3585,7 +3585,7 @@ function createFinalPage(programType, containerId) {
     priceAnchor.style.fontFamily = "Poppins";
     // Original price: £49.99 (line-through, 14px, #333)
     const originalPrice = document.createElement("span");
-    originalPrice.textContent = "£29.99";
+    originalPrice.textContent = "£19.99";
     originalPrice.style.color = "#333";
     originalPrice.style.textDecoration = "line-through";
     originalPrice.style.fontSize = "16px";

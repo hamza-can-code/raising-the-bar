@@ -1088,7 +1088,7 @@ function removeDiscountPricing() {
     // Hide the discounted price element
     priceSpecialDiscount.style.display = "none";
     // Set the cost to the full price value (£29.99) for the subscription
-    costPerDaySpecial.textContent = "£0.99";
+    costPerDaySpecial.textContent = "£0.67";
     // Calculate cost per day based on full price: 29.99/30
     if (currencyTagSpecial) currencyTagSpecial.style.display = "block";
   }

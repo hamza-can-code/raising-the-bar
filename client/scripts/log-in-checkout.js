@@ -36,7 +36,7 @@ function renderPlanSummary(isDiscountActive) {
 
   /* full-price lookup (add other plans if needed) */
   const FULL = {
-    "Pro Tracker": "£29.99",
+    "Pro Tracker": "£19.99",
     "1-Week Program": "£14.99",
     "4-Week Program": "£39.99",
     "12-Week Program": "£79.99"
@@ -44,7 +44,7 @@ function renderPlanSummary(isDiscountActive) {
 
   if (gPlanName === "Pro Tracker" && isDiscountActive) {
     gSummaryEl.innerHTML =
-      `${gPlanName} – <span class="old-price">£29.99</span>` +
+      `${gPlanName} – <span class="old-price">£19.99</span>` +
       ` <span class="new-price">£9.99</span>`;
   } else {
     const price = FULL[gPlanName] || gPlanPrice || "£—";
@@ -284,7 +284,7 @@ function removeDiscountPricing() {
     // Hide the discounted price element
     priceSpecialDiscount.style.display = "none";
     // Set the cost to the full price value (£29.99) for the subscription
-    costPerDaySpecial.textContent = "£0.99";
+    costPerDaySpecial.textContent = "£0.67";
     // Calculate cost per day based on full price: 29.99/30
     if (currencyTagSpecial) currencyTagSpecial.style.display = "block";
   }
