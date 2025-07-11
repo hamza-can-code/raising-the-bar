@@ -118,7 +118,7 @@
 
     const { error } = await stripeJs.confirmPayment({
       elements,
-      redirect: 'if_required',              // 👈 optional but recommended
+      redirect: 'always',              // 👈 optional but recommended
       confirmParams: {
         return_url: `${window.location.origin}/pages/dashboard.html`
       }
