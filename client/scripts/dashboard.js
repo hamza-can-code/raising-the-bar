@@ -77,46 +77,58 @@ function fadeOutLoader() {
   }
 })();
 
-async function decideProStatus(token) {
-  const planFromLS = localStorage.getItem('planName') || '';
+// async function decideProStatus(token) {
+//   const planFromLS = localStorage.getItem('planName') || '';
 
-  /* 1)  quick front-end guess so the UI doesn’t flash blank  */
-  let isPro = planFromLS === '12-Week Program' || planFromLS === 'Pro Tracker';
+//   /* 1)  quick front-end guess so the UI doesn’t flash blank  */
+//   let isPro = planFromLS === '12-Week Program' || planFromLS === 'Pro Tracker';
 
-  /* 2) hit the backend for the real numbers                  */
-  try {
-    const res = await fetch(`/api/access?ts=${Date.now()}`, {     // ⬅️ cache-buster
-      cache: 'no-store',                                        // ⬅️ double safety
-      headers: { Authorization: `Bearer ${token}` }
-    });
+//   /* 2) hit the backend for the real numbers                  */
+//   try {
+//     const res = await fetch(`/api/access?ts=${Date.now()}`, {     // ⬅️ cache-buster
+//       cache: 'no-store',                                        // ⬅️ double safety
+//       headers: { Authorization: `Bearer ${token}` }
+//     });
 
-    if (res.ok) {
-      const { unlockedWeeks = 0, subscriptionActive = false } = await res.json();
+//     if (res.ok) {
+//       const { unlockedWeeks = 0, subscriptionActive = false } = await res.json();
 
-      /* ---------- infer the plan if none stored ---------- */
-      let plan = planFromLS;
-      if (!plan) {
-        if (subscriptionActive) plan = 'Pro Tracker';
-        else if (unlockedWeeks >= 12) plan = '12-Week Program';
-        else if (unlockedWeeks >= 4) plan = '4-Week Program';
-        else if (unlockedWeeks >= 1) plan = '1-Week Program';
-        localStorage.setItem('planName', plan);
-      }
+//       /* ---------- infer the plan if none stored ---------- */
+//       let plan = planFromLS;
+//       if (!plan) {
+//         if (subscriptionActive) plan = 'Pro Tracker';
+//         else if (unlockedWeeks >= 12) plan = '12-Week Program';
+//         else if (unlockedWeeks >= 4) plan = '4-Week Program';
+//         else if (unlockedWeeks >= 1) plan = '1-Week Program';
+//         localStorage.setItem('planName', plan);
+//       }
 
-      /* ---------- final Pro decision --------------------- */
-      if (plan === 'Pro Tracker') isPro = subscriptionActive;
-      else if (plan === '12-Week Program') isPro = true;
-      else isPro = false;
+//       /* ---------- final Pro decision --------------------- */
+//       if (plan === 'Pro Tracker') isPro = subscriptionActive;
+//       else if (plan === '12-Week Program') isPro = true;
+//       else isPro = false;
 
-      /* expose weeks to the workout tracker                */
-      localStorage.setItem('purchasedWeeks', String(unlockedWeeks));
-    }
-  } catch (err) {
-    // console.warn('[decideProStatus] backend unreachable – using best guess:', err.message);
-  }
+//       /* expose weeks to the workout tracker                */
+//       localStorage.setItem('purchasedWeeks', String(unlockedWeeks));
+//     }
+//   } catch (err) {
+//     // console.warn('[decideProStatus] backend unreachable – using best guess:', err.message);
+//   }
 
-  localStorage.setItem('hasProTracker', isPro ? 'true' : 'false');
-  // console.log('🔧 Pro-Tracker flag set →', isPro);
+//   localStorage.setItem('hasProTracker', isPro ? 'true' : 'false');
+//   // console.log('🔧 Pro-Tracker flag set →', isPro);
+// }
+
+async function decideProStatus() {
+  /*  💥  FORCE these three flags on every load  💥 */
+  localStorage.setItem('hasProTracker',  'true');   // ← tells UI “Pro”
+  localStorage.setItem('purchasedWeeks', '12');     // ← lets workouts show
+  localStorage.setItem('planName',       'Pro Tracker');
+
+  /*  If some other code still calls this with a token or
+      awaits its Promise, we return a resolved Promise to keep
+      the call-site happy.                                         */
+  return true;
 }
 
 async function loadUserProgressSafe() {
