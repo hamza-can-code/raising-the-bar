@@ -3,7 +3,10 @@ const express = require('express');
 const Stripe = require('stripe');
 const router = express.Router();
 
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+ const stripe = Stripe(
+   process.env.STRIPE_SECRET_KEY,
+   { apiVersion: '2024-04-10' }    // or any version ≥ 2022-08-01
+ );
 
 console.log('🔐 Stripe key in use:', process.env.STRIPE_SECRET_KEY);
 
@@ -105,3 +108,60 @@ module.exports = router;
 
 // success_url: `${FRONTEND_URL}/pages/dashboard.html?session_id={CHECKOUT_SESSION_ID}`,
 // cancel_url: `${FRONTEND_URL}/pages/offer.html`
+
+/* POST  /api/create-subscription-intent  – Stripe Elements subscription */
+// server/routes/stripeRoutes.js  – ONLY the create-subscription-intent route
+const util = require('util');
+function log(label, obj) {
+  console.log(`🟡 ${label}`, util.inspect(obj, { depth: 3, colors: true }));
+}
+
+router.post('/create-subscription-intent', express.json(), async (req, res) => {
+  console.log('\n───────── /create-subscription-intent ─────────');
+  try {
+    const { email, discounted = false } = req.body;
+    log('1️⃣ incoming payload', req.body);
+    if (!email) return res.status(400).json({ error: 'Email required' });
+
+    /* 2 — customer */
+    const [existing] = await stripe.customers.list({ email, limit: 1 }).then(r => r.data);
+    const customer   = existing || await stripe.customers.create({ email });
+    log('2️⃣ customer', customer.id);
+
+    /* 3 — subscription */
+    const sub = await stripe.subscriptions.create({
+      customer: customer.id,
+      items   : [{ price: process.env.FULL_PRICE_ID }],
+      payment_behavior: 'default_incomplete',
+      payment_settings: {
+        save_default_payment_method: 'on_subscription',   // ✅ keep nested stuff simple
+      },
+      
+      ...(discounted && { discounts: [{ coupon: process.env.COUPON_ID }] }),
+      expand: ['latest_invoice.payment_intent']           // ask for PI right away
+    });
+    log('3️⃣ subscription', sub.id);
+
+    /* 4 — grab the PI (may still be missing on very first response) */
+    let pi = sub.latest_invoice.payment_intent;
+    if (!pi) {
+      const invoice = await stripe.invoices.retrieve(
+        sub.latest_invoice.id,
+        { expand: ['payment_intent'] }
+      );
+      pi = invoice.payment_intent;
+      log('4️⃣ re-fetched invoice', invoice.id);
+    }
+
+    if (!pi) {
+      return res.status(500).json({ error: 'Stripe failed to attach PaymentIntent' });
+    }
+
+    console.log('✅ 5️⃣ returning clientSecret');
+    res.json({ clientSecret: pi.client_secret, subscriptionId: sub.id });
+
+  } catch (err) {
+    console.error('❌ Stripe threw', err);
+    res.status(500).json({ error: err.message });
+  }
+});

@@ -1,3 +1,4 @@
+// client/scripts/offer.js
 const userId = localStorage.getItem('userId');
 
 // Clear the "startedForm" flag on successful form completion
@@ -266,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 3) Create the summary container (BMI / Daily Cal / Water / Plan)
   const summaryContainer = document.createElement("div");
-  summaryContainer.classList.add("fade-in", "summary-container");
+  summaryContainer.classList.add("summary-container");
   dynamicMessageContainer.insertAdjacentElement("afterend", summaryContainer);
 
   // 3a) BMI Section
@@ -1053,6 +1054,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   setInterval(updateTimer, 1000);
   updateTimer();
+  updatePlanSummary();
 });
 
 function removeDiscountPricing() {
@@ -1404,11 +1406,11 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateCTA(selectedProgram) {
     const finishBtn = document.getElementById("offerFinishBtn");
     if (!finishBtn) return;
-    if (selectedProgram === "new") {
-      finishBtn.style.backgroundColor = "#9333EA";
-    } else {
-      finishBtn.style.backgroundColor = "#007BFF";
-    }
+    // if (selectedProgram === "new") {
+    //   finishBtn.style.backgroundColor = "#9333EA";
+    // } else {
+    //   finishBtn.style.backgroundColor = "#007BFF";
+    // }
   }
   document.addEventListener('click', e => {
     // if the click wasn’t inside an offer-card…
@@ -1448,19 +1450,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const isDiscountActive = discountEnd > Date.now();
 
     // SPECIAL CASE: 1-Week
-    if (purchaseType === "oneWeek") {
-      localStorage.setItem("pendingPurchaseType", purchaseType);
+    // if (purchaseType === "oneWeek") {
+    //   localStorage.setItem("pendingPurchaseType", purchaseType);
 
-      if (isDiscountActive) {
-        // free
-        localStorage.setItem("planPrice", "FREE!");
-        return window.location.href = "sign-up.html";
-      } else {
-        // no longer free → paid at £24.99
-        localStorage.setItem("planPrice", "£24.99");
-        return window.location.href = `log-in-checkout.html?plan=${selected}`;
-      }
-    }
+    //   if (isDiscountActive) {
+    //     // free
+    //     localStorage.setItem("planPrice", "FREE!");
+    //     return window.location.href = "sign-up.html";
+    //   } else {
+    //     // no longer free → paid at £24.99
+    //     localStorage.setItem("planPrice", "£24.99");
+    //     return window.location.href = `log-in-checkout.html?plan=${selected}`;
+    //   }
+    // }
 
     // All other plans always go through checkout
     localStorage.setItem("pendingPurchaseType", purchaseType);
@@ -1481,7 +1483,7 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.setItem("planPrice", priceText);
     })();
 
-    window.location.href = `log-in-checkout.html?plan=${selected}`;
+    // window.location.href = `log-in-checkout.html?plan=${selected}`;
   });
 });
 
@@ -1518,12 +1520,12 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", () => {
 
   // Fade-in elements
-  const fadeInElements = document.querySelectorAll(".fade-in");
-  fadeInElements.forEach((element, index) => {
-    setTimeout(() => {
-      element.classList.add("visible");
-    }, index * 500);
-  });
+  // const fadeInElements = document.querySelectorAll(".fade-in");
+  // fadeInElements.forEach((element, index) => {
+  //   setTimeout(() => {
+  //     element.classList.add("visible");
+  //   }, index * 500);
+  // });
 
   // Example reviews
   const reviews = [
@@ -1955,3 +1957,44 @@ function setUpCompareModal0() {
 
   // ← remove any immediate calls to remove .show or .modal-open here!
 })();
+
+document.addEventListener('DOMContentLoaded', () => {
+  const continueBtn   = document.getElementById('offerFinishBtn');   // “Continue” / “Claim” button
+  const cardsSection  = document.getElementById('offerCardsContainer');
+  const payment       = document.getElementById('paymentSection');
+
+  if (!continueBtn || !cardsSection || !payment) return;
+
+  continueBtn.addEventListener('click', () => {
+    // 1. hide the offer cards
+    cardsSection.style.display = 'none';
+    document.getElementById('socialProof').style.display = 'block';
+    // 2. show the payment UI
+    payment.style.display = 'block';
+
+    // 3. (optional) focus the card field so the cursor is ready
+    const firstInput = payment.querySelector('iframe, input, button, select, textarea');
+    firstInput?.focus();
+  });
+});
+
+function updatePlanSummary() {
+  const summaryEl = document.getElementById("planSummary");
+  const planName  = localStorage.getItem("planName")  || "Your plan";
+  const planPrice = localStorage.getItem("planPrice") || "";
+  const isDiscountActive = document.body.classList.contains("discount-active");
+
+  if (planName === "Pro Tracker" && isDiscountActive) {
+    summaryEl.innerHTML = `
+      <span class="plan-name">${planName}</span>
+      <span class="plan-divider">–</span>
+      <span class="old-price">£19.99</span>
+      <span class="new-price">${planPrice}</span>
+    `;
+  } else {
+    summaryEl.textContent = `${planName} – ${planPrice}`;
+  }
+}
+
+// call it once on load
+document.addEventListener("DOMContentLoaded", updatePlanSummary);

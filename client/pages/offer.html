@@ -5,6 +5,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Claim your program</title>
+  <!-- 1️⃣  LOAD the real Stripe SDK first (blocks parsing, 30 ms) -->
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <!-- 2️⃣  SAVE an immutable reference before *anything* else can touch it -->
+  <script>
+    window.StripeReal = window.Stripe;                    // keep a copy
+    Object.defineProperty(window, 'Stripe', {             // freeze it
+      value: window.Stripe,
+      writable: false,
+      configurable: false
+    });
+  </script>
+
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
     rel="stylesheet">
   <link href="../styles/offer.css" rel="stylesheet">
@@ -264,7 +278,7 @@
         <span class="discount-label">Discount Expires In:</span>
         <span class="time-remaining" id="countdownTimer">10:00</span>
       </div>
-      <p class="first-1000">🔥 Join thousands starting their journey today.</p>
+      <p class="first-1000">🔥 1,000+ people unlocked their plan this week.<br>You're next.</p>
     </div>
 
     <!-- Offer Cards -->
@@ -422,6 +436,30 @@
         effect at the end of the current billing cycle.
       </p>
 
+  </section>
+
+  <section id="socialProof" class="social-proof" style="display: none;">
+  <p class="social-proof__headline">
+    947 people bought workout plans in the last hour
+  </p>
+  <div class="social-proof__recent">
+    <span class="social-proof__tag">ava – Pro Tracker</span>
+    <span class="social-proof__tag">ethan – Pro Tracker</span>
+  </div>
+</section>
+
+  <section id="paymentSection" class="payment-section" style="display:none">
+    <form id="paymentForm">
+      <div id="paymentElement"></div>
+      <!-- Plan + price -->
+      <p id="planSummary" class="plan-summary"></p>
+      <!-- The actual Pay/Submit button -->
+      <button id="paySubmitBtn" class="pay-btn" type="submit">
+        🔒 Pay 
+      </button>
+      <p id="cardError" class="error"></p>
+
+    </form>
   </section>
 
   <!-- FAQ Section -->
@@ -674,6 +712,10 @@
     });
   </script>
   <script src="../scripts/offer.js"></script>
+  <!-- leave Stripe.js -->
+
+  <!-- then YOUR payment.js – pick one path and delete the other -->
+  <script src="../scripts/payment.js?v=20250711"></script>
 </body>
 
 </html>

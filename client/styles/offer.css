@@ -1099,7 +1099,7 @@ img {
 /******************************************/
 .discount-section {
     padding: 40px 12px 40px 12px;
-    margin: 40px auto 80px auto;
+    margin: 40px auto 0px auto;
     max-width: 800px;
     border-radius: 6px;
 }
@@ -1107,7 +1107,7 @@ img {
 @media (max-width: 768px) {
 
     .discount-section {
-        margin: 40px auto;
+        margin: 40px auto 0px auto;
         padding: 40px 6px 40px 6px;
     }
 }
@@ -1636,7 +1636,9 @@ img {
 }
 
 .finish-btn {
-    background-color: #007bff;
+    background: linear-gradient(135deg, #9333EA, #A855F7);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
     color: #fff;
     border: none;
     font-size: 1rem;
@@ -1644,20 +1646,20 @@ img {
     padding: 16px 58px;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    /* transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); */
 }
 
 .finish-btn:hover {
-    background-color: #0056b3;
-    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #7c21d5, #8f3ddb);
+    /* Slightly darker purple */
     transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
 }
 
 .finish-btn:active {
-    background-color: #003f7f;
-    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
-    transform: translateY(2px);
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
 .finish-btn::after {
@@ -2265,7 +2267,7 @@ img {
 
 /* FAQ Section Styles */
 .faq-section {
-    margin: 10px auto 40px auto;
+    margin: 30px auto 40px auto;
     max-width: 800px;
     padding: 28px 24px 32px 24px;
     background-color: #f3f0ea;
@@ -2713,4 +2715,143 @@ body.modal-open .floating-cta {
     text-align: center;
     margin-top: 1rem;
     padding: 0 1rem;
+}
+
+.payment-section.hidden {
+    display: none;
+}
+
+.payment-section {
+    width: 90%;
+    /* keep it responsive */
+    max-width: 400px;
+    /* or whatever max width you want */
+    margin: 0 auto;
+    /* center it */
+    padding: 20px;
+    /* ← the magic “space from the edge” */
+    box-sizing: border-box;
+}
+
+#payment-element {
+    margin: 20px 0;
+}
+
+.pay-btn {
+    background: linear-gradient(135deg, #9333EA, #A855F7);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    color: #fff;
+    border: none;
+    padding: 20px 105px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background .25s;
+    display: block;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    /* ↑ controls the size of the text */
+    line-height: 1.2;
+    /* optional: tightens up vertical spacing */
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.pay-btn:hover {
+    background: linear-gradient(135deg, #7c21d5, #8f3ddb);
+    /* Slightly darker purple */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+}
+
+.pay-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.pay-btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.card-error {
+    color: #d9534f;
+    margin-top: 10px;
+    font-size: .9rem;
+}
+
+.plan-summary {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.5ch;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.125rem;
+    /* a bit bigger */
+    color: #333;
+    margin: 1rem 0;
+}
+
+.plan-summary .plan-name {
+    font-weight: 600;
+}
+
+.plan-summary .plan-divider {
+    margin: 0 0.25ch;
+    color: #666;
+}
+
+.plan-summary .old-price {
+    text-decoration: line-through;
+    color: #AAA;
+    font-weight: 400;
+}
+
+.plan-summary .new-price {
+    font-weight: 700;
+    color: #9333EA;
+    /* your brand purple */
+    background: rgba(147, 51, 234, 0.1);
+    padding: 0.1em 0.3em;
+    border-radius: 4px;
+}
+
+.social-proof {
+    background: #ffffff;
+    border: 1px solid #E0E0E0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    color: #2D3748;
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.social-proof__headline {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #9333EA;
+}
+
+.social-proof__recent {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.social-proof__tag {
+    background: rgba(147, 51, 234, 0.1);
+    /* very pale purple */
+    color: #9333EA;
+    /* purple text */
+    border: 1px solid #E0D5F8;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
 }

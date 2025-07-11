@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Step 3: Save token
       localStorage.setItem("token", loginBody.token);
+      localStorage.setItem("customerEmail", email.value);
 
       // Step 4: Now save preferences
       await savePreferencesAfterLogin();
