@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <script>
-  (async function() {
+  (async function () {
     const token = localStorage.getItem('token');
     if (!token) {
       location.href = 'log-in-offer.html';
@@ -21,6 +21,7 @@
     // If we get here, user is authenticated → do nothing
   })();
 </script>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -298,7 +299,7 @@
         <span class="discount-label">Discount Expires In:</span>
         <span class="time-remaining" id="countdownTimer">10:00</span>
       </div>
-      <p class="first-1000">🔥 1,000+ people unlocked their plan this week.<br>You're next.</p>
+      <p class="first-1000">🔥 1,500+ people unlocked their plan today.<br>You're next.</p>
     </div>
 
     <!-- Offer Cards -->
@@ -459,14 +460,18 @@
   </section>
 
   <section id="socialProof" class="social-proof" style="display: none;">
-  <p class="social-proof__headline">
-    947 people bought workout plans in the last hour
-  </p>
-  <div class="social-proof__recent">
-    <span class="social-proof__tag">ava – Pro Tracker</span>
-    <span class="social-proof__tag">ethan – Pro Tracker</span>
-  </div>
-</section>
+    <p class="social-proof__headline">
+      947 people bought workout plans in the last hour
+    </p>
+    <div class="social-proof__recent">
+      <span class="social-proof__tag">ava – Pro Tracker</span>
+      <span class="social-proof__tag">ethan – Pro Tracker</span>
+    </div>
+  </section>
+
+  <section id="loadingSection" class="loading-section" style="display: none;">
+    <p id="loadingText">Loading...</p>
+  </section>
 
   <section id="paymentSection" class="payment-section" style="display:none">
     <form id="paymentForm">
@@ -475,8 +480,13 @@
       <p id="planSummary" class="plan-summary"></p>
       <!-- The actual Pay/Submit button -->
       <button id="paySubmitBtn" class="pay-btn" type="submit">
-        🔒 Pay 
+        🔒 Pay
       </button>
+      <p id="postPayNote" class="post-pay-note"
+        style="display:none; text-align:center; margin-top:12px; color:#2a7f2a; font-weight:500;">
+        ✅ After payment, your 12-week program is unlocked immediately. You'll be taken straight to your dashboard to get
+        started.
+      </p>
       <p id="cardError" class="error"></p>
 
     </form>

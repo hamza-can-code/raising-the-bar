@@ -1917,7 +1917,7 @@ function setUpCompareModal0() {
   if (!modal) return;
 
   const closeBtn = modal.querySelector('.close');
-  const contBtn  = document.getElementById('valueContinue');
+  const contBtn = document.getElementById('valueContinue');
   const skipLink = document.getElementById('valueSkip');
   const planAnchor = document.getElementById('path-to-progress');
   const openBtns = [
@@ -1959,28 +1959,54 @@ function setUpCompareModal0() {
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
-  const continueBtn   = document.getElementById('offerFinishBtn');   // “Continue” / “Claim” button
-  const cardsSection  = document.getElementById('offerCardsContainer');
-  const payment       = document.getElementById('paymentSection');
+  const continueBtn = document.getElementById('offerFinishBtn');   // “Continue” / “Claim” button
+  const cardsSection = document.getElementById('offerCardsContainer');
+  const payment = document.getElementById('paymentSection');
+  const socialProof = document.getElementById('socialProof');
+  const loadingSection = document.getElementById('loadingSection');
+  const loadingText = document.getElementById('loadingText');
+  const paymentSection = document.getElementById('paymentSection');
+  const postPayNote    = document.getElementById('postPayNote');
+
 
   if (!continueBtn || !cardsSection || !payment) return;
 
   continueBtn.addEventListener('click', () => {
-    // 1. hide the offer cards
+    // 1) hide the offer cards
     cardsSection.style.display = 'none';
-    document.getElementById('socialProof').style.display = 'block';
-    // 2. show the payment UI
-    payment.style.display = 'block';
+    // 2) show your social-proof bar
+    socialProof.style.display = 'block';
+    // 3) show loading placeholder, hide Stripe UI
+    loadingSection.style.display = 'block';
+    paymentSection.style.display = 'none';
+    postPayNote.style.display    = 'none';
 
-    // 3. (optional) focus the card field so the cursor is ready
-    const firstInput = payment.querySelector('iframe, input, button, select, textarea');
-    firstInput?.focus();
+    // 4) animate the dots: Loading. → Loading.. → Loading...
+    let dots = 1;
+    const dotInterval = setInterval(() => {
+      loadingText.textContent = 'Loading' + '.'.repeat(dots);
+      dots = dots % 3 + 1;
+    }, 1000);
+
+    // 5) once your UI is “ready” (here: 2s), swap in Stripe
+    setTimeout(() => {
+      clearInterval(dotInterval);
+      loadingSection.style.display = 'none';
+      paymentSection.style.display = 'block';
+      postPayNote.style.display    = 'block';
+
+      // optional: focus the first field in the Stripe form
+      const firstInput = paymentSection.querySelector(
+        'iframe, input, button, select, textarea'
+      );
+      firstInput?.focus();
+    }, 2000);
   });
 });
 
 function updatePlanSummary() {
   const summaryEl = document.getElementById("planSummary");
-  const planName  = localStorage.getItem("planName")  || "Your plan";
+  const planName = localStorage.getItem("planName") || "Your plan";
   const planPrice = localStorage.getItem("planPrice") || "";
   const isDiscountActive = document.body.classList.contains("discount-active");
 
