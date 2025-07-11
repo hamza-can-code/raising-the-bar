@@ -52,6 +52,7 @@ else throw new Error('middleware/auth did not export a callable middleware');
 /* ——— GET /access ——— */
 router.get('/access', auth, async (req, res) => {
   try {
+    res.set('Cache-Control', 'no-store'); 
     const access = await UserAccess.findOne({ userId: req.user.id });
 
     if (!access) {

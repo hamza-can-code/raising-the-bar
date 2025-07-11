@@ -77,74 +77,46 @@ function fadeOutLoader() {
   }
 })();
 
-// async function decideProStatus(token) {
-//   const planFromLS = localStorage.getItem('planName') || '';
-
-//   /* 1)  quick front-end guess so the UI doesn’t flash blank  */
-//   let isPro = planFromLS === '12-Week Program' || planFromLS === 'Pro Tracker';
-
-//   /* 2) hit the backend for the real numbers                  */
-//   try {
-//     const res = await fetch('/api/access', {
-//       headers: { Authorization: `Bearer ${token}` }
-//     });
-
-//     if (res.ok) {
-//       const { unlockedWeeks = 0, subscriptionActive = false } = await res.json();
-
-//       /* ---------- infer the plan if none stored ---------- */
-//       let plan = planFromLS;
-//       if (!plan) {
-//         if (subscriptionActive) plan = 'Pro Tracker';
-//         else if (unlockedWeeks >= 12) plan = '12-Week Program';
-//         else if (unlockedWeeks >= 4) plan = '4-Week Program';
-//         else if (unlockedWeeks >= 1) plan = '1-Week Program';
-//         localStorage.setItem('planName', plan);
-//       }
-
-//       /* ---------- final Pro decision --------------------- */
-//       if (plan === 'Pro Tracker') isPro = subscriptionActive;
-//       else if (plan === '12-Week Program') isPro = true;
-//       else isPro = false;
-
-//       /* expose weeks to the workout tracker                */
-//       localStorage.setItem('purchasedWeeks', String(unlockedWeeks));
-//     }
-//   } catch (err) {
-//     // console.warn('[decideProStatus] backend unreachable – using best guess:', err.message);
-//   }
-
-//   localStorage.setItem('hasProTracker', isPro ? 'true' : 'false');
-//   // console.log('🔧 Pro-Tracker flag set →', isPro);
-// }
-
 async function decideProStatus(token) {
-  /* 1 ·  ask the backend how many weeks the user owns
-         and whether the subscription is active              */
-  let unlockedWeeks   = 0;
-  let subscriptionOK  = false;
+  const planFromLS = localStorage.getItem('planName') || '';
 
+  /* 1)  quick front-end guess so the UI doesn’t flash blank  */
+  let isPro = planFromLS === '12-Week Program' || planFromLS === 'Pro Tracker';
+
+  /* 2) hit the backend for the real numbers                  */
   try {
-    const r = await fetch('/api/access', {
+    const res = await fetch(`/api/access?ts=${Date.now()}`, {     // ⬅️ cache-buster
+      cache: 'no-store',                                        // ⬅️ double safety
       headers: { Authorization: `Bearer ${token}` }
     });
-    if (r.ok) {
-      const { unlockedWeeks: uw = 0, subscriptionStatus } = await r.json();
-      unlockedWeeks  = uw;
-      subscriptionOK = (subscriptionStatus === 'active');
+
+    if (res.ok) {
+      const { unlockedWeeks = 0, subscriptionActive = false } = await res.json();
+
+      /* ---------- infer the plan if none stored ---------- */
+      let plan = planFromLS;
+      if (!plan) {
+        if (subscriptionActive) plan = 'Pro Tracker';
+        else if (unlockedWeeks >= 12) plan = '12-Week Program';
+        else if (unlockedWeeks >= 4) plan = '4-Week Program';
+        else if (unlockedWeeks >= 1) plan = '1-Week Program';
+        localStorage.setItem('planName', plan);
+      }
+
+      /* ---------- final Pro decision --------------------- */
+      if (plan === 'Pro Tracker') isPro = subscriptionActive;
+      else if (plan === '12-Week Program') isPro = true;
+      else isPro = false;
+
+      /* expose weeks to the workout tracker                */
+      localStorage.setItem('purchasedWeeks', String(unlockedWeeks));
     }
-  } catch (_) {
-    /* network hiccup → fall back to whatever we already know */
+  } catch (err) {
+    // console.warn('[decideProStatus] backend unreachable – using best guess:', err.message);
   }
 
-  /* 2 ·  store everything your UI expects                    */
-  localStorage.setItem('planName',        'Pro Tracker');          // always
-  localStorage.setItem('purchasedWeeks',  String(unlockedWeeks));
-  localStorage.setItem('hasProTracker',   subscriptionOK ? 'true' : 'false');
-
-  /* 3 ·  (optional) log if you’re debugging */
-  // console.log('[Pro-status] weeks:', unlockedWeeks,
-  //             'sub active:', subscriptionOK);
+  localStorage.setItem('hasProTracker', isPro ? 'true' : 'false');
+  // console.log('🔧 Pro-Tracker flag set →', isPro);
 }
 
 async function loadUserProgressSafe() {
