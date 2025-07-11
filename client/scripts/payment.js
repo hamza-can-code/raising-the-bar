@@ -99,7 +99,7 @@
     if (error) { showError(error); continueBtn.disabled = false; return; }
     clientSecret = secret;
 
-    if (!stripeJs) stripeJs = Stripe(STRIPE_PK);   // hoisted ✔
+    if (!stripeJs) stripeJs = stripe(STRIPE_PK);   // hoisted ✔
     if (!elements) {
       elements = stripeJs.elements({ clientSecret });
       elements.create('payment').mount('#paymentElement');

@@ -2776,10 +2776,11 @@ body.modal-open .floating-cta {
     cursor: not-allowed;
 }
 
-.card-error {
+.error {
     color: #d9534f;
     margin-top: 10px;
     font-size: .9rem;
+    text-align: center;
 }
 
 .plan-summary {
