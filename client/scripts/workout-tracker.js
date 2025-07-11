@@ -447,7 +447,7 @@ let purchasedWeeks = 0;                 // will be fetched
 const planName = localStorage.getItem('planName') || '';
 
 // helpers
-const isProSub = planName === 'Pro Tracker Subscription';
+const isProSub = planName === 'Pro Tracker';
 const isTwelve = planName === '12-Week Program';
 const isFourWeek = planName === '4-Week Program';
 const isOneWeek = planName === '1-Week Program';

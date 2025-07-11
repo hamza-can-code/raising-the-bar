@@ -81,7 +81,7 @@ async function decideProStatus(token) {
   const planFromLS = localStorage.getItem('planName') || '';
 
   /* 1)  quick front-end guess so the UI doesn’t flash blank  */
-  let isPro = planFromLS === '12-Week Program' || planFromLS === 'Pro Tracker Subscription';
+  let isPro = planFromLS === '12-Week Program' || planFromLS === 'Pro Tracker';
 
   /* 2) hit the backend for the real numbers                  */
   try {
@@ -95,7 +95,7 @@ async function decideProStatus(token) {
       /* ---------- infer the plan if none stored ---------- */
       let plan = planFromLS;
       if (!plan) {
-        if (subscriptionActive) plan = 'Pro Tracker Subscription';
+        if (subscriptionActive) plan = 'Pro Tracker';
         else if (unlockedWeeks >= 12) plan = '12-Week Program';
         else if (unlockedWeeks >= 4) plan = '4-Week Program';
         else if (unlockedWeeks >= 1) plan = '1-Week Program';
@@ -103,7 +103,7 @@ async function decideProStatus(token) {
       }
 
       /* ---------- final Pro decision --------------------- */
-      if (plan === 'Pro Tracker Subscription') isPro = subscriptionActive;
+      if (plan === 'Pro Tracker') isPro = subscriptionActive;
       else if (plan === '12-Week Program') isPro = true;
       else isPro = false;
 

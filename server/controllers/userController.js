@@ -104,7 +104,7 @@ exports.updateUserPurchases = async (req, res) => {
     await sendOrderConfirmationEmail({
       email        : user.email,
       programName  : isSub
-        ? 'Pro Tracker Subscription'
+        ? 'Pro Tracker'
         : `${weeks}-Week Program`,
       unlockedWeeks: weeks,
       renewalDate  : null            // free / one-off purchase → no renewal

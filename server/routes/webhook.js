@@ -268,7 +268,7 @@ router.post(
         await sendOrderConfirmationEmail({
           email,
           programName : isSubscription
-            ? 'Pro Tracker Subscription'
+            ? 'Pro Tracker'
             : `${unlockedWeeks}-Week Program`,
           unlockedWeeks,
           renewalDate : isSubscription ? ua.renewalDate : null,
