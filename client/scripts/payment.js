@@ -116,6 +116,14 @@
     e.preventDefault();
     cardError.textContent = '';
 
+    const loadingEl = document.getElementById('loadingIndicator');
+    loadingEl.style.display = 'block';
+    let dots = 1;
+    const dotInterval = setInterval(() => {
+      loadingEl.textContent = 'Loading' + '.'.repeat(dots);
+      dots = dots % 3 + 1;
+    }, 500);
+
     const { error } = await stripeJs.confirmPayment({
       elements,
       redirect: 'always',              // 👈 optional but recommended
@@ -123,6 +131,9 @@
         return_url: `${window.location.origin}/pages/dashboard.html`
       }
     });
+
+    clearInterval(dotInterval);
+    loadingEl.style.display = 'none';
 
     if (error) showError(error.message);
   });

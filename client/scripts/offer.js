@@ -1986,7 +1986,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dotInterval = setInterval(() => {
       loadingText.textContent = 'Loading' + '.'.repeat(dots);
       dots = dots % 3 + 1;
-    }, 1000);
+    }, 500);
 
     // 5) once your UI is “ready” (here: 2s), swap in Stripe
     setTimeout(() => {

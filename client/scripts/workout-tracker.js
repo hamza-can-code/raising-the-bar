@@ -1,4 +1,37 @@
 /* ───── loader utilities (shared) ───── */
+
+(function forceProTracker() {
+  /* 1 ▸ Persist the override so it survives reloads */
+  localStorage.setItem('hasAWTSubscription', 'true');   // treat user as paid-up Pro sub
+  localStorage.setItem('hasPOSAddOnForAWT', 'true');    // …and legacy flag, just in case
+  localStorage.setItem('purchasedWeeks', '12');         // full 12-week programme
+
+  /* 2 ▸ Update the in-memory globals that the rest of the code relies on */
+  window.hasPurchasedAWT = true;      // every script checks this
+  // if these vars are declared with let or var *above* this block,
+  // you can safely re-assign them here; if not, comment them out.
+  try { hasPurchasedAWT = true; } catch(_) {}
+  try { purchasedWeeks  = 12;  } catch(_) {}
+
+  /* 3 ▸ Monkey-patch helper fns so nothing can undo the override ---------- */
+  // a. getPurchasedWeeks()  → always return 12
+  window.getPurchasedWeeks = () => 12;
+
+  // b. fetchPurchasedWeeks() → skip remote call, just broadcast the good news
+  window.fetchPurchasedWeeks = async () => {
+    purchasedWeeks          = 12;
+    window.hasPurchasedAWT  = true;
+    localStorage.setItem('purchasedWeeks', '12');
+
+    // re-render anything that depends on the week count
+    if (typeof renderWeekSelector      === 'function') renderWeekSelector();
+    if (typeof renderDaySelector       === 'function') renderDaySelector();
+    if (typeof fullyPrecomputeAllWeeks === 'function') fullyPrecomputeAllWeeks();
+    if (typeof renderWorkoutDisplay    === 'function') renderWorkoutDisplay();
+    if (typeof renderDailyMealDisplay  === 'function') renderDailyMealDisplay();
+  };
+})();
+
 function setLoaderScale(rawPct = 0) {
   /* ease + small overshoot */
   const eased = rawPct < 1
