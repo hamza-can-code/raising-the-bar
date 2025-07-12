@@ -3585,14 +3585,14 @@ function createFinalPage(programType, containerId) {
     priceAnchor.style.fontFamily = "Poppins";
     // Original price: £49.99 (line-through, 14px, #333)
     const originalPrice = document.createElement("span");
-    originalPrice.textContent = "£19.99";
+    originalPrice.textContent = "£29.99";
     originalPrice.style.color = "#333";
     originalPrice.style.textDecoration = "line-through";
     originalPrice.style.fontSize = "16px";
     originalPrice.style.marginRight = "2px";
     // New price: £39.99 (red, 18px)
     const newPrice = document.createElement("span");
-    newPrice.textContent = "£9.99 for the next 10 minutes!";
+    newPrice.textContent = "£0.99 for the next 10 minutes!";
     newPrice.style.color = "#D32F2F";
     newPrice.style.fontSize = "24px";
     newPrice.style.marginLeft = "2px";

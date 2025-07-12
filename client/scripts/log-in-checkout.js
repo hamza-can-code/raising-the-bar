@@ -36,7 +36,7 @@ function renderPlanSummary(isDiscountActive) {
 
   /* full-price lookup (add other plans if needed) */
   const FULL = {
-    "Pro Tracker": "£19.99",
+    "Pro Tracker": "£29.99",
     "1-Week Program": "£14.99",
     "4-Week Program": "£39.99",
     "12-Week Program": "£79.99"
@@ -44,8 +44,8 @@ function renderPlanSummary(isDiscountActive) {
 
   if (gPlanName === "Pro Tracker" && isDiscountActive) {
     gSummaryEl.innerHTML =
-      `${gPlanName} – <span class="old-price">£19.99</span>` +
-      ` <span class="new-price">£9.99</span>`;
+      `${gPlanName} – <span class="old-price">£29.99</span>` +
+      ` <span class="new-price">£0.99</span>`;
   } else {
     const price = FULL[gPlanName] || gPlanPrice || "£—";
     gSummaryEl.textContent = `${gPlanName} – ${price}`;

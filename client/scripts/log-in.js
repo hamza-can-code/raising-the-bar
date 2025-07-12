@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
       await fetchAndStorePreferences();
 
       // ✅ Redirect to dashboard
-      window.location.href = "dashboard.html";
+      window.location.href = "offer.html";
 
     } catch (err) {
       const msg = err.message || "";

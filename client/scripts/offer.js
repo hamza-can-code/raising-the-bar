@@ -1047,7 +1047,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const currencyTagSpecial = document.querySelector('[data-program="new"] .currency-tag');
     const perDaySpecial = document.querySelector('[data-program="new"] .per-day');
     if (costPerDaySpecial && currencyTagSpecial && perDaySpecial) {
-      costPerDaySpecial.textContent = "£" + (9.99 / 30).toFixed(2);
+      costPerDaySpecial.textContent = "£" + (0.99 / 30).toFixed(2);
       currencyTagSpecial.style.display = "block";
     }
   }
@@ -2014,7 +2014,7 @@ function updatePlanSummary() {
     summaryEl.innerHTML = `
       <span class="plan-name">${planName}</span>
       <span class="plan-divider">–</span>
-      <span class="old-price">£19.99</span>
+      <span class="old-price">£29.99</span>
       <span class="new-price">${planPrice}</span>
     `;
   } else {

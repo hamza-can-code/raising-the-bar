@@ -6821,7 +6821,7 @@ function renderUpsellModal(opts) {
   timerWrap.className = "timer-container";
   timerWrap.innerHTML = `
       <div class="timer-text">
-        <span class="discount-label">⏳ Unlock Pro today for £9.99:</span>
+        <span class="discount-label">⏳ Unlock Pro today for £0.99:</span>
         <span class="time-remaining" id="countdownTimer">10:00</span>
       </div>`;
   footer.appendChild(timerWrap);
