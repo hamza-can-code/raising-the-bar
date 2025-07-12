@@ -205,10 +205,21 @@
     <section class="youtube-prompt-section">
       <div class="youtube-video-container"
         style="position: relative; padding-top: 56.25%; height: 0; overflow: hidden;">
-        <div id="youtube-placeholder" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer;
-             background: url('https://img.youtube.com/vi/zCMqX9A8hmQ/hqdefault.jpg') center center / cover no-repeat;">
-          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-               background-color: rgba(0,0,0,0.6); border-radius: 50%; padding: 12px;">
+        <div id="youtube-placeholder" style="
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      cursor: pointer;
+      background: url('https://img.youtube.com/vi/H_aOWlPujIg/hqdefault.jpg')
+                  center center / cover no-repeat;
+    ">
+          <div style="
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0,0,0,0.6);
+        border-radius: 50%; padding: 12px;
+      ">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
               <path d="M8 5v14l11-7z" />
             </svg>
@@ -221,19 +232,26 @@
           const placeholder = document.getElementById("youtube-placeholder");
           placeholder.addEventListener("click", function () {
             const iframe = document.createElement("iframe");
-            iframe.setAttribute("src", "https://www.youtube.com/embed/zCMqX9A8hmQ?autoplay=1");
+            iframe.setAttribute(
+              "src",
+              "https://www.youtube.com/embed/H_aOWlPujIg?autoplay=1"
+            );
             iframe.setAttribute("frameborder", "0");
-            iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+            iframe.setAttribute(
+              "allow",
+              "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            );
             iframe.setAttribute("allowfullscreen", "");
             iframe.style.cssText = `
-          position: absolute;
-          top: 0; left: 0;
-          width: 100%; height: 100%;
-        `;
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+      `;
             placeholder.replaceWith(iframe);
           });
         });
       </script>
+
     </section>
 
     <h3 class="complete-workout-heading">
@@ -474,100 +492,103 @@
   </section>
 
   <div class="payment-wrapper">
-  <!-- this is the overlay rectangle -->
-  <div class="payment-overlay"></div>
+    <!-- this is the overlay rectangle -->
+    <div class="payment-overlay"></div>
 
-  <section id="paymentSection" class="payment-section" style="display:none">
-    <form id="paymentForm">
-      <div id="paymentElement"></div>
-      <!-- Plan + price -->
-      <p id="planSummary" class="plan-summary"></p>
-      <!-- The actual Pay/Submit button -->
-      <button id="paySubmitBtn" class="pay-btn" type="submit">
-        🔒 Pay
-      </button>
-       <p id="loadingIndicator"
-       style="
+    <section id="paymentSection" class="payment-section" style="display:none">
+      <form id="paymentForm">
+        <div id="paymentElement"></div>
+        <!-- Plan + price -->
+        <p id="planSummary" class="plan-summary"></p>
+        <!-- The actual Pay/Submit button -->
+        <button id="paySubmitBtn" class="pay-btn" type="submit">
+          🔒 Pay
+        </button>
+        <p id="loadingIndicator" style="
          display: none;
          text-align: center;
          margin-top: 12px;
          font-weight: 500;
          color: #333;
        ">
-      Loading
-    </p>
-      <p id="postPayNote" class="post-pay-note"
-        style="display:none; text-align:center; margin-top:12px; color:#2a7f2a; font-weight:500;">
-        ✅ After payment, your 12-week program is unlocked immediately. You'll be taken straight to your dashboard to get
-        started.
-      </p>
-      <p id="cardError" class="error"></p>
+          Loading
+        </p>
+        <p id="postPayNote" class="post-pay-note"
+          style="display:none; text-align:center; margin-top:12px; color:#2a7f2a; font-weight:500;">
+          ✅ After payment, your 12-week program is unlocked immediately. You'll be taken straight to your dashboard to
+          get
+          started.
+        </p>
+        <p id="cardError" class="error"></p>
 
-    </form>
-  </section>
+      </form>
+    </section>
 
-  <!-- FAQ Section -->
-  <section class="faq-section ">
-    <h2 class="faq-heading">Still have questions?</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <button class="faq-question">What exactly do I get when I join?</button>
-        <div class="faq-answer">
-          <p>You’ll get instant access to your personalized fitness tracker — with tailored workouts, meals, habit
-            tracking, progress tools, and insights that evolve with you. It’s all online, accessible 24/7, and built
-            around your exact answers during onboarding.</p>
+    <!-- FAQ Section -->
+    <section class="faq-section ">
+      <h2 class="faq-heading">Still have questions?</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question">What exactly do I get when I join?</button>
+          <div class="faq-answer">
+            <p>You’ll get instant access to your personalized fitness tracker — with tailored workouts, meals, habit
+              tracking, progress tools, and insights that evolve with you. It’s all online, accessible 24/7, and built
+              around your exact answers during onboarding.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Is this just a plan, or something more interactive?</button>
+          <div class="faq-answer">
+            <p>It’s far more than a plan. This is a live, adaptive tracker that responds to your feedback, tracks your
+              streaks, progression, and nutrition, and helps you stay on track with minimal guesswork. You don’t just
+              follow it — you interact with it daily.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">What if I’m a beginner or haven’t worked out in a while?</button>
+          <div class="faq-answer">
+            <p>That’s exactly who it’s built for. The tracker meets you where you are and progresses gradually. No
+              intimidating jumps, no overwhelm — just a smart path forward that builds confidence session by session.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">How is this different from a fitness app or YouTube workout?</button>
+          <div class="faq-answer">
+            <p>Most apps throw generic workouts at you. This is different — everything is built around your body, goals,
+              and feedback. It’s like having a personal trainer, nutritionist, and accountability coach — in one
+              connected
+              system — without the £60/hr price tag.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">What if I change my mind after joining?</button>
+          <div class="faq-answer">
+            <p>You’re covered. Try the tracker risk-free — if you don’t love it, you’ll get a full refund. No hassle, no
+              hoops, just email support within the refund window.</p>
+          </div>
         </div>
       </div>
-      <div class="faq-item">
-        <button class="faq-question">Is this just a plan, or something more interactive?</button>
-        <div class="faq-answer">
-          <p>It’s far more than a plan. This is a live, adaptive tracker that responds to your feedback, tracks your
-            streaks, progression, and nutrition, and helps you stay on track with minimal guesswork. You don’t just
-            follow it — you interact with it daily.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">What if I’m a beginner or haven’t worked out in a while?</button>
-        <div class="faq-answer">
-          <p>That’s exactly who it’s built for. The tracker meets you where you are and progresses gradually. No
-            intimidating jumps, no overwhelm — just a smart path forward that builds confidence session by session.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">How is this different from a fitness app or YouTube workout?</button>
-        <div class="faq-answer">
-          <p>Most apps throw generic workouts at you. This is different — everything is built around your body, goals,
-            and feedback. It’s like having a personal trainer, nutritionist, and accountability coach — in one connected
-            system — without the £60/hr price tag.
+    </section>
+
+    <section class="money-back-guarantee ">
+      <div class="mbg-container">
+        <div class="mbg-content">
+          <h2>100% Money-Back Guarantee</h2>
+          <p>
+            We're confident in the effectiveness of our programs. Achieve visible results in just 4 weeks, or get your
+            money back!
+            If you don't see results within 30 days, and you've followed the plan, we'll provide a full refund—no
+            hassle.
+          </p>
+          <p>
+            <a href="refund-policy.html" class="mbg-link">Learn more about our refund policy</a>.
           </p>
         </div>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-question">What if I change my mind after joining?</button>
-        <div class="faq-answer">
-          <p>You’re covered. Try the tracker risk-free — if you don’t love it, you’ll get a full refund. No hassle, no
-            hoops, just email support within the refund window.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="money-back-guarantee ">
-    <div class="mbg-container">
-      <div class="mbg-content">
-        <h2>100% Money-Back Guarantee</h2>
-        <p>
-          We're confident in the effectiveness of our programs. Achieve visible results in just 4 weeks, or get your
-          money back!
-          If you don't see results within 30 days, and you've followed the plan, we'll provide a full refund—no hassle.
-        </p>
-        <p>
-          <a href="refund-policy.html" class="mbg-link">Learn more about our refund policy</a>.
-        </p>
-      </div>
-    </div>
-    </div>
+  </div>
   </section>
 
   <div class="testimonial-section ">
@@ -724,7 +745,7 @@
 
       <div class="modal-actions">
         <button id="valueContinue" class="primary-btn">Continue</button>
-        <a id="valueDemo" href="https://www.youtube.com/watch?v=zCMqX9A8hmQ" target="_blank" rel="noopener"
+        <a id="valueDemo" href="https://www.youtube.com/shorts/H_aOWlPujIg" target="_blank" rel="noopener"
           class="secondary-btn">
           Watch&nbsp;Demo
         </a>
