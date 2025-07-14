@@ -34,7 +34,7 @@ function buildCheckoutConfig({ plan, discounted, email, origin }) {
   console.log('💸 Using price ID:', PRICE[plan]);
 
   const config = {
-    payment_method_types: ['card'],
+    payment_method_types: ['card', 'klarna'],
     mode: isSub ? 'subscription' : 'payment',
     customer_email: email,
     line_items: [{ price: PRICE[plan], quantity: 1 }],

@@ -1966,7 +1966,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const loadingSection = document.getElementById('loadingSection');
   const loadingText = document.getElementById('loadingText');
   const paymentSection = document.getElementById('paymentSection');
-  const postPayNote    = document.getElementById('postPayNote');
+  const postPayNote = document.getElementById('postPayNote');
 
 
   if (!continueBtn || !cardsSection || !payment) return;
@@ -1979,7 +1979,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3) show loading placeholder, hide Stripe UI
     loadingSection.style.display = 'block';
     paymentSection.style.display = 'none';
-    postPayNote.style.display    = 'none';
+    postPayNote.style.display = 'none';
 
     // 4) animate the dots: Loading. → Loading.. → Loading...
     let dots = 1;
@@ -1993,7 +1993,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(dotInterval);
       loadingSection.style.display = 'none';
       paymentSection.style.display = 'block';
-      postPayNote.style.display    = 'block';
+      postPayNote.style.display = 'block';
 
       // optional: focus the first field in the Stripe form
       const firstInput = paymentSection.querySelector(
@@ -2032,7 +2032,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const header = document.getElementById("valueModalHeader");
   if (header && firstName) {
     // Replace the leading “,” and insert the user’s name
-    header.textContent = `🎉 ${firstName}, you've been selected — start now for just 99p`;
+    header.textContent = `🎉 ${firstName}, you’ve just unlocked a 99p surprise!`;
     // If you need to keep the <strong> elements, use innerHTML instead:
     // header.innerHTML = `🎉 ${firstName}, you’ve been randomly selected to get your first month <strong>FREE</strong>`;
   }
