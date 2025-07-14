@@ -3,10 +3,10 @@ const express = require('express');
 const Stripe = require('stripe');
 const router = express.Router();
 
- const stripe = Stripe(
-   process.env.STRIPE_SECRET_KEY,
-   { apiVersion: '2024-04-10' }    // or any version ≥ 2022-08-01
- );
+const stripe = Stripe(
+  process.env.STRIPE_SECRET_KEY,
+  { apiVersion: '2024-04-10' }    // or any version ≥ 2022-08-01
+);
 
 console.log('🔐 Stripe key in use:', process.env.STRIPE_SECRET_KEY);
 
@@ -23,8 +23,8 @@ const PRICE = {
 const COUPON_ID = process.env.COUPON_ID;             // £9.99-first-month
 
 /* ─── Helper → build the Checkout session config ─────────── */
-function buildCheckoutConfig({ plan, discounted, email }) {
-  const FRONTEND_URL = process.env.FRONTEND_URL;
+function buildCheckoutConfig({ plan, discounted, email, origin }) {
+  const FRONTEND_URL = process.env.FRONTEND_URL || origin;
   console.log('✅ BUILDING CHECKOUT: FRONTEND_URL is:', FRONTEND_URL);
   if (!PRICE[plan]) throw new Error(`Unknown plan: ${plan}`);
 
@@ -40,7 +40,7 @@ function buildCheckoutConfig({ plan, discounted, email }) {
     line_items: [{ price: PRICE[plan], quantity: 1 }],
 
     success_url: `${process.env.FRONTEND_URL}/pages/dashboard.html?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.FRONTEND_URL}/pages/log-in-checkout.html`
+    cancel_url: `${process.env.FRONTEND_URL}/pages/offer.html`
 
   };
 
@@ -56,7 +56,8 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
   try {
     const { plan, discounted = false, email } = req.body;
 
-    const sessionConfig = buildCheckoutConfig({ plan, discounted, email });
+    const origin = req.get('origin');
+    const sessionConfig = buildCheckoutConfig({ plan, discounted, email, origin });
 
     console.log('🚨 FINAL CHECKOUT CONFIG:', sessionConfig);
     console.log('⏱️  Creating checkout session with:', sessionConfig);
@@ -125,18 +126,19 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
 
     /* 2 — customer */
     const [existing] = await stripe.customers.list({ email, limit: 1 }).then(r => r.data);
-    const customer   = existing || await stripe.customers.create({ email });
+    const customer = existing || await stripe.customers.create({ email });
     log('2️⃣ customer', customer.id);
 
     /* 3 — subscription */
     const sub = await stripe.subscriptions.create({
       customer: customer.id,
-      items   : [{ price: process.env.FULL_PRICE_ID }],
+      items: [{ price: process.env.FULL_PRICE_ID }],
       payment_behavior: 'default_incomplete',
       payment_settings: {
         save_default_payment_method: 'on_subscription',   // ✅ keep nested stuff simple
+        payment_method_types: ['card'],
       },
-      
+
       ...(discounted && { discounts: [{ coupon: process.env.COUPON_ID }] }),
       expand: ['latest_invoice.payment_intent']           // ask for PI right away
     });
