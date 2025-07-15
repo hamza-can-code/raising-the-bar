@@ -1374,7 +1374,7 @@ document.addEventListener("DOMContentLoaded", function () {
           info.removeEventListener('transitionend', h);
         }
       });
-      toggleBtn.textContent = 'See more';
+      toggleBtn.textContent = 'What’s Included?';
     }
 
     /* ► keep 4- & 12-week in sync */
@@ -1489,32 +1489,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   const claimProgramBtn = document.getElementById("claimProgramBtn");
-  const discountSection = document.getElementById("discountSection");
+  const socialProof       = document.getElementById("socialProof");
+  if (!claimProgramBtn || !socialProof) return;
 
-  if (claimProgramBtn && discountSection) {
-    claimProgramBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      // choose target based on screen width
-      const isSmall = window.innerWidth <= 375;
-      const targetId = isSmall
-        ? 'path-to-progress'
-        : 'path-to-progress';
+  claimProgramBtn.addEventListener("click", function (e) {
+    e.preventDefault();
 
-      const target = document.getElementById(targetId);
-      if (!target) return;
+    // on narrow (≤375px) we want the element 20px *below* the top of the viewport → +20
+    // on wider we want it 20px *above* the top → -20
+    const isSmall = window.matchMedia("(max-width: 375px)").matches;
+    const offset  = isSmall ?  -15 : -250;
 
-      // compute top of element
-      const elementTop = target.getBoundingClientRect().top + window.pageYOffset;
-      // tweak this offset px until it “feels” like one wheel-click above
-      const offset = 100;
+    // absolute Y position of the element
+    const elementTop = socialProof.getBoundingClientRect().top + window.pageYOffset;
 
-      window.scrollTo({
-        top: elementTop - offset,
-        behavior: 'smooth'
-      });
+    window.scrollTo({
+      top: elementTop + offset,
+      behavior: "smooth"
     });
-  }
+  });
 });
+
 
 //Testimonials
 document.addEventListener("DOMContentLoaded", () => {
@@ -1732,7 +1727,7 @@ function resetSpecialCard(card) {
     additionalInfo.style.display = "none";
   }
   if (toggleButton) {
-    toggleButton.textContent = "See more";
+    toggleButton.textContent = "What’s Included?";
     toggleButton.style.opacity = "1";
   }
   card.classList.remove("expanded");

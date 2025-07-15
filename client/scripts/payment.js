@@ -137,4 +137,29 @@
 
     if (error) showError(error.message);
   });
+  function swapName() {
+      const summaryEl = document.getElementById("planSummary");
+      if (!summaryEl) return;
+      // replace any literal occurrences
+      summaryEl.innerHTML = summaryEl.innerHTML.replace(
+        /Pro Tracker/g,
+        "12‑Week Plan"
+      );
+    }
+
+    // patch the original so any future calls get the swap too
+    if (window.updatePlanSummary) {
+      const orig = window.updatePlanSummary.bind(window);
+      window.updatePlanSummary = function(...args) {
+        orig(...args);
+        swapName();
+      };
+    }
+
+    // run it now (immediately, in case you already fired)
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", swapName);
+    } else {
+      swapName();
+    }
 })();
