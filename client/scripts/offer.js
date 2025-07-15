@@ -989,6 +989,18 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.classList.remove("discount-active");
   }
 
+  function updatePricingJustification() {
+  const el = document.querySelector('.pricing-justification');
+  if (!el) return;
+  if (document.body.classList.contains('discount-active')) {
+    el.textContent = 
+      'Normally £29.99 — now just 99p. 🎉 Only 1% get this deal — like a trainer in your pocket, for 3p a day.';
+  } else {
+    el.textContent = 
+      'Like having a personal trainer in your pocket — for less than the cost of one session.';
+  }
+}
+
   const timerContainer = document.getElementById("timerContainer");
   const countdownTimerEl = document.getElementById("countdownTimer");
 
@@ -1055,6 +1067,7 @@ document.addEventListener("DOMContentLoaded", function () {
   setInterval(updateTimer, 1000);
   updateTimer();
   updatePlanSummary();
+  updatePricingJustification();
 });
 
 function removeDiscountPricing() {

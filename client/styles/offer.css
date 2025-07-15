@@ -1098,7 +1098,7 @@ img {
 /* A) SECTION & BACKGROUNDS               */
 /******************************************/
 .discount-section {
-    padding: 0px 12px 40px 12px;
+    padding: 40px 12px 40px 12px;
     margin: 0px auto 0px auto;
     max-width: 800px;
     border-radius: 6px;
@@ -1108,7 +1108,7 @@ img {
 
     .discount-section {
         margin: 0px auto 0px auto;
-        padding: 00px 6px 40px 6px;
+        padding: 40px 6px 40px 6px;
     }
 }
 
@@ -1474,8 +1474,33 @@ img {
 }
 
 .price-strikethrough {
+    color: #666;
+    /* muted grey when no discount */
+    font-size: 1rem;
+    /* normal size */
+    font-weight: 400;
+    /* normal weight */
     text-decoration: line-through;
-    margin-right: 10px;
+    text-decoration-color: #666;
+    text-decoration-thickness: 1px;
+    margin-right: 0.5ch;
+    transition: none;
+}
+
+/* when discount is active, bump size, weight & switch to red anchor */
+body.discount-active .price-strikethrough {
+    color: #d9534f;
+    /* vivid red only while live */
+    font-size: 1.25rem;
+    /* larger for anchor impact */
+    font-weight: 700;
+    /* bold */
+    text-decoration-color: #d9534f;
+    text-decoration-thickness: 1px;
+    margin-right: 0.5ch;
+    font-family: 'Poppins', sans-serif;
+    /* or even a serif like Georgia for contrast */
+    font-style: italic;
 }
 
 /* RIGHT side of the card */
@@ -2721,7 +2746,7 @@ img {
     opacity: 0;
     visibility: hidden;
     transition: opacity .3s, visibility .3s;
-    z-index: 1200;
+  z-index: 20000 !important;
 }
 
 .modal.show {
