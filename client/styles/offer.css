@@ -2781,6 +2781,24 @@ body.modal-open .floating-cta {
     padding: 20px;
     /* ← the magic “space from the edge” */
     box-sizing: border-box;
+      position: relative;
+}
+
+
+
+
+.payment-close {
+  position: absolute;
+  top: -12px;
+  right: 12px;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.payment-close:hover {
+  color: #333;
 }
 
 #payment-element {

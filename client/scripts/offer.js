@@ -1969,50 +1969,101 @@ function setUpCompareModal0() {
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
-  const continueBtn = document.getElementById('offerFinishBtn');   // “Continue” / “Claim” button
-  const cardsSection = document.getElementById('offerCardsContainer');
-  const payment = document.getElementById('paymentSection');
-  const socialProof = document.getElementById('socialProof');
-  const loadingSection = document.getElementById('loadingSection');
-  const loadingText = document.getElementById('loadingText');
-  const paymentSection = document.getElementById('paymentSection');
-  const postPayNote = document.getElementById('postPayNote');
+  const continueBtn     = document.getElementById('offerFinishBtn');
+  const cardsSection    = document.getElementById('offerCardsContainer');
+  const paymentSection  = document.getElementById('paymentSection');
+  const socialProof     = document.getElementById('socialProof');
+  const loadingSection  = document.getElementById('loadingSection');
+  const loadingText     = document.getElementById('loadingText');
+  const postPayNote     = document.getElementById('postPayNote');
+  const paymentCloseBtn = document.getElementById('paymentCloseBtn');
+  const offerCards    = document.querySelectorAll('.offer-card');
 
+  let dotsIntervalId;
+  let loadingTimeoutId;
+  let cancelled = false;
 
-  if (!continueBtn || !cardsSection || !payment) return;
+   function collapseAllCards () {
+    offerCards.forEach(card => {
+      if (card.dataset.expanded === 'true') {
+        // use your existing helper so the animation & clean‑up run
+        if (typeof toggleDetails === 'function') {
+          toggleDetails(card, false);          // force‑collapse
+        } else {
+          // fall‑back: hard reset
+          card.classList.remove('expanded');
+          card.dataset.expanded = 'false';
+          const info = card.querySelector('.additional-info');
+          if (info) { info.style.display = 'none'; info.style.height = '0'; }
+          const btn  = card.querySelector('.toggle-details');
+          if (btn)  { btn.textContent = "What’s Included?"; }
+        }
+      }
+    });
+  }
+
+  if (!continueBtn || !cardsSection || !paymentSection) return;
 
   continueBtn.addEventListener('click', () => {
-    // 1) hide the offer cards
-    cardsSection.style.display = 'none';
-    // 2) show your social-proof bar
-    socialProof.style.display = 'block';
-    // 3) show loading placeholder, hide Stripe UI
-    loadingSection.style.display = 'block';
-    paymentSection.style.display = 'none';
-    postPayNote.style.display = 'none';
+    collapseAllCards();
+    // reset cancel flag
+    cancelled = false;
 
-    // 4) animate the dots: Loading. → Loading.. → Loading...
+    // 1) hide offers
+    cardsSection.style.display    = 'none';
+    // 2) show social proof
+    socialProof.style.display     = 'block';
+    // 3) show loading, hide payment UI
+    loadingSection.style.display  = 'block';
+    paymentSection.style.display  = 'none';
+    postPayNote.style.display     = 'none';
+
+    // 4) start dot animation
     let dots = 1;
-    const dotInterval = setInterval(() => {
+    clearInterval(dotsIntervalId);
+    dotsIntervalId = setInterval(() => {
       loadingText.textContent = 'Loading' + '.'.repeat(dots);
       dots = dots % 3 + 1;
     }, 500);
 
-    // 5) once your UI is “ready” (here: 2s), swap in Stripe
-    setTimeout(() => {
-      clearInterval(dotInterval);
-      loadingSection.style.display = 'none';
-      paymentSection.style.display = 'block';
-      postPayNote.style.display = 'block';
+    // 5) after 2s, if not cancelled, swap in payment UI
+    clearTimeout(loadingTimeoutId);
+    loadingTimeoutId = setTimeout(() => {
+      if (cancelled) return;
 
-      // optional: focus the first field in the Stripe form
+      clearInterval(dotsIntervalId);
+      loadingSection.style.display  = 'none';
+      paymentSection.style.display  = 'block';
+      postPayNote.style.display     = 'block';
+
+      // focus first stripe field
       const firstInput = paymentSection.querySelector(
         'iframe, input, button, select, textarea'
       );
       firstInput?.focus();
     }, 2000);
   });
+
+  // clicking the ✕
+  paymentCloseBtn?.addEventListener('click', () => {
+    // mark as cancelled
+    cancelled = true;
+    continueBtn.disabled = false; 
+    // kill any pending timers
+    clearInterval(dotsIntervalId);
+    clearTimeout(loadingTimeoutId);
+    // hide everything
+    paymentSection.style.display  = 'none';
+    loadingSection.style.display  = 'none';
+    postPayNote.style.display     = 'none';
+    socialProof.style.display     = 'none';
+    // show offers again
+    cardsSection.style.display    = 'flex';
+  });
 });
+
+
+
 
 function updatePlanSummary() {
   const summaryEl = document.getElementById("planSummary");
