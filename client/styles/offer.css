@@ -519,7 +519,7 @@ img {
 
 /* PT Styling (e.g., green) */
 .pt-item h4 {
-    color: #A855F7;
+    /* color: #A855F7; */
     /* Green text for PT items */
     margin: 0;
     font-size: 1.2rem;
@@ -529,7 +529,7 @@ img {
 }
 
 .pt-tick {
-    color: #A855F7;
+    /* color: #A855F7; */
     flex-shrink: 0;
     font-size: 20px;
     margin-right: 10px;
@@ -538,24 +538,24 @@ img {
 
 /* Hover state for PT items */
 .pt-item h4:hover {
-    color: #BA78F0;
+    /* color: #BA78F0; */
     /* Green for PT */
 }
 
 /* Active state for PT items */
 .pt-item.active h4 {
-    border-bottom: 2px solid #9333EA;
-    color: #9333EA;
+    border-bottom: 2px solid #1A1A1A;
+    /* color: #9333EA; */
 }
 
 /* Active tick for PT items and tick styling for hover */
 .pt-item.active .tick,
 .pt-item h4:hover+.tick {
-    color: #9333EA;
+    /* color: #9333EA; */
 }
 
 .pt-extra-container {
-    background-color: #9333EA !important;
+    /* background-color: #9333EA !important; */
     margin-top: 10px !important;
     text-align: center !important;
     padding: 6px 12px;
@@ -576,7 +576,7 @@ img {
 }
 
 .ct-extra-container {
-    background-color: #e0e0e0;
+    /* background-color: #e0e0e0; */
     /* light grey background */
     margin-top: 10px !important;
     /* same spacing as pt-extra */
@@ -619,7 +619,7 @@ img {
     margin-bottom: 0;
 }
 
-/* .wi2-item h4 {
+.wi2-item h4 {
     margin: 0;
     font-size: 1.2rem;
     color: #2D3748;
@@ -628,15 +628,15 @@ img {
     line-height: 1.3;
 } */
 
-/* .tick {
+.tick {
     font-size: 20px;
     color: #2D3748;
     margin-top: 2px;
     transition: color 0.2s;
     flex-shrink: 0;
-} */
+}
 
-/* .wi2-item h4:hover {
+ .wi2-item h4:hover {
     color: #007bff;
 }
 
@@ -648,7 +648,7 @@ img {
 .wi2-item.active .tick,
 .wi2-item h4:hover+.tick {
     color: #007bff;
-} */
+}
 
 /* Right pinned panel */
 .wi2-right {

@@ -715,13 +715,14 @@ document.addEventListener("DOMContentLoaded", () => {
       let descContent = whatsIncludedData[newIndex].desc;
       // If the title contains "(PT)", append an extra line
       if (whatsIncludedData[newIndex].title.includes("(PT)")) {
-        descContent += "<p class='pt-extra-container'><span class='crown-emoji'>👑</span> <span class='pt-extra'>Included in the Pro Tracker</span></p>";
+        descContent += "<p class='pt-extra-container'></p>";
+      // "<p class='pt-extra-container'><span class='crown-emoji'>👑</span> <span class='pt-extra'>Included in the Pro Tracker</span></p>";
       }
       // if the title contains "(CT)", append a grey badge instead
       if (whatsIncludedData[newIndex].title.includes("(CT)")) {
         descContent +=
           "<p class='ct-extra-container'>" +
-          "<span class='ct-extra'>Available in every plan</span>" +
+          // "<span class='ct-extra'>Available in every plan</span>" +
           "</p>";
       }
 
@@ -990,16 +991,17 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function updatePricingJustification() {
-  const el = document.querySelector('.pricing-justification');
-  if (!el) return;
-  if (document.body.classList.contains('discount-active')) {
-    el.textContent = 
-      'Normally £29.99 — now just 99p. 🎉 Only 1% get this deal — like a trainer in your pocket, for 3p a day.';
-  } else {
-    el.textContent = 
-      'Like having a personal trainer in your pocket — for less than the cost of one session.';
+    const el = document.querySelector('.pricing-justification');
+    if (!el) return;
+
+    if (document.body.classList.contains('discount-active')) {
+      el.innerHTML =
+        'Normally £29.99 — now just <strong>99p</strong>. 🎉 <strong>Limited-time incentive</strong> — like a trainer in your pocket, for 3p a day.';
+    } else {
+      el.textContent =
+        'Like having a personal trainer in your pocket — for less than the cost of one session.';
+    }
   }
-}
 
   const timerContainer = document.getElementById("timerContainer");
   const countdownTimerEl = document.getElementById("countdownTimer");
@@ -1502,7 +1504,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   const claimProgramBtn = document.getElementById("claimProgramBtn");
-  const socialProof       = document.getElementById("socialProof");
+  const socialProof = document.getElementById("socialProof");
   if (!claimProgramBtn || !socialProof) return;
 
   claimProgramBtn.addEventListener("click", function (e) {
@@ -1511,7 +1513,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // on narrow (≤375px) we want the element 20px *below* the top of the viewport → +20
     // on wider we want it 20px *above* the top → -20
     const isSmall = window.matchMedia("(max-width: 375px)").matches;
-    const offset  = isSmall ?  -15 : -250;
+    const offset = isSmall ? -15 : -250;
 
     // absolute Y position of the element
     const elementTop = socialProof.getBoundingClientRect().top + window.pageYOffset;
@@ -2040,7 +2042,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const header = document.getElementById("valueModalHeader");
   if (header && firstName) {
     // Replace the leading “,” and insert the user’s name
-    header.textContent = `🎉 ${firstName}, you’ve just unlocked a 99p surprise!`;
+    header.textContent = `✨ ${firstName}, your custom plan is ready — here’s how it works`;
     // If you need to keep the <strong> elements, use innerHTML instead:
     // header.innerHTML = `🎉 ${firstName}, you’ve been randomly selected to get your first month <strong>FREE</strong>`;
   }
