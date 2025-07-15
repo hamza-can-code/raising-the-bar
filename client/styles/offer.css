@@ -492,7 +492,7 @@ img {
 }
 
 .ct-tick {
-    color: #333;
+    /* color: #333; */
     flex-shrink: 0;
     font-size: 20px;
     margin-right: 10px;
@@ -514,7 +514,7 @@ img {
 /* Active tick for CT items and tick styling for hover */
 .ct-item.active .tick,
 .ct-item h4:hover+.tick {
-    color: #1A1A1A;
+    /* color: #1A1A1A; */
 }
 
 /* PT Styling (e.g., green) */
@@ -630,7 +630,7 @@ img {
 
 .tick {
     font-size: 20px;
-    color: #2D3748;
+    /* color: #2D3748; */
     margin-top: 2px;
     transition: color 0.2s;
     flex-shrink: 0;
@@ -647,7 +647,7 @@ img {
 
 .wi2-item.active .tick,
 .wi2-item h4:hover+.tick {
-    color: #007bff;
+    color: #007bff !important;
 }
 
 /* Right pinned panel */
