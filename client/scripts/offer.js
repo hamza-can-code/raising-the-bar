@@ -1,4 +1,25 @@
 // client/scripts/offer.js
+
+function setLoaderScale(rawPct = 0) {
+  /* ease + small overshoot */
+  const eased = rawPct < 1
+    ? 0.8 + 0.6 * rawPct                // grows 0.8 → 1.4
+    : 1.4 - 0.4 * Math.min((rawPct - 1) * 6, 1);
+  document.documentElement.style.setProperty('--scale', eased.toFixed(3));
+}
+function startIdlePulse() {
+  document.querySelector('.loader-logo')?.classList.add('pulsing');
+}
+function stopIdlePulse() {
+  document.querySelector('.loader-logo')?.classList.remove('pulsing');
+}
+function fadeOutLoader() {
+  const overlay = document.getElementById('loaderOverlay');
+  if (!overlay) return;
+  overlay.classList.add('fade-out');
+  overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
+}
+
 const userId = localStorage.getItem('userId');
 
 // Clear the "startedForm" flag on successful form completion
@@ -39,15 +60,15 @@ document.addEventListener("DOMContentLoaded", () => {
   let userGoal = localStorage.getItem("goal");
 
   const bodyTypeImgMap = {
-  slim          : 'slim.png',
-  average       : 'average.png',
-  heavy         : 'heavy.png',
-  athlete       : 'athlete.png',
-  hero          : 'hero.png',
-  bodybuilder   : 'bodybuilder.png'
-};
-// Return an absolute/relative path to your assets folder:
-const imgSrc = (file) => `../assets/${file}`;
+    slim: 'slim.png',
+    average: 'average.png',
+    heavy: 'heavy.png',
+    athlete: 'athlete.png',
+    hero: 'hero.png',
+    bodybuilder: 'bodybuilder.png'
+  };
+  // Return an absolute/relative path to your assets folder:
+  const imgSrc = (file) => `../assets/${file}`;
 
   // Retrieve all offers
   const oneWeekProgram = JSON.parse(localStorage.getItem("oneWeekProgram"));
@@ -80,36 +101,38 @@ const imgSrc = (file) => `../assets/${file}`;
   // console.log("4-week program:", fourWeekProgram);
   // console.log("12-week program:", twelveWeekProgram);
 
-  (function renderBodyTypeProgress(){
-  const wrap         = document.getElementById('bodyTypeProgress');
-  if(!wrap) return;                                    // safety
+  (function renderBodyTypeProgress() {
+    const wrap = document.getElementById('bodyTypeProgress');
+    if (!wrap) return;                                    // safety
 
-  const currentKey   = (localStorage.getItem('BodyType')        || '').toLowerCase();
-  const targetKey    = (localStorage.getItem('desiredBodyType') || '').toLowerCase();
-  const targetDateSt =  localStorage.getItem('userGoalDate');   // yyyy‑mm‑dd
+    const currentKey = (localStorage.getItem('BodyType') || '').toLowerCase();
+    const targetKey = (localStorage.getItem('desiredBodyType') || '').toLowerCase();
+    const targetDateSt = localStorage.getItem('userGoalDate');   // yyyy‑mm‑dd
 
-  // Fallbacks if data missing
-  if(!bodyTypeImgMap[currentKey] || !bodyTypeImgMap[targetKey]){
-    wrap.style.display = 'none';
-    return;
-  }
+    // Fallbacks if data missing
+    if (!bodyTypeImgMap[currentKey] || !bodyTypeImgMap[targetKey]) {
+      wrap.style.display = 'none';
+      return;
+    }
 
-  // Set images
-  document.getElementById('btpCurrentImg').src = imgSrc(bodyTypeImgMap[currentKey]);
-  document.getElementById('btpTargetImg' ).src = imgSrc(bodyTypeImgMap[targetKey ]);
+    // Set images
+    document.getElementById('btpCurrentImg').src = imgSrc(bodyTypeImgMap[currentKey]);
+    document.getElementById('btpTargetImg').src = imgSrc(bodyTypeImgMap[targetKey]);
 
-  // Days remaining
-  const daysEl = document.getElementById('btpDays');
-  let days     = 30;                                   // default backup
-  if(targetDateSt){
-    const today    = new Date();
-    const target   = new Date(targetDateSt);
-    const msInDay  = 1000*60*60*24;
-    const diffDays = Math.ceil( (target - today) / msInDay );
-    if(diffDays > 0) days = diffDays;
-  }
-  daysEl.textContent = `${days} Days`;
-})();
+    // Days remaining
+    const daysEl = document.getElementById('btpDays');
+
+    let days = 30;                                   // default backup
+    if (targetDateSt) {
+      const today = new Date();
+      const target = new Date(targetDateSt);
+      const msInDay = 1000 * 60 * 60 * 24;
+      const diffDays = Math.ceil((target - today) / msInDay);
+      if (diffDays > 0) days = diffDays;
+    }
+    daysEl.textContent = `${days} Days`;
+    document.getElementById('goalPeriod').textContent = daysEl.textContent;
+  })();
 
   // Set default goal if missing or invalid
   if (!userGoal || !["lose weight", "gain muscle", "improve body composition"].includes(userGoal)) {
@@ -759,7 +782,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // If the title contains "(PT)", append an extra line
       if (whatsIncludedData[newIndex].title.includes("(PT)")) {
         descContent += "<p class='pt-extra-container'></p>";
-      // "<p class='pt-extra-container'><span class='crown-emoji'>👑</span> <span class='pt-extra'>Included in the Pro Tracker</span></p>";
+        // "<p class='pt-extra-container'><span class='crown-emoji'>👑</span> <span class='pt-extra'>Included in the Pro Tracker</span></p>";
       }
       // if the title contains "(CT)", append a grey badge instead
       if (whatsIncludedData[newIndex].title.includes("(CT)")) {
@@ -1759,14 +1782,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 7) on resize, recalc
   window.addEventListener("resize", updateSlider);
-
   // 8) init
+  setLoaderScale(1.05);
+  startIdlePulse();
   createTestimonialCards();
   createDots();
   enableSwipe();
   nextBtn.addEventListener("click", goNext);
   prevBtn.addEventListener("click", goPrev);
   updateSlider();
+
+  stopIdlePulse();
+  fadeOutLoader();
 });
 
 function isElementFullyInViewport(el) {
@@ -2013,21 +2040,21 @@ function setUpCompareModal0() {
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
-  const continueBtn     = document.getElementById('offerFinishBtn');
-  const cardsSection    = document.getElementById('offerCardsContainer');
-  const paymentSection  = document.getElementById('paymentSection');
-  const socialProof     = document.getElementById('socialProof');
-  const loadingSection  = document.getElementById('loadingSection');
-  const loadingText     = document.getElementById('loadingText');
-  const postPayNote     = document.getElementById('postPayNote');
+  const continueBtn = document.getElementById('offerFinishBtn');
+  const cardsSection = document.getElementById('offerCardsContainer');
+  const paymentSection = document.getElementById('paymentSection');
+  const socialProof = document.getElementById('socialProof');
+  const loadingSection = document.getElementById('loadingSection');
+  const loadingText = document.getElementById('loadingText');
+  const postPayNote = document.getElementById('postPayNote');
   const paymentCloseBtn = document.getElementById('paymentCloseBtn');
-  const offerCards    = document.querySelectorAll('.offer-card');
+  const offerCards = document.querySelectorAll('.offer-card');
 
   let dotsIntervalId;
   let loadingTimeoutId;
   let cancelled = false;
 
-   function collapseAllCards () {
+  function collapseAllCards() {
     offerCards.forEach(card => {
       if (card.dataset.expanded === 'true') {
         // use your existing helper so the animation & clean‑up run
@@ -2039,8 +2066,8 @@ document.addEventListener('DOMContentLoaded', () => {
           card.dataset.expanded = 'false';
           const info = card.querySelector('.additional-info');
           if (info) { info.style.display = 'none'; info.style.height = '0'; }
-          const btn  = card.querySelector('.toggle-details');
-          if (btn)  { btn.textContent = "What’s Included?"; }
+          const btn = card.querySelector('.toggle-details');
+          if (btn) { btn.textContent = "What’s Included?"; }
         }
       }
     });
@@ -2054,13 +2081,13 @@ document.addEventListener('DOMContentLoaded', () => {
     cancelled = false;
 
     // 1) hide offers
-    cardsSection.style.display    = 'none';
+    cardsSection.style.display = 'none';
     // 2) show social proof
-    socialProof.style.display     = 'block';
+    socialProof.style.display = 'block';
     // 3) show loading, hide payment UI
-    loadingSection.style.display  = 'block';
-    paymentSection.style.display  = 'none';
-    postPayNote.style.display     = 'none';
+    loadingSection.style.display = 'block';
+    paymentSection.style.display = 'none';
+    postPayNote.style.display = 'none';
 
     // 4) start dot animation
     let dots = 1;
@@ -2076,9 +2103,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (cancelled) return;
 
       clearInterval(dotsIntervalId);
-      loadingSection.style.display  = 'none';
-      paymentSection.style.display  = 'block';
-      postPayNote.style.display     = 'block';
+      loadingSection.style.display = 'none';
+      paymentSection.style.display = 'block';
+      postPayNote.style.display = 'block';
 
       // focus first stripe field
       const firstInput = paymentSection.querySelector(
@@ -2092,44 +2119,44 @@ document.addEventListener('DOMContentLoaded', () => {
   paymentCloseBtn?.addEventListener('click', () => {
     // mark as cancelled
     cancelled = true;
-    continueBtn.disabled = false; 
+    continueBtn.disabled = false;
     // kill any pending timers
     clearInterval(dotsIntervalId);
     clearTimeout(loadingTimeoutId);
     // hide everything
-    paymentSection.style.display  = 'none';
-    loadingSection.style.display  = 'none';
-    postPayNote.style.display     = 'none';
+    paymentSection.style.display = 'none';
+    loadingSection.style.display = 'none';
+    postPayNote.style.display = 'none';
     // show offers again
-    cardsSection.style.display    = 'flex';
+    cardsSection.style.display = 'flex';
   });
 });
 
 /* --- helpers ---------------------------------------------------- */
 // the card the user last chose
-function getSelectedCard () {
+function getSelectedCard() {
   const id = localStorage.getItem('selectedProgram');
   return document.querySelector(`.offer-card[data-program="${id}"]`);
 }
 
 // read whatever price is currently visible on that card
-function extractDisplayedPrice (card) {
+function extractDisplayedPrice(card) {
   if (!card) return '';
   const disc = card.querySelector('.discount-price');
   if (disc && getComputedStyle(disc).display !== 'none') {
     return disc.textContent.trim();        // £0.99 (discount still live)
   }
   const full = card.querySelector('.full-price span')
-           ||  card.querySelector('.full-price');
+    || card.querySelector('.full-price');
   return full.textContent.trim();          // £29.99 (normal price)
 }
 
-function updatePlanSummary () {
-  const el       = document.getElementById('planSummary');
+function updatePlanSummary() {
+  const el = document.getElementById('planSummary');
   const planName = localStorage.getItem('planName') || 'Your plan';
-  const card     = getSelectedCard();
-  const price    = extractDisplayedPrice(card);
-  const dealOn   = document.body.classList.contains('discount-active');
+  const card = getSelectedCard();
+  const price = extractDisplayedPrice(card);
+  const dealOn = document.body.classList.contains('discount-active');
 
   /* Pro‑Tracker needs the crossed‑out £29.99 during the deal */
   if (planName === 'Pro Tracker' && dealOn) {
@@ -2164,13 +2191,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* ---------- PayPal ⇆ Card tab switcher – standalone ---------------- */
 document.addEventListener('DOMContentLoaded', () => {
-  const bar        = document.getElementById('pay-toggle');        // two buttons
+  const bar = document.getElementById('pay-toggle');        // two buttons
   if (!bar) return;                                                // safety
 
-  const slider     = bar.querySelector('.toggle-slider');
-  const marks      = document.getElementById('paypalMarkContainer');
-  const ppBtnWrap  = document.getElementById('paypal-btn');        // where SDK rendered
-  const ppBuyNow   = document.getElementById('paypalBuyNowBtn');   // purple proxy
+  const slider = bar.querySelector('.toggle-slider');
+  const marks = document.getElementById('paypalMarkContainer');
+  const ppBtnWrap = document.getElementById('paypal-btn');        // where SDK rendered
+  const ppBuyNow = document.getElementById('paypalBuyNowBtn');   // purple proxy
   const stripeForm = document.getElementById('paymentForm');
 
   function show(tab) {
@@ -2184,14 +2211,14 @@ document.addEventListener('DOMContentLoaded', () => {
       : 'calc(50% + var(--pad))';  // right half
 
     /* flip visibility */
-const pp = tab === 'paypal';
-  marks.style.display      = pp ? 'block' : 'none';
+    const pp = tab === 'paypal';
+    marks.style.display = pp ? 'block' : 'none';
 
-  /* 👇 this line was commented out – needs to run */
-  ppBtnWrap.style.display  = pp ? 'block' : 'none';
+    /* 👇 this line was commented out – needs to run */
+    ppBtnWrap.style.display = pp ? 'block' : 'none';
 
-  ppBuyNow.style.display   = pp ? 'block' : 'none';
-  stripeForm.style.display = pp ? 'none'  : 'block';
+    ppBuyNow.style.display = pp ? 'block' : 'none';
+    stripeForm.style.display = pp ? 'none' : 'block';
   }
 
   bar.addEventListener('click', e => {
@@ -2200,3 +2227,30 @@ const pp = tab === 'paypal';
 
   show('paypal');                         // default view
 });
+
+const bodyFatRanges = {
+  slim: '14-18%',
+  average: '20-24%',
+  heavy: '28-32%'
+};
+
+// ② Set this however you already know the user’s type
+const currentBodyType = window.userBodyType || 'average';   // slim | average | heavy
+
+// ③ Populate the “Now” body‑fat %
+document.getElementById('bodyFatNow').textContent =
+  bodyFatRanges[currentBodyType] || '—';
+
+// ④ Utility to render the muscle bars
+function renderMuscleBars(el, filledCount) {
+  el.innerHTML = '';                          // wipe existing
+  for (let i = 0; i < 5; i++) {
+    const bar = document.createElement('span');
+    bar.className = 'btp-bar' + (i < filledCount ? ' filled' : '');
+    el.appendChild(bar);
+  }
+}
+
+// Now  ► 1 bar | Goal ► 5 bars
+renderMuscleBars(document.getElementById('muscleBarsNow'), 1);
+renderMuscleBars(document.getElementById('muscleBarsGoal'), 5);

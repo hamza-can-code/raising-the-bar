@@ -112,6 +112,9 @@
 </head>
 
 <body>
+  <div id="loaderOverlay" class="loader-overlay">
+    <img src="../assets/rtb-logo-white.png" alt="Raising The Bar logo" class="loader-logo" />
+  </div>
   <div class="header">
     <div class="logo">
       <a href="../index.html">
@@ -126,15 +129,55 @@
       <div class="btp-img-group">
         <figure class="btp-col">
           <img id="btpCurrentImg" src="" alt="Current body type" />
-          <figcaption>Now</figcaption>
+          <figcaption class="visually-hidden">Now</figcaption>
         </figure>
 
-        <span class="btp-arrow">➜</span>
+        <span class="btp-arrow" aria-hidden="true">
+          <!--  size = viewBox; stroke inherits colour  -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 24h32" />
+            <polyline points="30 14 40 24 30 34" />
+          </svg>
+        </span>
 
         <figure class="btp-col">
           <img id="btpTargetImg" src="" alt="Desired body type" />
-          <figcaption id="btpDays">30&nbsp;Days</figcaption>
+          <figcaption id="btpDays" class="visually-hidden">30&nbsp;Days</figcaption>
         </figure>
+      </div>
+
+      <div class="btp-stats-table">
+        <!-- NOW column -->
+        <div class="btp-stat-col now">
+          <h5 class="btp-period">Now</h5>
+
+          <div class="btp-stat">
+            <span class="btp-label">Body fat</span>
+            <span class="btp-value" id="bodyFatNow">20‑24%</span>
+          </div>
+
+          <div class="btp-stat">
+            <span class="btp-label">Body muscles</span>
+            <div class="btp-bars" id="muscleBarsNow"></div>
+          </div>
+        </div>
+
+        <!-- GOAL column -->
+        <div class="btp-stat-col goal">
+          <!-- text filled dynamically in JS -->
+          <h5 class="btp-period" id="goalPeriod">‑</h5>
+
+          <div class="btp-stat">
+            <span class="btp-label">Body fat</span>
+            <span class="btp-value">8‑10%</span>
+          </div>
+
+          <div class="btp-stat">
+            <span class="btp-label">Body muscles</span>
+            <div class="btp-bars" id="muscleBarsGoal"></div>
+          </div>
+        </div>
       </div>
 
       <p class="btp-disclaimer">
@@ -523,10 +566,15 @@
       <!-- tab header -->
       <div id="pay-toggle" class="pay-toggle" role="tablist">
         <button type="button" data-pay="paypal" class="toggle-btn active" role="tab" aria-selected="true">
+          <img src="../assets/paypal-mark.webp" alt="" class="pay-pill-icon" />
           PayPal
         </button>
+
+        <!-- Card / Apple Pay / G Pay tab -->
         <button type="button" data-pay="card" class="toggle-btn" role="tab" aria-selected="false">
           Card
+          <img src="../assets/apple-pay-mark.webp" alt="Apple Pay" class="pay-pill-icon" />
+          <img src="../assets/google-gpay.webp" alt="Google Pay" class="pay-pill-icon" />
         </button>
 
         <!-- this is the coloured slider that slides under the active button -->
@@ -664,6 +712,14 @@
         <div id="paymentElement" style="margin-top:24px;"></div>
 
         <button id="paySubmitBtn" class="pay-btn" type="submit">🔒 Pay</button>
+        <div class="card-logos">
+          <img src="../assets/visa.png" alt="Visa" class="visa" />
+          <img src="../assets/mastercard.png" alt="Mastercard" />
+          <img src="../assets/amex.png" alt="American Express" />
+
+
+          <!-- <img src="../assets/discover.png" alt="Discover" /> -->
+        </div>
       </form>
 
       <!-- loaders / messages -->

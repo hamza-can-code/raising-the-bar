@@ -71,6 +71,35 @@ img {
     /* Reset position */
 }
 
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F9F4EB;
+  /* brand cream */
+  z-index: 25000;
+  transition: opacity .5s ease, transform .5s ease;
+}
+
+.loader-overlay.fade-out {
+  opacity: 0;
+  transform: translateY(-18px);
+  /* glide upward */
+  pointer-events: none;
+}
+
+.loader-logo {
+  --scale: 0.8;
+  /* driven by JS */
+  width: 120px;
+  max-width: 60vw;
+  transform: scale(var(--scale));
+  transform-origin: center;
+  transition: transform .2s cubic-bezier(.4, 0, .2, 1);
+}
+
 .offer-container {
     margin: 0 auto;
     /* Centers the box horizontally */
@@ -84,45 +113,230 @@ img {
 }
 
 /* === Body‑Type Progress visual ======================================= */
-.btp-wrapper{
-  margin:0 auto;
-  max-height:200px;
-  text-align:center;
+.btp-wrapper {
+    margin: 0 auto;
+    text-align: center;
 }
-.btp-img-group{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
+
+:root {
+    --filled: #0077bff;
+    /* 2) user‑specified blue     */
+    --unfilled: #c7dcff;
+    /*    faded version           */
 }
-.btp-col{
-  flex:0 0 100px;
-  margin: 0 auto;
+
+.btp-img-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
 }
-.btp-col img{
-  width:100%;
-  height:auto;
-  border-radius:6px;
-  /* box-shadow:0 2px 6px rgba(0,0,0,.12); */
-   /* background-color:#f9f7f2; */
+
+.btp-col {
+    flex: 0 0 140px;
+    margin: 0 auto;
 }
-.btp-arrow{
-  font-size:28px;
-  font-weight:700;
-  color:#333;
+
+/* desktop */
+@media (max-width:480px) {
+    .btp-col {
+        flex: 0 0 120px;
+    }
+
+    /* phones */
 }
-.btp-col figcaption{
-  margin-top:4px;
-  font-size:.85rem;
-  font-weight:600;
-  color:#444;
+
+.btp-img-group {
+    margin-bottom: -28px;
 }
-.btp-disclaimer{
-  margin-top:6px;
-  font-size:.7rem;
-  color:#666;
-  font-style:italic;
+
+.btp-stats-table {
+    position: relative;
+    /* create a containing block */
 }
+
+
+.btp-stats-table::before {
+    /* the divider itself */
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    /* halfway between the two grid columns */
+    width: 1px;
+    background: #ddd3c4;
+    /* same beige you use elsewhere */
+}
+
+.btp-stat-col.goal {
+    border-left: 1px solid #ddd3c4;
+    /* thin beige divider */
+}
+
+.btp-col img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    /* box-shadow:0 2px 6px rgba(0,0,0,.12); */
+    /* background-color:#f9f7f2; */
+}
+
+.btp-arrow {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+}
+
+.btp-col figcaption {
+    margin-top: 4px;
+    font-size: .85rem;
+    font-weight: 600;
+    color: #444;
+}
+
+.btp-disclaimer {
+    margin-top: 6px;
+    font-size: .7rem;
+    color: #666;
+    font-style: italic;
+}
+
+.btp-arrow {
+    display: flex;
+    /* centre it */
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    /* or var(--filled) */
+    width: 48px;
+    height: 48px;
+    /* matches SVG */
+}
+
+
+/* === Body‑fat / Muscle table =================================== */
+:root {
+    --filled: #007bff;
+    /* primary blue */
+    --unfilled: #aecbfd;
+    /* softened version */
+}
+
+.btp-stats-table {
+    color: #333;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: #f3f0ea;
+    /* 2) matches site palette    */
+    border: 1px solid #ddd3c4;
+    /* border: 1px solid #333; */
+    margin-top: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btp-stat-col.now .btp-period,
+.btp-stat-col.goal .btp-period {
+    display: block;
+    font-size: 1.15rem;
+    /* ↑ font size          */
+    background: #e8e4db;
+    padding: 8px 0;
+    margin: 0 -1rem 0;
+    /* stretch edge‑to‑edge */
+    border-bottom: 1px solid #ddd3c4;
+}
+
+.btp-stat-col.now .btp-period,
+.btp-stat-col.goal .btp-period {
+    margin: -1rem -1rem 0;
+    /* ← pull up by the 1rem of .btp-stat-col padding */
+}
+
+.btp-stats-table {
+    font-size: 1.05rem;
+}
+
+.btp-stat-col {
+    padding-top: .5rem;
+}
+
+/* room under new strip */
+
+.btp-stat-col {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.btp-period {
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 .25rem;
+}
+
+.btp-stat {
+    display: flex;
+    flex-direction: column;
+    /* 3 & 4) label ⬆ value/bars */
+    gap: 4px;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: .9rem;
+    color: #333;
+}
+
+.btp-label {
+    opacity: .75;
+}
+
+.btp-value {
+    font-weight: 600;
+}
+
+.btp-bars {
+    display: flex;
+    gap: 4px;
+    margin-left: 0;
+    /* aligns bars under value column */
+}
+
+.btp-bar {
+    width: 22px;
+    height: 6px;
+    border-radius: 0;
+    /* 5) rectangular bars        */
+    background: var(--unfilled);
+}
+
+.btp-bar.filled {
+    background: var(--filled);
+}
+
+@media (max-width:480px) {
+    .btp-value {
+        font-size: .8rem;
+    }
+
+    .btp-bar {
+        width: 16px;
+    }
+}
+
+.visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* =============================================================== */
+
 
 .personalized-box {
     border-radius: 10px;
@@ -2573,7 +2787,7 @@ body.discount-active .price-strikethrough {
 
 .compare-pill {
     display: inline-block;
-background-color: #E6F0FF;
+    background-color: #E6F0FF;
     padding: 6px 12px;
     border-radius: 20px;
     font-size: 0.85rem;
@@ -2864,7 +3078,7 @@ body.modal-open .floating-cta {
 
 .pay-toggle .toggle-slider {
     position: absolute;
-     z-index:0; 
+    z-index: 0;
     top: var(--pad);
     left: var(--pad);
     /* moves in JS */
@@ -2875,6 +3089,15 @@ body.modal-open .floating-cta {
     background: linear-gradient(135deg, #007BFF, #339DFF);
 
     transition: left .25s;
+}
+
+.pay-pill-icon {
+    height: 16px;
+    width: auto;
+    margin: 0 4px;
+    /* little breathing room */
+    vertical-align: middle;
+    pointer-events: none;
 }
 
 .payment-close {
@@ -2935,6 +3158,19 @@ body.modal-open .floating-cta {
 .pay-btn:disabled {
     opacity: .6;
     cursor: not-allowed;
+}
+
+.card-logos {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 12px;
+}
+
+.card-logos img {
+    height: 24px;
+    /* keep them neat & uniform */
+    width: 38px;
 }
 
 .error {
@@ -3073,75 +3309,101 @@ body.modal-open .floating-cta {
 }
 
 .visually-hidden {
-  position: absolute !important;
-  left: -9999px !important;
-  top: auto !important;
-  width: 1px !important;
-  height: 1px !important;
-  overflow: hidden !important;
-  clip:rect(0 0 0 0);
+    position: absolute !important;
+    left: -9999px !important;
+    top: auto !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0);
 }
 
-:root{
-  --pp-gold   : #FFC439;
-  --pp-gold-h : #FFB347;  /* hover   */
-  --pp-gold-a : #E0A400;  /* active  */
+:root {
+    --pp-gold: #FFC439;
+    --pp-gold-h: #FFB347;
+    /* hover   */
+    --pp-gold-a: #E0A400;
+    /* active  */
 }
 
 /* Pretty PayPal button  */
-.buy-now-btn{
-  /* sizing / layout */
-    position:relative; 
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  width:100%;
-  max-width:280px;
-  margin:0 auto;
+.buy-now-btn {
+    /* sizing / layout */
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
 
-  /* brand look */
-  background:#FFC439;                 /* PayPal gold */
-  border:none;
-  border-radius:28px;                 /* pill */
-  box-shadow:0 2px 5px rgba(0,0,0,.18);
+    /* brand look */
+    background: #FFC439;
+    /* PayPal gold */
+    border: none;
+    border-radius: 28px;
+    /* pill */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .18);
 
-  /* text */
-  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size:17px;
-  line-height:22px;
-  font-weight:500;                    /* **not** bold */
-  color:#111;                         /* charcoal */
+    /* text */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 22px;
+    font-weight: 500;
+    /* **not** bold */
+    color: #111;
+    /* charcoal */
 
-  cursor:pointer;
-  padding:14px 26px;
-  transition:background .15s,transform .1s;
+    cursor: pointer;
+    padding: 14px 26px;
+    transition: background .15s, transform .1s;
 }
-.buy-now-btn:hover{  background:#FFB347; }
-.buy-now-btn:active{
-  background:#E0A400;
-  transform:translateY(1px);
-  box-shadow:0 1px 3px rgba(0,0,0,.25) inset;
+
+.buy-now-btn:hover {
+    background: #FFB347;
+}
+
+.buy-now-btn:active {
+    background: #E0A400;
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .25) inset;
 }
 
 /* WORD‑MARK & TEXT ---------------------------------------------------*/
-.pp-wordmark{
-  height:18px;             /* keeps good balance with 17 px font */
-  width:auto;
-  flex-shrink:0;           /* never squish */
+.pp-wordmark {
+    height: 18px;
+    /* keeps good balance with 17 px font */
+    width: auto;
+    flex-shrink: 0;
+    /* never squish */
 }
-.btn-text{ color:#111; }   /* normal grey‑black, no bold */
-/* transparent iframe overlay (click‑through) */
-.paypal-overlay{
-  position:absolute;
-  inset:0;                /* top:0 right:0 bottom:0 left:0 */
-  border-radius:inherit;
-  overflow:hidden;        /* just in case PayPal sets a fixed size */
 
-  /* keep it clickable but invisible */
+.btn-text {
+    color: #111;
 }
-.btn-inner{ pointer-events:none; }
-.buy-now-btn:disabled {opacity:.6;cursor:not-allowed;}
+
+/* normal grey‑black, no bold */
+/* transparent iframe overlay (click‑through) */
+.paypal-overlay {
+    position: absolute;
+    inset: 0;
+    /* top:0 right:0 bottom:0 left:0 */
+    border-radius: inherit;
+    overflow: hidden;
+    /* just in case PayPal sets a fixed size */
+
+    /* keep it clickable but invisible */
+}
+
+.btn-inner {
+    pointer-events: none;
+}
+
+.buy-now-btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
 
 /* .pay-btn.buy-now-btn{
   position:relative;
@@ -3150,66 +3412,89 @@ body.modal-open .floating-cta {
   text-align:center;
 } */
 
-.buy-now-btn .btn-label{
-  font-weight:600;
-}
-.buy-now-btn .btn-label .buy { color:#111;  }
-.buy-now-btn .btn-label .now { color:#005EA6; }  /* PayPal brand blue */
-
-#paypalMarkContainer{
-  margin:14px 0 4px;       /* top ‑ right ‑ bottom */
-  display:block;
-}
-@media (min-width:420px){
-  #paypalMarkContainer{ margin-left:2px; }  /* nudge right on desktop */
+.buy-now-btn .btn-label {
+    font-weight: 600;
 }
 
-.pp-label{
-  letter-spacing:.15px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #444;
-  margin-bottom: 10px;
-  font-family: Poppins, sans-serif;
+.buy-now-btn .btn-label .buy {
+    color: #111;
 }
 
-.paypal-overlay iframe{
-  width:100%;
-  height:100%;
-  opacity:0;              /* invisible */
+.buy-now-btn .btn-label .now {
+    color: #005EA6;
 }
 
-#paypalBuyNowBtn{
-  position:relative;       /* ⬅︎ KEY */
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:16px 28px;
-  background:#fec43d;
-  border:0;
-  border-radius:50px;
-  font:400 16px/1 "Poppins",sans-serif;
-  cursor:pointer;
-  transition:filter .15s;
+/* PayPal brand blue */
+
+#paypalMarkContainer {
+    margin: 14px 0 4px;
+    /* top ‑ right ‑ bottom */
+    display: block;
 }
-#paypalBuyNowBtn:hover{ filter:brightness(1.05); }
+
+@media (min-width:420px) {
+    #paypalMarkContainer {
+        margin-left: 2px;
+    }
+
+    /* nudge right on desktop */
+}
+
+.pp-label {
+    letter-spacing: .15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 10px;
+    font-family: Poppins, sans-serif;
+}
+
+.paypal-overlay iframe {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    /* invisible */
+}
+
+#paypalBuyNowBtn {
+    position: relative;
+    /* ⬅︎ KEY */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 28px;
+    background: #fec43d;
+    border: 0;
+    border-radius: 50px;
+    font: 400 16px/1 "Poppins", sans-serif;
+    cursor: pointer;
+    transition: filter .15s;
+}
+
+#paypalBuyNowBtn:hover {
+    filter: brightness(1.05);
+}
 
 /* ②  overlay that will host the SDK iframe — clipped to the pill */
-#paypalMount{
-  position:absolute;
-  inset:0;                 /* top/right/bottom/left = 0 */
-  border-radius:inherit;   /* same rounded ends */
-  overflow:hidden;         /* stop the iframe from spilling out */
-  z-index:2;               /* above the yellow background */
+#paypalMount {
+    position: absolute;
+    inset: 0;
+    /* top/right/bottom/left = 0 */
+    border-radius: inherit;
+    /* same rounded ends */
+    overflow: hidden;
+    /* stop the iframe from spilling out */
+    z-index: 2;
+    /* above the yellow background */
 }
 
 /* ③  keep the iframe invisible but clickable */
-#paypalMount iframe{
-  width:100%;
-  height:100%;
-  opacity:0;
+#paypalMount iframe {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
 }
 
-#paypalBuyNowBtn { display:none!important; }
-
-
+#paypalBuyNowBtn {
+    display: none !important;
+}
