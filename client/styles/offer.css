@@ -2921,7 +2921,7 @@ body.modal-open .floating-cta {
 }
 
 .pay-btn:hover {
-    background: linear-gradient(135deg, #7c21d5, #8f3ddb);
+    /* background: linear-gradient(135deg, #7c21d5, #8f3ddb); */
     /* Slightly darker purple */
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
@@ -2973,7 +2973,7 @@ body.modal-open .floating-cta {
 
 .plan-summary .new-price {
     font-weight: 700;
-    color: #9333EA;
+    /* color: #9333EA; */
     /* your brand purple */
     background: rgba(147, 51, 234, 0.1);
     padding: 0.1em 0.3em;
