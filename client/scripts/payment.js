@@ -130,8 +130,7 @@
           });
           prButton.mount('#payment-request-button');
 
-          /* Optional: hide the normal “Pay” button if wallets exist */
-          document.getElementById('paySubmitBtn').style.display = 'none';
+          // document.getElementById('paySubmitBtn').style.display = 'none';
         } else {
           /* Unsupported browser/device → hide empty div */
           document.getElementById('payment-request-button').style.display = 'none';

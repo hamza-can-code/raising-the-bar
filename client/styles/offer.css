@@ -83,9 +83,50 @@ img {
     width: 90%;
 }
 
+/* === Body‑Type Progress visual ======================================= */
+.btp-wrapper{
+  margin:0 auto;
+  max-height:200px;
+  text-align:center;
+}
+.btp-img-group{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+}
+.btp-col{
+  flex:0 0 100px;
+  margin: 0 auto;
+}
+.btp-col img{
+  width:100%;
+  height:auto;
+  border-radius:6px;
+  /* box-shadow:0 2px 6px rgba(0,0,0,.12); */
+   /* background-color:#f9f7f2; */
+}
+.btp-arrow{
+  font-size:28px;
+  font-weight:700;
+  color:#333;
+}
+.btp-col figcaption{
+  margin-top:4px;
+  font-size:.85rem;
+  font-weight:600;
+  color:#444;
+}
+.btp-disclaimer{
+  margin-top:6px;
+  font-size:.7rem;
+  color:#666;
+  font-style:italic;
+}
+
 .personalized-box {
     border-radius: 10px;
-    padding: 10px 0;
+    padding: 0 0 10px;
     font-size: 20px;
     color: #333;
 }
@@ -118,6 +159,7 @@ img {
 .hero-header {
     font-size: 1.3rem;
     line-height: 1.4;
+    margin-top: 0;
 }
 
 .hero-subheadline {
@@ -1703,7 +1745,7 @@ body.discount-active .price-strikethrough {
 }
 
 .finish-btn:hover {
-    background: linear-gradient(135deg, #7c21d5, #8f3ddb);
+    /* background: linear-gradient(135deg, #7c21d5, #8f3ddb); */
     /* Slightly darker purple */
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
@@ -3101,12 +3143,12 @@ body.modal-open .floating-cta {
 .btn-inner{ pointer-events:none; }
 .buy-now-btn:disabled {opacity:.6;cursor:not-allowed;}
 
-.pay-btn.buy-now-btn{
-  position:relative;          /* ← so the iframe can be absolutely positioned */
+/* .pay-btn.buy-now-btn{
+  position:relative;
   display:block;
   width:100%;
   text-align:center;
-}
+} */
 
 .buy-now-btn .btn-label{
   font-weight:600;

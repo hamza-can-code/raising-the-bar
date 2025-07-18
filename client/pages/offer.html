@@ -122,14 +122,33 @@
 
 
   <div class="offer-container">
-    <p class="plan-diff-text-0">
+    <div id="bodyTypeProgress" class="btp-wrapper">
+      <div class="btp-img-group">
+        <figure class="btp-col">
+          <img id="btpCurrentImg" src="" alt="Current body type" />
+          <figcaption>Now</figcaption>
+        </figure>
+
+        <span class="btp-arrow">➜</span>
+
+        <figure class="btp-col">
+          <img id="btpTargetImg" src="" alt="Desired body type" />
+          <figcaption id="btpDays">30&nbsp;Days</figcaption>
+        </figure>
+      </div>
+
+      <p class="btp-disclaimer">
+        Images are illustrative only - results vary by individual.
+      </p>
+    </div>
+    <!-- <p class="plan-diff-text-0">
       <strong>No other app does what we do.</strong><br>
       Other apps just track. <strong>We use what you track to adapt workouts & meals</strong> so you
       <strong>get fit faster</strong>.
       <a href="#compare-plans" id="comparePlansLink0" class="compare-pill">
         🔎 See how it compares
       </a>
-    </p>
+    </p> -->
 
     <div id="dynamicMessageContainer" class="personalized-box">
       <!-- Dynamic content will go here -->
@@ -574,7 +593,7 @@
                 document.getElementById('paypalCancelNote')
                   ?.style.setProperty('display', 'inline');
               }
-            }, 15_000);                         
+            }, 15_000);
           },
 
           createSubscription: (_, actions) => {

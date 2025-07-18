@@ -38,6 +38,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const workoutFrequency = localStorage.getItem("workoutDays");
   let userGoal = localStorage.getItem("goal");
 
+  const bodyTypeImgMap = {
+  slim          : 'slim.png',
+  average       : 'average.png',
+  heavy         : 'heavy.png',
+  athlete       : 'athlete.png',
+  hero          : 'hero.png',
+  bodybuilder   : 'bodybuilder.png'
+};
+// Return an absolute/relative path to your assets folder:
+const imgSrc = (file) => `../assets/${file}`;
+
   // Retrieve all offers
   const oneWeekProgram = JSON.parse(localStorage.getItem("oneWeekProgram"));
   const fourWeekProgram = JSON.parse(localStorage.getItem("fourWeekProgram"));
@@ -68,6 +79,37 @@ document.addEventListener("DOMContentLoaded", () => {
   // console.log("1-week program:", oneWeekProgram);
   // console.log("4-week program:", fourWeekProgram);
   // console.log("12-week program:", twelveWeekProgram);
+
+  (function renderBodyTypeProgress(){
+  const wrap         = document.getElementById('bodyTypeProgress');
+  if(!wrap) return;                                    // safety
+
+  const currentKey   = (localStorage.getItem('BodyType')        || '').toLowerCase();
+  const targetKey    = (localStorage.getItem('desiredBodyType') || '').toLowerCase();
+  const targetDateSt =  localStorage.getItem('userGoalDate');   // yyyy‑mm‑dd
+
+  // Fallbacks if data missing
+  if(!bodyTypeImgMap[currentKey] || !bodyTypeImgMap[targetKey]){
+    wrap.style.display = 'none';
+    return;
+  }
+
+  // Set images
+  document.getElementById('btpCurrentImg').src = imgSrc(bodyTypeImgMap[currentKey]);
+  document.getElementById('btpTargetImg' ).src = imgSrc(bodyTypeImgMap[targetKey ]);
+
+  // Days remaining
+  const daysEl = document.getElementById('btpDays');
+  let days     = 30;                                   // default backup
+  if(targetDateSt){
+    const today    = new Date();
+    const target   = new Date(targetDateSt);
+    const msInDay  = 1000*60*60*24;
+    const diffDays = Math.ceil( (target - today) / msInDay );
+    if(diffDays > 0) days = diffDays;
+  }
+  daysEl.textContent = `${days} Days`;
+})();
 
   // Set default goal if missing or invalid
   if (!userGoal || !["lose weight", "gain muscle", "improve body composition"].includes(userGoal)) {
@@ -418,7 +460,8 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="plan-section">
         <h3 class="plan-heading">${name}'s Plan is Ready!</h3>
         <div class="plan-desc">
-         <p><strong>No other app does what we do.</strong><br>
+         <p>Other apps just track. <strong>We use what you track to adapt workouts & meals</strong> so you
+      <strong>get fit faster</strong>.<br>
         <div class="plan-grid">
           <!-- 1) Duration -->
         <div class="flip-card" data-description="Your ${sessionDuration} routine is built for results — you’ve earned your crown.">
