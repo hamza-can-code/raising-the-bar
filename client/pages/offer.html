@@ -27,6 +27,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Claim my plan</title>
   <!-- 1️⃣  LOAD the real Stripe SDK first (blocks parsing, 30 ms) -->
+  <!-- <script
+    src="https://www.paypal.com/sdk/js?client-id=AcygnP6DJSFGbIeyUa2BdGdznCQQk-qXjMEMijIZJeTbzkIltNVCGL5k1i2DdcNR24qoGTDPF_FD_VQ8&currency=GBP&vault=true&intent=subscription&components=buttons,marks&disable-funding=card"></script> -->
   <script src="https://js.stripe.com/v3/"></script>
 
   <!-- 2️⃣  SAVE an immutable reference before *anything* else can touch it -->
@@ -495,85 +497,174 @@
     <!-- this is the overlay rectangle -->
     <!-- <div class="payment-overlay"></div> -->
 
-    <section id="paymentSection" class="payment-section" style="display:none">
-      <span id="paymentCloseBtn" class="payment-close">&times;</span>
+    <!-- PAYMENTS: PayPal (default)  |  Card / Apple Pay (Stripe) -->
+    <section id="paymentSection" class="payment-section hidden">
+      <span id="paymentCloseBtn" class="payment-close" aria-label="Close">&times;</span>
 
-      <form id="paymentForm">
-        <div id="paymentElement"></div>
-        <!-- Plan + price -->
-        <p id="planSummary" class="plan-summary"></p>
-        <!-- The actual Pay/Submit button -->
-        <button id="paySubmitBtn" class="pay-btn" type="submit">
-          🔒 Pay
+      <!-- tab header -->
+      <div id="pay-toggle" class="pay-toggle" role="tablist">
+        <button type="button" data-pay="paypal" class="toggle-btn active" role="tab" aria-selected="true">
+          PayPal
         </button>
-        <p id="loadingIndicator" style="
-         display: none;
-         text-align: center;
-         margin-top: 12px;
-         font-weight: 500;
-         color: #333;
-       ">
-          Loading
-        </p>
-        <p id="postPayNote" class="post-pay-note"
-          style="display:none; text-align:center; margin-top:12px; color:#2a7f2a; font-weight:500;">
-          ✅ After payment, your 12-Week Plan is unlocked immediately. You'll be taken straight to your dashboard to
-          get
-          started.
-        </p>
-        <p id="cardError" class="error"></p>
+        <button type="button" data-pay="card" class="toggle-btn" role="tab" aria-selected="false">
+          Card
+        </button>
 
-      </form>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq-section ">
-      <h2 class="faq-heading">Still have questions?</h2>
-      <div class="faq-container">
-        <div class="faq-item">
-          <button class="faq-question">What exactly do I get when I join?</button>
-          <div class="faq-answer">
-            <p>You’ll get instant access to your personalized fitness tracker — with tailored workouts, meals, habit
-              tracking, progress tools, and insights that evolve with you. It’s all online, accessible 24/7, and built
-              around your exact answers during onboarding.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">Is this just a plan, or something more interactive?</button>
-          <div class="faq-answer">
-            <p>It’s far more than a plan. This is a live, adaptive tracker that responds to your feedback, tracks your
-              streaks, progression, and nutrition, and helps you stay on track with minimal guesswork. You don’t just
-              follow it — you interact with it daily.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">What if I’m a beginner or haven’t worked out in a while?</button>
-          <div class="faq-answer">
-            <p>That’s exactly who it’s built for. The tracker meets you where you are and progresses gradually. No
-              intimidating jumps, no overwhelm — just a smart path forward that builds confidence session by session.
-            </p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">How is this different from a fitness app or YouTube workout?</button>
-          <div class="faq-answer">
-            <p>Most apps throw generic workouts at you. This is different — everything is built around your body, goals,
-              and feedback. It’s like having a personal trainer, nutritionist, and accountability coach — in one
-              connected
-              system — without the £60/hr price tag.
-            </p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">What if I change my mind after joining?</button>
-          <div class="faq-answer">
-            <p>You’re covered. Try the tracker risk-free — if you don’t love it, you’ll get a full refund. No hassle, no
-              hoops, just email support within the refund window.</p>
-          </div>
-        </div>
+        <!-- this is the coloured slider that slides under the active button -->
+        <span class="toggle-slider" aria-hidden="true"></span>
       </div>
+      <p id="planSummary" class="plan-summary"></p>
+      <!-- PayPal -->
+      <div id="paypalMarkContainer" style="margin-top:20px;"></div>
+
+      <!-- keep this: SDK renders the real button inside -->
+      <div id="paypal-button-container" class="visually-hidden"></div>
+
+      <!-- <div id="paypal-btn"></div>
+
+      <script
+        src="https://www.paypal.com/sdk/js?client-id=AcygnP6DJSFGbIeyUa2BdGdznCQQk-qXjMEMijIZJeTbzkIltNVCGL5k1i2DdcNR24qoGTDPF_FD_VQ8&currency=GBP&vault=true&intent=subscription"></script>
+
+      <script>
+        /* the two plan IDs */
+        const PLAN_DISCOUNT = 'P-38P197067S4343902NB4O32Y'; 
+        const PLAN_FULL = 'P-4FN65942RD4768921NB4PLMA'; 
+
+        const planId = document.body.classList.contains('discount-active')
+          ? PLAN_DISCOUNT
+          : PLAN_FULL;
+
+        paypal.Buttons({
+          style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'paypal' },
+          createSubscription: (_d, a) => a.subscription.create({ plan_id: planId }),
+          onApprove: () => window.location.href = '/pages/dashboard.html',
+          onError: err => console.error('PayPal error:', err)
+        }).render('#paypal-btn');
+      </script> -->
+
+      <!-- two empty mounts -->
+      <div id="paypal-btn-discount"></div>
+      <div id="paypal-btn-full"></div>
+
+      <!-- PayPal SDK *with* onload -->
+      <div id="paypal-btn"></div>
+      <!-- 1️⃣  PayPal SDK – leave exactly one of these -->
+      <script
+        src="https://www.paypal.com/sdk/js?client-id=AcygnP6DJSFGbIeyUa2BdGdznCQQk-qXjMEMijIZJeTbzkIltNVCGL5k1i2DdcNR24qoGTDPF_FD_VQ8&currency=GBP&vault=true&intent=subscription&disable-funding=card">
+        </script>
+
+      <!-- 2️⃣  Inline script that actually makes the button -->
+      <script>
+        /* plan IDs */
+        const PLAN_DISCOUNT = 'P-38P197067S4343902NB4O32Y';   // 99 p
+        const PLAN_FULL = 'P-4FN65942RD4768921NB4PLMA';   // £29.99
+        let ppNoteTimer = null;
+        /* create exactly one button, on the right mount */
+        paypal.Buttons({
+          style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'paypal' },
+
+          onClick: () => {
+            /* NEW: only start the 30 s countdown if the discount banner is live */
+            if (!document.body.classList.contains('discount-active')) return;
+
+            clearTimeout(ppNoteTimer);          // kill any earlier countdown
+            ppNoteTimer = setTimeout(() => {
+              /* re‑check the deal hasn’t lapsed while we were waiting */
+              if (document.body.classList.contains('discount-active')) {
+                document.getElementById('paypalCancelNote')
+                  ?.style.setProperty('display', 'inline');
+              }
+            }, 15_000);                         
+          },
+
+          createSubscription: (_, actions) => {
+            const plan = document.body.classList.contains('discount-active')
+              ? PLAN_DISCOUNT
+              : PLAN_FULL;
+            return actions.subscription.create({ plan_id: plan });
+          },
+
+          onApprove: () => window.location.href = '/pages/dashboard.html',
+          onError: err => console.error('PayPal error:', err)
+        }).render('#paypal-btn');          /* make sure this div exists */
+      </script>
+
+
+
+
+      <!-- the purple proxy button users actually click -->
+      <button id="paypalBuyNowBtn" class="buy-now-btn">
+        <span class="btn-inner">
+          <img src="https://www.paypalobjects.com/images/shared/paypal-logo-129x32.svg" alt="PayPal"
+            class="pp-wordmark">
+          <span class="pp-label"></span>
+        </span>
+        <span id="paypalMount" class="paypal-overlay"></span>
+      </button>
+
+      <!-- PayPal – LIVE button -->
+      <!-- <div id="paypal-button-container-P-38P197067S4343902NB4O32Y"></div> -->
+
+      <!-- <script data-sdk-integration-source="button-factory"></script> -->
+
+      <!-- <script>
+        paypal.Buttons({
+          style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'paypal' },
+          createSubscription: (data, actions) =>
+            actions.subscription.create({ plan_id: 'P-38P197067S4343902NB4O32Y' }),
+          onApprove: data => window.location.href = '/pages/dashboard.html'
+        }).render('#paypal-button-container-P-38P197067S4343902NB4O32Y');
+      </script> -->
+
+      <!-- <div id="paypal-button-container-P-4FN65942RD4768921NB4PLMA"></div>
+<script src="https://www.paypal.com/sdk/js?client-id=AcygnP6DJSFGbIeyUa2BdGdznCQQk-qXjMEMijIZJeTbzkIltNVCGL5k1i2DdcNR24qoGTDPF_FD_VQ8&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+<script>
+  paypal.Buttons({
+      style: {
+          shape: 'rect',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'paypal'
+      },
+      createSubscription: function(data, actions) {
+        return actions.subscription.create({
+          /* Creates the subscription */
+          plan_id: 'P-4FN65942RD4768921NB4PLMA'
+        });
+      },
+      onApprove: function(data, actions) {
+        alert(data.subscriptionID); // You can add optional success message for the subscriber here
+      }
+  }).render('#paypal-button-container-P-4FN65942RD4768921NB4PLMA'); // Renders the PayPal button
+</script> -->
+
+
+      <!-- Stripe -->
+      <form id="paymentForm" style="display:none;">
+        <div id="payment-request-button"></div>
+        <div id="paymentElement" style="margin-top:24px;"></div>
+
+        <button id="paySubmitBtn" class="pay-btn" type="submit">🔒 Pay</button>
+      </form>
+
+      <!-- loaders / messages -->
+      <p id="loadingIndicator" style="display:none;text-align:center;margin-top:12px;font-weight:500;color:#333;">
+        Loading
+      </p>
+      <p id="postPayNote" class="post-pay-note" style="display:none;text-align:center;margin-top:12px;">
+        ✅ <strong>After payment, your 12‑Week Plan unlocks immediately</strong> – you’ll be taken to your dashboard.
+
+        <!-- ↓  wrap just this sentence ↓ -->
+        <span id="paypalCancelNote" style="display:none;">
+          <br><br>💡 <strong>Just 99p. Cancel anytime via</strong>
+          <a href="mailto:info@raisingthebarapp.com" style="font-weight:600;color:#007bff;text-decoration:underline;">
+            info@raisingthebarapp.com
+          </a> — you’ll keep access for 30 days.
+        </span>
+      </p>
+      <p id="cardError" class="error"></p>
     </section>
+
 
     <section class="money-back-guarantee ">
       <div class="mbg-container">
@@ -591,6 +682,55 @@
         </div>
       </div>
   </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section ">
+    <h2 class="faq-heading">Still have questions?</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <button class="faq-question">What exactly do I get when I join?</button>
+        <div class="faq-answer">
+          <p>You’ll get instant access to your personalized fitness tracker — with tailored workouts, meals, habit
+            tracking, progress tools, and insights that evolve with you. It’s all online, accessible 24/7, and built
+            around your exact answers during onboarding.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Is this just a plan, or something more interactive?</button>
+        <div class="faq-answer">
+          <p>It’s far more than a plan. This is a live, adaptive tracker that responds to your feedback, tracks your
+            streaks, progression, and nutrition, and helps you stay on track with minimal guesswork. You don’t just
+            follow it — you interact with it daily.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What if I’m a beginner or haven’t worked out in a while?</button>
+        <div class="faq-answer">
+          <p>That’s exactly who it’s built for. The tracker meets you where you are and progresses gradually. No
+            intimidating jumps, no overwhelm — just a smart path forward that builds confidence session by session.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How is this different from a fitness app or YouTube workout?</button>
+        <div class="faq-answer">
+          <p>Most apps throw generic workouts at you. This is different — everything is built around your body, goals,
+            and feedback. It’s like having a personal trainer, nutritionist, and accountability coach — in one
+            connected
+            system — without the £60/hr price tag.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What if I change my mind after joining?</button>
+        <div class="faq-answer">
+          <p>You’re covered. Try the tracker risk-free — if you don’t love it, you’ll get a full refund. No hassle, no
+            hoops, just email support within the refund window.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <div class="testimonial-section ">
@@ -782,7 +922,28 @@
   <!-- leave Stripe.js -->
 
   <!-- then YOUR payment.js – pick one path and delete the other -->
+  <script src="../scripts/paypal.js?v=20250716"></script>
   <script src="../scripts/payment.js?v=20250711"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const realMount = document.getElementById('paypalMount'); // <— changed
+      const proxyBtn = document.getElementById('paypalBuyNowBtn');
+      if (!realMount || !proxyBtn) return;
+
+      const poll = setInterval(() => {
+        const iframe = realMount.querySelector('iframe');
+        if (!iframe) return;        // SDK not ready yet
+
+        clearInterval(poll);
+        proxyBtn.disabled = false;  // make the button solid / clickable
+        proxyBtn.addEventListener('click', () => {
+          iframe.contentWindow.focus();
+          iframe.click();
+        });
+      }, 200);
+    });
+  </script>
 </body>
 
 </html>

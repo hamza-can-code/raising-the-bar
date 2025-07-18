@@ -103,6 +103,78 @@
     if (!elements) {
       elements = stripeJs.elements({ clientSecret });
       elements.create('payment').mount('#paymentElement');
+      if (!window.stripeJs) {
+      window.stripeJs = stripeJs;
+    }
+
+    // 2) Log when we call canMakePayment()
+      const paymentRequest = stripeJs.paymentRequest({
+        country: 'GB',          // or your selling country
+        currency: 'gbp',
+        total: { label: '12-Week Plan', amount: 99 },
+        requestPayerName: true,
+        requestPayerEmail: true,
+      });
+
+      paymentRequest.canMakePayment().then(result => {
+        if (result) {
+          const prButton = elements.create('paymentRequestButton', {
+            paymentRequest,
+            style: {
+              paymentRequestButton: {
+                type: 'buy',      // other options: default, donate
+                theme: 'light',    // or dark / light‑outline
+                height: '44px'
+              }
+            }
+          });
+          prButton.mount('#payment-request-button');
+
+          /* Optional: hide the normal “Pay” button if wallets exist */
+          document.getElementById('paySubmitBtn').style.display = 'none';
+        } else {
+          /* Unsupported browser/device → hide empty div */
+          document.getElementById('payment-request-button').style.display = 'none';
+        }
+      });
+
+      /* Handle the wallet authorisation event */
+      paymentRequest.on('paymentmethod', async ev => {
+        try {
+          /* We already have clientSecret from your Continue‑button flow.
+             If user reached this screen some other way, fetch it now. */
+          if (!clientSecret) {
+            const email = await getCustomerEmail();            // your helper
+            const resp = await fetch('/api/create-subscription-intent', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, discounted: true })
+            }).then(r => r.json());
+            if (resp.error) throw new Error(resp.error);
+            clientSecret = resp.clientSecret;
+          }
+
+          /* Tell Stripe to confirm using the wallet’s PaymentMethod */
+          const { error } = await stripeJs.confirmCardPayment(
+            clientSecret,
+            { payment_method: ev.paymentMethod.id },
+            { handleActions: true }      // Pops 3‑DS if required
+          );
+
+          if (error) {
+            ev.complete('fail');
+            showError(error.message);    // your existing helper
+            return;
+          }
+
+          ev.complete('success');
+          window.location.href = RETURN_URL;
+        } catch (err) {
+          ev.complete('fail');
+          showError(err.message);
+        }
+      });
+
     }
 
     // animatePanels();
@@ -138,28 +210,28 @@
     if (error) showError(error.message);
   });
   function swapName() {
-      const summaryEl = document.getElementById("planSummary");
-      if (!summaryEl) return;
-      // replace any literal occurrences
-      summaryEl.innerHTML = summaryEl.innerHTML.replace(
-        /Pro Tracker/g,
-        "12‑Week Plan"
-      );
-    }
+    const summaryEl = document.getElementById("planSummary");
+    if (!summaryEl) return;
+    // replace any literal occurrences
+    summaryEl.innerHTML = summaryEl.innerHTML.replace(
+      /Pro Tracker/g,
+      "12‑Week Plan"
+    );
+  }
 
-    // patch the original so any future calls get the swap too
-    if (window.updatePlanSummary) {
-      const orig = window.updatePlanSummary.bind(window);
-      window.updatePlanSummary = function(...args) {
-        orig(...args);
-        swapName();
-      };
-    }
-
-    // run it now (immediately, in case you already fired)
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", swapName);
-    } else {
+  // patch the original so any future calls get the swap too
+  if (window.updatePlanSummary) {
+    const orig = window.updatePlanSummary.bind(window);
+    window.updatePlanSummary = function (...args) {
+      orig(...args);
       swapName();
-    }
+    };
+  }
+
+  // run it now (immediately, in case you already fired)
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", swapName);
+  } else {
+    swapName();
+  }
 })();

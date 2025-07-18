@@ -1013,9 +1013,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // If the discount has expired…
     if (diff <= 0) {
       document.body.classList.remove("discount-active");
+      removeDiscountPricing();
       localStorage.removeItem("sevenDayDiscountEnd");
       if (timerContainer) timerContainer.style.display = "none";
-      removeDiscountPricing();
       const cardSubtext = document.querySelector(".card-subtext");
       if (cardSubtext) cardSubtext.remove();
       return;
@@ -1068,8 +1068,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   setInterval(updateTimer, 1000);
   updateTimer();
-  updatePlanSummary();
   updatePricingJustification();
+  updatePlanSummary();
+  return;
 });
 
 function removeDiscountPricing() {
@@ -2056,31 +2057,50 @@ document.addEventListener('DOMContentLoaded', () => {
     paymentSection.style.display  = 'none';
     loadingSection.style.display  = 'none';
     postPayNote.style.display     = 'none';
-    socialProof.style.display     = 'none';
     // show offers again
     cardsSection.style.display    = 'flex';
   });
 });
 
+/* --- helpers ---------------------------------------------------- */
+// the card the user last chose
+function getSelectedCard () {
+  const id = localStorage.getItem('selectedProgram');
+  return document.querySelector(`.offer-card[data-program="${id}"]`);
+}
 
+// read whatever price is currently visible on that card
+function extractDisplayedPrice (card) {
+  if (!card) return '';
+  const disc = card.querySelector('.discount-price');
+  if (disc && getComputedStyle(disc).display !== 'none') {
+    return disc.textContent.trim();        // £0.99 (discount still live)
+  }
+  const full = card.querySelector('.full-price span')
+           ||  card.querySelector('.full-price');
+  return full.textContent.trim();          // £29.99 (normal price)
+}
 
+function updatePlanSummary () {
+  const el       = document.getElementById('planSummary');
+  const planName = localStorage.getItem('planName') || 'Your plan';
+  const card     = getSelectedCard();
+  const price    = extractDisplayedPrice(card);
+  const dealOn   = document.body.classList.contains('discount-active');
 
-function updatePlanSummary() {
-  const summaryEl = document.getElementById("planSummary");
-  const planName = localStorage.getItem("planName") || "Your plan";
-  const planPrice = localStorage.getItem("planPrice") || "";
-  const isDiscountActive = document.body.classList.contains("discount-active");
-
-  if (planName === "Pro Tracker" && isDiscountActive) {
-    summaryEl.innerHTML = `
+  /* Pro‑Tracker needs the crossed‑out £29.99 during the deal */
+  if (planName === 'Pro Tracker' && dealOn) {
+    el.innerHTML = `
       <span class="plan-name">${planName}</span>
       <span class="plan-divider">–</span>
       <span class="old-price">£29.99</span>
-      <span class="new-price">${planPrice}</span>
-    `;
+      <span class="new-price">${price}</span>`;
   } else {
-    summaryEl.textContent = `${planName} – ${planPrice}`;
+    el.textContent = `${planName} – ${price}`;
   }
+
+  /* keep the cache in sync for anything else that still reads it */
+  localStorage.setItem('planPrice', price);
 }
 
 // call it once on load
@@ -2097,4 +2117,43 @@ document.addEventListener("DOMContentLoaded", () => {
     // If you need to keep the <strong> elements, use innerHTML instead:
     // header.innerHTML = `🎉 ${firstName}, you’ve been randomly selected to get your first month <strong>FREE</strong>`;
   }
+});
+
+/* ---------- PayPal ⇆ Card tab switcher – standalone ---------------- */
+document.addEventListener('DOMContentLoaded', () => {
+  const bar        = document.getElementById('pay-toggle');        // two buttons
+  if (!bar) return;                                                // safety
+
+  const slider     = bar.querySelector('.toggle-slider');
+  const marks      = document.getElementById('paypalMarkContainer');
+  const ppBtnWrap  = document.getElementById('paypal-btn');        // where SDK rendered
+  const ppBuyNow   = document.getElementById('paypalBuyNowBtn');   // purple proxy
+  const stripeForm = document.getElementById('paymentForm');
+
+  function show(tab) {
+    /* highlight the active tab */
+    bar.querySelectorAll('button').forEach(b =>
+      b.classList.toggle('active', b.dataset.pay === tab));
+
+    /* move the coloured slider */
+    slider.style.left = tab === 'paypal'
+      ? 'var(--pad)'               // left half
+      : 'calc(50% + var(--pad))';  // right half
+
+    /* flip visibility */
+const pp = tab === 'paypal';
+  marks.style.display      = pp ? 'block' : 'none';
+
+  /* 👇 this line was commented out – needs to run */
+  ppBtnWrap.style.display  = pp ? 'block' : 'none';
+
+  ppBuyNow.style.display   = pp ? 'block' : 'none';
+  stripeForm.style.display = pp ? 'none'  : 'block';
+  }
+
+  bar.addEventListener('click', e => {
+    if (e.target.tagName === 'BUTTON') show(e.target.dataset.pay);
+  });
+
+  show('paypal');                         // default view
 });

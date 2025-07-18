@@ -59,7 +59,7 @@ const questions = [
     // your existing options stay the same:
     options: ["Slim", "Average", "Heavy"],
     type: "radio",
-    // (add a `key` here only if you need one for your formData)
+    key: "BodyType"
   },
   {
     question: "Choose the body you want",
@@ -1014,6 +1014,21 @@ function handleOptionClick(selectedOption, type) {
       // calculateGoalCalories();
       // calculateBaseProjections();
     }
+     else if (questionKey === "BodyType") {
+      const val = clickedText.toLowerCase();
+      formData.BodyType = val;
+      localStorage.setItem("BodyType", val);
+    }
+    else if (questionKey === "desiredBodyType") {
+      const val = clickedText.toLowerCase();
+      formData.desiredBodyType = val;
+      localStorage.setItem("desiredBodyType", val);
+    }
+    else if (questionKey === "structuredProgram") {
+      const val = clickedText.toLowerCase();
+      formData.structuredProgram = val;
+      localStorage.setItem("structuredProgram", val);
+    }
     else if (questionKey === "activityLevel") {
       const selectedActivityLevel = clickedText.toLowerCase();
       formData.activityLevel = selectedActivityLevel;
@@ -1097,6 +1112,9 @@ function handleOptionClick(selectedOption, type) {
     formData[questionKey] = selectedTexts.map(txt => txt.toLowerCase());
     if (questionKey === "equipment") {
       localStorage.setItem("equipment", JSON.stringify(formData.equipment));
+    }
+        if (questionKey === "injuries") {
+      localStorage.setItem("injuries", JSON.stringify(formData.injuries));
     }
     // console.log("Current selected checkboxes =>", formData[questionKey]);
   }
