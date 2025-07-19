@@ -234,47 +234,47 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       goalDriver: "A wedding or special event",
       met: "Make sure you feel amazing, lean, and confident when your big day arrives in {eventMonth}.",
-      notMet: "This plan will help you feel stronger and more in control — this is still your moment. "
+      notMet: "Make sure you feel amazing, lean, and confident when your big day arrives in {eventMonth}."
     },
     {
       goalDriver: "An upcoming holiday",
       met: "Make this your best transformation yet — ready for the sun, the camera, and the mirror by {eventMonth}.",
-      notMet: "Feel lighter, stronger, and proud of how far you've come for your holiday."
+      notMet: "Make this your best transformation yet — ready for the sun, the camera, and the mirror by {eventMonth}."
     },
     {
       goalDriver: "A recent breakup or life change",
-      met: "Rebuild strength, confidence, and control.",
-      notMet: "Rebuild strength, confidence, and control."
+      met: "You’ve been through a lot — now rebuild, stronger than before.",
+      notMet: "You’ve been through a lot — now rebuild, stronger than before."
     },
     {
       goalDriver: "I want to feel confident in my body again",
-      met: "Feel proud of what you see in the mirror — and how far you've come.",
-      notMet: "Feel proud of what you see in the mirror — and how far you've come."
+      met: "Start showing up for the version of you that’s been waiting to reappear.",
+      notMet: "Start showing up for the version of you that’s been waiting to reappear."
     },
     {
       goalDriver: "I'm tired of feeling tired or unmotivated",
-      met: "Finally feel energized, clear-headed, and back in control again.",
-      notMet: "Finally feel energized, clear-headed, and back in control again."
+      met: "You don’t have to run on empty anymore — let’s rebuild your energy from the inside out.",
+      notMet: "You don’t have to run on empty anymore — let’s rebuild your energy from the inside out."
     },
     {
       goalDriver: "I’m doing this for my mental and emotional health",
-      met: "Feel calmer, stronger, and more grounded — this is about more than just your body.",
-      notMet: "Feel calmer, stronger, and more grounded — this is about more than just your body."
+      met: "Feel more grounded, in control, and emotionally lighter — this is about you, not just your body.",
+      notMet: "Feel more grounded, in control, and emotionally lighter — this is about you, not just your body."
     },
     {
       goalDriver: "I’ve let things slip and want to get back on track",
       met: "Get back in control — with momentum, structure, and progress you can feel by {eventMonth}.",
-      notMet: "Take back control — with small, daily wins that add up to real momentum."
+      notMet: "Get back in control — with momentum, structure, and progress you can feel by {eventMonth}."
     },
     {
       goalDriver: "I want to build discipline and stop starting over",
-      met: "No more starting over. Just steady progress, one day at a time.",
-      notMet: "No more starting over. Just steady progress, one day at a time."
+      met: "Consistency beats motivation — and this time, you’ve got a system built to last.",
+      notMet: "Consistency beats motivation — and this time, you’ve got a system built to last."
     },
     {
       goalDriver: "I just feel ready for a change",
-      met: "Step into something better — and start feeling more like yourself again.",
-      notMet: "Step into something better — and start feeling more like yourself again."
+      met: "Sometimes a fresh start is the strongest decision you can make — let’s make it count.",
+      notMet: "Sometimes a fresh start is the strongest decision you can make — let’s make it count."
     }
   ];
 
