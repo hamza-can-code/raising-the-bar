@@ -60,12 +60,12 @@ document.addEventListener("DOMContentLoaded", () => {
   let userGoal = localStorage.getItem("goal");
 
   const bodyTypeImgMap = {
-    slim: 'slim.png',
-    average: 'average.png',
-    heavy: 'heavy.png',
-    athlete: 'athlete.png',
-    hero: 'hero.png',
-    bodybuilder: 'bodybuilder.png'
+    slim: 'slim.webp',
+    average: 'average.webp',
+    heavy: 'heavy.webp',
+    athlete: 'athlete.webp',
+    hero: 'hero.webp',
+    bodybuilder: 'muscular-silhouette.webp'
   };
   // Return an absolute/relative path to your assets folder:
   const imgSrc = (file) => `../assets/${file}`;
@@ -1062,7 +1062,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (document.body.classList.contains('discount-active')) {
       el.innerHTML =
-        'Normally £29.99 — now just <strong>99p</strong>. 🎉 <strong>Limited-time incentive</strong> — like a trainer in your pocket, for 3p a day.';
+        'Normally £29.99 — now just <strong>99p</strong>. 🎉 <strong>Trial offer</strong> — get the <strong>full 12-Week Plan</strong>, like a trainer in your pocket, for 3p a day.';
     } else {
       el.textContent =
         'Like having a personal trainer in your pocket — for less than the cost of one session.';

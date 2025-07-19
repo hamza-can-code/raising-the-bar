@@ -3209,9 +3209,8 @@ body.modal-open .floating-cta {
 
 .plan-summary .new-price {
     font-weight: 700;
-    /* color: #9333EA; */
-    /* your brand purple */
-    background: rgba(147, 51, 234, 0.1);
+    color: #007bff;
+    background: rgba(0, 123, 255, 0.1);
     padding: 0.1em 0.3em;
     border-radius: 4px;
 }

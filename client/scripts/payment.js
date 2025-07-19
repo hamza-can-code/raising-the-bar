@@ -43,6 +43,8 @@
   let stripeJs;
   let elements;        // ← Stripe Elements instance (lazy-created)
   let clientSecret;    // ← from /api/create-subscription-intent
+    const discountEnd = Number(localStorage.getItem('discountEndTime') || 0);
+  const discounted = discountEnd > Date.now();
 
   /* ——————————————————————————————————————————————————————————— */
   /* 5.  Helpers                                                   */
@@ -92,7 +94,8 @@
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, discounted: true })
+        // body: JSON.stringify({ email, discounted: true })
+        body: JSON.stringify({ email, discounted })
       }
     ).then(r => r.json());
 
@@ -147,7 +150,8 @@
             const resp = await fetch('/api/create-subscription-intent', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ email, discounted: true })
+              // body: JSON.stringify({ email, discounted: true })
+               body: JSON.stringify({ email, discounted })
             }).then(r => r.json());
             if (resp.error) throw new Error(resp.error);
             clientSecret = resp.clientSecret;
