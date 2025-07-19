@@ -3064,7 +3064,7 @@ body.modal-open .floating-cta {
     z-index: 1;
     border: none;
     background: transparent;
-    padding: 8px 26px;
+    padding: 15px 40px;
     font: 600 .85rem/1 'Poppins', sans-serif;
     color: #555;
     cursor: pointer;
