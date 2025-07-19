@@ -43,7 +43,7 @@
   let stripeJs;
   let elements;        // ← Stripe Elements instance (lazy-created)
   let clientSecret;    // ← from /api/create-subscription-intent
-    const discountEnd = Number(localStorage.getItem('discountEndTime') || 0);
+  const discountEnd = Number(localStorage.getItem('discountEndTime') || 0);
   const discounted = discountEnd > Date.now();
 
   /* ——————————————————————————————————————————————————————————— */
@@ -107,14 +107,17 @@
       elements = stripeJs.elements({ clientSecret });
       elements.create('payment').mount('#paymentElement');
       if (!window.stripeJs) {
-      window.stripeJs = stripeJs;
-    }
+        window.stripeJs = stripeJs;
+      }
 
-    // 2) Log when we call canMakePayment()
+      // 2) Log when we call canMakePayment()
       const paymentRequest = stripeJs.paymentRequest({
         country: 'GB',          // or your selling country
         currency: 'gbp',
-        total: { label: '12-Week Plan', amount: 99 },
+        total: {
+          label: '12-Week Plan',
+          amount: discounted ? 99 : 2999
+        },
         requestPayerName: true,
         requestPayerEmail: true,
       });
@@ -151,7 +154,7 @@
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               // body: JSON.stringify({ email, discounted: true })
-               body: JSON.stringify({ email, discounted })
+              body: JSON.stringify({ email, discounted })
             }).then(r => r.json());
             if (resp.error) throw new Error(resp.error);
             clientSecret = resp.clientSecret;
