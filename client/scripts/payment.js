@@ -43,8 +43,10 @@
   let stripeJs;
   let elements;        // ← Stripe Elements instance (lazy-created)
   let clientSecret;    // ← from /api/create-subscription-intent
-  const discountEnd = Number(localStorage.getItem('discountEndTime') || 0);
-  const discounted = discountEnd > Date.now();
+  function isDiscountActive() {
+    const end = Number(localStorage.getItem('discountEndTime') || 0);
+    return end > Date.now();
+  }
 
   /* ——————————————————————————————————————————————————————————— */
   /* 5.  Helpers                                                   */
@@ -95,7 +97,7 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         // body: JSON.stringify({ email, discounted: true })
-        body: JSON.stringify({ email, discounted })
+        body: JSON.stringify({ email, discounted: isDiscountActive() })
       }
     ).then(r => r.json());
 
@@ -116,7 +118,7 @@
         currency: 'gbp',
         total: {
           label: '12-Week Plan',
-          amount: discounted ? 99 : 2999
+          amount: isDiscountActive() ? 99 : 2999
         },
         requestPayerName: true,
         requestPayerEmail: true,
@@ -154,7 +156,7 @@
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               // body: JSON.stringify({ email, discounted: true })
-              body: JSON.stringify({ email, discounted })
+              body: JSON.stringify({ email, discounted: isDiscountActive() })
             }).then(r => r.json());
             if (resp.error) throw new Error(resp.error);
             clientSecret = resp.clientSecret;
