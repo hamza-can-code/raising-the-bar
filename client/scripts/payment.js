@@ -30,11 +30,54 @@
   /* 3.  DOM handles                                               */
   /* ——————————————————————————————————————————————————————————— */
 
-  const continueBtn = document.getElementById('offerFinishBtn');
-  const cardsPanel = document.getElementById('offerCardsContainer');
-  const payPanel = document.getElementById('paymentSection');   // MUST have .payment-section.hidden classes
-  const payForm = document.getElementById('paymentForm');
-  const cardError = document.getElementById('cardError');
+ // DOM handles (now ALSO used by helpers we will define below)
+ const continueBtn   = document.getElementById('offerFinishBtn');
+ const cardsPanel    = document.getElementById('offerCardsContainer');
+ const payPanel      = document.getElementById('paymentSection');
+ const payForm       = document.getElementById('paymentForm');
+ const cardError     = document.getElementById('cardError');
+ const loadingSection = document.getElementById('loadingSection');
+ const loadingTextEl  = document.getElementById('loadingText');
+ 
+ // Loader / panel helpers (moved *inside* so payPanel is in scope)
+ let loadingDotsTimer = null;
+ let loadingShownAt   = 0;
+ function startStripeLoading(messageBase = 'Loading') {
+   if (!loadingSection || !loadingTextEl) return;
+   if (loadingDotsTimer) stopStripeLoading();
+   loadingShownAt = performance.now();
+   loadingTextEl.textContent = messageBase + '.';
+   loadingSection.style.display = 'block';
+   let step = 1;
+   loadingDotsTimer = setInterval(() => {
+     step = (step % 3) + 1;
+     loadingTextEl.textContent = messageBase + '.'.repeat(step);
+   }, 400);
+ }
+ function stopStripeLoading() {
+   if (loadingDotsTimer) {
+     clearInterval(loadingDotsTimer);
+     loadingDotsTimer = null;
+   }
+   if (loadingSection) loadingSection.style.display = 'none';
+ }
+ function showPaymentPanel() {
+   stopStripeLoading();
+   payPanel.classList.remove('preload-hide');
+   payPanel.style.display = 'block';
+   document.getElementById('postPayNote')?.style.setProperty('display','block');
+   const focusable = payPanel.querySelector('iframe,button,[tabindex],input,select,textarea');
+   focusable?.focus();
+ }
+ function showPaymentPanelWithMinDelay(minMs = 600) {
+   const elapsed = performance.now() - loadingShownAt;
+   if (elapsed >= minMs) showPaymentPanel();
+   else setTimeout(showPaymentPanel, minMs - elapsed);
+ }
+ // Attach the listener here (after helpers + before ensureStripe dispatch)
+ document.addEventListener('stripe-elements-ready', () => {
+   if (loadingDotsTimer) showPaymentPanelWithMinDelay();
+ });
 
   /* ——————————————————————————————————————————————————————————— */
   /* 4.  State                                                     */
@@ -224,6 +267,7 @@ stripeJs = stripeJs || stripe(STRIPE_PK);
     if (!elements) {
       elements = stripeJs.elements({ clientSecret });
       mountPaymentUI();            // mount once
+      document.dispatchEvent(new Event('stripe-elements-ready'));
     } else if (force) {
       elements.update({ clientSecret }); // update secret if we force refresh
     }
@@ -317,41 +361,29 @@ function collapseAllOfferCards() {
   });
 }
 
-  continueBtn.addEventListener('click', async (e) => {
-  e.preventDefault();
-  collapseAllOfferCards();
-
-  // Prevent double clicks
-  if (continueBtn.disabled) return;
-  continueBtn.disabled = true;
-
-  // Collapse offer cards (they’re still in the page)
-  const cardsSection = document.getElementById('offerCardsContainer');
-  const paymentSection = document.getElementById('paymentSection');
-  const postPayNote = document.getElementById('postPayNote');
-  const loadingSection = document.getElementById('loadingSection');
-  // Hide any stale loading UI (should be hidden anyway)
-  if (loadingSection) loadingSection.style.display = 'none';
-  cardsSection.style.display = 'none';
-  if (typeof updatePlanSummary === 'function') updatePlanSummary();
-  // Show payment instantly (warmup already ran)
-  paymentSection.classList.remove('preload-hide');
-  paymentSection.style.display = 'block';
-  postPayNote.style.display = 'block';
-
-  // Push history state once (for back button)
-  if (!history.state || !history.state.paymentOpen) {
-    history.pushState({ paymentOpen: true }, '', location.href);
-  }
-
-  // Re-enable (so user can click again if they close)
-  continueBtn.disabled = false;
-
-  // Focus first focusable (Stripe iframe is async, so delay a tick)
-  setTimeout(() => {
-    paymentSection.querySelector('iframe,button,input,select,textarea')?.focus();
-  }, 150);
-});
+continueBtn.addEventListener('click', async (e) => {
+   e.preventDefault();
+   collapseAllOfferCards();
+   if (continueBtn.disabled) return;
+   continueBtn.disabled = true;
+   const cardsSection = document.getElementById('offerCardsContainer');
+   cardsSection.style.display = 'none';
+   startStripeLoading('Preparing payment');
+   try {
+     await ensureStripe();
+     if (elements && loadingDotsTimer) showPaymentPanelWithMinDelay();
+   } catch (err) {
+     showError('Could not prepare payment. Please refresh and try again.');
+     stopStripeLoading();
+     cardsSection.style.display = 'flex';
+     continueBtn.disabled = false;
+     return;
+   }
+   if (!history.state || !history.state.paymentOpen) {
+     history.pushState({ paymentOpen: true }, '', location.href);
+   }
+   continueBtn.disabled = false;
+ });
 
 
   /* ——————————————————————————————————————————————————————————— */

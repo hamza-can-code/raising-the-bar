@@ -2024,6 +2024,8 @@ function setUpCompareModal0() {
   // ← remove any immediate calls to remove .show or .modal-open here!
 })();
 
+//   const loadingSection = document.getElementById('loadingSection');
+
 // document.addEventListener('DOMContentLoaded', () => {
 //   const continueBtn = document.getElementById('offerFinishBtn');
 //   const cardsSection = document.getElementById('offerCardsContainer');
