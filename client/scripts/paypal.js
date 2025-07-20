@@ -9,6 +9,7 @@ const PAYPAL_PLAN_FULL = 'P-4FN65942RD4768921NB4PLMA';  // ← straight 29.99 / 
 
 /* You rarely change anything below this line 😉 ------------------------*/
 
+
 (function () {
 
   let paypalLoaded = false;
