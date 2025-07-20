@@ -3497,3 +3497,30 @@ body.modal-open .floating-cta {
 #paypalBuyNowBtn {
     display: none !important;
 }
+
+.preload-hide {
+  position:absolute !important;
+  left:-9999px !important;
+  top:auto !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+
+.preloaded-ready { /* optional visual cue if you ever want one */ }
+
+#paymentWarmShell {
+  position:absolute;
+  top:0;
+  left:-9999px;     /* off-canvas (avoids layout jumps) */
+  width:380px;      /* your desired width */
+  opacity:0;
+  pointer-events:none;
+}
+
+.payment-live #paymentWarmShell {
+  position:static;
+  left:auto;
+  opacity:1;
+  pointer-events:auto;
+  transition:opacity .25s ease;
+}

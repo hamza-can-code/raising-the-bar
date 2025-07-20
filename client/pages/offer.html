@@ -27,6 +27,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Claim my plan</title>
   <!-- 1️⃣  LOAD the real Stripe SDK first (blocks parsing, 30 ms) -->
+  <link rel="preconnect" href="https://js.stripe.com" crossorigin>
+  <link rel="preconnect" href="https://api.stripe.com" crossorigin>
+  <link rel="preconnect" href="https://m.stripe.network" crossorigin>
+  <link rel="dns-prefetch" href="https://r.stripe.com">
   <!-- <script
     src="https://www.paypal.com/sdk/js?client-id=AcygnP6DJSFGbIeyUa2BdGdznCQQk-qXjMEMijIZJeTbzkIltNVCGL5k1i2DdcNR24qoGTDPF_FD_VQ8&currency=GBP&vault=true&intent=subscription&components=buttons,marks&disable-funding=card"></script> -->
   <script src="https://js.stripe.com/v3/"></script>
@@ -560,7 +564,7 @@
     <!-- <div class="payment-overlay"></div> -->
 
     <!-- PAYMENTS: PayPal (default)  |  Card / Apple Pay (Stripe) -->
-    <section id="paymentSection" class="payment-section hidden">
+    <section id="paymentSection" class="payment-section preload-hide">
       <span id="paymentCloseBtn" class="payment-close" aria-label="Close">&times;</span>
 
       <!-- tab header -->
@@ -707,6 +711,7 @@
 
 
       <!-- Stripe -->
+       <div id="paymentWarmShell"></div>
       <form id="paymentForm" style="display:none;">
         <div id="payment-request-button"></div>
         <div id="paymentElement" style="margin-top:24px;"></div>

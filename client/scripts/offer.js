@@ -1512,62 +1512,47 @@ document.addEventListener("DOMContentLoaded", function () {
 /**********************************************/
 /* E) FINISH BUTTON                           */
 /**********************************************/
-document.addEventListener("DOMContentLoaded", function () {
-  const finishBtn = document.getElementById("offerFinishBtn");
-  if (!finishBtn) return;
+// document.addEventListener("DOMContentLoaded", function () {
+//   const finishBtn = document.getElementById("offerFinishBtn");
+//   if (!finishBtn) return;
 
-  finishBtn.addEventListener("click", () => {
-    const selected = localStorage.getItem("selectedProgram");
-    const map = {
-      "1-week": "oneWeek",
-      "4-week": "fourWeek",
-      "12-week": "twelveWeek",
-      "new": "subscription"
-    };
-    const purchaseType = map[selected];
-    if (!purchaseType) return alert("Please select a program first.");
+//   finishBtn.addEventListener("click", () => {
+//     const selected = localStorage.getItem("selectedProgram");
+//     const map = {
+//       "1-week": "oneWeek",
+//       "4-week": "fourWeek",
+//       "12-week": "twelveWeek",
+//       "new": "subscription"
+//     };
+//     const purchaseType = map[selected];
+//     if (!purchaseType) return alert("Please select a program first.");
 
-    // Check if the 10-minute discount is still active
-    const discountEnd = Number(localStorage.getItem("discountEndTime") || 0);
-    const isDiscountActive = discountEnd > Date.now();
+//     // Check if the 10-minute discount is still active
+//     const discountEnd = Number(localStorage.getItem("discountEndTime") || 0);
+//     const isDiscountActive = discountEnd > Date.now();
 
-    // SPECIAL CASE: 1-Week
-    // if (purchaseType === "oneWeek") {
-    //   localStorage.setItem("pendingPurchaseType", purchaseType);
+//     // All other plans always go through checkout
+//     localStorage.setItem("pendingPurchaseType", purchaseType);
 
-    //   if (isDiscountActive) {
-    //     // free
-    //     localStorage.setItem("planPrice", "FREE!");
-    //     return window.location.href = "sign-up.html";
-    //   } else {
-    //     // no longer free → paid at £24.99
-    //     localStorage.setItem("planPrice", "£24.99");
-    //     return window.location.href = `log-in-checkout.html?plan=${selected}`;
-    //   }
-    // }
+//     // save whatever price was showing on the card
+//     (function savePlanPrice() {
+//       const card = document.querySelector(`.offer-card[data-program="${selected}"]`);
+//       let priceText = "";
+//       if (card) {
+//         const disc = card.querySelector(".discount-price");
+//         if (disc && getComputedStyle(disc).display !== "none") {
+//           priceText = disc.textContent.trim();
+//         } else {
+//           priceText = (card.querySelector(".full-price span") || card.querySelector(".full-price"))
+//             .textContent.trim();
+//         }
+//       }
+//       localStorage.setItem("planPrice", priceText);
+//     })();
 
-    // All other plans always go through checkout
-    localStorage.setItem("pendingPurchaseType", purchaseType);
-
-    // save whatever price was showing on the card
-    (function savePlanPrice() {
-      const card = document.querySelector(`.offer-card[data-program="${selected}"]`);
-      let priceText = "";
-      if (card) {
-        const disc = card.querySelector(".discount-price");
-        if (disc && getComputedStyle(disc).display !== "none") {
-          priceText = disc.textContent.trim();
-        } else {
-          priceText = (card.querySelector(".full-price span") || card.querySelector(".full-price"))
-            .textContent.trim();
-        }
-      }
-      localStorage.setItem("planPrice", priceText);
-    })();
-
-    // window.location.href = `log-in-checkout.html?plan=${selected}`;
-  });
-});
+//     // window.location.href = `log-in-checkout.html?plan=${selected}`;
+//   });
+// });
 
 document.addEventListener("DOMContentLoaded", function () {
   const claimProgramBtn = document.getElementById("claimProgramBtn");
@@ -2039,97 +2024,117 @@ function setUpCompareModal0() {
   // ← remove any immediate calls to remove .show or .modal-open here!
 })();
 
-document.addEventListener('DOMContentLoaded', () => {
-  const continueBtn = document.getElementById('offerFinishBtn');
-  const cardsSection = document.getElementById('offerCardsContainer');
+// document.addEventListener('DOMContentLoaded', () => {
+//   const continueBtn = document.getElementById('offerFinishBtn');
+//   const cardsSection = document.getElementById('offerCardsContainer');
+//   const paymentSection = document.getElementById('paymentSection');
+//   const socialProof = document.getElementById('socialProof');
+//   const loadingSection = document.getElementById('loadingSection');
+//   const loadingText = document.getElementById('loadingText');
+//   const postPayNote = document.getElementById('postPayNote');
+//   const paymentCloseBtn = document.getElementById('paymentCloseBtn');
+//   const offerCards = document.querySelectorAll('.offer-card');
+
+//   let dotsIntervalId;
+//   let loadingTimeoutId;
+//   let cancelled = false;
+
+//   function collapseAllCards() {
+//     offerCards.forEach(card => {
+//       if (card.dataset.expanded === 'true') {
+//         // use your existing helper so the animation & clean‑up run
+//         if (typeof toggleDetails === 'function') {
+//           toggleDetails(card, false);          // force‑collapse
+//         } else {
+//           // fall‑back: hard reset
+//           card.classList.remove('expanded');
+//           card.dataset.expanded = 'false';
+//           const info = card.querySelector('.additional-info');
+//           if (info) { info.style.display = 'none'; info.style.height = '0'; }
+//           const btn = card.querySelector('.toggle-details');
+//           if (btn) { btn.textContent = "What’s Included?"; }
+//         }
+//       }
+//     });
+//   }
+
+//   if (!continueBtn || !cardsSection || !paymentSection) return;
+
+//   continueBtn.addEventListener('click', () => {
+//     collapseAllCards();
+//     // reset cancel flag
+//     cancelled = false;
+
+//     // 1) hide offers
+//     cardsSection.style.display = 'none';
+//     // 2) show social proof
+//     socialProof.style.display = 'block';
+//     // 3) show loading, hide payment UI
+//     loadingSection.style.display = 'block';
+//     paymentSection.style.display = 'none';
+//     postPayNote.style.display = 'none';
+
+//     // 4) start dot animation
+//     let dots = 1;
+//     clearInterval(dotsIntervalId);
+//     dotsIntervalId = setInterval(() => {
+//       loadingText.textContent = 'Loading' + '.'.repeat(dots);
+//       dots = dots % 3 + 1;
+//     }, 500);
+
+//     // 5) after 2s, if not cancelled, swap in payment UI
+//     clearTimeout(loadingTimeoutId);
+//     loadingTimeoutId = setTimeout(() => {
+//       if (cancelled) return;
+
+//       clearInterval(dotsIntervalId);
+//       loadingSection.style.display = 'none';
+//       paymentSection.style.display = 'block';
+//       postPayNote.style.display = 'block';
+
+//       // focus first stripe field
+//       const firstInput = paymentSection.querySelector(
+//         'iframe, input, button, select, textarea'
+//       );
+//       firstInput?.focus();
+//     }, 2000);
+//   });
+
+//   // clicking the ✕
+//   paymentCloseBtn?.addEventListener('click', () => {
+//     // mark as cancelled
+//     cancelled = true;
+//     continueBtn.disabled = false;
+//     // kill any pending timers
+//     clearInterval(dotsIntervalId);
+//     clearTimeout(loadingTimeoutId);
+//     // hide everything
+//     paymentSection.style.display = 'none';
+//     loadingSection.style.display = 'none';
+//     postPayNote.style.display = 'none';
+//     // show offers again
+//     cardsSection.style.display = 'flex';
+//   });
+// });
+
+window.addEventListener('popstate', () => {
   const paymentSection = document.getElementById('paymentSection');
-  const socialProof = document.getElementById('socialProof');
-  const loadingSection = document.getElementById('loadingSection');
-  const loadingText = document.getElementById('loadingText');
-  const postPayNote = document.getElementById('postPayNote');
-  const paymentCloseBtn = document.getElementById('paymentCloseBtn');
-  const offerCards = document.querySelectorAll('.offer-card');
+  const cardsSection = document.getElementById('offerCardsContainer');
+  if (!paymentSection) return;
 
-  let dotsIntervalId;
-  let loadingTimeoutId;
-  let cancelled = false;
+  const open = !paymentSection.classList.contains('preload-hide') &&
+               paymentSection.style.display !== 'none';
 
-  function collapseAllCards() {
-    offerCards.forEach(card => {
-      if (card.dataset.expanded === 'true') {
-        // use your existing helper so the animation & clean‑up run
-        if (typeof toggleDetails === 'function') {
-          toggleDetails(card, false);          // force‑collapse
-        } else {
-          // fall‑back: hard reset
-          card.classList.remove('expanded');
-          card.dataset.expanded = 'false';
-          const info = card.querySelector('.additional-info');
-          if (info) { info.style.display = 'none'; info.style.height = '0'; }
-          const btn = card.querySelector('.toggle-details');
-          if (btn) { btn.textContent = "What’s Included?"; }
-        }
-      }
-    });
-  }
-
-  if (!continueBtn || !cardsSection || !paymentSection) return;
-
-  continueBtn.addEventListener('click', () => {
-    collapseAllCards();
-    // reset cancel flag
-    cancelled = false;
-
-    // 1) hide offers
-    cardsSection.style.display = 'none';
-    // 2) show social proof
-    socialProof.style.display = 'block';
-    // 3) show loading, hide payment UI
-    loadingSection.style.display = 'block';
+  if (open) {
+    paymentSection.classList.add('preload-hide');
     paymentSection.style.display = 'none';
-    postPayNote.style.display = 'none';
-
-    // 4) start dot animation
-    let dots = 1;
-    clearInterval(dotsIntervalId);
-    dotsIntervalId = setInterval(() => {
-      loadingText.textContent = 'Loading' + '.'.repeat(dots);
-      dots = dots % 3 + 1;
-    }, 500);
-
-    // 5) after 2s, if not cancelled, swap in payment UI
-    clearTimeout(loadingTimeoutId);
-    loadingTimeoutId = setTimeout(() => {
-      if (cancelled) return;
-
-      clearInterval(dotsIntervalId);
-      loadingSection.style.display = 'none';
-      paymentSection.style.display = 'block';
-      postPayNote.style.display = 'block';
-
-      // focus first stripe field
-      const firstInput = paymentSection.querySelector(
-        'iframe, input, button, select, textarea'
-      );
-      firstInput?.focus();
-    }, 2000);
-  });
-
-  // clicking the ✕
-  paymentCloseBtn?.addEventListener('click', () => {
-    // mark as cancelled
-    cancelled = true;
-    continueBtn.disabled = false;
-    // kill any pending timers
-    clearInterval(dotsIntervalId);
-    clearTimeout(loadingTimeoutId);
-    // hide everything
-    paymentSection.style.display = 'none';
-    loadingSection.style.display = 'none';
-    postPayNote.style.display = 'none';
-    // show offers again
+    document.getElementById('postPayNote')?.style.setProperty('display','none');
     cardsSection.style.display = 'flex';
-  });
+    // neutralize the pushed state
+    if (history.state && history.state.paymentOpen) {
+      history.replaceState(null, '', location.href);
+    }
+  }
 });
 
 /* --- helpers ---------------------------------------------------- */
