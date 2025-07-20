@@ -38,7 +38,7 @@
  const cardError     = document.getElementById('cardError');
  const loadingSection = document.getElementById('loadingSection');
  const loadingTextEl  = document.getElementById('loadingText');
- 
+
  // Loader / panel helpers (moved *inside* so payPanel is in scope)
  let loadingDotsTimer = null;
  let loadingShownAt   = 0;
@@ -368,7 +368,7 @@ continueBtn.addEventListener('click', async (e) => {
    continueBtn.disabled = true;
    const cardsSection = document.getElementById('offerCardsContainer');
    cardsSection.style.display = 'none';
-   startStripeLoading('Preparing payment');
+   startStripeLoading('Loading');
    try {
      await ensureStripe();
      if (elements && loadingDotsTimer) showPaymentPanelWithMinDelay();
