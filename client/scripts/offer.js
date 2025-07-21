@@ -864,7 +864,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ? "<p class='pt-extra-container'><span class='crown-emoji'>👑</span> <span class='pt-extra'>Included in the Pro Tracker</span></p>"
       : "")
     + (first.title.includes("(CT)")
-      ? "<p class='ct-extra-container'><span class='ct-extra'>Available in every plan</span></p>"
+      ? "<p class='ct-extra-container'></p>"
       : "");
 
   // 3) then fire your fade‑in on the panel
