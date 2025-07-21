@@ -4,8 +4,8 @@
 /* --------------------------------------------------
  * CONFIG – FILL THESE IN ⚠️
  * ------------------------------------------------*/
-const PAYPAL_PLAN_DISCOUNT = 'P-38P197067S4343902NB4O32Y'; // ← first month 0.99, then 29.99
-const PAYPAL_PLAN_FULL = 'P-4FN65942RD4768921NB4PLMA';  // ← straight 29.99 / month
+const PAYPAL_PLAN_DISCOUNT = 'P-16H14484TA859184CNB7AHUY'; // ← first month 0.99, then 29.99
+const PAYPAL_PLAN_FULL = 'P-2BG62815HH914120TNB7AJCA';  // ← straight 29.99 / month
 
 /* You rarely change anything below this line 😉 ------------------------*/
 
