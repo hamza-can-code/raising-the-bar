@@ -688,44 +688,44 @@ document.addEventListener("DOMContentLoaded", () => {
   const whatsIncludedData = [
     {
       title: "Tailored From Day One (CT)",
-      image: "../assets/1_tailored.png",
-      desc: "Your tracker is tailored from the start — built around your goal, training frequency, and available equipment."
+      image: "../assets/your-ui-mockup.webp",
+      desc: ""
     },
     {
       title: "Track Workouts, Earn XP (CT)",
-      image: "../assets/2_track_workouts.png",
-      desc: "Log your workouts, earn XP, and get instant feedback — just like having a trainer guide you, every session."
+      image: "../assets/clear-and-easy.PNG",
+      desc: ""
     },
     {
       title: "Adaptive Progression Engine (PT)",
-      image: "../assets/3_adaptive.png",
-      desc: "Your tracker evolves with you — adjusting your workouts as you improve, stall, or regress to keep you moving forward."
+      image: "../assets/workout-summary.PNG",
+      desc: ""
     },
     {
       title: "Macro-Matched Meals (PT)",
-      image: "../assets/4_macro_matched.png",
-      desc: "No more guessing or tracking — meals are portioned to match your exact macros automatically and updated weekly."
+      image: "../assets/progress-tracking-2.PNG",
+      desc: ""
     },
-    {
-      title: "Flexible Logging, Your Way (PT)",
-      image: "../assets/5_flexible_logging.png",
-      desc: "Log in one tap, customize meals, or skip when needed — your tracker adjusts for you."
-    },
-    {
-      title: "Daily Streaks That Stick (CT)",
-      image: "../assets/6_daily_streaks.png",
-      desc: "Build streaks that unlock milestones — with encouragement that celebrates your wins and helps you stay on track when it counts."
-    },
-    {
-      title: "Your Fitness Story, Visualized (PT)",
-      image: "../assets/7_your_fitness_story.png",
-      desc: "Your tracker doesn't just log data — it highlights trends, flags issues, and offers insights like a coach who's always paying attention."
-    },
-    {
-      title: "Your Progress, Scored (PT)",
-      image: "../assets/8_your_progress.png",
-      desc: "One score that reflects your training, nutrition, and consistency — so you can see how far you’ve come."
-    }
+    // {
+    //   title: "Flexible Logging, Your Way (PT)",
+    //   image: "../assets/5_flexible_logging.png",
+    //   desc: "Log in one tap, customize meals, or skip when needed — your tracker adjusts for you."
+    // },
+    // {
+    //   title: "Daily Streaks That Stick (CT)",
+    //   image: "../assets/6_daily_streaks.png",
+    //   desc: "Build streaks that unlock milestones — with encouragement that celebrates your wins and helps you stay on track when it counts."
+    // },
+    // {
+    //   title: "Your Fitness Story, Visualized (PT)",
+    //   image: "../assets/7_your_fitness_story.png",
+    //   desc: "Your tracker doesn't just log data — it highlights trends, flags issues, and offers insights like a coach who's always paying attention."
+    // },
+    // {
+    //   title: "Your Progress, Scored (PT)",
+    //   image: "../assets/8_your_progress.png",
+    //   desc: "One score that reflects your training, nutrition, and consistency — so you can see how far you’ve come."
+    // }
   ];
 
   /***************************************************

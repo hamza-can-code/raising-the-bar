@@ -1070,6 +1070,67 @@ img {
     }
 }
 
+/* === Social‑proof banner ======================================= */
+/* === Social‑proof banner – BLUE palette ===================== */
+.app-social-proof{
+  /* soft vignette : centre‑light → edge‑cream‑beige */
+  background:radial-gradient(circle at 50% 0,
+             #f9f7f2  0%,     /* same as page bg */
+             #f3f0ea  35%,
+             #e8e4db 100%);
+  border:1px solid #ddd3c4;   /* hairline like other cards */
+  border-radius:8px;
+  box-shadow:0 2px 6px rgba(0,0,0,.06);
+  
+  color:#2d3748;              /* deep grey text */
+  text-align:center;
+  padding:54px 18px 60px;
+  margin:60px auto;
+  max-width:800px;
+  overflow:hidden;            /* tidy any long lines */
+}
+
+.asp-inner{max-width:520px;margin:0 auto}
+
+/* headline */
+.asp-headline{
+  margin:0 0 26px;
+  font-family:'Poppins',sans-serif;
+  font-weight:700;
+  font-size:1.75rem;
+  line-height:1.3
+}
+.asp-number{
+  font-size:2.2rem;
+  display:block;
+  color:#1a1a1a;              /* a touch darker for emphasis */
+}
+
+/* rating row */
+.asp-rating{
+  display:flex;align-items:center;justify-content:center;
+  flex-wrap:wrap;gap:18px;margin-bottom:20px;
+  font-family:'Poppins',sans-serif;font-weight:600
+}
+.asp-stars{
+  font-size:1.25rem;letter-spacing:2px;
+  color:#f4b400;              /* warm muted gold */
+}
+.asp-score{font-size:.9rem;opacity:.85}
+.asp-rating img{height:28px;width:auto;filter:grayscale(25%)}
+
+/* supporting line */
+.asp-reviews{
+  font-size:1rem;font-weight:600;opacity:.9;margin:0
+}
+
+/* phones */
+@media(max-width:480px){
+  .app-social-proof{padding:42px 14px 54px}
+  .asp-headline{font-size:1.5rem}
+  .asp-number{font-size:1.9rem}
+}
+
 .results-section {
     width: 90%;
     max-width: 800px;
