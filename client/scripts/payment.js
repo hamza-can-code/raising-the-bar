@@ -278,7 +278,7 @@ stripeJs = stripeJs || stripe(STRIPE_PK);
       const pr = stripeJs.paymentRequest({
       country: 'GB',
       currency: 'gbp',
-      total: { label: '12-Week Plan', amount: discounted ? 99 : 2999 },
+      total: { label: '12-Week Plan', amount: discounted ? 99 : 4999 },
       requestPayerName: true,
       requestPayerEmail: true
     });
