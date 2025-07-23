@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error(body.message || "Login failed");
       }
 
-      // ✅ on success
+      // ✅ on successs
       localStorage.setItem("token", body.token);
       localStorage.setItem("dashboardVisited", "true");
 

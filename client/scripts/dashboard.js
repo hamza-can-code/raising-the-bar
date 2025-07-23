@@ -77,7 +77,7 @@ function fadeOutLoader() {
   }
 })();
 
-// async function decideProStatus(token) {
+// async function decideProStatus(token)) {
 //   const planFromLS = localStorage.getItem('planName') || '';
 
 //   /* 1)  quick front-end guess so the UI doesn’t flash blank  */
