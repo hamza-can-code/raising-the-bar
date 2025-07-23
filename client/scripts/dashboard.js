@@ -32,7 +32,7 @@ function fadeOutLoader() {
   startIdlePulse();
 
   const token = localStorage.getItem('token');
-  if (!token) { location.href = 'log-in.html'; return; }
+  if (!token) { location.href = 'log-in-dashboard.html'; return; }
 
   try {
     const res = await fetch('/api/auth/me', {
@@ -73,7 +73,7 @@ function fadeOutLoader() {
   } catch (err) {
     // console.error('❌ Boot error:', err);
     localStorage.removeItem('token');
-    location.href = 'log-in.html';
+    location.href = 'log-in-dashboard.html';
   }
 })();
 
