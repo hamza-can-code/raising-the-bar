@@ -406,7 +406,7 @@ window.addEventListener('DOMContentLoaded', fetchPurchasedWeeks);
   startIdlePulse();
 
   const token = localStorage.getItem('token');
-  if (!token) { location.href = 'log-in.html'; return; }
+  if (!token) { location.href = 'log-in-dashboard.html'; return; }
 
   try {
     const res = await fetch('/api/auth/me', {
@@ -443,7 +443,7 @@ window.addEventListener('DOMContentLoaded', fetchPurchasedWeeks);
   } catch (err) {
     // console.error('[NT boot]', err);
     localStorage.removeItem('token');
-    location.href = 'log-in.html';
+    location.href = 'log-in-dashboard.html';
   }
 })();
 

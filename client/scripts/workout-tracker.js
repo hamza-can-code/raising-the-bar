@@ -575,7 +575,7 @@ window.addEventListener('DOMContentLoaded', fetchPurchasedWeeks);
   startIdlePulse();
 
   const token = localStorage.getItem('token');
-  if (!token) { location.href = 'log-in.html'; return; }
+  if (!token) { location.href = 'log-in-dashboard.html'; return; }
 
   try {
     /* 1 · auth-check once */
@@ -616,7 +616,7 @@ window.addEventListener('DOMContentLoaded', fetchPurchasedWeeks);
   } catch (err) {
     // console.error('[WT boot]', err);
     localStorage.removeItem('token');
-    location.href = 'log-in.html';
+    location.href = 'log-in-dashboard.html';
   }
 })();
 
