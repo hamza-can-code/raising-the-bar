@@ -578,7 +578,8 @@
         By proceeding, you confirm that you’ve read and agree to our
         <a href="tos.html" target="_blank">terms of service</a> and
         <a href="refund-policy.html" target="_blank">refund policy</a>.
-        If you choose the 12-Week Plan, it renews at £49.99/month unless cancelled. Cancellations take effect at the end of the current billing cycle.
+        If you choose the 12-Week Plan, it renews at <span class="renew-amt"></span>/month unless cancelled. Cancellations take effect at the end
+        of the current billing cycle.
       </p>
 
   </section>
@@ -1024,6 +1025,37 @@
         }
       }
     });
+  </script>
+  <script>
+    // Lightweight currency bootstrap (v1)
+    ; (function () {
+      const saved = localStorage.getItem('rtb_currency');
+      if (saved) { window.RTB_CURRENCY = JSON.parse(saved); return; }
+
+      // Minimal map for initial regions. Extend as you add markets.
+      const COUNTRY_TO_CURRENCY = {
+        SE: { code: 'SEK', symbol: 'kr', minor: 2, fxFromGBP: 13.50 }, // 1 GBP ≈ 13.5 SEK (update periodically)
+        US: { code: 'USD', symbol: '$', minor: 2, fxFromGBP: 1.30 },
+        GB: { code: 'GBP', symbol: '£', minor: 2, fxFromGBP: 1.00 },
+        IE: { code: 'EUR', symbol: '€', minor: 2, fxFromGBP: 1.18 },
+        DE: { code: 'EUR', symbol: '€', minor: 2, fxFromGBP: 1.18 },
+        FR: { code: 'EUR', symbol: '€', minor: 2, fxFromGBP: 1.18 },
+        AU: { code: 'AUD', symbol: '$', minor: 2, fxFromGBP: 1.95 },
+        CA: { code: 'CAD', symbol: '$', minor: 2, fxFromGBP: 1.75 }
+      };
+
+      function pickByLocale() {
+        try {
+          const loc = Intl.DateTimeFormat().resolvedOptions().locale || '';
+          const cc = (loc.split('-')[1] || '').toUpperCase();
+          if (COUNTRY_TO_CURRENCY[cc]) return { country: cc, ...COUNTRY_TO_CURRENCY[cc] };
+        } catch { }
+        return { country: 'GB', ...COUNTRY_TO_CURRENCY.GB };
+      }
+
+      window.RTB_CURRENCY = pickByLocale();
+      localStorage.setItem('rtb_currency', JSON.stringify(window.RTB_CURRENCY));
+    })();
   </script>
   <script src="../scripts/offer.js"></script>
   <!-- leave Stripe.js -->

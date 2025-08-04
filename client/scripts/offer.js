@@ -19,6 +19,109 @@ function fadeOutLoader() {
   overlay.classList.add('fade-out');
   overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
 }
+window.RTB_PRICE_TABLE = {
+  GBP: { full: 49.99, intro: 0.99 },
+  USD: { full: 64.99, intro: 0.99 },
+  EUR: { full: 59.99, intro: 0.99 },
+  SEK: { full: 699, intro: 9 },
+  NOK: { full: 699, intro: 9 },
+  DKK: { full: 449, intro: 9 },
+  CHF: { full: 59.99, intro: 0.99 },
+  AUD: { full: 94.99, intro: 0.99 },
+  NZD: { full: 99.99, intro: 0.99 },
+  CAD: { full: 87.99, intro: 0.99 },
+  SGD: { full: 84.99, intro: 0.99 },
+  HKD: { full: 499, intro: 9 },
+  JPY: { full: 7900, intro: 99 },
+  INR: { full: 3999, intro: 99 },
+  BRL: { full: 259.99, intro: 4.99 },
+  MXN: { full: 1199, intro: 19 },
+};
+
+function getCurrency() {
+  return window.RTB_CURRENCY || { code: 'GBP', symbol: '£', minor: 2, country: 'GB' };
+}
+function pickLocaleForCurrency(code, country) {
+  const map = {
+    GBP: 'en-GB',
+    USD: 'en-US',
+    EUR: 'de-DE',   // choose one; change to 'fr-FR', 'en-IE', etc if you prefer
+    SEK: 'sv-SE',
+    NOK: 'nb-NO',
+    DKK: 'da-DK',
+    CHF: 'de-CH',
+    AUD: 'en-AU',
+    NZD: 'en-NZ',
+    CAD: 'en-CA',
+    SGD: 'en-SG',
+    HKD: 'zh-HK',
+    JPY: 'ja-JP',
+    INR: 'en-IN',
+    BRL: 'pt-BR',
+    MXN: 'es-MX',
+  };
+  // fallbacks: use currency map, else country, else browser
+  return map[code] || (country ? `en-${country}` : (navigator.language || 'en-GB'));
+}
+
+function fmt(code, amount) {
+  const { country } = getCurrency();
+  const locale = pickLocaleForCurrency(code, country);
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: code,
+    currencyDisplay: 'narrowSymbol' // => $, kr, €, etc (no “USD/SEK”)
+  }).format(amount);
+}
+function getLocalPrices() {
+  const code = getCurrency().code;
+  return { code, ...((window.RTB_PRICE_TABLE && window.RTB_PRICE_TABLE[code]) || window.RTB_PRICE_TABLE.GBP) };
+}
+function toLocal(amountGbp) {
+  const c = getCurrency();
+  return amountGbp * (c.fxFromGBP || 1);
+}
+function formatLocal(amountGbp) {
+  const c = getCurrency();                 // { code, minor, country, … }
+  const v = toLocal(amountGbp);
+  const locale = pickLocaleForCurrency(c.code, c.country);
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: c.code,
+    currencyDisplay: 'narrowSymbol',
+    minimumFractionDigits: c.minor,
+    maximumFractionDigits: c.minor
+  }).format(v);
+}
+function localizeProTrackerCard() {
+  const dealOn = document.body.classList.contains('discount-active');
+  const card = document.querySelector('.offer-card[data-program="new"]');
+  if (!card) return;
+
+  const fullEl = document.getElementById('priceSpecialFull');
+  const discEl = document.getElementById('priceSpecialDiscount');
+  const ccyTag = card.querySelector('.currency-tag');
+  const perDayEl = document.getElementById('costPerDaySpecial');
+
+  const { code, full, intro } = getLocalPrices();
+
+  if (fullEl) fullEl.textContent = fmt(code, full);
+  if (discEl) discEl.textContent = dealOn ? fmt(code, intro) : '';
+  if (ccyTag) ccyTag.textContent = code;
+
+  const shown = dealOn ? intro : full;
+  if (perDayEl) perDayEl.textContent = fmt(code, shown / 30);
+
+  // keep a human-readable cache for summaries
+  localStorage.setItem('planPrice', dealOn ? fmt(code, intro) : fmt(code, full));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const { code, full } = getLocalPrices();
+  document.querySelectorAll('.renew-amt').forEach(el => {
+    el.textContent = fmt(code, full);
+  });
+});
 
 const userId = localStorage.getItem('userId');
 
@@ -1060,12 +1163,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const el = document.querySelector('.pricing-justification');
     if (!el) return;
 
-    if (document.body.classList.contains('discount-active')) {
+    const dealOn = document.body.classList.contains('discount-active');
+    const { code, full, intro } = getLocalPrices();
+
+    if (dealOn) {
       el.innerHTML =
-        'Normally £49.99 — now just <strong>99p</strong>. 🎉 <strong>Trial offer</strong> — get the <strong>full 12-Week Plan</strong>, like a trainer in your pocket, for 3p a day.';
+        `Normally ${fmt(code, full)} — now just <strong>${fmt(code, intro)}</strong>. ` +
+        `🎉 <strong>Trial offer</strong> — get the full 12-Week Plan for ${fmt(code, intro / 30)} a day.`;
     } else {
-      el.textContent =
-        'Like having a personal trainer in your pocket — for less than the cost of one session.';
+      el.textContent = 'Like having a personal trainer in your pocket — for less than the cost of one session.';
     }
   }
 
@@ -1127,7 +1233,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const currencyTagSpecial = document.querySelector('[data-program="new"] .currency-tag');
     const perDaySpecial = document.querySelector('[data-program="new"] .per-day');
     if (costPerDaySpecial && currencyTagSpecial && perDaySpecial) {
-      costPerDaySpecial.textContent = "£" + (0.99 / 30).toFixed(2);
+      const { code, intro } = getLocalPrices();
+      costPerDaySpecial.textContent = fmt(code, intro / 30);
       currencyTagSpecial.style.display = "block";
     }
   }
@@ -1136,45 +1243,51 @@ document.addEventListener("DOMContentLoaded", function () {
   updateTimer();
   updatePricingJustification();
   updatePlanSummary();
+  localizeProTrackerCard();
   return;
 });
 
 function removeDiscountPricing() {
-  // For 1-Week Program: revert to full price (e.g., £14.99 with cost per day £2.14)
-  const price1WeekFull = document.getElementById("price1WeekFull");
-  const price1WeekDiscount = document.getElementById("price1WeekDiscount");
-  const costPerDay1Week = document.getElementById("costPerDay1Week");
+  // 1-Week Program (if present) → revert to full price view
+  const price1WeekFull = document.getElementById('price1WeekFull');
+  const price1WeekDiscount = document.getElementById('price1WeekDiscount');
+  const costPerDay1Week = document.getElementById('costPerDay1Week');
   const currencyTag1Week = document.querySelector('[data-program="1-week"] .currency-tag');
   const perDay1Week = document.querySelector('[data-program="1-week"] .per-day');
-  if (price1WeekFull && price1WeekDiscount && costPerDay1Week) {
-    // Remove strikethrough to show full price
-    price1WeekFull.style.textDecoration = "none";
-    // Hide discount price element for 1-week
-    price1WeekDiscount.style.display = "none";
-    // Set cost per day for 1-week full price (example value, adjust if needed)
-    costPerDay1Week.textContent = "£2.14";
-    if (currencyTag1Week) currencyTag1Week.style.display = "block";
+
+  if (price1WeekFull && costPerDay1Week) {
+    // Remove strikethrough and hide discounted label if it exists
+    price1WeekFull.style.textDecoration = 'none';
+    if (price1WeekDiscount) price1WeekDiscount.style.display = 'none';
+
+    // Try to parse a base GBP amount from data attribute or text
+    let baseGbp = null;
+    const holder = price1WeekFull.closest('.full-price');
+    const dataAttr = holder?.getAttribute('data-full-price') || '';
+    const txt = price1WeekFull.textContent || dataAttr || '';
+    const m = txt.replace(',', '').match(/([0-9]+(\.[0-9]+)?)/);
+    if (m) baseGbp = parseFloat(m[1]);
+
+    // If we found a GBP amount, format locally and compute per-day over 7 days
+    if (typeof formatLocal === 'function' && typeof toLocal === 'function' && baseGbp) {
+      price1WeekFull.textContent = formatLocal(baseGbp);
+      const perDayLocal = toLocal(baseGbp) / 7;
+      costPerDay1Week.textContent = new Intl.NumberFormat(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(perDayLocal);
+    }
+
+    if (currencyTag1Week) currencyTag1Week.style.display = 'block';
     if (perDay1Week) {
-      perDay1Week.style.display = "block";
-      perDay1Week.textContent = "per day";
+      perDay1Week.style.display = 'block';
+      perDay1Week.textContent = 'per day';
     }
   }
 
-  // For Pro Tracker Subscription (special card):
-  const priceSpecialFull = document.getElementById("priceSpecialFull");
-  const priceSpecialDiscount = document.getElementById("priceSpecialDiscount");
-  const costPerDaySpecial = document.getElementById("costPerDaySpecial");
-  const currencyTagSpecial = document.querySelector('[data-program="new"] .currency-tag');
-  const perDaySpecial = document.querySelector('[data-program="new"] .per-day');
-  if (priceSpecialFull && priceSpecialDiscount && costPerDaySpecial) {
-    // Remove the strikethrough (so full price is visible)
-    priceSpecialFull.style.textDecoration = "none";
-    // Hide the discounted price element
-    priceSpecialDiscount.style.display = "none";
-    // Set the cost to the full price value (£29.99) for the subscription
-    costPerDaySpecial.textContent = "£1.67";
-    // Calculate cost per day based on full price: 29.99/30
-    if (currencyTagSpecial) currencyTagSpecial.style.display = "block";
+  // Pro Tracker Subscription → revert to full price in local currency
+  if (typeof localizeProTrackerCard === 'function') {
+    localizeProTrackerCard();
   }
 }
 
@@ -2125,12 +2238,12 @@ window.addEventListener('popstate', () => {
   if (!paymentSection) return;
 
   const open = !paymentSection.classList.contains('preload-hide') &&
-               paymentSection.style.display !== 'none';
+    paymentSection.style.display !== 'none';
 
   if (open) {
     paymentSection.classList.add('preload-hide');
     paymentSection.style.display = 'none';
-    document.getElementById('postPayNote')?.style.setProperty('display','none');
+    document.getElementById('postPayNote')?.style.setProperty('display', 'none');
     cardsSection.style.display = 'flex';
     // neutralize the pushed state
     if (history.state && history.state.paymentOpen) {
@@ -2161,23 +2274,20 @@ function extractDisplayedPrice(card) {
 function updatePlanSummary() {
   const el = document.getElementById('planSummary');
   const planName = localStorage.getItem('planName') || 'Your plan';
-  const card = getSelectedCard();
-  const price = extractDisplayedPrice(card);
   const dealOn = document.body.classList.contains('discount-active');
+  const { code, full, intro } = getLocalPrices();
 
-  /* Pro‑Tracker needs the crossed‑out £29.99 during the deal */
   if (planName === 'Pro Tracker' && dealOn) {
     el.innerHTML = `
       <span class="plan-name">${planName}</span>
       <span class="plan-divider">–</span>
-      <span class="old-price">£49.99</span>
-      <span class="new-price">${price}</span>`;
+      <span class="old-price">${fmt(code, full)}</span>
+      <span class="new-price">${fmt(code, intro)}</span>`;
+    localStorage.setItem('planPrice', fmt(code, intro));
   } else {
-    el.textContent = `${planName} – ${price}`;
+    el.textContent = `${planName} – ${fmt(code, dealOn ? intro : full)}`;
+    localStorage.setItem('planPrice', fmt(code, dealOn ? intro : full));
   }
-
-  /* keep the cache in sync for anything else that still reads it */
-  localStorage.setItem('planPrice', price);
 }
 
 // call it once on load
@@ -2231,6 +2341,11 @@ document.addEventListener('DOMContentLoaded', () => {
   bar.addEventListener('click', e => {
     if (e.target.tagName === 'BUTTON') show(e.target.dataset.pay);
   });
+
+  const p = document.getElementById('offerDisclaimer');
+  if (!p) return;
+  const { code, full } = getLocalPrices();
+  p.innerHTML = p.innerHTML.replace(/£49\.99\/month/g, `${fmt(code, full)}/month`);
 
   show('paypal');                         // default view
 });
