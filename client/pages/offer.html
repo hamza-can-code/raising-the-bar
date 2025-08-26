@@ -628,7 +628,7 @@
             // Dynamically load the SDK and attach the client token on the script tag
             await new Promise((resolve, reject) => {
               const s = document.createElement('script');
-              s.src = 'https://www.paypal.com/sdk/js?client-id=AcygnP6DJSFGbIeyUa2BdGdznCQQk-qXjMEMijIZJeTbzkIltNVCGL5k1i2DdcNR24qoGTDPF_FD_VQ8&vault=true&intent=capture&components=buttons&currency=GBP';
+              s.src = 'https://www.paypal.com/sdk/js?client-id=AcygnP6DJSFGbIeyUa2BdGdznCQQk-qXjMEMijIZJeTbzkIltNVCGL5k1i2DdcNR24qoGTDPF_FD_VQ8&vault=true&intent=capture&components=buttons&currency=GBP&disable-funding=card,credit';
               s.setAttribute('data-client-token', client_token);
               s.onload = resolve;
               s.onerror = () => reject(new Error('PayPal SDK failed to load'));
@@ -726,12 +726,12 @@
         ✅ <strong>After payment, your 12‑Week Plan unlocks immediately</strong> – you’ll be taken to your dashboard.
 
         <!-- ↓  wrap just this sentence ↓ -->
-        <span id="paypalCancelNote" style="display:none;">
+        <!-- <span id="paypalCancelNote" style="display:none;">
           <br><br>💡 <strong>Just 99p. Cancel anytime via</strong>
           <a href="mailto:info@raisingthebarapp.com" style="font-weight:600;color:#007bff;text-decoration:underline;">
             info@raisingthebarapp.com
           </a> — you’ll keep access for 30 days.
-        </span>
+        </span> -->
       </p>
       <p id="cardError" class="error"></p>
     </section>
