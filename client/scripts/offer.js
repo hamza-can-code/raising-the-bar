@@ -2308,46 +2308,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* ---------- PayPal ⇆ Card tab switcher – standalone ---------------- */
 document.addEventListener('DOMContentLoaded', () => {
-  const bar = document.getElementById('pay-toggle');        // two buttons
-  if (!bar) return;                                                // safety
+  const bar = document.getElementById('pay-toggle');        // container with the two buttons
+  if (!bar) return;
 
-  const slider = bar.querySelector('.toggle-slider');
-  const marks = document.getElementById('paypalMarkContainer');
-  const ppBtnWrap = document.getElementById('paypal-btn');        // where SDK rendered
-  const ppBuyNow = document.getElementById('paypalBuyNowBtn');   // purple proxy
-  const stripeForm = document.getElementById('paymentForm');
+  const slider     = bar.querySelector('.toggle-slider');   // the moving underline
+  const marks      = document.getElementById('paypalMarkContainer'); // may be null (you've commented it out)
+  const ppBtnWrap  = document.getElementById('paypal-btn');          // where PayPal SDK renders
+  const stripeForm = document.getElementById('paymentForm');         // Stripe form
 
   function show(tab) {
-    /* highlight the active tab */
+    // highlight active tab
     bar.querySelectorAll('button').forEach(b =>
-      b.classList.toggle('active', b.dataset.pay === tab));
+      b.classList.toggle('active', b.dataset.pay === tab)
+    );
 
-    /* move the coloured slider */
-    slider.style.left = tab === 'paypal'
-      ? 'var(--pad)'               // left half
-      : 'calc(50% + var(--pad))';  // right half
+    // move slider if it exists
+    if (slider) {
+      slider.style.left = tab === 'paypal' ? 'var(--pad)' : 'calc(50% + var(--pad))';
+    }
 
-    /* flip visibility */
-    const pp = tab === 'paypal';
-    marks.style.display = pp ? 'block' : 'none';
-
-    /* 👇 this line was commented out – needs to run */
-    ppBtnWrap.style.display = pp ? 'block' : 'none';
-
-    ppBuyNow.style.display = pp ? 'block' : 'none';
-    stripeForm.style.display = pp ? 'none' : 'block';
+    // flip visibility (guard nulls)
+    const isPaypal = tab === 'paypal';
+    if (marks)      marks.style.display     = isPaypal ? 'block' : 'none';
+    if (ppBtnWrap)  ppBtnWrap.style.display = isPaypal ? 'block' : 'none';
+    if (stripeForm) stripeForm.style.display = isPaypal ? 'none'  : 'block';
   }
 
-  bar.addEventListener('click', e => {
-    if (e.target.tagName === 'BUTTON') show(e.target.dataset.pay);
+  bar.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-pay]');
+    if (btn) show(btn.dataset.pay);
   });
 
+  // replace hard-coded £49.99/month text with localized value
   const p = document.getElementById('offerDisclaimer');
-  if (!p) return;
-  const { code, full } = getLocalPrices();
-  p.innerHTML = p.innerHTML.replace(/£49\.99\/month/g, `${fmt(code, full)}/month`);
+  if (p) {
+    const { code, full } = getLocalPrices();
+    p.innerHTML = p.innerHTML.replace(/£49\.99\/month/g, `${fmt(code, full)}/month`);
+  }
 
-  show('paypal');                         // default view
+  show('paypal'); // default to PayPal on load
 });
 
 const bodyFatRanges = {
