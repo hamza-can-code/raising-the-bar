@@ -20,22 +20,22 @@ function fadeOutLoader() {
   overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
 }
 window.RTB_PRICE_TABLE = {
-  GBP: { full: 49.99, intro: 0.99 },
-  USD: { full: 64.99, intro: 0.99 },
-  EUR: { full: 59.99, intro: 0.99 },
-  SEK: { full: 699, intro: 9 },
-  NOK: { full: 699, intro: 9 },
-  DKK: { full: 449, intro: 9 },
-  CHF: { full: 59.99, intro: 0.99 },
-  AUD: { full: 94.99, intro: 0.99 },
-  NZD: { full: 99.99, intro: 0.99 },
-  CAD: { full: 87.99, intro: 0.99 },
-  SGD: { full: 84.99, intro: 0.99 },
-  HKD: { full: 499, intro: 9 },
-  JPY: { full: 7900, intro: 99 },
-  INR: { full: 3999, intro: 99 },
-  BRL: { full: 259.99, intro: 4.99 },
-  MXN: { full: 1199, intro: 19 },
+  GBP: { full: 49.99, intro: 0 },
+  USD: { full: 64.99, intro: 0 },
+  EUR: { full: 59.99, intro: 0 },
+  SEK: { full: 699, intro: 0 },
+  NOK: { full: 699, intro: 0 },
+  DKK: { full: 449, intro: 0 },
+  CHF: { full: 59.99, intro: 0 },
+  AUD: { full: 94.99, intro: 0 },
+  NZD: { full: 99.99, intro: 0 },
+  CAD: { full: 87.99, intro: 0 },
+  SGD: { full: 84.99, intro: 0 },
+  HKD: { full: 499, intro: 0 },
+  JPY: { full: 7900, intro: 0 },
+  INR: { full: 3999, intro: 0 },
+  BRL: { full: 259.99, intro: 0 },
+  MXN: { full: 1199, intro: 0 },
 };
 
 function getCurrency() {
@@ -114,6 +114,7 @@ function localizeProTrackerCard() {
 
   // keep a human-readable cache for summaries
   localStorage.setItem('planPrice', dealOn ? fmt(code, intro) : fmt(code, full));
+  localStorage.setItem('planPriceFull', fmt(code, full));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1169,7 +1170,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (dealOn) {
       el.innerHTML =
         `Normally ${fmt(code, full)} — now just <strong>${fmt(code, intro)}</strong>. ` +
-        `🎉 <strong>Trial offer</strong> — get the full 12-Week Plan for ${fmt(code, intro / 30)} a day.`;
+        `🎉 <strong>Free trial</strong> — get the full 12-Week Plan for ${fmt(code, intro / 30)}.`;
     } else {
       el.textContent = 'Like having a personal trainer in your pocket — for less than the cost of one session.';
     }
@@ -2264,7 +2265,7 @@ function extractDisplayedPrice(card) {
   if (!card) return '';
   const disc = card.querySelector('.discount-price');
   if (disc && getComputedStyle(disc).display !== 'none') {
-    return disc.textContent.trim();        // £0.99 (discount still live)
+    return disc.textContent.trim();        // £0.00 (discount still live)
   }
   const full = card.querySelector('.full-price span')
     || card.querySelector('.full-price');
@@ -2308,36 +2309,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* ---------- PayPal ⇆ Card tab switcher – standalone ---------------- */
 document.addEventListener('DOMContentLoaded', () => {
-  const bar = document.getElementById('pay-toggle');        // container with the two buttons
-  if (!bar) return;
+  // const bar = document.getElementById('pay-toggle');        // container with the two buttons
+  // if (!bar) return;
 
-  const slider     = bar.querySelector('.toggle-slider');   // the moving underline
-  const marks      = document.getElementById('paypalMarkContainer'); // may be null (you've commented it out)
-  const ppBtnWrap  = document.getElementById('paypal-btn');          // where PayPal SDK renders
-  const stripeForm = document.getElementById('paymentForm');         // Stripe form
+  // const slider     = bar.querySelector('.toggle-slider');   // the moving underline
+  // const marks      = document.getElementById('paypalMarkContainer'); // may be null (you've commented it out)
+  // const ppBtnWrap  = document.getElementById('paypal-btn');          // where PayPal SDK renders
+  // const stripeForm = document.getElementById('paymentForm');         // Stripe form
 
-  function show(tab) {
-    // highlight active tab
-    bar.querySelectorAll('button').forEach(b =>
-      b.classList.toggle('active', b.dataset.pay === tab)
-    );
+  // function show(tab) {
+  //   // highlight active tab
+  //   bar.querySelectorAll('button').forEach(b =>
+  //     b.classList.toggle('active', b.dataset.pay === tab)
+  //   );
 
-    // move slider if it exists
-    if (slider) {
-      slider.style.left = tab === 'paypal' ? 'var(--pad)' : 'calc(50% + var(--pad))';
-    }
+  //   // move slider if it exists
+  //   if (slider) {
+  //     slider.style.left = tab === 'paypal' ? 'var(--pad)' : 'calc(50% + var(--pad))';
+  //   }
 
-    // flip visibility (guard nulls)
-    const isPaypal = tab === 'paypal';
-    if (marks)      marks.style.display     = isPaypal ? 'block' : 'none';
-    if (ppBtnWrap)  ppBtnWrap.style.display = isPaypal ? 'block' : 'none';
-    if (stripeForm) stripeForm.style.display = isPaypal ? 'none'  : 'block';
-  }
+  //   // flip visibility (guard nulls)
+  //   const isPaypal = tab === 'paypal';
+  //   if (marks)      marks.style.display     = isPaypal ? 'block' : 'none';
+  //   if (ppBtnWrap)  ppBtnWrap.style.display = isPaypal ? 'block' : 'none';
+  //   if (stripeForm) stripeForm.style.display = isPaypal ? 'none'  : 'block';
+  // }
 
-  bar.addEventListener('click', (e) => {
-    const btn = e.target.closest('button[data-pay]');
-    if (btn) show(btn.dataset.pay);
-  });
+  // bar.addEventListener('click', (e) => {
+  //   const btn = e.target.closest('button[data-pay]');
+  //   if (btn) show(btn.dataset.pay);
+  // });
+
+    const stripeForm = document.getElementById('paymentForm');
+  if (stripeForm) stripeForm.style.display = 'block';
 
   // replace hard-coded £49.99/month text with localized value
   const p = document.getElementById('offerDisclaimer');
@@ -2346,7 +2350,7 @@ document.addEventListener('DOMContentLoaded', () => {
     p.innerHTML = p.innerHTML.replace(/£49\.99\/month/g, `${fmt(code, full)}/month`);
   }
 
-  show('paypal'); // default to PayPal on load
+  // show('paypal'); // default to PayPal on load
 });
 
 const bodyFatRanges = {

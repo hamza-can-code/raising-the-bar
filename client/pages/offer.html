@@ -518,7 +518,7 @@
           <div class="duration"><strong>Pro Tracker</strong></div>
           <div class="full-price" data-full-price="£49.99">
             <span class="price-strikethrough" id="priceSpecialFull">£49.99</span>
-            <span class="discount-price" id="priceSpecialDiscount">£0.99</span>
+            <span class="discount-price" id="priceSpecialDiscount">£0.00</span>
           </div>
           <div class="best-seller-banner">
             <strong><span class="crown-emoji">👑</span> <span class="banner-text">BEST VALUE</span></strong>
@@ -588,35 +588,32 @@
       <span id="paymentCloseBtn" class="payment-close" aria-label="Close">&times;</span>
 
       <!-- tab header -->
-      <div id="pay-toggle" class="pay-toggle" role="tablist">
+      <!-- <div id="pay-toggle" class="pay-toggle" role="tablist">
         <button type="button" data-pay="paypal" class="toggle-btn active" role="tab" aria-selected="true">
           <img src="../assets/paypal-mark.webp" alt="" class="pay-pill-icon" />
           PayPal
         </button>
-
-        <!-- Card / Apple Pay / G Pay tab -->
         <button type="button" data-pay="card" class="toggle-btn" role="tab" aria-selected="false">
           Card
           <img src="../assets/apple-pay-mark.webp" alt="Apple Pay" class="pay-pill-icon" />
           <img src="../assets/google-gpay.webp" alt="Google Pay" class="pay-pill-icon" />
         </button>
-
-        <!-- this is the coloured slider that slides under the active button -->
         <span class="toggle-slider" aria-hidden="true"></span>
-      </div>
+      </div> -->
+
       <p id="planSummary" class="plan-summary"></p>
       <!-- PayPal -->
       <!-- <div id="paypalMarkContainer" style="margin-top:20px;"></div> -->
 
       <!-- keep this: SDK renders the real button inside -->
-      <div id="paypal-button-container" class="visually-hidden"></div>
+      <!-- <div id="paypal-button-container" class="visually-hidden"></div> -->
 
       <!-- PayPal SDK: GBP, vault, capture, buttons -->
       <!-- <script
         src="https://www.paypal.com/sdk/js?client-id=AcygnP6DJSFGbIeyUa2BdGdznCQQk-qXjMEMijIZJeTbzkIltNVCGL5k1i2DdcNR24qoGTDPF_FD_VQ8&vault=true&intent=capture&components=buttons&currency=GBP"></script> -->
 
       <!-- Where the button will render -->
-      <div id="paypal-btn" style="margin-top:16px;"></div>
+      <!-- <div id="paypal-btn" style="margin-top:16px;"></div>
       <script>
         document.addEventListener('DOMContentLoaded', async () => {
           try {
@@ -638,10 +635,11 @@
             // Now render the button
             paypal.Buttons({
               createOrder: async () => {
+                const currency = (window.RTB_CURRENCY?.code || 'GBP');
                 const r = await fetch('/api/paypal/create-order-otp', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ amount: '0.99' })
+                  body: JSON.stringify({ currency })
                 });
                 if (!r.ok) throw new Error('create-order failed: ' + (await r.text()));
                 const { id } = await r.json();
@@ -657,16 +655,21 @@
                 console.log('vault_id:', vault_id);
 
                 const userId = localStorage.getItem('userId');
+                       const currency = (window.RTB_CURRENCY?.code || 'GBP');
+                const renewAmount = (window.RTB_PRICE_TABLE?.[currency]?.full) || 49.99;
+                const payload = {
+                  userId,
+                  vault_id,
+                  orderID: data.orderID,
+                  captureID: capture?.purchase_units?.[0]?.payments?.captures?.[0]?.id,
+                  currency,
+                  renewAmount
+                };
                 if (vault_id && vault_status === 'VAULTED') {
                   await fetch('/api/paypal/save-vault', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                      userId,
-                      vault_id,
-                      orderID: data.orderID,
-                      captureID: capture?.purchase_units?.[0]?.payments?.captures?.[0]?.id
-                    })
+body: JSON.stringify(payload)
                   });
                 } else {
                   console.log('Vaulting pending (status:', vault_status, '). Will be saved via webhook.');
@@ -675,12 +678,7 @@
                   await fetch('/api/paypal/save-vault', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                      userId,
-                      vault_id,
-                      orderID: data.orderID,
-                      captureID: capture?.purchase_units?.[0]?.payments?.captures?.[0]?.id
-                    })
+body: JSON.stringify(payload)
                   });
                 } catch (e) {
                   console.warn('save-vault failed (non-blocking)', e);
@@ -699,7 +697,7 @@
             alert('Could not initialise PayPal. Please refresh and try again.');
           }
         });
-      </script>
+      </script> -->
 
 
       <!-- Stripe -->

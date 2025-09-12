@@ -90,6 +90,7 @@
   let stripeJs;
   let elements;        // ← Stripe Elements instance (lazy-created)
   let clientSecret;    // ← from /api/create-subscription-intent
+  let intentType = 'payment';
   function isDiscountActive() {
     const end = Number(localStorage.getItem('discountEndTime') || 0);
     return end > Date.now();
@@ -127,113 +128,6 @@
     payPanel.classList.remove('hidden');
     requestAnimationFrame(() => payPanel.classList.add('slide-in'));
   }
-
-  /* ——————————————————————————————————————————————————————————— */
-  /* 6.  “Continue” click                                          */
-  /* ——————————————————————————————————————————————————————————— */
-
-  // continueBtn.addEventListener('click', async () => {
-  //   const email = await getCustomerEmail();
-  //   if (!email) { showError('Email missing – please log in again.'); return; }
-
-  //   continueBtn.disabled = true;
-
-  //   const { clientSecret: secret, error } = await fetch(
-  //     '/api/create-subscription-intent',
-  //     {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       // body: JSON.stringify({ email, discounted: true })
-  //       body: JSON.stringify({ email, discounted: isDiscountActive() })
-  //     }
-  //   ).then(r => r.json());
-
-  //   if (error) { showError(error); continueBtn.disabled = false; return; }
-  //   clientSecret = secret;
-
-  //   if (!stripeJs) stripeJs = stripe(STRIPE_PK);   // hoisted ✔
-  //   if (!elements) {
-  //     elements = stripeJs.elements({ clientSecret });
-  //     elements.create('payment').mount('#paymentElement');
-  //     if (!window.stripeJs) {
-  //       window.stripeJs = stripeJs;
-  //     }
-
-  //     // 2) Log when we call canMakePayment()
-  //     const paymentRequest = stripeJs.paymentRequest({
-  //       country: 'GB',          // or your selling country
-  //       currency: 'gbp',
-  //       total: {
-  //         label: '12-Week Plan',
-  //         amount: isDiscountActive() ? 99 : 2999
-  //       },
-  //       requestPayerName: true,
-  //       requestPayerEmail: true,
-  //     });
-
-  //     paymentRequest.canMakePayment().then(result => {
-  //       if (result) {
-  //         const prButton = elements.create('paymentRequestButton', {
-  //           paymentRequest,
-  //           style: {
-  //             paymentRequestButton: {
-  //               type: 'buy',      // other options: default, donate
-  //               theme: 'light',    // or dark / light‑outline
-  //               height: '44px'
-  //             }
-  //           }
-  //         });
-  //         prButton.mount('#payment-request-button');
-
-  //         // document.getElementById('paySubmitBtn').style.display = 'none';
-  //       } else {
-  //         /* Unsupported browser/device → hide empty div */
-  //         document.getElementById('payment-request-button').style.display = 'none';
-  //       }
-  //     });
-
-  //     /* Handle the wallet authorisation event */
-  //     paymentRequest.on('paymentmethod', async ev => {
-  //       try {
-  //         /* We already have clientSecret from your Continue‑button flow.
-  //            If user reached this screen some other way, fetch it now. */
-  //         if (!clientSecret) {
-  //           const email = await getCustomerEmail();            // your helper
-  //           const resp = await fetch('/api/create-subscription-intent', {
-  //             method: 'POST',
-  //             headers: { 'Content-Type': 'application/json' },
-  //             // body: JSON.stringify({ email, discounted: true })
-  //             body: JSON.stringify({ email, discounted: isDiscountActive() })
-  //           }).then(r => r.json());
-  //           if (resp.error) throw new Error(resp.error);
-  //           clientSecret = resp.clientSecret;
-  //         }
-
-  //         /* Tell Stripe to confirm using the wallet’s PaymentMethod */
-  //         const { error } = await stripeJs.confirmCardPayment(
-  //           clientSecret,
-  //           { payment_method: ev.paymentMethod.id },
-  //           { handleActions: true }      // Pops 3‑DS if required
-  //         );
-
-  //         if (error) {
-  //           ev.complete('fail');
-  //           showError(error.message);    // your existing helper
-  //           return;
-  //         }
-
-  //         ev.complete('success');
-  //         window.location.href = RETURN_URL;
-  //       } catch (err) {
-  //         ev.complete('fail');
-  //         showError(err.message);
-  //       }
-  //     });
-
-  //   }
-
-  //   // animatePanels();
-  // });
 
   function mountPaymentUI() {
     // Mount the unified Payment Element once; keep container hidden until Continue
@@ -275,6 +169,7 @@
       }
 
       clientSecret = resp.clientSecret;
+        intentType = resp.intentType || 'payment';
 
       stripeJs = stripeJs || stripe(STRIPE_PK);
       if (!elements) {
@@ -289,12 +184,12 @@
       if (!window.__STRIPE_WARM__?.pr) {
         // Read per-currency prices (from offer.js) or use a safe fallback table
         const PRICE = (window.RTB_PRICE_TABLE) || {
-          GBP: { full: 49.99, intro: 0.99 }, USD: { full: 64.99, intro: 0.99 }, EUR: { full: 59.99, intro: 0.99 },
-          SEK: { full: 699, intro: 9 }, NOK: { full: 699, intro: 9 }, DKK: { full: 449, intro: 9 },
-          CHF: { full: 59.99, intro: 0.99 }, AUD: { full: 94.99, intro: 0.99 }, NZD: { full: 99.99, intro: 0.99 },
-          CAD: { full: 87.99, intro: 0.99 }, SGD: { full: 84.99, intro: 0.99 }, HKD: { full: 499, intro: 9 },
-          JPY: { full: 7900, intro: 99 }, INR: { full: 3999, intro: 99 }, BRL: { full: 259.99, intro: 4.99 },
-          MXN: { full: 1199, intro: 19 }
+          GBP: { full: 49.99, intro: 0 }, USD: { full: 64.99, intro: 0 }, EUR: { full: 59.99, intro: 0 },
+          SEK: { full: 699, intro: 0 }, NOK: { full: 699, intro: 0 }, DKK: { full: 449, intro: 0 },
+          CHF: { full: 59.99, intro: 0 }, AUD: { full: 94.99, intro: 0 }, NZD: { full: 99.99, intro: 0 },
+          CAD: { full: 87.99, intro: 0 }, SGD: { full: 84.99, intro: 0 }, HKD: { full: 499, intro: 0 },
+          JPY: { full: 7900, intro: 0 }, INR: { full: 3999, intro: 0 }, BRL: { full: 259.99, intro: 0 },
+          MXN: { full: 1199, intro: 0 }
         };
 
         const row = PRICE[curr.code] || PRICE.GBP;
@@ -343,16 +238,25 @@
 
   async function walletHandler(ev) {
     try {
-      const { error } = await stripeJs.confirmCardPayment(
-        clientSecret,
-        { payment_method: ev.paymentMethod.id },
-        { handleActions: true }
-      );
-      if (error) {
+ let result;
+      if (intentType === 'setup') {
+        result = await stripeJs.confirmCardSetup(clientSecret, {
+          payment_method: ev.paymentMethod.id,
+        });
+      } else {
+        result = await stripeJs.confirmCardPayment(
+          clientSecret,
+          { payment_method: ev.paymentMethod.id },
+          { handleActions: true }
+        );
+      }
+
+      if (result.error) {
         ev.complete('fail');
-        showError(error.message);
+        showError(result.error.message);
         return;
       }
+
       ev.complete('success');
       window.location.href = RETURN_URL;
     } catch (err) {
@@ -430,18 +334,29 @@
       dots = dots % 3 + 1;
     }, 500);
 
-    const { error } = await stripeJs.confirmPayment({
-      elements,
-      redirect: 'always',              // 👈 optional but recommended
-      confirmParams: {
-        return_url: `${window.location.origin}/pages/dashboard.html`
-      }
-    });
+    let result;
+    if (intentType === 'setup') {
+      result = await stripeJs.confirmSetup({
+        elements,
+        redirect: 'always',
+        confirmParams: {
+          return_url: `${window.location.origin}/pages/dashboard.html`,
+        },
+      });
+    } else {
+      result = await stripeJs.confirmPayment({
+        elements,
+        redirect: 'always',              // 👈 optional but recommended
+        confirmParams: {
+          return_url: `${window.location.origin}/pages/dashboard.html`
+        }
+      });
+    }
 
     clearInterval(dotInterval);
     loadingEl.style.display = 'none';
 
-    if (error) showError(error.message);
+     if (result.error) showError(result.error.message);
   });
   function swapName() {
     const summaryEl = document.getElementById("planSummary");

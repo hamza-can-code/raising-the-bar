@@ -50,47 +50,46 @@ router.get('/client-token', async (_req, res) => {
   }
 });
 
-/** B) Create the £0.99 order and request vaulting (GBP only) */
+/** B) Create a £0 order (free 7‑day trial) and request vaulting */
 router.post('/create-order-otp', async (req, res) => {
   try {
     const { access_token } = await getAccessToken();
 
-    const price = process.env.INTRO_PRICE_GBP || '0.99';
-    const currency = 'GBP';
+const currency = (req.body.currency || 'GBP').toUpperCase();
 
     // Build return/cancel URLs from PUBLIC_BASE_URL (or current host)
     const origin = process.env.PUBLIC_BASE_URL || `${req.protocol}://${req.get('host')}`;
     const returnUrl = `${origin}/pages/dashboard.html`;
     const cancelUrl = `${origin}/pages/offer.html?paypal=cancelled`;
 
-const body = {
-  intent: 'CAPTURE',
-  purchase_units: [
-    {
-      reference_id: 'otp-099',
-        custom_id: req.userId || req.body.userId || 'unknown',
-      amount: { currency_code: 'GBP', value: price },
-      description: 'Intro month access'
-    }
-  ],
-  application_context: {
-    return_url: returnUrl,
-    cancel_url: cancelUrl,
-    user_action: 'PAY_NOW',
-    shipping_preference: 'NO_SHIPPING',
-    brand_name: 'Raising The Bar'
-  },
-  payment_source: {
-    paypal: {
-      attributes: {
-        vault: {
-          store_in_vault: 'ON_SUCCESS',
-          usage_type: 'MERCHANT'
-          // ❌ remove usage_pattern — it’s not accepted here
+    const body = {
+      intent: 'CAPTURE',
+      purchase_units: [
+        {
+          reference_id: 'trial-0',
+          custom_id: req.userId || req.body.userId || 'unknown',
+          amount: { currency_code: currency, value: '0.00' },
+          description: 'Free trial access'
+        }
+      ],
+      application_context: {
+        return_url: returnUrl,
+        cancel_url: cancelUrl,
+        user_action: 'PAY_NOW',
+        shipping_preference: 'NO_SHIPPING',
+        brand_name: 'Raising The Bar'
+      },
+      payment_source: {
+        paypal: {
+          attributes: {
+            vault: {
+              store_in_vault: 'ON_SUCCESS',
+              usage_type: 'MERCHANT'
+              // usage_pattern removed – not accepted here
+            }
+          }
         }
       }
-    }
-  }
 };
 
     const r = await fetchCompat(`${PP_BASE}/v2/checkout/orders`, {
@@ -190,19 +189,21 @@ router.get('/my-vault', async (req, res) => {
 router.post('/save-vault', async (req, res) => {
   try {
     console.log('🔹 save-vault payload:', req.body);
-    const { userId, vault_id } = req.body;
+    const { userId, vault_id, currency, renewAmount } = req.body;
     if (!userId || !vault_id) {
       return res.status(400).json({ error: 'userId and vault_id required' });
     }
 
     const now = Date.now();
-    const next = new Date(now + 30 * 24 * 60 * 60 * 1000);
+    const next = new Date(now + 7 * 24 * 60 * 60 * 1000);
 
     const u = await Users.findById(userId).lean();
     if (!u) return res.status(404).json({ error: 'user not found' });
 
-    const renewAmount = typeof u.renewAmount === 'number' ? u.renewAmount : 49.99;
-    const renewCurrency = u.renewCurrency || 'GBP';
+    const renewAmt = typeof renewAmount === 'number'
+      ? renewAmount
+      : (typeof u.renewAmount === 'number' ? u.renewAmount : 49.99);
+    const renewCurr = currency || u.renewCurrency || 'GBP';
 
     await Users.updateOne(
       { _id: userId },
@@ -210,8 +211,8 @@ router.post('/save-vault', async (req, res) => {
         $set: {
           paypal_vault_id: vault_id,
           nextRenewAt: u.nextRenewAt || next,
-          renewAmount,
-          renewCurrency,
+     renewAmount: renewAmt,
+          renewCurrency: renewCurr,
           billingStatus: 'active'
         }
       }
