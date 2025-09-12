@@ -121,7 +121,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       cancel_url: `${successBase}/pages/offer.html`,
       // Optional: metadata to help support
       metadata: {
-        product: 'Pro Tracker',
+        product: '12-Week Plan',
         currency_used: ccy,
         discounted: String(!!discounted),
       },
@@ -173,7 +173,7 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
       },
       expand: ['latest_invoice.payment_intent', 'pending_setup_intent'],
       metadata: {
-        product: 'Pro Tracker',
+        product: '12-Week Plan',
         currency_used: ccy,
         discounted: String(!!discounted),
       },

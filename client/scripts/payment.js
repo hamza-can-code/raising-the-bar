@@ -200,7 +200,7 @@
         const pr = stripeJs.paymentRequest({
           country: curr.country || 'GB',
           currency: (curr.code || 'GBP').toLowerCase(),
-          total: { label: 'Pro Tracker', amount: amountMinor },
+          total: { label: '12-Week Plan', amount: amountMinor },
           requestPayerName: true,
           requestPayerEmail: true
         });
