@@ -180,7 +180,7 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
     };
 
     if (discounted) {
-      subCfg.trial_period_days = 7;
+      subCfg.trial_period_days = 3;
     }
 
 
