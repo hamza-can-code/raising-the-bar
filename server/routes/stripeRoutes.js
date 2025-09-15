@@ -128,7 +128,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
     };
 
     if (discounted) {
-      sessionCfg.subscription_data = { trial_period_days: 7 };
+      sessionCfg.subscription_data = { trial_period_days: 3 };
       sessionCfg.payment_method_collection = 'always';
     }
 
