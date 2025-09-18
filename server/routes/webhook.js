@@ -138,6 +138,45 @@ router.post(
       }
     }
 
+    /******************************************************************
+     * 3️⃣  SETUP INTENT SUCCEEDED (free trial card collection)
+     *****************************************************************/
+    if (event.type === 'setup_intent.succeeded') {
+      const setupIntent = event.data.object;
+      const subscriptionId = setupIntent.metadata?.subscription_id;
+      const paymentMethodId = setupIntent.payment_method;
+
+      if (!subscriptionId || !paymentMethodId) {
+        console.warn(
+          '⚠️  setup_intent.succeeded without subscription metadata',
+          setupIntent.id
+        );
+      } else {
+        try {
+          await stripe.subscriptions.update(subscriptionId, {
+            default_payment_method: paymentMethodId,
+          });
+
+          if (setupIntent.customer) {
+            await stripe.customers.update(setupIntent.customer, {
+              invoice_settings: { default_payment_method: paymentMethodId },
+            });
+          }
+
+          console.log(
+            '💳  Stored default payment method for subscription',
+            subscriptionId
+          );
+        } catch (err) {
+          console.error(
+            '❌  Failed to attach default payment method for',
+            subscriptionId,
+            err.message
+          );
+        }
+      }
+    }
+
     /* Stripe expects only 2xx so it won’t retry */
     res.sendStatus(200);
   }

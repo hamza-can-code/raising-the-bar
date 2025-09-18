@@ -128,7 +128,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
     };
 
     if (discounted) {
-      sessionCfg.subscription_data = { trial_period_days: 3 };
+      sessionCfg.subscription_data = { trial_period_days: 1 };
       sessionCfg.payment_method_collection = 'always';
     }
 
@@ -180,7 +180,7 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
     };
 
     if (discounted) {
-      subCfg.trial_period_days = 3;
+      subCfg.trial_period_days = 1;
     }
 
 
@@ -195,6 +195,18 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
           : sub.pending_setup_intent;
       if (!setup) {
         return res.status(500).json({ error: 'SetupIntent not available' });
+      }
+            try {
+        if (setup.metadata?.subscription_id !== sub.id) {
+          await stripe.setupIntents.update(setup.id, {
+            metadata: {
+              subscription_id: sub.id,
+              customer_id: customer.id,
+            },
+          });
+        }
+      } catch (err) {
+        console.error('⚠️  Failed to tag SetupIntent with subscription metadata', err);
       }
       return res.json({
         clientSecret: setup.client_secret,
