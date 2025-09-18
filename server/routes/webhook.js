@@ -138,30 +138,117 @@ router.post(
       }
     }
 
+     /******************************************************************
+     * 3️⃣  SUBSCRIPTION CREATED/UPDATED (ensure SetupIntent tagged)
+     *****************************************************************/
+    if (
+      event.type === 'customer.subscription.created' ||
+      event.type === 'customer.subscription.updated'
+    ) {
+      const subscription = event.data.object;
+      const pendingSetup = subscription.pending_setup_intent;
+      const pendingSetupId =
+        typeof pendingSetup === 'string'
+          ? pendingSetup
+          : pendingSetup?.id;
+
+      if (pendingSetupId) {
+        try {
+          await stripe.setupIntents.update(pendingSetupId, {
+            metadata: {
+              subscription_id: subscription.id,
+              customer_id: subscription.customer,
+            },
+          });
+        } catch (err) {
+          console.error(
+            '⚠️  Failed to tag pending setup intent',
+            pendingSetupId,
+            err.message
+          );
+        }
+      }
+    }
+
     /******************************************************************
-     * 3️⃣  SETUP INTENT SUCCEEDED (free trial card collection)
+     * 4️⃣  SETUP INTENT SUCCEEDED (free trial card collection)
      *****************************************************************/
     if (event.type === 'setup_intent.succeeded') {
       const setupIntent = event.data.object;
-      const subscriptionId = setupIntent.metadata?.subscription_id;
       const paymentMethodId = setupIntent.payment_method;
+      const customerId = setupIntent.customer;
+      let subscriptionId =
+        setupIntent.metadata?.subscription_id ||
+        setupIntent.metadata?.subscriptionId ||
+        null;
+
+      if (!subscriptionId && customerId) {
+        try {
+          const subscriptions = await stripe.subscriptions.list({
+            customer: customerId,
+            status: 'all',
+            expand: ['data.pending_setup_intent'],
+            limit: 20,
+          });
+
+          const pendingMatch = subscriptions.data.find(sub => {
+            const pending =
+              typeof sub.pending_setup_intent === 'string'
+                ? sub.pending_setup_intent
+                : sub.pending_setup_intent?.id;
+            return pending === setupIntent.id;
+          });
+
+          if (pendingMatch) {
+            subscriptionId = pendingMatch.id;
+          } else {
+            const fallbackMatch = subscriptions.data
+              .filter(sub =>
+                !sub.default_payment_method &&
+                sub.collection_method !== 'send_invoice' &&
+                ['trialing', 'active', 'incomplete'].includes(sub.status)
+              )
+              .sort((a, b) => b.created - a.created)[0];
+
+            if (fallbackMatch) {
+              subscriptionId = fallbackMatch.id;
+            }
+          }
+        } catch (err) {
+          console.error(
+            '❌  Failed to locate subscription for setup intent',
+            setupIntent.id,
+            err.message
+          );
+        }
+      }
 
       if (!subscriptionId || !paymentMethodId) {
         console.warn(
-          '⚠️  setup_intent.succeeded without subscription metadata',
+          '⚠️  setup_intent.succeeded without linkable subscription',
           setupIntent.id
         );
       } else {
         try {
-          await stripe.subscriptions.update(subscriptionId, {
-            default_payment_method: paymentMethodId,
-          });
+          if (customerId) {
+            try {
+              await stripe.paymentMethods.attach(paymentMethodId, {
+                customer: customerId,
+              });
+            } catch (attachErr) {
+              if (attachErr.code !== 'resource_already_exists') {
+                throw attachErr;
+              }
+            }
 
-          if (setupIntent.customer) {
-            await stripe.customers.update(setupIntent.customer, {
+            await stripe.customers.update(customerId, {
               invoice_settings: { default_payment_method: paymentMethodId },
             });
           }
+
+          await stripe.subscriptions.update(subscriptionId, {
+            default_payment_method: paymentMethodId,
+          });
 
           console.log(
             '💳  Stored default payment method for subscription',
