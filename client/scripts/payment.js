@@ -184,10 +184,10 @@
       if (!window.__STRIPE_WARM__?.pr) {
         // Read per-currency prices (from offer.js) or use a safe fallback table
         const PRICE = (window.RTB_PRICE_TABLE) || {
-          GBP: { full: 49.99, intro: 0 }, USD: { full: 64.99, intro: 0 }, EUR: { full: 59.99, intro: 0 },
-          SEK: { full: 699, intro: 0 }, NOK: { full: 699, intro: 0 }, DKK: { full: 449, intro: 0 },
-          CHF: { full: 59.99, intro: 0 }, AUD: { full: 94.99, intro: 0 }, NZD: { full: 99.99, intro: 0 },
-          CAD: { full: 87.99, intro: 0 }, SGD: { full: 84.99, intro: 0 }, HKD: { full: 499, intro: 0 },
+          GBP: { full: 29.99, intro: 0 }, USD: { full: 39.99, intro: 0 }, EUR: { full: 34.99, intro: 0 },
+          SEK: { full: 399, intro: 0 }, NOK: { full: 399, intro: 0 }, DKK: { full: 449, intro: 0 },
+          CHF: { full: 34.99, intro: 0 }, AUD: { full: 94.99, intro: 0 }, NZD: { full: 59.99, intro: 0 },
+          CAD: { full: 49.99, intro: 0 }, SGD: { full: 84.99, intro: 0 }, HKD: { full: 499, intro: 0 },
           JPY: { full: 7900, intro: 0 }, INR: { full: 3999, intro: 0 }, BRL: { full: 259.99, intro: 0 },
           MXN: { full: 1199, intro: 0 }
         };

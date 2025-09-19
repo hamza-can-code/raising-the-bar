@@ -15,7 +15,7 @@ function buildRequestId(user, when) {
 }
 
 async function processUserRenewal(u) {
-  const amount   = typeof u.renewAmount === 'number' ? u.renewAmount : 49.99;
+  const amount   = typeof u.renewAmount === 'number' ? u.renewAmount : 29.99;
   const currency = u.renewCurrency || 'GBP';
   const when     = u.nextRenewAt ? new Date(u.nextRenewAt) : new Date();
   const periodKey = periodKeyFromDate(when);

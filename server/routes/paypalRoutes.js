@@ -202,7 +202,7 @@ router.post('/save-vault', async (req, res) => {
 
     const renewAmt = typeof renewAmount === 'number'
       ? renewAmount
-      : (typeof u.renewAmount === 'number' ? u.renewAmount : 49.99);
+      : (typeof u.renewAmount === 'number' ? u.renewAmount : 29.99);
     const renewCurr = currency || u.renewCurrency || 'GBP';
 
     await Users.updateOne(
@@ -240,11 +240,11 @@ router.post('/charge-vault', async (req, res) => {
       const u = await Users.findById(userId).lean();
       if (!u) return res.status(404).json({ error: 'user not found' });
       vaultId = vaultId || u.paypal_vault_id;
-      amt = (typeof amount === 'number' ? amount : u.renewAmount || 49.99).toFixed(2);
+      amt = (typeof amount === 'number' ? amount : u.renewAmount || 29.99).toFixed(2);
       curr = u.renewCurrency || 'GBP';
     } else {
       // fallback if only vault_id passed
-      amt = (typeof amount === 'number' ? amount : 49.99).toFixed(2);
+      amt = (typeof amount === 'number' ? amount : 29.99).toFixed(2);
       curr = 'GBP';
     }
 
