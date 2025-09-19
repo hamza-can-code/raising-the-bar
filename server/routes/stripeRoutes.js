@@ -109,23 +109,33 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
     }
 
     const { currency: ccy, priceId } = getSubPriceId(currency);
-     const couponId = discounted ? null : getCouponId(ccy);
+    const couponId = discounted ? null : getCouponId(ccy);
 
     const sessionCfg = {
       mode: 'subscription',
-      payment_method_types: ['card'],
+      line_items: [{ price: priceId, quantity: 1 }],
       customer_email: email,
       client_reference_id: client_reference_id || undefined,
-      line_items: [{ price: priceId, quantity: 1 }],
       success_url: `${successBase}/pages/dashboard.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${successBase}/pages/offer.html`,
-      // Optional: metadata to help support
+
+      // ✅ Always force card entry, even if trial
+      payment_method_collection: 'always',
+      customer_creation: 'always',
+
+      subscription_data: {
+        trial_period_days: discounted ? 1 : undefined, // only if you want a trial
+        payment_settings: { save_default_payment_method: 'on_subscription' },
+        trial_settings: { end_behavior: { missing_payment_method: 'cancel' } },
+      },
+
       metadata: {
         product: '12-Week Plan',
         currency_used: ccy,
         discounted: String(!!discounted),
       },
     };
+
 
     if (discounted) {
       sessionCfg.subscription_data = { trial_period_days: 1 };
@@ -160,7 +170,7 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
 
     // 2) choose price & coupon by currency
     const { currency: ccy, priceId } = getSubPriceId(currency);
-     const couponId = discounted ? null : getCouponId(ccy);
+    const couponId = discounted ? null : getCouponId(ccy);
 
     // 3) create subscription in incomplete state (for Elements confirmation)
     const subCfg = {
@@ -196,7 +206,7 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
       if (!setup) {
         return res.status(500).json({ error: 'SetupIntent not available' });
       }
-            try {
+      try {
         if (setup.metadata?.subscription_id !== sub.id) {
           await stripe.setupIntents.update(setup.id, {
             metadata: {
@@ -232,7 +242,7 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
     }
     if (!pi) return res.status(500).json({ error: 'PaymentIntent not available' });
 
-        return res.json({
+    return res.json({
       clientSecret: pi.client_secret,
       subscriptionId: sub.id,
       intentType: 'payment',
