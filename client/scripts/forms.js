@@ -5886,17 +5886,26 @@ function replaceWithFinalPage() {
   formContainer.innerHTML = "";
 
   // Final message
-  const finalMsg = document.createElement("div");
-  finalMsg.classList.add("final-message");
-  finalMsg.innerHTML = `
-    <h2>You're all set - your journey starts now.</h2>
-    <p>
-  <strong>Did you know?</strong> Other apps just track.  
-      <strong>We use what you track to adapt workouts & meals</strong> so you
-      <strong>get fit faster</strong>.
-  </p>
-  `;
-  formContainer.appendChild(finalMsg);
+const finalMsg = document.createElement("div");
+finalMsg.classList.add("final-message");
+finalMsg.innerHTML = `
+  <h2 class="final-headline">
+    <span class="final-num">10&nbsp;Million+</span><br>
+    <span class="final-sub"><strong>kick-started their journey with us</strong></span>
+  </h2>
+
+  <div class="final-rating" role="img" aria-label="Rated 4.7 out of 5 stars">
+    <span class="final-stars" aria-hidden="true">★★★★★</span>
+    <span class="final-score">4.7&nbsp;/&nbsp;5</span>
+  </div>
+
+  <!-- optional: real Apple/Google Pay button mounts here if supported -->
+  <div id="prb-inline" class="prb-inline" style="display:none;"></div>
+
+  <p class="final-reviews">250,000+ five-star reviews from happy users</p>
+`;
+formContainer.appendChild(finalMsg);
+
 
   // Loading container
   const loadingContainer = document.createElement("div");

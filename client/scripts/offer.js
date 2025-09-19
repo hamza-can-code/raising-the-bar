@@ -2301,7 +2301,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const header = document.getElementById("valueModalHeader");
   if (header && firstName) {
     // Replace the leading “,” and insert the user’s name
-    header.textContent = `✨ ${firstName}, your custom plan is ready — here’s how it works`;
+    header.textContent = `🎉 ${firstName}, good news — your free trial is unlocked!`;
     // If you need to keep the <strong> elements, use innerHTML instead:
     // header.innerHTML = `🎉 ${firstName}, you’ve been randomly selected to get your first month <strong>FREE</strong>`;
   }
