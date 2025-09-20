@@ -3353,7 +3353,7 @@ body.modal-open .floating-cta {
 
 .post-pay-note {
     display: block;
-    margin: 16px auto 0;
+    margin: 16px auto 16px;
     padding: 12px 16px;
     max-width: 360px;
     background-color: #E8F5E9;
