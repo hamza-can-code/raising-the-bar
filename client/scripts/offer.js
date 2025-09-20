@@ -1170,7 +1170,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (dealOn) {
       el.innerHTML =
         `Normally ${fmt(code, full)} — now just <strong>${fmt(code, intro)}</strong>. ` +
-        `🎉 <strong>Free trial</strong> — get the full 12-Week Plan for ${fmt(code, intro / 30)}.`;
+        `🎉 <strong>Free trial</strong> — get the full 1-Week Plan for ${fmt(code, intro / 30)}.`;
     } else {
       el.textContent = 'Like having a personal trainer in your pocket — for less than the cost of one session.';
     }
@@ -1189,8 +1189,7 @@ document.addEventListener("DOMContentLoaded", function () {
       removeDiscountPricing();
       localStorage.removeItem("sevenDayDiscountEnd");
       if (timerContainer) timerContainer.style.display = "none";
-      const cardSubtext = document.querySelector(".card-subtext");
-      if (cardSubtext) cardSubtext.remove();
+ document.querySelectorAll('.card-subtext').forEach(el => el.remove());
       return;
     }
 
@@ -1369,15 +1368,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // }
 
   /* Tell us whether two cards are the linked 4- & 12-week pair  */
-  function isSyncedPair(a, b) {
-    if (!a || !b) return false;
-    const p1 = a.dataset.program;
-    const p2 = b.dataset.program;
-    return (
-      (p1 === '4-week' && p2 === '12-week') ||
-      (p1 === '12-week' && p2 === '4-week')
-    );
-  }
+  // function isSyncedPair(a, b) {
+  //   if (!a || !b) return false;
+  //   const p1 = a.dataset.program;
+  //   const p2 = b.dataset.program;
+  //   return (
+  //     (p1 === '4-week' && p2 === '12-week') ||
+  //     (p1 === '12-week' && p2 === '4-week')
+  //   );
+  // }
 
 
   // Add click listeners to each offer card (ignoring clicks on the toggle button)
@@ -1427,10 +1426,18 @@ document.addEventListener("DOMContentLoaded", function () {
       // Select the new card
       card.classList.add("selected");
       currentlySelected = card;
-      localStorage.setItem("selectedProgram", card.dataset.program);
+      // localStorage.setItem("selectedProgram", card.dataset.program);
 
-      const planName = card.querySelector('.duration strong').textContent;
-      localStorage.setItem("planName", planName);
+      // const planName = card.querySelector('.duration strong').textContent;
+      // localStorage.setItem("planName", planName);
+
+            // Always route checkout through the primary 1-week experience
+      localStorage.setItem("selectedProgram", "new");
+      localStorage.setItem("pendingPurchaseType", "subscription");
+      localStorage.setItem("planName", "1-Week Plan");
+      if (typeof updatePlanSummary === 'function') {
+        try { updatePlanSummary(); } catch (_) { }
+      }
 
       // For the special card, always auto-expand; for others, call toggleDetails as before.
       if (card.dataset.program === "new") {
@@ -1438,7 +1445,8 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         toggleDetails(card, true);
       }
-      updateCTA(card.dataset.program);
+      // updateCTA(card.dataset.program);
+       updateCTA('new');
     });
   });
 
@@ -1574,10 +1582,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /* ► keep 4- & 12-week in sync */
-    if (!skipSync && (card.dataset.program === '4-week' || card.dataset.program === '12-week')) {
-      const partner = document.querySelector(`.offer-card[data-program="${card.dataset.program === '4-week' ? '12-week' : '4-week'}"]`);
-      if (partner) toggleDetails(partner, expandIt, true);
-    }
+    // if (!skipSync && (card.dataset.program === '4-week' || card.dataset.program === '12-week')) {
+    //   const partner = document.querySelector(`.offer-card[data-program="${card.dataset.program === '4-week' ? '12-week' : '4-week'}"]`);
+    //   if (partner) toggleDetails(partner, expandIt, true);
+    // }
   }
 
   document.querySelectorAll('.offer-card .toggle-details').forEach(btn => {
@@ -2301,7 +2309,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const header = document.getElementById("valueModalHeader");
   if (header && firstName) {
     // Replace the leading “,” and insert the user’s name
-    header.textContent = `🎉 ${firstName}, get your 12-Week Plan for free!`;
+    header.textContent = `🎉 ${firstName}, get your 1-Week Plan for free!`;
     // If you need to keep the <strong> elements, use innerHTML instead:
     // header.innerHTML = `🎉 ${firstName}, you’ve been randomly selected to get your first month <strong>FREE</strong>`;
   }

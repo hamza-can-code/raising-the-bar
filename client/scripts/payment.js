@@ -200,7 +200,7 @@
         const pr = stripeJs.paymentRequest({
           country: curr.country || 'GB',
           currency: (curr.code || 'GBP').toLowerCase(),
-          total: { label: '12-Week Plan', amount: amountMinor },
+          total: { label: '1-Week Plan', amount: amountMinor },
           requestPayerName: true,
           requestPayerEmail: true
         });
@@ -295,6 +295,11 @@
 
   continueBtn.addEventListener('click', async (e) => {
     e.preventDefault();
+        // Force the checkout context to the primary 1-week plan
+    localStorage.setItem('selectedProgram', 'new');
+    localStorage.setItem('pendingPurchaseType', 'subscription');
+    localStorage.setItem('planName', 'Pro Tracker');
+    try { window.updatePlanSummary?.(); } catch (_) { }
     collapseAllOfferCards();
     if (continueBtn.disabled) return;
     continueBtn.disabled = true;
@@ -364,7 +369,7 @@
     // replace any literal occurrences
     summaryEl.innerHTML = summaryEl.innerHTML.replace(
       /Pro Tracker/g,
-      "12‑Week Plan"
+       "1‑Week Plan"
     );
   }
 

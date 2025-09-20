@@ -1,4 +1,4 @@
-html,
+-whtml,
 body {
     margin: 0;
     padding: 0;
@@ -1757,7 +1757,7 @@ img {
 
 /* 2) Inject your cosmetic “12‑Week Program” in exactly the same spot */
 .offer-card.offer-special .duration strong::after {
-    content: "12‑Week Plan";
+    content: "1‑Week Plan";
     /* match your normal text styling */
     font-family: inherit;
     font-size: inherit;
