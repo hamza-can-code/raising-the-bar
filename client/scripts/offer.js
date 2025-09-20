@@ -1693,7 +1693,7 @@ if (!claimProgramBtn || !continueBtn) return;
     const elementTop = socialProof.getBoundingClientRect().top + window.pageYOffset;
 
     window.scrollTo({
-      top: elementTop + offset + 75,
+      top: elementTop + offset + 150,
       behavior: "smooth"
     });
   });
