@@ -1678,8 +1678,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   const claimProgramBtn = document.getElementById("claimProgramBtn");
-  const socialProof = document.getElementById("socialProof");
-  if (!claimProgramBtn || !socialProof) return;
+const continueBtn = document.getElementById("offerFinishBtn");
+if (!claimProgramBtn || !continueBtn) return;
 
   claimProgramBtn.addEventListener("click", function (e) {
     e.preventDefault();
@@ -1693,7 +1693,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const elementTop = socialProof.getBoundingClientRect().top + window.pageYOffset;
 
     window.scrollTo({
-      top: elementTop + offset,
+      top: elementTop + offset + 75,
       behavior: "smooth"
     });
   });
