@@ -1117,6 +1117,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 1000);
 });
 
+function updatePostPayNote() {
+  const host = document.getElementById('postPayNote');
+  const priceEl = document.getElementById('checkoutPrice');
+  if (!host || !priceEl) return;
+
+  const { code, full, intro } = getLocalPrices();
+  const dealOn = document.body.classList.contains('discount-active');
+  const checkout = dealOn ? intro : full;               // price user sees at checkout
+  priceEl.textContent = fmt(code, checkout);
+}
+
+
 /**********************************************/
 /* A) DISCOUNT TIMER LOGIC (with indefinite)  */
 /**********************************************/
@@ -1187,6 +1199,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (diff <= 0) {
       document.body.classList.remove("discount-active");
       removeDiscountPricing();
+      updatePostPayNote();
       localStorage.removeItem("sevenDayDiscountEnd");
       if (timerContainer) timerContainer.style.display = "none";
  document.querySelectorAll('.card-subtext').forEach(el => el.remove());
@@ -1240,6 +1253,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   setInterval(updateTimer, 1000);
+  updatePostPayNote();
   updateTimer();
   updatePricingJustification();
   updatePlanSummary();
@@ -2359,6 +2373,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // show('paypal'); // default to PayPal on load
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  updatePostPayNote();
 });
 
 const bodyFatRanges = {

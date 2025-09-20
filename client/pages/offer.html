@@ -549,7 +549,7 @@
         </div>
       </div>
 
-        <div class="offer-card offer-tier" data-program="4-week">
+      <div class="offer-card offer-tier" data-program="4-week">
         <div class="offer-left">
           <div class="duration"><strong>4-Week Plan</strong></div>
           <!-- <p class="card-subtext">Build momentum with a month of structured, progressive coaching.</p> -->
@@ -633,17 +633,11 @@
 
   </section>
 
-        <p id="postPayNote" class="post-pay-note" style="display:none;text-align:center;margin-top:12px;">
-        ✅ <strong>After your free checkout, your 1-Week Plan unlocks immediately</strong> – you’ll be taken to your dashboard.
-
-        <!-- ↓  wrap just this sentence ↓ -->
-        <!-- <span id="paypalCancelNote" style="display:none;">
-          <br><br>💡 <strong>Just 99p. Cancel anytime via</strong>
-          <a href="mailto:info@raisingthebarapp.com" style="font-weight:600;color:#007bff;text-decoration:underline;">
-            info@raisingthebarapp.com
-          </a> — you’ll keep access for 30 days.
-        </span> -->
-      </p>
+  <p id="postPayNote" class="post-pay-note" style="display:none;text-align:center;margin-top:12px;">
+    ✅ <strong>After checkout (<span id="checkoutPrice">—</span>), your plan unlocks immediately</strong> – you’ll
+    land on your dashboard.<br><br>
+    <strong>Cancel anytime</strong>. No commitment, no hidden fees.
+  </p>
 
   <section id="loadingSection" class="loading-section" style="display: none;">
     <p id="loadingText">Loading...</p>
@@ -999,7 +993,7 @@ body: JSON.stringify(payload)
       <h2 id="valueModalHeader"></h2>
 
       <p class="subtext">
-       <strong>Promo code automatically applied — ends in 10 minutes!</strong>
+        <strong>Promo code automatically applied — ends in 10 minutes!</strong>
       </p>
 
       <ul class="feature-list">
