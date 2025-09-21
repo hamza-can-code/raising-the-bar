@@ -382,7 +382,7 @@
 
 
     <p class="testimonial-disclaimer">
-      Results may vary. This transformation was achieved using the <strong>1-Week Plan</strong>, part of our tailored
+      Results may vary. This transformation was achieved using the <strong>12-Week Plan</strong>, part of our tailored
       training system.
     </p>
   </div>
@@ -404,7 +404,7 @@
         <span class="discount-label">Discount Expires In:</span>
         <span class="time-remaining" id="countdownTimer">10:00</span>
       </div>
-      <p class="first-1000">🔥 2,000+ people unlocked their plan today.<br>You're next.</p>
+      <p class="first-1000">🔥 2,000+ people claimed their plan today.<br>You're next.</p>
     </div>
 
     <!-- Offer Cards -->
@@ -414,11 +414,11 @@
         947 people bought workout plans in the last hour
       </p>
       <div class="social-proof__recent">
-        <span class="social-proof__tag">ava 1-Week Plan</span>
-        <span class="social-proof__tag">ethan 1-Week Plan</span>
+        <span class="social-proof__tag">ava 12-Week Plan</span>
+        <span class="social-proof__tag">ethan 12-Week Plan</span>
       </div>
     </section>
-    <h3 class="offer-heading" id="path-to-progress">Pick Your Path to Progress</h3>
+    <h3 class="offer-heading" id="path-to-progress">Claim Your Plan</h3>
     <p class="plan-diff-text">
       <!-- Other apps just track.
       <strong>We use what you track to adapt workouts & meals</strong> so you
@@ -428,6 +428,17 @@
         🔎 See how it compares
       </a>
     </p>
+
+    <!-- Promo applied strip -->
+    <div id="promoAppliedStrip" class="rtb-ps" hidden>
+      <span class="rtb-ps__badge">Promo applied</span>
+      <code id="promoStripCode" class="rtb-ps__code"></code>
+      <div class="rtb-ps__note">
+        Auto-applies at checkout • Ends in <span id="promoStripTimer">10:00</span>
+      </div>
+    </div>
+
+
     <!-- <p class="offer-subtext">Most people never stick to fitness because their plan doesn’t adapt. Yours will.
     </p> -->
 
@@ -515,7 +526,7 @@
       <!-- Row 3: New Special Offer Card (Full Width) -->
       <div class="offer-card offer-special" data-program="new">
         <div class="offer-left">
-          <div class="duration"><strong>1-Week Plan</strong></div>
+          <div class="duration"><strong>12-Week Plan</strong></div>
           <div class="full-price" data-full-price="£29.99">
             <span class="price-strikethrough" id="priceSpecialFull">£29.99</span>
             <span class="discount-price" id="priceSpecialDiscount">£0.00</span>
@@ -548,11 +559,11 @@
           What’s Included?
         </div>
       </div>
-
+      <!-- 
       <div class="offer-card offer-tier" data-program="4-week">
         <div class="offer-left">
           <div class="duration"><strong>4-Week Plan</strong></div>
-          <!-- <p class="card-subtext">Build momentum with a month of structured, progressive coaching.</p> -->
+          <p class="card-subtext">Build momentum with a month of structured, progressive coaching.</p>
           <div class="full-price" data-full-price="£39.99">
             <span>£39.99</span>
           </div>
@@ -575,13 +586,13 @@
           </ul>
         </div>
 
-        <!-- <div class="toggle-details" style="cursor:pointer;">What’s Included?</div> -->
+        <div class="toggle-details" style="cursor:pointer;">What’s Included?</div>
       </div>
 
       <div class="offer-card offer-tier" data-program="12-week">
         <div class="offer-left">
           <div class="duration"><strong>12-Week Plan</strong></div>
-          <!-- <p class="card-subtext">Go all-in with our flagship transformation program.</p> -->
+          <p class="card-subtext">Go all-in with our flagship transformation program.</p>
           <div class="full-price" data-full-price="£59.99">
             <span>£59.99</span>
           </div>
@@ -604,8 +615,8 @@
           </ul>
         </div>
 
-        <!-- <div class="toggle-details" style="cursor:pointer;">What’s Included?</div> -->
-      </div>
+        <div class="toggle-details" style="cursor:pointer;">What’s Included?</div>
+      </div> -->
 
       <p class="pricing-justification">
         Like having a personal trainer in your pocket — for less than the cost of one session.
@@ -619,14 +630,14 @@
       </div>
 
       <p class="final-reassurance" id="offerDisclaimer">
-        Try the 1-Week Plan risk-free. Cancel anytime — no commitment, no hidden fees.
+        Try the 12-Week Plan risk-free. No commitment, no hidden fees.
       </p>
 
       <p class="offer-disclaimer">
         By proceeding, you confirm that you’ve read and agree to our
         <a href="tos.html" target="_blank">terms of service</a> and
         <a href="refund-policy.html" target="_blank">refund policy</a>.
-        The trial lasts for 1 day. If you choose the 1-Week Plan, it renews at
+        The trial lasts for 1 day. If you choose the 12-Week Plan, it renews at
         <span class="renew-amt"></span>/month unless cancelled.
         Cancellations take effect at the end of the current billing cycle.
       </p>
@@ -635,8 +646,7 @@
 
   <p id="postPayNote" class="post-pay-note" style="display:none;text-align:center;margin-top:12px;">
     ✅ <strong>After checkout (<span id="checkoutPrice">—</span>), your plan unlocks immediately</strong> – you’ll
-    land on your dashboard.<br><br>
-    <strong>Cancel anytime</strong>. No commitment, no hidden fees.
+    land on your dashboard.
   </p>
 
   <section id="loadingSection" class="loading-section" style="display: none;">
@@ -665,7 +675,7 @@
         <span class="toggle-slider" aria-hidden="true"></span>
       </div> -->
 
-      <p id="planSummary" class="plan-summary"></p>
+      <p id="planSummary" class="plan-summary">12-Week Plan</p>
       <!-- PayPal -->
       <!-- <div id="paypalMarkContainer" style="margin-top:20px;"></div> -->
 
@@ -908,7 +918,7 @@ body: JSON.stringify(payload)
       <span class="close">&times;</span>
 
       <h2>Compare Plans</h2>
-      <p class="subtext">Here's what you unlock when using our 1-Week Plan.</p>
+      <p class="subtext">Here's what you unlock when using our 12-Week Plan.</p>
 
       <div class="table-wrapper">
         <table class="compare-table">
@@ -980,7 +990,7 @@ body: JSON.stringify(payload)
       </div>
 
       <p class="testimonial">
-        “I didn't realize how much I was missing until I unlocked the 1-Week Plan. It made everything click.”
+        “I didn't realize how much I was missing until I unlocked the 12-Week Plan. It made everything click.”
         - Alice, lost 7 kg
       </p>
     </div>
@@ -988,23 +998,39 @@ body: JSON.stringify(payload)
 
   <div id="valueModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
+      <!-- <span class="close">&times;</span> -->
 
       <h2 id="valueModalHeader"></h2>
 
-      <p class="subtext">
-        <strong>Promo code automatically applied — ends in 10 minutes!</strong>
-      </p>
+      <!-- <p class="subtext">
+        <strong>Scratch the card to reveal your promo.</strong><br>
+        Promo auto-applies at checkout — ends in <span id="scratchMirrorTimerNote">10:00</span>
+      </p> -->
 
-      <ul class="feature-list">
-        <li>✓ Miss a workout? Your plan adjusts.</li>
-        <li>✓ Meals not working? Swap them with 1 click.</li>
-        <li>✓ Track progress — XP, streaks, graphs & more.</li>
-      </ul>
-
-      <p class="note">
-        💡 This isn’t a fixed plan. It’s a <strong>smart tracker</strong> that adapts as you go.
-      </p>
+      <div class="scratch-wrap">
+        <div class="scratch-card" role="group" aria-label="Scratch to reveal your discount">
+          <div class="scratch-reveal">
+            <div class="reveal-content">
+              <div class="discount-badge">100% OFF</div>
+              <!-- <p class="reveal-sub">Your 12-Week Plan is free!</p> -->
+              <p id="promoCodeLine" class="promo-code-line"></p>
+              <p class="reveal-small">
+                Auto-applies at checkout · Ends in
+                <span class="reveal-timer" id="scratchMirrorTimer">10:00</span>
+              </p>
+            </div>
+            <canvas id="scratchCanvas"></canvas>
+            <!-- Finger-movement hint -->
+            <div id="scratchHint" class="scratch-hint" aria-hidden="true">
+              <div class="orbit">
+                <div class="dot"></div>
+              </div>
+              <p class="hint-copy">Swipe here to scratch</p>
+            </div>
+          </div>
+          <button id="scratchReset" class="link-btn" type="button" hidden>Reset</button>
+        </div>
+      </div>
 
       <div class="modal-actions">
         <button id="valueContinue" class="primary-btn">Continue</button>

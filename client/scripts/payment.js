@@ -200,7 +200,7 @@
         const pr = stripeJs.paymentRequest({
           country: curr.country || 'GB',
           currency: (curr.code || 'GBP').toLowerCase(),
-          total: { label: '1-Week Plan', amount: amountMinor },
+          total: { label: '12-Week Plan', amount: amountMinor },
           requestPayerName: true,
           requestPayerEmail: true
         });
@@ -369,7 +369,7 @@
     // replace any literal occurrences
     summaryEl.innerHTML = summaryEl.innerHTML.replace(
       /Pro Tracker/g,
-       "1‑Week Plan"
+       "12‑Week Plan"
     );
   }
 

@@ -1757,7 +1757,7 @@ img {
 
 /* 2) Inject your cosmetic “12‑Week Program” in exactly the same spot */
 .offer-card.offer-special .duration strong::after {
-    content: "1‑Week Plan";
+    content: "12-Week Plan";
     /* match your normal text styling */
     font-family: inherit;
     font-size: inherit;
@@ -3585,3 +3585,243 @@ body.modal-open .floating-cta {
   pointer-events:auto;
   transition:opacity .25s ease;
 }
+
+/* Scratch card */
+.scratch-wrap { margin: 16px 0 8px }
+.scratch-card { width: 100%; display: grid; gap: 8px }
+.scratch-card .link-btn {
+  background: none; border: 0; padding: 0; font: inherit; color: #6b7280; text-decoration: underline; cursor: pointer;
+}
+
+/* reveal surface */
+.scratch-reveal {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: radial-gradient(120% 120% at 10% 0%, #fff 0%, #f6f5ef 40%, #f0eee7 100%);
+  box-shadow: 0 6px 20px rgba(0,0,0,.06);
+  min-height: 148px;
+}
+.reveal-content {
+  position: absolute; inset: 0;
+  display: grid; place-items: center; text-align: center; padding: 18px;
+}
+.discount-badge {
+  display: inline-block;
+  font-weight: 800;
+  font-size: 28px;
+  letter-spacing: .5px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #E6F2FF;
+    border: 1px solid #007BFF;
+  color: #007BFF; 
+  backdrop-filter: blur(2px);
+}
+.reveal-sub { margin: 8px 0 4px; font-weight: 700 }
+.reveal-small { margin: 0; font-size: 12px; color: #333 }
+
+/* canvas (scratch layer) */
+#scratchCanvas {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 148px;           /* will be synced in JS for DPR */
+  touch-action: none;
+  cursor: pointer;
+}
+
+/* done state */
+.scratch-done #scratchCanvas { opacity: 0; pointer-events: none; transition: opacity .35s ease }
+.scratch-done .discount-badge { animation: pop .35s ease }
+@keyframes pop { 50% { transform: scale(1.06) } }
+@media (min-width: 640px) {
+  .discount-badge { font-size: 32px }
+  #scratchCanvas { height: 160px }
+}
+
+.promo-code-line {
+  margin: 16px 0 16px;          /* breathing space */
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.promo-code-line .promo-code-label {
+  margin-right: 6px;
+  font-size: 14px;
+  color: #666;                  /* muted label */
+}
+
+.promo-code-line .promo-code-value {
+  font-family: monospace;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: #E6F2FF;          /* light blue bg */
+  border: 1px solid #007BFF;    /* CTA blue */
+  color: #007BFF;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+
+/* lock state for the Continue button */
+#valueContinue.locked,
+#valueContinue:disabled,
+#valueContinue[disabled] {
+  background: #004a99 !important;       /* solid inactive */
+  background-image: none !important;     /* kill gradients */
+  border-color: #004a99 !important;
+  box-shadow: none !important;
+  color: #ccc !important;           /* lighter gray text */
+  cursor: not-allowed;
+  opacity: 1 !important;                 /* keep text readable */
+}
+
+/* if your theme uses a gradient/overlay via ::before */
+#valueContinue.locked::before,
+#valueContinue:disabled::before {
+  content: none !important;
+}
+
+/* Hint overlay (sits above content but below canvas hits) */
+.scratch-hint {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  pointer-events: none;          /* don't block scratching */
+  opacity: 1; transform: translateZ(0);
+  transition: opacity .25s ease;
+  z-index: 3;                    /* above content, below canvas erasing still works */
+}
+
+/* Hide when scratching / done */
+.scratch-done .scratch-hint,
+.scratch-reveal.scratching .scratch-hint {
+  opacity: 0;
+}
+
+/* Orbit container: spinning circle path */
+.scratch-hint .orbit {
+  position: relative;
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  animation: orbit-spin 2.2s linear infinite;
+  margin-bottom: 6px;
+}
+
+/* The “finger” dot that moves */
+.scratch-hint .dot {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 14px; height: 14px;
+  background: #007BFF;
+  border: 2px solid #E6F2FF;      /* light ring for contrast on blue cover */
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,.15);
+  transform: rotate(0) translateX(38px) translateY(-50%);
+}
+
+/* Soft trail */
+.scratch-hint .dot::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,123,255,.25), transparent 60%);
+  filter: blur(3px);
+}
+
+/* Copy under the animation */
+.scratch-hint .hint-copy {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+  background: rgba(249,247,242,.85); /* #F9F7F2 with light alpha */
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.05);
+}
+
+/* Keyframes: spin the path; the dot is offset so it “orbits” */
+@keyframes orbit-spin { 
+  to { transform: rotate(360deg); } 
+}
+
+/* Make sure canvas is above content but below hint visuals as needed */
+#scratchCanvas { z-index: 2; }
+
+/* Small devices: slightly smaller orbit */
+@media (max-width: 360px) {
+  .scratch-hint .orbit { width: 72px; height: 72px; }
+  .scratch-hint .dot { transform: rotate(0) translateX(30px) translateY(-50%); }
+}
+
+/* ========== PROMO STRIP (SCOPED) ========== */
+/* Only styles under #promoAppliedStrip apply */
+#promoAppliedStrip.rtb-ps {
+  /* layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 100%;
+    box-sizing: border-box;
+
+  /* spacing & container */
+  padding: 14px 16px;
+  margin: 12px auto 18px;              /* centers within your column */
+  width: min(100%, 720px);             /* never exceeds column width */
+  border-radius: 14px;
+
+  /* visuals (soft, on-brand) */
+  background: linear-gradient(180deg, #F7FAFF 0%, #EEF5FF 100%);
+  border: 1px solid #DCE8FF;
+  box-shadow: 0 2px 10px rgba(0, 123, 255, 0.05);
+
+  /* safety */
+  overflow: visible;
+}
+
+#promoAppliedStrip .rtb-ps__badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #0B63D1;
+  background: #E6F2FF;
+  border: 1px solid #C7DFFF;
+  border-radius: 999px;
+  padding: 4px 10px;
+  margin: 8px auto;
+}
+
+#promoAppliedStrip .rtb-ps__code {
+  display: inline-block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;           /* ALL CAPS render */
+  color: #0B63D1;
+  background: #fff;
+  border: 1px solid #C7DFFF;
+  border-radius: 10px;
+  margin: 8px auto;
+  padding: 6px 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+#promoAppliedStrip .rtb-ps__note {
+  font-size: 12px;
+  color: #666;
+  margin: 2px auto;
+}
+
+/* nice on small screens */
+@media (max-width: 420px) {
+  #promoAppliedStrip.rtb-ps { padding: 12px }
+  #promoAppliedStrip .rtb-ps__code { font-size: 14px }
+}
+
