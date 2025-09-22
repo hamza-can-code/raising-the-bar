@@ -54,7 +54,7 @@ const UserSchema = new mongoose.Schema({
   nextRenewAt:     { type: Date,   default: null, index: true }, // scheduler finds due users
 
   // Per-user renewal config (can be overridden per market/test)
-  renewAmount:     { type: Number, default: 29.99 },             // monthly charge
+  renewAmount:     { type: Number, default: 14.99 },             // monthly charge
   renewCurrency:   { type: String, default: 'GBP' },             // ISO 4217
 
   // Billing state / ops
@@ -99,7 +99,7 @@ UserSchema.methods.matchPassword = function(entered) {
 
 // Helper: ensure renewal defaults (optional, use if you ever need to coerce values)
 UserSchema.methods.ensureRenewalDefaults = function() {
-  if (typeof this.renewAmount !== 'number') this.renewAmount = 29.99;
+  if (typeof this.renewAmount !== 'number') this.renewAmount = 14.99;
   if (!this.renewCurrency) this.renewCurrency = 'GBP';
 };
 
