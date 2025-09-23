@@ -20,7 +20,7 @@ function fadeOutLoader() {
   overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
 }
 window.RTB_PRICE_TABLE = {
-  GBP: { full: 20.99, intro: 9.99 },
+  GBP: { full: 21.99, intro: 9.99 },
   USD: { full: 23.99, intro: 9.99 },
   EUR: { full: 22.99, intro: 9.99 },
   SEK: { full: 259, intro: 129 },
@@ -1182,7 +1182,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (dealOn) {
       el.innerHTML =
         `Normally ${fmt(code, full)} — now just <strong>${fmt(code, intro)}</strong>. ` +
-        `🎉 Get the full 12-Week Plan for ${fmt(code, intro / 30)}.`;
+        `🎉 Just ${fmt(code, intro / 30)} a day.`;
     } else {
       el.textContent = 'Like having a personal trainer in your pocket — for less than the cost of one session.';
     }
@@ -1702,7 +1702,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // on narrow (≤375px) we want the element 20px *below* the top of the viewport → +20
     // on wider we want it 20px *above* the top → -20
     const isSmall = window.matchMedia("(max-width: 375px)").matches;
-    const offset = isSmall ? -15 : -40;
+    const offset = isSmall ? -15 : -35;
 
     // absolute Y position of the element
     const elementTop = socialProof.getBoundingClientRect().top + window.pageYOffset;

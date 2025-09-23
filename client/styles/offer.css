@@ -3195,7 +3195,7 @@ body.modal-open .floating-cta {
     cursor: pointer;
     transition: background .25s;
     display: block;
-    margin: 10px auto 0;
+    margin: 30px auto 0;
     font-size: 1.1rem;
     /* ↑ controls the size of the text */
     line-height: 1.2;
@@ -4007,7 +4007,7 @@ body.modal-open .floating-cta {
 /* Wrapper with + icon */
 .bm-discount-wrap {
   position: relative;
-  margin: 24px 0 0;
+  margin: 0;
 }
 
 /* The + circle */
@@ -4036,9 +4036,24 @@ body.modal-open .floating-cta {
   padding:16px;
   background:#FFFFFF !important;                 /* visible white card */
   border:1px solid rgba(0,0,0,.08);
-  border-radius:16px;
+  border-radius:6px;
   box-shadow:0 6px 18px rgba(0,0,0,.06);
   box-sizing: border-box;
+}
+
+.offer-card {
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    padding: 15px;
+    position: relative;
+    /* needed for .best-seller-banner */
+    transition: border-color 0.3s;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    /* left col (details) + right col (price) */
+    column-gap: 10px;
 }
 
 .bm-row{
@@ -4065,10 +4080,17 @@ body.modal-open .floating-cta {
   letter-spacing: .3px;
   text-transform: uppercase;
   padding: 6px 12px;
-  border-radius: 999px;
+  border-radius: 10px;
   margin-top: 2px;
   margin-bottom: 0;
   border: 1px solid #C7DFFF;        /* soft border to match promo code strip */
+    text-align: center;
+    margin: 0 auto;
+}
+
+.bm-pill .pill-line {
+  display: block;
+  text-align: center;
 }
 
 .bm-head{
@@ -4108,3 +4130,4 @@ body.modal-open .floating-cta {
   .bm-media{ flex-basis:160px; }
   .bm-head{ font-size:15px; }
 }
+

@@ -129,13 +129,45 @@
     requestAnimationFrame(() => payPanel.classList.add('slide-in'));
   }
 
-  function mountPaymentUI() {
-    // Mount the unified Payment Element once; keep container hidden until Continue
-    if (!document.getElementById('paymentElement')) return;
-    if (document.getElementById('paymentElement').dataset.mounted === 'true') return;
-    elements.create('payment').mount('#paymentElement');
-    document.getElementById('paymentElement').dataset.mounted = 'true';
+function mountPaymentUI() {
+  const el = document.getElementById('paymentElement');
+  if (!el || el.dataset.mounted === 'true') return;
+
+  // Payment Element (leave defaults)
+  const paymentElement = elements.create('payment', { fields: { billingDetails: 'auto' } });
+  paymentElement.mount('#paymentElement');
+  el.dataset.mounted = 'true';
+
+  // ---- Cosmetic address block ABOVE the Pay button ----
+  let addrHost = document.getElementById('cosmeticBillingAddress');
+  if (!addrHost) {
+    addrHost = document.createElement('div');
+    addrHost.id = 'cosmeticBillingAddress';
+    addrHost.innerHTML = `
+      <label class="addr-label" style="display:block;margin:14px 0 6px;">Billing address (for delivery)</label>
+      <div id="addrMount"></div>
+    `;
+
+    // insert BEFORE the submit button
+    const payBtn = document.getElementById('paySubmitBtn') 
+                || payForm.querySelector('button[type="submit"]');
+    if (payBtn && payBtn.parentElement) {
+      payBtn.parentElement.insertBefore(addrHost, payBtn);
+    } else {
+      // fallback: right after the Payment Element container
+      el.parentElement.insertBefore(addrHost, el.nextSibling);
+    }
   }
+
+  const addrEl = elements.create('address', {
+    mode: 'billing',
+    allowedCountries: ['GB','US','CA','SE','IE','AU','NZ','DE','FR','IT','ES'],
+    fields: { phone: 'never' }
+  });
+  addrEl.mount('#addrMount');
+}
+
+
 
   async function ensureStripe(force = false) {
     // If already warmed AND not forcing, bail
@@ -184,7 +216,7 @@
       if (!window.__STRIPE_WARM__?.pr) {
         // Read per-currency prices (from offer.js) or use a safe fallback table
         const PRICE = (window.RTB_PRICE_TABLE) || {
-          GBP: { full: 20.99, intro: 9.99 }, USD: { full: 23.99, intro: 9.99 }, EUR: { full: 22.99, intro: 9.99 },
+          GBP: { full: 21.99, intro: 9.99 }, USD: { full: 23.99, intro: 9.99 }, EUR: { full: 22.99, intro: 9.99 },
           SEK: { full: 259, intro: 129 }, NOK: { full: 399, intro: 0 }, DKK: { full: 449, intro: 0 },
           CHF: { full: 34.99, intro: 0 }, AUD: { full: 94.99, intro: 0 }, NZD: { full: 59.99, intro: 0 },
           CAD: { full: 31.99, intro: 15.99 }, SGD: { full: 84.99, intro: 0 }, HKD: { full: 499, intro: 0 },
