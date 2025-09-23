@@ -251,6 +251,29 @@
     </div>
   </div>
 
+  <!-- Calisthenics Essential Kit -->
+  <section class="kit-promo" id="calisthenics-kit" aria-label="Calisthenics Essential Kit">
+    <div class="kit-inner">
+      <div class="kit-badge" aria-hidden="true">🎁</div>
+
+      <h3 class="kit-title">
+        <span class="kit-discount">51% OFF</span><br>
+        on <span class="kit-brand">Calisthenics Essential Kit</span>
+      </h3>
+
+      <p class="kit-subcopy">
+        Includes a foldable push-up board, ergonomic handles, and resistance bands — designed to target chest, back,
+        shoulders, and arms for effective home workouts. Available after purchase of the workout plan.
+      </p>
+
+
+      <figure class="kit-figure">
+        <img src="../assets/home-workout-kit.jpg" alt="Calisthenics Essential Kit – home workout equipment"
+          loading="lazy">
+      </figure>
+    </div>
+  </section>
+
   <section class="app-social-proof" aria-label="App social proof">
     <div class="asp-inner">
 
@@ -429,14 +452,31 @@
       </a>
     </p>
 
-    <!-- Promo applied strip -->
-    <div id="promoAppliedStrip" class="rtb-ps" hidden>
-      <span class="rtb-ps__badge">Promo applied</span>
-      <code id="promoStripCode" class="rtb-ps__code"></code>
-      <div class="rtb-ps__note">
-        Auto-applies at checkout • Ends in <span id="promoStripTimer">10:00</span>
+<!-- Promo applied strip -->
+<div id="promoAppliedStrip" class="rtb-ps" hidden>
+  <div class="ps-top">
+    <div class="discount-badge">
+      51% OFF
+      <span class="badge-subline">+ FREE SHIPPING</span>
+    </div>
+    <h4 class="ps-title">Promo code applied!</h4>
+  </div>
+
+  <div class="ps-bottom">
+    <!-- Code pill (left) -->
+    <code id="promoStripCode" class="rtb-ps__code" aria-label="Promo code"></code>
+
+    <!-- Timer (right) -->
+    <div class="ps-timer" aria-live="polite">
+      <div class="ps-time-value" id="promoStripTimer">10:00</div>
+      <div class="ps-time-labels">
+        <span>minutes</span>
+        <span>seconds</span>
       </div>
     </div>
+  </div>
+</div>
+
 
 
     <!-- <p class="offer-subtext">Most people never stick to fitness because their plan doesn’t adapt. Yours will.
@@ -618,6 +658,25 @@
         <div class="toggle-details" style="cursor:pointer;">What’s Included?</div>
       </div> -->
 
+      <div class="bm-discount-wrap">
+        <div class="bm-plus">+</div>
+
+        <div class="bm-discount-card">
+          <div class="bm-row">
+            <div class="bm-left">
+              <div class="bm-pill">51% SPECIAL DISCOUNT</div>
+              <p class="bm-head"><strong>Calisthenics Essential Kit</strong></p>
+            </div>
+
+            <figure class="bm-media">
+              <img src="../assets/home-workout-kit.jpg" alt="Calisthenics Essential Kit">
+            </figure>
+          </div>
+        </div>
+      </div>
+
+
+
       <p class="pricing-justification">
         Like having a personal trainer in your pocket — for less than the cost of one session.
       </p>
@@ -637,9 +696,9 @@
         By proceeding, you confirm that you’ve read and agree to our
         <a href="tos.html" target="_blank">terms of service</a> and
         <a href="refund-policy.html" target="_blank">refund policy</a>.
-        The trial lasts for 1 day. If you choose the 12-Week Plan, it renews at
+        If you choose the 12-Week Plan, it renews at
         <span class="renew-amt"></span>/month unless cancelled.
-        Cancellations take effect at the end of the current billing cycle.
+        Cancellations take effect at the end of the current billing cycle. The Calisthenics Essential Kit is available after purchase of the workout plan.
       </p>
 
   </section>
@@ -1011,7 +1070,10 @@ body: JSON.stringify(payload)
         <div class="scratch-card" role="group" aria-label="Scratch to reveal your discount">
           <div class="scratch-reveal">
             <div class="reveal-content">
-              <div class="discount-badge">100% OFF</div>
+              <div class="discount-badge">
+                51% OFF
+                <span class="badge-subline">+ Free Shipping</span>
+              </div>
               <!-- <p class="reveal-sub">Your 12-Week Plan is free!</p> -->
               <p id="promoCodeLine" class="promo-code-line"></p>
               <p class="reveal-small">

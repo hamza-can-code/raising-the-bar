@@ -251,6 +251,16 @@ button:hover {
   text-align: center;
 }
 
+.question-image {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  margin: 16px auto 0;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
 .form-options ol {
   list-style-type: none;
   padding: 10px;

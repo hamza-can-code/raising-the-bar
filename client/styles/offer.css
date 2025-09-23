@@ -1,4 +1,4 @@
--whtml,
+html,
 body {
     margin: 0;
     padding: 0;
@@ -3611,12 +3611,21 @@ body.modal-open .floating-cta {
   font-weight: 800;
   font-size: 28px;
   letter-spacing: .5px;
-  padding: 8px 14px;
-  border-radius: 999px;
+  padding: 8px 26px;
+  border-radius: 8px;
   background: #E6F2FF;
     border: 1px solid #007BFF;
   color: #007BFF; 
   backdrop-filter: blur(2px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+
+.discount-badge .badge-subline {
+  display: block;
+  font-size: 14px;        /* smaller than the main 28px */
+  font-weight: 600;
+  margin-top: 2px;
+  text-transform: none;
 }
 .reveal-sub { margin: 8px 0 4px; font-weight: 700 }
 .reveal-small { margin: 0; font-size: 12px; color: #333 }
@@ -3757,71 +3766,345 @@ body.modal-open .floating-cta {
   .scratch-hint .dot { transform: rotate(0) translateX(30px) translateY(-50%); }
 }
 
-/* ========== PROMO STRIP (SCOPED) ========== */
-/* Only styles under #promoAppliedStrip apply */
-#promoAppliedStrip.rtb-ps {
-  /* layout */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 100%;
-    box-sizing: border-box;
 
-  /* spacing & container */
-  padding: 14px 16px;
-  margin: 12px auto 18px;              /* centers within your column */
-  width: min(100%, 720px);             /* never exceeds column width */
-  border-radius: 14px;
 
-  /* visuals (soft, on-brand) */
-  background: linear-gradient(180deg, #F7FAFF 0%, #EEF5FF 100%);
-  border: 1px solid #DCE8FF;
-  box-shadow: 0 2px 10px rgba(0, 123, 255, 0.05);
 
-  /* safety */
-  overflow: visible;
+
+
+
+
+
+
+
+
+/* ─── Promo strip container ───────────────────────────────────────────── */
+#promoAppliedStrip.rtb-ps{
+  display:block;
+  text-align:left;
+  padding:16px;
+  margin:12px auto 18px;
+  width:min(100%,720px);
+  border-radius:14px;
+  background:linear-gradient(180deg,#F7FAFF 0%,#EEF5FF 100%);
+  border:1px solid #DCE8FF;
+  box-shadow:0 2px 10px rgba(0,123,255,.05);
+  box-sizing:border-box;
 }
 
-#promoAppliedStrip .rtb-ps__badge {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: #0B63D1;
-  background: #E6F2FF;
-  border: 1px solid #C7DFFF;
-  border-radius: 999px;
-  padding: 4px 10px;
-  margin: 8px auto;
+/* Top row: badge + headline */
+#promoAppliedStrip .ps-top{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:12px;
+}
+#promoAppliedStrip .ps-title{
+  margin:0;
+  font:800 18px/1.2 "Poppins",sans-serif;   /* bigger headline */
+  color:#1e1d1c;
 }
 
-#promoAppliedStrip .rtb-ps__code {
-  display: inline-block;
+/* Badge (scoped so your scratch-card badge stays as-is) */
+#promoAppliedStrip .discount-badge{
+  display:inline-flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:16px;                            /* larger */
+  letter-spacing:.5px;
+  padding:8px 12px;
+  border-radius:10px;                        /* 10px radius per request */
+  background:#0B63D1;   
+  border:1px solid #084EA8;
+  color:#FFFFFF;
+  backdrop-filter:blur(2px);
+}
+#promoAppliedStrip .discount-badge .badge-subline{
+  display:block;
+  font-size:12px;
+  font-weight:700;
+  margin-top:2px;
+  text-transform:none;
+}
+
+/* Bottom row: code (left) + timer (right) */
+#promoAppliedStrip .ps-bottom{
+  display:grid;
+  grid-template-columns: 1fr auto;          /* code left, timer right */
+  align-items: stretch;
+  gap:12px;
+}
+
+/* Code pill – white box with checkmark on the left */
+#promoAppliedStrip .rtb-ps__code{
+  display:block;
+  position:relative;
+  padding:12px 12px 12px 36px;              /* room for checkmark */
+  margin:0;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size: 15px;
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:#0B63D1;
+  background:#fff;
+  border:1px solid #C7DFFF;
+  border-radius:10px;
+  box-shadow:0 1px 2px rgba(0,0,0,.06), inset 0 1px 0 rgba(255,255,255,.6);
+  min-height:40px;
+}
+#promoAppliedStrip .rtb-ps__code::before{
+  content:"✓";
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  font:700 14px/1 "Poppins",sans-serif;
+  color:#1BAE6C;
+}
+
+/* Timer block (no "Ends in") – MM:SS with labels under each */
+#promoAppliedStrip .ps-timer{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:122px;
+  padding:10px 12px 8px;
+  background:#E6F2FF;
+  border:1px solid #C7DFFF;
+  border-radius:10px;
+  box-shadow:0 1px 2px rgba(0,0,0,.06), inset 0 1px 0 rgba(255,255,255,.6);
+}
+#promoAppliedStrip .ps-time-value{
+  font:800 20px/1 "Poppins",sans-serif;     /* big MM:SS */
+  color:#0B63D1;
+}
+#promoAppliedStrip .ps-time-labels{
+  display:flex;
+  justify-content:space-between;
+  gap:22px;
+  width:100%;
+  margin-top:4px;
+}
+#promoAppliedStrip .ps-time-labels span{
+  font:600 10px/1 "Poppins",sans-serif;
+  color:#0B63D1;
+  opacity:.85;
+}
+
+/* Mobile-first; only stack on ultra-narrow screens */
+@media (max-width:360px){
+  #promoAppliedStrip .ps-bottom{
+    grid-template-columns:1fr;               /* stack */
+  }
+  #promoAppliedStrip .ps-timer{
+    min-width:0;
+  }
+}
+
+/* Align tick + code text */
+#promoAppliedStrip .rtb-ps__code{
+  display: flex;
+  align-items: center;          /* vertical centering */
+  gap: 8px;                     /* space between tick and code */
+  padding: 12px;                /* remove extra left padding */
+}
+
+/* Make the tick participate in layout (not absolute) */
+#promoAppliedStrip .rtb-ps__code::before{
+  position: static;
+  transform: none;
+  margin: 0;                    /* handled by gap */
+  font: 700 14px/1 "Poppins", sans-serif;
+  line-height: 1;
+}
+
+/* Bring "minutes" and "seconds" closer together under the time */
+#promoAppliedStrip .ps-time-labels{
+  display: flex;
+  justify-content: center;      /* center under MM:SS */
+  gap: 10px;                    /* tighter spacing */
+  width: auto;                  /* stop stretching across the pill */
+}
+
+
+
+
+
+
+
+
+
+
+/* Calisthenics Essential Kit promo */
+.kit-promo {
+  max-width: 980px;
+  margin: 28px auto 12px;
+  padding: 0 16px;
+}
+.kit-inner {
+  background: #FFFFFF;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 18px;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.06);
+  padding: 28px 15px;
+  text-align: center;
+}
+.kit-badge {
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  margin: -50px auto 6px;
+  border-radius: 50%;
+  background: #F2ECE3; /* soft neutral to suit #F9F7F2 theme */
+  font-size: 22px;
+}
+.kit-title {
+  font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   font-weight: 800;
-  letter-spacing: .06em;
-  text-transform: uppercase;           /* ALL CAPS render */
-  color: #0B63D1;
-  background: #fff;
-  border: 1px solid #C7DFFF;
+  font-size: 26px;
+  line-height: 1.25;
+  color: #2a2a2a;
+  margin: 6px 0 10px;
+}
+.kit-title .kit-discount {
+  color: #3a2f28; /* dark cocoa, legible */
+}
+.kit-title .kit-brand {
+  color: #1e1d1c;
+}
+.kit-subcopy {
+  color: #5a5856;
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 620px;
+  margin: 0 auto 18px;
+}
+.kit-figure {
+  margin: 0;
+  background: #F9F7F2;
+  border-radius: 14px;
+  padding: 14px;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+.kit-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
   border-radius: 10px;
-  margin: 8px auto;
-  padding: 6px 12px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.6);
 }
 
-#promoAppliedStrip .rtb-ps__note {
-  font-size: 12px;
+/* responsive tweaks */
+@media (min-width: 768px) {
+  .kit-inner { padding: 34px 28px; }
+  .kit-title { font-size: 28px; }
+}
+
+/* ── BetterMe-style Kit card: centered, clean, with white bg ───────────────── */
+
+/* Wrapper with + icon */
+.bm-discount-wrap {
+  position: relative;
+  margin: 24px 0 0;
+}
+
+/* The + circle */
+.bm-plus {
+  position: absolute;
+  top: 2px;                           /* overlap the card */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 600 18px/1 "Poppins", sans-serif;
   color: #666;
-  margin: 2px auto;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  z-index: 2;
 }
 
-/* nice on small screens */
-@media (max-width: 420px) {
-  #promoAppliedStrip.rtb-ps { padding: 12px }
-  #promoAppliedStrip .rtb-ps__code { font-size: 14px }
+.bm-discount-card{
+  width:100%;
+  margin:16px auto 0;
+  padding:16px;
+  background:#FFFFFF !important;                 /* visible white card */
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:16px;
+  box-shadow:0 6px 18px rgba(0,0,0,.06);
+  box-sizing: border-box;
 }
 
+.bm-row{
+  display:flex;
+  align-items:center !important;                 /* vertically center left vs image */
+  justify-content:space-between;
+  gap:16px;
+}
+
+/* left column: pill + title (+ optional subline) */
+.bm-left{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;                        /* centers the stack */
+  gap:8px;
+  min-width:0;
+}
+
+.bm-pill {
+  align-self: flex-start;
+  background: #E6F2FF;              /* light blue background */
+  color: #007BFF;                   /* CTA blue text */
+  font: 700 12px/1 "Poppins", sans-serif;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 999px;
+  margin-top: 2px;
+  margin-bottom: 0;
+  border: 1px solid #C7DFFF;        /* soft border to match promo code strip */
+}
+
+.bm-head{
+  margin:0;
+  font:600 16px/1.2 "Poppins",sans-serif;
+  color:#1e1d1c;
+  text-align: center;
+}
+
+.bm-sub{
+  margin:0;
+  font:400 13px/1.45 "Roboto",system-ui,sans-serif;
+  color:#5a5856;
+}
+
+/* image on the right with soft inset bg */
+.bm-media{
+  flex:0 0 200px;                                /* image size */
+  margin:0;
+  background:#F4F2EC;
+  border-radius:12px;
+  padding:10px;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.05);
+}
+.bm-media img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:8px;
+}
+
+/* responsive tweaks */
+@media (min-width:1024px){
+  .bm-media{ flex-basis:240px; }
+}
+@media (max-width:520px){
+  .bm-media{ flex-basis:160px; }
+  .bm-head{ font-size:15px; }
+}

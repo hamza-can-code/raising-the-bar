@@ -20,16 +20,16 @@ function fadeOutLoader() {
   overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
 }
 window.RTB_PRICE_TABLE = {
-  GBP: { full: 14.99, intro: 0 },
-  USD: { full: 19.99, intro: 0 },
-  EUR: { full: 17.99, intro: 0 },
-  SEK: { full: 199, intro: 0 },
+  GBP: { full: 20.99, intro: 9.99 },
+  USD: { full: 23.99, intro: 9.99 },
+  EUR: { full: 22.99, intro: 9.99 },
+  SEK: { full: 259, intro: 129 },
   NOK: { full: 399, intro: 0 },
   DKK: { full: 449, intro: 0 },
   CHF: { full: 34.99, intro: 0 },
   AUD: { full: 94.99, intro: 0 },
   NZD: { full: 59.99, intro: 0 },
-  CAD: { full: 24.99, intro: 0 },
+  CAD: { full: 31.99, intro: 0 },
   SGD: { full: 84.99, intro: 0 },
   HKD: { full: 499, intro: 0 },
   JPY: { full: 7900, intro: 0 },
@@ -1702,7 +1702,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // on narrow (≤375px) we want the element 20px *below* the top of the viewport → +20
     // on wider we want it 20px *above* the top → -20
     const isSmall = window.matchMedia("(max-width: 375px)").matches;
-    const offset = isSmall ? -15 : -225;
+    const offset = isSmall ? -15 : -40;
 
     // absolute Y position of the element
     const elementTop = socialProof.getBoundingClientRect().top + window.pageYOffset;
@@ -2183,7 +2183,7 @@ SCRATCH_INIT = true;
     .replace(/[^a-z0-9]/gi, '-')   // normalize to letters/numbers/hyphen
     .replace(/-+/g, '-')           // collapse multiple hyphens
     .replace(/^-|-$/g, '');        // trim hyphens
-  const promoCode = `${firstName}-100-OFF`.toUpperCase();
+  const promoCode = `${firstName}-51-OFF`.toUpperCase();
   localStorage.setItem('appliedPromoCode', promoCode);
 
   // write to both the modal and the pricing strip if present
@@ -2740,7 +2740,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .replace(/[^a-z0-9]/gi, '-')       // normalize
     .replace(/-+/g,'-')
     .replace(/^-|-$/g,'');
-  const promoCode = `${firstName}-100-OFF`.toUpperCase();
+  const promoCode = `${firstName}-51-OFF`.toUpperCase();
 
   // Persist & render in both places (modal + strip)
   localStorage.setItem('appliedPromoCode', promoCode);

@@ -116,7 +116,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       line_items: [{ price: priceId, quantity: 1 }],
       customer_email: email,
       client_reference_id: client_reference_id || undefined,
-      success_url: `${successBase}/pages/dashboard.html?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${successBase}/pages/kit-offer.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${successBase}/pages/offer.html`,
 
       // ✅ Always force card entry, even if trial
@@ -124,9 +124,9 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       customer_creation: 'always',
 
       subscription_data: {
-        trial_period_days: discounted ? 1 : undefined, // only if you want a trial
+        // trial_period_days: discounted ? 1 : undefined,
         payment_settings: { save_default_payment_method: 'on_subscription' },
-        trial_settings: { end_behavior: { missing_payment_method: 'cancel' } },
+        // trial_settings: { end_behavior: { missing_payment_method: 'cancel' } },
       },
 
       metadata: {
@@ -137,10 +137,10 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
     };
 
 
-    if (discounted) {
-      sessionCfg.subscription_data = { trial_period_days: 1 };
-      sessionCfg.payment_method_collection = 'always';
-    }
+    // if (discounted) {
+    //   sessionCfg.subscription_data = { trial_period_days: 1 };
+    //   sessionCfg.payment_method_collection = 'always';
+    // }
 
     log('Checkout session config', sessionCfg);
     const session = await stripe.checkout.sessions.create(sessionCfg);
@@ -181,7 +181,7 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
         save_default_payment_method: 'on_subscription',
         payment_method_types: ['card'],
       },
-      expand: ['latest_invoice.payment_intent', 'pending_setup_intent'],
+    expand: ['latest_invoice.payment_intent'],
       metadata: {
         product: '12-Week Plan',
         currency_used: ccy,
@@ -189,41 +189,41 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
       },
     };
 
-    if (discounted) {
-      subCfg.trial_period_days = 1;
-    }
+    // if (discounted) {
+    //   subCfg.trial_period_days = 1;
+    // }
 
 
     log('Subscription create config', subCfg);
     const sub = await stripe.subscriptions.create(subCfg);
     log('Subscription', { id: sub.id, status: sub.status });
 
-    if (discounted) {
-      const setup =
-        typeof sub.pending_setup_intent === 'string'
-          ? await stripe.setupIntents.retrieve(sub.pending_setup_intent)
-          : sub.pending_setup_intent;
-      if (!setup) {
-        return res.status(500).json({ error: 'SetupIntent not available' });
-      }
-      try {
-        if (setup.metadata?.subscription_id !== sub.id) {
-          await stripe.setupIntents.update(setup.id, {
-            metadata: {
-              subscription_id: sub.id,
-              customer_id: customer.id,
-            },
-          });
-        }
-      } catch (err) {
-        console.error('⚠️  Failed to tag SetupIntent with subscription metadata', err);
-      }
-      return res.json({
-        clientSecret: setup.client_secret,
-        subscriptionId: sub.id,
-        intentType: 'setup',
-      });
-    }
+    // if (discounted) {
+    //   const setup =
+    //     typeof sub.pending_setup_intent === 'string'
+    //       ? await stripe.setupIntents.retrieve(sub.pending_setup_intent)
+    //       : sub.pending_setup_intent;
+    //   if (!setup) {
+    //     return res.status(500).json({ error: 'SetupIntent not available' });
+    //   }
+    //   try {
+    //     if (setup.metadata?.subscription_id !== sub.id) {
+    //       await stripe.setupIntents.update(setup.id, {
+    //         metadata: {
+    //           subscription_id: sub.id,
+    //           customer_id: customer.id,
+    //         },
+    //       });
+    //     }
+    //   } catch (err) {
+    //     console.error('⚠️  Failed to tag SetupIntent with subscription metadata', err);
+    //   }
+    //   return res.json({
+    //     clientSecret: setup.client_secret,
+    //     subscriptionId: sub.id,
+    //     intentType: 'setup',
+    //   });
+    // }
 
     // 4) extract PaymentIntent for client_secret
     let pi = sub.latest_invoice?.payment_intent || null;

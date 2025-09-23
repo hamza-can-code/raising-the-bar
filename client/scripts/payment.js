@@ -28,7 +28,7 @@
   /* ——————————————————————————————————————————————————————————— */
 
   const STRIPE_PK = 'pk_live_51RJa8007mQ8fzyxpyrHP8Tk9GMzRnhG06vVUTe5mAnpcAacIj8fRmwuRYBpEIr1tRvFqe5nQqpofCURgCHaPASbS00wwfmtIvU';
-  const RETURN_URL = `${window.location.origin}/pages/dashboard.html`;
+  const RETURN_URL = `${window.location.origin}/pages/kit-offer.html`;
 
   /* ——————————————————————————————————————————————————————————— */
   /* 3.  DOM handles                                               */
@@ -184,10 +184,10 @@
       if (!window.__STRIPE_WARM__?.pr) {
         // Read per-currency prices (from offer.js) or use a safe fallback table
         const PRICE = (window.RTB_PRICE_TABLE) || {
-          GBP: { full: 14.99, intro: 0 }, USD: { full: 19.99, intro: 0 }, EUR: { full: 17.99, intro: 0 },
-          SEK: { full: 199, intro: 0 }, NOK: { full: 399, intro: 0 }, DKK: { full: 449, intro: 0 },
+          GBP: { full: 20.99, intro: 9.99 }, USD: { full: 23.99, intro: 9.99 }, EUR: { full: 22.99, intro: 9.99 },
+          SEK: { full: 259, intro: 129 }, NOK: { full: 399, intro: 0 }, DKK: { full: 449, intro: 0 },
           CHF: { full: 34.99, intro: 0 }, AUD: { full: 94.99, intro: 0 }, NZD: { full: 59.99, intro: 0 },
-          CAD: { full: 24.99, intro: 0 }, SGD: { full: 84.99, intro: 0 }, HKD: { full: 499, intro: 0 },
+          CAD: { full: 31.99, intro: 15.99 }, SGD: { full: 84.99, intro: 0 }, HKD: { full: 499, intro: 0 },
           JPY: { full: 7900, intro: 0 }, INR: { full: 3999, intro: 0 }, BRL: { full: 259.99, intro: 0 },
           MXN: { full: 1199, intro: 0 }
         };
@@ -345,7 +345,7 @@
         elements,
         redirect: 'always',
         confirmParams: {
-          return_url: `${window.location.origin}/pages/dashboard.html`,
+          return_url: `${window.location.origin}/pages/kit-offer.html`,
         },
       });
     } else {
@@ -353,7 +353,7 @@
         elements,
         redirect: 'always',              // 👈 optional but recommended
         confirmParams: {
-          return_url: `${window.location.origin}/pages/dashboard.html`
+          return_url: `${window.location.origin}/pages/kit-offer.html`
         }
       });
     }
