@@ -567,22 +567,22 @@
       <div class="offer-card offer-special" data-program="new">
         <div class="offer-left">
           <div class="duration"><strong>12-Week Plan</strong></div>
-          <div class="full-price" data-full-price="£14.99">
+          <!-- <div class="full-price" data-full-price="£14.99">
             <span class="price-strikethrough" id="priceSpecialFull">£14.99</span>
             <span class="discount-price" id="priceSpecialDiscount">£0.00</span>
-          </div>
+          </div> -->
           <!-- <div class="best-seller-banner">
             <strong><span class="crown-emoji">👑</span> <span class="banner-text">BEST VALUE</span></strong>
           </div> -->
         </div>
 
-        <div class="offer-right">
+        <!-- <div class="offer-right">
           <div class="currency-tag">GBP</div>
           <div class="cost-per-day">
             <strong id="costPerDaySpecial">£0.33</strong>
           </div>
           <div class="per-day">per day</div>
-        </div>
+        </div> -->
 
         <!-- Moved .additional-info outside .offer-left so it can span the entire card -->
         <div class="additional-info" id="info-new" style="display: none;">
@@ -677,7 +677,26 @@
         </div>
       </div>
 
+<div class="total-price-summary" id="totalPriceSummary" aria-label="Total price">
+  <div class="tp-row full">
+    <span class="tp-label">Full price</span>
+    <span class="tp-val"><span id="tpFull"></span></span>
+  </div>
 
+  <div class="tp-row current">
+    <span class="tp-label"><strong>Current price</strong></span>
+    <span class="tp-val discount-price" id="tpNow"></span>
+  </div>
+
+  <div class="tp-row perday">
+    <span class="tp-label">≈ Per day</span>
+    <span class="tp-val">
+      <span class="cost-per-day" id="tpPerDay"></span>
+      <span class="per-day">&nbsp;per day</span>
+      <span class="currency-tag" id="tpCcy"></span>
+    </span>
+  </div>
+</div>
 
       <p class="pricing-justification">
         Like having a personal trainer in your pocket — for less than the cost of one session.
@@ -1077,6 +1096,7 @@ body: JSON.stringify(payload)
                 51% OFF
                 <span class="badge-subline">+ Free Shipping</span>
               </div>
+              <div class="discount-subline">On your 12-Week Plan and Calisthenics Essential Kit</div>
               <!-- <p class="reveal-sub">Your 12-Week Plan is free!</p> -->
               <p id="promoCodeLine" class="promo-code-line"></p>
               <p class="reveal-small">

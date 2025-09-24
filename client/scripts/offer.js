@@ -1186,6 +1186,18 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       el.textContent = 'Like having a personal trainer in your pocket — for less than the cost of one session.';
     }
+    // inside updatePricingJustification(), after you compute {code, full, intro} and dealOn
+    const $ = (id) => document.getElementById(id);
+
+    if ($('tpFull')) {
+      $('tpFull').textContent = fmt(code, full);
+      // add/remove strike class based on discount
+      $('tpFull').classList.toggle('price-strikethrough', !!dealOn);
+    }
+    if ($('tpNow')) $('tpNow').textContent = fmt(code, dealOn ? intro : full);
+    if ($('tpPerDay')) $('tpPerDay').textContent = fmt(code, (dealOn ? intro : full) / 30);
+    if ($('tpCcy')) $('tpCcy').textContent = code;
+
   }
 
   const timerContainer = document.getElementById("timerContainer");
@@ -1202,7 +1214,7 @@ document.addEventListener("DOMContentLoaded", function () {
       updatePostPayNote();
       localStorage.removeItem("sevenDayDiscountEnd");
       if (timerContainer) timerContainer.style.display = "none";
-           const cardSubtext = document.querySelector(".card-subtext");
+      const cardSubtext = document.querySelector(".card-subtext");
       if (cardSubtext) cardSubtext.remove();
       return;
     }
@@ -1702,7 +1714,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // on narrow (≤375px) we want the element 20px *below* the top of the viewport → +20
     // on wider we want it 20px *above* the top → -20
     const isSmall = window.matchMedia("(max-width: 375px)").matches;
-    const offset = isSmall ? -15 : -35;
+    const offset = isSmall ? -15 : 40;
 
     // absolute Y position of the element
     const elementTop = socialProof.getBoundingClientRect().top + window.pageYOffset;
@@ -2135,90 +2147,90 @@ function setUpCompareModal0() {
   }
 
   // Disable backdrop (outside click) + ESC for the promo modal only
-(function () {
-  const promoModal = document.getElementById('valueModal');
-  if (!promoModal) return;
+  (function () {
+    const promoModal = document.getElementById('valueModal');
+    if (!promoModal) return;
 
-  const content = promoModal.querySelector('.modal-content');
+    const content = promoModal.querySelector('.modal-content');
 
-  // Block clicks/taps that land on the backdrop
-  const blockBackdrop = (e) => {
-    if (e.target === promoModal || !content.contains(e.target)) {
-      e.stopImmediatePropagation();
-      e.preventDefault();
+    // Block clicks/taps that land on the backdrop
+    const blockBackdrop = (e) => {
+      if (e.target === promoModal || !content.contains(e.target)) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+      }
+    };
+    ['click', 'mousedown', 'touchstart'].forEach(evt =>
+      promoModal.addEventListener(evt, blockBackdrop, true) // capture phase
+    );
+
+    // Optional: also ignore ESC while this modal is visible
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && promoModal.classList.contains('show')) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+      }
+    }, true);
+  })();
+
+  // --- Scratch Card -------------------------------------------------
+  let SCRATCH_INIT = false;
+
+  function initScratchCard() {
+    if (SCRATCH_INIT) return;
+    SCRATCH_INIT = true;
+
+    const canvas = document.getElementById('scratchCanvas');
+    const wrap = canvas ? canvas.closest('.scratch-card') : null;
+    const reveal = wrap ? wrap.querySelector('.scratch-reveal') : null;
+    const content = reveal ? reveal.querySelector('.reveal-content') : null;
+    document.querySelector('#scratchHint .orbit')?.remove();
+    const continueBtn = document.getElementById('valueContinue');
+
+    if (!canvas || !wrap || !reveal || !continueBtn) return;
+
+    {
+      const fullName = localStorage.getItem('name') || '';
+      const firstName = (fullName.split(' ')[0] || 'user')
+        .replace(/[^a-z0-9]/gi, '-')   // normalize to letters/numbers/hyphen
+        .replace(/-+/g, '-')           // collapse multiple hyphens
+        .replace(/^-|-$/g, '');        // trim hyphens
+      const promoCode = `${firstName}-51-OFF`.toUpperCase();
+      localStorage.setItem('appliedPromoCode', promoCode);
+
+      // write to both the modal and the pricing strip if present
+      const targets = [
+        document.getElementById('promoCodeValue'),     // modal code (id)
+        document.getElementById('promoStripCode'),     // strip code (id)
+        document.querySelector('.promo-code-value')    // modal code (class fallback)
+      ].filter(Boolean);
+      targets.forEach(el => el.textContent = promoCode);
     }
-  };
-  ['click', 'mousedown', 'touchstart'].forEach(evt =>
-    promoModal.addEventListener(evt, blockBackdrop, true) // capture phase
-  );
 
-  // Optional: also ignore ESC while this modal is visible
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && promoModal.classList.contains('show')) {
-      e.stopImmediatePropagation();
-      e.preventDefault();
-    }
-  }, true);
-})();
+    // Lock the Continue button initially
+    continueBtn.disabled = true;
+    continueBtn.classList.add('locked');
+    continueBtn.style.setProperty('background', '#004a99', 'important');
+    continueBtn.style.setProperty('background-image', 'none', 'important');
 
-// --- Scratch Card -------------------------------------------------
-let SCRATCH_INIT = false;
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
-function initScratchCard() {
-if (SCRATCH_INIT) return;
-SCRATCH_INIT = true;
+    // ---- state (declare BEFORE any calls that read them)
+    let finished = false;
+    let scratching = false;
+    let idleTimer = null;
 
-  const canvas = document.getElementById('scratchCanvas');
-  const wrap   = canvas ? canvas.closest('.scratch-card') : null;
-  const reveal = wrap   ? wrap.querySelector('.scratch-reveal') : null;
-  const content= reveal ? reveal.querySelector('.reveal-content') : null;
-  document.querySelector('#scratchHint .orbit')?.remove();
-  const continueBtn = document.getElementById('valueContinue');
+    const hintText = document.querySelector('#scratchHint .hint-copy');
 
-  if (!canvas || !wrap || !reveal || !continueBtn) return;
+    // ---- Ghost finger zigzag animation (no extra HTML needed)
+    reveal.style.position = reveal.style.position || 'relative';
+    reveal.style.overflow = 'hidden';
 
-  {
-  const fullName  = localStorage.getItem('name') || '';
-  const firstName = (fullName.split(' ')[0] || 'user')
-    .replace(/[^a-z0-9]/gi, '-')   // normalize to letters/numbers/hyphen
-    .replace(/-+/g, '-')           // collapse multiple hyphens
-    .replace(/^-|-$/g, '');        // trim hyphens
-  const promoCode = `${firstName}-51-OFF`.toUpperCase();
-  localStorage.setItem('appliedPromoCode', promoCode);
-
-  // write to both the modal and the pricing strip if present
-  const targets = [
-    document.getElementById('promoCodeValue'),     // modal code (id)
-    document.getElementById('promoStripCode'),     // strip code (id)
-    document.querySelector('.promo-code-value')    // modal code (class fallback)
-  ].filter(Boolean);
-  targets.forEach(el => el.textContent = promoCode);
-}
-
-  // Lock the Continue button initially
-  continueBtn.disabled = true;
-  continueBtn.classList.add('locked');
-  continueBtn.style.setProperty('background', '#004a99', 'important');
-  continueBtn.style.setProperty('background-image', 'none', 'important');
-
-  const ctx = canvas.getContext('2d', { willReadFrequently: true });
-
-  // ---- state (declare BEFORE any calls that read them)
-  let finished   = false;
-  let scratching = false;
-  let idleTimer  = null;
-
-  const hintText = document.querySelector('#scratchHint .hint-copy');
-
-  // ---- Ghost finger zigzag animation (no extra HTML needed)
-reveal.style.position = reveal.style.position || 'relative';
-reveal.style.overflow = 'hidden';
-
-const ghost = document.createElement('div');
-const DOT = 28;                 // ghost diameter (px)
-const PAD = 10;                 // inner padding from edges
-ghost.id = 'scratchGhost';
-ghost.style.cssText = `
+    const ghost = document.createElement('div');
+    const DOT = 28;                 // ghost diameter (px)
+    const PAD = 10;                 // inner padding from edges
+    ghost.id = 'scratchGhost';
+    ghost.style.cssText = `
   position: absolute;
   left: 0; top: 0;              /* we’ll move it via translate() */
   width: ${DOT}px; height: ${DOT}px;
@@ -2231,226 +2243,226 @@ ghost.style.cssText = `
   box-shadow: 0 4px 10px rgba(0,0,0,.15);
   transform: translate(0,0);
 `;
-reveal.appendChild(ghost);
+    reveal.appendChild(ghost);
 
-let gx = PAD, gy = PAD;
-let vx = 2.2, vy = 1.6;
-let ghostActive = false;
+    let gx = PAD, gy = PAD;
+    let vx = 2.2, vy = 1.6;
+    let ghostActive = false;
 
-function bounds() {
-  const w = reveal.clientWidth;
-  const h = reveal.clientHeight;
-  return {
-    minX: PAD,              minY: PAD,
-    maxX: w - PAD - DOT,    maxY: h - PAD - DOT
-  };
-}
+    function bounds() {
+      const w = reveal.clientWidth;
+      const h = reveal.clientHeight;
+      return {
+        minX: PAD, minY: PAD,
+        maxX: w - PAD - DOT, maxY: h - PAD - DOT
+      };
+    }
 
-function placeGhost() {
-  ghost.style.transform = `translate(${gx}px, ${gy}px)`;
-}
+    function placeGhost() {
+      ghost.style.transform = `translate(${gx}px, ${gy}px)`;
+    }
 
-function animateGhost() {
-  if (!ghostActive) return;
-  const b = bounds();
-  gx += vx; gy += vy;
-  if (gx <= b.minX || gx >= b.maxX) vx *= -1;
-  if (gy <= b.minY || gy >= b.maxY) vy *= -1;
-  gx = Math.min(Math.max(gx, b.minX), b.maxX);
-  gy = Math.min(Math.max(gy, b.minY), b.maxY);
-  placeGhost();
-  requestAnimationFrame(animateGhost);
-}
+    function animateGhost() {
+      if (!ghostActive) return;
+      const b = bounds();
+      gx += vx; gy += vy;
+      if (gx <= b.minX || gx >= b.maxX) vx *= -1;
+      if (gy <= b.minY || gy >= b.maxY) vy *= -1;
+      gx = Math.min(Math.max(gx, b.minX), b.maxX);
+      gy = Math.min(Math.max(gy, b.minY), b.maxY);
+      placeGhost();
+      requestAnimationFrame(animateGhost);
+    }
 
-function startGhost() {
-  if (ghostActive || finished) return;
-  const b = bounds();
-  gx = Math.min(Math.max(reveal.clientWidth  * 0.35, b.minX), b.maxX);
-  gy = Math.min(Math.max(reveal.clientHeight * 0.35, b.minY), b.maxY);
-  placeGhost();
-  ghostActive = true;
-  ghost.style.opacity = '1';
-  animateGhost();
-}
-function stopGhost() {
-  ghostActive = false;
-  ghost.style.opacity = '0';
-}
+    function startGhost() {
+      if (ghostActive || finished) return;
+      const b = bounds();
+      gx = Math.min(Math.max(reveal.clientWidth * 0.35, b.minX), b.maxX);
+      gy = Math.min(Math.max(reveal.clientHeight * 0.35, b.minY), b.maxY);
+      placeGhost();
+      ghostActive = true;
+      ghost.style.opacity = '1';
+      animateGhost();
+    }
+    function stopGhost() {
+      ghostActive = false;
+      ghost.style.opacity = '0';
+    }
 
-/* Hint helpers now drive the ghost (old orbit hint is removed above) */
-function showHint() {
-  if (!finished) {
-    startGhost();
-    if (hintText) hintText.style.opacity = '1';
-  }
-}
-function hideHint() {
-  stopGhost();
-  if (hintText) hintText.style.opacity = '0';
-}
-function scheduleHint() {
-  clearTimeout(idleTimer);
-  if (!finished) idleTimer = setTimeout(showHint, 3000);
-}
-
-/* keep ghost in-bounds if size changes */
-const clampGhostToBounds = () => {
-  const b = bounds();
-  gx = Math.min(Math.max(gx, b.minX), b.maxX);
-  gy = Math.min(Math.max(gy, b.minY), b.maxY);
-  placeGhost();
-};
-
-  // ---- sizing + paint
-  function sizeCanvas() {
-    const cssW = reveal.clientWidth;
-    const contentH = Math.ceil((content?.scrollHeight || 148));
-    const cssH = Math.max(148, contentH + 10);
-
-    const dpr = Math.max(1, window.devicePixelRatio || 1);
-    // reset transform before resizing
-    ctx.setTransform(1,0,0,1,0,0);
-    canvas.width  = Math.floor(cssW * dpr);
-    canvas.height = Math.floor(cssH * dpr);
-    canvas.style.width  = cssW + 'px';
-    canvas.style.height = cssH + 'px';
-    ctx.scale(dpr, dpr);
-
-    paintCover(cssW, cssH);
-  }
-
-  function paintCover(w, h) {
-    // branded blue gradient + texture
-    const grad = ctx.createLinearGradient(0, 0, w, h);
-    grad.addColorStop(0, '#007BFF');
-    grad.addColorStop(1, '#339CFF');
-
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, w, h);
-
-    const step = 10;
-    ctx.globalAlpha = 0.25;
-    for (let y = 0; y < h; y += step) {
-      for (let x = 0; x < w; x += step) {
-        ctx.fillStyle = ((x + y) % (step * 2)) ? '#ffffff' : '#003F80';
-        ctx.fillRect(x, y, 2, 2);
+    /* Hint helpers now drive the ghost (old orbit hint is removed above) */
+    function showHint() {
+      if (!finished) {
+        startGhost();
+        if (hintText) hintText.style.opacity = '1';
       }
     }
-    ctx.globalAlpha = 1;
-    ctx.globalCompositeOperation = 'destination-out'; // ready to scratch
-  }
+    function hideHint() {
+      stopGhost();
+      if (hintText) hintText.style.opacity = '0';
+    }
+    function scheduleHint() {
+      clearTimeout(idleTimer);
+      if (!finished) idleTimer = setTimeout(showHint, 3000);
+    }
 
-  // ---- scratch interaction
-  const brush = 18;
+    /* keep ghost in-bounds if size changes */
+    const clampGhostToBounds = () => {
+      const b = bounds();
+      gx = Math.min(Math.max(gx, b.minX), b.maxX);
+      gy = Math.min(Math.max(gy, b.minY), b.maxY);
+      placeGhost();
+    };
 
-  function scratch(x, y) {
-    ctx.beginPath();
-    ctx.arc(x, y, brush, 0, Math.PI * 2);
-    ctx.fill();
-  }
+    // ---- sizing + paint
+    function sizeCanvas() {
+      const cssW = reveal.clientWidth;
+      const contentH = Math.ceil((content?.scrollHeight || 148));
+      const cssH = Math.max(148, contentH + 10);
 
-  function pointerPos(e) {
-    const r = canvas.getBoundingClientRect();
-    const p = e.touches ? e.touches[0] : e;
-    return { x: p.clientX - r.left, y: p.clientY - r.top };
-  }
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      // reset transform before resizing
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      canvas.width = Math.floor(cssW * dpr);
+      canvas.height = Math.floor(cssH * dpr);
+      canvas.style.width = cssW + 'px';
+      canvas.style.height = cssH + 'px';
+      ctx.scale(dpr, dpr);
 
-  function scratchPoint(e) {
-    const { x, y } = pointerPos(e);
-    scratch(x, y);
-  }
+      paintCover(cssW, cssH);
+    }
 
-  function start(e) {
-    scratching = true;
-    reveal.classList.add('scratching');
-    hideHint();
-    clearTimeout(idleTimer);
-    scratchPoint(e);
-    e.preventDefault();
-  }
+    function paintCover(w, h) {
+      // branded blue gradient + texture
+      const grad = ctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, '#007BFF');
+      grad.addColorStop(1, '#339CFF');
 
-  function move(e) {
-    if (!scratching) return;
-    scratchPoint(e);
-    e.preventDefault();
-  }
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
 
-  function end() {
-    scratching = false;
-    reveal.classList.remove('scratching');
-    if (!finished) scheduleHint();
-    maybeFinish();
-  }
+      const step = 10;
+      ctx.globalAlpha = 0.25;
+      for (let y = 0; y < h; y += step) {
+        for (let x = 0; x < w; x += step) {
+          ctx.fillStyle = ((x + y) % (step * 2)) ? '#ffffff' : '#003F80';
+          ctx.fillRect(x, y, 2, 2);
+        }
+      }
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = 'destination-out'; // ready to scratch
+    }
 
-  canvas.addEventListener('pointerdown', start);
-  canvas.addEventListener('pointermove', move);
-  window.addEventListener('pointerup', end);
-  canvas.addEventListener('touchstart', start, { passive: false });
-  canvas.addEventListener('touchmove',  move,  { passive: false });
-  window.addEventListener('touchend',   end);
+    // ---- scratch interaction
+    const brush = 30;
 
-  // ---- completion calc
-  function clearedRatio() {
-    const { width, height } = canvas;
-    const sample = ctx.getImageData(0, 0, width, height).data;
-    let clear = 0;
-    for (let i = 3; i < sample.length; i += 4) if (sample[i] === 0) clear++;
-    return clear / (sample.length / 4);
-  }
+    function scratch(x, y) {
+      ctx.beginPath();
+      ctx.arc(x, y, brush, 0, Math.PI * 2);
+      ctx.fill();
+    }
 
-  function maybeFinish() {
-    if (finished) return;
-    if (clearedRatio() > 0.6) {
-      finished = true;
-      wrap.classList.add('scratch-done');
+    function pointerPos(e) {
+      const r = canvas.getBoundingClientRect();
+      const p = e.touches ? e.touches[0] : e;
+      return { x: p.clientX - r.left, y: p.clientY - r.top };
+    }
+
+    function scratchPoint(e) {
+      const { x, y } = pointerPos(e);
+      scratch(x, y);
+    }
+
+    function start(e) {
+      scratching = true;
+      reveal.classList.add('scratching');
       hideHint();
       clearTimeout(idleTimer);
-
-      continueBtn.disabled = false;
-      continueBtn.classList.remove('locked');
-      continueBtn.style.removeProperty('background');
-      continueBtn.style.removeProperty('background-image');
-      continueBtn.focus();
-
-      try { window.sendAnalytics?.('scratch_revealed', { pct: 100 }); } catch {}
+      scratchPoint(e);
+      e.preventDefault();
     }
-  }
 
-  // ---- reset button (optional)
-  document.getElementById('scratchReset')?.addEventListener('click', () => {
-    wrap.classList.remove('scratch-done');
-    finished = false;
+    function move(e) {
+      if (!scratching) return;
+      scratchPoint(e);
+      e.preventDefault();
+    }
+
+    function end() {
+      scratching = false;
+      reveal.classList.remove('scratching');
+      if (!finished) scheduleHint();
+      maybeFinish();
+    }
+
+    canvas.addEventListener('pointerdown', start);
+    canvas.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', end);
+    canvas.addEventListener('touchstart', start, { passive: false });
+    canvas.addEventListener('touchmove', move, { passive: false });
+    window.addEventListener('touchend', end);
+
+    // ---- completion calc
+    function clearedRatio() {
+      const { width, height } = canvas;
+      const sample = ctx.getImageData(0, 0, width, height).data;
+      let clear = 0;
+      for (let i = 3; i < sample.length; i += 4) if (sample[i] === 0) clear++;
+      return clear / (sample.length / 4);
+    }
+
+    function maybeFinish() {
+      if (finished) return;
+      if (clearedRatio() > 0.6) {
+        finished = true;
+        wrap.classList.add('scratch-done');
+        hideHint();
+        clearTimeout(idleTimer);
+
+        continueBtn.disabled = false;
+        continueBtn.classList.remove('locked');
+        continueBtn.style.removeProperty('background');
+        continueBtn.style.removeProperty('background-image');
+        continueBtn.focus();
+
+        try { window.sendAnalytics?.('scratch_revealed', { pct: 100 }); } catch { }
+      }
+    }
+
+    // ---- reset button (optional)
+    document.getElementById('scratchReset')?.addEventListener('click', () => {
+      wrap.classList.remove('scratch-done');
+      finished = false;
+      sizeCanvas();
+      showHint();
+      continueBtn.disabled = true;
+      continueBtn.classList.add('locked');
+      continueBtn.style.setProperty('background', '#004a99', 'important');
+      continueBtn.style.setProperty('background-image', 'none', 'important');
+    });
+
+    // ---- mirror timer(s)
+    const src = document.getElementById('countdownTimer');
+    const mirror = document.getElementById('scratchMirrorTimer');
+    const note = document.getElementById('scratchMirrorTimerNote');
+    if (src) {
+      const sync = () => {
+        if (mirror) mirror.textContent = src.textContent;
+        if (note) note.textContent = src.textContent;
+      };
+      const obs = new MutationObserver(sync);
+      obs.observe(src, { childList: true, characterData: true, subtree: true });
+      sync();
+    }
+
+    // ---- kick off
     sizeCanvas();
     showHint();
-    continueBtn.disabled = true;
-    continueBtn.classList.add('locked');
-    continueBtn.style.setProperty('background', '#004a99', 'important');
-    continueBtn.style.setProperty('background-image', 'none', 'important');
-  });
-
-  // ---- mirror timer(s)
-  const src    = document.getElementById('countdownTimer');
-  const mirror = document.getElementById('scratchMirrorTimer');
-  const note   = document.getElementById('scratchMirrorTimerNote');
-  if (src) {
-    const sync = () => {
-      if (mirror) mirror.textContent = src.textContent;
-      if (note)   note.textContent   = src.textContent;
-    };
-    const obs = new MutationObserver(sync);
-    obs.observe(src, { childList: true, characterData: true, subtree: true });
-    sync();
+    clampGhostToBounds();
+    window.addEventListener('resize', () => {
+      if (!wrap.classList.contains('scratch-done')) sizeCanvas();
+    }, { passive: true });
   }
-
-  // ---- kick off
-  sizeCanvas();
-  showHint();
-  clampGhostToBounds();
-  window.addEventListener('resize', () => {
-    if (!wrap.classList.contains('scratch-done')) sizeCanvas();
-  }, { passive: true });
-}
 
   function closeModal() {
     modal.classList.remove('show');
@@ -2735,11 +2747,11 @@ renderMuscleBars(document.getElementById('muscleBarsGoal'), 5);
 
 document.addEventListener('DOMContentLoaded', () => {
   // Build promo code (ALL CAPS)
-  const fullName  = localStorage.getItem('name') || '';
+  const fullName = localStorage.getItem('name') || '';
   const firstName = (fullName.split(' ')[0] || 'user')
     .replace(/[^a-z0-9]/gi, '-')       // normalize
-    .replace(/-+/g,'-')
-    .replace(/^-|-$/g,'');
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
   const promoCode = `${firstName}-51-OFF`.toUpperCase();
 
   // Persist & render in both places (modal + strip)
@@ -2750,11 +2762,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Promo strip behavior
-  const strip   = document.getElementById('promoAppliedStrip');
+  const strip = document.getElementById('promoAppliedStrip');
   const timerEl = document.getElementById('promoStripTimer');
-  const src     = document.getElementById('countdownTimer');
+  const src = document.getElementById('countdownTimer');
 
-  if (strip){
+  if (strip) {
     // visibility follows discount-active class
     const refresh = () => { strip.hidden = !document.body.classList.contains('discount-active'); };
     refresh();
@@ -2764,10 +2776,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Mirror timer into strip
-  if (src && timerEl){
+  if (src && timerEl) {
     const sync = () => { timerEl.textContent = src.textContent; };
     const obs = new MutationObserver(sync);
-    obs.observe(src, { childList:true, characterData:true, subtree:true });
+    obs.observe(src, { childList: true, characterData: true, subtree: true });
     sync();
   }
 });

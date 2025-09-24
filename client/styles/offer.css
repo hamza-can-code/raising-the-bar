@@ -1732,9 +1732,9 @@ img {
 }
 
 /* On selection, highlight border in a blue shade that fits your palette */
-.offer-card.selected {
+/* .offer-card.selected {
     border: 2px solid #007bff;
-}
+} */
 
 /* LEFT side of the card */
 .offer-left {
@@ -2541,7 +2541,7 @@ body.discount-active .price-strikethrough {
     position: relative;
     max-height: 72px;
     margin-top: 10px;
-    margin-bottom: 30px;
+    /* margin-bottom: 10px; */
     padding-bottom: 25px;
 }
 
@@ -2583,20 +2583,18 @@ body.discount-active .price-strikethrough {
     text-align: center;
 }
 
-.offer-card.selected {
+/* .offer-card.selected {
     border: 2px solid #007bff;
-    /* Blue for regular cards */
-}
+} */
 
-.offer-card.offer-special.selected {
+/* .offer-card.offer-special.selected {
     border: 2px solid #007bff;
-    /* Purple for the special offer card */
-}
+} */
 
-.offer-card.highlighted {
+/* .offer-card.highlighted {
     outline: 2px solid #007bff;
     outline-offset: -2px;
-}
+} */
 
 .toggle-details {
     width: 75px;
@@ -2624,6 +2622,107 @@ body.discount-active .price-strikethrough {
     font-style: italic;
     text-align: center;
 }
+
+.total-price-summary{
+  margin:16px 0 8px;
+  padding:14px 16px;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:14px;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.04);
+}
+.total-price-summary .tp-row{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:6px 0; font-size:14px; line-height:1.3;
+}
+.total-price-summary .tp-row + .tp-row{ border-top:1px dashed rgba(0,0,0,.08); }
+.total-price-summary .tp-row.current{ font-weight:700; }
+.total-price-summary .tp-label{ color:#444; }
+
+/* card chrome stays the same */
+.total-price-summary{
+  margin:12px 0 8px;
+  padding:14px 16px;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:10px;
+  background:#fff;
+  box-shadow:0 6px 18px rgba(0,0,0,.06);
+}
+
+/* rows = label left, value right */
+.total-price-summary .tp-row{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:8px 0; font-size:.95rem; line-height:1.25;
+}
+.total-price-summary .tp-row + .tp-row{ border-top:1px dashed rgba(0,0,0,.12); }
+
+/* type: labels follow body copy; values pop with Poppins */
+.total-price-summary .tp-label{
+  color:#666; font-weight:500; font-family:'Roboto',sans-serif;
+}
+.total-price-summary .tp-val{
+  font-family:'Poppins',sans-serif; font-weight:700; color:#1a1a1a;
+}
+
+/* make “full price” red/struck only while discount active (re-uses your class) */
+body.discount-active #tpFull{
+  /* let .price-strikethrough control visuals; we just inherit here */
+}
+body.discount-active #tpFull.price-strikethrough{
+  color:#d9534f;
+  text-decoration:line-through;
+  text-decoration-color:#d9534f;
+  font-style:italic;
+  font-weight:700;
+}
+
+/* current price look */
+.total-price-summary .tp-row.current .tp-val{
+  color:#1a1a1a;          /* darker than #666 */
+}
+.total-price-summary .discount-price{
+  font-weight:700;
+}
+
+/* per-day on the RIGHT (not centered) + small suffix */
+.total-price-summary .perday .tp-val{
+  display:inline-flex; align-items:baseline; gap:.25ch;
+}
+.total-price-summary .per-day,
+.total-price-summary .currency-tag{
+  font-family:'Roboto',sans-serif; font-weight:500; font-size:.8rem; color:#666;
+}
+
+/* tiny screens: keep alignment tight */
+@media(max-width:375px){
+  .total-price-summary .tp-row{ padding:6px 0; font-size:.9rem; }
+}
+
+/* change from inline to vertical stack */
+.total-price-summary .perday .tp-val {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.1;       /* tighter line spacing */
+}
+
+.total-price-summary .perday .cost-per-day {
+  font-size: 0.95rem;     /* slightly smaller */
+  font-weight: 700;
+  margin-bottom: 0;       /* remove extra spacing */
+  margin-top: 10px;
+}
+
+.total-price-summary .perday .per-day {
+  font-size: 0.7rem;      /* smaller label */
+  font-weight: 500;
+  color: #666;
+}
+
+.total-price-summary .perday {
+  padding: 4px 0;         /* shrink vertical padding in the row */
+}
+
 
 .pricing-justification {
     font-size: 0.85rem;
@@ -4013,7 +4112,7 @@ body.modal-open .floating-cta {
 /* The + circle */
 .bm-plus {
   position: absolute;
-  top: 2px;                           /* overlap the card */
+  top: -16px;                           /* overlap the card */
   left: 50%;
   transform: translateX(-50%);
   width: 28px;
@@ -4043,9 +4142,9 @@ body.modal-open .floating-cta {
 
 .offer-card {
     background-color: #fff;
-    border: 2px solid #ccc;
+  border:1px solid rgba(0,0,0,.08);
     border-radius: 6px;
-    padding: 15px;
+  padding:16px;
     position: relative;
     /* needed for .best-seller-banner */
     transition: border-color 0.3s;
@@ -4054,6 +4153,18 @@ body.modal-open .floating-cta {
     grid-template-columns: 1fr auto;
     /* left col (details) + right col (price) */
     column-gap: 10px;
+      box-shadow:0 6px 18px rgba(0,0,0,.06);
+}
+
+.bm-discount-card{
+  width:100%;
+  margin:0 auto 0;
+  padding:16px;
+  background:#FFFFFF !important;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:6px;
+  box-shadow:0 6px 18px rgba(0,0,0,.06);
+  box-sizing: border-box;
 }
 
 .bm-row{
@@ -4131,3 +4242,9 @@ body.modal-open .floating-cta {
   .bm-head{ font-size:15px; }
 }
 
+.discount-subline {
+  font-size: 14px;
+  color: #333;
+  margin-top: 12px;
+  text-align: center;
+}
