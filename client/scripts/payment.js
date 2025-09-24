@@ -6,6 +6,8 @@
 (() => {
   'use strict';
 
+  const COLLAPSE_HANDLER_KEY = '__rtbCollapseHandler';
+
   /* ——————————————————————————————————————————————————————————— */
   /* 1.  Get a *stable* Stripe constructor (frozen in <head>)      */
   /* ——————————————————————————————————————————————————————————— */
@@ -90,7 +92,6 @@
   let stripeJs;
   let elements;        // ← Stripe Elements instance (lazy-created)
   let clientSecret;    // ← from /api/create-subscription-intent
-  let intentType = 'payment';
   function isDiscountActive() {
     const end = Number(localStorage.getItem('discountEndTime') || 0);
     return end > Date.now();
@@ -201,7 +202,6 @@ function mountPaymentUI() {
       }
 
       clientSecret = resp.clientSecret;
-        intentType = resp.intentType || 'payment';
 
       stripeJs = stripeJs || stripe(STRIPE_PK);
       if (!elements) {
@@ -270,22 +270,14 @@ function mountPaymentUI() {
 
   async function walletHandler(ev) {
     try {
- let result;
-      if (intentType === 'setup') {
-        result = await stripeJs.confirmCardSetup(clientSecret, {
-          payment_method: ev.paymentMethod.id,
-        });
-      } else {
-        result = await stripeJs.confirmCardPayment(
-          clientSecret,
-          { payment_method: ev.paymentMethod.id },
-          { handleActions: true }
-        );
-      }
-
-      if (result.error) {
+      const { error } = await stripeJs.confirmCardPayment(
+        clientSecret,
+        { payment_method: ev.paymentMethod.id },
+        { handleActions: true }
+      );
+      if (error) {
         ev.complete('fail');
-        showError(result.error.message);
+        showError(error.message);
         return;
       }
 
@@ -297,32 +289,75 @@ function mountPaymentUI() {
     }
   }
 
-  function collapseAllOfferCards() {
-    const cards = document.querySelectorAll('.offer-card');
-    cards.forEach(card => {
-      if (card.dataset.expanded === 'true') {
-        // Preferred: use existing toggleDetails if it exists globally
-        if (typeof window.toggleDetails === 'function') {
-          try { window.toggleDetails(card, false); return; } catch (_) { }
-        }
-        // Fallback: force close
-        card.dataset.expanded = 'false';
-        card.classList.remove('expanded', 'selected');
-        const info = card.querySelector('.additional-info');
-        if (info) {
-          info.style.height = '0px';
-          info.style.display = 'none';
-        }
-        const btn = card.querySelector('.toggle-details');
-        if (btn) {
-          // Restore original label
-          btn.textContent = btn.getAttribute('data-label-collapsed') || 'What’s Included?';
+   function forceCollapseCard(card) {
+    if (!card) return;
+
+    card.dataset.expanded = 'false';
+    card.classList.remove('expanded');
+
+    card.querySelectorAll('.additional-info').forEach(info => {
+      const existingHandler = info[COLLAPSE_HANDLER_KEY];
+      if (existingHandler) {
+        info.removeEventListener('transitionend', existingHandler);
+        info[COLLAPSE_HANDLER_KEY] = null;
+      }
+      info.style.transition = 'none';
+      info.style.overflow = 'hidden';
+      info.style.height = '0px';
+      info.style.display = 'none';
+      info.offsetHeight;
+      info.style.removeProperty('transition');
+    });
+
+    card.querySelectorAll('.toggle-details').forEach(btn => {
+      const fallbackLabel = btn.dataset.labelCollapsed
+        || btn.getAttribute('data-label-collapsed')
+        || 'What’s Included?';
+      btn.textContent = fallbackLabel;
+    });
+  }
+
+  function collapseCard(card, toggler) {
+    if (!card) {
+      return;
+    }
+
+    let handled = false;
+
+    if (typeof toggler === 'function') {
+      try {
+        toggler(card, false, true);
+        handled = true;
+      } catch (_) {
+        handled = false;
+      }
+    }
+
+    if (!handled) {
+      const toggleBtn = card.querySelector('.toggle-details');
+      if (toggleBtn) {
+        try {
+          toggleBtn.click();
+          handled = true;
+        } catch (_) {
+          handled = false;
         }
       } else {
         // also remove 'selected' visual if you want it cleared
         card.classList.remove('selected');
       }
+    }
+
+    forceCollapseCard(card);
+  }
+
+  function collapseAllOfferCards() {
+    const toggler = window.toggleOfferCardDetails || window.toggleDetails;
+    document.querySelectorAll('.offer-card').forEach(card => {
+      collapseCard(card, toggler);
     });
+    const kitCard = document.querySelector('.bm-discount-card');
+    collapseCard(kitCard, toggler);
   }
 
   continueBtn.addEventListener('click', async (e) => {
@@ -371,29 +406,18 @@ function mountPaymentUI() {
       dots = dots % 3 + 1;
     }, 500);
 
-    let result;
-    if (intentType === 'setup') {
-      result = await stripeJs.confirmSetup({
-        elements,
-        redirect: 'always',
-        confirmParams: {
+ const { error } = await stripeJs.confirmPayment({
+      elements,
+      redirect: 'always',              // 👈 optional but recommended
+      confirmParams: {
           return_url: `${window.location.origin}/pages/kit-offer.html`,
         },
       });
-    } else {
-      result = await stripeJs.confirmPayment({
-        elements,
-        redirect: 'always',              // 👈 optional but recommended
-        confirmParams: {
-          return_url: `${window.location.origin}/pages/kit-offer.html`
-        }
-      });
-    }
 
     clearInterval(dotInterval);
     loadingEl.style.display = 'none';
 
-     if (result.error) showError(result.error.message);
+      if (error) showError(error.message);
   });
   function swapName() {
     const summaryEl = document.getElementById("planSummary");

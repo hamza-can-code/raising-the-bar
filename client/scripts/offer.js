@@ -29,7 +29,7 @@ window.RTB_PRICE_TABLE = {
   CHF: { full: 34.99, intro: 0 },
   AUD: { full: 94.99, intro: 0 },
   NZD: { full: 59.99, intro: 0 },
-  CAD: { full: 31.99, intro: 0 },
+  CAD: { full: 31.99, intro: 15.99 },
   SGD: { full: 84.99, intro: 0 },
   HKD: { full: 499, intro: 0 },
   JPY: { full: 7900, intro: 0 },
@@ -37,6 +37,8 @@ window.RTB_PRICE_TABLE = {
   BRL: { full: 259.99, intro: 0 },
   MXN: { full: 1199, intro: 0 },
 };
+
+const FLAGSHIP_PLAN_DAYS = 12 * 7;
 
 function getCurrency() {
   return window.RTB_CURRENCY || { code: 'GBP', symbol: '£', minor: 2, country: 'GB' };
@@ -110,7 +112,7 @@ function localizeProTrackerCard() {
   if (ccyTag) ccyTag.textContent = code;
 
   const shown = dealOn ? intro : full;
-  if (perDayEl) perDayEl.textContent = fmt(code, shown / 30);
+  if (perDayEl) perDayEl.textContent = fmt(code, shown / FLAGSHIP_PLAN_DAYS);
 
   // keep a human-readable cache for summaries
   localStorage.setItem('planPrice', dealOn ? fmt(code, intro) : fmt(code, full));
@@ -1165,11 +1167,89 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Activate or deactivate the discount style immediately
-  if (discountEndTime > now) {
-    document.body.classList.add("discount-active");
-  } else {
-    document.body.classList.remove("discount-active");
+ const promoStrip = document.getElementById('promoAppliedStrip');
+  const kitTitle = document.querySelector('.kit-title');
+  if (kitTitle) {
+    if (!kitTitle.dataset.activeHtml) kitTitle.dataset.activeHtml = kitTitle.innerHTML;
+    if (!kitTitle.dataset.brandOnly) {
+      const brand = kitTitle.querySelector('.kit-brand');
+      kitTitle.dataset.brandOnly = brand
+        ? `<span class="kit-brand">${brand.textContent}</span>`
+        : kitTitle.textContent.trim();
+    }
+  }
+  const bmPills = Array.from(document.querySelectorAll('.bm-pill'));
+  const modalBadges = Array.from(document.querySelectorAll('#valueModal .discount-badge'));
+  const fullPriceRow = document.querySelector('#totalPriceSummary .tp-row.full');
+  const promoLine = document.getElementById('promoCodeLine');
+  if (promoLine) {
+    const captureActiveMarkup = () => {
+      if (!promoLine.dataset.activeHtml && promoLine.querySelector('.promo-code-value')) {
+        promoLine.dataset.activeHtml = promoLine.innerHTML;
+      }
+    };
+    captureActiveMarkup();
+    const promoObserver = new MutationObserver(captureActiveMarkup);
+    promoObserver.observe(promoLine, { childList: true, subtree: true });
+  }
+  const scratchCard = document.querySelector('.scratch-card');
+  const scratchMirror = document.getElementById('scratchMirrorTimer');
+  const scratchMirrorNote = document.getElementById('scratchMirrorTimerNote');
+  const continueBtn = document.getElementById('valueContinue');
+
+  function applyDiscountDecor(active) {
+    document.body.classList.toggle('discount-active', active);
+    document.body.classList.toggle('discount-expired', !active);
+
+    if (promoStrip) promoStrip.hidden = !active;
+
+    if (kitTitle) {
+      if (active) {
+        if (!kitTitle.dataset.activeHtml && kitTitle.querySelector('.kit-brand')) {
+          kitTitle.dataset.activeHtml = kitTitle.innerHTML;
+        }
+        if (kitTitle.dataset.activeHtml) {
+          kitTitle.innerHTML = kitTitle.dataset.activeHtml;
+        }
+      } else if (kitTitle.dataset.brandOnly) {
+        kitTitle.innerHTML = kitTitle.dataset.brandOnly;
+      }
+    }
+
+    bmPills.forEach(pill => {
+      pill.hidden = !active;
+    });
+
+    modalBadges.forEach(badge => {
+      badge.hidden = !active;
+    });
+
+    if (fullPriceRow) fullPriceRow.hidden = !active;
+
+    if (promoLine) {
+      if (active) {
+        if (!promoLine.dataset.activeHtml && promoLine.querySelector('.promo-code-value')) {
+          promoLine.dataset.activeHtml = promoLine.innerHTML;
+        }
+        if (promoLine.dataset.activeHtml) {
+          promoLine.innerHTML = promoLine.dataset.activeHtml;
+        }
+      } else {
+        promoLine.textContent = 'Your promo code has expired.';
+      }
+    }
+
+    if (scratchCard) scratchCard.classList.toggle('promo-expired', !active);
+    if (!active) {
+      if (scratchMirror) scratchMirror.textContent = 'Expired';
+      if (scratchMirrorNote) scratchMirrorNote.textContent = 'Expired';
+      if (continueBtn) {
+        continueBtn.disabled = false;
+        continueBtn.classList.remove('locked');
+        continueBtn.style.removeProperty('background');
+        continueBtn.style.removeProperty('background-image');
+      }
+    }
   }
 
   function updatePricingJustification() {
@@ -1180,9 +1260,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const { code, full, intro } = getLocalPrices();
 
     if (dealOn) {
+      const introPerDay = fmt(code, intro / FLAGSHIP_PLAN_DAYS);
       el.innerHTML =
         `Normally ${fmt(code, full)} — now just <strong>${fmt(code, intro)}</strong>. ` +
-        `🎉 Just ${fmt(code, intro / 30)} a day.`;
+        `🎉 Just ${introPerDay} a day.`;
     } else {
       el.textContent = 'Like having a personal trainer in your pocket — for less than the cost of one session.';
     }
@@ -1195,7 +1276,10 @@ document.addEventListener("DOMContentLoaded", function () {
       $('tpFull').classList.toggle('price-strikethrough', !!dealOn);
     }
     if ($('tpNow')) $('tpNow').textContent = fmt(code, dealOn ? intro : full);
-    if ($('tpPerDay')) $('tpPerDay').textContent = fmt(code, (dealOn ? intro : full) / 30);
+    if ($('tpPerDay')) {
+      const perDayAmount = (dealOn ? intro : full) / FLAGSHIP_PLAN_DAYS;
+      $('tpPerDay').textContent = fmt(code, perDayAmount);
+    }
     if ($('tpCcy')) $('tpCcy').textContent = code;
 
   }
@@ -1209,9 +1293,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // If the discount has expired…
     if (diff <= 0) {
-      document.body.classList.remove("discount-active");
+      applyDiscountDecor(false);
       removeDiscountPricing();
       updatePostPayNote();
+       updatePricingJustification();
+      updatePlanSummary();
       localStorage.removeItem("sevenDayDiscountEnd");
       if (timerContainer) timerContainer.style.display = "none";
       const cardSubtext = document.querySelector(".card-subtext");
@@ -1220,7 +1306,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Keep the discount styling active
-    document.body.classList.add("discount-active");
+     applyDiscountDecor(true);
 
     // Break diff into h/m/s
     const totalSeconds = Math.floor(diff / 1000);
@@ -1260,7 +1346,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const perDaySpecial = document.querySelector('[data-program="new"] .per-day');
     if (costPerDaySpecial && currencyTagSpecial && perDaySpecial) {
       const { code, intro } = getLocalPrices();
-      costPerDaySpecial.textContent = fmt(code, intro / 30);
+      costPerDaySpecial.textContent = fmt(code, intro / FLAGSHIP_PLAN_DAYS);
       currencyTagSpecial.style.display = "block";
     }
   }
@@ -1323,6 +1409,19 @@ function removeDiscountPricing() {
 /**********************************************/
 document.addEventListener("DOMContentLoaded", function () {
   const offerCards = document.querySelectorAll(".offer-card");
+  const accordionSelectors = ['.offer-card.offer-special', '.bm-discount-card'];
+  const kitCard = document.querySelector('.bm-discount-card');
+  const toggleButtons = document.querySelectorAll('.offer-card .toggle-details, .bm-discount-card .toggle-details');
+  const collapseHandlerKey = '__rtbCollapseHandler';
+
+  toggleButtons.forEach(btn => {
+    if (!btn.dataset.labelCollapsed) {
+      btn.dataset.labelCollapsed = btn.textContent.trim();
+    }
+    if (!btn.dataset.labelExpanded) {
+      btn.dataset.labelExpanded = 'See less';
+    }
+  });
   let currentlySelected = null;
 
   // Check localStorage for previously selected program
@@ -1371,7 +1470,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         const fullEl = proTrackerCard.querySelector('.full-price span')
           || proTrackerCard.querySelector('.full-price');
-        priceText = fullEl.textContent.trim();
+        // priceText = fullEl.textContent.trim();
       }
       localStorage.setItem('planPrice', priceText);
 
@@ -1574,17 +1673,25 @@ document.addEventListener("DOMContentLoaded", function () {
   //   }
   // }
 
+    function isAccordionCard(card) {
+    return accordionSelectors.some(sel => card && card.matches(sel));
+  }
+
   function toggleDetails(card, forceExpand = null, skipSync = false) {
     const info = card.querySelector('.additional-info');
     const toggleBtn = card.querySelector('.toggle-details');
     if (!info || !toggleBtn) return;
 
-    const isOpen = info.style.display === 'block';
+    const isOpen = card.dataset.expanded === 'true';
     const expandIt = forceExpand === null ? !isOpen : forceExpand;
 
     if (expandIt) {
       card.dataset.expanded = 'true';
       card.classList.add('expanded');
+
+       if (!skipSync && isAccordionCard(card)) {
+        collapseLinkedCards(card);
+      }
 
       info.style.display = 'block';
       info.style.height = '0px';
@@ -1593,19 +1700,25 @@ document.addEventListener("DOMContentLoaded", function () {
       info.style.transition = 'height .4s ease';
       info.style.height = info.scrollHeight + 'px';
 
-      toggleBtn.textContent = 'See less';
+      const expandedLabel = toggleBtn.dataset.labelExpanded || 'See less';
+      toggleBtn.textContent = expandedLabel;
     } else {
       card.dataset.expanded = 'false';
       card.classList.remove('expanded');
 
+       info.style.overflow = 'hidden';
       info.style.height = '0px';
-      info.addEventListener('transitionend', function h(e) {
-        if (e.propertyName === 'height') {
-          info.style.display = 'none';
-          info.removeEventListener('transitionend', h);
-        }
-      });
-      toggleBtn.textContent = 'What’s Included?';
+ const collapseDone = function h(e) {
+        if (e.propertyName !== 'height') return;
+        info.style.display = 'none';
+        info.removeEventListener('transitionend', h);
+        info[collapseHandlerKey] = null;
+      };
+      info[collapseHandlerKey] = collapseDone;
+      info.addEventListener('transitionend', collapseDone);
+      const collapsedLabel = toggleBtn.dataset.labelCollapsed || 'What’s Included?';
+      toggleBtn.textContent = collapsedLabel;
+      toggleBtn.textContent = collapsedLabel;
     }
 
     /* ► keep 4- & 12-week in sync */
@@ -1613,6 +1726,17 @@ document.addEventListener("DOMContentLoaded", function () {
     //   const partner = document.querySelector(`.offer-card[data-program="${card.dataset.program === '4-week' ? '12-week' : '4-week'}"]`);
     //   if (partner) toggleDetails(partner, expandIt, true);
     // }
+  }
+
+    function collapseLinkedCards(activeCard) {
+    accordionSelectors.forEach(sel => {
+      document.querySelectorAll(sel).forEach(other => {
+        if (!other || other === activeCard) return;
+        if (other.dataset.expanded === 'true') {
+          toggleDetails(other, false, true);
+        }
+      });
+    });
   }
 
   document.querySelectorAll('.offer-card .toggle-details').forEach(btn => {
@@ -1634,6 +1758,28 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+if (kitCard) {
+    kitCard.dataset.expanded = kitCard.dataset.expanded === 'true' ? 'true' : 'false';
+
+    const kitToggle = kitCard.querySelector('.toggle-details');
+    if (kitToggle) {
+      kitToggle.addEventListener('click', e => {
+        e.stopPropagation();
+        const shouldExpand = kitCard.dataset.expanded !== 'true';
+        toggleDetails(kitCard, shouldExpand);
+      });
+    }
+
+    kitCard.addEventListener('click', e => {
+      if (e.target.closest('.toggle-details')) return;
+      if (kitCard.dataset.expanded === 'true') return;
+      toggleDetails(kitCard, true);
+    });
+  }
+
+  window.toggleOfferCardDetails = toggleDetails;
+
+
   function updateCTA(selectedProgram) {
     const finishBtn = document.getElementById("offerFinishBtn");
     if (!finishBtn) return;
@@ -1644,8 +1790,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // }
   }
   document.addEventListener('click', e => {
-    // if the click wasn’t inside an offer-card…
-    if (!e.target.closest('.offer-card')) {
+    // if the click wasn’t inside an offer-card or the kit bundle card…
+    if (!e.target.closest('.offer-card') && !e.target.closest('.bm-discount-card')) {
       offerCards.forEach(card => {
         // only collapse if currently expanded
         if (card.dataset.expanded === 'true') {
@@ -1653,6 +1799,9 @@ document.addEventListener("DOMContentLoaded", function () {
           card.classList.remove('selected');
         }
       });
+            if (kitCard && kitCard.dataset.expanded === 'true') {
+        toggleDetails(kitCard, false);
+      }
       currentlySelected = null;  // reset selection
     }
   });
@@ -1714,7 +1863,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // on narrow (≤375px) we want the element 20px *below* the top of the viewport → +20
     // on wider we want it 20px *above* the top → -20
     const isSmall = window.matchMedia("(max-width: 375px)").matches;
-    const offset = isSmall ? -15 : 40;
+    const offset = isSmall ? -15 : 225;
 
     // absolute Y position of the element
     const elementTop = socialProof.getBoundingClientRect().top + window.pageYOffset;
@@ -2178,7 +2327,6 @@ function setUpCompareModal0() {
 
   function initScratchCard() {
     if (SCRATCH_INIT) return;
-    SCRATCH_INIT = true;
 
     const canvas = document.getElementById('scratchCanvas');
     const wrap = canvas ? canvas.closest('.scratch-card') : null;
@@ -2188,6 +2336,17 @@ function setUpCompareModal0() {
     const continueBtn = document.getElementById('valueContinue');
 
     if (!canvas || !wrap || !reveal || !continueBtn) return;
+
+        if (!document.body.classList.contains('discount-active')) {
+      wrap.classList.add('promo-expired');
+      continueBtn.disabled = false;
+      continueBtn.classList.remove('locked');
+      continueBtn.style.removeProperty('background');
+      continueBtn.style.removeProperty('background-image');
+      return;
+    }
+
+    SCRATCH_INIT = true;
 
     {
       const fullName = localStorage.getItem('name') || '';
