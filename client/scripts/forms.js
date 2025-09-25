@@ -6084,18 +6084,54 @@ function replaceWithFinalPage() {
   const formContainer = document.querySelector(".form-container");
   formContainer.innerHTML = "";
 
-  // Final message
-  const finalMsg = document.createElement("div");
-  finalMsg.classList.add("final-message");
-  finalMsg.innerHTML = `
+// Final message
+const finalMsg = document.createElement("div");
+finalMsg.classList.add("final-message");
+
+// unique id for the half-star clipPath (prevents duplicates on page)
+const tpHalfId = `tp-half-${Date.now()}`;
+
+finalMsg.innerHTML = `
   <h2 class="final-headline">
     <span class="final-num">10&nbsp;Million+</span><br>
     <span class="final-sub"><strong>kick-started their journey with us</strong></span>
   </h2>
 
-  <div class="final-rating" role="img" aria-label="Rated 4.7 out of 5 stars">
-    <span class="final-stars" aria-hidden="true">★★★★★</span>
-    <span class="final-score">4.7&nbsp;/&nbsp;5</span>
+  <div class="micro-proof tp" aria-label="Customer rating">
+    <div class="tp-left">
+      <span class="tp-label">Excellent</span>
+      <span class="tp-stars" aria-hidden="true">
+        <!-- 4 full + 1 half -->
+        <svg viewBox="0 0 20 20" class="tp-star full">
+          <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z"></path>
+        </svg>
+        <svg viewBox="0 0 20 20" class="tp-star full">
+          <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z"></path>
+        </svg>
+        <svg viewBox="0 0 20 20" class="tp-star full">
+          <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z"></path>
+        </svg>
+        <svg viewBox="0 0 20 20" class="tp-star full">
+          <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z"></path>
+        </svg>
+        <svg viewBox="0 0 20 20" class="tp-star half">
+          <defs>
+            <clipPath id="${tpHalfId}">
+              <rect x="0" y="0" width="10" height="20"></rect>
+            </clipPath>
+          </defs>
+          <path class="tp-outline" d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z"></path>
+          <path class="tp-fill" d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z" clip-path="url(#${tpHalfId})"></path>
+        </svg>
+      </span>
+    </div>
+
+    <div class="tp-brand" aria-label="Trustpilot">
+      <svg class="tp-logo-star" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2.2l2.6 5.3 5.9.9-4.3 4.1 1 6L12 16l-5.2 2.5 1-6L3.5 8.4l5.9-.9L12 2.2z"></path>
+      </svg>
+      <span class="tp-logo-text">Trustpilot</span>
+    </div>
   </div>
 
   <!-- optional: real Apple/Google Pay button mounts here if supported -->
@@ -6103,7 +6139,7 @@ function replaceWithFinalPage() {
 
   <p class="final-reviews">250,000+ five-star reviews from happy users</p>
 `;
-  formContainer.appendChild(finalMsg);
+formContainer.appendChild(finalMsg);
 
 
   // Loading container

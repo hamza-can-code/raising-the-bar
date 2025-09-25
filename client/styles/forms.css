@@ -755,18 +755,67 @@ label a:hover {
   /* white-space: pre-line; */
 }
 
-.final-message{ text-align:center; margin:24px 0 8px; }
-.final-headline{ margin:0 0 6px; line-height:1.15; }
+:root{
+  --tp-mint:#F2FBF7;
+  --tp-mint-pill:#F0FFF7;
+  --tp-mint-border:#C6EBD9;
+  --tp-green:#00B67A;
+  --tp-ink-1:#1f2a37;
+  --tp-ink-2:#0f172a;
+}
+
+/* container + type */
+.final-message{
+  max-width:520px;
+  margin:16px auto 8px;
+  text-align:center;
+}
+.final-headline{ margin:0 0 8px; line-height:1.15; }
 .final-num{ font-weight:800; font-size:28px; }
 .final-sub{ font-size:16px; font-weight:600; }
 
+/* optional rating row (if you use it elsewhere) */
 .final-rating{ display:flex; justify-content:center; align-items:center; gap:10px; margin:6px 0 10px; }
 .final-stars{ font-size:18px; letter-spacing:2px; }
 .final-score{ font-weight:600; opacity:.9; }
 
-.final-badges{ display:flex; justify-content:center; align-items:center; gap:12px; margin:6px 0 8px; }
-.final-badges img{ height:28px; opacity:.9; filter:grayscale(100%); transition:opacity .2s ease, filter .2s ease; }
-.final-badges img:hover{ opacity:1; filter:none; }
-
+/* payment row mount + caption */
 .prb-inline{ display:flex; justify-content:center; margin:8px 0 6px; }
 .final-reviews{ font-size:.92rem; color:#666; margin:6px 0 0; }
+
+/* trustpilot-style card */
+.micro-proof.tp{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; padding:12px 14px;
+  background:var(--tp-mint);
+  border:1px solid var(--tp-mint-border);
+  border-radius:10px;
+  box-shadow:0 1px 0 rgba(0,0,0,.03);
+  margin:10px 0 12px;
+}
+.tp-left{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.tp-label{ font-weight:700; color:var(--tp-ink-1); }
+.tp-stars{ display:inline-flex; gap:4px; line-height:0; transform:translateY(1px); }
+.tp-star{ width:18px; height:18px; flex:0 0 18px; }
+
+.tp-star.full path{ fill:var(--tp-green); }
+.tp-star.half .tp-fill{ fill:var(--tp-green); }
+.tp-star.half .tp-outline{ fill:none; stroke:var(--tp-green); stroke-width:1; }
+
+.tp-score{ font-weight:600; color:var(--tp-ink-1); opacity:.9; }
+
+.tp-brand{
+  display:flex; align-items:center; gap:6px;
+  padding:4px 8px; border-radius:8px;
+  background:var(--tp-mint-pill);
+}
+.tp-logo-star{ width:24px; height:24px; fill:var(--tp-green); }
+.tp-logo-text{ font-weight:700; letter-spacing:.2px; color:var(--tp-ink-2); }
+
+/* mobile polish */
+@media (max-width:540px){
+  .final-message{ margin-top:12px; }
+  .micro-proof.tp{ padding:10px 12px; }
+  .tp-score{ font-size:13px; }
+  .tp-brand{ padding:3px 7px; }
+}

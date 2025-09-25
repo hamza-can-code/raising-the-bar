@@ -416,8 +416,7 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
     const couponId = discounted ? getCouponId(ccy) : null;
 
     // 3) create subscription in incomplete state (for Elements confirmation)
-    const subCfg = {
-      customer: customer.id,
+  const baseSubCfg = {
       items: [{ price: priceId }],
       payment_behavior: 'default_incomplete',
       payment_settings: {
@@ -434,32 +433,134 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
       },
     };
 
-    log('Subscription create config', subCfg);
-    const sub = await stripe.subscriptions.create(subCfg);
+log('Subscription create config', { ...baseSubCfg, customer: customer.id });
+    const { subscription: sub, customer: activeCustomer } =
+      await createSubscriptionWithRetry(customer, baseSubCfg, email, ccy);
+    if (activeCustomer.id !== customer.id) {
+      log('Reassigned customer for currency isolation', {
+        previous: customer.id,
+        replacement: activeCustomer.id,
+        currency: ccy,
+         });
+           }
     log('Subscription', { id: sub.id, status: sub.status });
 
-    // 4) extract PaymentIntent for client_secret
-    const latestInvoice = sub.latest_invoice;
-    let pi = latestInvoice?.payment_intent || null;
-
-    if (!pi) {
-      const invoiceId =
-        typeof latestInvoice === 'string' ? latestInvoice : latestInvoice?.id;
-
-      if (invoiceId) {
-        const invoice = await stripe.invoices.retrieve(invoiceId, {
-          expand: ['payment_intent'],
-        });
-        pi = invoice.payment_intent;
-        log('Re-fetched invoice for PI', { invoice: invoice.id, pi: pi?.id });
-      }
-    }
+// 4) extract PaymentIntent for client_secret with resilient fallbacks
+    const pi = await resolvePaymentIntent(sub);
     if (!pi) return res.status(500).json({ error: 'PaymentIntent not available' });
-    return res.json({ clientSecret: pi.client_secret, subscriptionId: sub.id });
+    
+ return res.json({
+      clientSecret: pi.client_secret,
+      subscriptionId: sub.id,
+      intentType: 'payment',
+    });
   } catch (err) {
     console.error('❌ /create-subscription-intent error:', err);
     res.status(500).json({ error: err.message });
   }
 });
+
+async function resolvePaymentIntent(sub) {
+  const latestInvoice = sub.latest_invoice;
+
+  let pi = await inflatePaymentIntent(latestInvoice?.payment_intent);
+  if (pi) return pi;
+
+  const invoiceId =
+    typeof latestInvoice === 'string' ? latestInvoice : latestInvoice?.id;
+
+  if (invoiceId) {
+    const invoice = await stripe.invoices.retrieve(invoiceId, {
+      expand: ['payment_intent'],
+    });
+    pi = await inflatePaymentIntent(invoice.payment_intent);
+    if (pi) {
+      log('Re-fetched invoice for PI', { invoice: invoice.id, pi: pi?.id });
+      return pi;
+    }
+  }
+
+  const refreshed = await stripe.subscriptions.retrieve(sub.id, {
+    expand: ['latest_invoice.payment_intent'],
+  });
+
+  const refreshedInvoice = refreshed.latest_invoice;
+  pi = await inflatePaymentIntent(refreshedInvoice?.payment_intent);
+  if (pi) {
+    log('Re-retrieved subscription for PI', {
+      subscription: refreshed.id,
+      invoice:
+        typeof refreshedInvoice === 'string'
+          ? refreshedInvoice
+          : refreshedInvoice?.id,
+      pi: pi?.id,
+    });
+    return pi;
+  }
+
+  return null;
+}
+
+async function inflatePaymentIntent(piLike) {
+  if (!piLike) return null;
+
+  if (typeof piLike === 'string') {
+    const pi = await stripe.paymentIntents.retrieve(piLike);
+    log('Expanded PI from string ref', { pi: pi?.id });
+    return pi;
+  }
+
+  if (piLike.id && !piLike.client_secret) {
+    const pi = await stripe.paymentIntents.retrieve(piLike.id);
+    log('Expanded PI missing client_secret', { pi: pi?.id });
+    return pi;
+  }
+
+  return piLike;
+}
+
+async function createSubscriptionWithRetry(customer, baseConfig, email, currency) {
+  try {
+    const subscription = await stripe.subscriptions.create({
+      ...baseConfig,
+      customer: customer.id,
+    });
+
+    return { subscription, customer };
+  } catch (err) {
+    if (isCurrencyMixingError(err)) {
+      console.warn('⚠️ Currency mismatch detected, creating a fresh customer');
+      const newCustomer = await stripe.customers.create({
+        email,
+        metadata: {
+          currency_isolation_for: currency,
+          replaced_customer: customer.id,
+        },
+      });
+      log('Created isolated customer for currency', {
+        requestedCurrency: currency,
+        originalCustomer: customer.id,
+        replacementCustomer: newCustomer.id,
+      });
+
+      const subscription = await stripe.subscriptions.create({
+        ...baseConfig,
+        customer: newCustomer.id,
+      });
+
+      return { subscription, customer: newCustomer };
+    }
+
+    throw err;
+  }
+}
+
+function isCurrencyMixingError(err) {
+  return (
+    err?.type === 'StripeInvalidRequestError' &&
+    typeof err.message === 'string' &&
+    err.message.toLowerCase().includes('combine currencies')
+  );
+}
 
 module.exports = router;
