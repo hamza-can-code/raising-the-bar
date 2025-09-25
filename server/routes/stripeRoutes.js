@@ -313,6 +313,8 @@ const COUPON_BY_CCY = {
   MXN: process.env.COUPON_MXN,
 };
 
+const couponCache = new Map();
+
 function log(label, obj) {
   console.log(`🟡 ${label}`, util.inspect(obj, { depth: 4, colors: true }));
 }
@@ -365,7 +367,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
     }
 
     const { currency: ccy, priceId } = getSubPriceId(currency);
-    const couponId = discounted ? getCouponId(ccy) : null;
+    const discount = await resolveDiscountForCurrency(ccy, discounted);
 
     const existing = await stripe.customers.list({ email, limit: 1 });
     const customer = existing.data[0] || (await stripe.customers.create({ email }));
@@ -379,16 +381,17 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       success_url: `${successBase}/pages/kit-offer.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${successBase}/pages/offer.html`,
       // If coupon is present, apply it
-      ...(couponId && { discounts: [{ coupon: couponId }] }),
+     ...(discount.discounts && { discounts: discount.discounts }),
       // Optional: metadata to help support
       metadata: {
         product: 'Pro Tracker',
         currency_used: ccy,
         discounted: String(!!discounted),
+         coupon_id: discount.couponId || undefined,
       },
     };
 
-    log('Checkout session config', { ...baseSessionCfg });
+  log('Checkout session config', { ...baseSessionCfg });
     const { session, customer: activeCustomer } = await createCheckoutSessionWithRetry(
       customer,
       baseSessionCfg,
@@ -430,23 +433,23 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
 
     // 2) choose price & coupon by currency
     const { currency: ccy, priceId } = getSubPriceId(currency);
-    const couponId = discounted ? getCouponId(ccy) : null;
+    const discount = await resolveDiscountForCurrency(ccy, discounted);
 
     // 3) create subscription in incomplete state (for Elements confirmation)
-    const baseSubCfg = {
+   const baseSubCfg = {
       items: [{ price: priceId }],
       payment_behavior: 'default_incomplete',
       payment_settings: {
         save_default_payment_method: 'on_subscription',
         payment_method_types: ['card'],
       },
-      ...(couponId && { discounts: [{ coupon: couponId }] }),
+      ...(discount.discounts && { discounts: discount.discounts }),
       expand: ['latest_invoice.payment_intent'],
 
       metadata: {
         product: 'Pro Tracker',
         currency_used: ccy,
-        discounted: String(!!discounted),
+    coupon_id: discount.couponId || undefined,
       },
     };
 
@@ -609,13 +612,67 @@ async function createCheckoutSessionWithRetry(customer, baseConfig, email, curre
   }
 }
 
-
 function isCurrencyMixingError(err) {
   return (
     err?.type === 'StripeInvalidRequestError' &&
     typeof err.message === 'string' &&
     err.message.toLowerCase().includes('combine currencies')
   );
+}
+
+async function resolveDiscountForCurrency(currency, discounted) {
+  if (!discounted) return { discounts: null, couponId: null };
+
+  const couponId = getCouponId(currency);
+  if (!couponId) return { discounts: null, couponId: null };
+
+  try {
+    const coupon = await fetchCoupon(couponId);
+    if (!coupon || coupon.valid === false) {
+      if (!coupon) {
+        console.warn('⚠️ Coupon configured but not found', { couponId });
+      }
+      return { discounts: null, couponId: null };
+    }
+
+    const requested = currency.toLowerCase();
+
+    if (coupon.currency_options) {
+      if (!coupon.currency_options[requested]) {
+        console.warn('⚠️ Coupon missing currency option for discount', {
+          couponId,
+          requestedCurrency: currency,
+          available: Object.keys(coupon.currency_options),
+        });
+        return { discounts: null, couponId: null };
+      }
+    } else if (coupon.currency && coupon.currency.toUpperCase() !== currency) {
+      console.warn('⚠️ Coupon currency mismatch; skipping discount', {
+        couponId,
+        couponCurrency: coupon.currency,
+        requestedCurrency: currency,
+      });
+      return { discounts: null, couponId: null };
+    }
+
+    return { discounts: [{ coupon: couponId }], couponId };
+  } catch (err) {
+    console.error('⚠️ Failed to validate coupon for discount', {
+      couponId,
+      requestedCurrency: currency,
+      error: err.message,
+    });
+    return { discounts: null, couponId: null };
+  }
+}
+
+async function fetchCoupon(couponId) {
+  if (!couponId) return null;
+  if (couponCache.has(couponId)) return couponCache.get(couponId);
+
+  const coupon = await stripe.coupons.retrieve(couponId);
+  couponCache.set(couponId, coupon);
+  return coupon;
 }
 
 module.exports = router;
