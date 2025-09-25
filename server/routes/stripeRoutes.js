@@ -367,10 +367,13 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
     const { currency: ccy, priceId } = getSubPriceId(currency);
     const couponId = discounted ? getCouponId(ccy) : null;
 
-    const sessionCfg = {
+    const existing = await stripe.customers.list({ email, limit: 1 });
+    const customer = existing.data[0] || (await stripe.customers.create({ email }));
+
+    const baseSessionCfg = {
       mode: 'subscription',
       payment_method_types: ['card'],
-      customer_email: email,
+      customer: customer.id,
       client_reference_id: client_reference_id || undefined,
       line_items: [{ price: priceId, quantity: 1 }],
       success_url: `${successBase}/pages/kit-offer.html?session_id={CHECKOUT_SESSION_ID}`,
@@ -385,8 +388,22 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       },
     };
 
-    log('Checkout session config', sessionCfg);
-    const session = await stripe.checkout.sessions.create(sessionCfg);
+    log('Checkout session config', { ...baseSessionCfg });
+    const { session, customer: activeCustomer } = await createCheckoutSessionWithRetry(
+      customer,
+      baseSessionCfg,
+      email,
+      ccy
+    );
+
+    if (activeCustomer.id !== customer.id) {
+      log('Reassigned customer for currency isolation', {
+        previous: customer.id,
+        replacement: activeCustomer.id,
+        currency: ccy,
+      });
+    }
+
     return res.json({ url: session.url });
   } catch (err) {
     console.error('❌ /create-checkout-session error:', err);
@@ -416,7 +433,7 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
     const couponId = discounted ? getCouponId(ccy) : null;
 
     // 3) create subscription in incomplete state (for Elements confirmation)
-  const baseSubCfg = {
+    const baseSubCfg = {
       items: [{ price: priceId }],
       payment_behavior: 'default_incomplete',
       payment_settings: {
@@ -433,7 +450,7 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
       },
     };
 
-log('Subscription create config', { ...baseSubCfg, customer: customer.id });
+    log('Subscription create config', { ...baseSubCfg, customer: customer.id });
     const { subscription: sub, customer: activeCustomer } =
       await createSubscriptionWithRetry(customer, baseSubCfg, email, ccy);
     if (activeCustomer.id !== customer.id) {
@@ -441,15 +458,15 @@ log('Subscription create config', { ...baseSubCfg, customer: customer.id });
         previous: customer.id,
         replacement: activeCustomer.id,
         currency: ccy,
-         });
-           }
+      });
+    }
     log('Subscription', { id: sub.id, status: sub.status });
 
-// 4) extract PaymentIntent for client_secret with resilient fallbacks
+    // 4) extract PaymentIntent for client_secret with resilient fallbacks
     const pi = await resolvePaymentIntent(sub);
     if (!pi) return res.status(500).json({ error: 'PaymentIntent not available' });
-    
- return res.json({
+
+    return res.json({
       clientSecret: pi.client_secret,
       subscriptionId: sub.id,
       intentType: 'payment',
@@ -554,6 +571,44 @@ async function createSubscriptionWithRetry(customer, baseConfig, email, currency
     throw err;
   }
 }
+
+async function createCheckoutSessionWithRetry(customer, baseConfig, email, currency) {
+  try {
+    const session = await stripe.checkout.sessions.create({
+      ...baseConfig,
+      customer: customer.id,
+    });
+
+    return { session, customer };
+  } catch (err) {
+    if (isCurrencyMixingError(err)) {
+      console.warn('⚠️ Currency mismatch detected, creating a fresh customer for Checkout');
+      const newCustomer = await stripe.customers.create({
+        email,
+        metadata: {
+          currency_isolation_for: currency,
+          replaced_customer: customer.id,
+        },
+      });
+
+      log('Created isolated customer for currency (Checkout)', {
+        requestedCurrency: currency,
+        originalCustomer: customer.id,
+        replacementCustomer: newCustomer.id,
+      });
+
+      const session = await stripe.checkout.sessions.create({
+        ...baseConfig,
+        customer: newCustomer.id,
+      });
+
+      return { session, customer: newCustomer };
+    }
+
+    throw err;
+  }
+}
+
 
 function isCurrencyMixingError(err) {
   return (
