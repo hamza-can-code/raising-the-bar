@@ -232,7 +232,7 @@ function mountPaymentUI() {
         const pr = stripeJs.paymentRequest({
           country: curr.country || 'GB',
           currency: (curr.code || 'GBP').toLowerCase(),
-          total: { label: '12-Week Plan', amount: amountMinor },
+          total: { label: '12-Week Plan Bundle', amount: amountMinor },
           requestPayerName: true,
           requestPayerEmail: true
         });
@@ -425,7 +425,7 @@ function mountPaymentUI() {
     // replace any literal occurrences
     summaryEl.innerHTML = summaryEl.innerHTML.replace(
       /Pro Tracker/g,
-       "12‑Week Plan"
+       "12‑Week Plan Bundle"
     );
   }
 

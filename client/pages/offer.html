@@ -195,7 +195,7 @@
   </div>
 
 
-  <div class="whats-included-container">
+  <div class="whats-included-container" id="whatsIncluded">
     <h2 class="wi2-heading">Inside Your Plan</h2>
     <p class="wi2-description">Everything you need to stay consistent — workouts, meals, and progress that adjust as you
       go.</p>
@@ -427,7 +427,7 @@
         <span class="discount-label">Discount Expires In:</span>
         <span class="time-remaining" id="countdownTimer">10:00</span>
       </div>
-      <p class="first-1000">🔥 2,000+ people claimed their plan today.<br>You're next.</p>
+      <p class="first-1000">🔥 2,000+ people claimed their plan today.<br>Only 3 left - act fast!</p>
     </div>
 
     <!-- Offer Cards -->
@@ -451,35 +451,6 @@
         🔎 See how it compares
       </a>
     </p>
-
-    <!-- Social proof (Trustpilot-style, no count) -->
-<div class="micro-proof tp" aria-label="Customer rating">
-  <div class="tp-left">
-    <span class="tp-label">Excellent</span>
-    <span class="tp-stars" aria-hidden="true">
-      <!-- 4 full + 1 half -->
-      <svg viewBox="0 0 20 20" class="tp-star full"><path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z"/></svg>
-      <svg viewBox="0 0 20 20" class="tp-star full"><path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z"/></svg>
-      <svg viewBox="0 0 20 20" class="tp-star full"><path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z"/></svg>
-      <svg viewBox="0 0 20 20" class="tp-star full"><path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z"/></svg>
-      <svg viewBox="0 0 20 20" class="tp-star half">
-        <defs><clipPath id="tp-half"><rect x="0" y="0" width="10" height="20"/></clipPath></defs>
-        <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z" class="tp-outline"/>
-        <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z" clip-path="url(#tp-half)" class="tp-fill"/>
-      </svg>
-    </span>
-    <span class="tp-score">4.8 out of 5</span>
-  </div>
-
-  <div class="tp-brand" aria-label="Trustpilot">
-    <!-- Trustpilot star mark -->
-    <svg class="tp-logo-star" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 2.2l2.6 5.3 5.9.9-4.3 4.1 1 6L12 16l-5.2 2.5 1-6L3.5 8.4l5.9-.9L12 2.2z"/>
-    </svg>
-    <span class="tp-logo-text">Trustpilot</span>
-  </div>
-</div>
-
 
     <!-- Promo applied strip -->
     <div id="promoAppliedStrip" class="rtb-ps" hidden>
@@ -506,7 +477,46 @@
       </div>
     </div>
 
+    <!-- Social proof (Trustpilot-style, no count) -->
+    <div class="micro-proof tp" aria-label="Customer rating">
+      <div class="tp-left">
+        <span class="tp-label">Excellent</span>
+        <span class="tp-stars" aria-hidden="true">
+          <!-- 4 full + 1 half -->
+          <svg viewBox="0 0 20 20" class="tp-star full">
+            <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z" />
+          </svg>
+          <svg viewBox="0 0 20 20" class="tp-star full">
+            <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z" />
+          </svg>
+          <svg viewBox="0 0 20 20" class="tp-star full">
+            <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z" />
+          </svg>
+          <svg viewBox="0 0 20 20" class="tp-star full">
+            <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z" />
+          </svg>
+          <svg viewBox="0 0 20 20" class="tp-star half">
+            <defs>
+              <clipPath id="tp-half">
+                <rect x="0" y="0" width="10" height="20" />
+              </clipPath>
+            </defs>
+            <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z" class="tp-outline" />
+            <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z"
+              clip-path="url(#tp-half)" class="tp-fill" />
+          </svg>
+        </span>
+        <span class="tp-score">4.8 out of 5</span>
+      </div>
 
+      <div class="tp-brand" aria-label="Trustpilot">
+        <!-- Trustpilot star mark -->
+        <svg class="tp-logo-star" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2.2l2.6 5.3 5.9.9-4.3 4.1 1 6L12 16l-5.2 2.5 1-6L3.5 8.4l5.9-.9L12 2.2z" />
+        </svg>
+        <span class="tp-logo-text">Trustpilot</span>
+      </div>
+    </div>
 
     <!-- <p class="offer-subtext">Most people never stick to fitness because their plan doesn’t adapt. Yours will.
     </p> -->
@@ -596,22 +606,22 @@
       <div class="offer-card offer-special" data-program="new">
         <div class="offer-left">
           <div class="duration"><strong>12-Week Plan</strong></div>
-          <!-- <div class="full-price" data-full-price="£14.99">
+          <div class="full-price" data-full-price="£14.99">
             <span class="price-strikethrough" id="priceSpecialFull">£14.99</span>
             <span class="discount-price" id="priceSpecialDiscount">£0.00</span>
-          </div> -->
+          </div>
           <!-- <div class="best-seller-banner">
             <strong><span class="crown-emoji">👑</span> <span class="banner-text">BEST VALUE</span></strong>
           </div> -->
         </div>
 
-        <!-- <div class="offer-right">
+        <div class="offer-right">
           <div class="currency-tag">GBP</div>
           <div class="cost-per-day">
             <strong id="costPerDaySpecial">£0.33</strong>
           </div>
           <div class="per-day">per day</div>
-        </div> -->
+        </div>
 
         <!-- Moved .additional-info outside .offer-left so it can span the entire card -->
         <div class="additional-info" id="info-new" style="display: none;">
@@ -693,8 +703,8 @@
         <div class="bm-discount-card" data-expanded="false">
           <div class="bm-row">
             <div class="bm-left">
-              <div class="bm-pill">51% OFF<br>
-                <span>+ FREE SHIPPING</span>
+              <div class="bm-pill">Only 3 left<br>
+                <span>Act fast!</span>
               </div>
               <p class="bm-head"><strong>Calisthenics <br> Essential Kit</strong></p>
             </div>
@@ -703,10 +713,11 @@
               <img src="../assets/home-workout-kit.jpg" alt="Calisthenics Essential Kit">
             </figure>
           </div>
-           <div class="additional-info" style="display: none;">
+          <div class="additional-info" style="display: none;">
             <h4>Compact Kit. Full-Body Results.</h4>
             <ul class="offer-includes">
-              <li>🟦 <strong>Foldable push-up board</strong> with color-coded angles for chest, back &amp; shoulders.</li>
+              <li>🟦 <strong>Foldable push-up board</strong> with color-coded angles for chest, back &amp; shoulders.
+              </li>
               <li>✋ <strong>Ergonomic handle pair</strong> that locks in for a steady, wrist-friendly grip.</li>
               <li>🟢 <strong>Multi-resistance bands + door anchor</strong> to scale every progression from home.</li>
             </ul>
@@ -716,17 +727,10 @@
         </div>
       </div>
 
-<section class="order-summary" aria-labelledby="orderSummaryTitle">
+      <!-- <section class="order-summary" aria-labelledby="orderSummaryTitle">
   <header class="os-head">
     <h3 id="orderSummaryTitle" class="os-title">Order summary</h3>
-    <!-- <p class="os-sub">Includes everything above</p> -->
   </header>
-
-  <!-- <ul class="os-includes" aria-label="Items included">
-    <li>12-Week Plan</li>
-    <li>Calisthenics Essential Kit</li>
-  </ul> -->
-
   <div class="total-price-summary" id="totalPriceSummary" aria-label="Total price">
     <div class="tp-row full">
       <span class="tp-label">Full price</span>
@@ -747,10 +751,13 @@
       </span>
     </div>
   </div>
-</section>
+</section> -->
 
       <p class="pricing-justification">
         Like having a personal trainer in your pocket — for less than the cost of one session.
+      </p>
+      <p class="offer-help">Not sure what’s included?
+        <a href="#whatsIncluded">See everything</a>
       </p>
 
       <!-- FINISH BUTTON -->
