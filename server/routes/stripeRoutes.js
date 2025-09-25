@@ -367,13 +367,13 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
     const { currency: ccy, priceId } = getSubPriceId(currency);
     const couponId = discounted ? getCouponId(ccy) : null;
 
-     const sessionCfg = {
+    const sessionCfg = {
       mode: 'subscription',
       payment_method_types: ['card'],
       customer_email: email,
       client_reference_id: client_reference_id || undefined,
       line_items: [{ price: priceId, quantity: 1 }],
-      success_url: `${successBase}/pages/dashboard.html?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${successBase}/pages/kit-offer.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${successBase}/pages/offer.html`,
       // If coupon is present, apply it
       ...(couponId && { discounts: [{ coupon: couponId }] }),
@@ -438,19 +438,25 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
     const sub = await stripe.subscriptions.create(subCfg);
     log('Subscription', { id: sub.id, status: sub.status });
 
-     // 4) extract PaymentIntent for client_secret
-    let pi = sub.latest_invoice?.payment_intent || null;
-    if (!pi) {
-      const invoice = await stripe.invoices.retrieve(sub.latest_invoice, {
-        expand: ['payment_intent'],
-      });
-      pi = invoice.payment_intent;
-      log('Re-fetched invoice for PI', { invoice: invoice.id, pi: pi?.id });
+    // 4) extract PaymentIntent for client_secret
+    const latestInvoice = sub.latest_invoice;
+    let pi = latestInvoice?.payment_intent || null;
 
-       }
+    if (!pi) {
+      const invoiceId =
+        typeof latestInvoice === 'string' ? latestInvoice : latestInvoice?.id;
+
+      if (invoiceId) {
+        const invoice = await stripe.invoices.retrieve(invoiceId, {
+          expand: ['payment_intent'],
+        });
+        pi = invoice.payment_intent;
+        log('Re-fetched invoice for PI', { invoice: invoice.id, pi: pi?.id });
+      }
+    }
     if (!pi) return res.status(500).json({ error: 'PaymentIntent not available' });
     return res.json({ clientSecret: pi.client_secret, subscriptionId: sub.id });
-      } catch (err) {
+  } catch (err) {
     console.error('❌ /create-subscription-intent error:', err);
     res.status(500).json({ error: err.message });
   }
