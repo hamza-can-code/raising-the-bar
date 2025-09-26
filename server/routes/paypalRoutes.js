@@ -59,7 +59,7 @@ const currency = (req.body.currency || 'GBP').toUpperCase();
 
     // Build return/cancel URLs from PUBLIC_BASE_URL (or current host)
     const origin = process.env.PUBLIC_BASE_URL || `${req.protocol}://${req.get('host')}`;
-     const returnUrl = `${origin}/pages/kit-offer.html`;
+    const returnUrl = `${origin}/pages/dashboard.html`;
     const cancelUrl = `${origin}/pages/offer.html?paypal=cancelled`;
 
     const body = {

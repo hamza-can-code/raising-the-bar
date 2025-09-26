@@ -111,8 +111,8 @@ const PAYPAL_PLAN_FULL = 'P-2BG62815HH914120TNB7AJCA';  // ← straight 29.99 / 
       /* optional: fire your Brevo confirmation e‑mail route
          await fetch('/api/send-confirmation', { … })  */
 
-      // 🏁  Redirect the buyer → kit-offer.html
-      window.location.href = '/pages/kit-offer.html';
+      // 🏁  Redirect the buyer → dashboard.html
+      window.location.href = '/pages/dashboard.html';
     },
 
     onError(err) {

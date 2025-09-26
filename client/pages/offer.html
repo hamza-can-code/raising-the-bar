@@ -195,7 +195,7 @@
   </div>
 
 
-  <div class="whats-included-container" id="whatsIncluded">
+  <div class="whats-included-container">
     <h2 class="wi2-heading">Inside Your Plan</h2>
     <p class="wi2-description">Everything you need to stay consistent — workouts, meals, and progress that adjust as you
       go.</p>
@@ -251,29 +251,6 @@
     </div>
   </div>
 
-  <!-- Calisthenics Essential Kit -->
-  <section class="kit-promo" id="calisthenics-kit" aria-label="Calisthenics Essential Kit">
-    <div class="kit-inner">
-      <div class="kit-badge" aria-hidden="true">🎁</div>
-
-      <h3 class="kit-title">
-        <span class="kit-discount">51% OFF</span><br>
-        on <span class="kit-brand">Calisthenics Essential Kit</span>
-      </h3>
-
-      <p class="kit-subcopy">
-        Includes a foldable push-up board, ergonomic handles, and resistance bands — designed to target chest, back,
-        shoulders, and arms for effective home workouts.
-      </p>
-
-
-      <figure class="kit-figure">
-        <img src="../assets/home-workout-kit.jpg" alt="Calisthenics Essential Kit – home workout equipment"
-          loading="lazy">
-      </figure>
-    </div>
-  </section>
-
   <section class="app-social-proof" aria-label="App social proof">
     <div class="asp-inner">
 
@@ -292,7 +269,7 @@
       <!-- rating + store badges -->
       <div class="asp-rating">
         <span class="asp-stars" aria-label="Star rating">★★★★★</span>
-        <span class="asp-score">4.8&nbsp;/&nbsp;5</span>
+        <span class="asp-score">4.7&nbsp;/&nbsp;5</span>
 
         <!-- store badges – use your own assets if you prefer -->
         <img src="../assets/apple-pay-mark.webp" alt="App Store" loading="lazy">
@@ -427,7 +404,7 @@
         <span class="discount-label">Discount Expires In:</span>
         <span class="time-remaining" id="countdownTimer">10:00</span>
       </div>
-      <p class="first-1000">🔥 2,000+ people claimed their plan today.<br>Only 3 left - act fast!</p>
+      <p class="first-1000">🔥 2,000+ people claimed their plan today.<br>You're next.</p>
     </div>
 
     <!-- Offer Cards -->
@@ -454,69 +431,13 @@
 
     <!-- Promo applied strip -->
     <div id="promoAppliedStrip" class="rtb-ps" hidden>
-      <div class="ps-top">
-        <div class="discount-badge">
-          51% OFF
-          <span class="badge-subline">+ FREE SHIPPING</span>
-        </div>
-        <h4 class="ps-title">Promo code applied!</h4>
-      </div>
-
-      <div class="ps-bottom">
-        <!-- Code pill (left) -->
-        <code id="promoStripCode" class="rtb-ps__code" aria-label="Promo code"></code>
-
-        <!-- Timer (right) -->
-        <div class="ps-timer" aria-live="polite">
-          <div class="ps-time-value" id="promoStripTimer">10:00</div>
-          <div class="ps-time-labels">
-            <span>minutes</span>
-            <span>seconds</span>
-          </div>
-        </div>
+      <span class="rtb-ps__badge">Promo applied</span>
+      <code id="promoStripCode" class="rtb-ps__code"></code>
+      <div class="rtb-ps__note">
+        Auto-applies at checkout • Ends in <span id="promoStripTimer">10:00</span>
       </div>
     </div>
 
-    <!-- Social proof (Trustpilot-style, no count) -->
-    <div class="micro-proof tp" aria-label="Customer rating">
-      <div class="tp-left">
-        <span class="tp-label">Excellent</span>
-        <span class="tp-stars" aria-hidden="true">
-          <!-- 4 full + 1 half -->
-          <svg viewBox="0 0 20 20" class="tp-star full">
-            <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z" />
-          </svg>
-          <svg viewBox="0 0 20 20" class="tp-star full">
-            <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z" />
-          </svg>
-          <svg viewBox="0 0 20 20" class="tp-star full">
-            <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z" />
-          </svg>
-          <svg viewBox="0 0 20 20" class="tp-star full">
-            <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z" />
-          </svg>
-          <svg viewBox="0 0 20 20" class="tp-star half">
-            <defs>
-              <clipPath id="tp-half">
-                <rect x="0" y="0" width="10" height="20" />
-              </clipPath>
-            </defs>
-            <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z" class="tp-outline" />
-            <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z"
-              clip-path="url(#tp-half)" class="tp-fill" />
-          </svg>
-        </span>
-        <span class="tp-score">4.8 out of 5</span>
-      </div>
-
-      <div class="tp-brand" aria-label="Trustpilot">
-        <!-- Trustpilot star mark -->
-        <svg class="tp-logo-star" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 2.2l2.6 5.3 5.9.9-4.3 4.1 1 6L12 16l-5.2 2.5 1-6L3.5 8.4l5.9-.9L12 2.2z" />
-        </svg>
-        <span class="tp-logo-text">Trustpilot</span>
-      </div>
-    </div>
 
     <!-- <p class="offer-subtext">Most people never stick to fitness because their plan doesn’t adapt. Yours will.
     </p> -->
@@ -610,9 +531,9 @@
             <span class="price-strikethrough" id="priceSpecialFull">£14.99</span>
             <span class="discount-price" id="priceSpecialDiscount">£0.00</span>
           </div>
-          <!-- <div class="best-seller-banner">
+          <div class="best-seller-banner">
             <strong><span class="crown-emoji">👑</span> <span class="banner-text">BEST VALUE</span></strong>
-          </div> -->
+          </div>
         </div>
 
         <div class="offer-right">
@@ -697,67 +618,8 @@
         <div class="toggle-details" style="cursor:pointer;">What’s Included?</div>
       </div> -->
 
-      <div class="bm-discount-wrap">
-        <div class="bm-plus">+</div>
-
-        <div class="bm-discount-card" data-expanded="false">
-          <div class="bm-row">
-            <div class="bm-left">
-              <div class="bm-pill">Only 3 left<br>
-                <span>Act fast!</span>
-              </div>
-              <p class="bm-head"><strong>Calisthenics <br> Essential Kit</strong></p>
-            </div>
-
-            <figure class="bm-media">
-              <img src="../assets/home-workout-kit.jpg" alt="Calisthenics Essential Kit">
-            </figure>
-          </div>
-          <div class="additional-info" style="display: none;">
-            <h4>Compact Kit. Full-Body Results.</h4>
-            <ul class="offer-includes">
-              <li>🟦 <strong>Foldable push-up board</strong> with color-coded angles for chest, back &amp; shoulders.
-              </li>
-              <li>✋ <strong>Ergonomic handle pair</strong> that locks in for a steady, wrist-friendly grip.</li>
-              <li>🟢 <strong>Multi-resistance bands + door anchor</strong> to scale every progression from home.</li>
-            </ul>
-          </div>
-
-          <div class="toggle-details">What’s Included?</div>
-        </div>
-      </div>
-
-      <!-- <section class="order-summary" aria-labelledby="orderSummaryTitle">
-  <header class="os-head">
-    <h3 id="orderSummaryTitle" class="os-title">Order summary</h3>
-  </header>
-  <div class="total-price-summary" id="totalPriceSummary" aria-label="Total price">
-    <div class="tp-row full">
-      <span class="tp-label">Full price</span>
-      <span class="tp-val tp-strike"><span id="tpFull"></span></span>
-    </div>
-
-    <div class="tp-row current">
-      <span class="tp-label"><strong>Current price</strong></span>
-      <span class="tp-val tp-now" id="tpNow"></span>
-    </div>
-
-    <div class="tp-row perday">
-      <span class="tp-label">≈ Per day</span>
-      <span class="tp-val tp-perday">
-        <span class="cost-per-day" id="tpPerDay"></span>
-        <span class="per-day">per day</span>
-        <span class="currency-tag" id="tpCcy" aria-hidden="true"></span>
-      </span>
-    </div>
-  </div>
-</section> -->
-
       <p class="pricing-justification">
         Like having a personal trainer in your pocket — for less than the cost of one session.
-      </p>
-      <p class="offer-help">Not sure what’s included?
-        <a href="#whatsIncluded">See everything</a>
       </p>
 
       <!-- FINISH BUTTON -->
@@ -775,10 +637,9 @@
         By proceeding, you confirm that you’ve read and agree to our
         <a href="tos.html" target="_blank">terms of service</a> and
         <a href="refund-policy.html" target="_blank">refund policy</a>.
-        If you choose the 12-Week Plan, it renews at
+        The trial lasts for 1 day. If you choose the 12-Week Plan, it renews at
         <span class="renew-amt"></span>/month unless cancelled.
-        Cancellations take effect at the end of the current billing cycle. The Calisthenics Essential Kit is available
-        after purchase of the workout plan.
+        Cancellations take effect at the end of the current billing cycle.
       </p>
 
   </section>
@@ -1150,11 +1011,7 @@ body: JSON.stringify(payload)
         <div class="scratch-card" role="group" aria-label="Scratch to reveal your discount">
           <div class="scratch-reveal">
             <div class="reveal-content">
-              <div class="discount-badge">
-                51% OFF
-                <span class="badge-subline">+ Free Shipping</span>
-              </div>
-              <div class="discount-subline">On your 12-Week Plan and Calisthenics Essential Kit</div>
+              <div class="discount-badge">100% OFF</div>
               <!-- <p class="reveal-sub">Your 12-Week Plan is free!</p> -->
               <p id="promoCodeLine" class="promo-code-line"></p>
               <p class="reveal-small">

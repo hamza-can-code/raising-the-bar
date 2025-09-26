@@ -6,8 +6,6 @@
 (() => {
   'use strict';
 
-  const COLLAPSE_HANDLER_KEY = '__rtbCollapseHandler';
-
   /* ——————————————————————————————————————————————————————————— */
   /* 1.  Get a *stable* Stripe constructor (frozen in <head>)      */
   /* ——————————————————————————————————————————————————————————— */
@@ -30,7 +28,7 @@
   /* ——————————————————————————————————————————————————————————— */
 
   const STRIPE_PK = 'pk_live_51RJa8007mQ8fzyxpyrHP8Tk9GMzRnhG06vVUTe5mAnpcAacIj8fRmwuRYBpEIr1tRvFqe5nQqpofCURgCHaPASbS00wwfmtIvU';
-  const RETURN_URL = `${window.location.origin}/pages/kit-offer.html`;
+  const RETURN_URL = `${window.location.origin}/pages/dashboard.html`;
 
   /* ——————————————————————————————————————————————————————————— */
   /* 3.  DOM handles                                               */
@@ -92,6 +90,7 @@
   let stripeJs;
   let elements;        // ← Stripe Elements instance (lazy-created)
   let clientSecret;    // ← from /api/create-subscription-intent
+  let intentType = 'payment';
   function isDiscountActive() {
     const end = Number(localStorage.getItem('discountEndTime') || 0);
     return end > Date.now();
@@ -130,45 +129,13 @@
     requestAnimationFrame(() => payPanel.classList.add('slide-in'));
   }
 
-function mountPaymentUI() {
-  const el = document.getElementById('paymentElement');
-  if (!el || el.dataset.mounted === 'true') return;
-
-  // Payment Element (leave defaults)
-  const paymentElement = elements.create('payment', { fields: { billingDetails: 'auto' } });
-  paymentElement.mount('#paymentElement');
-  el.dataset.mounted = 'true';
-
-  // ---- Cosmetic address block ABOVE the Pay button ----
-  let addrHost = document.getElementById('cosmeticBillingAddress');
-  if (!addrHost) {
-    addrHost = document.createElement('div');
-    addrHost.id = 'cosmeticBillingAddress';
-    addrHost.innerHTML = `
-      <label class="addr-label" style="display:block;margin:14px 0 6px;">Billing address (for delivery)</label>
-      <div id="addrMount"></div>
-    `;
-
-    // insert BEFORE the submit button
-    const payBtn = document.getElementById('paySubmitBtn') 
-                || payForm.querySelector('button[type="submit"]');
-    if (payBtn && payBtn.parentElement) {
-      payBtn.parentElement.insertBefore(addrHost, payBtn);
-    } else {
-      // fallback: right after the Payment Element container
-      el.parentElement.insertBefore(addrHost, el.nextSibling);
-    }
+  function mountPaymentUI() {
+    // Mount the unified Payment Element once; keep container hidden until Continue
+    if (!document.getElementById('paymentElement')) return;
+    if (document.getElementById('paymentElement').dataset.mounted === 'true') return;
+    elements.create('payment').mount('#paymentElement');
+    document.getElementById('paymentElement').dataset.mounted = 'true';
   }
-
-  const addrEl = elements.create('address', {
-    mode: 'billing',
-    allowedCountries: ['GB','US','CA','SE','IE','AU','NZ','DE','FR','IT','ES'],
-    fields: { phone: 'never' }
-  });
-  addrEl.mount('#addrMount');
-}
-
-
 
   async function ensureStripe(force = false) {
     // If already warmed AND not forcing, bail
@@ -202,6 +169,7 @@ function mountPaymentUI() {
       }
 
       clientSecret = resp.clientSecret;
+        intentType = resp.intentType || 'payment';
 
       stripeJs = stripeJs || stripe(STRIPE_PK);
       if (!elements) {
@@ -216,10 +184,10 @@ function mountPaymentUI() {
       if (!window.__STRIPE_WARM__?.pr) {
         // Read per-currency prices (from offer.js) or use a safe fallback table
         const PRICE = (window.RTB_PRICE_TABLE) || {
-          GBP: { full: 21.99, intro: 9.99 }, USD: { full: 23.99, intro: 9.99 }, EUR: { full: 22.99, intro: 9.99 },
-          SEK: { full: 259, intro: 129 }, NOK: { full: 399, intro: 0 }, DKK: { full: 449, intro: 0 },
+          GBP: { full: 14.99, intro: 0 }, USD: { full: 19.99, intro: 0 }, EUR: { full: 17.99, intro: 0 },
+          SEK: { full: 199, intro: 0 }, NOK: { full: 399, intro: 0 }, DKK: { full: 449, intro: 0 },
           CHF: { full: 34.99, intro: 0 }, AUD: { full: 94.99, intro: 0 }, NZD: { full: 59.99, intro: 0 },
-          CAD: { full: 31.99, intro: 15.99 }, SGD: { full: 84.99, intro: 0 }, HKD: { full: 499, intro: 0 },
+          CAD: { full: 24.99, intro: 0 }, SGD: { full: 84.99, intro: 0 }, HKD: { full: 499, intro: 0 },
           JPY: { full: 7900, intro: 0 }, INR: { full: 3999, intro: 0 }, BRL: { full: 259.99, intro: 0 },
           MXN: { full: 1199, intro: 0 }
         };
@@ -232,7 +200,7 @@ function mountPaymentUI() {
         const pr = stripeJs.paymentRequest({
           country: curr.country || 'GB',
           currency: (curr.code || 'GBP').toLowerCase(),
-          total: { label: '12-Week Plan Bundle', amount: amountMinor },
+          total: { label: '12-Week Plan', amount: amountMinor },
           requestPayerName: true,
           requestPayerEmail: true
         });
@@ -270,14 +238,22 @@ function mountPaymentUI() {
 
   async function walletHandler(ev) {
     try {
-      const { error } = await stripeJs.confirmCardPayment(
-        clientSecret,
-        { payment_method: ev.paymentMethod.id },
-        { handleActions: true }
-      );
-      if (error) {
+ let result;
+      if (intentType === 'setup') {
+        result = await stripeJs.confirmCardSetup(clientSecret, {
+          payment_method: ev.paymentMethod.id,
+        });
+      } else {
+        result = await stripeJs.confirmCardPayment(
+          clientSecret,
+          { payment_method: ev.paymentMethod.id },
+          { handleActions: true }
+        );
+      }
+
+      if (result.error) {
         ev.complete('fail');
-        showError(error.message);
+        showError(result.error.message);
         return;
       }
 
@@ -289,75 +265,32 @@ function mountPaymentUI() {
     }
   }
 
-   function forceCollapseCard(card) {
-    if (!card) return;
-
-    card.dataset.expanded = 'false';
-    card.classList.remove('expanded');
-
-    card.querySelectorAll('.additional-info').forEach(info => {
-      const existingHandler = info[COLLAPSE_HANDLER_KEY];
-      if (existingHandler) {
-        info.removeEventListener('transitionend', existingHandler);
-        info[COLLAPSE_HANDLER_KEY] = null;
-      }
-      info.style.transition = 'none';
-      info.style.overflow = 'hidden';
-      info.style.height = '0px';
-      info.style.display = 'none';
-      info.offsetHeight;
-      info.style.removeProperty('transition');
-    });
-
-    card.querySelectorAll('.toggle-details').forEach(btn => {
-      const fallbackLabel = btn.dataset.labelCollapsed
-        || btn.getAttribute('data-label-collapsed')
-        || 'What’s Included?';
-      btn.textContent = fallbackLabel;
-    });
-  }
-
-  function collapseCard(card, toggler) {
-    if (!card) {
-      return;
-    }
-
-    let handled = false;
-
-    if (typeof toggler === 'function') {
-      try {
-        toggler(card, false, true);
-        handled = true;
-      } catch (_) {
-        handled = false;
-      }
-    }
-
-    if (!handled) {
-      const toggleBtn = card.querySelector('.toggle-details');
-      if (toggleBtn) {
-        try {
-          toggleBtn.click();
-          handled = true;
-        } catch (_) {
-          handled = false;
+  function collapseAllOfferCards() {
+    const cards = document.querySelectorAll('.offer-card');
+    cards.forEach(card => {
+      if (card.dataset.expanded === 'true') {
+        // Preferred: use existing toggleDetails if it exists globally
+        if (typeof window.toggleDetails === 'function') {
+          try { window.toggleDetails(card, false); return; } catch (_) { }
+        }
+        // Fallback: force close
+        card.dataset.expanded = 'false';
+        card.classList.remove('expanded', 'selected');
+        const info = card.querySelector('.additional-info');
+        if (info) {
+          info.style.height = '0px';
+          info.style.display = 'none';
+        }
+        const btn = card.querySelector('.toggle-details');
+        if (btn) {
+          // Restore original label
+          btn.textContent = btn.getAttribute('data-label-collapsed') || 'What’s Included?';
         }
       } else {
         // also remove 'selected' visual if you want it cleared
         card.classList.remove('selected');
       }
-    }
-
-    forceCollapseCard(card);
-  }
-
-  function collapseAllOfferCards() {
-    const toggler = window.toggleOfferCardDetails || window.toggleDetails;
-    document.querySelectorAll('.offer-card').forEach(card => {
-      collapseCard(card, toggler);
     });
-    const kitCard = document.querySelector('.bm-discount-card');
-    collapseCard(kitCard, toggler);
   }
 
   continueBtn.addEventListener('click', async (e) => {
@@ -406,18 +339,29 @@ function mountPaymentUI() {
       dots = dots % 3 + 1;
     }, 500);
 
- const { error } = await stripeJs.confirmPayment({
-      elements,
-      redirect: 'always',              // 👈 optional but recommended
-      confirmParams: {
-          return_url: `${window.location.origin}/pages/kit-offer.html`,
+    let result;
+    if (intentType === 'setup') {
+      result = await stripeJs.confirmSetup({
+        elements,
+        redirect: 'always',
+        confirmParams: {
+          return_url: `${window.location.origin}/pages/dashboard.html`,
         },
       });
+    } else {
+      result = await stripeJs.confirmPayment({
+        elements,
+        redirect: 'always',              // 👈 optional but recommended
+        confirmParams: {
+          return_url: `${window.location.origin}/pages/dashboard.html`
+        }
+      });
+    }
 
     clearInterval(dotInterval);
     loadingEl.style.display = 'none';
 
-      if (error) showError(error.message);
+     if (result.error) showError(result.error.message);
   });
   function swapName() {
     const summaryEl = document.getElementById("planSummary");
@@ -425,7 +369,7 @@ function mountPaymentUI() {
     // replace any literal occurrences
     summaryEl.innerHTML = summaryEl.innerHTML.replace(
       /Pro Tracker/g,
-       "12‑Week Plan Bundle"
+       "12‑Week Plan"
     );
   }
 

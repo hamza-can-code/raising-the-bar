@@ -20,16 +20,16 @@ function fadeOutLoader() {
   overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
 }
 window.RTB_PRICE_TABLE = {
-  GBP: { full: 21.99, intro: 9.99 },
-  USD: { full: 23.99, intro: 9.99 },
-  EUR: { full: 22.99, intro: 9.99 },
-  SEK: { full: 259, intro: 129 },
+  GBP: { full: 14.99, intro: 0 },
+  USD: { full: 19.99, intro: 0 },
+  EUR: { full: 17.99, intro: 0 },
+  SEK: { full: 199, intro: 0 },
   NOK: { full: 399, intro: 0 },
   DKK: { full: 449, intro: 0 },
   CHF: { full: 34.99, intro: 0 },
   AUD: { full: 94.99, intro: 0 },
   NZD: { full: 59.99, intro: 0 },
-  CAD: { full: 31.99, intro: 15.99 },
+  CAD: { full: 24.99, intro: 0 },
   SGD: { full: 84.99, intro: 0 },
   HKD: { full: 499, intro: 0 },
   JPY: { full: 7900, intro: 0 },
@@ -37,8 +37,6 @@ window.RTB_PRICE_TABLE = {
   BRL: { full: 259.99, intro: 0 },
   MXN: { full: 1199, intro: 0 },
 };
-
-const FLAGSHIP_PLAN_DAYS = 12 * 7;
 
 function getCurrency() {
   return window.RTB_CURRENCY || { code: 'GBP', symbol: '£', minor: 2, country: 'GB' };
@@ -112,7 +110,7 @@ function localizeProTrackerCard() {
   if (ccyTag) ccyTag.textContent = code;
 
   const shown = dealOn ? intro : full;
-  if (perDayEl) perDayEl.textContent = fmt(code, shown / FLAGSHIP_PLAN_DAYS);
+  if (perDayEl) perDayEl.textContent = fmt(code, shown / 30);
 
   // keep a human-readable cache for summaries
   localStorage.setItem('planPrice', dealOn ? fmt(code, intro) : fmt(code, full));
@@ -1167,89 +1165,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
- const promoStrip = document.getElementById('promoAppliedStrip');
-  const kitTitle = document.querySelector('.kit-title');
-  if (kitTitle) {
-    if (!kitTitle.dataset.activeHtml) kitTitle.dataset.activeHtml = kitTitle.innerHTML;
-    if (!kitTitle.dataset.brandOnly) {
-      const brand = kitTitle.querySelector('.kit-brand');
-      kitTitle.dataset.brandOnly = brand
-        ? `<span class="kit-brand">${brand.textContent}</span>`
-        : kitTitle.textContent.trim();
-    }
-  }
-  const bmPills = Array.from(document.querySelectorAll('.bm-pill'));
-  const modalBadges = Array.from(document.querySelectorAll('#valueModal .discount-badge'));
-  const fullPriceRow = document.querySelector('#totalPriceSummary .tp-row.full');
-  const promoLine = document.getElementById('promoCodeLine');
-  if (promoLine) {
-    const captureActiveMarkup = () => {
-      if (!promoLine.dataset.activeHtml && promoLine.querySelector('.promo-code-value')) {
-        promoLine.dataset.activeHtml = promoLine.innerHTML;
-      }
-    };
-    captureActiveMarkup();
-    const promoObserver = new MutationObserver(captureActiveMarkup);
-    promoObserver.observe(promoLine, { childList: true, subtree: true });
-  }
-  const scratchCard = document.querySelector('.scratch-card');
-  const scratchMirror = document.getElementById('scratchMirrorTimer');
-  const scratchMirrorNote = document.getElementById('scratchMirrorTimerNote');
-  const continueBtn = document.getElementById('valueContinue');
-
-  function applyDiscountDecor(active) {
-    document.body.classList.toggle('discount-active', active);
-    document.body.classList.toggle('discount-expired', !active);
-
-    if (promoStrip) promoStrip.hidden = !active;
-
-    if (kitTitle) {
-      if (active) {
-        if (!kitTitle.dataset.activeHtml && kitTitle.querySelector('.kit-brand')) {
-          kitTitle.dataset.activeHtml = kitTitle.innerHTML;
-        }
-        if (kitTitle.dataset.activeHtml) {
-          kitTitle.innerHTML = kitTitle.dataset.activeHtml;
-        }
-      } else if (kitTitle.dataset.brandOnly) {
-        kitTitle.innerHTML = kitTitle.dataset.brandOnly;
-      }
-    }
-
-    bmPills.forEach(pill => {
-      pill.hidden = !active;
-    });
-
-    modalBadges.forEach(badge => {
-      badge.hidden = !active;
-    });
-
-    if (fullPriceRow) fullPriceRow.hidden = !active;
-
-    if (promoLine) {
-      if (active) {
-        if (!promoLine.dataset.activeHtml && promoLine.querySelector('.promo-code-value')) {
-          promoLine.dataset.activeHtml = promoLine.innerHTML;
-        }
-        if (promoLine.dataset.activeHtml) {
-          promoLine.innerHTML = promoLine.dataset.activeHtml;
-        }
-      } else {
-        promoLine.textContent = 'Your promo code has expired.';
-      }
-    }
-
-    if (scratchCard) scratchCard.classList.toggle('promo-expired', !active);
-    if (!active) {
-      if (scratchMirror) scratchMirror.textContent = 'Expired';
-      if (scratchMirrorNote) scratchMirrorNote.textContent = 'Expired';
-      if (continueBtn) {
-        continueBtn.disabled = false;
-        continueBtn.classList.remove('locked');
-        continueBtn.style.removeProperty('background');
-        continueBtn.style.removeProperty('background-image');
-      }
-    }
+  // Activate or deactivate the discount style immediately
+  if (discountEndTime > now) {
+    document.body.classList.add("discount-active");
+  } else {
+    document.body.classList.remove("discount-active");
   }
 
   function updatePricingJustification() {
@@ -1260,28 +1180,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const { code, full, intro } = getLocalPrices();
 
     if (dealOn) {
-      const introPerDay = fmt(code, intro / FLAGSHIP_PLAN_DAYS);
       el.innerHTML =
         `Normally ${fmt(code, full)} — now just <strong>${fmt(code, intro)}</strong>. ` +
-        `🎉 Just ${introPerDay} a day.`;
+        `🎉 Get the full 12-Week Plan for ${fmt(code, intro / 30)}.`;
     } else {
       el.textContent = 'Like having a personal trainer in your pocket — for less than the cost of one session.';
     }
-    // inside updatePricingJustification(), after you compute {code, full, intro} and dealOn
-    const $ = (id) => document.getElementById(id);
-
-    if ($('tpFull')) {
-      $('tpFull').textContent = fmt(code, full);
-      // add/remove strike class based on discount
-      $('tpFull').classList.toggle('price-strikethrough', !!dealOn);
-    }
-    if ($('tpNow')) $('tpNow').textContent = fmt(code, dealOn ? intro : full);
-    if ($('tpPerDay')) {
-      const perDayAmount = (dealOn ? intro : full) / FLAGSHIP_PLAN_DAYS;
-      $('tpPerDay').textContent = fmt(code, perDayAmount);
-    }
-    if ($('tpCcy')) $('tpCcy').textContent = code;
-
   }
 
   const timerContainer = document.getElementById("timerContainer");
@@ -1293,20 +1197,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // If the discount has expired…
     if (diff <= 0) {
-      applyDiscountDecor(false);
+      document.body.classList.remove("discount-active");
       removeDiscountPricing();
       updatePostPayNote();
-       updatePricingJustification();
-      updatePlanSummary();
       localStorage.removeItem("sevenDayDiscountEnd");
       if (timerContainer) timerContainer.style.display = "none";
-      const cardSubtext = document.querySelector(".card-subtext");
+           const cardSubtext = document.querySelector(".card-subtext");
       if (cardSubtext) cardSubtext.remove();
       return;
     }
 
     // Keep the discount styling active
-     applyDiscountDecor(true);
+    document.body.classList.add("discount-active");
 
     // Break diff into h/m/s
     const totalSeconds = Math.floor(diff / 1000);
@@ -1346,7 +1248,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const perDaySpecial = document.querySelector('[data-program="new"] .per-day');
     if (costPerDaySpecial && currencyTagSpecial && perDaySpecial) {
       const { code, intro } = getLocalPrices();
-      costPerDaySpecial.textContent = fmt(code, intro / FLAGSHIP_PLAN_DAYS);
+      costPerDaySpecial.textContent = fmt(code, intro / 30);
       currencyTagSpecial.style.display = "block";
     }
   }
@@ -1409,19 +1311,6 @@ function removeDiscountPricing() {
 /**********************************************/
 document.addEventListener("DOMContentLoaded", function () {
   const offerCards = document.querySelectorAll(".offer-card");
-  const accordionSelectors = ['.offer-card.offer-special', '.bm-discount-card'];
-  const kitCard = document.querySelector('.bm-discount-card');
-  const toggleButtons = document.querySelectorAll('.offer-card .toggle-details, .bm-discount-card .toggle-details');
-  const collapseHandlerKey = '__rtbCollapseHandler';
-
-  toggleButtons.forEach(btn => {
-    if (!btn.dataset.labelCollapsed) {
-      btn.dataset.labelCollapsed = btn.textContent.trim();
-    }
-    if (!btn.dataset.labelExpanded) {
-      btn.dataset.labelExpanded = 'See less';
-    }
-  });
   let currentlySelected = null;
 
   // Check localStorage for previously selected program
@@ -1470,7 +1359,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         const fullEl = proTrackerCard.querySelector('.full-price span')
           || proTrackerCard.querySelector('.full-price');
-        // priceText = fullEl.textContent.trim();
+        priceText = fullEl.textContent.trim();
       }
       localStorage.setItem('planPrice', priceText);
 
@@ -1673,25 +1562,17 @@ document.addEventListener("DOMContentLoaded", function () {
   //   }
   // }
 
-    function isAccordionCard(card) {
-    return accordionSelectors.some(sel => card && card.matches(sel));
-  }
-
   function toggleDetails(card, forceExpand = null, skipSync = false) {
     const info = card.querySelector('.additional-info');
     const toggleBtn = card.querySelector('.toggle-details');
     if (!info || !toggleBtn) return;
 
-    const isOpen = card.dataset.expanded === 'true';
+    const isOpen = info.style.display === 'block';
     const expandIt = forceExpand === null ? !isOpen : forceExpand;
 
     if (expandIt) {
       card.dataset.expanded = 'true';
       card.classList.add('expanded');
-
-       if (!skipSync && isAccordionCard(card)) {
-        collapseLinkedCards(card);
-      }
 
       info.style.display = 'block';
       info.style.height = '0px';
@@ -1700,25 +1581,19 @@ document.addEventListener("DOMContentLoaded", function () {
       info.style.transition = 'height .4s ease';
       info.style.height = info.scrollHeight + 'px';
 
-      const expandedLabel = toggleBtn.dataset.labelExpanded || 'See less';
-      toggleBtn.textContent = expandedLabel;
+      toggleBtn.textContent = 'See less';
     } else {
       card.dataset.expanded = 'false';
       card.classList.remove('expanded');
 
-       info.style.overflow = 'hidden';
       info.style.height = '0px';
- const collapseDone = function h(e) {
-        if (e.propertyName !== 'height') return;
-        info.style.display = 'none';
-        info.removeEventListener('transitionend', h);
-        info[collapseHandlerKey] = null;
-      };
-      info[collapseHandlerKey] = collapseDone;
-      info.addEventListener('transitionend', collapseDone);
-      const collapsedLabel = toggleBtn.dataset.labelCollapsed || 'What’s Included?';
-      toggleBtn.textContent = collapsedLabel;
-      toggleBtn.textContent = collapsedLabel;
+      info.addEventListener('transitionend', function h(e) {
+        if (e.propertyName === 'height') {
+          info.style.display = 'none';
+          info.removeEventListener('transitionend', h);
+        }
+      });
+      toggleBtn.textContent = 'What’s Included?';
     }
 
     /* ► keep 4- & 12-week in sync */
@@ -1726,17 +1601,6 @@ document.addEventListener("DOMContentLoaded", function () {
     //   const partner = document.querySelector(`.offer-card[data-program="${card.dataset.program === '4-week' ? '12-week' : '4-week'}"]`);
     //   if (partner) toggleDetails(partner, expandIt, true);
     // }
-  }
-
-    function collapseLinkedCards(activeCard) {
-    accordionSelectors.forEach(sel => {
-      document.querySelectorAll(sel).forEach(other => {
-        if (!other || other === activeCard) return;
-        if (other.dataset.expanded === 'true') {
-          toggleDetails(other, false, true);
-        }
-      });
-    });
   }
 
   document.querySelectorAll('.offer-card .toggle-details').forEach(btn => {
@@ -1758,28 +1622,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-if (kitCard) {
-    kitCard.dataset.expanded = kitCard.dataset.expanded === 'true' ? 'true' : 'false';
-
-    const kitToggle = kitCard.querySelector('.toggle-details');
-    if (kitToggle) {
-      kitToggle.addEventListener('click', e => {
-        e.stopPropagation();
-        const shouldExpand = kitCard.dataset.expanded !== 'true';
-        toggleDetails(kitCard, shouldExpand);
-      });
-    }
-
-    kitCard.addEventListener('click', e => {
-      if (e.target.closest('.toggle-details')) return;
-      if (kitCard.dataset.expanded === 'true') return;
-      toggleDetails(kitCard, true);
-    });
-  }
-
-  window.toggleOfferCardDetails = toggleDetails;
-
-
   function updateCTA(selectedProgram) {
     const finishBtn = document.getElementById("offerFinishBtn");
     if (!finishBtn) return;
@@ -1790,8 +1632,8 @@ if (kitCard) {
     // }
   }
   document.addEventListener('click', e => {
-    // if the click wasn’t inside an offer-card or the kit bundle card…
-    if (!e.target.closest('.offer-card') && !e.target.closest('.bm-discount-card')) {
+    // if the click wasn’t inside an offer-card…
+    if (!e.target.closest('.offer-card')) {
       offerCards.forEach(card => {
         // only collapse if currently expanded
         if (card.dataset.expanded === 'true') {
@@ -1799,9 +1641,6 @@ if (kitCard) {
           card.classList.remove('selected');
         }
       });
-            if (kitCard && kitCard.dataset.expanded === 'true') {
-        toggleDetails(kitCard, false);
-      }
       currentlySelected = null;  // reset selection
     }
   });
@@ -1863,7 +1702,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // on narrow (≤375px) we want the element 20px *below* the top of the viewport → +20
     // on wider we want it 20px *above* the top → -20
     const isSmall = window.matchMedia("(max-width: 375px)").matches;
-    const offset = isSmall ? -15 : 50;
+    const offset = isSmall ? -15 : -225;
 
     // absolute Y position of the element
     const elementTop = socialProof.getBoundingClientRect().top + window.pageYOffset;
@@ -2296,100 +2135,90 @@ function setUpCompareModal0() {
   }
 
   // Disable backdrop (outside click) + ESC for the promo modal only
-  (function () {
-    const promoModal = document.getElementById('valueModal');
-    if (!promoModal) return;
+(function () {
+  const promoModal = document.getElementById('valueModal');
+  if (!promoModal) return;
 
-    const content = promoModal.querySelector('.modal-content');
+  const content = promoModal.querySelector('.modal-content');
 
-    // Block clicks/taps that land on the backdrop
-    const blockBackdrop = (e) => {
-      if (e.target === promoModal || !content.contains(e.target)) {
-        e.stopImmediatePropagation();
-        e.preventDefault();
-      }
-    };
-    ['click', 'mousedown', 'touchstart'].forEach(evt =>
-      promoModal.addEventListener(evt, blockBackdrop, true) // capture phase
-    );
-
-    // Optional: also ignore ESC while this modal is visible
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && promoModal.classList.contains('show')) {
-        e.stopImmediatePropagation();
-        e.preventDefault();
-      }
-    }, true);
-  })();
-
-  // --- Scratch Card -------------------------------------------------
-  let SCRATCH_INIT = false;
-
-  function initScratchCard() {
-    if (SCRATCH_INIT) return;
-
-    const canvas = document.getElementById('scratchCanvas');
-    const wrap = canvas ? canvas.closest('.scratch-card') : null;
-    const reveal = wrap ? wrap.querySelector('.scratch-reveal') : null;
-    const content = reveal ? reveal.querySelector('.reveal-content') : null;
-    document.querySelector('#scratchHint .orbit')?.remove();
-    const continueBtn = document.getElementById('valueContinue');
-
-    if (!canvas || !wrap || !reveal || !continueBtn) return;
-
-        if (!document.body.classList.contains('discount-active')) {
-      wrap.classList.add('promo-expired');
-      continueBtn.disabled = false;
-      continueBtn.classList.remove('locked');
-      continueBtn.style.removeProperty('background');
-      continueBtn.style.removeProperty('background-image');
-      return;
+  // Block clicks/taps that land on the backdrop
+  const blockBackdrop = (e) => {
+    if (e.target === promoModal || !content.contains(e.target)) {
+      e.stopImmediatePropagation();
+      e.preventDefault();
     }
+  };
+  ['click', 'mousedown', 'touchstart'].forEach(evt =>
+    promoModal.addEventListener(evt, blockBackdrop, true) // capture phase
+  );
 
-    SCRATCH_INIT = true;
-
-    {
-      const fullName = localStorage.getItem('name') || '';
-      const firstName = (fullName.split(' ')[0] || 'user')
-        .replace(/[^a-z0-9]/gi, '-')   // normalize to letters/numbers/hyphen
-        .replace(/-+/g, '-')           // collapse multiple hyphens
-        .replace(/^-|-$/g, '');        // trim hyphens
-      const promoCode = `${firstName}-51-OFF`.toUpperCase();
-      localStorage.setItem('appliedPromoCode', promoCode);
-
-      // write to both the modal and the pricing strip if present
-      const targets = [
-        document.getElementById('promoCodeValue'),     // modal code (id)
-        document.getElementById('promoStripCode'),     // strip code (id)
-        document.querySelector('.promo-code-value')    // modal code (class fallback)
-      ].filter(Boolean);
-      targets.forEach(el => el.textContent = promoCode);
+  // Optional: also ignore ESC while this modal is visible
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && promoModal.classList.contains('show')) {
+      e.stopImmediatePropagation();
+      e.preventDefault();
     }
+  }, true);
+})();
 
-    // Lock the Continue button initially
-    continueBtn.disabled = true;
-    continueBtn.classList.add('locked');
-    continueBtn.style.setProperty('background', '#004a99', 'important');
-    continueBtn.style.setProperty('background-image', 'none', 'important');
+// --- Scratch Card -------------------------------------------------
+let SCRATCH_INIT = false;
 
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+function initScratchCard() {
+if (SCRATCH_INIT) return;
+SCRATCH_INIT = true;
 
-    // ---- state (declare BEFORE any calls that read them)
-    let finished = false;
-    let scratching = false;
-    let idleTimer = null;
+  const canvas = document.getElementById('scratchCanvas');
+  const wrap   = canvas ? canvas.closest('.scratch-card') : null;
+  const reveal = wrap   ? wrap.querySelector('.scratch-reveal') : null;
+  const content= reveal ? reveal.querySelector('.reveal-content') : null;
+  document.querySelector('#scratchHint .orbit')?.remove();
+  const continueBtn = document.getElementById('valueContinue');
 
-    const hintText = document.querySelector('#scratchHint .hint-copy');
+  if (!canvas || !wrap || !reveal || !continueBtn) return;
 
-    // ---- Ghost finger zigzag animation (no extra HTML needed)
-    reveal.style.position = reveal.style.position || 'relative';
-    reveal.style.overflow = 'hidden';
+  {
+  const fullName  = localStorage.getItem('name') || '';
+  const firstName = (fullName.split(' ')[0] || 'user')
+    .replace(/[^a-z0-9]/gi, '-')   // normalize to letters/numbers/hyphen
+    .replace(/-+/g, '-')           // collapse multiple hyphens
+    .replace(/^-|-$/g, '');        // trim hyphens
+  const promoCode = `${firstName}-100-OFF`.toUpperCase();
+  localStorage.setItem('appliedPromoCode', promoCode);
 
-    const ghost = document.createElement('div');
-    const DOT = 28;                 // ghost diameter (px)
-    const PAD = 10;                 // inner padding from edges
-    ghost.id = 'scratchGhost';
-    ghost.style.cssText = `
+  // write to both the modal and the pricing strip if present
+  const targets = [
+    document.getElementById('promoCodeValue'),     // modal code (id)
+    document.getElementById('promoStripCode'),     // strip code (id)
+    document.querySelector('.promo-code-value')    // modal code (class fallback)
+  ].filter(Boolean);
+  targets.forEach(el => el.textContent = promoCode);
+}
+
+  // Lock the Continue button initially
+  continueBtn.disabled = true;
+  continueBtn.classList.add('locked');
+  continueBtn.style.setProperty('background', '#004a99', 'important');
+  continueBtn.style.setProperty('background-image', 'none', 'important');
+
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+
+  // ---- state (declare BEFORE any calls that read them)
+  let finished   = false;
+  let scratching = false;
+  let idleTimer  = null;
+
+  const hintText = document.querySelector('#scratchHint .hint-copy');
+
+  // ---- Ghost finger zigzag animation (no extra HTML needed)
+reveal.style.position = reveal.style.position || 'relative';
+reveal.style.overflow = 'hidden';
+
+const ghost = document.createElement('div');
+const DOT = 28;                 // ghost diameter (px)
+const PAD = 10;                 // inner padding from edges
+ghost.id = 'scratchGhost';
+ghost.style.cssText = `
   position: absolute;
   left: 0; top: 0;              /* we’ll move it via translate() */
   width: ${DOT}px; height: ${DOT}px;
@@ -2402,226 +2231,226 @@ function setUpCompareModal0() {
   box-shadow: 0 4px 10px rgba(0,0,0,.15);
   transform: translate(0,0);
 `;
-    reveal.appendChild(ghost);
+reveal.appendChild(ghost);
 
-    let gx = PAD, gy = PAD;
-    let vx = 2.2, vy = 1.6;
-    let ghostActive = false;
+let gx = PAD, gy = PAD;
+let vx = 2.2, vy = 1.6;
+let ghostActive = false;
 
-    function bounds() {
-      const w = reveal.clientWidth;
-      const h = reveal.clientHeight;
-      return {
-        minX: PAD, minY: PAD,
-        maxX: w - PAD - DOT, maxY: h - PAD - DOT
-      };
-    }
+function bounds() {
+  const w = reveal.clientWidth;
+  const h = reveal.clientHeight;
+  return {
+    minX: PAD,              minY: PAD,
+    maxX: w - PAD - DOT,    maxY: h - PAD - DOT
+  };
+}
 
-    function placeGhost() {
-      ghost.style.transform = `translate(${gx}px, ${gy}px)`;
-    }
+function placeGhost() {
+  ghost.style.transform = `translate(${gx}px, ${gy}px)`;
+}
 
-    function animateGhost() {
-      if (!ghostActive) return;
-      const b = bounds();
-      gx += vx; gy += vy;
-      if (gx <= b.minX || gx >= b.maxX) vx *= -1;
-      if (gy <= b.minY || gy >= b.maxY) vy *= -1;
-      gx = Math.min(Math.max(gx, b.minX), b.maxX);
-      gy = Math.min(Math.max(gy, b.minY), b.maxY);
-      placeGhost();
-      requestAnimationFrame(animateGhost);
-    }
+function animateGhost() {
+  if (!ghostActive) return;
+  const b = bounds();
+  gx += vx; gy += vy;
+  if (gx <= b.minX || gx >= b.maxX) vx *= -1;
+  if (gy <= b.minY || gy >= b.maxY) vy *= -1;
+  gx = Math.min(Math.max(gx, b.minX), b.maxX);
+  gy = Math.min(Math.max(gy, b.minY), b.maxY);
+  placeGhost();
+  requestAnimationFrame(animateGhost);
+}
 
-    function startGhost() {
-      if (ghostActive || finished) return;
-      const b = bounds();
-      gx = Math.min(Math.max(reveal.clientWidth * 0.35, b.minX), b.maxX);
-      gy = Math.min(Math.max(reveal.clientHeight * 0.35, b.minY), b.maxY);
-      placeGhost();
-      ghostActive = true;
-      ghost.style.opacity = '1';
-      animateGhost();
-    }
-    function stopGhost() {
-      ghostActive = false;
-      ghost.style.opacity = '0';
-    }
+function startGhost() {
+  if (ghostActive || finished) return;
+  const b = bounds();
+  gx = Math.min(Math.max(reveal.clientWidth  * 0.35, b.minX), b.maxX);
+  gy = Math.min(Math.max(reveal.clientHeight * 0.35, b.minY), b.maxY);
+  placeGhost();
+  ghostActive = true;
+  ghost.style.opacity = '1';
+  animateGhost();
+}
+function stopGhost() {
+  ghostActive = false;
+  ghost.style.opacity = '0';
+}
 
-    /* Hint helpers now drive the ghost (old orbit hint is removed above) */
-    function showHint() {
-      if (!finished) {
-        startGhost();
-        if (hintText) hintText.style.opacity = '1';
+/* Hint helpers now drive the ghost (old orbit hint is removed above) */
+function showHint() {
+  if (!finished) {
+    startGhost();
+    if (hintText) hintText.style.opacity = '1';
+  }
+}
+function hideHint() {
+  stopGhost();
+  if (hintText) hintText.style.opacity = '0';
+}
+function scheduleHint() {
+  clearTimeout(idleTimer);
+  if (!finished) idleTimer = setTimeout(showHint, 3000);
+}
+
+/* keep ghost in-bounds if size changes */
+const clampGhostToBounds = () => {
+  const b = bounds();
+  gx = Math.min(Math.max(gx, b.minX), b.maxX);
+  gy = Math.min(Math.max(gy, b.minY), b.maxY);
+  placeGhost();
+};
+
+  // ---- sizing + paint
+  function sizeCanvas() {
+    const cssW = reveal.clientWidth;
+    const contentH = Math.ceil((content?.scrollHeight || 148));
+    const cssH = Math.max(148, contentH + 10);
+
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
+    // reset transform before resizing
+    ctx.setTransform(1,0,0,1,0,0);
+    canvas.width  = Math.floor(cssW * dpr);
+    canvas.height = Math.floor(cssH * dpr);
+    canvas.style.width  = cssW + 'px';
+    canvas.style.height = cssH + 'px';
+    ctx.scale(dpr, dpr);
+
+    paintCover(cssW, cssH);
+  }
+
+  function paintCover(w, h) {
+    // branded blue gradient + texture
+    const grad = ctx.createLinearGradient(0, 0, w, h);
+    grad.addColorStop(0, '#007BFF');
+    grad.addColorStop(1, '#339CFF');
+
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+
+    const step = 10;
+    ctx.globalAlpha = 0.25;
+    for (let y = 0; y < h; y += step) {
+      for (let x = 0; x < w; x += step) {
+        ctx.fillStyle = ((x + y) % (step * 2)) ? '#ffffff' : '#003F80';
+        ctx.fillRect(x, y, 2, 2);
       }
     }
-    function hideHint() {
-      stopGhost();
-      if (hintText) hintText.style.opacity = '0';
-    }
-    function scheduleHint() {
-      clearTimeout(idleTimer);
-      if (!finished) idleTimer = setTimeout(showHint, 3000);
-    }
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'destination-out'; // ready to scratch
+  }
 
-    /* keep ghost in-bounds if size changes */
-    const clampGhostToBounds = () => {
-      const b = bounds();
-      gx = Math.min(Math.max(gx, b.minX), b.maxX);
-      gy = Math.min(Math.max(gy, b.minY), b.maxY);
-      placeGhost();
-    };
+  // ---- scratch interaction
+  const brush = 18;
 
-    // ---- sizing + paint
-    function sizeCanvas() {
-      const cssW = reveal.clientWidth;
-      const contentH = Math.ceil((content?.scrollHeight || 148));
-      const cssH = Math.max(148, contentH + 10);
+  function scratch(x, y) {
+    ctx.beginPath();
+    ctx.arc(x, y, brush, 0, Math.PI * 2);
+    ctx.fill();
+  }
 
-      const dpr = Math.max(1, window.devicePixelRatio || 1);
-      // reset transform before resizing
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      canvas.width = Math.floor(cssW * dpr);
-      canvas.height = Math.floor(cssH * dpr);
-      canvas.style.width = cssW + 'px';
-      canvas.style.height = cssH + 'px';
-      ctx.scale(dpr, dpr);
+  function pointerPos(e) {
+    const r = canvas.getBoundingClientRect();
+    const p = e.touches ? e.touches[0] : e;
+    return { x: p.clientX - r.left, y: p.clientY - r.top };
+  }
 
-      paintCover(cssW, cssH);
-    }
+  function scratchPoint(e) {
+    const { x, y } = pointerPos(e);
+    scratch(x, y);
+  }
 
-    function paintCover(w, h) {
-      // branded blue gradient + texture
-      const grad = ctx.createLinearGradient(0, 0, w, h);
-      grad.addColorStop(0, '#007BFF');
-      grad.addColorStop(1, '#339CFF');
+  function start(e) {
+    scratching = true;
+    reveal.classList.add('scratching');
+    hideHint();
+    clearTimeout(idleTimer);
+    scratchPoint(e);
+    e.preventDefault();
+  }
 
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, w, h);
+  function move(e) {
+    if (!scratching) return;
+    scratchPoint(e);
+    e.preventDefault();
+  }
 
-      const step = 10;
-      ctx.globalAlpha = 0.25;
-      for (let y = 0; y < h; y += step) {
-        for (let x = 0; x < w; x += step) {
-          ctx.fillStyle = ((x + y) % (step * 2)) ? '#ffffff' : '#003F80';
-          ctx.fillRect(x, y, 2, 2);
-        }
-      }
-      ctx.globalAlpha = 1;
-      ctx.globalCompositeOperation = 'destination-out'; // ready to scratch
-    }
+  function end() {
+    scratching = false;
+    reveal.classList.remove('scratching');
+    if (!finished) scheduleHint();
+    maybeFinish();
+  }
 
-    // ---- scratch interaction
-    const brush = 30;
+  canvas.addEventListener('pointerdown', start);
+  canvas.addEventListener('pointermove', move);
+  window.addEventListener('pointerup', end);
+  canvas.addEventListener('touchstart', start, { passive: false });
+  canvas.addEventListener('touchmove',  move,  { passive: false });
+  window.addEventListener('touchend',   end);
 
-    function scratch(x, y) {
-      ctx.beginPath();
-      ctx.arc(x, y, brush, 0, Math.PI * 2);
-      ctx.fill();
-    }
+  // ---- completion calc
+  function clearedRatio() {
+    const { width, height } = canvas;
+    const sample = ctx.getImageData(0, 0, width, height).data;
+    let clear = 0;
+    for (let i = 3; i < sample.length; i += 4) if (sample[i] === 0) clear++;
+    return clear / (sample.length / 4);
+  }
 
-    function pointerPos(e) {
-      const r = canvas.getBoundingClientRect();
-      const p = e.touches ? e.touches[0] : e;
-      return { x: p.clientX - r.left, y: p.clientY - r.top };
-    }
-
-    function scratchPoint(e) {
-      const { x, y } = pointerPos(e);
-      scratch(x, y);
-    }
-
-    function start(e) {
-      scratching = true;
-      reveal.classList.add('scratching');
+  function maybeFinish() {
+    if (finished) return;
+    if (clearedRatio() > 0.6) {
+      finished = true;
+      wrap.classList.add('scratch-done');
       hideHint();
       clearTimeout(idleTimer);
-      scratchPoint(e);
-      e.preventDefault();
+
+      continueBtn.disabled = false;
+      continueBtn.classList.remove('locked');
+      continueBtn.style.removeProperty('background');
+      continueBtn.style.removeProperty('background-image');
+      continueBtn.focus();
+
+      try { window.sendAnalytics?.('scratch_revealed', { pct: 100 }); } catch {}
     }
+  }
 
-    function move(e) {
-      if (!scratching) return;
-      scratchPoint(e);
-      e.preventDefault();
-    }
-
-    function end() {
-      scratching = false;
-      reveal.classList.remove('scratching');
-      if (!finished) scheduleHint();
-      maybeFinish();
-    }
-
-    canvas.addEventListener('pointerdown', start);
-    canvas.addEventListener('pointermove', move);
-    window.addEventListener('pointerup', end);
-    canvas.addEventListener('touchstart', start, { passive: false });
-    canvas.addEventListener('touchmove', move, { passive: false });
-    window.addEventListener('touchend', end);
-
-    // ---- completion calc
-    function clearedRatio() {
-      const { width, height } = canvas;
-      const sample = ctx.getImageData(0, 0, width, height).data;
-      let clear = 0;
-      for (let i = 3; i < sample.length; i += 4) if (sample[i] === 0) clear++;
-      return clear / (sample.length / 4);
-    }
-
-    function maybeFinish() {
-      if (finished) return;
-      if (clearedRatio() > 0.6) {
-        finished = true;
-        wrap.classList.add('scratch-done');
-        hideHint();
-        clearTimeout(idleTimer);
-
-        continueBtn.disabled = false;
-        continueBtn.classList.remove('locked');
-        continueBtn.style.removeProperty('background');
-        continueBtn.style.removeProperty('background-image');
-        continueBtn.focus();
-
-        try { window.sendAnalytics?.('scratch_revealed', { pct: 100 }); } catch { }
-      }
-    }
-
-    // ---- reset button (optional)
-    document.getElementById('scratchReset')?.addEventListener('click', () => {
-      wrap.classList.remove('scratch-done');
-      finished = false;
-      sizeCanvas();
-      showHint();
-      continueBtn.disabled = true;
-      continueBtn.classList.add('locked');
-      continueBtn.style.setProperty('background', '#004a99', 'important');
-      continueBtn.style.setProperty('background-image', 'none', 'important');
-    });
-
-    // ---- mirror timer(s)
-    const src = document.getElementById('countdownTimer');
-    const mirror = document.getElementById('scratchMirrorTimer');
-    const note = document.getElementById('scratchMirrorTimerNote');
-    if (src) {
-      const sync = () => {
-        if (mirror) mirror.textContent = src.textContent;
-        if (note) note.textContent = src.textContent;
-      };
-      const obs = new MutationObserver(sync);
-      obs.observe(src, { childList: true, characterData: true, subtree: true });
-      sync();
-    }
-
-    // ---- kick off
+  // ---- reset button (optional)
+  document.getElementById('scratchReset')?.addEventListener('click', () => {
+    wrap.classList.remove('scratch-done');
+    finished = false;
     sizeCanvas();
     showHint();
-    clampGhostToBounds();
-    window.addEventListener('resize', () => {
-      if (!wrap.classList.contains('scratch-done')) sizeCanvas();
-    }, { passive: true });
+    continueBtn.disabled = true;
+    continueBtn.classList.add('locked');
+    continueBtn.style.setProperty('background', '#004a99', 'important');
+    continueBtn.style.setProperty('background-image', 'none', 'important');
+  });
+
+  // ---- mirror timer(s)
+  const src    = document.getElementById('countdownTimer');
+  const mirror = document.getElementById('scratchMirrorTimer');
+  const note   = document.getElementById('scratchMirrorTimerNote');
+  if (src) {
+    const sync = () => {
+      if (mirror) mirror.textContent = src.textContent;
+      if (note)   note.textContent   = src.textContent;
+    };
+    const obs = new MutationObserver(sync);
+    obs.observe(src, { childList: true, characterData: true, subtree: true });
+    sync();
   }
+
+  // ---- kick off
+  sizeCanvas();
+  showHint();
+  clampGhostToBounds();
+  window.addEventListener('resize', () => {
+    if (!wrap.classList.contains('scratch-done')) sizeCanvas();
+  }, { passive: true });
+}
 
   function closeModal() {
     modal.classList.remove('show');
@@ -2906,12 +2735,12 @@ renderMuscleBars(document.getElementById('muscleBarsGoal'), 5);
 
 document.addEventListener('DOMContentLoaded', () => {
   // Build promo code (ALL CAPS)
-  const fullName = localStorage.getItem('name') || '';
+  const fullName  = localStorage.getItem('name') || '';
   const firstName = (fullName.split(' ')[0] || 'user')
     .replace(/[^a-z0-9]/gi, '-')       // normalize
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-  const promoCode = `${firstName}-51-OFF`.toUpperCase();
+    .replace(/-+/g,'-')
+    .replace(/^-|-$/g,'');
+  const promoCode = `${firstName}-100-OFF`.toUpperCase();
 
   // Persist & render in both places (modal + strip)
   localStorage.setItem('appliedPromoCode', promoCode);
@@ -2921,11 +2750,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Promo strip behavior
-  const strip = document.getElementById('promoAppliedStrip');
+  const strip   = document.getElementById('promoAppliedStrip');
   const timerEl = document.getElementById('promoStripTimer');
-  const src = document.getElementById('countdownTimer');
+  const src     = document.getElementById('countdownTimer');
 
-  if (strip) {
+  if (strip){
     // visibility follows discount-active class
     const refresh = () => { strip.hidden = !document.body.classList.contains('discount-active'); };
     refresh();
@@ -2935,35 +2764,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Mirror timer into strip
-  if (src && timerEl) {
+  if (src && timerEl){
     const sync = () => { timerEl.textContent = src.textContent; };
     const obs = new MutationObserver(sync);
-    obs.observe(src, { childList: true, characterData: true, subtree: true });
+    obs.observe(src, { childList:true, characterData:true, subtree:true });
     sync();
   }
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const link   = document.getElementById('offerLearnMore');
-  const info   = document.querySelector('.offer-card.offer-special .additional-info'); // id="info-new"
-  const toggle = document.querySelector('.offer-card.offer-special .toggle-details');
-
-  if (!link || !info) return;
-
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    // Open the panel if it’s closed
-    if (info.style.display === 'none' || getComputedStyle(info).display === 'none') {
-      info.style.display = 'block';
-      if (toggle) toggle.textContent = 'See less';
-    }
-
-    // Scroll to the revealed content
-    info.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-    // Optional: brief highlight so users notice it
-    info.classList.add('peek');
-    setTimeout(() => info.classList.remove('peek'), 900);
-  });
 });

@@ -121,19 +121,6 @@ const questions = [
     key: "goal",
   },
   {
-    question: "You're going to crush this!",
-    extraText: "We provide workout routines and accessores for you to get in shape at home. No need for gym memberships",
-    image: {
-      src: "../assets/home-workout-kit.jpg",
-      alt: "Calisthenics Essential Kit",
-    },
-    options: [
-      { display: "🔥 Cool, let’s go!", value: "Cool, let's go!" }
-    ],
-    type: "radio",
-    key: "pushupBoardInterest",
-  },
-  {
     question: "What’s driving your goal right now?",
     options: [
       { display: "💍 A wedding or special event", value: "A wedding or special event" },
@@ -208,30 +195,6 @@ const questions = [
     type: "radio",
     key: "workoutLocation",
   },
-  // {
-  //   question: "Interested in a Push-Up Board?",
-  //   extraText: "It’s a compact board with color-coded hand positions that guide your push-ups to target specific muscles — making calisthenics more effective.",
-  //   options: [
-  //     { display: "✅ Yes, I’d be interested", value: "Interested" },
-  //     { display: "🤔 Maybe later", value: "Maybe later" },
-  //     { display: "❌ No thanks", value: "Not interested" }
-  //   ],
-  //   type: "radio",
-  //   key: "pushupBoardInterest",
-  // },
-  // {
-  //   question: "How much would you pay for a Push-Up Board?",
-  //   options: [
-  //     "Less than £10",
-  //     "£10 – £19",
-  //     "£20 – £29",
-  //     "£30 – £39",
-  //     "£40 or more",
-  //     "Not sure"
-  //   ],
-  //   type: "radio",
-  //   key: "pushupBoardPriceRange"
-  // },
   {
     question: "What equipment is available to you?",
     options: [
@@ -249,19 +212,6 @@ const questions = [
     ],
     type: "checkbox",
     key: "equipment",
-  },
-  {
-    question: "You'll love our Calisthenics accessories",
-    extraText: "They're easy to use and bring results faster than normal exercises. Unlock a special discount to build your dream body without overspending.",
-    image: {
-      src: "../assets/home-workout-kit.jpg",
-      alt: "Calisthenics Essential Kit",
-    },
-    options: [
-      { display: "💪 I’m interested!", value: "I'm interested!" }
-    ],
-    type: "radio",
-    key: "pushupBoardInterest",
   },
   {
     question: "Do you have any equipment preferences?",
@@ -729,95 +679,6 @@ function calculateBaseProjections() {
  ***********************************************************************/
 
 const questionText = document.querySelector(".form-question h2");
-const formQuestionContainer = document.querySelector(".form-question");
-
-function resetQuestionDecorations() {
-  if (!formQuestionContainer || !questionText) {
-    return;
-  }
-
-  Array.from(formQuestionContainer.children).forEach((child) => {
-    if (child !== questionText) {
-      formQuestionContainer.removeChild(child);
-    }
-  });
-}
-
-function normaliseImageClassList(rawClasses) {
-  if (!rawClasses) {
-    return [];
-  }
-
-  const classes = Array.isArray(rawClasses)
-    ? rawClasses
-    : (typeof rawClasses === "string" ? rawClasses.split(" ") : []);
-
-  return classes
-    .map((cls) => (typeof cls === "string" ? cls.trim() : ""))
-    .filter((cls) => cls && cls !== "question-image");
-}
-
-function resolveQuestionImageConfig(question) {
-  if (!question) {
-    return null;
-  }
-
-  const normaliseConfig = (config) => {
-    if (!config) {
-      return null;
-    }
-
-    if (typeof config === "string") {
-      const src = config.trim();
-      return src ? { src, classList: [] } : null;
-    }
-
-    if (typeof config === "object") {
-      const src = typeof config.src === "string" ? config.src.trim() : "";
-      if (!src) {
-        return null;
-      }
-
-      return {
-        src,
-        alt: typeof config.alt === "string" ? config.alt.trim() : "",
-        srcset: typeof config.srcset === "string" ? config.srcset.trim() : "",
-        sizes: typeof config.sizes === "string" ? config.sizes.trim() : "",
-        loading: typeof config.loading === "string" ? config.loading.trim() : "",
-        decoding: typeof config.decoding === "string" ? config.decoding.trim() : "",
-        width: typeof config.width === "number" && config.width > 0 ? config.width : undefined,
-        height: typeof config.height === "number" && config.height > 0 ? config.height : undefined,
-        classList: normaliseImageClassList(config.classList ?? config.className),
-      };
-    }
-
-    return null;
-  };
-
-  const directConfig = normaliseConfig(question.image);
-  if (directConfig) {
-    return directConfig;
-  }
-
-  const fallbackSrc = typeof question.src === "string" ? question.src.trim() : "";
-  if (!fallbackSrc) {
-    return null;
-  }
-
-  return {
-    src: fallbackSrc,
-    alt: typeof question.alt === "string" ? question.alt.trim() : "",
-    srcset: typeof question.srcset === "string" ? question.srcset.trim() : "",
-    sizes: typeof question.sizes === "string" ? question.sizes.trim() : "",
-    loading: typeof question.loading === "string" ? question.loading.trim() : "",
-    decoding: typeof question.decoding === "string" ? question.decoding.trim() : "",
-    width: typeof question.width === "number" && question.width > 0 ? question.width : undefined,
-    height: typeof question.height === "number" && question.height > 0 ? question.height : undefined,
-    classList: normaliseImageClassList(
-      question.imageClass ?? question.imageClasses ?? question.imageClassName
-    ),
-  };
-}
 const optionsContainer = document.querySelector(".form-options ol");
 const nextButton = document.getElementById("next-button");
 const progressBarFill = document.querySelector(".progress-bar-fill");
@@ -976,60 +837,12 @@ function loadQuestion(i) {
     return;                          // don’t render this page
   }
   questionText.textContent = currentQ.question;
-
-  // document.querySelectorAll(".question-image").forEach(el => el.remove());
-
-  resetQuestionDecorations();
-
-  if (currentQ.extraText && formQuestionContainer) {
+  document.querySelectorAll(".scroll-text").forEach(el => el.remove());
+  if (currentQ.extraText) {
     const extra = document.createElement("p");
     extra.classList.add("scroll-text");
     extra.textContent = currentQ.extraText;
-    formQuestionContainer.appendChild(extra);
-  }
-
-  const imageConfig = resolveQuestionImageConfig(currentQ);
-  if (imageConfig && formQuestionContainer) {
-    const imageElement = document.createElement("img");
-    imageElement.classList.add("question-image");
-
-    imageElement.src = imageConfig.src;
-
-    if (imageConfig.alt) {
-      imageElement.alt = imageConfig.alt;
-    }
-    if (imageConfig.srcset) {
-      imageElement.srcset = imageConfig.srcset;
-    }
-    if (imageConfig.sizes) {
-      imageElement.sizes = imageConfig.sizes;
-    }
-    if (imageConfig.loading) {
-      imageElement.loading = imageConfig.loading;
-    }
-    if (imageConfig.decoding) {
-      imageElement.decoding = imageConfig.decoding;
-    }
-    if (typeof imageConfig.width === "number") {
-      imageElement.width = imageConfig.width;
-    }
-    if (typeof imageConfig.height === "number") {
-      imageElement.height = imageConfig.height;
-    }
-
-    imageConfig.classList?.forEach((cls) => imageElement.classList.add(cls));
-
-    if (!imageElement.alt) {
-      imageElement.alt = currentQ.question || "";
-    }
-    if (!imageElement.loading) {
-      imageElement.loading = "lazy";
-    }
-    if (!imageElement.decoding) {
-      imageElement.decoding = "async";
-    }
-
-    formQuestionContainer.appendChild(imageElement);
+    document.querySelector(".form-question").appendChild(extra);
   }
   optionsContainer.innerHTML = "";
 
@@ -1201,7 +1014,7 @@ function handleOptionClick(selectedOption, type) {
       // calculateGoalCalories();
       // calculateBaseProjections();
     }
-    else if (questionKey === "BodyType") {
+     else if (questionKey === "BodyType") {
       const val = clickedText.toLowerCase();
       formData.BodyType = val;
       localStorage.setItem("BodyType", val);
@@ -1269,18 +1082,6 @@ function handleOptionClick(selectedOption, type) {
       }
       // console.log(`Workout Location saved: ${selectedWorkoutLocation}`);
     }
-    else if (questionKey === "pushupBoardInterest") {
-      const val = clickedText.toLowerCase();
-      formData.pushupBoardInterest = val;
-      localStorage.setItem("pushupBoardInterest", val);
-      // console.log(`Pushup Board Interest saved: ${val}`);
-    }
-    else if (questionKey === "pushupBoardPriceRange") {
-      const val = clickedText.toLowerCase();
-      formData.pushupBoardPriceRange = val;
-      localStorage.setItem("pushupBoardPriceRange", val);
-      // console.log(`Pushup Board Price Range saved: ${val}`);
-    }
     else if (questionKey === "effortLevel") {
       const normalized = clickedText.toLowerCase().split(" ")[0];
       formData.effortLevel = normalized;
@@ -1312,7 +1113,7 @@ function handleOptionClick(selectedOption, type) {
     if (questionKey === "equipment") {
       localStorage.setItem("equipment", JSON.stringify(formData.equipment));
     }
-    if (questionKey === "injuries") {
+        if (questionKey === "injuries") {
       localStorage.setItem("injuries", JSON.stringify(formData.injuries));
     }
     // console.log("Current selected checkboxes =>", formData[questionKey]);
@@ -6084,54 +5885,18 @@ function replaceWithFinalPage() {
   const formContainer = document.querySelector(".form-container");
   formContainer.innerHTML = "";
 
-// Final message
+  // Final message
 const finalMsg = document.createElement("div");
 finalMsg.classList.add("final-message");
-
-// unique id for the half-star clipPath (prevents duplicates on page)
-const tpHalfId = `tp-half-${Date.now()}`;
-
 finalMsg.innerHTML = `
   <h2 class="final-headline">
     <span class="final-num">10&nbsp;Million+</span><br>
     <span class="final-sub"><strong>kick-started their journey with us</strong></span>
   </h2>
 
-  <div class="micro-proof tp" aria-label="Customer rating">
-    <div class="tp-left">
-      <span class="tp-label">Excellent</span>
-      <span class="tp-stars" aria-hidden="true">
-        <!-- 4 full + 1 half -->
-        <svg viewBox="0 0 20 20" class="tp-star full">
-          <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z"></path>
-        </svg>
-        <svg viewBox="0 0 20 20" class="tp-star full">
-          <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z"></path>
-        </svg>
-        <svg viewBox="0 0 20 20" class="tp-star full">
-          <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z"></path>
-        </svg>
-        <svg viewBox="0 0 20 20" class="tp-star full">
-          <path d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z"></path>
-        </svg>
-        <svg viewBox="0 0 20 20" class="tp-star half">
-          <defs>
-            <clipPath id="${tpHalfId}">
-              <rect x="0" y="0" width="10" height="20"></rect>
-            </clipPath>
-          </defs>
-          <path class="tp-outline" d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z"></path>
-          <path class="tp-fill" d="M10 1.6l2.6 5.2 5.8.8-4.2 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L1.6 7.6l5.8-.8z" clip-path="url(#${tpHalfId})"></path>
-        </svg>
-      </span>
-    </div>
-
-    <div class="tp-brand" aria-label="Trustpilot">
-      <svg class="tp-logo-star" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 2.2l2.6 5.3 5.9.9-4.3 4.1 1 6L12 16l-5.2 2.5 1-6L3.5 8.4l5.9-.9L12 2.2z"></path>
-      </svg>
-      <span class="tp-logo-text">Trustpilot</span>
-    </div>
+  <div class="final-rating" role="img" aria-label="Rated 4.7 out of 5 stars">
+    <span class="final-stars" aria-hidden="true">★★★★★</span>
+    <span class="final-score">4.7&nbsp;/&nbsp;5</span>
   </div>
 
   <!-- optional: real Apple/Google Pay button mounts here if supported -->
