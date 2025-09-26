@@ -431,13 +431,28 @@
 
     <!-- Promo applied strip -->
     <div id="promoAppliedStrip" class="rtb-ps" hidden>
-      <span class="rtb-ps__badge">Promo applied</span>
-      <code id="promoStripCode" class="rtb-ps__code"></code>
-      <div class="rtb-ps__note">
-        Auto-applies at checkout • Ends in <span id="promoStripTimer">10:00</span>
+      <div class="ps-top">
+        <div class="discount-badge">
+          100% OFF
+          <!-- <span class="badge-subline">+ FREE SHIPPING</span> -->
+        </div>
+        <h4 class="ps-title">Promo code applied!</h4>
+      </div>
+
+      <div class="ps-bottom">
+        <!-- Code pill (left) -->
+        <code id="promoStripCode" class="rtb-ps__code" aria-label="Promo code"></code>
+
+        <!-- Timer (right) -->
+        <div class="ps-timer" aria-live="polite">
+          <div class="ps-time-value" id="promoStripTimer">10:00</div>
+          <div class="ps-time-labels">
+            <span>minutes</span>
+            <span>seconds</span>
+          </div>
+        </div>
       </div>
     </div>
-
 
     <!-- <p class="offer-subtext">Most people never stick to fitness because their plan doesn’t adapt. Yours will.
     </p> -->
@@ -527,8 +542,8 @@
       <div class="offer-card offer-special" data-program="new">
         <div class="offer-left">
           <div class="duration"><strong>12-Week Plan</strong></div>
-          <div class="full-price" data-full-price="£14.99">
-            <span class="price-strikethrough" id="priceSpecialFull">£14.99</span>
+          <div class="full-price" data-full-price="£24.99">
+            <span class="price-strikethrough" id="priceSpecialFull">£24.99</span>
             <span class="discount-price" id="priceSpecialDiscount">£0.00</span>
           </div>
           <div class="best-seller-banner">

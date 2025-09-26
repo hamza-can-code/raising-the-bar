@@ -20,16 +20,16 @@ function fadeOutLoader() {
   overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
 }
 window.RTB_PRICE_TABLE = {
-  GBP: { full: 14.99, intro: 0 },
-  USD: { full: 19.99, intro: 0 },
-  EUR: { full: 17.99, intro: 0 },
-  SEK: { full: 199, intro: 0 },
+  GBP: { full: 24.99, intro: 0 },
+  USD: { full: 25.99, intro: 0 },
+  EUR: { full: 24.99, intro: 0 },
+  SEK: { full: 279, intro: 0 },
   NOK: { full: 399, intro: 0 },
   DKK: { full: 449, intro: 0 },
   CHF: { full: 34.99, intro: 0 },
   AUD: { full: 94.99, intro: 0 },
   NZD: { full: 59.99, intro: 0 },
-  CAD: { full: 24.99, intro: 0 },
+  CAD: { full: 34.99, intro: 0 },
   SGD: { full: 84.99, intro: 0 },
   HKD: { full: 499, intro: 0 },
   JPY: { full: 7900, intro: 0 },
@@ -2342,7 +2342,7 @@ const clampGhostToBounds = () => {
   }
 
   // ---- scratch interaction
-  const brush = 18;
+  const brush = 30;
 
   function scratch(x, y) {
     ctx.beginPath();

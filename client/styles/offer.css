@@ -3757,71 +3757,152 @@ body.modal-open .floating-cta {
   .scratch-hint .dot { transform: rotate(0) translateX(30px) translateY(-50%); }
 }
 
-/* ========== PROMO STRIP (SCOPED) ========== */
-/* Only styles under #promoAppliedStrip apply */
-#promoAppliedStrip.rtb-ps {
-  /* layout */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 100%;
-    box-sizing: border-box;
-
-  /* spacing & container */
-  padding: 14px 16px;
-  margin: 12px auto 18px;              /* centers within your column */
-  width: min(100%, 720px);             /* never exceeds column width */
-  border-radius: 14px;
-
-  /* visuals (soft, on-brand) */
-  background: linear-gradient(180deg, #F7FAFF 0%, #EEF5FF 100%);
-  border: 1px solid #DCE8FF;
-  box-shadow: 0 2px 10px rgba(0, 123, 255, 0.05);
-
-  /* safety */
-  overflow: visible;
+/* ─── Promo strip container ───────────────────────────────────────────── */
+#promoAppliedStrip.rtb-ps{
+  display:block;
+  text-align:left;
+  padding:16px;
+  margin:12px auto 18px;
+  width:min(100%,720px);
+  border-radius:14px;
+  background:linear-gradient(180deg,#F7FAFF 0%,#EEF5FF 100%);
+  border:1px solid #DCE8FF;
+  box-shadow:0 2px 10px rgba(0,123,255,.05);
+  box-sizing:border-box;
 }
 
-#promoAppliedStrip .rtb-ps__badge {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: #0B63D1;
-  background: #E6F2FF;
-  border: 1px solid #C7DFFF;
-  border-radius: 999px;
-  padding: 4px 10px;
-  margin: 8px auto;
+/* Top row: badge + headline */
+#promoAppliedStrip .ps-top{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:12px;
+}
+#promoAppliedStrip .ps-title{
+  margin:0;
+  font:800 18px/1.2 "Poppins",sans-serif;   /* bigger headline */
+  color:#1e1d1c;
 }
 
-#promoAppliedStrip .rtb-ps__code {
-  display: inline-block;
+/* Badge (scoped so your scratch-card badge stays as-is) */
+#promoAppliedStrip .discount-badge{
+  display:inline-flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:16px;                            /* larger */
+  letter-spacing:.5px;
+  padding:8px 12px;
+  border-radius:10px;                        /* 10px radius per request */
+  background:#0B63D1;   
+  border:1px solid #084EA8;
+  color:#FFFFFF;
+  backdrop-filter:blur(2px);
+}
+#promoAppliedStrip .discount-badge .badge-subline{
+  display:block;
+  font-size:12px;
+  font-weight:700;
+  margin-top:2px;
+  text-transform:none;
+}
+
+#promoAppliedStrip .ps-bottom{
+  display:grid;
+  grid-template-columns: 1fr auto;          /* code left, timer right */
+  align-items: stretch;
+  gap:12px;
+}
+
+#promoAppliedStrip .rtb-ps__code{
+  display:block;
+  position:relative;
+  padding:12px 12px 12px 36px;              /* room for checkmark */
+  margin:0;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: .06em;
-  text-transform: uppercase;           /* ALL CAPS render */
-  color: #0B63D1;
-  background: #fff;
-  border: 1px solid #C7DFFF;
-  border-radius: 10px;
-  margin: 8px auto;
-  padding: 6px 12px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.6);
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:#0B63D1;
+  background:#fff;
+  border:1px solid #C7DFFF;
+  border-radius:10px;
+  box-shadow:0 1px 2px rgba(0,0,0,.06), inset 0 1px 0 rgba(255,255,255,.6);
+  min-height:40px;
+}
+#promoAppliedStrip .rtb-ps__code::before{
+  content:"✓";
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  font:700 14px/1 "Poppins",sans-serif;
+  color:#1BAE6C;
 }
 
-#promoAppliedStrip .rtb-ps__note {
-  font-size: 12px;
-  color: #666;
-  margin: 2px auto;
+/* Timer block (no "Ends in") – MM:SS with labels under each */
+#promoAppliedStrip .ps-timer{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:122px;
+  padding:10px 12px 8px;
+  background:#E6F2FF;
+  border:1px solid #C7DFFF;
+  border-radius:10px;
+  box-shadow:0 1px 2px rgba(0,0,0,.06), inset 0 1px 0 rgba(255,255,255,.6);
+}
+#promoAppliedStrip .ps-time-value{
+  font:800 20px/1 "Poppins",sans-serif;     /* big MM:SS */
+  color:#0B63D1;
+}
+#promoAppliedStrip .ps-time-labels{
+  display:flex;
+  justify-content:space-between;
+  gap:22px;
+  width:100%;
+  margin-top:4px;
+}
+#promoAppliedStrip .ps-time-labels span{
+  font:600 10px/1 "Poppins",sans-serif;
+  color:#0B63D1;
+  opacity:.85;
 }
 
-/* nice on small screens */
-@media (max-width: 420px) {
-  #promoAppliedStrip.rtb-ps { padding: 12px }
-  #promoAppliedStrip .rtb-ps__code { font-size: 14px }
+/* Mobile-first; only stack on ultra-narrow screens */
+@media (max-width:360px){
+  #promoAppliedStrip .ps-bottom{
+    grid-template-columns:1fr;               /* stack */
+  }
+  #promoAppliedStrip .ps-timer{
+    min-width:0;
+  }
 }
 
+/* Align tick + code text */
+#promoAppliedStrip .rtb-ps__code{
+  display: flex;
+  align-items: center;          /* vertical centering */
+  gap: 8px;                     /* space between tick and code */
+  padding: 12px;                /* remove extra left padding */
+}
+
+/* Make the tick participate in layout (not absolute) */
+#promoAppliedStrip .rtb-ps__code::before{
+  position: static;
+  transform: none;
+  margin: 0;                    /* handled by gap */
+  font: 700 14px/1 "Poppins", sans-serif;
+  line-height: 1;
+}
+
+/* Bring "minutes" and "seconds" closer together under the time */
+#promoAppliedStrip .ps-time-labels{
+  display: flex;
+  justify-content: center;      /* center under MM:SS */
+  gap: 10px;                    /* tighter spacing */
+  width: auto;                  /* stop stretching across the pill */
+}
