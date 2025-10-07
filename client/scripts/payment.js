@@ -169,7 +169,7 @@
       }
 
       clientSecret = resp.clientSecret;
-        intentType = resp.intentType || 'payment';
+      intentType = resp.intentType || 'payment';
 
       stripeJs = stripeJs || stripe(STRIPE_PK);
       if (!elements) {
@@ -184,12 +184,22 @@
       if (!window.__STRIPE_WARM__?.pr) {
         // Read per-currency prices (from offer.js) or use a safe fallback table
         const PRICE = (window.RTB_PRICE_TABLE) || {
-          GBP: { full: 19.99, intro: 0 }, USD: { full: 24.99, intro: 0 }, EUR: { full: 22.99, intro: 0 },
-          SEK: { full: 249, intro: 0 }, NOK: { full: 279, intro: 0 }, DKK: { full: 179, intro: 0 },
-          CHF: { full: 34.99, intro: 0 }, AUD: { full: 94.99, intro: 0 }, NZD: { full: 59.99, intro: 0 },
-          CAD: { full: 37.99, intro: 0 }, SGD: { full: 84.99, intro: 0 }, HKD: { full: 499, intro: 0 },
-          JPY: { full: 7900, intro: 0 }, INR: { full: 3999, intro: 0 }, BRL: { full: 259.99, intro: 0 },
-          MXN: { full: 1199, intro: 0 }
+          GBP: { full: 19.99, weekly: 4.99, intro: 0 },
+          USD: { full: 23.99, weekly: 5.99, intro: 0 },
+          EUR: { full: 22.99, weekly: 5.99, intro: 0 },
+          SEK: { full: 249, weekly: 69, intro: 0 },
+          NOK: { full: 259, weekly: 69, intro: 0 },
+          DKK: { full: 179, weekly: 45, intro: 0 },
+          CAD: { full: 29.99, weekly: 8.99, intro: 0 },
+          CHF: { full: 24.99, weekly: 6.49, intro: 0 },
+          AUD: { full: 34.99, weekly: 9.49, intro: 0 },
+          NZD: { full: 32.99, weekly: 8.99, intro: 0 },
+          SGD: { full: 29.99, weekly: 8.49, intro: 0 },
+          HKD: { full: 169, weekly: 45, intro: 0 },
+          JPY: { full: 3590, weekly: 950, intro: 0 },
+          INR: { full: 1499, weekly: 399, intro: 0 },
+          BRL: { full: 109.99, weekly: 29.99, intro: 0 },
+          MXN: { full: 459, weekly: 119, intro: 0 }
         };
 
         const row = PRICE[curr.code] || PRICE.GBP;
@@ -238,7 +248,7 @@
 
   async function walletHandler(ev) {
     try {
- let result;
+      let result;
       if (intentType === 'setup') {
         result = await stripeJs.confirmCardSetup(clientSecret, {
           payment_method: ev.paymentMethod.id,
@@ -295,7 +305,7 @@
 
   continueBtn.addEventListener('click', async (e) => {
     e.preventDefault();
-        // Force the checkout context to the primary 1-week plan
+    // Force the checkout context to the primary 1-week plan
     localStorage.setItem('selectedProgram', 'new');
     localStorage.setItem('pendingPurchaseType', 'subscription');
     localStorage.setItem('planName', 'Pro Tracker');
@@ -361,7 +371,7 @@
     clearInterval(dotInterval);
     loadingEl.style.display = 'none';
 
-     if (result.error) showError(result.error.message);
+    if (result.error) showError(result.error.message);
   });
   function swapName() {
     const summaryEl = document.getElementById("planSummary");
@@ -369,7 +379,7 @@
     // replace any literal occurrences
     summaryEl.innerHTML = summaryEl.innerHTML.replace(
       /Pro Tracker/g,
-       "12‑Week Plan"
+      "12‑Week Plan"
     );
   }
 

@@ -20,22 +20,22 @@ function fadeOutLoader() {
   overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
 }
 window.RTB_PRICE_TABLE = {
-  GBP: { full: 19.99, intro: 0 },
-  USD: { full: 24.99, intro: 0 },
-  EUR: { full: 22.99, intro: 0 },
-  SEK: { full: 249, intro: 0 },
-  NOK: { full: 279, intro: 0 },
-  DKK: { full: 179, intro: 0 },
-  CHF: { full: 34.99, intro: 0 },
-  AUD: { full: 94.99, intro: 0 },
-  NZD: { full: 59.99, intro: 0 },
-  CAD: { full: 37.99, intro: 0 },
-  SGD: { full: 84.99, intro: 0 },
-  HKD: { full: 499, intro: 0 },
-  JPY: { full: 7900, intro: 0 },
-  INR: { full: 3999, intro: 0 },
-  BRL: { full: 259.99, intro: 0 },
-  MXN: { full: 1199, intro: 0 },
+  GBP: { full: 19.99, weekly: 4.99, intro: 0 },
+  USD: { full: 23.99, weekly: 5.99, intro: 0 },
+  EUR: { full: 22.99, weekly: 5.99, intro: 0 },
+  SEK: { full: 249, weekly: 69, intro: 0 },
+  NOK: { full: 259, weekly: 69, intro: 0 },
+  DKK: { full: 179, weekly: 45, intro: 0 },
+  CAD: { full: 29.99, weekly: 8.99, intro: 0 },
+  CHF: { full: 24.99, weekly: 6.49, intro: 0 },
+  AUD: { full: 34.99, weekly: 9.49, intro: 0 },
+  NZD: { full: 32.99, weekly: 8.99, intro: 0 },
+  SGD: { full: 29.99, weekly: 8.49, intro: 0 },
+  HKD: { full: 169, weekly: 45, intro: 0 },
+  JPY: { full: 3590, weekly: 950, intro: 0 },
+  INR: { full: 1499, weekly: 399, intro: 0 },
+  BRL: { full: 109.99, weekly: 29.99, intro: 0 },
+  MXN: { full: 459, weekly: 119, intro: 0 },
 };
 
 function getCurrency() {
@@ -77,6 +77,12 @@ function getLocalPrices() {
   const code = getCurrency().code;
   return { code, ...((window.RTB_PRICE_TABLE && window.RTB_PRICE_TABLE[code]) || window.RTB_PRICE_TABLE.GBP) };
 }
+function getWeeklyAmount(row) {
+  if (!row) return 0;
+  if (typeof row.weekly === 'number') return row.weekly;
+  if (typeof row.full === 'number') return row.full / 4;
+  return 0;
+}
 function toLocal(amountGbp) {
   const c = getCurrency();
   return amountGbp * (c.fxFromGBP || 1);
@@ -102,6 +108,7 @@ function localizeProTrackerCard() {
   const discEl = document.getElementById('priceSpecialDiscount');
   const ccyTag = card.querySelector('.currency-tag');
   const perDayEl = document.getElementById('costPerDaySpecial');
+    const perDayLabel = card.querySelector('.per-day');
 
   const { code, full, intro } = getLocalPrices();
 
@@ -111,6 +118,7 @@ function localizeProTrackerCard() {
 
   const shown = dealOn ? intro : full;
   if (perDayEl) perDayEl.textContent = fmt(code, shown / 30);
+    if (perDayLabel) perDayLabel.textContent = 'per day';
 
   // keep a human-readable cache for summaries
   localStorage.setItem('planPrice', dealOn ? fmt(code, intro) : fmt(code, full));
@@ -118,9 +126,11 @@ function localizeProTrackerCard() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const { code, full } = getLocalPrices();
+  const pricing = getLocalPrices();
+  const { code, full } = pricing;
+  const weekly = getWeeklyAmount(pricing);
   document.querySelectorAll('.renew-amt').forEach(el => {
-    el.textContent = fmt(code, full);
+    el.textContent = fmt(code, weekly);
   });
 });
 
@@ -1177,12 +1187,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!el) return;
 
     const dealOn = document.body.classList.contains('discount-active');
-    const { code, full, intro } = getLocalPrices();
+    const pricing = getLocalPrices();
+    const { code, full, intro } = pricing;
+    const weekly = getWeeklyAmount(pricing);
 
     if (dealOn) {
       el.innerHTML =
         `Normally ${fmt(code, full)} — now just <strong>${fmt(code, intro)}</strong>. ` +
-        `🎉 Get the full 12-Week Plan for ${fmt(code, intro / 30)}.`;
+     `🎉 Get the full 12-Week Plan for ${fmt(code, intro / 30)}.`;
     } else {
       el.textContent = 'Like having a personal trainer in your pocket — for less than the cost of one session.';
     }
@@ -1248,7 +1260,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const perDaySpecial = document.querySelector('[data-program="new"] .per-day');
     if (costPerDaySpecial && currencyTagSpecial && perDaySpecial) {
       const { code, intro } = getLocalPrices();
-      costPerDaySpecial.textContent = fmt(code, intro / 30);
+      costPerDaySpecial.textContent = fmt(code, intro);
+      perDaySpecial.textContent = "per day";
       currencyTagSpecial.style.display = "block";
     }
   }
