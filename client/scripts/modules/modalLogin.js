@@ -48,7 +48,7 @@ export function initModalLogin() {
         localStorage.setItem("dashboardVisited", "true");
   
         await fetchAndStorePreferences(data.token);
-        window.location.href = "dashboard.html";
+        window.location.href = "pages/dashboard.html";
       } catch (err) {
         const msg = (err.message || "").toLowerCase();
         if (msg.includes("email")) showError("modal-email-error", err.message);
