@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
   <title>My Dashboard</title>
 
   <!-- Fonts + stylesheets -->
@@ -71,24 +71,29 @@
       }(window, document, 'ttq');
     </script>
     <!-- TikTok Pixel Code End -->
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '2589073464764526');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=2589073464764526&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+    <!-- Meta Pixel Code -->
+    <script>
+      !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return; n = f.fbq = function () {
+          n.callMethod ?
+            n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+        n.queue = []; t = b.createElement(e); t.async = !0;
+        t.src = v; s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+      }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '2589073464764526');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=2589073464764526&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
   </header>
+
+ 
+
   <div id="trackerBadge"></div>
 
   <div id="wtOnboardingOverlay" class="wt-onboarding-overlay">
@@ -166,6 +171,39 @@ src="https://www.facebook.com/tr?id=2589073464764526&ev=PageView&noscript=1"
       </a>
     </section>
 
+  </section>
+
+   <section class="referral-banner" aria-label="Referral giveaway">
+    <div class="referral-banner__inner">
+      <div class="referral-banner__copy">
+        <div class="referral-banner__headline">
+          <span class="referral-banner__icon" aria-hidden="true">🏆</span>
+          <div>
+            <h2>Win £1,000  + <br>12 Weeks of 1-on-1 Coaching</h2>
+            <!-- <p class="referral-banner__subtitle">Each referral = one entry this month.</p> -->
+          </div>
+        </div>
+
+        <!-- <p class="referral-banner__lede">
+          Win £1,000 for yourself — and both you and your referrals get 12 weeks of coaching, free.
+        </p> -->
+
+        <p class="referral-banner__steps">
+          <strong>How to enter:</strong>
+          Friends claim their plan at
+          <a href="https://raisingthebarapp.com" class="referral-banner__link">raisingthebarapp.com</a>,
+          then contact us with your name, email, and who you referred.
+        </p>
+      </div>
+
+      <div class="referral-banner__side">
+        <p class="referral-banner__note">More referrals = more chances to win.</p>
+        <a class="referral-banner__button" href="contact-us.html">Submit Referrals</a>
+        <div class="referral-banner__trust" aria-live="polite">
+          <p style="text-align: center;">💸 £5,000+ awarded so far <br> 🏅 September winner: Tom B.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Tracker cards -->

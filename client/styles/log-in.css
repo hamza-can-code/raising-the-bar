@@ -134,6 +134,20 @@ button {
   .signup-link a:hover {
     text-decoration: underline;
   }
+
+    .forgot-password-link {
+    text-align: center;
+  }
+
+  .forgot-password-link a {
+    color: #007BFF;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .forgot-password-link a:hover {
+    text-decoration: underline;
+  }
   
   .footer {
     margin-top: auto;
