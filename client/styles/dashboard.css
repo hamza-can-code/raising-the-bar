@@ -101,7 +101,7 @@ h6,
 }
 
 .referral-banner__copy h2 {
-  margin: 0 0 6px;
+  margin: 8PX 0 6px;
   font-size: clamp(1.9rem, 5vw, 2.75rem);
   line-height: 1.1;
 }
