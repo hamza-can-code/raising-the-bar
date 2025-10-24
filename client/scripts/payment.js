@@ -184,7 +184,7 @@
       if (!window.__STRIPE_WARM__?.pr) {
         // Read per-currency prices (from offer.js) or use a safe fallback table
         const PRICE = (window.RTB_PRICE_TABLE) || {
-          GBP: { full: 19.99, weekly: 4.99, intro: 0 },
+          GBP: { full: 26.99, weekly: 4.99, intro: 0 },
           USD: { full: 23.99, weekly: 5.99, intro: 0 },
           EUR: { full: 22.99, weekly: 5.99, intro: 0 },
           SEK: { full: 249, weekly: 69, intro: 0 },

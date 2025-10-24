@@ -20,7 +20,7 @@ function fadeOutLoader() {
   overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
 }
 window.RTB_PRICE_TABLE = {
-  GBP: { full: 19.99, weekly: 4.99, intro: 0 },
+  GBP: { full: 26.99, weekly: 4.99, intro: 0 },
   USD: { full: 23.99, weekly: 5.99, intro: 0 },
   EUR: { full: 22.99, weekly: 5.99, intro: 0 },
   SEK: { full: 249, weekly: 69, intro: 0 },
@@ -77,12 +77,12 @@ function getLocalPrices() {
   const code = getCurrency().code;
   return { code, ...((window.RTB_PRICE_TABLE && window.RTB_PRICE_TABLE[code]) || window.RTB_PRICE_TABLE.GBP) };
 }
-function getWeeklyAmount(row) {
-  if (!row) return 0;
-  if (typeof row.weekly === 'number') return row.weekly;
-  if (typeof row.full === 'number') return row.full / 4;
-  return 0;
-}
+// function getWeeklyAmount(row) {
+//   if (!row) return 0;
+//   if (typeof row.weekly === 'number') return row.weekly;
+//   if (typeof row.full === 'number') return row.full / 4;
+//   return 0;
+// }
 function toLocal(amountGbp) {
   const c = getCurrency();
   return amountGbp * (c.fxFromGBP || 1);
@@ -108,7 +108,7 @@ function localizeProTrackerCard() {
   const discEl = document.getElementById('priceSpecialDiscount');
   const ccyTag = card.querySelector('.currency-tag');
   const perDayEl = document.getElementById('costPerDaySpecial');
-    const perDayLabel = card.querySelector('.per-day');
+    // const perDayLabel = card.querySelector('.per-day');
 
   const { code, full, intro } = getLocalPrices();
 
@@ -118,7 +118,7 @@ function localizeProTrackerCard() {
 
   const shown = dealOn ? intro : full;
   if (perDayEl) perDayEl.textContent = fmt(code, shown / 30);
-    if (perDayLabel) perDayLabel.textContent = 'per day';
+    // if (perDayLabel) perDayLabel.textContent = 'per day';
 
   // keep a human-readable cache for summaries
   localStorage.setItem('planPrice', dealOn ? fmt(code, intro) : fmt(code, full));
@@ -128,9 +128,9 @@ function localizeProTrackerCard() {
 document.addEventListener('DOMContentLoaded', () => {
   const pricing = getLocalPrices();
   const { code, full } = pricing;
-  const weekly = getWeeklyAmount(pricing);
+  // const weekly = getWeeklyAmount(pricing);
   document.querySelectorAll('.renew-amt').forEach(el => {
-    el.textContent = fmt(code, weekly);
+    el.textContent = fmt(code, full);
   });
 });
 
@@ -1189,7 +1189,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const dealOn = document.body.classList.contains('discount-active');
     const pricing = getLocalPrices();
     const { code, full, intro } = pricing;
-    const weekly = getWeeklyAmount(pricing);
+    // const weekly = getWeeklyAmount(pricing);
 
     if (dealOn) {
       el.innerHTML =
