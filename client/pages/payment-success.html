@@ -37,12 +37,12 @@
           return;
         }
         countdownEl.textContent = remaining.toString();
-      }, 1000);
+      }, 60000);
 
       // Failsafe redirect after 10 seconds in case the timer is interrupted
       setTimeout(() => {
         window.location.href = redirectUrl;
-      }, 10000);
+      }, 60000);
     })();
   </script>
 </body>
