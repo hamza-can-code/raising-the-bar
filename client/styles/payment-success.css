@@ -1,0 +1,112 @@
+:root {
+  color-scheme: light;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  --brand-cream: #f9f7f2;
+  --brand-ink: #1f2937;
+  --brand-muted: #4b5563;
+  --brand-accent: #007bff;
+  --brand-border: #e4ded1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--brand-cream);
+  color: var(--brand-ink);
+}
+
+.success-wrapper {
+  width: 100%;
+  padding: 48px 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.success-card {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 48px 40px;
+  max-width: 460px;
+  width: 100%;
+  text-align: center;
+  border: 1px solid var(--brand-border);
+  box-shadow: 0 20px 35px -25px rgba(15, 23, 42, 0.25);
+}
+
+.success-logo {
+  width: 150px;
+  margin-bottom: 24px;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  margin: 0 0 20px;
+  letter-spacing: -0.01em;
+}
+
+.success-message {
+  font-size: 1.05rem;
+  margin: 0 0 12px;
+  color: var(--brand-muted);
+}
+
+.redirect-message {
+  font-size: 0.95rem;
+  margin: 0 0 28px;
+  color: var(--brand-muted);
+}
+
+#countdown {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.75rem;
+  padding: 0 0.25rem;
+  border-radius: 999px;
+  background-color: rgba(0, 123, 255, 0.12);
+  color: var(--brand-accent);
+  font-weight: 700;
+}
+
+.dashboard-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background-color: var(--brand-accent);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.dashboard-link:hover,
+.dashboard-link:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px -12px rgba(0, 123, 255, 0.6);
+  background-color: #0066d4;
+}
+
+.dashboard-link:focus-visible {
+  outline: 3px solid rgba(0, 123, 255, 0.35);
+  outline-offset: 4px;
+}
+
+@media (max-width: 480px) {
+  .success-card {
+    padding: 36px 24px;
+  }
+
+  .success-logo {
+    width: 120px;
+  }
+}

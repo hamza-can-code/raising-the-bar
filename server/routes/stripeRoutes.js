@@ -116,7 +116,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       line_items: [{ price: priceId, quantity: 1 }],
       customer_email: email,
       client_reference_id: client_reference_id || undefined,
-      success_url: `${successBase}/pages/dashboard.html?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${successBase}/pages/payment-success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${successBase}/pages/offer.html`,
 
       // ✅ Always force card entry, even if trial
