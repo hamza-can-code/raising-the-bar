@@ -62,7 +62,7 @@ h6,
 }
 
 .logo img {
-  max-height: 80px;
+  max-height: 50px;
 }
 
 /* -------- Referral Banner -------- */
@@ -80,6 +80,38 @@ h6,
   overflow: hidden;
   isolation: isolate;
   flex: 0 0 auto;
+}
+
+.referral-banner__timer {
+  position: absolute;
+  top: -10px;
+  right: -4px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  /* background: rgba(15, 23, 42, 0.38);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(6px); */
+  font-family: 'Poppins', sans-serif;
+  z-index: 2;
+  min-width: 128px;
+}
+
+.referral-banner__timer-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.referral-banner__timer-value {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
 }
 
 .referral-banner::after {
@@ -139,7 +171,7 @@ h6,
 }
 
 .referral-banner__steps {
-  margin-top: 16px;
+  margin: 8px 0;
   padding: 16px;
   border-radius: 18px;
   background: rgba(15, 23, 42, 0.25);
@@ -198,7 +230,7 @@ h6,
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 14px;
+  padding: 14px 14px;
   border-radius: 20px;
   background: rgba(15, 23, 42, 0.32);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
@@ -213,6 +245,7 @@ h6,
   text-transform: uppercase;
   color: #fde68a;
   text-align: center;
+  font-size: 1rem;
 }
 
 .referral-banner__button {
@@ -278,7 +311,7 @@ h6,
   .referral-banner__inner {
     flex-direction: row;
     align-items: stretch;
-    gap: 36px;
+    gap: 18px;
   }
 
   .referral-banner__copy {

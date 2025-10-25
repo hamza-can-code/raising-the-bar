@@ -737,6 +737,67 @@ function reveal() {
   });
 }
 
+/* ---------- Referral urgency timer ---------- */
+const REFERRAL_TIMER_KEY = 'referralCountdownDeadline';
+const REFERRAL_TIMER_DONE_KEY = 'referralCountdownExpired';
+const REFERRAL_TIMER_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+
+function formatCountdown(ms) {
+  const totalSeconds = Math.max(0, Math.floor(ms / 1000));
+  const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+  const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+  const seconds = String(totalSeconds % 60).padStart(2, '0');
+  return `${hours}:${minutes}:${seconds}`;
+}
+
+function setUpReferralCountdown() {
+  const wrapper = document.getElementById('referralCountdown');
+  if (!wrapper) return;
+
+  const valueEl = wrapper.querySelector('.referral-banner__timer-value');
+  if (!valueEl) return;
+
+  if (localStorage.getItem(REFERRAL_TIMER_DONE_KEY) === 'true') {
+    wrapper.style.display = 'none';
+    wrapper.setAttribute('aria-hidden', 'true');
+    return;
+  }
+
+  const now = Date.now();
+  let deadline = Number.parseInt(localStorage.getItem(REFERRAL_TIMER_KEY), 10);
+
+  if (!Number.isFinite(deadline)) {
+    deadline = now + REFERRAL_TIMER_DURATION;
+    localStorage.setItem(REFERRAL_TIMER_KEY, String(deadline));
+  }
+
+  if (deadline <= now) {
+    wrapper.style.display = 'none';
+    wrapper.setAttribute('aria-hidden', 'true');
+    localStorage.setItem(REFERRAL_TIMER_DONE_KEY, 'true');
+    localStorage.removeItem(REFERRAL_TIMER_KEY);
+    return;
+  }
+
+  const update = () => {
+    const remaining = deadline - Date.now();
+    if (remaining <= 0) {
+      valueEl.textContent = '00:00:00';
+      clearInterval(intervalId);
+      wrapper.style.display = 'none';
+      wrapper.setAttribute('aria-hidden', 'true');
+      localStorage.setItem(REFERRAL_TIMER_DONE_KEY, 'true');
+      localStorage.removeItem(REFERRAL_TIMER_KEY);
+      return;
+    }
+
+    valueEl.textContent = formatCountdown(remaining);
+  };
+
+  valueEl.textContent = formatCountdown(deadline - now);
+  const intervalId = setInterval(update, 1000);
+}
+
 /* ---------- 6. Init ---------- */
 
 function initDashboard() {
@@ -746,6 +807,7 @@ function initDashboard() {
   populateNutritionCard();
   populateMotivation();
   reveal();
+    setUpReferralCountdown();
   wireUpCardClicks();
   addTrackerBadge();           // badge in the corner
   applyCoreDashboardChanges(); // only runs if user is on Core
