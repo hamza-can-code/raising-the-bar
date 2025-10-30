@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
   <title>Payment Successful</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/payment-success.css">
-</head>
-<header>
-      <!-- TikTok Pixel Code Start -->
+   <!-- TikTok Pixel Code Start -->
     <script>
       !function (w, d, t) {
         w.TiktokAnalyticsObject = t; var ttq = w[t] = w[t] || []; ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"], ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } }; for (var i = 0; i < ttq.methods.length; i++)ttq.setAndDefer(ttq, ttq.methods[i]); ttq.instance = function (t) {
@@ -26,42 +24,268 @@
       }(window, document, 'ttq');
     </script>
     <!-- TikTok Pixel Code End -->
-</header>
+</head>
 <body>
+  <header class="success-header" role="banner">
+  <div class="header">
+    <div class="logo">
+      <a href="../index.html">
+        <img id="logo" class="logo" src="../assets/rtb-logo-white.png" alt="Raising The Bar Logo">
+      </a>
+    </div>
+  </div>
+    <div class="progress" aria-label="Checkout progress" role="status">
+      <div class="progress-heading">
+        <span class="progress-step-label">Step 2 of 3</span>
+        <span class="progress-stage">Bonus</span>
+      </div>
+      <div class="progress-bar" aria-hidden="true">
+        <span class="progress-bar-fill"></span>
+      </div>
+      <ol class="progress-steps">
+        <li class="progress-step is-complete">
+          <span>Payment</span>
+        </li>
+        <li class="progress-step is-current">
+          <span>Bonus</span>
+        </li>
+        <li class="progress-step">
+          <span>Dashboard</span>
+        </li>
+      </ol>
+    </div>
+  </header>
   <main class="success-wrapper" role="main">
     <section class="success-card" aria-labelledby="success-title">
-      <img class="success-logo" src="../assets/rtb-logo-white.png" alt="Raising The Bar logo">
-      <h1 id="success-title">Thank you for your order!</h1>
-      <p class="success-message">
-        Your payment has been processed successfully.
-      </p>
-      <p class="redirect-message" aria-live="polite">
-        Redirecting you to your dashboard in <span id="countdown">5</span> seconds…
-      </p>
-      <a class="dashboard-link" href="/pages/dashboard.html">Go to my dashboard now</a>
+      <div class="card-intro">
+        <!-- <p class="intro-kicker">Unlock your next bonus</p> -->
+        <h1 id="success-title">Add a bonus to my plan</h1>
+        <!-- <p class="success-message">Boost your training with premium add-ons that adapt to you and keep you focused on what matters most.</p> -->
+      </div>
+      <div class="carousel" aria-live="polite">
+        <div class="carousel-track">
+          <article class="carousel-slide is-active">
+            <img src="../assets/reps-sets.png" width="140" height="140" alt="" loading="lazy" decoding="async" aria-hidden="true">
+            <h2 class="carousel-title">Workout Progression</h2>
+            <p class="carousel-copy">Adapts weekly to your strength and recovery.</p>
+          </article>
+          <!-- <article class="carousel-slide" aria-hidden="true">
+            <img src="../assets/workout-summary.PNG" width="140" height="140" alt="" loading="lazy" decoding="async" aria-hidden="true">
+            <h2 class="carousel-title">Workout Summaries</h2>
+            <p class="carousel-copy">Instant recaps after every session.</p>
+          </article> -->
+          <article class="carousel-slide" aria-hidden="true">
+            <img src="../assets/progress-tracking.PNG" width="140" height="140" alt="" loading="lazy" decoding="async" aria-hidden="true">
+            <h2 class="carousel-title">Progress Tracking</h2>
+            <p class="carousel-copy">See trends across lifts and habits in one place.</p>
+          </article>
+          <article class="carousel-slide" aria-hidden="true">
+            <img src="../assets/weekly-recap.png" width="140" height="140" alt="" loading="lazy" decoding="async" aria-hidden="true">
+            <h2 class="carousel-title">Weekly Recaps</h2>
+            <p class="carousel-copy">Celebrate wins and refocus fast each week.</p>
+          </article>
+        </div>
+        <!-- <div class="carousel-dots" role="tablist" aria-label="Bonus feature highlights">
+          <button class="carousel-dot is-active" type="button" role="tab" aria-label="Adaptive Workout Progression"></button>
+          <button class="carousel-dot" type="button" role="tab" aria-label="Workout Summaries"></button>
+          <button class="carousel-dot" type="button" role="tab" aria-label="Progress Tracking"></button>
+          <button class="carousel-dot" type="button" role="tab" aria-label="Weekly Recaps"></button>
+        </div> -->
+      </div>
+      <div class="cta-group">
+        <!-- <button class="primary-cta" id="upsell-button" type="button">Add to my plan</button> -->
+        <p id="upsell-status" class="cta-status" role="status" aria-live="polite"></p>
+        <a id="skip-link" class="skip-link" href="/pages/dashboard.html">No thanks, take me to my dashboard.</a>
+      </div>
     </section>
   </main>
 
-  <script>
-    (function () {
-      const countdownEl = document.getElementById('countdown');
-      const redirectUrl = '/pages/dashboard.html';
-      let remaining = 5;
+      <div class="floating-cta-container" id="floatingCtaContainer">
+      <div class="floating-cta -cta" id="floating-cta">
+        <button id="claimProgramBtn" class="claim-program-btn">Add to my plan</button>
+      </div>
+    </div>
+    <div id="ctaStopContainer"></div>
 
-      const timer = setInterval(() => {
-        remaining -= 1;
-        if (remaining <= 0) {
-          clearInterval(timer);
-          window.location.href = redirectUrl;
+  <script>
+      (function () {
+      const track = document.querySelector('.carousel-track');
+      const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+      const dots = Array.from(document.querySelectorAll('.carousel-dot'));
+      const skipLink = document.getElementById('skip-link');
+      const upsellButton = document.getElementById('claimProgramBtn');
+      const statusEl = document.getElementById('upsell-status');
+      const floatingCTA = document.getElementById('floating-cta');
+      const ctaStop = document.getElementById('ctaStopContainer');
+      const cycleInterval = 5000;
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const urlParams = new URLSearchParams(window.location.search);
+      const sessionId = urlParams.get('session_id') || localStorage.getItem('rtb:lastCheckoutSession') || '';
+
+      if (sessionId) {
+        localStorage.setItem('rtb:lastCheckoutSession', sessionId);
+      }
+
+      const currencyHint = (window.RTB_CURRENCY?.code || 'GBP').toUpperCase();
+      let currentIndex = 0;
+      let carouselTimer;
+      let isInteracting = false;
+      let touchStartX = 0;
+      let touchDeltaX = 0;
+
+      const applyOffset = () => {
+        const offset = -currentIndex * 100;
+        track.style.setProperty('--carousel-offset', `${offset}%`);
+      };
+
+      const setSlide = (index) => {
+        if (index === currentIndex || index < 0 || index >= slides.length) {
           return;
         }
-        countdownEl.textContent = remaining.toString();
-      }, 1000);
 
-      // Failsafe redirect after 10 seconds in case the timer is interrupted
-      setTimeout(() => {
-        window.location.href = redirectUrl;
-      }, 10000);
+        slides[currentIndex].classList.remove('is-active');
+        slides[currentIndex].setAttribute('aria-hidden', 'true');
+        // dots[currentIndex].classList.remove('is-active');
+
+        currentIndex = index;
+        applyOffset();
+
+        slides[currentIndex].classList.add('is-active');
+        slides[currentIndex].removeAttribute('aria-hidden');
+        // dots[currentIndex].classList.add('is-active');
+      };
+
+      const startTimer = () => {
+        if (prefersReducedMotion) return;
+        stopTimer();
+        carouselTimer = window.setInterval(() => {
+          const nextIndex = (currentIndex + 1) % slides.length;
+          // setSlide(nextIndex);
+        }, cycleInterval);
+      };
+
+      const stopTimer = () => {
+        if (carouselTimer) {
+          window.clearInterval(carouselTimer);
+          carouselTimer = null;
+        }
+      };
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          setSlide(index);
+          startTimer();
+        });
+      });
+
+      track.addEventListener('pointerdown', (event) => {
+        if (event.pointerType === 'mouse') return;
+        isInteracting = true;
+        touchStartX = event.clientX;
+        touchDeltaX = 0;
+        stopTimer();
+        track.setPointerCapture(event.pointerId);
+      });
+
+      track.addEventListener('pointermove', (event) => {
+        if (!isInteracting) return;
+        touchDeltaX = event.clientX - touchStartX;
+      });
+
+      const endPointerInteraction = (event) => {
+        if (!isInteracting) return;
+        const sensitivity = 40;
+        if (touchDeltaX > sensitivity) {
+          setSlide(Math.max(0, currentIndex - 1));
+        } else if (touchDeltaX < -sensitivity) {
+          setSlide(Math.min(slides.length - 1, currentIndex + 1));
+        } else {
+          applyOffset();
+        }
+        isInteracting = false;
+        touchStartX = 0;
+        touchDeltaX = 0;
+        startTimer();
+        if (event.pointerId) {
+          track.releasePointerCapture(event.pointerId);
+        }
+      };
+
+      track.addEventListener('pointerup', endPointerInteraction);
+      track.addEventListener('pointercancel', endPointerInteraction);
+
+      slides.forEach((slide, index) => {
+        if (index !== currentIndex) {
+          slide.setAttribute('aria-hidden', 'true');
+        }
+      });
+
+      applyOffset();
+      startTimer();
+
+      if (skipLink) {
+        skipLink.setAttribute('aria-hidden', 'true');
+        skipLink.tabIndex = -1;
+        window.setTimeout(() => {
+          skipLink.classList.add('is-visible');
+          skipLink.removeAttribute('aria-hidden');
+          skipLink.removeAttribute('tabindex');
+        }, 10000);
+      }
+
+      upsellButton.addEventListener('click', async () => {
+        if (upsellButton.disabled) return;
+        const token = localStorage.getItem('token');
+        if (!token) {
+          statusEl.textContent = 'Please sign back in so we can confirm the upgrade on your account.';
+          return;
+        }
+
+        upsellButton.disabled = true;
+        upsellButton.classList.add('is-loading');
+        const originalLabel = upsellButton.textContent;
+        upsellButton.textContent = 'Adding your bonus…';
+        statusEl.textContent = '';
+
+        try {
+          const response = await fetch('/api/upsell/bonus', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              currency: currencyHint,
+              sessionId,
+              source: 'payment-success'
+            })
+          });
+
+          if (!response.ok) {
+            const errorPayload = await response.json().catch(() => ({}));
+            const detail = errorPayload?.message || errorPayload?.error;
+            throw new Error(detail || 'Request failed');
+          }
+
+          const result = await response.json().catch(() => ({ success: true }));
+          if (!result?.success) {
+            throw new Error(result?.message || 'We need an extra approval before we can add the bonus.');
+          }
+
+          statusEl.textContent = 'Bonus added! Redirecting you to your dashboard…';
+          const redirectUrl = result?.redirectUrl || '/pages/dashboard.html';
+          window.setTimeout(() => {
+            window.location.href = redirectUrl;
+          }, 800);
+        } catch (error) {
+          upsellButton.disabled = false;
+          upsellButton.classList.remove('is-loading');
+          upsellButton.textContent = originalLabel;
+          statusEl.textContent = error?.message
+            ? `${error.message} If it persists, continue to your dashboard.`
+            : 'We couldn\'t add the bonus just yet. Please try again or continue to your dashboard.';
+        }
+      });
     })();
   </script>
 </body>

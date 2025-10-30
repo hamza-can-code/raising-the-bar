@@ -1,14 +1,19 @@
 :root {
   color-scheme: light;
   font-family: 'Poppins', 'Segoe UI', sans-serif;
+  --brand-blue: #007bff;
+  --brand-blue-dark: #005dc8;
+  --brand-blue-faint: rgba(0, 123, 255, 0.12);
+  --brand-ink: #1c2430;
+  --brand-muted: #4d5661;
   --brand-cream: #f9f7f2;
-  --brand-ink: #1f2937;
-  --brand-muted: #4b5563;
-  --brand-accent: #007bff;
-  --brand-border: #e4ded1;
+  --brand-panel: #fdfaf3;
+  --brand-border: rgba(16, 24, 40, 0.08);
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -16,97 +21,557 @@ body {
   margin: 0;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
+  background: var(--brand-cream);
+  color: var(--brand-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.header {
+    position: relative;
+    text-align: center;
+}
+
+.logo img {
+    max-height: 50px;
+}
+
+.success-header {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px 18px 12px;
+  background: linear-gradient(180deg, rgba(0, 123, 255, 0.08) 0%, rgba(0, 123, 255, 0) 100%);
+}
+
+.success-logo {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  background-color: var(--brand-cream);
+  justify-content: flex-start;
+  width: 152px;
+}
+
+.success-logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.progress {
+  display: grid;
+  border-radius: 18px;
+  padding: 0 16px 0;
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(6px);
+}
+
+.progress-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brand-muted);
+}
+
+.progress-stage {
+  font-weight: 600;
+  color: var(--brand-ink);
+  letter-spacing: 0.02em;
+}
+
+.progress-bar {
+  position: relative;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--brand-blue-faint);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  position: absolute;
+  inset: 0;
+  width: 66.7%;
+  background: var(--brand-blue);
+  border-radius: inherit;
+}
+
+.progress-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  font-size: 0.78rem;
+  color: rgba(28, 36, 48, 0.7);
+  gap: 6px;
+}
+
+.progress-step {
+  position: relative;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.progress-step::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(0, 123, 255, 0.2);
+}
+
+.progress-step.is-complete::before,
+.progress-step.is-current::before {
+  background: var(--brand-blue);
+}
+
+.progress-step.is-current span {
+  font-weight: 600;
   color: var(--brand-ink);
 }
 
 .success-wrapper {
-  width: 100%;
-  padding: 48px 24px;
+  flex: 1;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  padding: 24px 18px 40px;
 }
 
 .success-card {
-  background-color: #fff;
-  border-radius: 20px;
-  padding: 48px 40px;
-  max-width: 460px;
-  width: 100%;
-  text-align: center;
-  border: 1px solid var(--brand-border);
-  box-shadow: 0 20px 35px -25px rgba(15, 23, 42, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 100%;
+  overflow: hidden;
 }
 
-.success-logo {
-  width: 150px;
-  margin-bottom: 24px;
+.card-intro {
+  display: grid;
+  gap: 12px;
+  text-align: center;
+}
+
+.intro-kicker {
+  margin: 0;
+  font-size: 0.88rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(28, 36, 48, 0.65);
 }
 
 h1 {
-  font-size: clamp(2rem, 4vw, 2.5rem);
-  margin: 0 0 20px;
-  letter-spacing: -0.01em;
+  margin: 0 0 10px;
+  font-size: clamp(1.8rem, 8vw, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .success-message {
-  font-size: 1.05rem;
-  margin: 0 0 12px;
+  margin: 0;
+  font-size: clamp(1rem, 4vw, 1.12rem);
   color: var(--brand-muted);
 }
 
-.redirect-message {
-  font-size: 0.95rem;
-  margin: 0 0 28px;
+.carousel {
+  flex: 1;
+  min-height: 0; /* allows flexbox to properly shrink it */
+}
+
+.carousel-track {
+  --carousel-offset: 0%;
+  display: flex;
+  transition: transform 0.45s ease;
+  transform: translateX(var(--carousel-offset));
+  will-change: transform;
+}
+
+@media (max-width: 480px) {
+  .carousel-track {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .carousel-slide {
+    flex: 0 0 85%;
+    scroll-snap-align: center;
+    margin-right: 16px;
+  }
+
+  .carousel-slide:last-child {
+    margin-right: 0;
+  }
+}
+
+/* Add breathing room between intro, carousel, and CTA */
+.card-intro {
+  margin-bottom: 4px;
+}
+
+.carousel {
+  margin-bottom: 12px;
+}
+
+.carousel-slide {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+  text-align: center;
+  padding: 24px 18px 26px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(0, 123, 255, 0.08) 0%, rgba(0, 123, 255, 0) 100%);
+  border: 1px solid rgba(0, 123, 255, 0.18);
+  color: var(--brand-ink);
+}
+
+.carousel-slide img {
+  width: clamp(92px, 32vw, 132px);
+  height: auto;
+  filter: drop-shadow(0 12px 20px rgba(15, 23, 42, 0.15));
+}
+
+.carousel-title {
+  margin: 0;
+  font-size: clamp(1.1rem, 4vw, 1.3rem);
+  letter-spacing: -0.01em;
+}
+
+.carousel-copy {
+  margin: 0;
+  font-size: clamp(0.95rem, 3.6vw, 1.05rem);
   color: var(--brand-muted);
 }
 
-#countdown {
-  display: inline-flex;
-  align-items: center;
+.carousel-dots {
+  display: flex;
   justify-content: center;
-  min-width: 1.75rem;
-  padding: 0 0.25rem;
-  border-radius: 999px;
-  background-color: rgba(0, 123, 255, 0.12);
-  color: var(--brand-accent);
-  font-weight: 700;
+  gap: 10px;
 }
 
-.dashboard-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 14px 28px;
+.carousel-dot {
+  width: 12px;
+  height: 12px;
   border-radius: 999px;
-  background-color: var(--brand-accent);
-  color: #fff;
+  border: none;
+  padding: 0;
+  background: rgba(0, 123, 255, 0.22);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.carousel-dot.is-active {
+  transform: scale(1.2);
+  background: var(--brand-blue);
+}
+
+.carousel-dot:focus-visible {
+  outline: 2px solid rgba(0, 123, 255, 0.4);
+  outline-offset: 2px;
+}
+
+.cta-group {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+.primary-cta {
+  width: min(100%, 320px);
+  border: none;
+  border-radius: 999px;
+  padding: 16px 32px;
+  font-size: 1rem;
   font-weight: 600;
-  text-decoration: none;
+  font-family: inherit;
+  color: #fff;
+  background: var(--brand-blue);
+  box-shadow: 0 18px 32px -22px rgba(0, 123, 255, 0.65);
+  cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-.dashboard-link:hover,
-.dashboard-link:focus-visible {
+.primary-cta:hover,
+.primary-cta:focus-visible {
   transform: translateY(-1px);
-  box-shadow: 0 12px 24px -12px rgba(0, 123, 255, 0.6);
-  background-color: #0066d4;
+  background: var(--brand-blue-dark);
+  box-shadow: 0 22px 40px -24px rgba(0, 93, 200, 0.7);
 }
 
-.dashboard-link:focus-visible {
+.primary-cta:focus-visible {
   outline: 3px solid rgba(0, 123, 255, 0.35);
   outline-offset: 4px;
 }
 
-@media (max-width: 480px) {
-  .success-card {
-    padding: 36px 24px;
+.primary-cta:disabled {
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+.primary-cta.is-loading {
+  background: var(--brand-blue-dark);
+}
+
+.cta-status {
+  min-height: 1.2em;
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--brand-muted);
+  text-align: center;
+}
+
+.skip-link {
+  font-size: 0.96rem;
+  color: rgba(28, 36, 48, 0.65);
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.skip-link:hover,
+.skip-link:focus-visible {
+  text-decoration: underline;
+}
+
+.skip-link.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (min-width: 640px) {
+  .success-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px clamp(24px, 6vw, 48px) 18px;
   }
 
-  .success-logo {
-    width: 120px;
+  .progress {
+    max-width: 420px;
+  }
+
+  .success-wrapper {
+    padding: clamp(32px, 6vw, 72px) clamp(24px, 8vw, 80px) 64px;
+  }
+
+  .success-card {
+    padding: clamp(36px, 5vw, 52px);
+    gap: clamp(24px, 4vw, 32px);
+  }
+
+  .carousel-track {
+    gap: clamp(18px, 3vw, 24px);
   }
 }
+
+@media (min-width: 960px) {
+  body {
+    align-items: center;
+  }
+
+  .success-wrapper {
+    width: 100%;
+    max-width: 960px;
+    padding-bottom: 96px;
+  }
+
+  .success-card {
+    max-width: 560px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .carousel-track {
+    transition: none;
+  }
+}
+
+  .floating-cta-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+  }
+
+  .fade-in-cta {
+    opacity: 0;
+    /* Initially hidden */
+    transform: translateY(20px);
+    /* Start slightly below */
+    transition: opacity 1.5s ease, transform 1.5s ease;
+    /* Smooth fade and slide */
+  }
+
+  .cta-visible {
+    opacity: 1;
+    /* Fully visible */
+    transform: translateY(0);
+    /* Reset position */
+  }
+
+  .floating-cta {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    /* opacity: 1; */
+    /* Always visible from page load */
+    transition: all 0.4s ease;
+    /* smooth transitions */
+    /* typical sizing */
+    padding: 10px 20px;
+  }
+
+  .floating-cta.pinned {
+    position: absolute;
+    bottom: 0;
+    /* pinned to bottom of the container */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0px;
+  }
+
+  .claim-program-btn {
+    font-family: 'Poppins', sans-serif;
+    display: inline-block;
+    /* Ensures proper button-like appearance */
+    text-align: center;
+    /* Centers text */
+    text-decoration: none;
+    /* Removes underline */
+    background: linear-gradient(135deg, #007BFF, #339DFF);
+    /* Vibrant blue for attention */
+    color: #fff;
+    /* White text for contrast */
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    /* Subtle shadow for elevation */
+    transition: all 0.3s ease;
+  }
+
+  .claim-program-btn:hover {
+    background-color: #0056b3;
+    /* Darker blue on hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+    /* Slightly larger shadow */
+    transform: translateY(-2px);
+    /* Lift effect on hover */
+  }
+
+  .claim-program-btn:active {
+    background-color: #003f7f;
+    /* Even darker blue on click */
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+    /* Reduced shadow */
+    transform: translateY(2px);
+    /* Press effect on click */
+  }
+
+  .claim-program-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.75;
+  }
+
+  .claim-program-btn.is-loading {
+    background-color: #005dc8;
+  }
+
+  /* For screens above 768px,
+       we add the 'shadow overlay' effect behind the CTA when it’s floating. */
+  @media (min-width: 768px) {
+    .floating-cta.shadow-active::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        /* Transparent at the top */
+        rgba(0, 0, 0, 0.1) 80%,
+        /* Fading into subtle blur */
+        rgba(0, 0, 0, 0.1) 90%,
+        /* Consistent blur in the middle */
+        rgba(0, 0, 0, 0.2) 100%
+        /* Slightly stronger at the bottom */
+      );
+    }
+
+    .floating-cta {
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      /* centers horizontally */
+      width: auto;
+      /* not full width, so it looks “centered” */
+      border-radius: 0;
+      text-align: center;
+
+      /* Limit the transition to bottom & opacity only (not transform).
+         This avoids weird horizontal wobbles if pinned logic changes. */
+      transition: bottom 0.4s ease, opacity 0.4s ease;
+      width: 100%;
+    }
+  }
+
+  /* On smaller screens,
+       no dark overlay, but place CTA in a different colored box. */
+  @media (max-width: 767px) {
+    .floating-cta {
+      left: 0;
+      right: 0;
+      transform: none;
+      width: 100%;
+      bottom: 0;
+      border-radius: 0;
+      max-width: none;
+      background-color: #F6EFE3;
+      transition: bottom 0.4s ease, opacity 0.4s ease;
+      box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .floating-cta::before {
+      display: none;
+    }
+
+    .claim-program-btn {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 25px;
+      font-size: 1.2rem;
+      /* ensure padding doesn't overflow */
+    }
+
+    .claim-program-btn:hover {
+      background: linear-gradient(135deg, #007BFF, #339DFF);
+      /* Darker blue on hover */
+      box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+      /* Slightly larger shadow */
+      transform: translateY(-2px);
+      /* Lift effect on hover */
+    }
+  }

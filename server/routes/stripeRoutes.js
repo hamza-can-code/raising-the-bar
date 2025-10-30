@@ -3,6 +3,9 @@ const express = require('express');
 const Stripe = require('stripe');
 const util = require('util');
 
+const { protect } = require('../middleware/auth');
+const UserAccess = require('../models/UserAccess');
+
 const router = express.Router();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
@@ -10,6 +13,21 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 });
 
 const FRONTEND_URL = process.env.FRONTEND_URL;
+
+function parseMinorUnit(value, fallback = null) {
+  if (value === undefined || value === null || value === '') return fallback;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? Math.round(parsed) : fallback;
+}
+
+const BONUS_PRICE_MINOR = {
+  GBP: parseMinorUnit(process.env.BONUS_PRICE_MINOR_GBP ?? process.env.BONUS_PRICE_GBP, 1),
+  USD: parseMinorUnit(process.env.BONUS_PRICE_MINOR_USD ?? process.env.BONUS_PRICE_USD, 2499),
+  EUR: parseMinorUnit(process.env.BONUS_PRICE_MINOR_EUR ?? process.env.BONUS_PRICE_EUR, 2299),
+};
+
+const BONUS_PRODUCT_DESCRIPTION =
+  process.env.BONUS_PRODUCT_DESCRIPTION || 'Raising The Bar bonus upgrade';
 
 /* ──────────────────────────────────────────────────────────
    Currency-aware Price & Coupon selection
@@ -71,6 +89,27 @@ function getSubPriceId(currencyCode) {
   const id = PRICE_SUB[c];
   if (!id) throw new Error(`Missing PRICE_SUB_${c} in environment.`);
   return { currency: c, priceId: id };
+}
+
+function pickBonusCurrency(input) {
+  const code = (input || 'GBP').toUpperCase();
+  if (BONUS_PRICE_MINOR[code]) return code;
+  return BONUS_PRICE_MINOR.GBP ? 'GBP' : Object.keys(BONUS_PRICE_MINOR).find(c => BONUS_PRICE_MINOR[c]) || 'GBP';
+}
+
+function getBonusAmount(currencyCode) {
+  const currency = pickBonusCurrency(currencyCode);
+  const amount = BONUS_PRICE_MINOR[currency];
+  if (!amount) {
+    throw new Error(`Missing BONUS price configuration for currency ${currency}`);
+  }
+  return { currency, amount };
+}
+
+async function ensureStripeCustomer(email) {
+  const existing = await stripe.customers.list({ email, limit: 1 });
+  if (existing.data.length) return existing.data[0];
+  return stripe.customers.create({ email });
 }
 
 function getCouponId(currencyCode) {
@@ -250,6 +289,110 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
   } catch (err) {
     console.error('❌ /create-subscription-intent error:', err);
     res.status(500).json({ error: err.message });
+  }
+});
+
+router.post('/upsell/bonus', protect, async (req, res) => {
+  try {
+    if (!req.user?.email) {
+      return res.status(400).json({ error: 'User email required to charge bonus.' });
+    }
+
+    const { sessionId, currency: currencyHint, source } = req.body || {};
+    const { currency, amount } = getBonusAmount(currencyHint);
+
+    const customer = await ensureStripeCustomer(req.user.email);
+
+    let paymentMethodId = customer.invoice_settings?.default_payment_method || null;
+    if (paymentMethodId && typeof paymentMethodId !== 'string') {
+      paymentMethodId = paymentMethodId.id;
+    }
+
+    if (!paymentMethodId) {
+      const pmList = await stripe.paymentMethods.list({
+        customer: customer.id,
+        type: 'card',
+        limit: 1,
+      });
+      paymentMethodId = pmList.data[0]?.id || null;
+    }
+
+    if (!paymentMethodId) {
+      return res.status(409).json({
+        error: 'no_payment_method',
+        message: 'No saved card found. Please update your payment method before adding the bonus.',
+      });
+    }
+
+    const idempotencyKey = sessionId ? `bonus-${sessionId}` : undefined;
+    const intentConfig = {
+      amount,
+      currency: currency.toLowerCase(),
+      customer: customer.id,
+      confirm: true,
+      off_session: true,
+      payment_method: paymentMethodId,
+      description: BONUS_PRODUCT_DESCRIPTION,
+      metadata: {
+        upsell: 'bonus',
+        userId: req.user._id?.toString?.() || req.user.id,
+        email: req.user.email,
+        sessionId: sessionId || '',
+        source: source || 'payment-success',
+      },
+    };
+
+    const intent = await stripe.paymentIntents.create(
+      intentConfig,
+      idempotencyKey ? { idempotencyKey } : undefined,
+    );
+
+    if (intent.status !== 'succeeded') {
+      return res.status(202).json({
+        success: false,
+        status: intent.status,
+        message: 'The saved card needs an additional check. Please update your payment method in the dashboard.',
+      });
+    }
+
+    if (!req.user.purchases) req.user.purchases = {};
+    if (!req.user.purchases.bonus) {
+      req.user.purchases.bonus = true;
+      req.user.markModified?.('purchases');
+      await req.user.save();
+    }
+
+    const amountDecimal = Number((amount / 100).toFixed(2));
+    await UserAccess.findOneAndUpdate(
+      { userId: req.user._id || req.user.id },
+      {
+        $set: {
+          hasBonusAccess: true,
+          bonusGrantedAt: new Date(),
+          bonusPaymentIntentId: intent.id,
+          bonusAmount: amountDecimal,
+          bonusCurrency: currency,
+        },
+      },
+      { new: true, upsert: true, setDefaultsOnInsert: true },
+    );
+
+    return res.json({
+      success: true,
+      intentId: intent.id,
+      redirectUrl: '/pages/dashboard.html?bonus=1',
+    });
+  } catch (err) {
+    console.error('❌ /upsell/bonus error', err);
+
+    if (err?.type === 'StripeCardError' || err?.code === 'authentication_required') {
+      return res.status(402).json({
+        error: err.code || 'card_error',
+        message: 'Your bank needs extra approval. Please open your dashboard to approve the payment.',
+      });
+    }
+
+    res.status(500).json({ error: err.message || 'Failed to process bonus payment.' });
   }
 });
 
