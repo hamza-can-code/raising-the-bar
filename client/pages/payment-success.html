@@ -122,8 +122,14 @@
       const urlParams = new URLSearchParams(window.location.search);
       const sessionId = urlParams.get('session_id') || localStorage.getItem('rtb:lastCheckoutSession') || '';
 
+            const setupIntentId = urlParams.get('setup_intent') || localStorage.getItem('rtb:lastSetupIntent') || '';
+
       if (sessionId) {
         localStorage.setItem('rtb:lastCheckoutSession', sessionId);
+      }
+
+            if (setupIntentId) {
+        localStorage.setItem('rtb:lastSetupIntent', setupIntentId);
       }
 
       const currencyHint = (window.RTB_CURRENCY?.code || 'GBP').toUpperCase();
@@ -257,6 +263,7 @@
             body: JSON.stringify({
               currency: currencyHint,
               sessionId,
+              setupIntentId,
               source: 'payment-success'
             })
           });

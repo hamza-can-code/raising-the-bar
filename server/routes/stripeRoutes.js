@@ -21,7 +21,7 @@ function parseMinorUnit(value, fallback = null) {
 }
 
 const BONUS_PRICE_MINOR = {
-  GBP: parseMinorUnit(process.env.BONUS_PRICE_MINOR_GBP ?? process.env.BONUS_PRICE_GBP, 1),
+  GBP: parseMinorUnit(process.env.BONUS_PRICE_MINOR_GBP ?? process.env.BONUS_PRICE_GBP, 1999),
   USD: parseMinorUnit(process.env.BONUS_PRICE_MINOR_USD ?? process.env.BONUS_PRICE_USD, 2499),
   EUR: parseMinorUnit(process.env.BONUS_PRICE_MINOR_EUR ?? process.env.BONUS_PRICE_EUR, 2299),
 };
@@ -107,7 +107,11 @@ function getBonusAmount(currencyCode) {
 }
 
 async function ensureStripeCustomer(email) {
-  const existing = await stripe.customers.list({ email, limit: 1 });
+  const existing = await stripe.customers.list({
+    email,
+    limit: 1,
+    expand: ['data.invoice_settings.default_payment_method'],
+  });
   if (existing.data.length) return existing.data[0];
   return stripe.customers.create({ email });
 }
@@ -298,26 +302,112 @@ router.post('/upsell/bonus', protect, async (req, res) => {
       return res.status(400).json({ error: 'User email required to charge bonus.' });
     }
 
-    const { sessionId, currency: currencyHint, source } = req.body || {};
+    const { sessionId, currency: currencyHint, source, setupIntentId } = req.body || {};
+    console.log('\n───────── /upsell/bonus ─────────');
+    log('Bonus request body', req.body);
+    log('Bonus user', { id: req.user._id || req.user.id, email: req.user.email });
     const { currency, amount } = getBonusAmount(currencyHint);
 
-    const customer = await ensureStripeCustomer(req.user.email);
+    let customer = await ensureStripeCustomer(req.user.email);
+    customer = await stripe.customers.retrieve(customer.id, {
+      expand: ['invoice_settings.default_payment_method'],
+    });
+    log('Bonus customer', {
+      id: customer.id,
+      email: customer.email,
+      default_payment_method:
+        typeof customer.invoice_settings?.default_payment_method === 'string'
+          ? customer.invoice_settings.default_payment_method
+          : customer.invoice_settings?.default_payment_method?.id,
+    });
+
+    let customerId = customer.id;
 
     let paymentMethodId = customer.invoice_settings?.default_payment_method || null;
     if (paymentMethodId && typeof paymentMethodId !== 'string') {
       paymentMethodId = paymentMethodId.id;
     }
 
+       if (!paymentMethodId && setupIntentId) {
+      try {
+        const setupIntent = await stripe.setupIntents.retrieve(setupIntentId, {
+          expand: ['payment_method'],
+        });
+
+        const setupPaymentMethodId =
+          typeof setupIntent.payment_method === 'string'
+            ? setupIntent.payment_method
+            : setupIntent.payment_method?.id;
+
+        const setupCustomerId =
+          typeof setupIntent.customer === 'string'
+            ? setupIntent.customer
+            : setupIntent.customer?.id;
+
+        log('Reused setup intent', {
+          id: setupIntent.id,
+          status: setupIntent.status,
+          setupCustomerId,
+          setupPaymentMethodId,
+        });
+
+        if (setupCustomerId && setupCustomerId !== customerId) {
+          console.warn(
+            '⚠️  Setup intent customer differs from looked-up customer. Switching to setup intent customer for bonus.',
+            { setupCustomerId, lookedUpCustomerId: customerId }
+          );
+          customerId = setupCustomerId;
+          customer = await stripe.customers.retrieve(customerId, {
+            expand: ['invoice_settings.default_payment_method'],
+          });
+          paymentMethodId = customer.invoice_settings?.default_payment_method || null;
+          if (paymentMethodId && typeof paymentMethodId !== 'string') {
+            paymentMethodId = paymentMethodId.id;
+          }
+        }
+
+        if (setupIntent.status === 'succeeded' && setupPaymentMethodId && setupCustomerId === customerId) {
+          try {
+            await stripe.paymentMethods.attach(setupPaymentMethodId, {
+              customer: customerId,
+            });
+          } catch (attachErr) {
+            if (attachErr.code !== 'resource_already_exists') {
+              throw attachErr;
+            }
+          }
+
+          await stripe.customers.update(customerId, {
+            invoice_settings: { default_payment_method: setupPaymentMethodId },
+          });
+
+          paymentMethodId = setupPaymentMethodId;
+        }
+      } catch (setupErr) {
+        console.error(
+          '⚠️  Failed to reuse setup intent for bonus payment',
+          setupIntentId,
+          setupErr.message
+        );
+      }
+    }
+
     if (!paymentMethodId) {
       const pmList = await stripe.paymentMethods.list({
-        customer: customer.id,
+        customer: customerId,
         type: 'card',
-        limit: 1,
+        limit: 5,
       });
+      log('Available payment methods', pmList.data.map(pm => ({ id: pm.id, customer: pm.customer })));
       paymentMethodId = pmList.data[0]?.id || null;
     }
 
     if (!paymentMethodId) {
+            console.warn('⚠️  No payment method on file for bonus charge', {
+        customerId,
+        email: req.user.email,
+        setupIntentId,
+      });
       return res.status(409).json({
         error: 'no_payment_method',
         message: 'No saved card found. Please update your payment method before adding the bonus.',
@@ -328,7 +418,7 @@ router.post('/upsell/bonus', protect, async (req, res) => {
     const intentConfig = {
       amount,
       currency: currency.toLowerCase(),
-      customer: customer.id,
+      customer: customerId,
       confirm: true,
       off_session: true,
       payment_method: paymentMethodId,
@@ -342,12 +432,23 @@ router.post('/upsell/bonus', protect, async (req, res) => {
       },
     };
 
+        log('Bonus payment intent config', {
+      ...intentConfig,
+      metadata: undefined,
+      amountDecimal: Number((amount / 100).toFixed(2)),
+    });
+
     const intent = await stripe.paymentIntents.create(
       intentConfig,
       idempotencyKey ? { idempotencyKey } : undefined,
     );
 
     if (intent.status !== 'succeeded') {
+            console.warn('⚠️  Bonus payment intent requires action', {
+        intentId: intent.id,
+        status: intent.status,
+        customerId,
+      });
       return res.status(202).json({
         success: false,
         status: intent.status,
@@ -376,6 +477,14 @@ router.post('/upsell/bonus', protect, async (req, res) => {
       },
       { new: true, upsert: true, setDefaultsOnInsert: true },
     );
+
+        console.log('✅ Bonus payment captured', {
+      intentId: intent.id,
+      customerId,
+      amount,
+      currency,
+      userId: req.user._id || req.user.id,
+    });
 
     return res.json({
       success: true,
