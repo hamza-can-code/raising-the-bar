@@ -21,7 +21,7 @@ function parseMinorUnit(value, fallback = null) {
 }
 
 const BONUS_PRICE_MINOR = {
-  GBP: parseMinorUnit(process.env.BONUS_PRICE_MINOR_GBP ?? process.env.BONUS_PRICE_GBP, 1999),
+  GBP: parseMinorUnit(process.env.BONUS_PRICE_MINOR_GBP ?? process.env.BONUS_PRICE_GBP, 1499),
   USD: parseMinorUnit(process.env.BONUS_PRICE_MINOR_USD ?? process.env.BONUS_PRICE_USD, 2499),
   EUR: parseMinorUnit(process.env.BONUS_PRICE_MINOR_EUR ?? process.env.BONUS_PRICE_EUR, 2299),
 };

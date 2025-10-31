@@ -1,0 +1,172 @@
+:root {
+  color-scheme: light;
+  font-family: 'Poppins', 'Roboto', 'Segoe UI', sans-serif;
+  --brand-blue: #007bff;
+  --brand-blue-dark: #005dc8;
+  --brand-blue-faint: rgba(0, 123, 255, 0.12);
+  --brand-ink: #1c2430;
+  --brand-muted: #4d5661;
+  --brand-cream: #f9f7f2;
+  --brand-panel: #ffffff;
+  --brand-gold: #f5b84c;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--brand-cream);
+  color: var(--brand-ink);
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+.header {
+  text-align: center;
+  padding: 18px 18px 0;
+}
+
+.logo img {
+  max-height: 50px;
+  width: auto;
+}
+
+.upgrade-header {
+  background: linear-gradient(180deg, rgba(0, 123, 255, 0.08) 0%, rgba(0, 123, 255, 0) 100%);
+}
+
+.upgrade-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 18px 48px;
+}
+
+.upgrade-card {
+  width: min(520px, 100%);
+  background: var(--brand-panel);
+  border-radius: 24px;
+  padding: 32px 28px 36px;
+  box-shadow: 0 22px 44px rgba(12, 35, 64, 0.12);
+  display: grid;
+  gap: 22px;
+  text-align: center;
+}
+
+.kicker {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-blue-dark);
+}
+
+h1 {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.8rem, 2.6vw + 1.2rem, 2.4rem);
+  color: var(--brand-ink);
+}
+
+.message {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(28, 36, 48, 0.82);
+}
+
+.progress-section {
+  display: grid;
+  gap: 14px;
+  text-align: center;
+}
+
+.progress-label {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  color: var(--brand-ink);
+}
+
+.progress-bar {
+  position: relative;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--brand-blue-faint);
+  overflow: hidden;
+}
+
+.progress-fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #5eb8f5, #3498db);
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 0.2s ease-out;
+}
+
+.progress-hint {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--brand-muted);
+}
+
+.dashboard-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 18px;
+  border-radius: 999px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.98rem;
+  text-decoration: none;
+  background: var(--brand-blue);
+  color: #fff;
+  box-shadow: 0 12px 24px rgba(0, 123, 255, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-link:hover,
+.dashboard-link:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 32px rgba(0, 123, 255, 0.32);
+}
+
+.dashboard-link:focus {
+  outline: 3px solid rgba(0, 123, 255, 0.35);
+  outline-offset: 2px;
+}
+
+@media (max-width: 520px) {
+  .upgrade-card {
+    border-radius: 20px;
+    padding: 28px 22px 32px;
+  }
+
+  .dashboard-link {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-fill,
+  .dashboard-link {
+    transition: none;
+  }
+}
