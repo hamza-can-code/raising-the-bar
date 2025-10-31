@@ -72,32 +72,32 @@ img {
 }
 
 .loader-overlay {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #F9F4EB;
-  /* brand cream */
-  z-index: 25000;
-  transition: opacity .5s ease, transform .5s ease;
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F9F4EB;
+    /* brand cream */
+    z-index: 25000;
+    transition: opacity .5s ease, transform .5s ease;
 }
 
 .loader-overlay.fade-out {
-  opacity: 0;
-  transform: translateY(-18px);
-  /* glide upward */
-  pointer-events: none;
+    opacity: 0;
+    transform: translateY(-18px);
+    /* glide upward */
+    pointer-events: none;
 }
 
 .loader-logo {
-  --scale: 0.8;
-  /* driven by JS */
-  width: 120px;
-  max-width: 60vw;
-  transform: scale(var(--scale));
-  transform-origin: center;
-  transition: transform .2s cubic-bezier(.4, 0, .2, 1);
+    --scale: 0.8;
+    /* driven by JS */
+    width: 120px;
+    max-width: 60vw;
+    transform: scale(var(--scale));
+    transform-origin: center;
+    transition: transform .2s cubic-bezier(.4, 0, .2, 1);
 }
 
 .offer-container {
@@ -1072,63 +1072,100 @@ img {
 
 /* === Social‑proof banner ======================================= */
 /* === Social‑proof banner – BLUE palette ===================== */
-.app-social-proof{
-  /* soft vignette : centre‑light → edge‑cream‑beige */
-  background:radial-gradient(circle at 50% 0,
-             #f9f7f2  0%,     /* same as page bg */
-             #f3f0ea  35%,
-             #e8e4db 100%);
-  border:1px solid #ddd3c4;   /* hairline like other cards */
-  border-radius:8px;
-  box-shadow:0 2px 6px rgba(0,0,0,.06);
-  
-  color:#2d3748;              /* deep grey text */
-  text-align:center;
-  padding:54px 18px 60px;
-  margin:60px auto;
-  max-width:800px;
-  overflow:hidden;            /* tidy any long lines */
+.app-social-proof {
+    /* soft vignette : centre‑light → edge‑cream‑beige */
+    background: radial-gradient(circle at 50% 0,
+            #f9f7f2 0%,
+            /* same as page bg */
+            #f3f0ea 35%,
+            #e8e4db 100%);
+    border: 1px solid #ddd3c4;
+    /* hairline like other cards */
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .06);
+
+    color: #2d3748;
+    /* deep grey text */
+    text-align: center;
+    padding: 54px 18px 60px;
+    margin: 60px auto;
+    max-width: 800px;
+    overflow: hidden;
+    /* tidy any long lines */
 }
 
-.asp-inner{max-width:520px;margin:0 auto}
+.asp-inner {
+    max-width: 520px;
+    margin: 0 auto
+}
 
 /* headline */
-.asp-headline{
-  margin:0 0 26px;
-  font-family:'Poppins',sans-serif;
-  font-weight:700;
-  font-size:1.75rem;
-  line-height:1.3
+.asp-headline {
+    margin: 0 0 26px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 1.3
 }
-.asp-number{
-  font-size:2.2rem;
-  display:block;
-  color:#1a1a1a;              /* a touch darker for emphasis */
+
+.asp-number {
+    font-size: 2.2rem;
+    display: block;
+    color: #1a1a1a;
+    /* a touch darker for emphasis */
 }
 
 /* rating row */
-.asp-rating{
-  display:flex;align-items:center;justify-content:center;
-  flex-wrap:wrap;gap:18px;margin-bottom:20px;
-  font-family:'Poppins',sans-serif;font-weight:600
+.asp-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600
 }
-.asp-stars{
-  font-size:1.25rem;letter-spacing:2px;
-  color:#f4b400;              /* warm muted gold */
+
+.asp-stars {
+    font-size: 1.25rem;
+    letter-spacing: 2px;
+    color: #f4b400;
+    /* warm muted gold */
 }
-.asp-score{font-size:.9rem;opacity:.85}
-.asp-rating img{height:28px;width:auto;filter:grayscale(25%)}
+
+.asp-score {
+    font-size: .9rem;
+    opacity: .85
+}
+
+.asp-rating img {
+    height: 28px;
+    width: auto;
+    filter: grayscale(25%)
+}
 
 /* supporting line */
-.asp-reviews{
-  font-size:1rem;font-weight:600;opacity:.9;margin:0
+.asp-reviews {
+    font-size: 1rem;
+    font-weight: 600;
+    opacity: .9;
+    margin: 0
 }
 
 /* phones */
-@media(max-width:480px){
-  .app-social-proof{padding:42px 14px 54px}
-  .asp-headline{font-size:1.5rem}
-  .asp-number{font-size:1.9rem}
+@media(max-width:480px) {
+    .app-social-proof {
+        padding: 42px 14px 54px
+    }
+
+    .asp-headline {
+        font-size: 1.5rem
+    }
+
+    .asp-number {
+        font-size: 1.9rem
+    }
 }
 
 .results-section {
@@ -3560,349 +3597,469 @@ body.modal-open .floating-cta {
 }
 
 .preload-hide {
-  position:absolute !important;
-  left:-9999px !important;
-  top:auto !important;
-  visibility:hidden !important;
-  pointer-events:none !important;
+    position: absolute !important;
+    left: -9999px !important;
+    top: auto !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
 }
 
-.preloaded-ready { /* optional visual cue if you ever want one */ }
+.preloaded-ready {
+    /* optional visual cue if you ever want one */
+}
 
 #paymentWarmShell {
-  position:absolute;
-  top:0;
-  left:-9999px;     /* off-canvas (avoids layout jumps) */
-  width:380px;      /* your desired width */
-  opacity:0;
-  pointer-events:none;
+    position: absolute;
+    top: 0;
+    left: -9999px;
+    /* off-canvas (avoids layout jumps) */
+    width: 380px;
+    /* your desired width */
+    opacity: 0;
+    pointer-events: none;
 }
 
 .payment-live #paymentWarmShell {
-  position:static;
-  left:auto;
-  opacity:1;
-  pointer-events:auto;
-  transition:opacity .25s ease;
+    position: static;
+    left: auto;
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity .25s ease;
 }
 
 /* Scratch card */
-.scratch-wrap { margin: 16px 0 8px }
-.scratch-card { width: 100%; display: grid; gap: 8px }
+.scratch-wrap {
+    margin: 16px 0 8px
+}
+
+.scratch-card {
+    width: 100%;
+    display: grid;
+    gap: 8px
+}
+
 .scratch-card .link-btn {
-  background: none; border: 0; padding: 0; font: inherit; color: #6b7280; text-decoration: underline; cursor: pointer;
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    color: #6b7280;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 /* reveal surface */
 .scratch-reveal {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  background: radial-gradient(120% 120% at 10% 0%, #fff 0%, #f6f5ef 40%, #f0eee7 100%);
-  box-shadow: 0 6px 20px rgba(0,0,0,.06);
-  min-height: 148px;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: radial-gradient(120% 120% at 10% 0%, #fff 0%, #f6f5ef 40%, #f0eee7 100%);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .06);
+    min-height: 148px;
 }
+
 .reveal-content {
-  position: absolute; inset: 0;
-  display: grid; place-items: center; text-align: center; padding: 18px;
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 18px;
 }
+
 .discount-badge {
-  display: inline-block;
-  font-weight: 800;
-  font-size: 28px;
-  letter-spacing: .5px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: #E6F2FF;
+    display: inline-block;
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: .5px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #E6F2FF;
     border: 1px solid #007BFF;
-  color: #007BFF; 
-  backdrop-filter: blur(2px);
+    color: #007BFF;
+    backdrop-filter: blur(2px);
 }
-.reveal-sub { margin: 8px 0 4px; font-weight: 700 }
-.reveal-small { margin: 0; font-size: 12px; color: #333 }
+
+.discount-badge.expired {
+    background: #f2f4f7;
+    border-color: #c7ccd8;
+    color: #4b5563;
+}
+
+.reveal-sub {
+    margin: 8px 0 4px;
+    font-weight: 700
+}
+
+.reveal-small {
+    margin: 0;
+    font-size: 12px;
+    color: #333
+}
+
+.scratch-expired-message {
+    margin: 8px 0 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.reveal-small {
+    margin: 0;
+    font-size: 12px;
+    color: #333
+}
 
 /* canvas (scratch layer) */
 #scratchCanvas {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 148px;           /* will be synced in JS for DPR */
-  touch-action: none;
-  cursor: pointer;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 148px;
+    /* will be synced in JS for DPR */
+    touch-action: none;
+    cursor: pointer;
 }
 
 /* done state */
-.scratch-done #scratchCanvas { opacity: 0; pointer-events: none; transition: opacity .35s ease }
-.scratch-done .discount-badge { animation: pop .35s ease }
-@keyframes pop { 50% { transform: scale(1.06) } }
+.scratch-done #scratchCanvas {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .35s ease
+}
+
+.scratch-done .discount-badge {
+    animation: pop .35s ease
+}
+
+@keyframes pop {
+    50% {
+        transform: scale(1.06)
+    }
+}
+
 @media (min-width: 640px) {
-  .discount-badge { font-size: 32px }
-  #scratchCanvas { height: 160px }
+    .discount-badge {
+        font-size: 32px
+    }
+
+    #scratchCanvas {
+        height: 160px
+    }
 }
 
 .promo-code-line {
-  margin: 16px 0 16px;          /* breathing space */
-  text-align: center;
-  font-size: 15px;
-  font-weight: 500;
-  color: #333;
+    margin: 16px 0 16px;
+    /* breathing space */
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
 }
 
 .promo-code-line .promo-code-label {
-  margin-right: 6px;
-  font-size: 14px;
-  color: #666;                  /* muted label */
+    margin-right: 6px;
+    font-size: 14px;
+    color: #666;
+    /* muted label */
 }
 
 .promo-code-line .promo-code-value {
-  font-family: monospace;
-  font-size: 16px;
-  font-weight: 700;
-  padding: 5px 12px;
-  border-radius: 8px;
-  background: #E6F2FF;          /* light blue bg */
-  border: 1px solid #007BFF;    /* CTA blue */
-  color: #007BFF;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    font-family: monospace;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 8px;
+    background: #E6F2FF;
+    /* light blue bg */
+    border: 1px solid #007BFF;
+    /* CTA blue */
+    color: #007BFF;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 /* lock state for the Continue button */
 #valueContinue.locked,
 #valueContinue:disabled,
 #valueContinue[disabled] {
-  background: #004a99 !important;       /* solid inactive */
-  background-image: none !important;     /* kill gradients */
-  border-color: #004a99 !important;
-  box-shadow: none !important;
-  color: #ccc !important;           /* lighter gray text */
-  cursor: not-allowed;
-  opacity: 1 !important;                 /* keep text readable */
+    background: #004a99 !important;
+    /* solid inactive */
+    background-image: none !important;
+    /* kill gradients */
+    border-color: #004a99 !important;
+    box-shadow: none !important;
+    color: #ccc !important;
+    /* lighter gray text */
+    cursor: not-allowed;
+    opacity: 1 !important;
+    /* keep text readable */
 }
 
 /* if your theme uses a gradient/overlay via ::before */
 #valueContinue.locked::before,
 #valueContinue:disabled::before {
-  content: none !important;
+    content: none !important;
 }
 
 /* Hint overlay (sits above content but below canvas hits) */
 .scratch-hint {
-  position: absolute; inset: 0;
-  display: grid; place-items: center;
-  pointer-events: none;          /* don't block scratching */
-  opacity: 1; transform: translateZ(0);
-  transition: opacity .25s ease;
-  z-index: 3;                    /* above content, below canvas erasing still works */
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    /* don't block scratching */
+    opacity: 1;
+    transform: translateZ(0);
+    transition: opacity .25s ease;
+    z-index: 3;
+    /* above content, below canvas erasing still works */
 }
 
 /* Hide when scratching / done */
 .scratch-done .scratch-hint,
 .scratch-reveal.scratching .scratch-hint {
-  opacity: 0;
+    opacity: 0;
 }
 
 /* Orbit container: spinning circle path */
 .scratch-hint .orbit {
-  position: relative;
-  width: 90px; height: 90px;
-  border-radius: 50%;
-  animation: orbit-spin 2.2s linear infinite;
-  margin-bottom: 6px;
+    position: relative;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    animation: orbit-spin 2.2s linear infinite;
+    margin-bottom: 6px;
 }
 
 /* The “finger” dot that moves */
 .scratch-hint .dot {
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 14px; height: 14px;
-  background: #007BFF;
-  border: 2px solid #E6F2FF;      /* light ring for contrast on blue cover */
-  border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(0,0,0,.15);
-  transform: rotate(0) translateX(38px) translateY(-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    background: #007BFF;
+    border: 2px solid #E6F2FF;
+    /* light ring for contrast on blue cover */
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .15);
+    transform: rotate(0) translateX(38px) translateY(-50%);
 }
 
 /* Soft trail */
 .scratch-hint .dot::after {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,123,255,.25), transparent 60%);
-  filter: blur(3px);
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 123, 255, .25), transparent 60%);
+    filter: blur(3px);
 }
 
 /* Copy under the animation */
 .scratch-hint .hint-copy {
-  margin: 0;
-  font-size: 12px;
-  color: #666;
-  background: rgba(249,247,242,.85); /* #F9F7F2 with light alpha */
-  padding: 4px 8px;
-  border-radius: 999px;
-  border: 1px solid rgba(0,0,0,.05);
+    margin: 0;
+    font-size: 12px;
+    color: #666;
+    background: rgba(249, 247, 242, .85);
+    /* #F9F7F2 with light alpha */
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, .05);
 }
 
 /* Keyframes: spin the path; the dot is offset so it “orbits” */
-@keyframes orbit-spin { 
-  to { transform: rotate(360deg); } 
+@keyframes orbit-spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* Make sure canvas is above content but below hint visuals as needed */
-#scratchCanvas { z-index: 2; }
+#scratchCanvas {
+    z-index: 2;
+}
 
 /* Small devices: slightly smaller orbit */
 @media (max-width: 360px) {
-  .scratch-hint .orbit { width: 72px; height: 72px; }
-  .scratch-hint .dot { transform: rotate(0) translateX(30px) translateY(-50%); }
+    .scratch-hint .orbit {
+        width: 72px;
+        height: 72px;
+    }
+
+    .scratch-hint .dot {
+        transform: rotate(0) translateX(30px) translateY(-50%);
+    }
 }
 
 /* ─── Promo strip container ───────────────────────────────────────────── */
-#promoAppliedStrip.rtb-ps{
-  display:block;
-  text-align:left;
-  padding:16px;
-  margin:12px auto 18px;
-  width:min(100%,720px);
-  border-radius:14px;
-  background:linear-gradient(180deg,#F7FAFF 0%,#EEF5FF 100%);
-  border:1px solid #DCE8FF;
-  box-shadow:0 2px 10px rgba(0,123,255,.05);
-  box-sizing:border-box;
+#promoAppliedStrip.rtb-ps {
+    display: block;
+    text-align: left;
+    padding: 16px;
+    margin: 12px auto 18px;
+    width: min(100%, 720px);
+    border-radius: 14px;
+    background: linear-gradient(180deg, #F7FAFF 0%, #EEF5FF 100%);
+    border: 1px solid #DCE8FF;
+    box-shadow: 0 2px 10px rgba(0, 123, 255, .05);
+    box-sizing: border-box;
 }
 
 /* Top row: badge + headline */
-#promoAppliedStrip .ps-top{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:12px;
+#promoAppliedStrip .ps-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
 }
-#promoAppliedStrip .ps-title{
-  margin:0;
-  font:800 18px/1.2 "Poppins",sans-serif;   /* bigger headline */
-  color:#1e1d1c;
+
+#promoAppliedStrip .ps-title {
+    margin: 0;
+    font: 800 18px/1.2 "Poppins", sans-serif;
+    /* bigger headline */
+    color: #1e1d1c;
 }
 
 /* Badge (scoped so your scratch-card badge stays as-is) */
-#promoAppliedStrip .discount-badge{
-  display:inline-flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  font-weight:800;
-  font-size:16px;                            /* larger */
-  letter-spacing:.5px;
-  padding:8px 12px;
-  border-radius:10px;                        /* 10px radius per request */
-  background:#0B63D1;   
-  border:1px solid #084EA8;
-  color:#FFFFFF;
-  backdrop-filter:blur(2px);
-}
-#promoAppliedStrip .discount-badge .badge-subline{
-  display:block;
-  font-size:12px;
-  font-weight:700;
-  margin-top:2px;
-  text-transform:none;
+#promoAppliedStrip .discount-badge {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 16px;
+    /* larger */
+    letter-spacing: .5px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    /* 10px radius per request */
+    background: #0B63D1;
+    border: 1px solid #084EA8;
+    color: #FFFFFF;
+    backdrop-filter: blur(2px);
 }
 
-#promoAppliedStrip .ps-bottom{
-  display:grid;
-  grid-template-columns: 1fr auto;          /* code left, timer right */
-  align-items: stretch;
-  gap:12px;
+#promoAppliedStrip .discount-badge .badge-subline {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 2px;
+    text-transform: none;
 }
 
-#promoAppliedStrip .rtb-ps__code{
-  display:block;
-  position:relative;
-  padding:12px 12px 12px 36px;              /* room for checkmark */
-  margin:0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size:15px;
-  font-weight:800;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-  color:#0B63D1;
-  background:#fff;
-  border:1px solid #C7DFFF;
-  border-radius:10px;
-  box-shadow:0 1px 2px rgba(0,0,0,.06), inset 0 1px 0 rgba(255,255,255,.6);
-  min-height:40px;
+#promoAppliedStrip .ps-bottom {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    /* code left, timer right */
+    align-items: stretch;
+    gap: 12px;
 }
-#promoAppliedStrip .rtb-ps__code::before{
-  content:"✓";
-  position:absolute;
-  left:12px;
-  top:50%;
-  transform:translateY(-50%);
-  font:700 14px/1 "Poppins",sans-serif;
-  color:#1BAE6C;
+
+#promoAppliedStrip .rtb-ps__code {
+    display: block;
+    position: relative;
+    padding: 12px 12px 12px 36px;
+    /* room for checkmark */
+    margin: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #0B63D1;
+    background: #fff;
+    border: 1px solid #C7DFFF;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .06), inset 0 1px 0 rgba(255, 255, 255, .6);
+    min-height: 40px;
+}
+
+#promoAppliedStrip .rtb-ps__code::before {
+    content: "✓";
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font: 700 14px/1 "Poppins", sans-serif;
+    color: #1BAE6C;
 }
 
 /* Timer block (no "Ends in") – MM:SS with labels under each */
-#promoAppliedStrip .ps-timer{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  min-width:122px;
-  padding:10px 12px 8px;
-  background:#E6F2FF;
-  border:1px solid #C7DFFF;
-  border-radius:10px;
-  box-shadow:0 1px 2px rgba(0,0,0,.06), inset 0 1px 0 rgba(255,255,255,.6);
+#promoAppliedStrip .ps-timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 122px;
+    padding: 10px 12px 8px;
+    background: #E6F2FF;
+    border: 1px solid #C7DFFF;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .06), inset 0 1px 0 rgba(255, 255, 255, .6);
 }
-#promoAppliedStrip .ps-time-value{
-  font:800 20px/1 "Poppins",sans-serif;     /* big MM:SS */
-  color:#0B63D1;
+
+#promoAppliedStrip .ps-time-value {
+    font: 800 20px/1 "Poppins", sans-serif;
+    /* big MM:SS */
+    color: #0B63D1;
 }
-#promoAppliedStrip .ps-time-labels{
-  display:flex;
-  justify-content:space-between;
-  gap:22px;
-  width:100%;
-  margin-top:4px;
+
+#promoAppliedStrip .ps-time-labels {
+    display: flex;
+    justify-content: space-between;
+    gap: 22px;
+    width: 100%;
+    margin-top: 4px;
 }
-#promoAppliedStrip .ps-time-labels span{
-  font:600 10px/1 "Poppins",sans-serif;
-  color:#0B63D1;
-  opacity:.85;
+
+#promoAppliedStrip .ps-time-labels span {
+    font: 600 10px/1 "Poppins", sans-serif;
+    color: #0B63D1;
+    opacity: .85;
 }
 
 /* Mobile-first; only stack on ultra-narrow screens */
-@media (max-width:360px){
-  #promoAppliedStrip .ps-bottom{
-    grid-template-columns:1fr;               /* stack */
-  }
-  #promoAppliedStrip .ps-timer{
-    min-width:0;
-  }
+@media (max-width:360px) {
+    #promoAppliedStrip .ps-bottom {
+        grid-template-columns: 1fr;
+        /* stack */
+    }
+
+    #promoAppliedStrip .ps-timer {
+        min-width: 0;
+    }
 }
 
 /* Align tick + code text */
-#promoAppliedStrip .rtb-ps__code{
-  display: flex;
-  align-items: center;          /* vertical centering */
-  gap: 8px;                     /* space between tick and code */
-  padding: 12px;                /* remove extra left padding */
+#promoAppliedStrip .rtb-ps__code {
+    display: flex;
+    align-items: center;
+    /* vertical centering */
+    gap: 8px;
+    /* space between tick and code */
+    padding: 12px;
+    /* remove extra left padding */
 }
 
 /* Make the tick participate in layout (not absolute) */
-#promoAppliedStrip .rtb-ps__code::before{
-  position: static;
-  transform: none;
-  margin: 0;                    /* handled by gap */
-  font: 700 14px/1 "Poppins", sans-serif;
-  line-height: 1;
+#promoAppliedStrip .rtb-ps__code::before {
+    position: static;
+    transform: none;
+    margin: 0;
+    /* handled by gap */
+    font: 700 14px/1 "Poppins", sans-serif;
+    line-height: 1;
 }
 
 /* Bring "minutes" and "seconds" closer together under the time */
-#promoAppliedStrip .ps-time-labels{
-  display: flex;
-  justify-content: center;      /* center under MM:SS */
-  gap: 10px;                    /* tighter spacing */
-  width: auto;                  /* stop stretching across the pill */
+#promoAppliedStrip .ps-time-labels {
+    display: flex;
+    justify-content: center;
+    /* center under MM:SS */
+    gap: 10px;
+    /* tighter spacing */
+    width: auto;
+    /* stop stretching across the pill */
 }

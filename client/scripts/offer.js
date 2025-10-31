@@ -19,6 +19,42 @@ function fadeOutLoader() {
   overlay.classList.add('fade-out');
   overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
 }
+
+const DISCOUNT_STATE_EVENT = 'rtb:discount-state';
+let lastDiscountActive = null;
+
+function isDiscountActive() {
+  return document.body.classList.contains('discount-active');
+}
+
+function setDiscountActive(active, { force = false } = {}) {
+  const prev = isDiscountActive();
+  const next = !!active;
+  document.body.classList.toggle('discount-active', next);
+  lastDiscountActive = next;
+  if (force || prev !== next) {
+    document.dispatchEvent(new CustomEvent(DISCOUNT_STATE_EVENT, {
+      detail: { active: next }
+    }));
+  }
+}
+
+const discountClassObserver = new MutationObserver(() => {
+  const current = isDiscountActive();
+  if (current === lastDiscountActive) return;
+  lastDiscountActive = current;
+  document.dispatchEvent(new CustomEvent(DISCOUNT_STATE_EVENT, {
+    detail: { active: current }
+  }));
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  lastDiscountActive = isDiscountActive();
+  document.dispatchEvent(new CustomEvent(DISCOUNT_STATE_EVENT, {
+    detail: { active: lastDiscountActive }
+  }));
+  discountClassObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+});
 window.RTB_PRICE_TABLE = {
   GBP: { full: 19.99, weekly: 4.99, intro: 0 },
   USD: { full: 23.99, weekly: 5.99, intro: 0 },
@@ -1176,12 +1212,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Activate or deactivate the discount style immediately
-  if (discountEndTime > now) {
-    document.body.classList.add("discount-active");
-  } else {
-    document.body.classList.remove("discount-active");
-  }
-
+  setDiscountActive(discountEndTime > now, { force: true });
   function updatePricingJustification() {
     const el = document.querySelector('.pricing-justification');
     if (!el) return;
@@ -1209,7 +1240,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // If the discount has expired…
     if (diff <= 0) {
-      document.body.classList.remove("discount-active");
+      setDiscountActive(false);
       removeDiscountPricing();
       updatePostPayNote();
       localStorage.removeItem("sevenDayDiscountEnd");
@@ -1220,7 +1251,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Keep the discount styling active
-    document.body.classList.add("discount-active");
+    setDiscountActive(true);
 
     // Break diff into h/m/s
     const totalSeconds = Math.floor(diff / 1000);
@@ -1265,6 +1296,17 @@ document.addEventListener("DOMContentLoaded", function () {
       currencyTagSpecial.style.display = "block";
     }
   }
+
+    document.addEventListener(DISCOUNT_STATE_EVENT, (e) => {
+    const active = !!(e.detail && e.detail.active);
+    if (!active) {
+      removeDiscountPricing();
+    }
+    updatePostPayNote();
+    updatePricingJustification();
+    updatePlanSummary();
+    localizeProTrackerCard();
+  });
 
   setInterval(updateTimer, 1000);
   updatePostPayNote();
@@ -2174,6 +2216,49 @@ function setUpCompareModal0() {
   }, true);
 })();
 
+function updateScratchDiscountContent(active = isDiscountActive()) {
+  const wrap = document.querySelector('.scratch-card');
+  if (!wrap) return;
+
+  const reveal = wrap.querySelector('.scratch-reveal');
+  const content = reveal ? reveal.querySelector('.reveal-content') : null;
+  const badge = content ? content.querySelector('.discount-badge') : null;
+  const promoLine = document.getElementById('promoCodeLine');
+  const note = content ? content.querySelector('.reveal-small') : null;
+  const timer = document.getElementById('scratchMirrorTimer');
+  let expired = content ? content.querySelector('.scratch-expired-message') : null;
+
+  if (content && !expired) {
+    expired = document.createElement('p');
+    expired.className = 'reveal-small scratch-expired-message';
+    expired.textContent = 'Sorry, this discount has expired.';
+    expired.setAttribute('hidden', '');
+    content.appendChild(expired);
+  }
+
+  if (badge) {
+    if (!badge.dataset.activeLabel) {
+      badge.dataset.activeLabel = badge.textContent.trim();
+    }
+    badge.textContent = active ? (badge.dataset.activeLabel || '100% OFF') : 'Discount expired';
+    badge.classList.toggle('expired', !active);
+  }
+
+  if (promoLine) promoLine.toggleAttribute('hidden', !active);
+  if (note) note.toggleAttribute('hidden', !active);
+  if (timer) timer.toggleAttribute('hidden', !active);
+  if (expired) expired.toggleAttribute('hidden', active);
+}
+
+// ensure other inline handlers can safely reuse the helper
+if (typeof window !== 'undefined') {
+  window.updateScratchDiscountContent = updateScratchDiscountContent;
+}
+
+document.addEventListener(DISCOUNT_STATE_EVENT, (e) => {
+  updateScratchDiscountContent(!!(e.detail && e.detail.active));
+});
+
 // --- Scratch Card -------------------------------------------------
 let SCRATCH_INIT = false;
 
@@ -2189,6 +2274,8 @@ SCRATCH_INIT = true;
   const continueBtn = document.getElementById('valueContinue');
 
   if (!canvas || !wrap || !reveal || !continueBtn) return;
+
+    updateScratchDiscountContent(isDiscountActive());
 
   {
   const fullName  = localStorage.getItem('name') || '';
@@ -2665,8 +2752,10 @@ document.addEventListener("DOMContentLoaded", () => {
     <span class="promo-code-label">Your code:</span>
     <code class="promo-code-value">${code}</code>
   `;
+      promoLine.dataset.activeHtml = promoLine.innerHTML;
     }
   }
+  updateScratchDiscountContent(isDiscountActive());
 });
 
 /* ---------- PayPal ⇆ Card tab switcher – standalone ---------------- */
@@ -2768,12 +2857,39 @@ document.addEventListener('DOMContentLoaded', () => {
   const src     = document.getElementById('countdownTimer');
 
   if (strip){
-    // visibility follows discount-active class
-    const refresh = () => { strip.hidden = !document.body.classList.contains('discount-active'); };
+    const timerActive = () => {
+      const timer = document.getElementById('timerContainer');
+      if (!timer) return false;
+      let el = timer;
+      while (el) {
+        if (el.hasAttribute('hidden')) return false;
+        const style = window.getComputedStyle(el);
+        if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
+          return false;
+        }
+        el = el.parentElement;
+      }
+      // If any ancestor collapses layout (e.g. display:none) rects will be empty
+      return !!timer.getClientRects().length;
+    };
+    // visibility follows discount-active class and the timer state
+    const updateStripVisibility = (show) => {
+      strip.toggleAttribute('hidden', !show);
+      strip.style.display = show ? 'block' : 'none';
+      strip.setAttribute('aria-hidden', String(!show));
+      strip.classList.toggle('promo-strip-active', show);
+    };
+    const refresh = () => {
+      updateStripVisibility(isDiscountActive() && timerActive());
+    };
     refresh();
     const visIv = setInterval(refresh, 800); // lightweight sync with your timer
+        document.addEventListener(DISCOUNT_STATE_EVENT, refresh);
     // clean up on unload (optional)
-    window.addEventListener('beforeunload', () => clearInterval(visIv));
+    window.addEventListener('beforeunload', () => {
+      clearInterval(visIv);
+      document.removeEventListener(DISCOUNT_STATE_EVENT, refresh);
+    });
   }
 
   // Mirror timer into strip
