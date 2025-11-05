@@ -186,11 +186,16 @@ h1 {
 
 .carousel-track {
   --carousel-offset: 0px;
+  --carousel-drag-offset: 0px;
   display: flex;
   transition: transform 0.45s ease;
-  transform: translateX(var(--carousel-offset));
+  transform: translateX(calc(var(--carousel-offset) + var(--carousel-drag-offset)));
   will-change: transform;
     touch-action: pan-y;
+}
+
+.carousel-track.is-dragging {
+  transition: none;
 }
 
 @media (max-width: 480px) {

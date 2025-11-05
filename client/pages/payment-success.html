@@ -166,15 +166,18 @@
       let carouselTimer;
       let isInteracting = false;
       let touchStartX = 0;
-      let touchDeltaX = 0;
+      let dragOffset = 0;
+      let currentOffset = 0;
 
       const applyOffset = () => {
-       const targetSlide = slides[currentIndex];
+        const targetSlide = slides[currentIndex];
         if (!targetSlide) return;
 
         const offset = targetSlide.offsetLeft;
         track.scrollLeft = 0;
-        track.style.setProperty('--carousel-offset', `${-offset}px`);
+        currentOffset = -offset;
+        track.style.setProperty('--carousel-offset', `${currentOffset}px`);
+        track.style.setProperty('--carousel-drag-offset', '0px');
       };
 
       const setSlide = (index) => {
@@ -221,31 +224,45 @@
         if (event.pointerType === 'mouse') return;
         isInteracting = true;
         touchStartX = event.clientX;
-        touchDeltaX = 0;
+        dragOffset = 0;
         stopTimer();
-        track.setPointerCapture(event.pointerId);
+             track.classList.add('is-dragging');
+        track.style.setProperty('--carousel-drag-offset', '0px');
+        if (typeof track.setPointerCapture === 'function') {
+          track.setPointerCapture(event.pointerId);
+        }
       });
 
       track.addEventListener('pointermove', (event) => {
         if (!isInteracting) return;
-        touchDeltaX = event.clientX - touchStartX;
+        const deltaX = event.clientX - touchStartX;
+        const lastSlide = slides[slides.length - 1];
+        if (!lastSlide) return;
+        const minOffset = -lastSlide.offsetLeft;
+        const maxOffset = 0;
+        const desiredOffset = currentOffset + deltaX;
+        const clampedOffset = Math.min(maxOffset, Math.max(minOffset, desiredOffset));
+        dragOffset = clampedOffset - currentOffset;
+        track.style.setProperty('--carousel-drag-offset', `${dragOffset}px`);
       });
 
       const endPointerInteraction = (event) => {
         if (!isInteracting) return;
-        const sensitivity = 40;
-        if (touchDeltaX > sensitivity) {
+        const sensitivity = 30;
+        track.classList.remove('is-dragging');
+        track.style.setProperty('--carousel-drag-offset', '0px');
+        if (dragOffset > sensitivity) {
           setSlide(Math.max(0, currentIndex - 1));
-        } else if (touchDeltaX < -sensitivity) {
+      } else if (dragOffset < -sensitivity) {
           setSlide(Math.min(slides.length - 1, currentIndex + 1));
         } else {
           applyOffset();
         }
         isInteracting = false;
         touchStartX = 0;
-        touchDeltaX = 0;
+       dragOffset = 0;
         startTimer();
-        if (event.pointerId) {
+   if (event.pointerId && typeof track.hasPointerCapture === 'function' && track.hasPointerCapture(event.pointerId)) {
           track.releasePointerCapture(event.pointerId);
         }
       };
