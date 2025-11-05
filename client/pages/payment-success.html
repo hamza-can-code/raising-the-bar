@@ -169,10 +169,11 @@
       let touchDeltaX = 0;
 
       const applyOffset = () => {
-        const targetSlide = slides[currentIndex];
+       const targetSlide = slides[currentIndex];
         if (!targetSlide) return;
 
         const offset = targetSlide.offsetLeft;
+        track.scrollLeft = 0;
         track.style.setProperty('--carousel-offset', `${-offset}px`);
       };
 

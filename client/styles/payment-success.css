@@ -181,6 +181,7 @@ h1 {
 .carousel {
   flex: 1;
   min-height: 0; /* allows flexbox to properly shrink it */
+    overflow: hidden;
 }
 
 .carousel-track {
@@ -189,18 +190,13 @@ h1 {
   transition: transform 0.45s ease;
   transform: translateX(var(--carousel-offset));
   will-change: transform;
+    touch-action: pan-y;
 }
 
 @media (max-width: 480px) {
-  .carousel-track {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-  }
 
   .carousel-slide {
     flex: 0 0 85%;
-    scroll-snap-align: center;
     margin-right: 16px;
   }
 
