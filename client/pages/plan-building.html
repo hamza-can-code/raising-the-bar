@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+  <title>Upgrading Your Plan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/plan-upgrade.css">
+  <!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+
+  ttq.load('D0M3KORC77UCAFR1EOLG');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+</head>
+<body>
+  <header class="upgrade-header" role="banner">
+    <div class="header">
+      <div class="logo">
+        <a href="../index.html">
+          <img src="../assets/rtb-logo-white.png" alt="Raising The Bar Logo">
+        </a>
+      </div>
+    </div>
+  </header>
+  <main class="upgrade-main" role="main">
+    <section class="upgrade-card" aria-labelledby="upgrade-title">
+      <p class="kicker">Thank you for purchasing</p>
+      <h1 id="upgrade-title">We&#8217;re building your plan</h1>
+      <!-- <p class="message">Hang tight while we finish unlocking your new features.</p> -->
+      <div class="progress-section">
+        <p class="progress-label">We’re setting up your plan — it’ll be ready in <span id="upgrade-countdown">5</span> seconds&#8230;</p>
+        <div class="progress-bar" role="progressbar" aria-label="Upgrade progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <span class="progress-fill" id="upgrade-progress" aria-hidden="true"></span>
+        </div>
+        <p class="progress-hint">Please hang tight, this won’t take long.</p>
+      </div>
+      <!-- <a class="dashboard-link" id="upgrade-dashboard-link" href="/pages/dashboard.html">Skip the wait &mdash; take me there now</a> -->
+    </section>
+  </main>
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const nextUrl = params.get('next') || '/pages/payment-success.html';
+      const countdownEl = document.getElementById('upgrade-countdown');
+      const progressFill = document.getElementById('upgrade-progress');
+      const progressBar = document.querySelector('.progress-bar');
+      const dashboardLink = document.getElementById('upgrade-dashboard-link');
+      const totalDuration = 5000;
+      let lastDisplayed = 5;
+      let hasRedirected = false;
+
+      countdownEl.textContent = String(lastDisplayed);
+      // dashboardLink.setAttribute('href', nextUrl);
+      // dashboardLink.addEventListener('click', (event) => {
+      //   event.preventDefault();
+      //   hasRedirected = true;
+      //   window.location.href = nextUrl;
+      // });
+
+      const updateFrame = (startTime) => (now) => {
+        if (hasRedirected) {
+          return;
+        }
+        const elapsed = now - startTime;
+        const clamped = Math.min(elapsed, totalDuration);
+        const progress = clamped / totalDuration;
+        const percent = Math.round(progress * 100);
+        progressFill.style.transform = `scaleX(${progress})`;
+        progressBar.setAttribute('aria-valuenow', String(percent));
+
+        const remainingSeconds = Math.max(0, Math.ceil((totalDuration - clamped) / 1000));
+        if (remainingSeconds !== lastDisplayed) {
+          lastDisplayed = remainingSeconds;
+          countdownEl.textContent = String(remainingSeconds);
+        }
+
+        if (elapsed < totalDuration) {
+          window.requestAnimationFrame(updateFrame(startTime));
+        } else if (!hasRedirected) {
+          hasRedirected = true;
+          window.location.href = nextUrl;
+        }
+      };
+
+      const startAnimation = (startTime) => {
+        window.requestAnimationFrame(updateFrame(startTime));
+      };
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        progressFill.style.transition = 'none';
+        progressFill.style.transform = 'scaleX(1)';
+        progressBar.setAttribute('aria-valuenow', '100');
+        countdownEl.textContent = '0';
+        window.setTimeout(() => {
+          if (!hasRedirected) {
+            hasRedirected = true;
+            window.location.href = nextUrl;
+          }
+        }, 500);
+        return;
+      }
+
+      window.requestAnimationFrame((startTime) => {
+        startAnimation(startTime);
+        window.setTimeout(() => {
+          if (!hasRedirected) {
+            hasRedirected = true;
+            window.location.href = nextUrl;
+          }
+        }, totalDuration + 200);
+      });
+    })();
+  </script>
+</body>
+</html>

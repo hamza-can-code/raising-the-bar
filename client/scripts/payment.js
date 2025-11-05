@@ -29,7 +29,7 @@
 
   const STRIPE_PK = 'pk_live_51RJa8007mQ8fzyxpyrHP8Tk9GMzRnhG06vVUTe5mAnpcAacIj8fRmwuRYBpEIr1tRvFqe5nQqpofCURgCHaPASbS00wwfmtIvU';
   // const RETURN_URL = `${window.location.origin}/pages/dashboard.html`;
-  const SUCCESS_PATH = '/pages/payment-success.html';
+  const SUCCESS_PATH = '/pages/plan-building.html';
   const RETURN_URL = `${window.location.origin}${SUCCESS_PATH}`;
 
   /* ——————————————————————————————————————————————————————————— */
