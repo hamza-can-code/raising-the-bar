@@ -144,7 +144,7 @@ function localizeProTrackerCard() {
   const discEl = document.getElementById('priceSpecialDiscount');
   const ccyTag = card.querySelector('.currency-tag');
   const perDayEl = document.getElementById('costPerDaySpecial');
-    // const perDayLabel = card.querySelector('.per-day');
+  // const perDayLabel = card.querySelector('.per-day');
 
   const { code, full, intro } = getLocalPrices();
 
@@ -154,7 +154,7 @@ function localizeProTrackerCard() {
 
   const shown = dealOn ? intro : full;
   if (perDayEl) perDayEl.textContent = fmt(code, shown / 30);
-    // if (perDayLabel) perDayLabel.textContent = 'per day';
+  // if (perDayLabel) perDayLabel.textContent = 'per day';
 
   // keep a human-readable cache for summaries
   localStorage.setItem('planPrice', dealOn ? fmt(code, intro) : fmt(code, full));
@@ -755,7 +755,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Muscle gain review.
     selectedReviewName = "David";
     selectedReviewText =
-      "I used to wing it at the gym and second-guess everything. Seeing my workouts and progress adapt over time changed everything. I’ve gained 6kg of muscle — and confidence too.";
+      "I used to wing it with random exercises and YouTube routines. Having workouts that actually adapt to my progress changed everything. I've built 6 kg of lean muscle all from home.";
     beforeImgSrc = "../assets/harry_chest_before.webp";
     afterImgSrc = "../assets/harry_chest_after.webp";
 
@@ -854,6 +854,11 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       title: "Macro-Matched Meals (PT)",
       image: "../assets/progress-tracking-2.PNG",
+      desc: ""
+    },
+    {
+      title: "Macro-Matched Meals (PT)",
+      image: "../assets/coach-call.png",
       desc: ""
     },
     // {
@@ -1225,7 +1230,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (dealOn) {
       el.innerHTML =
         `Normally ${fmt(code, full)} — now just <strong>${fmt(code, intro)}</strong>. ` +
-     `🎉 Get the full 12-Week Plan for ${fmt(code, intro / 30)}.`;
+        `🎉 Get the full 12-Week Plan for ${fmt(code, intro / 30)}.`;
     } else {
       el.textContent = 'Like having a personal trainer in your pocket — for less than the cost of one session.';
     }
@@ -1245,7 +1250,7 @@ document.addEventListener("DOMContentLoaded", function () {
       updatePostPayNote();
       localStorage.removeItem("sevenDayDiscountEnd");
       if (timerContainer) timerContainer.style.display = "none";
-           const cardSubtext = document.querySelector(".card-subtext");
+      const cardSubtext = document.querySelector(".card-subtext");
       if (cardSubtext) cardSubtext.remove();
       return;
     }
@@ -1297,7 +1302,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-    document.addEventListener(DISCOUNT_STATE_EVENT, (e) => {
+  document.addEventListener(DISCOUNT_STATE_EVENT, (e) => {
     const active = !!(e.detail && e.detail.active);
     if (!active) {
       removeDiscountPricing();
@@ -1786,7 +1791,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       name: "Lee",
       text:
-        "I’d tried bootcamps, meal plans — nothing stuck. This finally made everything click. I’ve lost 10kg, but more than that, I finally feel like myself again.",
+        "I’d tried bootcamps, meal plans, but nothing stuck. This finally made everything click. I’ve lost 10kg, but more than that, I finally feel like myself again.",
       beforeImage: {
         src: "../assets/lynn_before.webp",
         width: 120,
@@ -1809,7 +1814,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       name: "David",
       text:
-        "I used to wing it at the gym and second-guess everything. Seeing my workouts and progress adapt over time changed everything. I’ve gained 6kg of muscle — and confidence too.",
+        "I used to wing it with random exercises and YouTube routines. Having workouts that actually adapt to my progress changed everything. I've built 6 kg of lean muscle all from home.",
       beforeImage: {
         src: "../assets/harry_chest_before.webp",
         width: 120,
@@ -1832,7 +1837,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       name: "Alice",
       text:
-        "Strict plans never worked for me. This didn’t just tell me what to do — it fit into my life. I’ve lost weight, feel healthier, and for the first time, I’m in control of the process.",
+        "Strict plans never worked for me. This didn’t just tell me what to do - it fit into my life. I’ve lost weight, feel healthier, and for the first time, I’m in control of the process.",
       beforeImage: {
         src: "../assets/halima_back_before.webp",
         width: 120,
@@ -2190,135 +2195,146 @@ function setUpCompareModal0() {
   }
 
   // Disable backdrop (outside click) + ESC for the promo modal only
-(function () {
-  const promoModal = document.getElementById('valueModal');
-  if (!promoModal) return;
+  (function () {
+    const promoModal = document.getElementById('valueModal');
+    if (!promoModal) return;
 
-  const content = promoModal.querySelector('.modal-content');
+    const content = promoModal.querySelector('.modal-content');
 
-  // Block clicks/taps that land on the backdrop
-  const blockBackdrop = (e) => {
-    if (e.target === promoModal || !content.contains(e.target)) {
-      e.stopImmediatePropagation();
-      e.preventDefault();
+    // Block clicks/taps that land on the backdrop
+    const blockBackdrop = (e) => {
+      if (e.target === promoModal || !content.contains(e.target)) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+      }
+    };
+    ['click', 'mousedown', 'touchstart'].forEach(evt =>
+      promoModal.addEventListener(evt, blockBackdrop, true) // capture phase
+    );
+
+    // Optional: also ignore ESC while this modal is visible
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && promoModal.classList.contains('show')) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+      }
+    }, true);
+  })();
+
+  function updateScratchDiscountContent(active = isDiscountActive()) {
+    const wrap = document.querySelector('.scratch-card');
+    if (!wrap) return;
+
+    const reveal = wrap.querySelector('.scratch-reveal');
+    const content = reveal ? reveal.querySelector('.reveal-content') : null;
+    const badge = content ? content.querySelector('.discount-badge') : null;
+    const promoLine = document.getElementById('promoCodeLine');
+    const note = content ? content.querySelector('.reveal-small') : null;
+    const timer = document.getElementById('scratchMirrorTimer');
+    let expired = content ? content.querySelector('.scratch-expired-message') : null;
+
+    if (content && !expired) {
+      expired = document.createElement('p');
+      expired.className = 'reveal-small scratch-expired-message';
+      expired.textContent = 'Sorry, this discount has expired.';
+      expired.setAttribute('hidden', '');
+      content.appendChild(expired);
     }
-  };
-  ['click', 'mousedown', 'touchstart'].forEach(evt =>
-    promoModal.addEventListener(evt, blockBackdrop, true) // capture phase
-  );
 
-  // Optional: also ignore ESC while this modal is visible
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && promoModal.classList.contains('show')) {
-      e.stopImmediatePropagation();
-      e.preventDefault();
+    if (badge) {
+  const mainLine = badge.querySelector('.discount-badge__main');
+    const bonusPill = badge.querySelector('.discount-badge__bonus');
+
+    if (mainLine) {
+      if (!mainLine.dataset.activeLabel) {
+        mainLine.dataset.activeLabel = mainLine.textContent.trim() || '100% OFF';
+      }
+      mainLine.textContent = active ? mainLine.dataset.activeLabel : 'Discount expired';
+    } else {
+      if (!badge.dataset.activeLabel) {
+        badge.dataset.activeLabel = badge.textContent.trim();
+      }
+      badge.textContent = active ? (badge.dataset.activeLabel || '100% OFF') : 'Discount expired';
+      }
+if (bonusPill) bonusPill.toggleAttribute('hidden', !active);
+      badge.classList.toggle('expired', !active);
     }
-  }, true);
-})();
 
-function updateScratchDiscountContent(active = isDiscountActive()) {
-  const wrap = document.querySelector('.scratch-card');
-  if (!wrap) return;
-
-  const reveal = wrap.querySelector('.scratch-reveal');
-  const content = reveal ? reveal.querySelector('.reveal-content') : null;
-  const badge = content ? content.querySelector('.discount-badge') : null;
-  const promoLine = document.getElementById('promoCodeLine');
-  const note = content ? content.querySelector('.reveal-small') : null;
-  const timer = document.getElementById('scratchMirrorTimer');
-  let expired = content ? content.querySelector('.scratch-expired-message') : null;
-
-  if (content && !expired) {
-    expired = document.createElement('p');
-    expired.className = 'reveal-small scratch-expired-message';
-    expired.textContent = 'Sorry, this discount has expired.';
-    expired.setAttribute('hidden', '');
-    content.appendChild(expired);
+    if (promoLine) promoLine.toggleAttribute('hidden', !active);
+    if (note) note.toggleAttribute('hidden', !active);
+    if (timer) timer.toggleAttribute('hidden', !active);
+    if (expired) expired.toggleAttribute('hidden', active);
   }
 
-  if (badge) {
-    if (!badge.dataset.activeLabel) {
-      badge.dataset.activeLabel = badge.textContent.trim();
-    }
-    badge.textContent = active ? (badge.dataset.activeLabel || '100% OFF') : 'Discount expired';
-    badge.classList.toggle('expired', !active);
+  // ensure other inline handlers can safely reuse the helper
+  if (typeof window !== 'undefined') {
+    window.updateScratchDiscountContent = updateScratchDiscountContent;
   }
 
-  if (promoLine) promoLine.toggleAttribute('hidden', !active);
-  if (note) note.toggleAttribute('hidden', !active);
-  if (timer) timer.toggleAttribute('hidden', !active);
-  if (expired) expired.toggleAttribute('hidden', active);
-}
+  document.addEventListener(DISCOUNT_STATE_EVENT, (e) => {
+    updateScratchDiscountContent(!!(e.detail && e.detail.active));
+  });
 
-// ensure other inline handlers can safely reuse the helper
-if (typeof window !== 'undefined') {
-  window.updateScratchDiscountContent = updateScratchDiscountContent;
-}
+  // --- Scratch Card -------------------------------------------------
+  let SCRATCH_INIT = false;
 
-document.addEventListener(DISCOUNT_STATE_EVENT, (e) => {
-  updateScratchDiscountContent(!!(e.detail && e.detail.active));
-});
+  function initScratchCard() {
+    if (SCRATCH_INIT) return;
+    SCRATCH_INIT = true;
 
-// --- Scratch Card -------------------------------------------------
-let SCRATCH_INIT = false;
+    const canvas = document.getElementById('scratchCanvas');
+    const wrap = canvas ? canvas.closest('.scratch-card') : null;
+    const reveal = wrap ? wrap.querySelector('.scratch-reveal') : null;
+    const content = reveal ? reveal.querySelector('.reveal-content') : null;
+    document.querySelector('#scratchHint .orbit')?.remove();
+    const continueBtn = document.getElementById('valueContinue');
 
-function initScratchCard() {
-if (SCRATCH_INIT) return;
-SCRATCH_INIT = true;
-
-  const canvas = document.getElementById('scratchCanvas');
-  const wrap   = canvas ? canvas.closest('.scratch-card') : null;
-  const reveal = wrap   ? wrap.querySelector('.scratch-reveal') : null;
-  const content= reveal ? reveal.querySelector('.reveal-content') : null;
-  document.querySelector('#scratchHint .orbit')?.remove();
-  const continueBtn = document.getElementById('valueContinue');
-
-  if (!canvas || !wrap || !reveal || !continueBtn) return;
+    if (!canvas || !wrap || !reveal || !continueBtn) return;
 
     updateScratchDiscountContent(isDiscountActive());
 
-  {
-  const fullName  = localStorage.getItem('name') || '';
-  const firstName = (fullName.split(' ')[0] || 'user')
-    .replace(/[^a-z0-9]/gi, '-')   // normalize to letters/numbers/hyphen
-    .replace(/-+/g, '-')           // collapse multiple hyphens
-    .replace(/^-|-$/g, '');        // trim hyphens
-  const promoCode = `${firstName}-100-OFF`.toUpperCase();
-  localStorage.setItem('appliedPromoCode', promoCode);
+    {
+      const fullName = localStorage.getItem('name') || '';
+      const firstName = (fullName.split(' ')[0] || 'user')
+        .replace(/[^a-z0-9]/gi, '-')   // normalize to letters/numbers/hyphen
+        .replace(/-+/g, '-')           // collapse multiple hyphens
+        .replace(/^-|-$/g, '');        // trim hyphens
+      const promoCode = `${firstName}-100-OFF`.toUpperCase();
+      localStorage.setItem('appliedPromoCode', promoCode);
 
-  // write to both the modal and the pricing strip if present
-  const targets = [
-    document.getElementById('promoCodeValue'),     // modal code (id)
-    document.getElementById('promoStripCode'),     // strip code (id)
-    document.querySelector('.promo-code-value')    // modal code (class fallback)
-  ].filter(Boolean);
-  targets.forEach(el => el.textContent = promoCode);
-}
+      // write to both the modal and the pricing strip if present
+      const targets = [
+        document.getElementById('promoCodeValue'),     // modal code (id)
+        document.getElementById('promoStripCode'),     // strip code (id)
+        document.querySelector('.promo-code-value')    // modal code (class fallback)
+      ].filter(Boolean);
+      targets.forEach(el => el.textContent = promoCode);
+    }
 
-  // Lock the Continue button initially
-  continueBtn.disabled = true;
-  continueBtn.classList.add('locked');
-  continueBtn.style.setProperty('background', '#004a99', 'important');
-  continueBtn.style.setProperty('background-image', 'none', 'important');
+    // Lock the Continue button initially
+    continueBtn.disabled = true;
+    continueBtn.classList.add('locked');
+    continueBtn.style.setProperty('background', '#004a99', 'important');
+    continueBtn.style.setProperty('background-image', 'none', 'important');
 
-  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
-  // ---- state (declare BEFORE any calls that read them)
-  let finished   = false;
-  let scratching = false;
-  let idleTimer  = null;
+    // ---- state (declare BEFORE any calls that read them)
+    let finished = false;
+    let scratching = false;
+    let idleTimer = null;
 
-  const hintText = document.querySelector('#scratchHint .hint-copy');
+    const hintText = document.querySelector('#scratchHint .hint-copy');
 
-  // ---- Ghost finger zigzag animation (no extra HTML needed)
-reveal.style.position = reveal.style.position || 'relative';
-reveal.style.overflow = 'hidden';
+    // ---- Ghost finger zigzag animation (no extra HTML needed)
+    reveal.style.position = reveal.style.position || 'relative';
+    reveal.style.overflow = 'hidden';
 
-const ghost = document.createElement('div');
-const DOT = 28;                 // ghost diameter (px)
-const PAD = 10;                 // inner padding from edges
-ghost.id = 'scratchGhost';
-ghost.style.cssText = `
+    const ghost = document.createElement('div');
+    const DOT = 28;                 // ghost diameter (px)
+    const PAD = 10;                 // inner padding from edges
+    ghost.id = 'scratchGhost';
+    ghost.style.cssText = `
   position: absolute;
   left: 0; top: 0;              /* we’ll move it via translate() */
   width: ${DOT}px; height: ${DOT}px;
@@ -2331,226 +2347,226 @@ ghost.style.cssText = `
   box-shadow: 0 4px 10px rgba(0,0,0,.15);
   transform: translate(0,0);
 `;
-reveal.appendChild(ghost);
+    reveal.appendChild(ghost);
 
-let gx = PAD, gy = PAD;
-let vx = 2.2, vy = 1.6;
-let ghostActive = false;
+    let gx = PAD, gy = PAD;
+    let vx = 2.2, vy = 1.6;
+    let ghostActive = false;
 
-function bounds() {
-  const w = reveal.clientWidth;
-  const h = reveal.clientHeight;
-  return {
-    minX: PAD,              minY: PAD,
-    maxX: w - PAD - DOT,    maxY: h - PAD - DOT
-  };
-}
+    function bounds() {
+      const w = reveal.clientWidth;
+      const h = reveal.clientHeight;
+      return {
+        minX: PAD, minY: PAD,
+        maxX: w - PAD - DOT, maxY: h - PAD - DOT
+      };
+    }
 
-function placeGhost() {
-  ghost.style.transform = `translate(${gx}px, ${gy}px)`;
-}
+    function placeGhost() {
+      ghost.style.transform = `translate(${gx}px, ${gy}px)`;
+    }
 
-function animateGhost() {
-  if (!ghostActive) return;
-  const b = bounds();
-  gx += vx; gy += vy;
-  if (gx <= b.minX || gx >= b.maxX) vx *= -1;
-  if (gy <= b.minY || gy >= b.maxY) vy *= -1;
-  gx = Math.min(Math.max(gx, b.minX), b.maxX);
-  gy = Math.min(Math.max(gy, b.minY), b.maxY);
-  placeGhost();
-  requestAnimationFrame(animateGhost);
-}
+    function animateGhost() {
+      if (!ghostActive) return;
+      const b = bounds();
+      gx += vx; gy += vy;
+      if (gx <= b.minX || gx >= b.maxX) vx *= -1;
+      if (gy <= b.minY || gy >= b.maxY) vy *= -1;
+      gx = Math.min(Math.max(gx, b.minX), b.maxX);
+      gy = Math.min(Math.max(gy, b.minY), b.maxY);
+      placeGhost();
+      requestAnimationFrame(animateGhost);
+    }
 
-function startGhost() {
-  if (ghostActive || finished) return;
-  const b = bounds();
-  gx = Math.min(Math.max(reveal.clientWidth  * 0.35, b.minX), b.maxX);
-  gy = Math.min(Math.max(reveal.clientHeight * 0.35, b.minY), b.maxY);
-  placeGhost();
-  ghostActive = true;
-  ghost.style.opacity = '1';
-  animateGhost();
-}
-function stopGhost() {
-  ghostActive = false;
-  ghost.style.opacity = '0';
-}
+    function startGhost() {
+      if (ghostActive || finished) return;
+      const b = bounds();
+      gx = Math.min(Math.max(reveal.clientWidth * 0.35, b.minX), b.maxX);
+      gy = Math.min(Math.max(reveal.clientHeight * 0.35, b.minY), b.maxY);
+      placeGhost();
+      ghostActive = true;
+      ghost.style.opacity = '1';
+      animateGhost();
+    }
+    function stopGhost() {
+      ghostActive = false;
+      ghost.style.opacity = '0';
+    }
 
-/* Hint helpers now drive the ghost (old orbit hint is removed above) */
-function showHint() {
-  if (!finished) {
-    startGhost();
-    if (hintText) hintText.style.opacity = '1';
-  }
-}
-function hideHint() {
-  stopGhost();
-  if (hintText) hintText.style.opacity = '0';
-}
-function scheduleHint() {
-  clearTimeout(idleTimer);
-  if (!finished) idleTimer = setTimeout(showHint, 3000);
-}
-
-/* keep ghost in-bounds if size changes */
-const clampGhostToBounds = () => {
-  const b = bounds();
-  gx = Math.min(Math.max(gx, b.minX), b.maxX);
-  gy = Math.min(Math.max(gy, b.minY), b.maxY);
-  placeGhost();
-};
-
-  // ---- sizing + paint
-  function sizeCanvas() {
-    const cssW = reveal.clientWidth;
-    const contentH = Math.ceil((content?.scrollHeight || 148));
-    const cssH = Math.max(148, contentH + 10);
-
-    const dpr = Math.max(1, window.devicePixelRatio || 1);
-    // reset transform before resizing
-    ctx.setTransform(1,0,0,1,0,0);
-    canvas.width  = Math.floor(cssW * dpr);
-    canvas.height = Math.floor(cssH * dpr);
-    canvas.style.width  = cssW + 'px';
-    canvas.style.height = cssH + 'px';
-    ctx.scale(dpr, dpr);
-
-    paintCover(cssW, cssH);
-  }
-
-  function paintCover(w, h) {
-    // branded blue gradient + texture
-    const grad = ctx.createLinearGradient(0, 0, w, h);
-    grad.addColorStop(0, '#007BFF');
-    grad.addColorStop(1, '#339CFF');
-
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, w, h);
-
-    const step = 10;
-    ctx.globalAlpha = 0.25;
-    for (let y = 0; y < h; y += step) {
-      for (let x = 0; x < w; x += step) {
-        ctx.fillStyle = ((x + y) % (step * 2)) ? '#ffffff' : '#003F80';
-        ctx.fillRect(x, y, 2, 2);
+    /* Hint helpers now drive the ghost (old orbit hint is removed above) */
+    function showHint() {
+      if (!finished) {
+        startGhost();
+        if (hintText) hintText.style.opacity = '1';
       }
     }
-    ctx.globalAlpha = 1;
-    ctx.globalCompositeOperation = 'destination-out'; // ready to scratch
-  }
+    function hideHint() {
+      stopGhost();
+      if (hintText) hintText.style.opacity = '0';
+    }
+    function scheduleHint() {
+      clearTimeout(idleTimer);
+      if (!finished) idleTimer = setTimeout(showHint, 3000);
+    }
 
-  // ---- scratch interaction
-  const brush = 30;
+    /* keep ghost in-bounds if size changes */
+    const clampGhostToBounds = () => {
+      const b = bounds();
+      gx = Math.min(Math.max(gx, b.minX), b.maxX);
+      gy = Math.min(Math.max(gy, b.minY), b.maxY);
+      placeGhost();
+    };
 
-  function scratch(x, y) {
-    ctx.beginPath();
-    ctx.arc(x, y, brush, 0, Math.PI * 2);
-    ctx.fill();
-  }
+    // ---- sizing + paint
+    function sizeCanvas() {
+      const cssW = reveal.clientWidth;
+      const contentH = Math.ceil((content?.scrollHeight || 148));
+      const cssH = Math.max(148, contentH + 10);
 
-  function pointerPos(e) {
-    const r = canvas.getBoundingClientRect();
-    const p = e.touches ? e.touches[0] : e;
-    return { x: p.clientX - r.left, y: p.clientY - r.top };
-  }
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      // reset transform before resizing
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      canvas.width = Math.floor(cssW * dpr);
+      canvas.height = Math.floor(cssH * dpr);
+      canvas.style.width = cssW + 'px';
+      canvas.style.height = cssH + 'px';
+      ctx.scale(dpr, dpr);
 
-  function scratchPoint(e) {
-    const { x, y } = pointerPos(e);
-    scratch(x, y);
-  }
+      paintCover(cssW, cssH);
+    }
 
-  function start(e) {
-    scratching = true;
-    reveal.classList.add('scratching');
-    hideHint();
-    clearTimeout(idleTimer);
-    scratchPoint(e);
-    e.preventDefault();
-  }
+    function paintCover(w, h) {
+      // branded blue gradient + texture
+      const grad = ctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, '#007BFF');
+      grad.addColorStop(1, '#339CFF');
 
-  function move(e) {
-    if (!scratching) return;
-    scratchPoint(e);
-    e.preventDefault();
-  }
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
 
-  function end() {
-    scratching = false;
-    reveal.classList.remove('scratching');
-    if (!finished) scheduleHint();
-    maybeFinish();
-  }
+      const step = 10;
+      ctx.globalAlpha = 0.25;
+      for (let y = 0; y < h; y += step) {
+        for (let x = 0; x < w; x += step) {
+          ctx.fillStyle = ((x + y) % (step * 2)) ? '#ffffff' : '#003F80';
+          ctx.fillRect(x, y, 2, 2);
+        }
+      }
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = 'destination-out'; // ready to scratch
+    }
 
-  canvas.addEventListener('pointerdown', start);
-  canvas.addEventListener('pointermove', move);
-  window.addEventListener('pointerup', end);
-  canvas.addEventListener('touchstart', start, { passive: false });
-  canvas.addEventListener('touchmove',  move,  { passive: false });
-  window.addEventListener('touchend',   end);
+    // ---- scratch interaction
+    const brush = 30;
 
-  // ---- completion calc
-  function clearedRatio() {
-    const { width, height } = canvas;
-    const sample = ctx.getImageData(0, 0, width, height).data;
-    let clear = 0;
-    for (let i = 3; i < sample.length; i += 4) if (sample[i] === 0) clear++;
-    return clear / (sample.length / 4);
-  }
+    function scratch(x, y) {
+      ctx.beginPath();
+      ctx.arc(x, y, brush, 0, Math.PI * 2);
+      ctx.fill();
+    }
 
-  function maybeFinish() {
-    if (finished) return;
-    if (clearedRatio() > 0.6) {
-      finished = true;
-      wrap.classList.add('scratch-done');
+    function pointerPos(e) {
+      const r = canvas.getBoundingClientRect();
+      const p = e.touches ? e.touches[0] : e;
+      return { x: p.clientX - r.left, y: p.clientY - r.top };
+    }
+
+    function scratchPoint(e) {
+      const { x, y } = pointerPos(e);
+      scratch(x, y);
+    }
+
+    function start(e) {
+      scratching = true;
+      reveal.classList.add('scratching');
       hideHint();
       clearTimeout(idleTimer);
-
-      continueBtn.disabled = false;
-      continueBtn.classList.remove('locked');
-      continueBtn.style.removeProperty('background');
-      continueBtn.style.removeProperty('background-image');
-      continueBtn.focus();
-
-      try { window.sendAnalytics?.('scratch_revealed', { pct: 100 }); } catch {}
+      scratchPoint(e);
+      e.preventDefault();
     }
-  }
 
-  // ---- reset button (optional)
-  document.getElementById('scratchReset')?.addEventListener('click', () => {
-    wrap.classList.remove('scratch-done');
-    finished = false;
+    function move(e) {
+      if (!scratching) return;
+      scratchPoint(e);
+      e.preventDefault();
+    }
+
+    function end() {
+      scratching = false;
+      reveal.classList.remove('scratching');
+      if (!finished) scheduleHint();
+      maybeFinish();
+    }
+
+    canvas.addEventListener('pointerdown', start);
+    canvas.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', end);
+    canvas.addEventListener('touchstart', start, { passive: false });
+    canvas.addEventListener('touchmove', move, { passive: false });
+    window.addEventListener('touchend', end);
+
+    // ---- completion calc
+    function clearedRatio() {
+      const { width, height } = canvas;
+      const sample = ctx.getImageData(0, 0, width, height).data;
+      let clear = 0;
+      for (let i = 3; i < sample.length; i += 4) if (sample[i] === 0) clear++;
+      return clear / (sample.length / 4);
+    }
+
+    function maybeFinish() {
+      if (finished) return;
+      if (clearedRatio() > 0.6) {
+        finished = true;
+        wrap.classList.add('scratch-done');
+        hideHint();
+        clearTimeout(idleTimer);
+
+        continueBtn.disabled = false;
+        continueBtn.classList.remove('locked');
+        continueBtn.style.removeProperty('background');
+        continueBtn.style.removeProperty('background-image');
+        continueBtn.focus();
+
+        try { window.sendAnalytics?.('scratch_revealed', { pct: 100 }); } catch { }
+      }
+    }
+
+    // ---- reset button (optional)
+    document.getElementById('scratchReset')?.addEventListener('click', () => {
+      wrap.classList.remove('scratch-done');
+      finished = false;
+      sizeCanvas();
+      showHint();
+      continueBtn.disabled = true;
+      continueBtn.classList.add('locked');
+      continueBtn.style.setProperty('background', '#004a99', 'important');
+      continueBtn.style.setProperty('background-image', 'none', 'important');
+    });
+
+    // ---- mirror timer(s)
+    const src = document.getElementById('countdownTimer');
+    const mirror = document.getElementById('scratchMirrorTimer');
+    const note = document.getElementById('scratchMirrorTimerNote');
+    if (src) {
+      const sync = () => {
+        if (mirror) mirror.textContent = src.textContent;
+        if (note) note.textContent = src.textContent;
+      };
+      const obs = new MutationObserver(sync);
+      obs.observe(src, { childList: true, characterData: true, subtree: true });
+      sync();
+    }
+
+    // ---- kick off
     sizeCanvas();
     showHint();
-    continueBtn.disabled = true;
-    continueBtn.classList.add('locked');
-    continueBtn.style.setProperty('background', '#004a99', 'important');
-    continueBtn.style.setProperty('background-image', 'none', 'important');
-  });
-
-  // ---- mirror timer(s)
-  const src    = document.getElementById('countdownTimer');
-  const mirror = document.getElementById('scratchMirrorTimer');
-  const note   = document.getElementById('scratchMirrorTimerNote');
-  if (src) {
-    const sync = () => {
-      if (mirror) mirror.textContent = src.textContent;
-      if (note)   note.textContent   = src.textContent;
-    };
-    const obs = new MutationObserver(sync);
-    obs.observe(src, { childList: true, characterData: true, subtree: true });
-    sync();
+    clampGhostToBounds();
+    window.addEventListener('resize', () => {
+      if (!wrap.classList.contains('scratch-done')) sizeCanvas();
+    }, { passive: true });
   }
-
-  // ---- kick off
-  sizeCanvas();
-  showHint();
-  clampGhostToBounds();
-  window.addEventListener('resize', () => {
-    if (!wrap.classList.contains('scratch-done')) sizeCanvas();
-  }, { passive: true });
-}
 
   function closeModal() {
     modal.classList.remove('show');
@@ -2743,8 +2759,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const header = document.getElementById("valueModalHeader");
   if (header) {
     header.textContent = firstName
-      ? `🎁 ${firstName}, scratch to unlock your promo`
-      : "🎁 Scratch to unlock your promo";
+      ? `🎁 ${firstName}, scratch to unlock your random promo`
+      : "🎁 Scratch to unlock your random promo";
     const promoLine = document.getElementById("promoCodeLine");
     if (promoLine) {
       const code = `${firstName.toLowerCase()}-100-OFF`;
@@ -2837,11 +2853,11 @@ renderMuscleBars(document.getElementById('muscleBarsGoal'), 5);
 
 document.addEventListener('DOMContentLoaded', () => {
   // Build promo code (ALL CAPS)
-  const fullName  = localStorage.getItem('name') || '';
+  const fullName = localStorage.getItem('name') || '';
   const firstName = (fullName.split(' ')[0] || 'user')
     .replace(/[^a-z0-9]/gi, '-')       // normalize
-    .replace(/-+/g,'-')
-    .replace(/^-|-$/g,'');
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
   const promoCode = `${firstName}-100-OFF`.toUpperCase();
 
   // Persist & render in both places (modal + strip)
@@ -2852,11 +2868,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Promo strip behavior
-  const strip   = document.getElementById('promoAppliedStrip');
+  const strip = document.getElementById('promoAppliedStrip');
   const timerEl = document.getElementById('promoStripTimer');
-  const src     = document.getElementById('countdownTimer');
+  const src = document.getElementById('countdownTimer');
 
-  if (strip){
+  if (strip) {
     const timerActive = () => {
       const timer = document.getElementById('timerContainer');
       if (!timer) return false;
@@ -2884,7 +2900,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     refresh();
     const visIv = setInterval(refresh, 800); // lightweight sync with your timer
-        document.addEventListener(DISCOUNT_STATE_EVENT, refresh);
+    document.addEventListener(DISCOUNT_STATE_EVENT, refresh);
     // clean up on unload (optional)
     window.addEventListener('beforeunload', () => {
       clearInterval(visIv);
@@ -2893,10 +2909,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Mirror timer into strip
-  if (src && timerEl){
+  if (src && timerEl) {
     const sync = () => { timerEl.textContent = src.textContent; };
     const obs = new MutationObserver(sync);
-    obs.observe(src, { childList:true, characterData:true, subtree:true });
+    obs.observe(src, { childList: true, characterData: true, subtree: true });
     sync();
   }
 });

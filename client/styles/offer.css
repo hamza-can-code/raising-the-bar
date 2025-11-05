@@ -3668,22 +3668,54 @@ body.modal-open .floating-cta {
 }
 
 .discount-badge {
-    display: inline-block;
+ display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+}
+
+.discount-badge__main {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-weight: 800;
     font-size: 28px;
     letter-spacing: .5px;
-    padding: 8px 14px;
+    padding: 8px 18px;
     border-radius: 999px;
     background: #E6F2FF;
     border: 1px solid #007BFF;
     color: #007BFF;
     backdrop-filter: blur(2px);
+     line-height: 1.1;
 }
 
-.discount-badge.expired {
+.discount-badge__bonus {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(230, 242, 255, 0.6) !important;
+    border: 1px solid rgba(0, 123, 255, 0.4) !important;
+    color: #0A4FA5 !important;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: .25px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-align: center !important;
+}
+
+.discount-badge.expired .discount-badge__main {
     background: #f2f4f7;
     border-color: #c7ccd8;
     color: #4b5563;
+}
+
+.discount-badge.expired .discount-badge__bonus {
+    opacity: .4;
 }
 
 .reveal-sub {
@@ -3739,8 +3771,14 @@ body.modal-open .floating-cta {
 }
 
 @media (min-width: 640px) {
-    .discount-badge {
-        font-size: 32px
+    .discount-badge__main {
+        font-size: 32px;
+        padding-inline: 22px;
+    }
+
+    .discount-badge__bonus {
+        font-size: 15px;
+        padding: 5px 14px;
     }
 
     #scratchCanvas {
@@ -3924,29 +3962,29 @@ body.modal-open .floating-cta {
 
 /* Badge (scoped so your scratch-card badge stays as-is) */
 #promoAppliedStrip .discount-badge {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 16px;
-    /* larger */
-    letter-spacing: .5px;
-    padding: 8px 12px;
-    border-radius: 10px;
-    /* 10px radius per request */
+    align-items: flex-start;
+    text-align: left;
+    gap: 6px;
+}
+
+#promoAppliedStrip .discount-badge__main {
     background: #0B63D1;
     border: 1px solid #084EA8;
     color: #FFFFFF;
-    backdrop-filter: blur(2px);
+       border-radius: 10px;
+    font-size: 18px;
+    letter-spacing: .5px;
+    padding: 8px 14px;
 }
 
-#promoAppliedStrip .discount-badge .badge-subline {
-    display: block;
+#promoAppliedStrip .discount-badge__bonus {
+    background: rgba(12, 93, 204, 0.12);
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #ffffff;
     font-size: 12px;
-    font-weight: 700;
-    margin-top: 2px;
-    text-transform: none;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+    padding: 4px 10px;
 }
 
 #promoAppliedStrip .ps-bottom {
