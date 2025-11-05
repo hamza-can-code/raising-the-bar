@@ -112,6 +112,30 @@
   </div>
   <div id="ctaStopContainer"></div>
 
+  <footer class="footer" id="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 Raising The Bar App Ltd. All rights reserved.</p>
+      <div class="footer-links">
+        <a>Start Training</a>
+        <span class="separator">|</span>
+        <a>Our Policies</a>
+        <span class="separator">|</span>
+        <a>Contact Us</a>
+      </div>
+      <!-- <div class="social-icons">
+        <a href="https://www.instagram.com/raising_the_bar_app/?hl=en" target="_blank" aria-label="Instagram">
+          <img src="../assets/instagram-icon.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@Raising_The_Bar_App" target="_blank" aria-label="YouTube">
+          <img src="../assets/youtube-icon.png" alt="YouTube">
+        </a>
+        <a href="https://www.tiktok.com/@raising_the_bar_app" target="_blank" aria-label="TikTok">
+          <img src="../assets/tiktok-icon.png" alt="TikTok">
+        </a>
+      </div> -->
+    </div>
+  </footer>
+
   <script>
     (function () {
       const track = document.querySelector('.carousel-track');
@@ -145,8 +169,11 @@
       let touchDeltaX = 0;
 
       const applyOffset = () => {
-        const offset = -currentIndex * 100;
-        track.style.setProperty('--carousel-offset', `${offset}%`);
+        const targetSlide = slides[currentIndex];
+        if (!targetSlide) return;
+
+        const offset = targetSlide.offsetLeft;
+        track.style.setProperty('--carousel-offset', `${-offset}px`);
       };
 
       const setSlide = (index) => {
@@ -232,6 +259,9 @@
       });
 
       applyOffset();
+      window.addEventListener('resize', () => {
+        window.requestAnimationFrame(applyOffset);
+      });
       startTimer();
 
       if (skipLink) {
