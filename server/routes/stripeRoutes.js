@@ -410,7 +410,7 @@ router.post('/upsell/bonus', protect, async (req, res) => {
       });
       return res.status(409).json({
         error: 'no_payment_method',
-        message: 'No saved card found. Please update your payment method before adding the bonus.',
+        message: 'Please update your payment method before adding the bonus.',
       });
     }
 
@@ -452,7 +452,7 @@ router.post('/upsell/bonus', protect, async (req, res) => {
       return res.status(202).json({
         success: false,
         status: intent.status,
-        message: 'The saved card needs an additional check. Please update your payment method in the dashboard.',
+        message: 'Your card needs an additional check. Please update your payment method.',
       });
     }
 
@@ -489,7 +489,7 @@ router.post('/upsell/bonus', protect, async (req, res) => {
     return res.json({
       success: true,
       intentId: intent.id,
-      redirectUrl: '/pages/dashboard.html?bonus=1',
+      redirectUrl: '/pages/plan-upgrade.html',
     });
   } catch (err) {
     console.error('❌ /upsell/bonus error', err);
@@ -497,7 +497,7 @@ router.post('/upsell/bonus', protect, async (req, res) => {
     if (err?.type === 'StripeCardError' || err?.code === 'authentication_required') {
       return res.status(402).json({
         error: err.code || 'card_error',
-        message: 'Your bank needs extra approval. Please open your dashboard to approve the payment.',
+        message: 'Your bank needs extra approval. Please approve the payment.',
       });
     }
 
