@@ -61,6 +61,21 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       <!-- <a class="dashboard-link" id="upgrade-dashboard-link" href="/pages/dashboard.html">Skip the wait &mdash; take me there now</a> -->
     </section>
   </main>
+<script>
+  const email = localStorage.getItem('email');
+
+  const payload = {
+    value: 9.99,
+    currency: 'GBP',
+    content_ids: ['rtb-upsell-9-99']
+  };
+
+  if (email) {
+    payload.email = email;
+  }
+
+  ttq.track('Purchase', payload);
+</script>
   <script>
     (function () {
       const params = new URLSearchParams(window.location.search);
