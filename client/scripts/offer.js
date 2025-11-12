@@ -847,12 +847,12 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       title: "Adaptive Progression Engine (PT)",
-      image: "../assets/visible-results.png",
+      image: "../assets/visible-results.webp",
       desc: ""
     },
     {
       title: "Adaptive Progression Engine (PT)",
-      image: "../assets/meal-scanner.png",
+      image: "../assets/meal-scanner.webp",
       desc: ""
     },
     {
