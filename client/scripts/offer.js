@@ -633,8 +633,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="plan-section">
         <h3 class="plan-heading">${name}'s Plan is Ready!</h3>
         <div class="plan-desc">
-         <p>Other apps just track. <strong>We use what you track to adapt workouts & meals</strong> so you
-      <strong>get fit faster</strong>.<br>
+         <p><strong>Tap the cards</strong> to learn more about your plan.<br>
         <div class="plan-grid">
           <!-- 1) Duration -->
         <div class="flip-card" data-description="Your ${sessionDuration} routine is built for results — you’ve earned your crown.">
@@ -848,7 +847,12 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       title: "Adaptive Progression Engine (PT)",
-      image: "../assets/workout-summary.PNG",
+      image: "../assets/visible-results.png",
+      desc: ""
+    },
+    {
+      title: "Adaptive Progression Engine (PT)",
+      image: "../assets/meal-scanner.png",
       desc: ""
     },
     {
@@ -860,7 +864,7 @@ document.addEventListener("DOMContentLoaded", () => {
       title: "Macro-Matched Meals (PT)",
       image: "../assets/coach-call.png",
       desc: ""
-    },
+    }
     // {
     //   title: "Flexible Logging, Your Way (PT)",
     //   image: "../assets/5_flexible_logging.png",
@@ -2242,21 +2246,21 @@ function setUpCompareModal0() {
     }
 
     if (badge) {
-  const mainLine = badge.querySelector('.discount-badge__main');
-    const bonusPill = badge.querySelector('.discount-badge__bonus');
+      const mainLine = badge.querySelector('.discount-badge__main');
+      const bonusPill = badge.querySelector('.discount-badge__bonus');
 
-    if (mainLine) {
-      if (!mainLine.dataset.activeLabel) {
-        mainLine.dataset.activeLabel = mainLine.textContent.trim() || '100% OFF';
+      if (mainLine) {
+        if (!mainLine.dataset.activeLabel) {
+          mainLine.dataset.activeLabel = mainLine.textContent.trim() || '100% OFF';
+        }
+        mainLine.textContent = active ? mainLine.dataset.activeLabel : 'Discount expired';
+      } else {
+        if (!badge.dataset.activeLabel) {
+          badge.dataset.activeLabel = badge.textContent.trim();
+        }
+        badge.textContent = active ? (badge.dataset.activeLabel || '100% OFF') : 'Discount expired';
       }
-      mainLine.textContent = active ? mainLine.dataset.activeLabel : 'Discount expired';
-    } else {
-      if (!badge.dataset.activeLabel) {
-        badge.dataset.activeLabel = badge.textContent.trim();
-      }
-      badge.textContent = active ? (badge.dataset.activeLabel || '100% OFF') : 'Discount expired';
-      }
-if (bonusPill) bonusPill.toggleAttribute('hidden', !active);
+      if (bonusPill) bonusPill.toggleAttribute('hidden', !active);
       badge.classList.toggle('expired', !active);
     }
 
@@ -2758,16 +2762,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const firstName = fullName.split(" ")[0] || "";
   const header = document.getElementById("valueModalHeader");
   if (header) {
-    header.textContent = firstName
-      ? `🎁 ${firstName}, scratch to unlock your random promo`
-      : "🎁 Scratch to unlock your random promo";
+    const baseText = firstName
+      ? `🎁 ${firstName}, scratch to unlock your <span style="text-decoration: underline;">random</span> promo`
+      : `🎁 Scratch to unlock your <span style="text-decoration: underline;">random</span> promo`;
+    header.innerHTML = baseText;
+
     const promoLine = document.getElementById("promoCodeLine");
     if (promoLine) {
       const code = `${firstName.toLowerCase()}-100-OFF`;
       promoLine.innerHTML = `
-    <span class="promo-code-label">Your code:</span>
-    <code class="promo-code-value">${code}</code>
-  `;
+        <span class="promo-code-label">Your code:</span>
+        <code class="promo-code-value">${code}</code>
+      `;
       promoLine.dataset.activeHtml = promoLine.innerHTML;
     }
   }
