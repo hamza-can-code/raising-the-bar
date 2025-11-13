@@ -2225,6 +2225,109 @@ function setUpCompareModal0() {
     }, true);
   })();
 
+  let discountShuffleTimer = null;
+  let discountShuffleTarget = null;
+
+  function lockDiscountLabelWidth(target, sampleText) {
+    if (!target || !document.body) return;
+
+    const baseLabel = sampleText
+      || target.dataset.activeLabel
+      || target.dataset.baseLabel
+      || target.textContent.trim()
+      || '100% OFF';
+
+    if (!baseLabel) return;
+
+    const needsMeasure = target.dataset.widthLockLabel !== baseLabel
+      || target.dataset.widthLockApplied !== '1';
+
+    if (!needsMeasure) return;
+
+    const clone = target.cloneNode(true);
+    clone.textContent = baseLabel;
+    clone.style.position = 'absolute';
+    clone.style.visibility = 'hidden';
+    clone.style.pointerEvents = 'none';
+    clone.style.width = 'auto';
+    clone.style.minWidth = '0';
+    clone.style.maxWidth = 'none';
+    clone.style.whiteSpace = 'nowrap';
+    clone.style.left = '-9999px';
+    clone.style.top = '-9999px';
+
+    document.body.appendChild(clone);
+    const width = clone.getBoundingClientRect().width;
+    document.body.removeChild(clone);
+
+    if (width) {
+      target.style.minWidth = `${Math.ceil(width)}px`;
+      target.dataset.widthLockApplied = '1';
+      target.dataset.widthLockLabel = baseLabel;
+    }
+  }
+
+  function startScratchDiscountShuffle(target) {
+    if (!target) return;
+
+    // clear any existing shuffle before starting a fresh one
+    if (discountShuffleTimer) {
+      clearInterval(discountShuffleTimer);
+      discountShuffleTimer = null;
+    }
+
+    discountShuffleTarget = target;
+    const baseLabel = target.dataset.activeLabel || target.textContent.trim() || '100% OFF';
+    target.dataset.baseLabel = baseLabel;
+    target.dataset.shuffle = '1';
+
+    lockDiscountLabelWidth(target, baseLabel);
+
+    const randomLabel = (() => {
+      let cycle = 0;
+      return () => {
+        cycle = (cycle + 1) % 7;
+        if (cycle === 0) return baseLabel;
+
+        let value;
+        let label;
+        do {
+          value = Math.floor(Math.random() * 91) + 10; // 10 – 100
+          label = `${value}% OFF`;
+        } while (label === baseLabel);
+
+        return label;
+      };
+    })();
+
+    // set initial random value immediately for responsiveness
+    target.textContent = randomLabel();
+    discountShuffleTimer = setInterval(() => {
+      target.textContent = randomLabel();
+    }, 40);
+  }
+
+  function stopScratchDiscountShuffle(options = {}) {
+    const { restore = true, target = discountShuffleTarget } = options;
+
+    if (discountShuffleTimer) {
+      clearInterval(discountShuffleTimer);
+      discountShuffleTimer = null;
+    }
+
+    if (target) {
+      target.dataset.shuffle = '0';
+      if (restore) {
+        const label = target.dataset.activeLabel || target.dataset.baseLabel || '100% OFF';
+        target.textContent = label;
+      }
+    }
+
+    if (!options.target || options.target === discountShuffleTarget) {
+      discountShuffleTarget = null;
+    }
+  }
+
   function updateScratchDiscountContent(active = isDiscountActive()) {
     const wrap = document.querySelector('.scratch-card');
     if (!wrap) return;
@@ -2235,6 +2338,7 @@ function setUpCompareModal0() {
     const promoLine = document.getElementById('promoCodeLine');
     const note = content ? content.querySelector('.reveal-small') : null;
     const timer = document.getElementById('scratchMirrorTimer');
+        const urgencyNotes = document.querySelectorAll('.urgency-note');
     let expired = content ? content.querySelector('.scratch-expired-message') : null;
 
     if (content && !expired) {
@@ -2249,16 +2353,31 @@ function setUpCompareModal0() {
       const mainLine = badge.querySelector('.discount-badge__main');
       const bonusPill = badge.querySelector('.discount-badge__bonus');
 
+       const labelTarget = mainLine || badge;
+      const isAnimating = labelTarget && labelTarget.dataset.shuffle === '1';
+      const isDone = wrap.classList.contains('scratch-done');
+
+
       if (mainLine) {
         if (!mainLine.dataset.activeLabel) {
           mainLine.dataset.activeLabel = mainLine.textContent.trim() || '100% OFF';
         }
-        mainLine.textContent = active ? mainLine.dataset.activeLabel : 'Discount expired';
+    if (!active) {
+          stopScratchDiscountShuffle({ restore: false, target: mainLine });
+          mainLine.textContent = 'Discount expired';
+        } else if (isDone || !isAnimating) {
+          mainLine.textContent = mainLine.dataset.activeLabel;
+        }
       } else {
         if (!badge.dataset.activeLabel) {
           badge.dataset.activeLabel = badge.textContent.trim();
         }
-        badge.textContent = active ? (badge.dataset.activeLabel || '100% OFF') : 'Discount expired';
+         if (!active) {
+          stopScratchDiscountShuffle({ restore: false, target: badge });
+          badge.textContent = 'Discount expired';
+        } else if (isDone || !isAnimating) {
+          badge.textContent = badge.dataset.activeLabel || '100% OFF';
+        }
       }
       if (bonusPill) bonusPill.toggleAttribute('hidden', !active);
       badge.classList.toggle('expired', !active);
@@ -2267,6 +2386,7 @@ function setUpCompareModal0() {
     if (promoLine) promoLine.toggleAttribute('hidden', !active);
     if (note) note.toggleAttribute('hidden', !active);
     if (timer) timer.toggleAttribute('hidden', !active);
+        urgencyNotes.forEach(el => el.toggleAttribute('hidden', !active));
     if (expired) expired.toggleAttribute('hidden', active);
   }
 
@@ -2295,7 +2415,10 @@ function setUpCompareModal0() {
 
     if (!canvas || !wrap || !reveal || !continueBtn) return;
 
-    updateScratchDiscountContent(isDiscountActive());
+    const discountLabel = content ? (content.querySelector('.discount-badge__main') || content.querySelector('.discount-badge')) : null;
+    if (isDiscountActive() && discountLabel && !wrap.classList.contains('scratch-done')) {
+      startScratchDiscountShuffle(discountLabel);
+    }
 
     {
       const fullName = localStorage.getItem('name') || '';
@@ -2533,6 +2656,13 @@ function setUpCompareModal0() {
         continueBtn.style.removeProperty('background-image');
         continueBtn.focus();
 
+        const shouldRestoreLabel = isDiscountActive();
+        if (discountLabel) {
+          stopScratchDiscountShuffle({ target: discountLabel, restore: shouldRestoreLabel });
+        } else {
+          stopScratchDiscountShuffle({ restore: shouldRestoreLabel });
+        }
+
         try { window.sendAnalytics?.('scratch_revealed', { pct: 100 }); } catch { }
       }
     }
@@ -2547,6 +2677,9 @@ function setUpCompareModal0() {
       continueBtn.classList.add('locked');
       continueBtn.style.setProperty('background', '#004a99', 'important');
       continueBtn.style.setProperty('background-image', 'none', 'important');
+            if (isDiscountActive() && discountLabel) {
+        startScratchDiscountShuffle(discountLabel);
+      }
     });
 
     // ---- mirror timer(s)
