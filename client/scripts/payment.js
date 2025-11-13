@@ -67,11 +67,15 @@
     }
     if (loadingSection) loadingSection.style.display = 'none';
   }
+    function markOfferDisclaimerVisible() {
+    document.body.classList.add('offer-disclaimer-visible');
+  }
   function showPaymentPanel() {
     stopStripeLoading();
     payPanel.classList.remove('preload-hide');
     payPanel.style.display = 'block';
     document.getElementById('postPayNote')?.style.setProperty('display', 'block');
+    markOfferDisclaimerVisible();
     const focusable = payPanel.querySelector('iframe,button,[tabindex],input,select,textarea');
     focusable?.focus();
   }
@@ -313,6 +317,7 @@
     localStorage.setItem('planName', 'Pro Tracker');
     try { window.updatePlanSummary?.(); } catch (_) { }
     collapseAllOfferCards();
+     markOfferDisclaimerVisible();
     if (continueBtn.disabled) return;
     continueBtn.disabled = true;
     const cardsSection = document.getElementById('offerCardsContainer');

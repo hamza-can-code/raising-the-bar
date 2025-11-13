@@ -1462,7 +1462,7 @@ img {
 
     .discount-section {
         margin: 0px auto 0px auto;
-        padding: 40px 6px 20px 6px;
+        padding: 40px 6px 40px 6px;
     }
 }
 
@@ -2102,8 +2102,12 @@ body.discount-active .price-strikethrough {
     }
 }
 
+body:not(.offer-disclaimer-visible) .offer-disclaimer {
+    display: none;
+}
+
 .offer-disclaimer {
-    margin-top: 40px;
+    margin-top: 15px;
     text-align: center;
     font-size: 0.8rem;
     color: #888;
