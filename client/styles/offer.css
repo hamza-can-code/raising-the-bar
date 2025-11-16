@@ -1462,7 +1462,7 @@ img {
 
     .discount-section {
         margin: 0px auto 0px auto;
-        padding: 40px 6px 40px 6px;
+        padding: 40px 6px 20px 6px;
     }
 }
 
@@ -1708,7 +1708,7 @@ img {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .offer-card {
@@ -2102,12 +2102,8 @@ body.discount-active .price-strikethrough {
     }
 }
 
-body:not(.offer-disclaimer-visible) .offer-disclaimer {
-    display: none;
-}
-
 .offer-disclaimer {
-    margin-top: 15px;
+    margin-top: 40px;
     text-align: center;
     font-size: 0.8rem;
     color: #888;
@@ -2656,6 +2652,14 @@ body:not(.offer-disclaimer-visible) .offer-disclaimer {
     display: inline-block;
     margin-top: 10px;
   }   */
+
+.offer-personalization {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #111;
+    margin: 20px 0 0;
+}
 
 .trust-line {
     font-size: 0.85rem;
@@ -3323,7 +3327,7 @@ body.modal-open .floating-cta {
     /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); */
     color: #2D3748;
     text-align: center;
-    padding: 0 1.5rem 0 1.5rem;
+    padding: 0 1rem 0 1rem;
     border-radius: 8px;
     margin-bottom: 0.2rem;
     font-family: 'Poppins', sans-serif;
@@ -3349,17 +3353,17 @@ body.modal-open .floating-cta {
     width: auto;
     max-height: 150px;
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
-    bottom: 98px;
+    bottom: 60px;
 }
 
 .social-proof__headline {
-    font-size: 1.125rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0;
     color: #2D3748;
     position: relative;
     z-index: 2;
-    margin-top: 165px;
+    margin-top: 185px;
 }
 
 .social-proof__recent {
@@ -3672,7 +3676,7 @@ body.modal-open .floating-cta {
 }
 
 .discount-badge {
- display: inline-flex;
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -3692,7 +3696,7 @@ body.modal-open .floating-cta {
     border: 1px solid #007BFF;
     color: #007BFF;
     backdrop-filter: blur(2px);
-     line-height: 1.1;
+    line-height: 1.1;
 }
 
 .discount-badge__bonus {
@@ -3964,6 +3968,19 @@ body.modal-open .floating-cta {
     color: #1e1d1c;
 }
 
+.promo-strip__rarity {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #5b6b86;
+}
+
+.promo-strip__rarity-count {
+    font-weight: 700;
+    color: #0b63d1;
+}
+
 /* Badge (scoped so your scratch-card badge stays as-is) */
 #promoAppliedStrip .discount-badge {
     align-items: flex-start;
@@ -3975,7 +3992,7 @@ body.modal-open .floating-cta {
     background: #0B63D1;
     border: 1px solid #084EA8;
     color: #FFFFFF;
-       border-radius: 10px;
+    border-radius: 10px;
     font-size: 18px;
     letter-spacing: .5px;
     padding: 8px 14px;
@@ -4104,4 +4121,610 @@ body.modal-open .floating-cta {
     /* tighter spacing */
     width: auto;
     /* stop stretching across the pill */
+}
+
+#promoAppliedStrip.promo-strip {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 20px 22px;
+    margin: 12px auto 14px;
+    width: 100%;
+    max-width: min(560px, 90%);
+    border: 1.5px solid #007BFF;
+    border-radius: 16px;
+    background: linear-gradient(140deg, rgba(0, 123, 255, 0.08), rgba(0, 123, 255, 0.02));
+    backdrop-filter: blur(8px);
+    color: #0f1c3f;
+    overflow: hidden;
+    box-shadow: 0 18px 32px rgba(0, 79, 181, 0.18);
+    text-align: center;
+}
+
+.promo-strip__confetti {
+    position: absolute;
+    inset: -70% -45%;
+    /* cover more of the strip */
+    pointer-events: none;
+    opacity: 0.95;
+    filter: saturate(120%);
+
+    background-image:
+        /* small dots */
+        radial-gradient(circle at 8% 12%, rgba(0, 123, 255, 0.45) 0 4px, transparent 5px),
+        radial-gradient(circle at 30% 22%, rgba(255, 196, 0, 0.55) 0 4px, transparent 5px),
+        radial-gradient(circle at 70% 18%, rgba(255, 71, 107, 0.55) 0 4px, transparent 5px),
+        radial-gradient(circle at 90% 30%, rgba(0, 214, 170, 0.5) 0 4px, transparent 5px),
+
+        /* medium dots */
+        radial-gradient(circle at 18% 68%, rgba(111, 66, 193, 0.55) 0 6px, transparent 7px),
+        radial-gradient(circle at 52% 78%, rgba(255, 161, 67, 0.55) 0 6px, transparent 7px),
+        radial-gradient(circle at 78% 72%, rgba(29, 185, 84, 0.5) 0 6px, transparent 7px),
+
+        /* big soft pops */
+        radial-gradient(circle at 16% 38%, rgba(0, 123, 255, 0.35) 0 10px, transparent 11px),
+        radial-gradient(circle at 84% 52%, rgba(255, 99, 71, 0.4) 0 10px, transparent 11px),
+
+        /* soft blue wash */
+        linear-gradient(120deg, rgba(0, 123, 255, 0.18) 0%, rgba(0, 123, 255, 0.04) 55%, rgba(255, 255, 255, 0.22) 100%);
+
+    background-size:
+        160px 160px,
+        160px 160px,
+        160px 160px,
+        160px 160px,
+
+        220px 220px,
+        220px 220px,
+        220px 220px,
+
+        260px 260px,
+        260px 260px,
+
+        100% 100%;
+
+    background-repeat: repeat;
+}
+
+
+.promo-strip__copy {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    text-align: center;
+}
+
+.promo-strip__title {
+    margin: 0;
+    font: 800 1rem "Poppins", sans-serif;
+    color: #0f1c3f;
+}
+
+.promo-strip__subtitle {
+    margin: 0;
+    font: 600 0.85rem "Poppins", sans-serif;
+    color: rgba(15, 28, 63, 0.76);
+}
+
+.promo-strip__meta {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 14px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.promo-strip__meta-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1.5px solid rgba(0, 123, 255, 0.24);
+    border-radius: 16px;
+    padding: 12px 18px 12px;
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 86px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 10px 20px rgba(12, 74, 173, 0.12);
+}
+
+.promo-strip__meta-label {
+    font: 600 0.68rem "Poppins", sans-serif;
+    color: rgba(15, 28, 63, 0.62);
+    text-transform: uppercase;
+    letter-spacing: .18em;
+}
+
+.promo-strip__meta-value {
+    font: 800 0.9rem "Poppins", sans-serif;
+    color: #0d3f92;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.promo-strip__meta-item--timer .promo-strip__meta-value {
+    font-size: 1.2rem;
+    letter-spacing: 0.08em;
+}
+
+.promo-strip__meta-item--timer {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.18), rgba(0, 123, 255, 0.32));
+    border-color: rgba(0, 123, 255, 0.35);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 12px 22px rgba(0, 87, 189, 0.16);
+    flex: 0 0 138px;
+    padding: 0px 0px !important;
+}
+
+.promo-strip__timer {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: end;
+    gap: 10px;
+}
+
+.promo-strip__timer-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    line-height: 1;
+}
+
+.promo-strip__timer-value {
+    font: 800 1.35rem "Poppins", sans-serif;
+    color: #0b4fc5;
+    letter-spacing: 0.04em;
+}
+
+.promo-strip__timer-unit {
+    font: 600 0.62rem "Poppins", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: rgba(10, 60, 150, 0.72);
+}
+
+.promo-strip__timer-separator {
+    font: 800 1.1rem "Poppins", sans-serif;
+    color: rgba(10, 70, 170, 0.7);
+    align-self: center;
+}
+
+.promo-strip__meta-item--code .promo-strip__meta-value {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.promo-strip__meta-item--code {
+    flex: 1 1 auto;
+    min-width: 0;
+    text-align: left;
+}
+
+.promo-strip__meta-item--code .promo-strip__meta-value::before {
+    content: "✓";
+    color: #1bbf83;
+    font-weight: 700;
+}
+
+.promo-strip--expired {
+    border-color: rgba(122, 139, 174, 0.55);
+    background: linear-gradient(140deg, rgba(143, 154, 179, 0.12), rgba(209, 214, 226, 0.08));
+}
+
+.promo-strip--expired .promo-strip__meta-item {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(134, 149, 177, 0.32);
+    box-shadow: none;
+}
+
+.promo-strip--expired .promo-strip__meta-value {
+    color: #516087;
+}
+
+@media (max-width: 580px) {
+    #promoAppliedStrip.promo-strip {
+        padding: 16px;
+        gap: 14px;
+    }
+
+    .promo-strip__meta {
+        gap: 10px;
+    }
+
+    .promo-strip__meta-item {
+        padding: 12px 16px;
+    }
+
+    .promo-strip__meta-item--timer {
+        flex-basis: 126px;
+    }
+}
+
+@media (max-width: 420px) {
+    #promoAppliedStrip.promo-strip {
+        padding: 14px 12px 16px;
+    }
+
+    .promo-strip__meta {
+        gap: 8px;
+    }
+
+    .promo-strip__meta-item {
+        min-height: 78px;
+        padding: 0px 6px 0px 14px;
+    }
+
+    .promo-strip__meta-item--timer {
+        flex-basis: 116px;
+    }
+}
+
+.promo-strip__highlight {
+    color: #007BFF;
+    font-weight: 700;
+}
+
+.promo-subline {
+    margin: 6px auto 0;
+    width: min(100%, 560px);
+    color: #132144;
+    font: 700 1.2rem/1.35 "Poppins", sans-serif;
+    text-align: left;
+    letter-spacing: 0.01em;
+    display: none;
+}
+
+.promo-subline span {
+    text-transform: capitalize;
+}
+
+.promo-subline.show {
+    display: block;
+}
+
+/* Bottom sheet wheel modal */
+
+.wheel-modal {
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 10px calc(env(safe-area-inset-bottom, 0) + 12px);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+
+.wheel-modal__content {
+    width: 100%;
+    max-width: min(620px, calc(100vw - 12px));
+    margin: 0 auto;
+    border-radius: 28px 28px 0 0;
+    background: #ffffff;
+    padding: 36px 22px 30px;
+    box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.18);
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+@media (max-width: 420px) {
+    .wheel-modal__content {
+        max-width: calc(100vw - 6px);
+        padding: 28px 14px 22px;
+        border-radius: 24px 24px 0 0;
+    }
+}
+
+.wheel-modal__header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.wheel-highlight {
+    color: #007BFF;
+}
+
+.promo-code-line {
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.promo-code-line__text {
+    font: 500 0.85rem "Poppins", sans-serif;
+    color: #4a5b7f;
+    margin-left: 8px;
+}
+
+@media (max-width: 420px) {
+    .promo-code-line {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* .promo-code-card {
+        width: 100%;
+    } */
+}
+
+
+.wheel-modal__body {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    overflow: visible;
+    padding: 0 4px;
+}
+
+.wheel-modal__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 104px;
+    height: 104px;
+}
+
+.wheel-action-btn {
+    width: 100%;
+    padding: 20px 28px;
+    font-size: 1.05rem;
+    border-radius: 14px;
+}
+
+.wheel-action-btn.wheel-action-btn--finished {
+    visibility: visible;
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+.spin-wheel-frame {
+    position: relative;
+    width: min(420px, 100%);
+    margin: 0 auto;
+    padding: 4px 0 10px;
+}
+
+@media (max-width: 768px) {
+    .spin-wheel-frame {
+        width: min(340px, 92vw);
+    }
+}
+
+@media (max-width: 480px) {
+    .spin-wheel-frame {
+        width: min(240px, 82vw);
+        /* smaller wheel on phones */
+        padding: 0 0 6px;
+    }
+
+    .wheel-modal__body {
+        margin-bottom: 12px;
+        padding: 0 2px;
+    }
+
+    .wheel-modal__actions {
+        min-height: 72px;
+        height: auto;
+    }
+
+    .wheel-action-btn {
+        padding: 14px 20px;
+        font-size: 0.98rem;
+    }
+}
+
+/* GLOW AROUND WHEEL */
+.spin-wheel-frame::before {
+    content: "";
+    position: absolute;
+    inset: -16px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 123, 255, 0.3) 0%, rgba(0, 123, 255, 0) 72%);
+    filter: blur(16px);
+    z-index: 0;
+}
+
+@media (max-width: 480px) {
+    .spin-wheel-frame::before {
+        inset: -8px;
+        filter: blur(12px);
+    }
+}
+
+.spin-wheel-outline {
+    position: relative;
+    z-index: 1;
+    border-radius: 50%;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spin-wheel-ring {
+    position: relative;
+    z-index: 1;
+    border-radius: 50%;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spin-wheel {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* JS overrides this on stop, but keep a sane default */
+    transition: transform 1.2s cubic-bezier(0.25, 0.1, 0.15, 1);
+    will-change: transform;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.98) 0%, rgba(245, 248, 255, 0.92) 55%, rgba(233, 240, 255, 0.88) 100%);
+    box-shadow: inset 0 12px 26px rgba(0, 0, 0, 0.04);
+}
+
+/* SVG + segments unchanged */
+.spin-wheel__svg {
+    width: 100%;
+    height: 100%;
+}
+
+.spin-wheel__rim {
+    fill: #ffffff;
+    stroke: #007bff;
+    stroke-width: 8;
+    filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.08));
+}
+
+.spin-wheel__segment {
+    stroke: rgba(0, 0, 0, 0.04);
+    stroke-width: 1.4;
+}
+
+.spin-wheel__segment--light {
+    fill: #ffffff;
+}
+
+.spin-wheel__segment--blue {
+    fill: #007bff;
+}
+
+.spin-wheel__label {
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    fill: #007bff;
+    letter-spacing: 0.02em;
+}
+
+.spin-wheel__label--inverse {
+    fill: #ffffff;
+}
+
+.spin-wheel__hub {
+    fill: #007bff;
+    /* was #0c0e16 */
+    stroke: #dfeaff;
+    stroke-width: 8;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.18));
+}
+
+/* Pointer + gift cap */
+
+.spin-wheel-pointer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* perfectly center on wheel */
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spin-wheel-pointer::after {
+    content: "";
+    position: absolute;
+    /* move clearly above the hub */
+    top: calc(-130%);
+    /* higher than before */
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 16px solid #5aa8ff;
+}
+
+/* SCALE CENTER CAP WITH WHEEL */
+.pointer-cap {
+    width: clamp(70px, 22%, 110px);
+    height: clamp(70px, 22%, 110px);
+    border-radius: 50%;
+    background: transparent;
+    /* no background */
+    border: none;
+    /* no border */
+    box-shadow: none;
+    /* no shadow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 20;
+}
+
+/* EMOJI CENTERING + RESPONSIVE SIZE */
+.pointer-emoji {
+    font-size: clamp(24px, 6vw, 34px);
+    line-height: 1;
+    display: block;
+}
+
+@media (max-width: 480px) {
+    .spin-wheel-pointer::after {
+        top: calc(-175%);
+        /* slightly closer on small screens */
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 14px solid #5aa8ff;
+    }
+}
+
+.promo-code-card {
+    display: inline-flex;
+    align-items: stretch;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(0, 123, 255, 0.04);
+    /* border: 1px solid rgba(0, 123, 255, 0.20); */
+    box-shadow: 0 10px 26px rgba(0, 35, 112, 0.18);
+}
+
+/* Left label chip: small, subtle */
+.promo-code-card__label {
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: rgba(0, 123, 255, 0.10);
+    color: #0c2b5b;
+    display: flex;
+    align-items: center;
+}
+
+/* The actual code – looks like a premium pill */
+.promo-code-card__value {
+    padding: 4px 14px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-family: "SF Mono", "Roboto Mono", ui-monospace, Menlo, Monaco, monospace;
+    background: #007bff;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
