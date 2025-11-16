@@ -230,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const fourWeekProgram = JSON.parse(localStorage.getItem("fourWeekProgram"));
   const twelveWeekProgram = JSON.parse(localStorage.getItem("twelveWeekProgram"));
 
-    const namePrompt = document.getElementById("offerNamePrompt");
+  const namePrompt = document.getElementById("offerNamePrompt");
   if (namePrompt) {
     namePrompt.textContent = `${name || "Athlete"}, claim your calisthenics workout plan`;
   }
@@ -2212,14 +2212,14 @@ function setUpCompareModal0() {
   let built = false;
   let isSpinning = false;
   let hasStopped = false;
-  const SPIN_SPEED = 1.45; // deg per ms during free spin
+  const SPIN_SPEED = 0.75; // deg per ms during free spin
   let spinRaf = 0;
   let currentAngle = 0;
   let lastFrame = 0;
   let targetAngle = null;
   let decelRate = 0;
   let spinVelocity = SPIN_SPEED;
- let hasSpunWheel = localStorage.getItem(WHEEL_SPUN_KEY) === '1';
+  let hasSpunWheel = localStorage.getItem(WHEEL_SPUN_KEY) === '1';
 
   function describeSlice(cx, cy, r, startAngle, endAngle) {
     const startX = cx + r * Math.cos(startAngle);
@@ -2412,11 +2412,14 @@ function setUpCompareModal0() {
         return;
       }
 
-      const delta = timestamp - lastFrame;
+      let delta = timestamp - lastFrame;
       lastFrame = timestamp;
 
+      // clamp to avoid massive jumps on dropped frames
+      if (delta > 32) delta = 32;
+
       const deltaAngle = spinVelocity * delta;
-      currentAngle = currentAngle + deltaAngle;
+      currentAngle += deltaAngle;
 
       if (wheel) {
         wheel.style.transform = `rotate(${currentAngle}deg)`;
@@ -2429,87 +2432,87 @@ function setUpCompareModal0() {
     if (actionBtn) actionBtn.textContent = 'Stop';
   }
 
-  function stopSpin() {
-    if (!isSpinning || hasStopped) return;
-    hasStopped = true;
-    if (!wheel) return;
+function stopSpin() {
+  if (!isSpinning || hasStopped) return;
+  hasStopped = true;
+  if (!wheel) return;
 
-    // Stop the rAF loop – we’re switching to CSS for the final spin
-    isSpinning = false;
-    if (spinRaf) {
-      cancelAnimationFrame(spinRaf);
-      spinRaf = 0;
-    }
-
-    // Read the actual current angle from the DOM to avoid drift
-    const angleNow = getWheelAngle(wheel);
-    currentAngle = angleNow;
-
-    // Align so 100% is at the top (angle 0) after a few extra spins
-    const normalized = ((currentAngle % 360) + 360) % 360;
-    const extraToZero = (360 - normalized) % 360;
-
-    const SPINS_AFTER_STOP = 4; // tweak: more = longer, less = shorter
-    targetAngle = currentAngle + extraToZero + 360 * SPINS_AFTER_STOP;
-
-    // Smooth, eased slowdown via CSS
-    wheel.style.transition = 'transform 2s cubic-bezier(0.15, 0.9, 0.25, 1)';
-
-    wheel.style.transform = `rotate(${targetAngle}deg)`;
-
-    if (actionBtn) actionBtn.disabled = true;
+  // Stop the rAF loop – we’re switching to CSS for the final spin
+  isSpinning = false;
+  if (spinRaf) {
+    cancelAnimationFrame(spinRaf);
+    spinRaf = 0;
   }
 
-function scrollToPlan() {
-  const continueBtn = document.getElementById('offerFinishBtn');
-  if (continueBtn) {
-    const rect = continueBtn.getBoundingClientRect();
-    const offset = rect.top + window.scrollY;
-    const baseTarget = Math.max(offset - (window.innerHeight - rect.height - 24), 0);
-    window.scrollTo({ top: baseTarget + 90, behavior: 'smooth' });
-  } else if (planAnchor) {
-    planAnchor.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
-  }
+  // Read the actual current angle from the DOM
+  const angleNow = getWheelAngle(wheel);
+  currentAngle = angleNow;
+
+  // Align so 100% is at the top (angle 0) after a few extra spins
+  const normalized = ((currentAngle % 360) + 360) % 360;
+  const extraToZero = (360 - normalized) % 360;
+
+  const SPINS_AFTER_STOP = 3; // was 4 — fewer extra spins = less “jump”
+  targetAngle = currentAngle + extraToZero + 360 * SPINS_AFTER_STOP;
+
+  // Smooth ease-out, no initial speed spike
+  wheel.style.transition = 'transform 1.8s ease-out';
+  wheel.style.transform = `rotate(${targetAngle}deg)`;
+
+  if (actionBtn) actionBtn.disabled = true;
 }
 
-function applyDiscountWin() {
-  const promoCode = localStorage.getItem('appliedPromoCode');
+  function scrollToPlan() {
+    const continueBtn = document.getElementById('offerFinishBtn');
+    if (continueBtn) {
+      const rect = continueBtn.getBoundingClientRect();
+      const offset = rect.top + window.scrollY;
+      const baseTarget = Math.max(offset - (window.innerHeight - rect.height - 24), 0);
+    const desiredOffset = 90 - 25; // position CTA slightly higher after auto-scroll
+    window.scrollTo({ top: baseTarget + desiredOffset, behavior: 'smooth' });
+    } else if (planAnchor) {
+      planAnchor.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+    }
+  }
 
-hasSpunWheel = true; // mark wheel as used
-localStorage.setItem(WHEEL_SPUN_KEY, '1');
+  function applyDiscountWin() {
+    const promoCode = localStorage.getItem('appliedPromoCode');
 
-  setDiscountActive(true, { force: true });
+    hasSpunWheel = true; // mark wheel as used
+    localStorage.setItem(WHEEL_SPUN_KEY, '1');
 
-  if (header) header.innerHTML = WIN_HEADER_HTML;
+    setDiscountActive(true, { force: true });
 
-  if (promoLine) {
-    if (promoCode) {
-      promoLine.hidden = false;
-      promoLine.innerHTML = `
+    if (header) header.innerHTML = WIN_HEADER_HTML;
+
+    if (promoLine) {
+      if (promoCode) {
+        promoLine.hidden = false;
+        promoLine.innerHTML = `
         <span class="promo-code-card">
           <span class="promo-code-card__label">Promo code</span>
           <span class="promo-code-card__value">${promoCode}</span>
         </span>
         <span class="promo-code-line__text">applied automatically.</span>
       `.trim();
-    } else {
-      promoLine.hidden = true;
-      promoLine.innerHTML = '';
+      } else {
+        promoLine.hidden = true;
+        promoLine.innerHTML = '';
+      }
     }
+
+    if (actionBtn) {
+      actionBtn.disabled = false;
+      actionBtn.classList.add('wheel-action-btn--finished');
+    }
+
+    window.sendAnalytics?.('wheel_win', { prize: '100' });
+
+    setTimeout(() => {
+      closeWheelModal();
+      scrollToPlan();
+    }, 2200);
   }
-
-  if (actionBtn) {
-    actionBtn.disabled = false;
-    actionBtn.classList.add('wheel-action-btn--finished');
-  }
-
-  window.sendAnalytics?.('wheel_win', { prize: '100' });
-
-  setTimeout(() => {
-    closeWheelModal();
-    scrollToPlan();
-  }, 2200);
-}
 
   if (wheel) {
     wheel.addEventListener('transitionend', (event) => {
@@ -2536,23 +2539,23 @@ localStorage.setItem(WHEEL_SPUN_KEY, '1');
     return !isDiscountActive();
   }
 
-openBtns.forEach(btn => {
-  btn.addEventListener('click', e => {
-    // If they’ve already spun once, just scroll to the plan
-    if (hasSpunWheel) {
+  openBtns.forEach(btn => {
+    btn.addEventListener('click', e => {
+      // If they’ve already spun once, just scroll to the plan
+      if (hasSpunWheel) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        scrollToPlan();
+        return;
+      }
+
+      if (!shouldOpenWheel(btn)) return;
+
       e.preventDefault();
       e.stopImmediatePropagation();
-      scrollToPlan();
-      return;
-    }
-
-    if (!shouldOpenWheel(btn)) return;
-
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    openWheelModal();
+      openWheelModal();
+    });
   });
-});
 
 
   window.addEventListener('resize', () => {
