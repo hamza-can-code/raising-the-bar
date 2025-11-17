@@ -2102,8 +2102,16 @@ body.discount-active .price-strikethrough {
     }
 }
 
+.offer-page .offer-disclaimer {
+    display: none;
+}
+
+.offer-page.offer-disclaimer-visible .offer-disclaimer {
+    display: block;
+}
+
 .offer-disclaimer {
-    margin-top: 40px;
+    margin-top: 20px;
     text-align: center;
     font-size: 0.6rem;
     color: #888;

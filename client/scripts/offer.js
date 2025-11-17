@@ -870,9 +870,9 @@ document.addEventListener("DOMContentLoaded", () => {
       image: "../assets/progress-tracking-2.PNG",
       desc: ""
     },
-    {
+        {
       title: "Macro-Matched Meals (PT)",
-      image: "../assets/coach-call.png",
+      image: "../assets/customer-support.webp",
       desc: ""
     }
     // {
@@ -2673,6 +2673,9 @@ window.addEventListener('popstate', () => {
     paymentSection.style.display = 'none';
     document.getElementById('postPayNote')?.style.setProperty('display', 'none');
     cardsSection.style.display = 'flex';
+        if (window.__PAYMENT_VISITED__) {
+      document.body.classList.add('offer-disclaimer-visible');
+    }
     // neutralize the pushed state
     if (history.state && history.state.paymentOpen) {
       history.replaceState(null, '', location.href);

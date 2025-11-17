@@ -67,7 +67,8 @@
     }
     if (loadingSection) loadingSection.style.display = 'none';
   }
-    function markOfferDisclaimerVisible() {
+  function markOfferDisclaimerVisible() {
+    if (!window.__PAYMENT_VISITED__) return;
     document.body.classList.add('offer-disclaimer-visible');
   }
   function showPaymentPanel() {
@@ -75,7 +76,7 @@
     payPanel.classList.remove('preload-hide');
     payPanel.style.display = 'block';
     document.getElementById('postPayNote')?.style.setProperty('display', 'block');
-    markOfferDisclaimerVisible();
+    window.__PAYMENT_VISITED__ = true;
     const focusable = payPanel.querySelector('iframe,button,[tabindex],input,select,textarea');
     focusable?.focus();
   }
@@ -97,6 +98,7 @@
   let elements;        // ← Stripe Elements instance (lazy-created)
   let clientSecret;    // ← from /api/create-subscription-intent
   let intentType = 'payment';
+  window.__PAYMENT_VISITED__ = window.__PAYMENT_VISITED__ || false;
   function isDiscountActive() {
     const end = Number(localStorage.getItem('discountEndTime') || 0);
     return end > Date.now();
@@ -317,7 +319,6 @@
     localStorage.setItem('planName', 'Pro Tracker');
     try { window.updatePlanSummary?.(); } catch (_) { }
     collapseAllOfferCards();
-     markOfferDisclaimerVisible();
     if (continueBtn.disabled) return;
     continueBtn.disabled = true;
     const cardsSection = document.getElementById('offerCardsContainer');
@@ -407,19 +408,20 @@
   } else {
     swapName();
   }
+  document.getElementById('paymentCloseBtn')?.addEventListener('click', e => {
+    e.preventDefault();
+    const paymentSection = document.getElementById('paymentSection');
+    const cardsSection = document.getElementById('offerCardsContainer');
+
+    paymentSection.classList.add('preload-hide');
+    paymentSection.style.display = 'none';
+    document.getElementById('postPayNote')?.style.setProperty('display', 'none');
+    cardsSection.style.display = 'flex';
+
+    markOfferDisclaimerVisible();
+
+    if (history.state && history.state.paymentOpen) {
+      history.replaceState(null, '', location.href);
+    }
+  });
 })();
-
-document.getElementById('paymentCloseBtn')?.addEventListener('click', e => {
-  e.preventDefault();
-  const paymentSection = document.getElementById('paymentSection');
-  const cardsSection = document.getElementById('offerCardsContainer');
-
-  paymentSection.classList.add('preload-hide');
-  paymentSection.style.display = 'none';
-  document.getElementById('postPayNote')?.style.setProperty('display', 'none');
-  cardsSection.style.display = 'flex';
-
-  if (history.state && history.state.paymentOpen) {
-    history.replaceState(null, '', location.href);
-  }
-});
