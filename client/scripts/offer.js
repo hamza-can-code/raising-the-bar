@@ -214,13 +214,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const workoutFrequency = localStorage.getItem("workoutDays");
   let userGoal = localStorage.getItem("goal");
 
+  const normalizedGender = (gender || '').toLowerCase();
+  const genderSuffix = normalizedGender === 'female' ? '-f' : '';
   const bodyTypeImgMap = {
-    slim: 'slim.webp',
-    average: 'average.webp',
-    heavy: 'heavy.webp',
-    athlete: 'athlete.webp',
-    hero: 'hero.webp',
-    bodybuilder: 'muscular-silhouette.webp'
+    slim: `slim${genderSuffix}.webp`,
+    average: `average${genderSuffix}.webp`,
+    heavy: `heavy${genderSuffix}.webp`,
+    athlete: `athlete${genderSuffix}.webp`,
+    hero: `hero${genderSuffix}.webp`,
+    bodybuilder: `muscular-silhouette${genderSuffix}.webp`
   };
   // Return an absolute/relative path to your assets folder:
   const imgSrc = (file) => `../assets/${file}`;
