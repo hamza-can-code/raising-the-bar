@@ -28,7 +28,7 @@
       We’ll get back to you as soon as possible.
     </p>
 
-    <form action="https://formspree.io/f/mjkwlapp" method="POST">
+    <form id="contact-form" action="https://formspree.io/f/mjkwlapp" method="POST">
       <input type="hidden" name="_subject" value="New message from Raising The Bar contact form!">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" placeholder="Enter your name" required>
@@ -40,11 +40,10 @@
       <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
 
       <button type="submit" id="submit-button">Submit</button>
+      <p id="submission-status" class="form-status" aria-live="polite"></p>
     </form>
     <p style="margin-top: 1rem; font-size: 0.9rem;">
       You’ll receive a confirmation once your message is submitted.
-      <br><br>
-      We aim to respond within 2–3 business days.
     </p>
 
 
@@ -74,6 +73,41 @@
       </div> -->
     </div>
   </footer>
+  <script>
+    (function () {
+      const SUBMISSION_KEY = 'contactFormSubmissionSent';
+      const form = document.getElementById('contact-form');
+      const statusMessage = document.getElementById('submission-status');
+
+      const lockForm = (message) => {
+        const controls = form.querySelectorAll('input:not([type="hidden"]), textarea, button');
+        controls.forEach((control) => {
+          control.disabled = true;
+          control.classList.add('disabled');
+        });
+        if (message) {
+          statusMessage.textContent = message;
+        }
+        statusMessage.classList.add('locked');
+      };
+
+      if (localStorage.getItem(SUBMISSION_KEY) === 'true') {
+        lockForm('You have already submitted a message. We will be in touch soon.');
+      }
+
+      form.addEventListener('submit', (event) => {
+        if (localStorage.getItem(SUBMISSION_KEY) === 'true') {
+          event.preventDefault();
+          statusMessage.textContent = 'Only one message can be sent. Thank you for your patience while we respond.';
+          statusMessage.classList.add('locked');
+          return;
+        }
+
+        localStorage.setItem(SUBMISSION_KEY, 'true');
+        setTimeout(() => lockForm('Thanks for your message! We aim to respond withiin 2-3 business days.'), 0);
+      });
+    })();
+  </script>
 </body>
 
 </html>
