@@ -3374,7 +3374,7 @@ body.modal-open .floating-cta {
     margin-top: 185px;
 }
 
-@media (max-width: 390px) {
+@media (max-width: 414px) {
 .social-proof__coach {
     bottom: 72px;
 }
@@ -3987,7 +3987,8 @@ body.modal-open .floating-cta {
     margin-bottom: 4px;
     font-size: 0.82rem;
     line-height: 1.5;
-    color: #5b6b86;
+    font-weight: 500;
+    color: #233352; /* darker navy, higher contrast, not competing */
 }
 
 .promo-strip__rarity-count {

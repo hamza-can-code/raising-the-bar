@@ -2195,376 +2195,937 @@ function setUpCompareModal0() {
   const modal = document.getElementById('valueModal');
   if (!modal) return;
 
+  const closeBtn = modal.querySelector('.close');
+  const contBtn = document.getElementById('valueContinue');
+  const skipLink = document.getElementById('valueSkip');
   const planAnchor = document.getElementById('path-to-progress');
-  const wheel = document.getElementById('discountWheel');
-  const actionBtn = document.getElementById('wheelActionBtn');
-  const header = document.getElementById('valueModalHeader');
-  const promoLine = document.getElementById('promoCodeLine');
-  const WHEEL_SPUN_KEY = 'rtbWheelSpunOnce';
   const openBtns = [
     document.getElementById('claimProgramBtn'),
     ...document.querySelectorAll('[data-open-value-modal]')
   ].filter(Boolean);
 
-  const INITIAL_HEADER_HTML = 'Spin and win <span class="wheel-highlight">random discount</span> up to 100%';
-  const WIN_HEADER_HTML = 'Wow, you won the <span class="wheel-highlight">biggest discount</span> of <span class="wheel-highlight">100%</span>!';
-  const SEGMENTS = [100, 30, 25, 20, 15, 10, 7, 5, 3, 2, 1, 12];
-  const SVG_NS = 'http://www.w3.org/2000/svg';
-
-  let built = false;
-  let isSpinning = false;
-  let hasStopped = false;
-  const SPIN_SPEED = 0.75; // deg per ms during free spin
-  let spinRaf = 0;
-  let currentAngle = 0;
-  let lastFrame = 0;
-  let targetAngle = null;
-  let decelRate = 0;
-  let spinVelocity = SPIN_SPEED;
-  let hasSpunWheel = localStorage.getItem(WHEEL_SPUN_KEY) === '1';
-
-  function describeSlice(cx, cy, r, startAngle, endAngle) {
-    const startX = cx + r * Math.cos(startAngle);
-    const startY = cy + r * Math.sin(startAngle);
-    const endX = cx + r * Math.cos(endAngle);
-    const endY = cy + r * Math.sin(endAngle);
-    const largeArc = endAngle - startAngle <= Math.PI ? 0 : 1;
-    return [
-      `M ${cx} ${cy}`,
-      `L ${startX} ${startY}`,
-      `A ${r} ${r} 0 ${largeArc} 1 ${endX} ${endY}`,
-      'Z'
-    ].join(' ');
+  function openModal() {
+    modal.classList.add('show');
+    document.body.classList.add('modal-open');
+    initScratchCard();
   }
 
-  function buildWheel(sizeHint) {
-    if (!wheel) return;
-    const parentWidth = wheel.parentElement?.clientWidth || wheel.parentElement?.offsetWidth || wheel.offsetWidth || 0;
-    const baseSize = sizeHint || parentWidth || 360;
-    const size = Math.max(280, Math.min(520, Math.round(baseSize)));
-    const radius = size / 2;
-    const innerRadius = radius - 18;
-    const segmentRadius = innerRadius - 6;
-    const step = (Math.PI * 2) / SEGMENTS.length;
-    const startOffset = -Math.PI / 2; // 12 o'clock
-    const labelRadius = segmentRadius * 0.74;
+  // Disable backdrop (outside click) + ESC for the promo modal only
+  (function () {
+    const promoModal = document.getElementById('valueModal');
+    if (!promoModal) return;
 
-    wheel.innerHTML = '';
-    wheel.style.width = `${size}px`;
-    wheel.style.height = `${size}px`;
-    currentAngle = 0;
+    const content = promoModal.querySelector('.modal-content');
 
-    const svg = document.createElementNS(SVG_NS, 'svg');
-    svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
-    svg.setAttribute('class', 'spin-wheel__svg');
-    svg.setAttribute('aria-hidden', 'true');
+    // Block clicks/taps that land on the backdrop
+    const blockBackdrop = (e) => {
+      if (e.target === promoModal || !content.contains(e.target)) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+      }
+    };
+    ['click', 'mousedown', 'touchstart'].forEach(evt =>
+      promoModal.addEventListener(evt, blockBackdrop, true) // capture phase
+    );
 
-    const rim = document.createElementNS(SVG_NS, 'circle');
-    rim.setAttribute('cx', radius);
-    rim.setAttribute('cy', radius);
-    rim.setAttribute('r', innerRadius);
-    rim.setAttribute('class', 'spin-wheel__rim');
-    svg.appendChild(rim);
+    // Optional: also ignore ESC while this modal is visible
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && promoModal.classList.contains('show')) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+      }
+    }, true);
+  })();
 
-    const segmentsGroup = document.createElementNS(SVG_NS, 'g');
-    segmentsGroup.setAttribute('transform', `translate(${radius} ${radius})`);
+  let discountShuffleTimer = null;
+  let discountShuffleTarget = null;
 
-    SEGMENTS.forEach((value, index) => {
-      const startAngle = startOffset + index * step;
-      const endAngle = startAngle + step;
+  function lockDiscountLabelWidth(target, sampleText) {
+    if (!target || !document.body) return;
 
-      const segment = document.createElementNS(SVG_NS, 'path');
-      segment.setAttribute('d', describeSlice(0, 0, segmentRadius, startAngle, endAngle));
-      segment.setAttribute('class', `spin-wheel__segment ${index % 2 === 0 ? 'spin-wheel__segment--light' : 'spin-wheel__segment--blue'}`);
-      segmentsGroup.appendChild(segment);
+    const baseLabel = sampleText
+      || target.dataset.activeLabel
+      || target.dataset.baseLabel
+      || target.textContent.trim()
+      || '100% OFF';
 
-      const label = document.createElementNS(SVG_NS, 'text');
-      label.setAttribute('class', `spin-wheel__label${index % 2 === 0 ? '' : ' spin-wheel__label--inverse'}`);
-      label.setAttribute('text-anchor', 'middle');
-      label.setAttribute('dominant-baseline', 'middle');
-      const midAngle = startAngle + step / 2;
-      const lx = Math.cos(midAngle) * labelRadius;
-      const ly = Math.sin(midAngle) * labelRadius;
-      label.setAttribute('transform', `translate(${lx.toFixed(3)} ${ly.toFixed(3)}) rotate(${(-midAngle * 180 / Math.PI).toFixed(3)})`);
-      label.textContent = `${value}%`;
-      segmentsGroup.appendChild(label);
-    });
+    if (!baseLabel) return;
 
-    svg.appendChild(segmentsGroup);
+    const needsMeasure = target.dataset.widthLockLabel !== baseLabel
+      || target.dataset.widthLockApplied !== '1';
 
-    const hub = document.createElementNS(SVG_NS, 'circle');
-    hub.setAttribute('cx', radius);
-    hub.setAttribute('cy', radius);
-    hub.setAttribute('r', innerRadius * 0.32);
-    hub.setAttribute('class', 'spin-wheel__hub');
-    svg.appendChild(hub);
+    if (!needsMeasure) return;
 
-    wheel.appendChild(svg);
-    wheel.style.transition = 'none';
-    wheel.style.transform = 'rotate(0deg)';
-    wheel.dataset.size = String(size);
-    built = true;
-  }
+    const clone = target.cloneNode(true);
+    clone.textContent = baseLabel;
+    clone.style.position = 'absolute';
+    clone.style.visibility = 'hidden';
+    clone.style.pointerEvents = 'none';
+    clone.style.width = 'auto';
+    clone.style.minWidth = '0';
+    clone.style.maxWidth = 'none';
+    clone.style.whiteSpace = 'nowrap';
+    clone.style.left = '-9999px';
+    clone.style.top = '-9999px';
 
-  function ensureWheel(force = false) {
-    if (!wheel) return;
-    if (isSpinning && !force) return;
-    const size = Number(wheel.dataset.size || 0);
-    const containerWidth = wheel.parentElement?.clientWidth || wheel.parentElement?.offsetWidth || wheel.offsetWidth || 0;
-    const desired = Math.max(280, Math.min(520, Math.round(containerWidth || size || 360)));
-    if (force || !built || !size || Math.abs(desired - size) > 3) {
-      buildWheel(desired);
+    document.body.appendChild(clone);
+    const width = clone.getBoundingClientRect().width;
+    document.body.removeChild(clone);
+
+    if (width) {
+      target.style.minWidth = `${Math.ceil(width)}px`;
+      target.dataset.widthLockApplied = '1';
+      target.dataset.widthLockLabel = baseLabel;
     }
   }
 
-  function getWheelAngle(element) {
-    if (!element) return 0;
-    try {
-      const computed = getComputedStyle(element);
-      const transform = computed.transform || computed.webkitTransform;
-      if (!transform || transform === 'none') return 0;
+  function startScratchDiscountShuffle(target) {
+    if (!target) return;
 
-      let matrixObj = null;
-      if (typeof DOMMatrixReadOnly === 'function') {
-        matrixObj = new DOMMatrixReadOnly(transform);
-      } else if (typeof DOMMatrix === 'function') {
-        matrixObj = new DOMMatrix(transform);
+    // clear any existing shuffle before starting a fresh one
+    if (discountShuffleTimer) {
+      clearInterval(discountShuffleTimer);
+      discountShuffleTimer = null;
+    }
+
+    discountShuffleTarget = target;
+    const baseLabel = target.dataset.activeLabel || target.textContent.trim() || '100% OFF';
+    target.dataset.baseLabel = baseLabel;
+    target.dataset.shuffle = '1';
+
+    lockDiscountLabelWidth(target, baseLabel);
+
+    const randomLabel = (() => {
+      let cycle = 0;
+      return () => {
+        cycle = (cycle + 1) % 7;
+        if (cycle === 0) return baseLabel;
+
+        let value;
+        let label;
+        do {
+          value = Math.floor(Math.random() * 91) + 10; // 10 – 100
+          label = `${value}% OFF`;
+        } while (label === baseLabel);
+
+        return label;
+      };
+    })();
+
+    // set initial random value immediately for responsiveness
+    target.textContent = randomLabel();
+    discountShuffleTimer = setInterval(() => {
+      target.textContent = randomLabel();
+    }, 90);
+  }
+
+  function stopScratchDiscountShuffle(options = {}) {
+    const { restore = true, target = discountShuffleTarget } = options;
+
+    if (discountShuffleTimer) {
+      clearInterval(discountShuffleTimer);
+      discountShuffleTimer = null;
+    }
+
+    if (target) {
+      target.dataset.shuffle = '0';
+      if (restore) {
+        const label = target.dataset.activeLabel || target.dataset.baseLabel || '100% OFF';
+        target.textContent = label;
       }
+    }
 
-      if (matrixObj) {
-        const angle = Math.atan2(matrixObj.b, matrixObj.a) * (180 / Math.PI);
-        return Number.isFinite(angle) ? angle : 0;
-      }
+    if (!options.target || options.target === discountShuffleTarget) {
+      discountShuffleTarget = null;
+    }
+  }
 
-      const match = transform.match(/matrix\(([^)]+)\)/);
-      if (match) {
-        const parts = match[1].split(',').map(v => parseFloat(v.trim()));
-        if (parts.length >= 2) {
-          const angle = Math.atan2(parts[1], parts[0]) * (180 / Math.PI);
-          return Number.isFinite(angle) ? angle : 0;
+  function updateScratchDiscountContent(active = isDiscountActive()) {
+    const wrap = document.querySelector('.scratch-card');
+    if (!wrap) return;
+
+    const reveal = wrap.querySelector('.scratch-reveal');
+    const content = reveal ? reveal.querySelector('.reveal-content') : null;
+    const badge = content ? content.querySelector('.discount-badge') : null;
+    const promoLine = document.getElementById('promoCodeLine');
+    const note = content ? content.querySelector('.reveal-small') : null;
+    const timer = document.getElementById('scratchMirrorTimer');
+        const urgencyNotes = document.querySelectorAll('.urgency-note');
+    let expired = content ? content.querySelector('.scratch-expired-message') : null;
+
+    if (content && !expired) {
+      expired = document.createElement('p');
+      expired.className = 'reveal-small scratch-expired-message';
+      expired.textContent = 'Sorry, this discount has expired.';
+      expired.setAttribute('hidden', '');
+      content.appendChild(expired);
+    }
+
+    if (badge) {
+      const mainLine = badge.querySelector('.discount-badge__main');
+      const bonusPill = badge.querySelector('.discount-badge__bonus');
+
+       const labelTarget = mainLine || badge;
+      const isAnimating = labelTarget && labelTarget.dataset.shuffle === '1';
+      const isDone = wrap.classList.contains('scratch-done');
+
+
+      if (mainLine) {
+        if (!mainLine.dataset.activeLabel) {
+          mainLine.dataset.activeLabel = mainLine.textContent.trim() || '100% OFF';
+        }
+    if (!active) {
+          stopScratchDiscountShuffle({ restore: false, target: mainLine });
+          mainLine.textContent = 'Discount expired';
+        } else if (isDone || !isAnimating) {
+          mainLine.textContent = mainLine.dataset.activeLabel;
+        }
+      } else {
+        if (!badge.dataset.activeLabel) {
+          badge.dataset.activeLabel = badge.textContent.trim();
+        }
+         if (!active) {
+          stopScratchDiscountShuffle({ restore: false, target: badge });
+          badge.textContent = 'Discount expired';
+        } else if (isDone || !isAnimating) {
+          badge.textContent = badge.dataset.activeLabel || '100% OFF';
         }
       }
-      return 0;
-    } catch (err) {
-      console.warn('[wheel] Unable to read transform', err);
-      return 0;
+      if (bonusPill) bonusPill.toggleAttribute('hidden', !active);
+      badge.classList.toggle('expired', !active);
     }
+
+    if (promoLine) promoLine.toggleAttribute('hidden', !active);
+    if (note) note.toggleAttribute('hidden', !active);
+    if (timer) timer.toggleAttribute('hidden', !active);
+        urgencyNotes.forEach(el => el.toggleAttribute('hidden', !active));
+    if (expired) expired.toggleAttribute('hidden', active);
   }
 
-  function resetWheel() {
-    hasStopped = false;
-    isSpinning = false;
-    lastFrame = 0;
-    currentAngle = 0;
-    if (spinRaf) cancelAnimationFrame(spinRaf);
-    spinRaf = 0;
-    ensureWheel();
-    if (wheel) {
-      wheel.style.transition = 'none';
-      wheel.style.transform = 'rotate(0deg)';
-      wheel.style.removeProperty('--wheel-speed');
-    }
-    if (actionBtn) {
-      actionBtn.classList.remove('wheel-action-btn--finished');
-      actionBtn.disabled = false;
-      actionBtn.textContent = 'Spin';
-    }
-    if (header) header.innerHTML = INITIAL_HEADER_HTML;
-    if (promoLine) {
-      promoLine.hidden = true;
-      promoLine.innerHTML = '';
-    }
+  // ensure other inline handlers can safely reuse the helper
+  if (typeof window !== 'undefined') {
+    window.updateScratchDiscountContent = updateScratchDiscountContent;
   }
 
-  function openWheelModal() {
-    ensureWheel();
-    resetWheel();
-    modal.classList.add('show');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('modal-open');
-    requestAnimationFrame(() => ensureWheel());
+  document.addEventListener(DISCOUNT_STATE_EVENT, (e) => {
+    updateScratchDiscountContent(!!(e.detail && e.detail.active));
+  });
+
+  // --- Scratch Card -------------------------------------------------
+  let SCRATCH_INIT = false;
+
+  function initScratchCard() {
+    if (SCRATCH_INIT) return;
+    SCRATCH_INIT = true;
+
+    const canvas = document.getElementById('scratchCanvas');
+    const wrap = canvas ? canvas.closest('.scratch-card') : null;
+    const reveal = wrap ? wrap.querySelector('.scratch-reveal') : null;
+    const content = reveal ? reveal.querySelector('.reveal-content') : null;
+    document.querySelector('#scratchHint .orbit')?.remove();
+    const continueBtn = document.getElementById('valueContinue');
+
+    if (!canvas || !wrap || !reveal || !continueBtn) return;
+
+    const discountLabel = content ? (content.querySelector('.discount-badge__main') || content.querySelector('.discount-badge')) : null;
+    if (isDiscountActive() && discountLabel && !wrap.classList.contains('scratch-done')) {
+      startScratchDiscountShuffle(discountLabel);
+    }
+
+    {
+      const fullName = localStorage.getItem('name') || '';
+      const firstName = (fullName.split(' ')[0] || 'user')
+        .replace(/[^a-z0-9]/gi, '-')   // normalize to letters/numbers/hyphen
+        .replace(/-+/g, '-')           // collapse multiple hyphens
+        .replace(/^-|-$/g, '');        // trim hyphens
+      const promoCode = `${firstName}-100-OFF`.toUpperCase();
+      localStorage.setItem('appliedPromoCode', promoCode);
+
+      // write to both the modal and the pricing strip if present
+      const targets = [
+        document.getElementById('promoCodeValue'),     // modal code (id)
+        document.getElementById('promoStripCode'),     // strip code (id)
+        document.querySelector('.promo-code-value')    // modal code (class fallback)
+      ].filter(Boolean);
+      targets.forEach(el => el.textContent = promoCode);
+    }
+
+    // Lock the Continue button initially
+    continueBtn.disabled = true;
+    continueBtn.classList.add('locked');
+    continueBtn.style.setProperty('background', '#004a99', 'important');
+    continueBtn.style.setProperty('background-image', 'none', 'important');
+
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+
+    // ---- state (declare BEFORE any calls that read them)
+    let finished = false;
+    let scratching = false;
+    let idleTimer = null;
+
+    const hintText = document.querySelector('#scratchHint .hint-copy');
+
+    // ---- Ghost finger zigzag animation (no extra HTML needed)
+    reveal.style.position = reveal.style.position || 'relative';
+    reveal.style.overflow = 'hidden';
+
+    const ghost = document.createElement('div');
+    const DOT = 28;                 // ghost diameter (px)
+    const PAD = 10;                 // inner padding from edges
+    ghost.id = 'scratchGhost';
+    ghost.style.cssText = `
+  position: absolute;
+  left: 0; top: 0;              /* we’ll move it via translate() */
+  width: ${DOT}px; height: ${DOT}px;
+  border: 3px solid rgba(0,0,0,0.35);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity .25s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,.15);
+  transform: translate(0,0);
+`;
+    reveal.appendChild(ghost);
+
+    let gx = PAD, gy = PAD;
+    let vx = 2.2, vy = 1.6;
+    let ghostActive = false;
+
+    function bounds() {
+      const w = reveal.clientWidth;
+      const h = reveal.clientHeight;
+      return {
+        minX: PAD, minY: PAD,
+        maxX: w - PAD - DOT, maxY: h - PAD - DOT
+      };
+    }
+
+    function placeGhost() {
+      ghost.style.transform = `translate(${gx}px, ${gy}px)`;
+    }
+
+    function animateGhost() {
+      if (!ghostActive) return;
+      const b = bounds();
+      gx += vx; gy += vy;
+      if (gx <= b.minX || gx >= b.maxX) vx *= -1;
+      if (gy <= b.minY || gy >= b.maxY) vy *= -1;
+      gx = Math.min(Math.max(gx, b.minX), b.maxX);
+      gy = Math.min(Math.max(gy, b.minY), b.maxY);
+      placeGhost();
+      requestAnimationFrame(animateGhost);
+    }
+
+    function startGhost() {
+      if (ghostActive || finished) return;
+      const b = bounds();
+      gx = Math.min(Math.max(reveal.clientWidth * 0.35, b.minX), b.maxX);
+      gy = Math.min(Math.max(reveal.clientHeight * 0.35, b.minY), b.maxY);
+      placeGhost();
+      ghostActive = true;
+      ghost.style.opacity = '1';
+      animateGhost();
+    }
+    function stopGhost() {
+      ghostActive = false;
+      ghost.style.opacity = '0';
+    }
+
+    /* Hint helpers now drive the ghost (old orbit hint is removed above) */
+    function showHint() {
+      if (!finished) {
+        startGhost();
+        if (hintText) hintText.style.opacity = '1';
+      }
+    }
+    function hideHint() {
+      stopGhost();
+      if (hintText) hintText.style.opacity = '0';
+    }
+    function scheduleHint() {
+      clearTimeout(idleTimer);
+      if (!finished) idleTimer = setTimeout(showHint, 3000);
+    }
+
+    /* keep ghost in-bounds if size changes */
+    const clampGhostToBounds = () => {
+      const b = bounds();
+      gx = Math.min(Math.max(gx, b.minX), b.maxX);
+      gy = Math.min(Math.max(gy, b.minY), b.maxY);
+      placeGhost();
+    };
+
+    // ---- sizing + paint
+    function sizeCanvas() {
+      const cssW = reveal.clientWidth;
+      const contentH = Math.ceil((content?.scrollHeight || 148));
+      const cssH = Math.max(148, contentH + 10);
+
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      // reset transform before resizing
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      canvas.width = Math.floor(cssW * dpr);
+      canvas.height = Math.floor(cssH * dpr);
+      canvas.style.width = cssW + 'px';
+      canvas.style.height = cssH + 'px';
+      ctx.scale(dpr, dpr);
+
+      paintCover(cssW, cssH);
+    }
+
+    function paintCover(w, h) {
+      // branded blue gradient + texture
+      const grad = ctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, '#007BFF');
+      grad.addColorStop(1, '#339CFF');
+
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      const step = 10;
+      ctx.globalAlpha = 0.25;
+      for (let y = 0; y < h; y += step) {
+        for (let x = 0; x < w; x += step) {
+          ctx.fillStyle = ((x + y) % (step * 2)) ? '#ffffff' : '#003F80';
+          ctx.fillRect(x, y, 2, 2);
+        }
+      }
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = 'destination-out'; // ready to scratch
+    }
+
+    // ---- scratch interaction
+    const brush = 30;
+
+    function scratch(x, y) {
+      ctx.beginPath();
+      ctx.arc(x, y, brush, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function pointerPos(e) {
+      const r = canvas.getBoundingClientRect();
+      const p = e.touches ? e.touches[0] : e;
+      return { x: p.clientX - r.left, y: p.clientY - r.top };
+    }
+
+    function scratchPoint(e) {
+      const { x, y } = pointerPos(e);
+      scratch(x, y);
+    }
+
+    function start(e) {
+      scratching = true;
+      reveal.classList.add('scratching');
+      hideHint();
+      clearTimeout(idleTimer);
+      scratchPoint(e);
+      e.preventDefault();
+    }
+
+    function move(e) {
+      if (!scratching) return;
+      scratchPoint(e);
+      e.preventDefault();
+    }
+
+    function end() {
+      scratching = false;
+      reveal.classList.remove('scratching');
+      if (!finished) scheduleHint();
+      maybeFinish();
+    }
+
+    canvas.addEventListener('pointerdown', start);
+    canvas.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', end);
+    canvas.addEventListener('touchstart', start, { passive: false });
+    canvas.addEventListener('touchmove', move, { passive: false });
+    window.addEventListener('touchend', end);
+
+    // ---- completion calc
+    function clearedRatio() {
+      const { width, height } = canvas;
+      const sample = ctx.getImageData(0, 0, width, height).data;
+      let clear = 0;
+      for (let i = 3; i < sample.length; i += 4) if (sample[i] === 0) clear++;
+      return clear / (sample.length / 4);
+    }
+
+    function maybeFinish() {
+      if (finished) return;
+      if (clearedRatio() > 0.6) {
+        finished = true;
+        wrap.classList.add('scratch-done');
+        hideHint();
+        clearTimeout(idleTimer);
+
+        continueBtn.disabled = false;
+        continueBtn.classList.remove('locked');
+        continueBtn.style.removeProperty('background');
+        continueBtn.style.removeProperty('background-image');
+        continueBtn.focus();
+
+        const shouldRestoreLabel = isDiscountActive();
+        if (discountLabel) {
+          stopScratchDiscountShuffle({ target: discountLabel, restore: shouldRestoreLabel });
+        } else {
+          stopScratchDiscountShuffle({ restore: shouldRestoreLabel });
+        }
+
+        try { window.sendAnalytics?.('scratch_revealed', { pct: 100 }); } catch { }
+      }
+    }
+
+    document.getElementById('scratchReset')?.addEventListener('click', () => {
+      wrap.classList.remove('scratch-done');
+      finished = false;
+      sizeCanvas();
+      showHint();
+      continueBtn.disabled = true;
+      continueBtn.classList.add('locked');
+      continueBtn.style.setProperty('background', '#004a99', 'important');
+      continueBtn.style.setProperty('background-image', 'none', 'important');
+            if (isDiscountActive() && discountLabel) {
+        startScratchDiscountShuffle(discountLabel);
+      }
+    });
+
+    // ---- mirror timer(s)
+    const src = document.getElementById('countdownTimer');
+    const mirror = document.getElementById('scratchMirrorTimer');
+    const note = document.getElementById('scratchMirrorTimerNote');
+    if (src) {
+      const sync = () => {
+        if (mirror) mirror.textContent = src.textContent;
+        if (note) note.textContent = src.textContent;
+      };
+      const obs = new MutationObserver(sync);
+      obs.observe(src, { childList: true, characterData: true, subtree: true });
+      sync();
+    }
+
+    // ---- kick off
+    sizeCanvas();
+    showHint();
+    clampGhostToBounds();
+    window.addEventListener('resize', () => {
+      if (!wrap.classList.contains('scratch-done')) sizeCanvas();
+    }, { passive: true });
   }
 
-  function closeWheelModal() {
+  function closeModal() {
     modal.classList.remove('show');
-    modal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('modal-open');
   }
 
-  function startSpin() {
-    if (isSpinning || hasStopped) return;
-    if (!built) ensureWheel(true);
-    isSpinning = true;
-    hasStopped = false;
-    lastFrame = 0;
-    targetAngle = null;
-    decelRate = 0;
-    spinVelocity = SPIN_SPEED;
-    if (wheel) {
-      wheel.style.transition = 'none';
-      currentAngle = getWheelAngle(wheel);
-      wheel.style.transform = `rotate(${currentAngle}deg)`;
-    }
-
-    const tick = (timestamp) => {
-      if (!isSpinning) return;
-      if (!lastFrame) {
-        lastFrame = timestamp;
-        spinRaf = requestAnimationFrame(tick);
-        return;
-      }
-
-      let delta = timestamp - lastFrame;
-      lastFrame = timestamp;
-
-      // clamp to avoid massive jumps on dropped frames
-      if (delta > 32) delta = 32;
-
-      const deltaAngle = spinVelocity * delta;
-      currentAngle += deltaAngle;
-
-      if (wheel) {
-        wheel.style.transform = `rotate(${currentAngle}deg)`;
-      }
-
-      spinRaf = requestAnimationFrame(tick);
-    };
-
-    spinRaf = requestAnimationFrame(tick);
-    if (actionBtn) actionBtn.textContent = 'Stop';
-  }
-
-function stopSpin() {
-  if (!isSpinning || hasStopped) return;
-  hasStopped = true;
-  if (!wheel) return;
-
-  // Stop the rAF loop – we’re switching to CSS for the final spin
-  isSpinning = false;
-  if (spinRaf) {
-    cancelAnimationFrame(spinRaf);
-    spinRaf = 0;
-  }
-
-  // Read the actual current angle from the DOM
-  const angleNow = getWheelAngle(wheel);
-  currentAngle = angleNow;
-
-  // Align so 100% is at the top (angle 0) after a few extra spins
-  const normalized = ((currentAngle % 360) + 360) % 360;
-  const extraToZero = (360 - normalized) % 360;
-
-  const SPINS_AFTER_STOP = 3; // was 4 — fewer extra spins = less “jump”
-  targetAngle = currentAngle + extraToZero + 360 * SPINS_AFTER_STOP;
-
-  // Smooth ease-out, no initial speed spike
-  wheel.style.transition = 'transform 1.8s ease-out';
-  wheel.style.transform = `rotate(${targetAngle}deg)`;
-
-  if (actionBtn) actionBtn.disabled = true;
-}
-
-  function scrollToPlan() {
-    const continueBtn = document.getElementById('offerFinishBtn');
-    if (continueBtn) {
-      const rect = continueBtn.getBoundingClientRect();
-      const offset = rect.top + window.scrollY;
-      const baseTarget = Math.max(offset - (window.innerHeight - rect.height - 24), 0);
-    const desiredOffset = 90 - 25; // position CTA slightly higher after auto-scroll
-    window.scrollTo({ top: baseTarget + desiredOffset, behavior: 'smooth' });
-    } else if (planAnchor) {
-      planAnchor.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
-    }
-  }
-
-  function applyDiscountWin() {
-    const promoCode = localStorage.getItem('appliedPromoCode');
-
-    hasSpunWheel = true; // mark wheel as used
-    localStorage.setItem(WHEEL_SPUN_KEY, '1');
-
-    setDiscountActive(true, { force: true });
-
-    if (header) header.innerHTML = WIN_HEADER_HTML;
-
-    if (promoLine) {
-      if (promoCode) {
-        promoLine.hidden = false;
-        promoLine.innerHTML = `
-        <span class="promo-code-card">
-          <span class="promo-code-card__label">Promo code</span>
-          <span class="promo-code-card__value">${promoCode}</span>
-        </span>
-        <span class="promo-code-line__text">applied automatically.</span>
-      `.trim();
-      } else {
-        promoLine.hidden = true;
-        promoLine.innerHTML = '';
-      }
-    }
-
-    if (actionBtn) {
-      actionBtn.disabled = false;
-      actionBtn.classList.add('wheel-action-btn--finished');
-    }
-
-    window.sendAnalytics?.('wheel_win', { prize: '100' });
-
-    setTimeout(() => {
-      closeWheelModal();
-      scrollToPlan();
-    }, 2200);
-  }
-
-  if (wheel) {
-    wheel.addEventListener('transitionend', (event) => {
-      if (event.propertyName !== 'transform' || !hasStopped) return;
-      wheel.style.transition = 'none';
-      wheel.style.transform = 'rotate(0deg)';
-      isSpinning = false;
-      applyDiscountWin();
-    });
-  }
-
-  actionBtn?.addEventListener('click', () => {
-    if (!isSpinning && !hasStopped) {
-      startSpin();
-    } else if (isSpinning && !hasStopped) {
-      stopSpin();
-    }
-  });
-
-  function shouldOpenWheel(btn) {
-    if (!btn) return false;
-    if (btn.id === 'claimProgramBtn') return true;
-    if (btn.hasAttribute('data-open-value-modal')) return true;
-    return !isDiscountActive();
-  }
-
-  openBtns.forEach(btn => {
-    btn.addEventListener('click', e => {
-      // If they’ve already spun once, just scroll to the plan
-      if (hasSpunWheel) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        scrollToPlan();
-        return;
-      }
-
-      if (!shouldOpenWheel(btn)) return;
-
+  // only open if you haven’t scrolled past pricing
+openBtns.forEach(btn => {
+  btn.addEventListener('click', e => {
+    if (!planAnchor) {
       e.preventDefault();
-      e.stopImmediatePropagation();
-      openWheelModal();
-    });
+      openModal();
+      return;
+    }
+
+    const pricingTop = planAnchor.getBoundingClientRect().top + window.scrollY;
+    if (window.scrollY + 150 < pricingTop) {
+      e.preventDefault();
+      openModal();
+    }
+  });
+});
+
+  // hook up the buttons
+  closeBtn?.addEventListener('click', closeModal);
+  contBtn?.addEventListener('click', closeModal);
+  skipLink?.addEventListener('click', e => { e.preventDefault(); closeModal(); });
+
+  // clicking on the backdrop
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeModal();
   });
 
-
-  window.addEventListener('resize', () => {
-    if (!modal.classList.contains('show')) built = false;
-    ensureWheel();
-  });
+  // ← remove any immediate calls to remove .show or .modal-open here!
 })();
+
+
+// (function () {
+//   const modal = document.getElementById('valueModal');
+//   if (!modal) return;
+
+//   const planAnchor = document.getElementById('path-to-progress');
+//   const wheel = document.getElementById('discountWheel');
+//   const actionBtn = document.getElementById('wheelActionBtn');
+//   const header = document.getElementById('valueModalHeader');
+//   const promoLine = document.getElementById('promoCodeLine');
+//   const WHEEL_SPUN_KEY = 'rtbWheelSpunOnce';
+//   const openBtns = [
+//     document.getElementById('claimProgramBtn'),
+//     ...document.querySelectorAll('[data-open-value-modal]')
+//   ].filter(Boolean);
+
+//   const INITIAL_HEADER_HTML = 'Spin and win <span class="wheel-highlight">random discount</span> up to 100%';
+//   const WIN_HEADER_HTML = 'Wow, you won the <span class="wheel-highlight">biggest discount</span> of <span class="wheel-highlight">100%</span>!';
+//   const SEGMENTS = [100, 30, 25, 20, 15, 10, 7, 5, 3, 2, 1, 12];
+//   const SVG_NS = 'http://www.w3.org/2000/svg';
+
+//   let built = false;
+//   let isSpinning = false;
+//   let hasStopped = false;
+//   const SPIN_SPEED = 0.75; // deg per ms during free spin
+//   let spinRaf = 0;
+//   let currentAngle = 0;
+//   let lastFrame = 0;
+//   let targetAngle = null;
+//   let decelRate = 0;
+//   let spinVelocity = SPIN_SPEED;
+//   let hasSpunWheel = localStorage.getItem(WHEEL_SPUN_KEY) === '1';
+
+//   function describeSlice(cx, cy, r, startAngle, endAngle) {
+//     const startX = cx + r * Math.cos(startAngle);
+//     const startY = cy + r * Math.sin(startAngle);
+//     const endX = cx + r * Math.cos(endAngle);
+//     const endY = cy + r * Math.sin(endAngle);
+//     const largeArc = endAngle - startAngle <= Math.PI ? 0 : 1;
+//     return [
+//       `M ${cx} ${cy}`,
+//       `L ${startX} ${startY}`,
+//       `A ${r} ${r} 0 ${largeArc} 1 ${endX} ${endY}`,
+//       'Z'
+//     ].join(' ');
+//   }
+
+//   function buildWheel(sizeHint) {
+//     if (!wheel) return;
+//     const parentWidth = wheel.parentElement?.clientWidth || wheel.parentElement?.offsetWidth || wheel.offsetWidth || 0;
+//     const baseSize = sizeHint || parentWidth || 360;
+//     const size = Math.max(280, Math.min(520, Math.round(baseSize)));
+//     const radius = size / 2;
+//     const innerRadius = radius - 18;
+//     const segmentRadius = innerRadius - 6;
+//     const step = (Math.PI * 2) / SEGMENTS.length;
+//     const startOffset = -Math.PI / 2; // 12 o'clock
+//     const labelRadius = segmentRadius * 0.74;
+
+//     wheel.innerHTML = '';
+//     wheel.style.width = `${size}px`;
+//     wheel.style.height = `${size}px`;
+//     currentAngle = 0;
+
+//     const svg = document.createElementNS(SVG_NS, 'svg');
+//     svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+//     svg.setAttribute('class', 'spin-wheel__svg');
+//     svg.setAttribute('aria-hidden', 'true');
+
+//     const rim = document.createElementNS(SVG_NS, 'circle');
+//     rim.setAttribute('cx', radius);
+//     rim.setAttribute('cy', radius);
+//     rim.setAttribute('r', innerRadius);
+//     rim.setAttribute('class', 'spin-wheel__rim');
+//     svg.appendChild(rim);
+
+//     const segmentsGroup = document.createElementNS(SVG_NS, 'g');
+//     segmentsGroup.setAttribute('transform', `translate(${radius} ${radius})`);
+
+//     SEGMENTS.forEach((value, index) => {
+//       const startAngle = startOffset + index * step;
+//       const endAngle = startAngle + step;
+
+//       const segment = document.createElementNS(SVG_NS, 'path');
+//       segment.setAttribute('d', describeSlice(0, 0, segmentRadius, startAngle, endAngle));
+//       segment.setAttribute('class', `spin-wheel__segment ${index % 2 === 0 ? 'spin-wheel__segment--light' : 'spin-wheel__segment--blue'}`);
+//       segmentsGroup.appendChild(segment);
+
+//       const label = document.createElementNS(SVG_NS, 'text');
+//       label.setAttribute('class', `spin-wheel__label${index % 2 === 0 ? '' : ' spin-wheel__label--inverse'}`);
+//       label.setAttribute('text-anchor', 'middle');
+//       label.setAttribute('dominant-baseline', 'middle');
+//       const midAngle = startAngle + step / 2;
+//       const lx = Math.cos(midAngle) * labelRadius;
+//       const ly = Math.sin(midAngle) * labelRadius;
+//       label.setAttribute('transform', `translate(${lx.toFixed(3)} ${ly.toFixed(3)}) rotate(${(-midAngle * 180 / Math.PI).toFixed(3)})`);
+//       label.textContent = `${value}%`;
+//       segmentsGroup.appendChild(label);
+//     });
+
+//     svg.appendChild(segmentsGroup);
+
+//     const hub = document.createElementNS(SVG_NS, 'circle');
+//     hub.setAttribute('cx', radius);
+//     hub.setAttribute('cy', radius);
+//     hub.setAttribute('r', innerRadius * 0.32);
+//     hub.setAttribute('class', 'spin-wheel__hub');
+//     svg.appendChild(hub);
+
+//     wheel.appendChild(svg);
+//     wheel.style.transition = 'none';
+//     wheel.style.transform = 'rotate(0deg)';
+//     wheel.dataset.size = String(size);
+//     built = true;
+//   }
+
+//   function ensureWheel(force = false) {
+//     if (!wheel) return;
+//     if (isSpinning && !force) return;
+//     const size = Number(wheel.dataset.size || 0);
+//     const containerWidth = wheel.parentElement?.clientWidth || wheel.parentElement?.offsetWidth || wheel.offsetWidth || 0;
+//     const desired = Math.max(280, Math.min(520, Math.round(containerWidth || size || 360)));
+//     if (force || !built || !size || Math.abs(desired - size) > 3) {
+//       buildWheel(desired);
+//     }
+//   }
+
+//   function getWheelAngle(element) {
+//     if (!element) return 0;
+//     try {
+//       const computed = getComputedStyle(element);
+//       const transform = computed.transform || computed.webkitTransform;
+//       if (!transform || transform === 'none') return 0;
+
+//       let matrixObj = null;
+//       if (typeof DOMMatrixReadOnly === 'function') {
+//         matrixObj = new DOMMatrixReadOnly(transform);
+//       } else if (typeof DOMMatrix === 'function') {
+//         matrixObj = new DOMMatrix(transform);
+//       }
+
+//       if (matrixObj) {
+//         const angle = Math.atan2(matrixObj.b, matrixObj.a) * (180 / Math.PI);
+//         return Number.isFinite(angle) ? angle : 0;
+//       }
+
+//       const match = transform.match(/matrix\(([^)]+)\)/);
+//       if (match) {
+//         const parts = match[1].split(',').map(v => parseFloat(v.trim()));
+//         if (parts.length >= 2) {
+//           const angle = Math.atan2(parts[1], parts[0]) * (180 / Math.PI);
+//           return Number.isFinite(angle) ? angle : 0;
+//         }
+//       }
+//       return 0;
+//     } catch (err) {
+//       console.warn('[wheel] Unable to read transform', err);
+//       return 0;
+//     }
+//   }
+
+//   function resetWheel() {
+//     hasStopped = false;
+//     isSpinning = false;
+//     lastFrame = 0;
+//     currentAngle = 0;
+//     if (spinRaf) cancelAnimationFrame(spinRaf);
+//     spinRaf = 0;
+//     ensureWheel();
+//     if (wheel) {
+//       wheel.style.transition = 'none';
+//       wheel.style.transform = 'rotate(0deg)';
+//       wheel.style.removeProperty('--wheel-speed');
+//     }
+//     if (actionBtn) {
+//       actionBtn.classList.remove('wheel-action-btn--finished');
+//       actionBtn.disabled = false;
+//       actionBtn.textContent = 'Spin';
+//     }
+//     if (header) header.innerHTML = INITIAL_HEADER_HTML;
+//     if (promoLine) {
+//       promoLine.hidden = true;
+//       promoLine.innerHTML = '';
+//     }
+//   }
+
+//   function openWheelModal() {
+//     ensureWheel();
+//     resetWheel();
+//     modal.classList.add('show');
+//     modal.setAttribute('aria-hidden', 'false');
+//     document.body.classList.add('modal-open');
+//     requestAnimationFrame(() => ensureWheel());
+//   }
+
+//   function closeWheelModal() {
+//     modal.classList.remove('show');
+//     modal.setAttribute('aria-hidden', 'true');
+//     document.body.classList.remove('modal-open');
+//   }
+
+//   function startSpin() {
+//     if (isSpinning || hasStopped) return;
+//     if (!built) ensureWheel(true);
+//     isSpinning = true;
+//     hasStopped = false;
+//     lastFrame = 0;
+//     targetAngle = null;
+//     decelRate = 0;
+//     spinVelocity = SPIN_SPEED;
+//     if (wheel) {
+//       wheel.style.transition = 'none';
+//       currentAngle = getWheelAngle(wheel);
+//       wheel.style.transform = `rotate(${currentAngle}deg)`;
+//     }
+
+//     const tick = (timestamp) => {
+//       if (!isSpinning) return;
+//       if (!lastFrame) {
+//         lastFrame = timestamp;
+//         spinRaf = requestAnimationFrame(tick);
+//         return;
+//       }
+
+//       let delta = timestamp - lastFrame;
+//       lastFrame = timestamp;
+
+//       // clamp to avoid massive jumps on dropped frames
+//       if (delta > 32) delta = 32;
+
+//       const deltaAngle = spinVelocity * delta;
+//       currentAngle += deltaAngle;
+
+//       if (wheel) {
+//         wheel.style.transform = `rotate(${currentAngle}deg)`;
+//       }
+
+//       spinRaf = requestAnimationFrame(tick);
+//     };
+
+//     spinRaf = requestAnimationFrame(tick);
+//     if (actionBtn) actionBtn.textContent = 'Stop';
+//   }
+
+// function stopSpin() {
+//   if (!isSpinning || hasStopped) return;
+//   hasStopped = true;
+//   if (!wheel) return;
+
+//   // Stop the rAF loop – we’re switching to CSS for the final spin
+//   isSpinning = false;
+//   if (spinRaf) {
+//     cancelAnimationFrame(spinRaf);
+//     spinRaf = 0;
+//   }
+
+//   // Read the actual current angle from the DOM
+//   const angleNow = getWheelAngle(wheel);
+//   currentAngle = angleNow;
+
+//   // Align so 100% is at the top (angle 0) after a few extra spins
+//   const normalized = ((currentAngle % 360) + 360) % 360;
+//   const extraToZero = (360 - normalized) % 360;
+
+//   const SPINS_AFTER_STOP = 3; // was 4 — fewer extra spins = less “jump”
+//   targetAngle = currentAngle + extraToZero + 360 * SPINS_AFTER_STOP;
+
+//   // Smooth ease-out, no initial speed spike
+//   wheel.style.transition = 'transform 1.8s ease-out';
+//   wheel.style.transform = `rotate(${targetAngle}deg)`;
+
+//   if (actionBtn) actionBtn.disabled = true;
+// }
+
+//   function scrollToPlan() {
+//     const continueBtn = document.getElementById('offerFinishBtn');
+//     if (continueBtn) {
+//       const rect = continueBtn.getBoundingClientRect();
+//       const offset = rect.top + window.scrollY;
+//       const baseTarget = Math.max(offset - (window.innerHeight - rect.height - 24), 0);
+//     const desiredOffset = 90 - 25; // position CTA slightly higher after auto-scroll
+//     window.scrollTo({ top: baseTarget + desiredOffset, behavior: 'smooth' });
+//     } else if (planAnchor) {
+//       planAnchor.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+//     }
+//   }
+
+//   function applyDiscountWin() {
+//     const promoCode = localStorage.getItem('appliedPromoCode');
+
+//     hasSpunWheel = true; // mark wheel as used
+//     localStorage.setItem(WHEEL_SPUN_KEY, '1');
+
+//     setDiscountActive(true, { force: true });
+
+//     if (header) header.innerHTML = WIN_HEADER_HTML;
+
+//     if (promoLine) {
+//       if (promoCode) {
+//         promoLine.hidden = false;
+//         promoLine.innerHTML = `
+//         <span class="promo-code-card">
+//           <span class="promo-code-card__label">Promo code</span>
+//           <span class="promo-code-card__value">${promoCode}</span>
+//         </span>
+//         <span class="promo-code-line__text">applied automatically.</span>
+//       `.trim();
+//       } else {
+//         promoLine.hidden = true;
+//         promoLine.innerHTML = '';
+//       }
+//     }
+
+//     if (actionBtn) {
+//       actionBtn.disabled = false;
+//       actionBtn.classList.add('wheel-action-btn--finished');
+//     }
+
+//     window.sendAnalytics?.('wheel_win', { prize: '100' });
+
+//     setTimeout(() => {
+//       closeWheelModal();
+//       scrollToPlan();
+//     }, 2200);
+//   }
+
+//   if (wheel) {
+//     wheel.addEventListener('transitionend', (event) => {
+//       if (event.propertyName !== 'transform' || !hasStopped) return;
+//       wheel.style.transition = 'none';
+//       wheel.style.transform = 'rotate(0deg)';
+//       isSpinning = false;
+//       applyDiscountWin();
+//     });
+//   }
+
+//   actionBtn?.addEventListener('click', () => {
+//     if (!isSpinning && !hasStopped) {
+//       startSpin();
+//     } else if (isSpinning && !hasStopped) {
+//       stopSpin();
+//     }
+//   });
+
+//   function shouldOpenWheel(btn) {
+//     if (!btn) return false;
+//     if (btn.id === 'claimProgramBtn') return true;
+//     if (btn.hasAttribute('data-open-value-modal')) return true;
+//     return !isDiscountActive();
+//   }
+
+//   openBtns.forEach(btn => {
+//     btn.addEventListener('click', e => {
+//       // If they’ve already spun once, just scroll to the plan
+//       if (hasSpunWheel) {
+//         e.preventDefault();
+//         e.stopImmediatePropagation();
+//         scrollToPlan();
+//         return;
+//       }
+
+//       if (!shouldOpenWheel(btn)) return;
+
+//       e.preventDefault();
+//       e.stopImmediatePropagation();
+//       openWheelModal();
+//     });
+//   });
+
+
+//   window.addEventListener('resize', () => {
+//     if (!modal.classList.contains('show')) built = false;
+//     ensureWheel();
+//   });
+// })();
 
 
 //   const loadingSection = document.getElementById('loadingSection');

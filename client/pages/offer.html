@@ -449,9 +449,9 @@ placeholder.replaceWith(iframe);
           Your <span class="promo-strip__highlight">discount</span> of 100% is applied.
         </p>
         <p class="promo-strip__rarity">
-          Almost no one hits 100% off.
-          The last winner was <span class="promo-strip__rarity-count">10,542</span> users ago.
-          Don’t miss your chance to claim this for free.
+          You just scratched 100% off. Last win was
+          <span class="promo-strip__rarity-count">3,847</span> users ago.
+          Don’t let this go.
         </p>
       </div>
 
@@ -1038,34 +1038,58 @@ alert('Could not initialise PayPal. Please refresh and try again.');
     </div>
   </div>
 
-  <div id="valueModal" class="modal wheel-modal" aria-hidden="true">
-    <div class="modal-content wheel-modal__content" role="dialog" aria-modal="true" aria-labelledby="valueModalHeader">
-      <div class="wheel-modal__header">
-        <h2 id="valueModalHeader">
-          Spin and win <span class="wheel-highlight">random discount</span> up to 100%
-        </h2>
-        <p id="promoCodeLine" class="promo-code-line" hidden></p>
-      </div>
-      <div class="wheel-modal__body">
-        <div class="spin-wheel-frame">
-          <div class="spin-wheel-outline">
-            <div class="spin-wheel-ring">
-              <div id="discountWheel" class="spin-wheel" role="img"
-                aria-label="Discount wheel showing multiple savings"></div>
+  <div id="valueModal" class="modal">
+    <div class="modal-content">
+      <!-- <span class="close">&times;</span> -->
+
+      <h2 id="valueModalHeader"></h2>
+
+      <!-- <p class="subtext">
+        <strong>Scratch the card to reveal your promo.</strong><br>
+        Promo auto-applies at checkout — ends in <span id="scratchMirrorTimerNote">10:00</span>
+      </p> -->
+
+      <div class="scratch-wrap">
+        <div class="scratch-card" role="group" aria-label="Scratch to reveal your discount">
+          <div class="scratch-reveal">
+            <div class="reveal-content">
+              <div class="discount-badge">
+                <span class="discount-badge__main">100% OFF</span>
+                <span class="discount-badge__bonus">+ Free Coach Call</span>
+              </div>
+              <!-- <p class="reveal-sub">Your 12-Week Plan is free!</p> -->
+              <p id="promoCodeLine" class="promo-code-line"></p>
+              <p class="reveal-small">
+                Auto-applies at checkout · Ends in
+                <span class="reveal-timer" id="scratchMirrorTimer">10:00</span>
+              </p>
+            </div>
+            <canvas id="scratchCanvas"></canvas>
+            <!-- Finger-movement hint -->
+            <div id="scratchHint" class="scratch-hint" aria-hidden="true">
+              <div class="orbit">
+                <div class="dot"></div>
+              </div>
+              <p class="hint-copy">Swipe here to scratch</p>
             </div>
           </div>
-          <div class="spin-wheel-pointer" aria-hidden="true">
-            <div class="pointer-cap">
-              <span class="pointer-emoji" role="presentation">🎁</span>
-            </div>
-          </div>
+          <button id="scratchReset" class="link-btn" type="button" hidden>Reset</button>
         </div>
       </div>
 
-      <div class="wheel-modal__actions">
-        <button id="wheelActionBtn" type="button" class="claim-program-btn wheel-action-btn">Spin</button>
+      <div class="modal-actions">
+        <button id="valueContinue" class="primary-btn">Continue</button>
+        <!-- <a id="valueDemo" href="https://www.youtube.com/shorts/H_aOWlPujIg" target="_blank" rel="noopener"
+          class="secondary-btn">
+          Watch&nbsp;Demo
+        </a> -->
       </div>
-
+      <p class="urgency-note">
+        ⏳ <strong>Claim your plan before the discount ends.</strong>
+      </p>
+      <!-- <p class="skip-link">
+        <a href="#" id="valueSkip">No thanks, just take me to the plan</a>
+      </p> -->
     </div>
   </div>
 
