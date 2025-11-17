@@ -871,12 +871,12 @@ document.addEventListener("DOMContentLoaded", () => {
       title: "Macro-Matched Meals (PT)",
       image: "../assets/progress-tracking-2.PNG",
       desc: ""
-    },
-        {
-      title: "Macro-Matched Meals (PT)",
-      image: "../assets/customer-support.webp",
-      desc: ""
     }
+    //     {
+    //   title: "Macro-Matched Meals (PT)",
+    //   image: "../assets/customer-support.webp",
+    //   desc: ""
+    // }
     // {
     //   title: "Flexible Logging, Your Way (PT)",
     //   image: "../assets/5_flexible_logging.png",
