@@ -2062,11 +2062,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const defaultReviews = [
   // 🔹 TODAY
+        {
+    name: 'joris bonson',
+    rating: 5,
+    time: 'Today',
+    text: 'would rate 67 if i cud',
+  },
+      {
+    name: 'THE ALPHA',
+    rating: 4,
+    time: 'Today',
+    text: 'Been using this for a couple of weeks and its genuinely amazing (avging 2kg muscle per week). Was going to rate 5 stars but i read someone got 100% off like wtf i only got 3% off 💔 still worth it tho',
+  },
+    {
+    name: 'alex',
+    rating: 5,
+    time: 'Today',
+    text: 'so yesterday i did the quiz and everythuing then i got an offer for 100% off. I was skeptical but hollyyy this app this app is sick wouldve been silly saying no',
+  },
+    {
+    name: '.',
+    rating: 5,
+    time: 'Today',
+    text: 'Maybe women will finally find me attractive',
+  },
+
   {
     name: 'J',
     rating: 5,
     time: 'Today',
     text: '3 weeks in + my lifts are finally consistent. The “micro wins” reminders hit just when I’m about to bail. 🔥',
+  },
+        {
+    name: 'sully',
+    rating: 5,
+    time: 'Today',
+    text: 'got 77% off for my promo what a steal',
+  },
+    {
+    name: 'Cal',
+    rating: 5,
+    time: 'Today',
+    text: 'nice to have an app where i can track workouts and meals rather than juggling multiple apps. plus i got 52% off lfg',
   },
   {
     name: 'Diego',
@@ -2104,7 +2141,7 @@ const defaultReviews = [
     name: 'Kyra L',
     rating: 5,
     time: 'Yesterday',
-    text: 'Didn’t expect the meals to be this college-budget-friendly. Big W for the grocery lists.',
+    text: 'Didn’t expect the meals to be this college-budget-friendly, plus i got 23% off woop woop. Big W for the grocery lists.',
   },
   {
     name: 'layla',
@@ -2131,6 +2168,12 @@ const defaultReviews = [
     rating: 4,
     time: '2 days ago',
     text: 'uni wrecked my routine ngl, but the app didn’t “shame” me. It just recalced my plan and we moved.',
+  },
+    {
+    name: 'kia malifa',
+    rating: 5,
+    time: '2 days ago',
+    text: 'i got 69% off. nice. and yh the apps good too',
   },
   {
     name: 'Maddie',
