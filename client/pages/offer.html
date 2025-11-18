@@ -448,11 +448,6 @@ placeholder.replaceWith(iframe);
         <p class="promo-strip__subtitle">
           Your <span class="promo-strip__highlight">discount</span> of 100% is applied.
         </p>
-        <p class="promo-strip__rarity">
-          You just scratched 100% off. Last win was
-          <span class="promo-strip__rarity-count">3,847</span> users ago.
-          Don’t let this go.
-        </p>
       </div>
 
       <div class="promo-strip__meta">
@@ -572,7 +567,7 @@ placeholder.replaceWith(iframe);
             <span class="discount-price" id="priceSpecialDiscount">£0.00</span>
           </div>
           <div class="best-seller-banner">
-            <strong><span class="crown-emoji">👑</span> <span class="banner-text">BEST VALUE</span></strong>
+            <strong><span class="crown-emoji">👑</span> <span class="banner-text">UNREAL VALUE</span></strong>
           </div>
         </div>
 
@@ -669,8 +664,9 @@ placeholder.replaceWith(iframe);
         </button>
       </div>
 
-      <p class="final-reassurance" id="offerDisclaimer">
-        Try the 12-Week Plan risk-free. No commitment, no hidden fees.
+      <p class="reassurance" id="offerDisclaimer">
+        Try 12-Week Plan free. At the end of your free period, renews at
+        <span class="renew-amt"></span>/month - <strong>cancel anytime in one click, no hidden fees</strong>. You're also covered by our         <a href="#moneyBackGuarantee" id="moneyBackGuaranteeLink" class="mbg-scroll-link">Money-Back Guarantee</a>.
       </p>
 
       <p class="offer-disclaimer">
@@ -840,7 +836,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
     </section>
 
 
-    <section class="money-back-guarantee ">
+    <section class="money-back-guarantee " id="moneyBackGuarantee">
       <div class="mbg-container">
         <div class="mbg-content">
           <h2>100% Money-Back Guarantee</h2>
@@ -1043,10 +1039,15 @@ alert('Could not initialise PayPal. Please refresh and try again.');
       <!-- <span class="close">&times;</span> -->
 
       <h2 id="valueModalHeader"></h2>
+      <p id="scratchCompletionNote" class="promo-strip__rarity" hidden>
+        You just scratched 100% off. Last win was
+        <span class="promo-strip__rarity-count">3,847</span> users ago.
+        This is rare - don’t let it expire.
+      </p>
 
       <!-- <p class="subtext">
-        <strong>Scratch the card to reveal your promo.</strong><br>
-        Promo auto-applies at checkout — ends in <span id="scratchMirrorTimerNote">10:00</span>
+          <strong>Scratch the card to reveal your promo.</strong><br>
+          Promo auto-applies at checkout — ends in <span id="scratchMirrorTimerNote">10:00</span>
       </p> -->
 
       <div class="scratch-wrap">
@@ -1055,11 +1056,11 @@ alert('Could not initialise PayPal. Please refresh and try again.');
             <div class="reveal-content">
               <div class="discount-badge">
                 <span class="discount-badge__main">100% OFF</span>
-                <span class="discount-badge__bonus">+ Free Coach Call</span>
+                <!-- <span class="discount-badge__bonus">+ Free Coach Call</span> -->
               </div>
               <!-- <p class="reveal-sub">Your 12-Week Plan is free!</p> -->
-              <p id="promoCodeLine" class="promo-code-line"></p>
-              <p class="reveal-small">
+ <p id="promoCodeLine" class="promo-code-line" hidden></p>
+              <p id="scratchDiscountNote" class="reveal-small" hidden>
                 Auto-applies at checkout · Ends in
                 <span class="reveal-timer" id="scratchMirrorTimer">10:00</span>
               </p>

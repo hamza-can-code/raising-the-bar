@@ -233,9 +233,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const twelveWeekProgram = JSON.parse(localStorage.getItem("twelveWeekProgram"));
 
   const namePrompt = document.getElementById("offerNamePrompt");
-  if (namePrompt) {
-    namePrompt.textContent = `${name || "Athlete"}, claim your calisthenics workout plan`;
-  }
+  const updateOfferNamePrompt = (active = isDiscountActive()) => {
+    if (!namePrompt) return;
+    const planCopy = active
+      ? "claim your free calisthenics workout plan"
+      : "claim your calisthenics workout plan";
+    namePrompt.textContent = `${name || "Athlete"}, ${planCopy}`;
+  };
+
+  updateOfferNamePrompt();
+  document.addEventListener(DISCOUNT_STATE_EVENT, (e) => {
+    updateOfferNamePrompt(!!(e.detail && e.detail.active));
+  });
 
   // Normalize the user goal by trimming and checking for expected values
   userGoal = userGoal ? userGoal.trim().toLowerCase() : ""; // Trim and normalize
@@ -1246,7 +1255,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (dealOn) {
       el.innerHTML =
         `Normally ${fmt(code, full)} — now just <strong>${fmt(code, intro)}</strong>. ` +
-        `🎉 Get the full 12-Week Plan for ${fmt(code, intro / 30)}.`;
+        // `🎉 You won the full 12-Week Plan for ${fmt(code, intro / 30)}.`;
+                `🎉 You won the full 12-Week Plan for free.`;
     } else {
       el.textContent = 'Like having a personal trainer in your pocket — for less than the cost of one session.';
     }
@@ -2204,9 +2214,156 @@ function setUpCompareModal0() {
     ...document.querySelectorAll('[data-open-value-modal]')
   ].filter(Boolean);
 
+  const SCRATCH_COMPLETE_KEY = 'scratch_modal_completed';
+  const SCRATCH_LAST_WIN_KEY = 'scratch_last_win_meta';
+
+  function hasCompletedScratch() {
+    try {
+      return localStorage.getItem(SCRATCH_COMPLETE_KEY) === '1';
+    } catch {
+      return false;
+    }
+  }
+
+    function toggleScratchRevealDetails(active, completed) {
+    const promoLine = document.getElementById('promoCodeLine');
+    const discountNote = document.getElementById('scratchDiscountNote');
+    const timer = document.getElementById('scratchMirrorTimer');
+    const show = !!active && !!completed;
+
+    [promoLine, discountNote, timer].forEach(el => {
+      if (el) el.toggleAttribute('hidden', !show);
+    });
+  }
+
+  // Generate + persist a realistic “last win” meta object
+  function getLastWinInfo() {
+    try {
+      const raw = localStorage.getItem(SCRATCH_LAST_WIN_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (
+          parsed &&
+          typeof parsed.usersAgo === 'number' &&
+          typeof parsed.dateStr === 'string' &&
+          typeof parsed.timeStr === 'string'
+        ) {
+          return parsed;
+        }
+      }
+    } catch {
+      // ignore and regenerate
+    }
+
+    // Generate fresh values
+    const minUsers = 1800;
+    const maxUsers = 9500;
+    const usersAgo =
+      Math.floor(Math.random() * (maxUsers - minUsers + 1)) + minUsers;
+
+    const now = new Date();
+    const lastWin = new Date(now);
+    // “Day before around midday” → yesterday, between 11:00–14:59
+    lastWin.setDate(now.getDate() - 1);
+    lastWin.setHours(11 + Math.floor(Math.random() * 4)); // 11–14
+    lastWin.setMinutes(Math.floor(Math.random() * 60));
+    lastWin.setSeconds(0);
+    lastWin.setMilliseconds(0);
+
+    const dateStr = lastWin.toLocaleDateString(undefined, {
+      month: 'short',
+      day: 'numeric'
+    });
+    const timeStr = lastWin.toLocaleTimeString(undefined, {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    });
+
+    const info = { usersAgo, dateStr, timeStr };
+
+    try {
+      localStorage.setItem(SCRATCH_LAST_WIN_KEY, JSON.stringify(info));
+    } catch {
+      // non-fatal
+    }
+
+    return info;
+  }
+
+  function unlockContinueButton(forceDisable) {
+    const continueBtn = document.getElementById('valueContinue');
+    if (!continueBtn) return;
+
+    if (forceDisable) {
+      continueBtn.disabled = true;
+      continueBtn.classList.add('locked');
+      continueBtn.style.setProperty('background', '#004a99', 'important');
+      continueBtn.style.setProperty('background-image', 'none', 'important');
+      return;
+    }
+
+    continueBtn.disabled = false;
+    continueBtn.classList.remove('locked');
+    continueBtn.style.removeProperty('background');
+    continueBtn.style.removeProperty('background-image');
+  }
+
+  function updateScratchCompletionUi() {
+    const header = document.getElementById('valueModalHeader');
+    const note = document.getElementById('scratchCompletionNote');
+    const winText =
+      header?.dataset.winText || 'You unlocked the biggest discount.';
+    const baseText = header?.dataset.baseText || header?.innerHTML || '';
+
+    if (header) {
+      header.innerHTML = hasCompletedScratch() ? winText : baseText;
+    }
+
+    if (note) {
+      const info = getLastWinInfo();
+      if (info) {
+        const formattedUsers =
+          (info.usersAgo && info.usersAgo.toLocaleString?.()) || info.usersAgo;
+        note.innerHTML = `
+          You just scratched 100% off. Last win was
+          <span class="promo-strip__rarity-count">${formattedUsers}</span>
+          users ago, on <span class="promo-strip__rarity-count">${info.dateStr}</span> at <span class="promo-strip__rarity-count">${info.timeStr}</span>. <br> <strong>This is rare - don’t let it expire</strong>.
+        `;
+      }
+      note.hidden = !hasCompletedScratch();
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    window.updateScratchCompletionUi = updateScratchCompletionUi;
+  }
+
+function markScratchCompleted() {
+  try {
+    localStorage.setItem(SCRATCH_COMPLETE_KEY, '1');
+  } catch {}
+
+  updateScratchCompletionUi();
+
+  // 🔥 Re-run the discount UI so promo line + note unhide
+  try {
+    updateScratchDiscountContent(); // uses isDiscountActive() + hasCompletedScratch()
+  } catch (err) {
+    console.error('updateScratchDiscountContent failed:', err);
+  }
+}
+
+  function scrollToPlans() {
+    if (planAnchor) {
+      planAnchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
   function openModal() {
     modal.classList.add('show');
     document.body.classList.add('modal-open');
+     updateScratchCompletionUi();
     initScratchCard();
   }
 
@@ -2347,10 +2504,7 @@ function setUpCompareModal0() {
     const reveal = wrap.querySelector('.scratch-reveal');
     const content = reveal ? reveal.querySelector('.reveal-content') : null;
     const badge = content ? content.querySelector('.discount-badge') : null;
-    const promoLine = document.getElementById('promoCodeLine');
-    const note = content ? content.querySelector('.reveal-small') : null;
-    const timer = document.getElementById('scratchMirrorTimer');
-        const urgencyNotes = document.querySelectorAll('.urgency-note');
+const urgencyNotes = document.querySelectorAll('.urgency-note');
     let expired = content ? content.querySelector('.scratch-expired-message') : null;
 
     if (content && !expired) {
@@ -2395,10 +2549,8 @@ function setUpCompareModal0() {
       badge.classList.toggle('expired', !active);
     }
 
-    if (promoLine) promoLine.toggleAttribute('hidden', !active);
-    if (note) note.toggleAttribute('hidden', !active);
-    if (timer) timer.toggleAttribute('hidden', !active);
-        urgencyNotes.forEach(el => el.toggleAttribute('hidden', !active));
+    toggleScratchRevealDetails(active, hasCompletedScratch());
+    urgencyNotes.forEach(el => el.toggleAttribute('hidden', !active));
     if (expired) expired.toggleAttribute('hidden', active);
   }
 
@@ -2433,28 +2585,37 @@ function setUpCompareModal0() {
     }
 
     {
-      const fullName = localStorage.getItem('name') || '';
-      const firstName = (fullName.split(' ')[0] || 'user')
-        .replace(/[^a-z0-9]/gi, '-')   // normalize to letters/numbers/hyphen
-        .replace(/-+/g, '-')           // collapse multiple hyphens
-        .replace(/^-|-$/g, '');        // trim hyphens
-      const promoCode = `${firstName}-100-OFF`.toUpperCase();
-      localStorage.setItem('appliedPromoCode', promoCode);
+  const fullName = localStorage.getItem('name') || '';
+  const firstName = (fullName.split(' ')[0] || 'user')
+    .replace(/[^a-z0-9]/gi, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+  const promoCode = `${firstName}-100-OFF`.toUpperCase();
+  localStorage.setItem('appliedPromoCode', promoCode);
 
-      // write to both the modal and the pricing strip if present
-      const targets = [
-        document.getElementById('promoCodeValue'),     // modal code (id)
-        document.getElementById('promoStripCode'),     // strip code (id)
-        document.querySelector('.promo-code-value')    // modal code (class fallback)
-      ].filter(Boolean);
-      targets.forEach(el => el.textContent = promoCode);
+  const targets = [
+    document.getElementById('promoCodeValue'),
+    document.getElementById('promoStripCode'),
+    document.querySelector('.promo-code-value')
+  ].filter(Boolean);
+  targets.forEach(el => el.textContent = promoCode);
+
+  // 👇 add this
+  const promoLine = document.getElementById('promoCodeLine');
+  if (promoLine) {
+    promoLine.innerHTML = `
+      Your promo code: <span class="promo-code-value">${promoCode}</span>
+    `;
+  }
+}
+
+    // Lock the Continue button initially unless the user already finished
+    if (hasCompletedScratch()) {
+      wrap.classList.add('scratch-done');
+      unlockContinueButton(false);
+    } else {
+      unlockContinueButton(true);
     }
-
-    // Lock the Continue button initially
-    continueBtn.disabled = true;
-    continueBtn.classList.add('locked');
-    continueBtn.style.setProperty('background', '#004a99', 'important');
-    continueBtn.style.setProperty('background-image', 'none', 'important');
 
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
@@ -2675,6 +2836,8 @@ function setUpCompareModal0() {
           stopScratchDiscountShuffle({ restore: shouldRestoreLabel });
         }
 
+        markScratchCompleted();
+
         try { window.sendAnalytics?.('scratch_revealed', { pct: 100 }); } catch { }
       }
     }
@@ -2721,26 +2884,20 @@ function setUpCompareModal0() {
     document.body.classList.remove('modal-open');
   }
 
-  // only open if you haven’t scrolled past pricing
 openBtns.forEach(btn => {
   btn.addEventListener('click', e => {
-    if (!planAnchor) {
-      e.preventDefault();
-      openModal();
-      return;
-    }
-
-    const pricingTop = planAnchor.getBoundingClientRect().top + window.scrollY;
-    if (window.scrollY + 150 < pricingTop) {
-      e.preventDefault();
-      openModal();
-    }
+    e.preventDefault();      // stop any anchor default scroll
+    openModal();             // just open the modal
   });
 });
 
   // hook up the buttons
   closeBtn?.addEventListener('click', closeModal);
-  contBtn?.addEventListener('click', closeModal);
+  contBtn?.addEventListener('click', e => {
+    e.preventDefault();
+    closeModal();
+    scrollToPlans();
+  });
   skipLink?.addEventListener('click', e => { e.preventDefault(); closeModal(); });
 
   // clicking on the backdrop
@@ -3293,8 +3450,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const header = document.getElementById("valueModalHeader");
   if (header) {
     const baseText = firstName
-      ? `🎁 ${firstName}, scratch to unlock your <span style="text-decoration: underline;">random</span> promo`
-      : `🎁 Scratch to unlock your <span style="text-decoration: underline;">random</span> promo`;
+      ? `🎁 Scratch and win <span class="rtb-blue-underline">random discount</span> for the first 12 weeks`
+      : `🎁 Scratch and win <span class="rtb-blue-underline">random discount</span> for the first 12 weeks`;
+    header.dataset.baseText = baseText;
+    header.dataset.winText = '<span class="promo-strip__rarity-count">Wow!</span> You won the <span class="promo-strip__rarity-count">biggest</span> discount!';
     header.innerHTML = baseText;
 
     const promoLine = document.getElementById("promoCodeLine");
@@ -3307,6 +3466,7 @@ document.addEventListener("DOMContentLoaded", () => {
       promoLine.dataset.activeHtml = promoLine.innerHTML;
     }
   }
+  updateScratchCompletionUi();
   updateScratchDiscountContent(isDiscountActive());
 });
 
@@ -3351,6 +3511,26 @@ document.addEventListener('DOMContentLoaded', () => {
   if (p) {
     const { code, full } = getLocalPrices();
     p.innerHTML = p.innerHTML.replace(/£49\.99\/month/g, `${fmt(code, full)}/month`);
+  }
+
+  const reassurance = document.getElementById('offerDisclaimer');
+  const syncReassuranceVisibility = (active = isDiscountActive()) => {
+    if (!reassurance) return;
+    reassurance.style.display = active ? '' : 'none';
+  };
+  syncReassuranceVisibility();
+  document.addEventListener(DISCOUNT_STATE_EVENT, (e) => {
+    syncReassuranceVisibility(!!(e.detail && e.detail.active));
+  });
+
+  const mbgLink = document.getElementById('moneyBackGuaranteeLink');
+  const mbgSection = document.getElementById('moneyBackGuarantee');
+  if (mbgLink && mbgSection) {
+    mbgLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      const targetTop = mbgSection.getBoundingClientRect().top + window.scrollY - 65;
+      window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+    });
   }
 
   // show('paypal'); // default to PayPal on load
