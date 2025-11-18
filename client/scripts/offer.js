@@ -1076,6 +1076,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const claimProgramBtn = document.getElementById('claimProgramBtn');
   const SCRATCH_COMPLETE_KEY = 'scratch_modal_completed';
 
+  const hasCompletedScratch = () => {
+    try {
+      return localStorage.getItem(SCRATCH_COMPLETE_KEY) === '1';
+    } catch {
+      return false;
+    }
+  };
+
   if (!floatingCTA || !ctaContainer || !ctaStop) {
     // console.warn("Missing CTA elements. Check #floating-cta, #floatingCtaContainer, #ctaStopContainer");
     return;
@@ -1094,7 +1102,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const hasModalBeenSeen = () => !!window.offerModalState?.hasOpened?.();
 
   const tryOpenScratchModal = () => {
-    if (hasModalAutoOpened || hasModalBeenSeen()) return;
+    if (hasModalAutoOpened || hasModalBeenSeen() || hasCompletedScratch()) return;
     if (window.offerModalState?.maybeOpenModal) {
       window.offerModalState.maybeOpenModal();
       hasModalAutoOpened = true;
@@ -1133,7 +1141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Also remove shadow overlay if pinned (if you prefer)
         floatingCTA.classList.remove('shadow-active');
         isPinned = true;
-         tryOpenScratchModal()
+        tryOpenScratchModal()
       }
     } else {
       // unpin if pinned
@@ -1280,7 +1288,7 @@ document.addEventListener("DOMContentLoaded", function () {
       el.innerHTML =
         `Normally ${fmt(code, full)} — now just <strong>${fmt(code, intro)}</strong>. ` +
         // `🎉 You won the full 12-Week Plan for ${fmt(code, intro / 30)}.`;
-                `🎉 You won the full 12-Week Plan for free.`;
+        `🎉 You won the full 12-Week Plan for free.`;
     } else {
       el.textContent = 'Like having a personal trainer in your pocket — for less than the cost of one session.';
     }
@@ -1806,7 +1814,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const continueBtn = document.getElementById("offerFinishBtn");
   if (!claimProgramBtn || !continueBtn) return;
 
-   
+
 });
 
 
@@ -2022,286 +2030,626 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!reviewsSection || !reviewsList || !reviewsPagination) return;
 
+
   const REVIEWS_PER_PAGE = 3;
+  const USER_REVIEWS_KEY = 'rtb_user_reviews';
   let currentPage = 1;
-  let reviewsData = [
-    {
-      name: 'Jade A.',
-      rating: 5,
-      time: 'Today',
-      text: '3 weeks in + my lifts are finally consistent. The “micro wins” reminders hit just when I’m about to bail. 🔥',
-    },
-    {
-      name: 'Diego V.',
-      rating: 5,
-      time: 'Today',
-      text: 'Cardio was boring before. Now the intervals feel like a game + the macros don’t make me feel deprived.',
-    },
-    {
-      name: 'Sofia M.',
-      rating: 5,
-      time: 'Yesterday',
-      text: 'Lost 8kg and gained a routine that actually feels doable. The check-ins felt like the app was high-fiving me 🙌.',
-    },
-    {
-      name: 'Kyra L.',
-      rating: 5,
-      time: 'Yesterday',
-      text: 'Didn’t expect the meals to be this college-budget-friendly. Big W for the grocery lists.',
-    },
-    {
-      name: 'Marcus (busy dad)',
-      rating: 5,
-      time: '2 days ago',
-      text: 'Short workouts + meals that my kids will actually eat? Yes pls. I even missed one session and it adapted so I didn’t feel guilty.',
-    },
-    {
-      name: 'Priya',
-      rating: 4,
-      time: '3 days ago',
-      text: 'UI is smooth and the daily notes keep me honest. Would love more veggie meal swaps, but still a 9.5/10 for me.',
-    },
-    {
-      name: 'Hannah T.',
-      rating: 5,
-      time: '5 days ago',
-      text: 'Went from “I’ll start Monday” to 21 days straight. The streak badges are addictive (in a good way).',
-    },
-    {
-      name: 'Ethan R',
-      rating: 4,
-      time: '6 days ago',
-      text: 'Tried a bunch of apps—this one actually listens. Typo here + there in the tips but workouts slap. 💪',
-    },
-    {
-      name: 'Lara K.',
-      rating: 5,
-      time: '1 week ago',
-      text: 'Verified purchase + verified results. Down 2 belt holes already and the nutrition tracker is low-key fun.',
-    },
-    {
-      name: 'Ayana (grad student)',
-      rating: 5,
-      time: '1 week ago',
-      text: 'Balancing lab + lifting used to fry me. The app’s chill nudges + quick meals = no more all-nighter crashes.',
-    },
-    {
-      name: 'Noah & Lea',
-      rating: 5,
-      time: '2 weeks ago',
-      text: 'Couples workouts without cringe. We compete on streaks and the app keeps it friendly (most days 😅).',
-    },
-    {
-      name: 'Gabe “night owl”',
-      rating: 5,
-      time: '3 weeks ago',
-      text: 'Late-night sessions used to ruin my sleep. The plan nudged me to swap timing + macros and boom, energy back.',
-    },
-    {
-      name: 'Mei',
-      rating: 5,
-      time: '1 month ago',
-      text: 'Exercises scale up gently so my joints aren’t screaming. (ty for the form cues!)',
-    },
-    {
-      name: 'Talia P.',
-      rating: 4,
-      time: '5 weeks ago',
-      text: 'App aesthetic is 🔥 and the coach notes read like a friend. Wish there was dark mode but still obsessed.',
-    },
-    {
-      name: 'Omar (new dad)',
-      rating: 5,
-      time: '2 months ago',
-      text: 'Snuck in 20-min workouts during nap time and still progressed. The recovery tips stopped my back twinges.',
-    },
-    {
-      name: 'Zayne',
-      rating: 5,
-      time: '3 months ago',
-      text: 'Cut from 15% → 11% bf without feeling hangry. The weekly nudges feel like a real coach in my ear.',
-    },
-    {
-      name: 'Liv (designer)',
-      rating: 4,
-      time: '4 months ago',
-      text: 'Interface is clean, workouts are spicy. Added my own emoji notes lol. Small bug once but support replied fast.',
-    },
-    {
-      name: 'Andre M.',
-      rating: 5,
-      time: '5 months ago',
-      text: 'Came for the 12-week plan, stayed for the “habit wins.” Feels like I’m finally stacking momentum.',
-    },
-    {
-  name: 'Hannah T.',
-  rating: 5,
-  time: '5 days ago',
-  text: 'Went from “I’ll start Monday” to 21 days straight. The streak badges are addictive (in a good way).',
-},
-{
-  name: 'Ethan R',
-  rating: 4,
-  time: '6 days ago',
-  text: 'Tried a bunch of apps—this one actually listens. Typo here + there in the tips but workouts slap. 💪',
-},
-{
-  name: 'Lara K.',
-  rating: 5,
-  time: '1 week ago',
-  text: 'Verified purchase + verified results. Down 2 belt holes already and the nutrition tracker is low-key fun.',
-},
-{
-  name: 'Ayana (grad student)',
-  rating: 5,
-  time: '1 week ago',
-  text: 'Balancing lab + lifting used to fry me. The app’s chill nudges + quick meals = no more all-nighter crashes.',
-},
-{
-  name: 'Noah & Lea',
-  rating: 5,
-  time: '2 weeks ago',
-  text: 'Couples workouts without cringe. We compete on streaks and the app keeps it friendly (most days 😅).',
-},
-{
-  name: 'Gabe “night owl”',
-  rating: 5,
-  time: '3 weeks ago',
-  text: 'Late-night sessions used to ruin my sleep. The plan nudged me to swap timing + macros and boom, energy back.',
-},
-{
-  name: 'Mei',
-  rating: 5,
-  time: '1 month ago',
-  text: 'Exercises scale up gently so my joints aren’t screaming. (ty for the form cues!)',
-},
-{
-  name: 'Talia P.',
-  rating: 4,
-  time: '5 weeks ago',
-  text: 'App aesthetic is 🔥 and the coach notes read like a friend. Wish there was dark mode but still obsessed.',
-},
-{
-  name: 'Omar (new dad)',
-  rating: 5,
-  time: '2 months ago',
-  text: 'Snuck in 20-min workouts during nap time and still progressed. The recovery tips stopped my back twinges.',
-},
-{
-  name: 'Zayne',
-  rating: 5,
-  time: '3 months ago',
-  text: 'Cut from 15% → 11% bf without feeling hangry. The weekly nudges feel like a real coach in my ear.',
-},
-{
-  name: 'Liv (designer)',
-  rating: 4,
-  time: '4 months ago',
-  text: 'Interface is clean, workouts are spicy. Added my own emoji notes lol. Small bug once but support replied fast.',
-},
-{
-  name: 'Andre M.',
-  rating: 5,
-  time: '5 months ago',
-  text: 'Came for the 12-week plan, stayed for the “habit wins.” Feels like I’m finally stacking momentum.',
-},
-{
-  name: 'Cam (med student)',
-  rating: 5,
-  time: '6 months ago',
-  text: 'Night float rotations wrecked me before this. Short recovery flows + quick prep meals = I’m not crashing in lectures.',
-},
-{
-  name: 'Luca G.',
-  rating: 4,
-  time: '7 months ago',
-  text: 'Started for summer, stayed for the streak counter. Would love a playlists tab but workouts keep me dialed.',
-},
-{
-  name: 'Shay',
-  rating: 5,
-  time: '8 months ago',
-  text: 'Finished my first 10k thanks to the pace cues. The gentle “drink water” nudges are elite 😂.',
-},
-{
-  name: 'Dylan T.',
-  rating: 5,
-  time: '9 months ago',
-  text: 'Bulked without the bloat. Macro coach felt like a friend checking in, not a drill sergeant.',
-},
-{
-  name: 'Imani',
-  rating: 5,
-  time: '10 months ago',
-  text: 'Crushed my first pull-up and the app actually celebrated it. The lil confetti animation? I kept replaying it lol.',
-},
-{
-  name: 'Cal',
-  rating: 4,
-  time: '11 months ago',
-  text: 'Minimalist UI, maximal gains. Some circuits repeat but the progressions make sense.',
-},
-{
-  name: 'Rae',
-  rating: 5,
-  time: '12 months ago',
-  text: 'Ran this during finals szn. The “study break sweats” track saved my sanity + posture.',
-},
-{
-  name: 'Harper',
-  rating: 5,
-  time: '13 months ago',
-  text: 'Post-ACL rehab felt sketchy before this. The stability drills eased me back into squats safely.',
-},
-{
-  name: 'Nico (DJ)',
-  rating: 5,
-  time: '14 months ago',
-  text: 'Late gigs = messy sleep. The app shifted my workouts to afternoon + added mobility. Knees finally stopped whining.',
-},
-{
-  name: 'Jess',
-  rating: 5,
-  time: '15 months ago',
-  text: '5AM lifting crew checking in 🌅. This kept me accountable when my friends bailed.',
-},
-{
-  name: 'Tomas',
-  rating: 4,
-  time: '16 months ago',
-  text: 'Programming is solid. Wish the warmups had video loops but the cues are clear.',
-},
-{
-  name: 'Elise',
-  rating: 5,
-  time: '17 months ago',
-  text: 'Used it while backpacking EU. Bodyweight-only weeks were clutch + the hydration reminders were cute.',
-},
-{
-  name: 'Mo',
-  rating: 5,
-  time: '18 months ago',
-  text: 'Dropped 6kg before a music video shoot. The checklist vibe kept me calm.',
-},
-{
-  name: 'Sienna',
-  rating: 5,
-  time: '19 months ago',
-  text: 'Tiny apartment, zero equipment, still got definition. The plan felt tailored not generic.',
-},
-{
-  name: 'Arjun',
-  rating: 5,
-  time: '20 months ago',
-  text: 'Coach notes convinced me to finally deload. PRs went up after—respect the science.',
-},
-{
-  name: 'Vi',
-  rating: 4,
-  time: '2 years ago',
-  text: 'Used this alongside dance rehearsals. Would be cool to log rehearsals as workouts, but recovery tips still on point.',
-},
-  ];
+
+  const loadUserReviews = () => {
+    try {
+      const raw = localStorage.getItem(USER_REVIEWS_KEY);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return [];
+      return parsed.filter(review =>
+        typeof review?.name === 'string'
+        && typeof review?.text === 'string'
+        && typeof review?.time === 'string'
+        && typeof review?.rating === 'number'
+      );
+    } catch {
+      return [];
+    }
+  };
+
+  const persistUserReviews = (reviews) => {
+    try {
+      localStorage.setItem(USER_REVIEWS_KEY, JSON.stringify(reviews));
+    } catch {
+      // non-fatal
+    }
+  };
+
+const defaultReviews = [
+  // 🔹 TODAY
+  {
+    name: 'Jade A.',
+    rating: 5,
+    time: 'Today',
+    text: '3 weeks in + my lifts are finally consistent. The “micro wins” reminders hit just when I’m about to bail. 🔥',
+  },
+  {
+    name: 'Diego V.',
+    rating: 5,
+    time: 'Today',
+    text: 'Cardio was boring before ngl. Now the intervals feel like a game and the macros don’t make me feel deprived',
+  },
+  {
+    name: 'Mia (final year)',
+    rating: 5,
+    time: 'Today',
+    text: 'Revision + gym usually = meltdown. This app kinda thinks for me so I just show up and press start 😂',
+  },
+  {
+    name: 'Josh K.',
+    rating: 4,
+    time: 'Today',
+    text: 'Lowkey thought it was just another tiktok ad. 2 weeks in and my pushups doubled. Would rate 4.7 if that was a thing.',
+  },
+  {
+    name: 'Ben (23)',
+    rating: 5,
+    time: 'Today',
+    text: 'The way it adjusts after a bad sleep night is actually crazy. I felt weirdly seen when it downgraded my session lol.=',
+  },
+
+  // 🔹 YESTERDAY
+  {
+    name: 'Sofia M.',
+    rating: 5,
+    time: 'Yesterday',
+    text: 'Lost 8kg and gained a routine that actually feels doable. The check-ins felt like the app was high-fiving me 🙌=',
+  },
+  {
+    name: 'Kyra L.',
+    rating: 5,
+    time: 'Yesterday',
+    text: 'Didn’t expect the meals to be this college-budget-friendly. Big W for the grocery lists.',
+  },
+  {
+    name: 'Layla',
+    rating: 5,
+    time: 'Yesterday',
+    text: 'As someone w anxiety the gentle “you did enough” messages hit different. love the vibes :)',
+  },
+  {
+    name: 'Mateo',
+    rating: 5,
+    time: 'Yesterday',
+    text: 'I travel for work a lot. Switched to hotel-room/bodyweight weeks and didn’t lose momentum once.',
+  },
+
+  // 🔹 2 DAYS AGO
+  {
+    name: 'M',
+    rating: 5,
+    time: '2 days ago',
+    text: 'Short workouts + meals that my kids will actually eat? Yes pls. I even missed one session and it adapted so I didn’t feel guilty.',
+  },
+  {
+    name: 'Riley',
+    rating: 4,
+    time: '2 days ago',
+    text: 'uni wrecked my routine ngl, but the app didn’t “shame” me. It just recalced my plan and we moved.',
+  },
+  {
+    name: 'Maddie',
+    rating: 5,
+    time: '2 days ago',
+    text: 'The lil “how are you feeling?” check-ins made me realise I was overdoing it. Adjusted volume and my knees stopped screaming.',
+  },
+
+  // 🔹 3 DAYS AGO
+  {
+    name: 'Priya',
+    rating: 4,
+    time: '3 days ago',
+    text: 'UI is smooth and the daily notes keep me honest. Would love more meal swaps, but still a 9.5/10 for me.',
+  },
+  {
+    name: 'Aaron P.',
+    rating: 5,
+    time: '3 days ago',
+    text: 'First time sticking to anything longer than 10 days. I open it out of habit now same as checking socials.',
+  },
+  {
+    name: 'Nia',
+    rating: 3,
+    time: '3 days ago',
+    text: 'Good app, just wish there were more dairy-free meals by default. Still using it tho bc the workouts bang.',
+  },
+
+  // 🔹 4 DAYS AGO
+  {
+    name: 'Leo (night shift)',
+    rating: 5,
+    time: '4 days ago',
+    text: 'Works even with my cursed 10pm–6am schedule. It stopped telling me to train at 7am like a normal person 😂.',
+  },
+  {
+    name: 'Isla',
+    rating: 4,
+    time: '4 days ago',
+    text: 'Love the streaks. Hate when I break them (my fault lol). Dark mode soon plsss.',
+  },
+
+  // 🔹 5 DAYS AGO
+  {
+    name: 'Hannah T.',
+    rating: 5,
+    time: '5 days ago',
+    text: 'Went from “I’ll start Monday” to 21 days straight. The streak badges are addictive (in a good way).',
+  },
+  {
+    name: 'Tommy & Zac',
+    rating: 5,
+    time: '5 days ago',
+    text: 'We started as a joke competition and now we’re both actually shredded. The weekly recap basically fuels the trash talk.',
+  },
+  {
+    name: 'Serena',
+    rating: 5,
+    time: '5 days ago',
+    text: 'The calm tone is everything. No “summer shred in 7 days” nonsense, just actual guidance that works.',
+  },
+
+  // 🔹 6 DAYS AGO
+  {
+    name: 'Ethan R',
+    rating: 4,
+    time: '6 days ago',
+    text: 'Tried a bunch of apps—this one actually listens. Typo here + there in the tips but workouts slap. 💪',
+  },
+  {
+    name: 'Yusuf',
+    rating: 4,
+    time: '6 days ago',
+    text: 'Some of the meals are UK-shop friendly which I appreciate. One recipe had weird portions but I just winged it.',
+  },
+  {
+    name: 'Chloe (busy nurse)',
+    rating: 5,
+    time: '6 days ago',
+    text: '12 hour shifts and I still manage 3 short sessions a week now. The app does the mental load for me.',
+  },
+
+  // 🔹 1 WEEK AGO
+  {
+    name: 'Lara K.',
+    rating: 5,
+    time: '1 week ago',
+    text: 'Verified purchase + verified results. Down 2 belt holes already and the nutrition tracker is low-key fun.',
+  },
+  {
+    name: 'Ayana (grad student)',
+    rating: 5,
+    time: '1 week ago',
+    text: 'Balancing lab + lifting used to fry me. The app’s chill nudges + quick meals = no more all-nighter crashes.',
+  },
+  {
+    name: 'Andre & Mel',
+    rating: 5,
+    time: '1 week ago',
+    text: 'We use the same plan but diff levels. Low key turned into a date night thing cooking the meals together.',
+  },
+  {
+    name: 'Connor',
+    rating: 5,
+    time: '1 week ago',
+    text: 'I was stuck at the same pullup count for months. The progression path here finally broke the plateau.',
+  },
+  {
+    name: 'Kira (19)',
+    rating: 4,
+    time: '1 week ago',
+    text: 'Helps with my body image tbh. Focus is on “what did you do today” not “what do you weigh right now”.',
+  },
+  {
+    name: 'Ollie',
+    rating: 5,
+    time: '1 week ago',
+    text: 'First time an app told me to DELoad instead of grind harder. Felt illegal but my bench went up so yeah.',
+  },
+
+  // 🔹 2 WEEKS AGO
+  {
+    name: 'Noah & Lea',
+    rating: 5,
+    time: '2 weeks ago',
+    text: 'Couples workouts without cringe. We compete on streaks and the app keeps it friendly (most days 😅).',
+  },
+  {
+    name: 'Samira',
+    rating: 5,
+    time: '2 weeks ago',
+    text: 'Had 0 clue about macros. It basically baby-stepped me into eating enough protein without turning into a chicken breast robot.',
+  },
+  {
+    name: 'Reece (desk job)',
+    rating: 4,
+    time: '2 weeks ago',
+    text: 'The posture and mobility stuff is sneaky good. Should be more hyped in the marketing fr.',
+  },
+  {
+    name: 'Ella',
+    rating: 5,
+    time: '2 weeks ago',
+    text: 'The day it congratulated me for going to bed earlier instead of just working out harder, I was SOLD.',
+  },
+  {
+    name: 'Jared',
+    rating: 3,
+    time: '2 weeks ago',
+    text: 'Good overall but I got confused with one superset explanation. Support replied quick tho and fixed it for next week.',
+  },
+
+  // 🔹 3 WEEKS AGO
+  {
+    name: 'Gabe “night owl”',
+    rating: 5,
+    time: '3 weeks ago',
+    text: 'Late-night sessions used to ruin my sleep. The plan nudged me to swap timing + macros and boom, energy back.',
+  },
+  {
+    name: 'Helena',
+    rating: 5,
+    time: '3 weeks ago',
+    text: 'Down 5kg but more importantly: I actually like training now. That was not on my 2025 bingo card.',
+  },
+  {
+    name: 'Khalid',
+    rating: 5,
+    time: '3 weeks ago',
+    text: 'Ramadan mode was clutch. Adjusted training + meal timing so I didn’t feel like I was dying every session.',
+  },
+  {
+    name: 'Abby (new to gym)',
+    rating: 5,
+    time: '3 weeks ago',
+    text: 'Started literally not knowing what a superset was. Now I walk into the gym with an actual plan instead of vibes.',
+  },
+
+  // 🔹 1 MONTH AGO
+  {
+    name: 'Mei',
+    rating: 5,
+    time: '1 month ago',
+    text: 'Exercises scale up gently so my joints aren’t screaming. (ty for the form cues!)',
+  },
+  {
+    name: 'Jay',
+    rating: 4,
+    time: '1 month ago',
+    text: 'Wish I could colour-theme my dashboard (design brain talking). But functionally it is on point.',
+  },
+  {
+    name: 'Steph',
+    rating: 5,
+    time: '1 month ago',
+    text: 'Used to punish myself with 90 min sessions. This made me realise 30 focused mins is better and I feel human again.',
+  },
+  {
+    name: 'Max (28)',
+    rating: 5,
+    time: '1 month ago',
+    text: 'Best part is it doesn’t panic if I miss a day. Just reshuffles and keeps it moving. Less all-or-nothing vibes.',
+  },
+  {
+    name: 'Lina',
+    rating: 4,
+    time: '1 month ago',
+    text: 'Meals are surprisingly normal. Like actual food and not weird “protein pancakes” every day.',
+  },
+
+  // 🔹 5 WEEKS AGO
+  {
+    name: 'Talia P.',
+    rating: 4,
+    time: '5 weeks ago',
+    text: 'App aesthetic is 🔥 and the coach notes read like a friend. Wish there was dark mode but still obsessed.',
+  },
+
+  // 🔹 2 MONTHS AGO
+  {
+    name: 'Omar (new dad)',
+    rating: 5,
+    time: '2 months ago',
+    text: 'Snuck in 20-min workouts during nap time and still progressed. The recovery tips stopped my back twinges.',
+  },
+  {
+    name: 'Rob (office dad)',
+    rating: 5,
+    time: '2 months ago',
+    text: '45, 2 kids, zero free time. Still getting stronger slowly. The progress charts are weirdly satisfying.',
+  },
+  {
+    name: 'Bea',
+    rating: 5,
+    time: '2 months ago',
+    text: 'I log in mostly for the lil “you showed up” messages if we’re being honest. But my legs are also looking insane now sooo.',
+  },
+  {
+    name: 'Isaac',
+    rating: 4,
+    time: '2 months ago',
+    text: 'Took a bit to figure out the meal swap flow (user error lol) but once I got it, it was smooth.',
+  },
+  {
+    name: 'Gina (PT, 32)',
+    rating: 5,
+    time: '2 months ago',
+    text: 'I coach clients and still use this for my own structure. The deload logic is actually respectable.',
+  },
+
+  // 🔹 3 MONTHS AGO
+  {
+    name: 'Zayne',
+    rating: 5,
+    time: '3 months ago',
+    text: 'Cut from 15% → 11% bf without feeling hangry. The weekly nudges feel like a real coach in my ear.',
+  },
+  {
+    name: 'Harvey',
+    rating: 3,
+    time: '3 months ago',
+    text: 'Solid app but I had one sync issue on my old Android. Reinstalled and it was chill after that.',
+  },
+  {
+    name: 'Zoë',
+    rating: 5,
+    time: '3 months ago',
+    text: 'Neurodivergent brain approves. Clear steps, no 5 different decisions every time I want to train.',
+  },
+  {
+    name: 'Leo & Finn',
+    rating: 5,
+    time: '3 months ago',
+    text: 'Roommates lifting together. The shared “on a streak” screenshot is now in our kitchen group chat permanently.',
+  },
+
+  // 🔹 4 MONTHS AGO
+  {
+    name: 'Liv (designer)',
+    rating: 4,
+    time: '4 months ago',
+    text: 'Interface is clean, workouts are spicy. Added my own emoji notes lol. Small bug once but support replied fast.',
+  },
+  {
+    name: 'Marisol',
+    rating: 5,
+    time: '4 months ago',
+    text: 'English is not my first lang but the app is easy to follow. Diagrams + simple words = no problem.',
+  },
+  {
+    name: 'Craig (52)',
+    rating: 5,
+    time: '4 months ago',
+    text: 'Came in scared of hurting my back again. The warm ups and gradual progressions have been spot on.',
+  },
+  {
+    name: 'Huda',
+    rating: 4,
+    time: '4 months ago',
+    text: 'The reflection questions at the end of the week are actually deep. Lowkey turned this into therapy lite.',
+  },
+
+  // 🔹 5 MONTHS AGO
+  {
+    name: 'Andre M.',
+    rating: 5,
+    time: '5 months ago',
+    text: 'Came for the 12-week plan, stayed for the “habit wins.” Feels like I’m finally stacking momentum.',
+  },
+  {
+    name: 'Jon',
+    rating: 5,
+    time: '5 months ago',
+    text: 'Started for fat loss, stayed because I just feel better in my head. Less brain fog, more “I got this”.',
+  },
+  {
+    name: 'Tegan',
+    rating: 5,
+    time: '5 months ago',
+    text: 'Program doesn’t freak out when I log a bad sleep or period cramps. It just adjusts. Bless whoever coded that.',
+  },
+
+  // 🔹 6 MONTHS AGO
+  {
+    name: 'Cam (med student)',
+    rating: 5,
+    time: '6 months ago',
+    text: 'Night float rotations wrecked me before this. Short recovery flows + quick prep meals = I’m not crashing in lectures.',
+  },
+  {
+    name: 'Milo',
+    rating: 4,
+    time: '6 months ago',
+    text: 'Would love a “gym anxiety” mode with more visual demos, but the text cues are already super helpful.',
+  },
+  {
+    name: 'Ana (new mum)',
+    rating: 5,
+    time: '6 months ago',
+    text: 'Postpartum training felt scary and this made it feel manageable. Small wins, zero pressure.',
+  },
+
+  // 🔹 7 MONTHS AGO
+  {
+    name: 'Luca G.',
+    rating: 4,
+    time: '7 months ago',
+    text: 'Started for summer, stayed for the streak counter. Would love a playlists tab but workouts keep me dialed.',
+  },
+  {
+    name: 'Dominic',
+    rating: 5,
+    time: '7 months ago',
+    text: 'It told me to slow down more than speed up which is honestly what I needed.',
+  },
+  {
+    name: 'Frida',
+    rating: 4,
+    time: '7 months ago',
+    text: 'Sometimes the push notifications hit at weird times but the content of them is on point lol.',
+  },
+
+  // 🔹 8 MONTHS AGO
+  {
+    name: 'Shay',
+    rating: 5,
+    time: '8 months ago',
+    text: 'Finished my first 10k thanks to the pace cues. The gentle “drink water” nudges are elite 😂.',
+  },
+  {
+    name: 'Sienna',
+    rating: 5,
+    time: '8 months ago',
+    text: 'Tiny apartment, zero equipment, still got definition. The plan felt tailored not generic.',
+  },
+  {
+    name: 'Zara',
+    rating: 5,
+    time: '8 months ago',
+    text: 'Literally the first time I have a “before and during” not “before and after” pic folder. Still going.',
+  },
+  {
+    name: 'Owen',
+    rating: 5,
+    time: '8 months ago',
+    text: 'Used it alongside football training and it slotted in nice. Recovery blocks stopped me from overcooking it.',
+  },
+
+  // 🔹 9 MONTHS AGO
+  {
+    name: 'Dylan T.',
+    rating: 5,
+    time: '9 months ago',
+    text: 'Bulked without the bloat. Macro coach felt like a friend checking in, not a drill sergeant.',
+  },
+  {
+    name: 'Nate (chef)',
+    rating: 5,
+    time: '9 months ago',
+    text: 'As a chef I was ready to hate the recipes but they’re decent. Seasonings are not criminal anyway 😂.',
+  },
+  {
+    name: 'Leila',
+    rating: 4,
+    time: '9 months ago',
+    text: 'UI sometimes lags on my old phone but the structure is so good I refuse to switch apps.',
+  },
+
+  // 🔹 10 MONTHS AGO
+  {
+    name: 'Imani',
+    rating: 5,
+    time: '10 months ago',
+    text: 'Crushed my first pull-up and the app actually celebrated it. The lil confetti animation? I kept replaying it lol.',
+  },
+  {
+    name: 'Gareth',
+    rating: 5,
+    time: '10 months ago',
+    text: '2 stone down and somehow I don’t feel like I “dieted”. Just followed the dots.',
+  },
+  {
+    name: 'Millie',
+    rating: 5,
+    time: '10 months ago',
+    text: 'My favourite feature is literally the “how did you feel?” slider. Makes me pause and check in instead of autopilot.',
+  },
+
+  // 🔹 11 MONTHS AGO
+  {
+    name: 'Cal',
+    rating: 4,
+    time: '11 months ago',
+    text: 'Minimalist UI, maximal gains. Some circuits repeat but the progressions make sense.',
+  },
+  {
+    name: 'Pat (55)',
+    rating: 4,
+    time: '11 months ago',
+    text: 'I am not the target TikTok age but it still worked for me. Might need bigger text option though.',
+  },
+  {
+    name: 'Romy',
+    rating: 5,
+    time: '11 months ago',
+    text: 'Started because my friends bullied me into a group challenge. Still using it solo months later, so that says enough.',
+  },
+
+  // 🔹 12 MONTHS / 1 YEAR AGO
+  {
+    name: 'Rae',
+    rating: 5,
+    time: '12 months ago',
+    text: 'Ran this during finals szn. The “study break sweats” track saved my sanity + posture.',
+  },
+  {
+    name: 'Harper',
+    rating: 5,
+    time: '13 months ago',
+    text: 'Post-ACL rehab felt sketchy before this. The stability drills eased me back into squats safely.',
+  },
+  {
+    name: 'Nico (DJ)',
+    rating: 5,
+    time: '14 months ago',
+    text: 'Late gigs = messy sleep. The app shifted my workouts to afternoon + added mobility. Knees finally stopped whining.',
+  },
+  {
+    name: 'Jess',
+    rating: 5,
+    time: '15 months ago',
+    text: '5AM lifting crew checking in 🌅. This kept me accountable when my friends bailed.',
+  },
+  {
+    name: 'Tomas',
+    rating: 4,
+    time: '16 months ago',
+    text: 'Programming is solid. Wish the warmups had video loops but the cues are clear.',
+  },
+  {
+    name: 'Elise',
+    rating: 5,
+    time: '17 months ago',
+    text: 'Used it while backpacking EU. Bodyweight-only weeks were clutch + the hydration reminders were cute.',
+  },
+  {
+    name: 'Mo',
+    rating: 5,
+    time: '18 months ago',
+    text: 'Dropped 6kg before a music video shoot. The checklist vibe kept me calm.',
+  },
+  {
+    name: 'Sienna',
+    rating: 5,
+    time: '19 months ago',
+    text: 'Tiny apartment, zero equipment, still got definition. The plan felt tailored not generic.',
+  },
+  {
+    name: 'Arjun',
+    rating: 5,
+    time: '20 months ago',
+    text: 'Coach notes convinced me to finally deload. PRs went up after—respect the science.',
+  },
+  {
+    name: 'Vi',
+    rating: 4,
+    time: '2 years ago',
+    text: 'Used this alongside dance rehearsals. Would be cool to log rehearsals as workouts, but recovery tips still on point.',
+  },
+  {
+    name: 'Silas',
+    rating: 5,
+    time: '1 year ago',
+    text: 'Year check-in: still here, still training, still not bored. That has never happened before for me.',
+  },
+];
+
+  let userReviews = loadUserReviews();
+  let reviewsData = [...userReviews, ...defaultReviews];
 
   const renderStars = (rating) => {
     const full = '★'.repeat(Math.round(rating));
@@ -2376,52 +2724,54 @@ document.addEventListener('DOMContentLoaded', () => {
     renderPagination();
   };
 
-const scrollToReviews = () => {
-  const rect = reviewsSection.getBoundingClientRect();
-  const targetTop = rect.top + window.scrollY - 100;
-  window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
-};
+  const scrollToReviews = () => {
+    const rect = reviewsSection.getBoundingClientRect();
+    const targetTop = rect.top + window.scrollY - 100;
+    window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+  };
 
-const scrollToNewestReview = () => {
-  const firstReview = reviewsList.querySelector('.review-card');
+  const scrollToNewestReview = () => {
+    const firstReview = reviewsList.querySelector('.review-card');
 
-  if (!firstReview) {
+    if (!firstReview) {
+      scrollToReviews();
+      return;
+    }
+
+    const rect = firstReview.getBoundingClientRect();
+    const targetTop = rect.top + window.scrollY - 120;
+    window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+  };
+
+  readReviewsLink?.addEventListener('click', (e) => {
+    e.preventDefault();
     scrollToReviews();
-    return;
-  }
+  });
 
-  const rect = firstReview.getBoundingClientRect();
-  const targetTop = rect.top + window.scrollY - 120;
-  window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
-};
+  reviewComposer?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = (document.getElementById('reviewName').value || 'You').trim();
+    const text = (document.getElementById('reviewText').value || '').trim();
+    const rating = Number(document.getElementById('reviewRating').value || 5);
 
-readReviewsLink?.addEventListener('click', (e) => {
-  e.preventDefault();
-  scrollToReviews();
-});
+    if (!text) return;
 
-reviewComposer?.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const name = (document.getElementById('reviewName').value || 'You').trim();
-  const text = (document.getElementById('reviewText').value || '').trim();
-  const rating = Number(document.getElementById('reviewRating').value || 5);
-
-  if (!text) return;
-
-  reviewsData = [
-    {
+    const newReview = {
       name: name.length > 2 ? name : 'You',
       rating: Math.min(5, Math.max(1, rating)),
       time: 'Just now',
       text,
       pending: true,
-    },
-    ...reviewsData,
-  ];
+    };
 
-  goToFirstPage();
-  scrollToNewestReview();
-  e.target.reset();
+    userReviews = [newReview, ...userReviews].slice(0, 25);
+    persistUserReviews(userReviews);
+
+    reviewsData = [...userReviews, ...defaultReviews];
+
+    goToFirstPage();
+    scrollToNewestReview();
+    e.target.reset();
   });
 
   goToFirstPage();
@@ -2640,7 +2990,7 @@ function setUpCompareModal0() {
   const SCRATCH_COMPLETE_KEY = 'scratch_modal_completed';
   const SCRATCH_LAST_WIN_KEY = 'scratch_last_win_meta';
 
-    let hasShownModal = false;
+  let hasShownModal = false;
   let isModalOpen = false;
 
   function hasCompletedScratch() {
@@ -2651,7 +3001,7 @@ function setUpCompareModal0() {
     }
   }
 
-    function toggleScratchRevealDetails(active, completed) {
+  function toggleScratchRevealDetails(active, completed) {
     const promoLine = document.getElementById('promoCodeLine');
     const discountNote = document.getElementById('scratchDiscountNote');
     const timer = document.getElementById('scratchMirrorTimer');
@@ -2765,46 +3115,46 @@ function setUpCompareModal0() {
     window.updateScratchCompletionUi = updateScratchCompletionUi;
   }
 
-function markScratchCompleted() {
-  try {
-    localStorage.setItem(SCRATCH_COMPLETE_KEY, '1');
-  } catch {}
+  function markScratchCompleted() {
+    try {
+      localStorage.setItem(SCRATCH_COMPLETE_KEY, '1');
+    } catch { }
 
-  updateScratchCompletionUi();
+    updateScratchCompletionUi();
 
-  // 🔥 Re-run the discount UI so promo line + note unhide
-  try {
-    updateScratchDiscountContent(); // uses isDiscountActive() + hasCompletedScratch()
-  } catch (err) {
-    console.error('updateScratchDiscountContent failed:', err);
-  }
-}
-
-function scrollToPlans() {
-  const mbg = document.getElementById('moneyBackGuarantee');
-
-  // Prefer landing with the Money-Back Guarantee higher in the viewport
-  if (mbg) {
-    const rect = mbg.getBoundingClientRect();
-    const targetTop = rect.top + window.scrollY - 900;
-    window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
-    return;
+    // 🔥 Re-run the discount UI so promo line + note unhide
+    try {
+      updateScratchDiscountContent(); // uses isDiscountActive() + hasCompletedScratch()
+    } catch (err) {
+      console.error('updateScratchDiscountContent failed:', err);
+    }
   }
 
-  if (planAnchor) {
-    const rect = planAnchor.getBoundingClientRect();
-    const targetTop = rect.top + window.scrollY - 32;
-    window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+  function scrollToPlans() {
+    const mbg = document.getElementById('moneyBackGuarantee');
+
+    // Prefer landing with the Money-Back Guarantee higher in the viewport
+    if (mbg) {
+      const rect = mbg.getBoundingClientRect();
+      const targetTop = rect.top + window.scrollY - 905;
+      window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+      return;
+    }
+
+    if (planAnchor) {
+      const rect = planAnchor.getBoundingClientRect();
+      const targetTop = rect.top + window.scrollY - 32;
+      window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
     }
   }
 
   function openModal() {
-     if (isModalOpen) return;
+    if (isModalOpen) return;
     modal.classList.add('show');
     document.body.classList.add('modal-open');
-     updateScratchCompletionUi();
+    updateScratchCompletionUi();
     initScratchCard();
-     isModalOpen = true;
+    isModalOpen = true;
     hasShownModal = true;
   }
 
@@ -2945,7 +3295,7 @@ function scrollToPlans() {
     const reveal = wrap.querySelector('.scratch-reveal');
     const content = reveal ? reveal.querySelector('.reveal-content') : null;
     const badge = content ? content.querySelector('.discount-badge') : null;
-const urgencyNotes = document.querySelectorAll('.urgency-note');
+    const urgencyNotes = document.querySelectorAll('.urgency-note');
     let expired = content ? content.querySelector('.scratch-expired-message') : null;
 
     if (content && !expired) {
@@ -2960,7 +3310,7 @@ const urgencyNotes = document.querySelectorAll('.urgency-note');
       const mainLine = badge.querySelector('.discount-badge__main');
       const bonusPill = badge.querySelector('.discount-badge__bonus');
 
-       const labelTarget = mainLine || badge;
+      const labelTarget = mainLine || badge;
       const isAnimating = labelTarget && labelTarget.dataset.shuffle === '1';
       const isDone = wrap.classList.contains('scratch-done');
 
@@ -2969,7 +3319,7 @@ const urgencyNotes = document.querySelectorAll('.urgency-note');
         if (!mainLine.dataset.activeLabel) {
           mainLine.dataset.activeLabel = mainLine.textContent.trim() || '100% OFF';
         }
-    if (!active) {
+        if (!active) {
           stopScratchDiscountShuffle({ restore: false, target: mainLine });
           mainLine.textContent = 'Discount expired';
         } else if (isDone || !isAnimating) {
@@ -2979,7 +3329,7 @@ const urgencyNotes = document.querySelectorAll('.urgency-note');
         if (!badge.dataset.activeLabel) {
           badge.dataset.activeLabel = badge.textContent.trim();
         }
-         if (!active) {
+        if (!active) {
           stopScratchDiscountShuffle({ restore: false, target: badge });
           badge.textContent = 'Discount expired';
         } else if (isDone || !isAnimating) {
@@ -3026,29 +3376,29 @@ const urgencyNotes = document.querySelectorAll('.urgency-note');
     }
 
     {
-  const fullName = localStorage.getItem('name') || '';
-  const firstName = (fullName.split(' ')[0] || 'user')
-    .replace(/[^a-z0-9]/gi, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-  const promoCode = `${firstName}-100-OFF`.toUpperCase();
-  localStorage.setItem('appliedPromoCode', promoCode);
+      const fullName = localStorage.getItem('name') || '';
+      const firstName = (fullName.split(' ')[0] || 'user')
+        .replace(/[^a-z0-9]/gi, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+      const promoCode = `${firstName}-100-OFF`.toUpperCase();
+      localStorage.setItem('appliedPromoCode', promoCode);
 
-  const targets = [
-    document.getElementById('promoCodeValue'),
-    document.getElementById('promoStripCode'),
-    document.querySelector('.promo-code-value')
-  ].filter(Boolean);
-  targets.forEach(el => el.textContent = promoCode);
+      const targets = [
+        document.getElementById('promoCodeValue'),
+        document.getElementById('promoStripCode'),
+        document.querySelector('.promo-code-value')
+      ].filter(Boolean);
+      targets.forEach(el => el.textContent = promoCode);
 
-  // 👇 add this
-  const promoLine = document.getElementById('promoCodeLine');
-  if (promoLine) {
-    promoLine.innerHTML = `
+      // 👇 add this
+      const promoLine = document.getElementById('promoCodeLine');
+      if (promoLine) {
+        promoLine.innerHTML = `
       Your promo code: <span class="promo-code-value">${promoCode}</span>
     `;
-  }
-}
+      }
+    }
 
     // Lock the Continue button initially unless the user already finished
     if (hasCompletedScratch()) {
@@ -3292,7 +3642,7 @@ const urgencyNotes = document.querySelectorAll('.urgency-note');
       continueBtn.classList.add('locked');
       continueBtn.style.setProperty('background', '#004a99', 'important');
       continueBtn.style.setProperty('background-image', 'none', 'important');
-            if (isDiscountActive() && discountLabel) {
+      if (isDiscountActive() && discountLabel) {
         startScratchDiscountShuffle(discountLabel);
       }
     });
@@ -3323,10 +3673,10 @@ const urgencyNotes = document.querySelectorAll('.urgency-note');
   function closeModal() {
     modal.classList.remove('show');
     document.body.classList.remove('modal-open');
-     isModalOpen = false;
+    isModalOpen = false;
   }
 
-   const maybeOpenModal = () => {
+  const maybeOpenModal = () => {
     if (hasShownModal || isModalOpen) return;
     openModal();
   };
@@ -3338,16 +3688,16 @@ const urgencyNotes = document.querySelectorAll('.urgency-note');
     isOpen: () => isModalOpen,
   };
 
-openBtns.forEach(btn => {
-  btn.addEventListener('click', e => {
-    e.preventDefault();
-    if (hasShownModal || hasCompletedScratch()) {
-      scrollToPlans();
-      return;
-    }
-    openModal();
+  openBtns.forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      if (hasShownModal || hasCompletedScratch()) {
+        scrollToPlans();
+        return;
+      }
+      openModal();
+    });
   });
-});
 
   // hook up the buttons
   closeBtn?.addEventListener('click', closeModal);
@@ -3364,7 +3714,7 @@ openBtns.forEach(btn => {
   });
 
   // ← remove any immediate calls to remove .show or .modal-open here!
-  
+
   document.dispatchEvent(new Event('offer:modal-ready'));
 })();
 
@@ -3853,7 +4203,7 @@ window.addEventListener('popstate', () => {
     paymentSection.style.display = 'none';
     document.getElementById('postPayNote')?.style.setProperty('display', 'none');
     cardsSection.style.display = 'flex';
-        if (window.__PAYMENT_VISITED__) {
+    if (window.__PAYMENT_VISITED__) {
       document.body.classList.add('offer-disclaimer-visible');
     }
     // neutralize the pushed state
