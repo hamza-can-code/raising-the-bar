@@ -2063,51 +2063,51 @@ document.addEventListener('DOMContentLoaded', () => {
 const defaultReviews = [
   // 🔹 TODAY
   {
-    name: 'Jade A.',
+    name: 'J',
     rating: 5,
     time: 'Today',
     text: '3 weeks in + my lifts are finally consistent. The “micro wins” reminders hit just when I’m about to bail. 🔥',
   },
   {
-    name: 'Diego V.',
+    name: 'Diego',
     rating: 5,
     time: 'Today',
     text: 'Cardio was boring before ngl. Now the intervals feel like a game and the macros don’t make me feel deprived',
   },
   {
-    name: 'Mia (final year)',
+    name: 'mia',
     rating: 5,
     time: 'Today',
     text: 'Revision + gym usually = meltdown. This app kinda thinks for me so I just show up and press start 😂',
   },
   {
-    name: 'Josh K.',
+    name: 'baki hanma',
     rating: 4,
     time: 'Today',
     text: 'Lowkey thought it was just another tiktok ad. 2 weeks in and my pushups doubled. Would rate 4.7 if that was a thing.',
   },
   {
-    name: 'Ben (23)',
+    name: 'Bennyyy',
     rating: 5,
     time: 'Today',
-    text: 'The way it adjusts after a bad sleep night is actually crazy. I felt weirdly seen when it downgraded my session lol.=',
+    text: 'The way it adjusts after a bad sleep night is actually crazy. I felt weirdly seen when it downgraded my session lol',
   },
 
   // 🔹 YESTERDAY
   {
-    name: 'Sofia M.',
+    name: 'Sofia',
     rating: 5,
     time: 'Yesterday',
-    text: 'Lost 8kg and gained a routine that actually feels doable. The check-ins felt like the app was high-fiving me 🙌=',
+    text: 'Lost 8kg and gained a routine that actually feels doable. The check-ins felt like the app was high-fiving me 🙌',
   },
   {
-    name: 'Kyra L.',
+    name: 'Kyra L',
     rating: 5,
     time: 'Yesterday',
     text: 'Didn’t expect the meals to be this college-budget-friendly. Big W for the grocery lists.',
   },
   {
-    name: 'Layla',
+    name: 'layla',
     rating: 5,
     time: 'Yesterday',
     text: 'As someone w anxiety the gentle “you did enough” messages hit different. love the vibes :)',
@@ -2127,7 +2127,7 @@ const defaultReviews = [
     text: 'Short workouts + meals that my kids will actually eat? Yes pls. I even missed one session and it adapted so I didn’t feel guilty.',
   },
   {
-    name: 'Riley',
+    name: 'riley',
     rating: 4,
     time: '2 days ago',
     text: 'uni wrecked my routine ngl, but the app didn’t “shame” me. It just recalced my plan and we moved.',
@@ -2141,7 +2141,7 @@ const defaultReviews = [
 
   // 🔹 3 DAYS AGO
   {
-    name: 'Priya',
+    name: 'priya',
     rating: 4,
     time: '3 days ago',
     text: 'UI is smooth and the daily notes keep me honest. Would love more meal swaps, but still a 9.5/10 for me.',
@@ -2150,21 +2150,21 @@ const defaultReviews = [
     name: 'Aaron P.',
     rating: 5,
     time: '3 days ago',
-    text: 'First time sticking to anything longer than 10 days. I open it out of habit now same as checking socials.',
+    text: 'First time sticking to anything longer than 10 days. I open it out of habit now same as checking socials, thx for helping improving my life :D',
   },
   {
-    name: 'Nia',
+    name: 'nia',
     rating: 3,
     time: '3 days ago',
-    text: 'Good app, just wish there were more dairy-free meals by default. Still using it tho bc the workouts bang.',
+    text: 'Good app, just wish there was a dark mode. Still using it tho bc the workouts bang.',
   },
 
   // 🔹 4 DAYS AGO
   {
-    name: 'Leo (night shift)',
+    name: 'Leon',
     rating: 5,
     time: '4 days ago',
-    text: 'Works even with my cursed 10pm–6am schedule. It stopped telling me to train at 7am like a normal person 😂.',
+    text: 'Works even with my cursed 10pm–6am schedule. It stopped telling me to train at 7am like a normal person 😂',
   },
   {
     name: 'Isla',
@@ -2175,22 +2175,22 @@ const defaultReviews = [
 
   // 🔹 5 DAYS AGO
   {
-    name: 'Hannah T.',
+    name: 'the goat',
     rating: 5,
     time: '5 days ago',
     text: 'Went from “I’ll start Monday” to 21 days straight. The streak badges are addictive (in a good way).',
   },
   {
-    name: 'Tommy & Zac',
+    name: 'Tommy :D and Zac D:',
     rating: 5,
     time: '5 days ago',
-    text: 'We started as a joke competition and now we’re both actually shredded. The weekly recap basically fuels the trash talk.',
+    text: 'We started as a joke competition and now we’re both actually locked in lmao. The weekly recap basically fuels the trash talk',
   },
   {
     name: 'Serena',
     rating: 5,
     time: '5 days ago',
-    text: 'The calm tone is everything. No “summer shred in 7 days” nonsense, just actual guidance that works.',
+    text: 'The calm tone is everything. No “summer shred in 7 days” nonsense, its nice to have guidance that works.',
   },
 
   // 🔹 6 DAYS AGO
@@ -2198,16 +2198,16 @@ const defaultReviews = [
     name: 'Ethan R',
     rating: 4,
     time: '6 days ago',
-    text: 'Tried a bunch of apps—this one actually listens. Typo here + there in the tips but workouts slap. 💪',
+    text: 'Tried a bunch of apps—this one actually listens. workouts slap 💪',
   },
   {
     name: 'Yusuf',
     rating: 4,
     time: '6 days ago',
-    text: 'Some of the meals are UK-shop friendly which I appreciate. One recipe had weird portions but I just winged it.',
+    text: 'Some of the meals are UK-shop friendly which I appreciate. One recipe had weird portions but I just winged it and it wasnt too bad',
   },
   {
-    name: 'Chloe (busy nurse)',
+    name: 'Chloe',
     rating: 5,
     time: '6 days ago',
     text: '12 hour shifts and I still manage 3 short sessions a week now. The app does the mental load for me.',
@@ -2218,10 +2218,10 @@ const defaultReviews = [
     name: 'Lara K.',
     rating: 5,
     time: '1 week ago',
-    text: 'Verified purchase + verified results. Down 2 belt holes already and the nutrition tracker is low-key fun.',
+    text: 'Down 2 belt holes already and the nutrition tracker is low-key fun.',
   },
   {
-    name: 'Ayana (grad student)',
+    name: 'Ayyy',
     rating: 5,
     time: '1 week ago',
     text: 'Balancing lab + lifting used to fry me. The app’s chill nudges + quick meals = no more all-nighter crashes.',
@@ -2233,13 +2233,13 @@ const defaultReviews = [
     text: 'We use the same plan but diff levels. Low key turned into a date night thing cooking the meals together.',
   },
   {
-    name: 'Connor',
+    name: 'connor',
     rating: 5,
     time: '1 week ago',
     text: 'I was stuck at the same pullup count for months. The progression path here finally broke the plateau.',
   },
   {
-    name: 'Kira (19)',
+    name: 'Kira',
     rating: 4,
     time: '1 week ago',
     text: 'Helps with my body image tbh. Focus is on “what did you do today” not “what do you weigh right now”.',
@@ -2259,13 +2259,13 @@ const defaultReviews = [
     text: 'Couples workouts without cringe. We compete on streaks and the app keeps it friendly (most days 😅).',
   },
   {
-    name: 'Samira',
+    name: 'samira',
     rating: 5,
     time: '2 weeks ago',
     text: 'Had 0 clue about macros. It basically baby-stepped me into eating enough protein without turning into a chicken breast robot.',
   },
   {
-    name: 'Reece (desk job)',
+    name: 'Reece',
     rating: 4,
     time: '2 weeks ago',
     text: 'The posture and mobility stuff is sneaky good. Should be more hyped in the marketing fr.',
@@ -2277,7 +2277,7 @@ const defaultReviews = [
     text: 'The day it congratulated me for going to bed earlier instead of just working out harder, I was SOLD.',
   },
   {
-    name: 'Jared',
+    name: 'jared',
     rating: 3,
     time: '2 weeks ago',
     text: 'Good overall but I got confused with one superset explanation. Support replied quick tho and fixed it for next week.',
@@ -2285,7 +2285,7 @@ const defaultReviews = [
 
   // 🔹 3 WEEKS AGO
   {
-    name: 'Gabe “night owl”',
+    name: 'Gabe',
     rating: 5,
     time: '3 weeks ago',
     text: 'Late-night sessions used to ruin my sleep. The plan nudged me to swap timing + macros and boom, energy back.',
@@ -2297,13 +2297,13 @@ const defaultReviews = [
     text: 'Down 5kg but more importantly: I actually like training now. That was not on my 2025 bingo card.',
   },
   {
-    name: 'Khalid',
+    name: 'batman',
     rating: 5,
     time: '3 weeks ago',
     text: 'Ramadan mode was clutch. Adjusted training + meal timing so I didn’t feel like I was dying every session.',
   },
   {
-    name: 'Abby (new to gym)',
+    name: 'Abby',
     rating: 5,
     time: '3 weeks ago',
     text: 'Started literally not knowing what a superset was. Now I walk into the gym with an actual plan instead of vibes.',
@@ -2329,7 +2329,7 @@ const defaultReviews = [
     text: 'Used to punish myself with 90 min sessions. This made me realise 30 focused mins is better and I feel human again.',
   },
   {
-    name: 'Max (28)',
+    name: 'Max',
     rating: 5,
     time: '1 month ago',
     text: 'Best part is it doesn’t panic if I miss a day. Just reshuffles and keeps it moving. Less all-or-nothing vibes.',
@@ -2343,7 +2343,7 @@ const defaultReviews = [
 
   // 🔹 5 WEEKS AGO
   {
-    name: 'Talia P.',
+    name: 'Talia P',
     rating: 4,
     time: '5 weeks ago',
     text: 'App aesthetic is 🔥 and the coach notes read like a friend. Wish there was dark mode but still obsessed.',
@@ -2351,13 +2351,13 @@ const defaultReviews = [
 
   // 🔹 2 MONTHS AGO
   {
-    name: 'Omar (new dad)',
+    name: 'dad',
     rating: 5,
     time: '2 months ago',
     text: 'Snuck in 20-min workouts during nap time and still progressed. The recovery tips stopped my back twinges.',
   },
   {
-    name: 'Rob (office dad)',
+    name: 'Rob',
     rating: 5,
     time: '2 months ago',
     text: '45, 2 kids, zero free time. Still getting stronger slowly. The progress charts are weirdly satisfying.',
@@ -2375,7 +2375,7 @@ const defaultReviews = [
     text: 'Took a bit to figure out the meal swap flow (user error lol) but once I got it, it was smooth.',
   },
   {
-    name: 'Gina (PT, 32)',
+    name: 'Gina',
     rating: 5,
     time: '2 months ago',
     text: 'I coach clients and still use this for my own structure. The deload logic is actually respectable.',
@@ -2389,7 +2389,7 @@ const defaultReviews = [
     text: 'Cut from 15% → 11% bf without feeling hangry. The weekly nudges feel like a real coach in my ear.',
   },
   {
-    name: 'Harvey',
+    name: 'big man harvey',
     rating: 3,
     time: '3 months ago',
     text: 'Solid app but I had one sync issue on my old Android. Reinstalled and it was chill after that.',
@@ -2401,7 +2401,7 @@ const defaultReviews = [
     text: 'Neurodivergent brain approves. Clear steps, no 5 different decisions every time I want to train.',
   },
   {
-    name: 'Leo & Finn',
+    name: 'Leo + Finn',
     rating: 5,
     time: '3 months ago',
     text: 'Roommates lifting together. The shared “on a streak” screenshot is now in our kitchen group chat permanently.',
@@ -2409,7 +2409,7 @@ const defaultReviews = [
 
   // 🔹 4 MONTHS AGO
   {
-    name: 'Liv (designer)',
+    name: 'Liv',
     rating: 4,
     time: '4 months ago',
     text: 'Interface is clean, workouts are spicy. Added my own emoji notes lol. Small bug once but support replied fast.',
@@ -2421,7 +2421,7 @@ const defaultReviews = [
     text: 'English is not my first lang but the app is easy to follow. Diagrams + simple words = no problem.',
   },
   {
-    name: 'Craig (52)',
+    name: 'Craig',
     rating: 5,
     time: '4 months ago',
     text: 'Came in scared of hurting my back again. The warm ups and gradual progressions have been spot on.',
@@ -2435,7 +2435,7 @@ const defaultReviews = [
 
   // 🔹 5 MONTHS AGO
   {
-    name: 'Andre M.',
+    name: 'andre M.',
     rating: 5,
     time: '5 months ago',
     text: 'Came for the 12-week plan, stayed for the “habit wins.” Feels like I’m finally stacking momentum.',
@@ -2455,7 +2455,7 @@ const defaultReviews = [
 
   // 🔹 6 MONTHS AGO
   {
-    name: 'Cam (med student)',
+    name: 'Cam',
     rating: 5,
     time: '6 months ago',
     text: 'Night float rotations wrecked me before this. Short recovery flows + quick prep meals = I’m not crashing in lectures.',
@@ -2467,7 +2467,7 @@ const defaultReviews = [
     text: 'Would love a “gym anxiety” mode with more visual demos, but the text cues are already super helpful.',
   },
   {
-    name: 'Ana (new mum)',
+    name: 'Ana',
     rating: 5,
     time: '6 months ago',
     text: 'Postpartum training felt scary and this made it feel manageable. Small wins, zero pressure.',
@@ -2527,7 +2527,7 @@ const defaultReviews = [
     text: 'Bulked without the bloat. Macro coach felt like a friend checking in, not a drill sergeant.',
   },
   {
-    name: 'Nate (chef)',
+    name: 'Nate',
     rating: 5,
     time: '9 months ago',
     text: 'As a chef I was ready to hate the recipes but they’re decent. Seasonings are not criminal anyway 😂.',
@@ -2567,7 +2567,7 @@ const defaultReviews = [
     text: 'Minimalist UI, maximal gains. Some circuits repeat but the progressions make sense.',
   },
   {
-    name: 'Pat (55)',
+    name: 'Pat',
     rating: 4,
     time: '11 months ago',
     text: 'I am not the target TikTok age but it still worked for me. Might need bigger text option though.',
@@ -2593,7 +2593,7 @@ const defaultReviews = [
     text: 'Post-ACL rehab felt sketchy before this. The stability drills eased me back into squats safely.',
   },
   {
-    name: 'Nico (DJ)',
+    name: 'Nico da DJ',
     rating: 5,
     time: '14 months ago',
     text: 'Late gigs = messy sleep. The app shifted my workouts to afternoon + added mobility. Knees finally stopped whining.',

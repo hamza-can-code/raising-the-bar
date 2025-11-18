@@ -5894,9 +5894,9 @@ finalMsg.innerHTML = `
     <span class="final-sub"><strong>kick-started their journey with us</strong></span>
   </h2>
 
-  <div class="final-rating" role="img" aria-label="Rated 4.7 out of 5 stars">
+  <div class="final-rating" role="img" aria-label="Rated 4.8 out of 5 stars">
     <span class="final-stars" aria-hidden="true">★★★★★</span>
-    <span class="final-score">4.7&nbsp;/&nbsp;5</span>
+    <span class="final-score">4.8&nbsp;/&nbsp;5</span>
   </div>
 
   <!-- optional: real Apple/Google Pay button mounts here if supported -->
