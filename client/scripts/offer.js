@@ -2086,18 +2086,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const defaultReviews = [
   // 🔹 TODAY
-
+      {
+    name: 'Chris',
+    rating: 4,
+    time: 'Today',
+    text: 'really good app, best one ive tried bc it covers both workouts and nutrition with specific tools like the ai scanners. Idk how i feel abt the random discounts tho. Like i got 25% off and was buzzing but just saw someone got 100% off?? idm TOO much cuz this app is worth the money but if i got a 100% code i wouldve used it in a heartbeat lmao',
+  },
       {
     name: 'THE ALPHA',
     rating: 4,
     time: 'Today',
-    text: 'Been using this for a couple of weeks and its genuinely amazing (avging 2kg muscle per week). Was going to rate 5 stars but i read someone got 100% off like wtf i only got 3% off 💔 still worth it tho',
+    text: 'Been using this for a couple of weeks and its genuinely amazing (avging 2kg muscle per week). Was going to rate 5 stars but i littraly just read someone got 100% off like wtf i only got 3% off 💔 still worth it tho',
   },
     {
     name: 'alex',
     rating: 5,
     time: 'Today',
-    text: 'so yesterday i did the quiz and everythuing then i got an offer for 100% off. I was skeptical but hollyyy this app this app is sick wouldve been silly saying no in hindsight',
+    text: 'so yesterday i did the quiz and everythuing then i got an offer for 100% off. I was skeptical but decided to give it a shot and bro this is sick wouldve been silly saying no in hindsight',
   },
           {
     name: 'Sephy xx',
