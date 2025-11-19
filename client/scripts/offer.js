@@ -3351,25 +3351,35 @@ function setUpCompareModal0() {
     }
   }
 
-  function scrollToPlans() {
-    runAfterOfferCollapse(() => {
-      const mbg = document.getElementById('moneyBackGuarantee');
+    function getScrollOffsetAdjustment() {
+      if (typeof window === 'undefined') return 0;
 
-      // Prefer landing with the Money-Back Guarantee higher in the viewport
-      if (mbg) {
-        const rect = mbg.getBoundingClientRect();
-        const targetTop = rect.top + window.scrollY - 910;
-        window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
-        return;
-      }
+      const width = window.innerWidth || 0;
+      if (width <= 375) return 225;
+      if (width <= 390) return 50;
+      return 0;
+    }
 
-      if (planAnchor) {
-        const rect = planAnchor.getBoundingClientRect();
-        const targetTop = rect.top + window.scrollY - 32;
-        window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
-      }
-    });
-  }
+    function scrollToPlans() {
+      runAfterOfferCollapse(() => {
+        const mbg = document.getElementById('moneyBackGuarantee');
+        const offsetAdjustment = getScrollOffsetAdjustment();
+
+        // Prefer landing with the Money-Back Guarantee higher in the viewport
+        if (mbg) {
+          const rect = mbg.getBoundingClientRect();
+          const targetTop = rect.top + window.scrollY - (910 - offsetAdjustment);
+          window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+          return;
+        }
+
+        if (planAnchor) {
+          const rect = planAnchor.getBoundingClientRect();
+          const targetTop = rect.top + window.scrollY - (32 - offsetAdjustment);
+          window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+        }
+      });
+    }
 
   function openModal() {
     if (isModalOpen) return;
