@@ -1994,7 +1994,7 @@ body.discount-active .price-strikethrough {
     list-style-type: disc;
     margin: 5px 0;
     padding-left: 15px;
-    color: #666;
+    color: #111;
     font-size: 0.9rem;
 }
 

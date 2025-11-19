@@ -213,6 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const workoutLocation = localStorage.getItem("workoutLocation");
   const workoutFrequency = localStorage.getItem("workoutDays");
   let userGoal = localStorage.getItem("goal");
+  let goalTimelineLabel = '';
 
   const normalizedGender = (gender || '').toLowerCase();
   const genderSuffix = normalizedGender === 'female' ? '-f' : '';
@@ -326,6 +327,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     daysEl.textContent = `${days} Days`;
     document.getElementById('goalPeriod').textContent = daysEl.textContent;
+    goalTimelineLabel = `${days} day${days === 1 ? '' : 's'}`;
   })();
 
   // Set default goal if missing or invalid
@@ -432,13 +434,13 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       goalDriver: "An upcoming holiday",
-      met: "Make this your best transformation yet — ready for the sun, the camera, and the mirror by {eventMonth}.",
-      notMet: "Make this your best transformation yet — ready for the sun, the camera, and the mirror by {eventMonth}."
+      met: "Make this your best transformation yet - ready for the sun, the camera, and the mirror by {eventMonth}.",
+      notMet: "Make this your best transformation yet - ready for the sun, the camera, and the mirror by {eventMonth}."
     },
     {
       goalDriver: "A recent breakup or life change",
-      met: "You’ve been through a lot — now rebuild, stronger than before.",
-      notMet: "You’ve been through a lot — now rebuild, stronger than before."
+      met: "You’ve been through a lot - now rebuild, stronger than before.",
+      notMet: "You’ve been through a lot - now rebuild, stronger than before."
     },
     {
       goalDriver: "I want to feel confident in my body again",
@@ -447,28 +449,28 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       goalDriver: "I'm tired of feeling tired or unmotivated",
-      met: "You don’t have to run on empty anymore — let’s rebuild your energy from the inside out.",
-      notMet: "You don’t have to run on empty anymore — let’s rebuild your energy from the inside out."
+      met: "You don’t have to run on empty anymore - let’s rebuild your energy from the inside out.",
+      notMet: "You don’t have to run on empty anymore - let’s rebuild your energy from the inside out."
     },
     {
       goalDriver: "I’m doing this for my mental and emotional health",
-      met: "Feel more grounded, in control, and emotionally lighter — this is about you, not just your body.",
-      notMet: "Feel more grounded, in control, and emotionally lighter — this is about you, not just your body."
+      met: "Feel more grounded, in control, and emotionally lighter - this is about you, not just your body.",
+      notMet: "Feel more grounded, in control, and emotionally lighter - this is about you, not just your body."
     },
     {
       goalDriver: "I’ve let things slip and want to get back on track",
-      met: "Get back in control — with momentum, structure, and progress you can feel by {eventMonth}.",
-      notMet: "Get back in control — with momentum, structure, and progress you can feel by {eventMonth}."
+      met: "Get back in control - with momentum, structure, and progress you can feel by {eventMonth}.",
+      notMet: "Get back in control - with momentum, structure, and progress you can feel by {eventMonth}."
     },
     {
       goalDriver: "I want to build discipline and stop starting over",
-      met: "Consistency beats motivation — and this time, you’ve got a system built to last.",
-      notMet: "Consistency beats motivation — and this time, you’ve got a system built to last."
+      met: "Consistency beats motivation - and this time, you’ve got a system built to last.",
+      notMet: "Consistency beats motivation - and this time, you’ve got a system built to last."
     },
     {
       goalDriver: "I just feel ready for a change",
-      met: "Sometimes a fresh start is the strongest decision you can make — let’s make it count.",
-      notMet: "Sometimes a fresh start is the strongest decision you can make — let’s make it count."
+      met: "Sometimes a fresh start is the strongest decision you can make - let’s make it count.",
+      notMet: "Sometimes a fresh start is the strongest decision you can make - let’s make it count."
     }
   ];
 
@@ -510,6 +512,79 @@ document.addEventListener("DOMContentLoaded", () => {
   // e.g. "Nov" — you can use { month: "long" } for "November" if preferred
 
   heroLine2 = heroLine2.replace("{eventMonth}", eventMonthName);
+
+  const updateOfferCardHighlights = () => {
+    const workoutsLineEl = document.getElementById('offerWorkoutsLine');
+    const mealsLineEl = document.getElementById('offerMealsLine');
+    const emotionLineEl = document.getElementById('offerEmotionLine');
+
+    if (!workoutsLineEl && !mealsLineEl && !emotionLineEl) return;
+
+    const formatWeightAmount = (kgValue) => {
+      if (!Number.isFinite(kgValue)) return '';
+      const absoluteKg = Math.abs(kgValue);
+      if (absoluteKg <= 0) return '';
+      const converted = weightUnit === 'lbs' ? kgToLbs(absoluteKg) : absoluteKg;
+      const digits = converted >= 10 ? 0 : 1;
+      const formatted = parseFloat(converted.toFixed(digits));
+      return `${formatted} ${weightUnit}`;
+    };
+
+    const timelineText = (() => {
+      if (goalTimelineLabel) return goalTimelineLabel;
+      if (userGoalDateStr) {
+        const today = new Date();
+        const target = new Date(userGoalDateStr);
+        const diff = Math.max(1, Math.ceil((target - today) / (1000 * 60 * 60 * 24)));
+        return `${diff} day${diff === 1 ? '' : 's'}`;
+      }
+      return '';
+    })();
+    const timelineSegment = timelineText ? `in ${timelineText}` : 'on your timeline';
+
+    let workoutsCopy = '';
+    if (userGoal === 'lose weight') {
+      const diffLabel = formatWeightAmount(currentKg - goalKg);
+      workoutsCopy = diffLabel
+        ? `Workouts that'll burn ${diffLabel} ${timelineSegment}`
+        : `Workouts that keep you burning fat ${timelineSegment}`;
+    } else if (userGoal === 'gain muscle') {
+      const diffLabel = formatWeightAmount(goalKg - currentKg);
+      workoutsCopy = diffLabel
+        ? `Workouts that'll build ${diffLabel} of muscle ${timelineSegment}`
+        : `Workouts that keep you building muscle ${timelineSegment}`;
+    } else {
+      const targetLabel = formatWeightAmount(goalKg || currentKg);
+      workoutsCopy = targetLabel
+        ? `Workouts that'll get you to your goal weight of ${targetLabel} ${timelineSegment}`
+        : `Workouts that keep you sculpting lean muscle ${timelineSegment}`;
+    }
+
+    const mealsCopyMap = {
+      'lose weight': 'Meals that lose fat without feeling deprived.',
+      'gain muscle': 'Meals that put on muscle without gaining fat or feeling bloated.',
+      'improve body composition': 'Meals that gain muscle and lose fat without complicating the process.',
+    };
+    const mealsCopy = mealsCopyMap[userGoal] || 'Meals that keep you energized without complicating the process.';
+
+    const heroTriggerRaw = (heroLine2 || '').replace(/<[^>]*>/g, '').trim();
+    const heroTrigger = heroTriggerRaw.replace(/[.?!]+$/, '');
+    const emotionalCopy = heroTrigger
+      ? `${heroTrigger}`
+      : 'Every workout, meal, and scan here acts as your complete fitness solution.';
+
+    if (workoutsLineEl && workoutsCopy) {
+      workoutsLineEl.innerHTML = `🏋️ ${workoutsCopy}`;
+    }
+    if (mealsLineEl) {
+      mealsLineEl.innerHTML = `🍽️ ${mealsCopy}`;
+    }
+    if (emotionLineEl) {
+      emotionLineEl.innerHTML = `💛 ${emotionalCopy}`;
+    }
+  };
+
+  updateOfferCardHighlights();
 
   // 9) Line #3 is static
   const heroLine3 = "- with a smart tracker that asks how you feel and adapts your plan around it.>.";
@@ -2090,7 +2165,7 @@ const defaultReviews = [
     name: 'Chris',
     rating: 4,
     time: 'Today',
-    text: 'really good app, best one ive tried bc it covers both workouts and nutrition with specific tools like the ai scanners. Idk how i feel abt the random discounts tho. Like i got 25% off and was buzzing but just saw someone got 100% off?? idm TOO much cuz this app is worth the money but if i got a 100% code i wouldve used it in a heartbeat lmao',
+    text: 'really good app, best one ive tried bc it covers both workouts and nutrition at top quality and the results speak for themself (lost 3kg in a week and feel healthier than ever). Idk how i feel abt the random discounts tho. Like i got 25% off and was buzzing but just saw someone got 100% off?? idm TOO much cuz this app is worth the money but if i got a 100% code i wouldve used it in a heartbeat lmao',
   },
       {
     name: 'THE ALPHA',
@@ -2803,10 +2878,18 @@ const defaultReviews = [
     renderPagination();
   };
 
-  const scrollToReviews = () => {
-    const rect = reviewsSection.getBoundingClientRect();
-    const targetTop = rect.top + window.scrollY + 400;
-    window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+  const scrollToReviews = ({ collapseOfferCard = false } = {}) => {
+    const runScroll = () => {
+      const rect = reviewsSection.getBoundingClientRect();
+      const targetTop = rect.top + window.scrollY + 400;
+      window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+    };
+
+    if (collapseOfferCard) {
+      runAfterOfferCollapse(runScroll);
+    } else {
+      runScroll();
+    }
   };
 
   const scrollToNewestReview = () => {
@@ -2822,11 +2905,13 @@ const defaultReviews = [
     window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
   };
 
+  const handleReviewsTrigger = (e) => {
+    e.preventDefault();
+    scrollToReviews({ collapseOfferCard: true });
+  };
+
   [readReviewsLink, reassuranceReviewsLink].forEach((trigger) => {
-    trigger?.addEventListener('click', (e) => {
-      e.preventDefault();
-      scrollToReviews();
-    });
+    trigger?.addEventListener('click', handleReviewsTrigger);
   });
 
   reviewComposer?.addEventListener('submit', (e) => {
@@ -2879,6 +2964,61 @@ function resetSpecialCard(card) {
     toggleButton.style.opacity = "1";
   }
   card.classList.remove("expanded");
+}
+
+function nextFrame(callback) {
+  if (typeof callback !== 'function') return;
+  if (typeof window !== 'undefined' && typeof window.requestAnimationFrame === 'function') {
+    window.requestAnimationFrame(callback);
+  } else {
+    setTimeout(callback, 16);
+  }
+}
+
+function collapseOfferCardsInstantly() {
+  const cards = Array.from(document.querySelectorAll('.offer-card'));
+  let collapsed = false;
+
+  cards.forEach((card) => {
+    const info = card.querySelector('.additional-info');
+    if (!info) return;
+    const isExpanded = card.dataset.expanded === 'true' || info.style.display === 'block';
+    if (!isExpanded) return;
+
+    collapsed = true;
+    const toggleButton = card.querySelector('.toggle-details');
+    const previousTransition = info.style.transition;
+
+    info.style.transition = 'none';
+    info.style.height = '0px';
+    info.style.overflow = 'hidden';
+    info.style.display = 'none';
+
+    card.dataset.expanded = 'false';
+    card.classList.remove('expanded');
+
+    if (toggleButton) toggleButton.textContent = 'What’s Included?';
+
+    nextFrame(() => {
+      if (previousTransition) {
+        info.style.transition = previousTransition;
+      } else {
+        info.style.removeProperty('transition');
+      }
+      info.style.removeProperty('overflow');
+    });
+  });
+
+  return collapsed;
+}
+
+function runAfterOfferCollapse(task) {
+  if (typeof task !== 'function') return;
+  if (collapseOfferCardsInstantly()) {
+    nextFrame(task);
+  } else {
+    task();
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -3212,21 +3352,23 @@ function setUpCompareModal0() {
   }
 
   function scrollToPlans() {
-    const mbg = document.getElementById('moneyBackGuarantee');
+    runAfterOfferCollapse(() => {
+      const mbg = document.getElementById('moneyBackGuarantee');
 
-    // Prefer landing with the Money-Back Guarantee higher in the viewport
-    if (mbg) {
-      const rect = mbg.getBoundingClientRect();
-      const targetTop = rect.top + window.scrollY - 905;
-      window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
-      return;
-    }
+      // Prefer landing with the Money-Back Guarantee higher in the viewport
+      if (mbg) {
+        const rect = mbg.getBoundingClientRect();
+        const targetTop = rect.top + window.scrollY - 905;
+        window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+        return;
+      }
 
-    if (planAnchor) {
-      const rect = planAnchor.getBoundingClientRect();
-      const targetTop = rect.top + window.scrollY - 32;
-      window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
-    }
+      if (planAnchor) {
+        const rect = planAnchor.getBoundingClientRect();
+        const targetTop = rect.top + window.scrollY - 32;
+        window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+      }
+    });
   }
 
   function openModal() {
@@ -4398,12 +4540,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (stripeForm) stripeForm.style.display = 'block';
 
   // replace hard-coded £49.99/month text with localized value
-  const p = document.getElementById('offerDisclaimer');
-  if (p) {
-    const { code, full } = getLocalPrices();
-    p.innerHTML = p.innerHTML.replace(/£49\.99\/month/g, `${fmt(code, full)}/month`);
-  }
-
   const reassurance = document.getElementById('offerDisclaimer');
   const syncReassuranceVisibility = (active = isDiscountActive()) => {
     if (!reassurance) return;
@@ -4419,8 +4555,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mbgLink && mbgSection) {
     mbgLink.addEventListener('click', (event) => {
       event.preventDefault();
-      const targetTop = mbgSection.getBoundingClientRect().top + window.scrollY - 65;
-      window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+      runAfterOfferCollapse(() => {
+        const targetTop = mbgSection.getBoundingClientRect().top + window.scrollY - 65;
+        window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+      });
     });
   }
 
