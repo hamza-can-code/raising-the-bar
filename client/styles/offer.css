@@ -1712,8 +1712,12 @@ img {
 }
 
 .offer-card {
-    background-color: #fff;
-    border: 2px solid #ccc;
+ background:
+      /* inner fill */
+      linear-gradient(#ffffff, #ffffff) padding-box,
+      /* gradient border */
+      linear-gradient(135deg, #007BFF, #339DFF) border-box;
+    border: 2px solid transparent;
     border-radius: 6px;
     padding: 15px;
     position: relative;
@@ -1769,9 +1773,6 @@ img {
 }
 
 /* On selection, highlight border in a blue shade that fits your palette */
-.offer-card.selected {
-    border: 2px solid #007bff;
-}
 
 /* LEFT side of the card */
 .offer-left {
@@ -1918,9 +1919,10 @@ body.discount-active .price-strikethrough {
     /* "below" the bottom edge but still attached */
     left: -2px;
     width: 100%;
-    background-color: #007bff;
-    border: 2px solid;
-    border-color: #007bff;
+  background:
+    linear-gradient(135deg, #007BFF, #339DFF) padding-box,
+    linear-gradient(135deg, #007BFF, #339DFF) border-box;
+  border: 2px solid transparent;
     color: #fff;
     font-size: 0.8rem;
     height: 26px;
@@ -2661,12 +2663,12 @@ body.discount-active .price-strikethrough {
 }
 
 .offer-card.selected {
-    border: 2px solid #007bff;
+    border: 2px solid transparent;
     /* Blue for regular cards */
 }
 
 .offer-card.offer-special.selected {
-    border: 2px solid #007bff;
+    border: 2px solid transparent;
     /* Purple for the special offer card */
 }
 
@@ -3004,7 +3006,7 @@ body.discount-active .price-strikethrough {
 
 .pricing-justification {
     font-size: 0.85rem;
-    margin-top: 1rem;
+    margin-top: 12px;
     margin-bottom: 0;
     opacity: 0.75;
     font-style: italic;
@@ -3718,7 +3720,7 @@ body.modal-open .floating-cta {
 
 .social-proof__recent {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
@@ -3731,12 +3733,12 @@ body.modal-open .floating-cta {
     border: 1px solid #E2E8F0;
     padding: 0.4rem 0.4rem;
     border-radius: 4px;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     font-weight: 500;
 }
 
 .rating-summary {
-    margin: 1rem auto 1.5rem;
+    margin: 1rem auto 0.9rem;
     max-width: 460px;
     background: rgba(0, 193, 173, 0.08);
     border: 1px solid #E2E8F0;
@@ -4691,14 +4693,14 @@ body.modal-open .floating-cta {
 }
 
 .promo-strip__meta-label {
-    font: 600 0.68rem "Poppins", sans-serif;
+    font: 600 0.6rem "Poppins", sans-serif;
     color: rgba(15, 28, 63, 0.62);
     text-transform: uppercase;
     letter-spacing: .18em;
 }
 
 .promo-strip__meta-value {
-    font: 800 0.9rem "Poppins", sans-serif;
+    font: 800 1rem "Poppins", sans-serif;
     color: #0d3f92;
     letter-spacing: .12em;
     text-transform: uppercase;
@@ -4736,7 +4738,7 @@ body.modal-open .floating-cta {
 }
 
 .promo-strip__timer-value {
-    font: 800 1.35rem "Poppins", sans-serif;
+    font: 800 1.1rem "Poppins", sans-serif;
     color: #0b4fc5;
     letter-spacing: 0.04em;
 }
@@ -4808,7 +4810,7 @@ body.modal-open .floating-cta {
 
 @media (max-width: 420px) {
     #promoAppliedStrip.promo-strip {
-        padding: 14px 12px 16px;
+        padding: 8px 12px 10px;
     }
 
     .promo-strip__meta {
@@ -4816,8 +4818,8 @@ body.modal-open .floating-cta {
     }
 
     .promo-strip__meta-item {
-        min-height: 78px;
-        padding: 0px 6px 0px 14px;
+        min-height: 58px;
+        padding: 0px 0px 0px 14px;
     }
 
     .promo-strip__meta-item--timer {
