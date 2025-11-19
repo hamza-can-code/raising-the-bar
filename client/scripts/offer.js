@@ -3358,7 +3358,7 @@ function setUpCompareModal0() {
       // Prefer landing with the Money-Back Guarantee higher in the viewport
       if (mbg) {
         const rect = mbg.getBoundingClientRect();
-        const targetTop = rect.top + window.scrollY - 930;
+        const targetTop = rect.top + window.scrollY - 920;
         window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
         return;
       }
