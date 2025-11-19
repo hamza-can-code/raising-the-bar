@@ -2134,6 +2134,19 @@ body.discount-active .price-strikethrough {
     color: #555;
 }
 
+.reassurance__reviews {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.reassurance__reviews-link {
+    padding: 0;
+    font-size: inherit;
+    font-size: 0.8rem !important;
+}
+
 .final-reassurance {
     margin-top: 15px;
     text-align: center;
@@ -2898,6 +2911,7 @@ body.discount-active .price-strikethrough {
     border: 1px dashed #cbd5e0;
     padding: 18px 16px;
     border-radius: 12px;
+    margin: 0 0 30px 0;
 }
 
 .reviews-form h3 {
@@ -3006,6 +3020,18 @@ body.discount-active .price-strikethrough {
     border: 1px solid #ddd3c4;
     border-radius: 6px;
     /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04); */
+}
+
+.post-faq-cta {
+    display: flex;
+    justify-content: center;
+    margin: 24px auto 24px auto;
+    padding: 0 64px;
+}
+
+.post-faq-cta .claim-program-btn {
+    width: 100%;
+    max-width: 320px;
 }
 
 .faq-heading {
@@ -3712,7 +3738,7 @@ body.modal-open .floating-cta {
 .rating-summary {
     margin: 1rem auto 1.5rem;
     max-width: 460px;
-    background: linear-gradient(135deg, rgba(0, 74, 153, 0.06), rgba(0, 193, 173, 0.08));
+    background: rgba(0, 193, 173, 0.08);
     border: 1px solid #E2E8F0;
     border-radius: 12px;
     padding: 1rem 1.25rem;
@@ -3771,6 +3797,17 @@ body.modal-open .floating-cta {
 
 .rating-summary__link:hover {
     color: #003a7a;
+}
+
+.rating-summary__reassurance {
+  display: flex;
+  justify-content: center;   /* horizontally center text + button */
+  align-items: center;       /* vertically align them */
+}
+
+/* optional: remove default p margin so it doesn't push things off */
+.rating-summary__reassurance p {
+  margin: 0;
 }
 
 .offer-scroll-anchor {

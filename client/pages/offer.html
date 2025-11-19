@@ -421,7 +421,7 @@ placeholder.replaceWith(iframe);
 
     <!-- Offer Cards -->
     <section id="socialProof" class="social-proof">
-      <img src="../assets/muscular-silhouette.webp" alt="Muscular Man" class="social-proof__coach" />
+      <img src="../assets/muscular-silhouette.webp" alt="Coach silhouette" class="social-proof__coach" />
       <p class="social-proof__headline">
         947 people bought workout plans in the last hour
       </p>
@@ -476,18 +476,24 @@ placeholder.replaceWith(iframe);
 
     <p class="offer-personalization" id="offerNamePrompt">Athlete, claim your calisthenics workout plan</p>
 
-        <div class="rating-summary" aria-label="Average rating 4.8 out of 5">
-      <div class="rating-summary__row">
-        <div class="rating-summary__stars" aria-hidden="true">
-          <span class="rating-summary__stars-fill" style="width: 96%;">★★★★★</span>
-          <span class="rating-summary__stars-base" aria-hidden="true">★★★★★</span>
-        </div>
-        <div class="rating-summary__score">
-          <strong>4.8/5</strong> (312,143 reviews)
-        </div>
-      </div>
-      <button class="rating-summary__link" id="readReviewsLink" type="button">Read reviews</button>
+<div class="rating-summary" aria-label="Average rating 4.8 out of 5">
+  <div class="rating-summary__row">
+    <div class="rating-summary__stars" aria-hidden="true">
+      <span class="rating-summary__stars-fill" style="width: 96%;">★★★★★</span>
+      <span class="rating-summary__stars-base" aria-hidden="true">★★★★★</span>
     </div>
+    <div class="rating-summary__score">
+      <strong>4.8/5</strong> (312,143 reviews)
+    </div>
+  </div>
+
+  <div class="rating-summary__reassurance">
+    <p>Need reassurance?</p>
+    <button class="rating-summary__link" id="readReviewsLink" type="button">
+      Read reviews
+    </button>
+  </div>
+</div>
 
     <!-- <p class="offer-subtext">Most people never stick to fitness because their plan doesn’t adapt. Yours will.
 </p> -->
@@ -679,19 +685,28 @@ placeholder.replaceWith(iframe);
         </button>
       </div>
 
-      <p class="reassurance" id="offerDisclaimer">
-        Try 12-Week Plan free. At the end of your free period, renews at
-        <span class="renew-amt"></span>/month - <strong>cancel anytime in one click, no hidden fees</strong>. You're also covered by our         <a href="#moneyBackGuarantee" id="moneyBackGuaranteeLink" class="mbg-scroll-link">Money-Back Guarantee</a>.
-      </p>
+<p class="reassurance" id="offerDisclaimer">
+  Try 12-Week Plan free. After trial, renews at
+  <span class="renew-amt"></span>/month unless cancelled.
+  <strong>Cancel anytime in one click, no hidden fees.</strong>
+  Covered by
+  <a href="#moneyBackGuarantee" id="moneyBackGuaranteeLink" class="mbg-scroll-link">
+    Money-Back Guarantee
+  </a>.
+  Need reassurance?
+  <button type="button" class="rating-summary__link reassurance__reviews-link" id="reassuranceReviewsLink">
+    Read reviews
+  </button>
+</p>
 
       <p class="offer-disclaimer">
-        By continuing, you agree to our
+        <!-- By continuing, you agree to our
         <a href="tos.html" target="_blank">terms</a> and
         <a href="refund-policy.html" target="_blank">refund policy</a>.
         The 1-day free trial renews every 30 days at
         <span class="renew-amt"></span>/month unless cancelled.
         One-time bonus (£14.99) shown after checkout.
-        Cancellations take effect at the end of your 30-day period.
+        Cancellations take effect at the end of your 30-day period. -->
       </p>
 
 
@@ -869,8 +884,86 @@ alert('Could not initialise PayPal. Please refresh and try again.');
   </div>
   </section>
 
+  <div class="testimonial-section ">
+    <h2>See What Happens When Everything Connects</h2>
+    <p class="hero-text">
+      Progress from real people, using the same system you're about to unlock.
+    </p>
+
+    <div class="testimonial-container">
+      <!-- Desktop Arrows (hidden on mobile) -->
+      <button class="arrow-button prev">❮</button>
+
+      <!-- Slider that holds all testimonial cards -->
+      <div class="testimonial-slider">
+        <!-- Populated by JS -->
+      </div>
+
+      <button class="arrow-button next">❯</button>
+    </div>
+  </div>
+
+  <div class="dots-container "></div>
+
+  <section class="reviews-section" id="reviewsSection" aria-label="Customer reviews">
+        <div class="reviews-form" id="reviewsForm">
+      <h3>Share your experience</h3>
+      <p class="reviews-form__hint">Your review shows up instantly (and helps others feel confident).</p>
+      <form id="reviewComposer">
+        <div class="reviews-form__row">
+          <label for="reviewName">Name</label>
+          <input id="reviewName" name="reviewName" type="text" placeholder="Alex J." required>
+        </div>
+        <div class="reviews-form__row reviews-form__row--rating">
+          <label for="reviewRating">Rating</label>
+          <select id="reviewRating" name="reviewRating">
+            <option value="5">5 - Life changing 🔥</option>
+            <option value="4">4 - Very good</option>
+            <option value="3">3 - It’s decent</option>
+            <option value="2">2 - Needs work</option>
+            <option value="1">1 - Not for me</option>
+          </select>
+        </div>
+        <div class="reviews-form__row">
+          <label for="reviewText">Review</label>
+          <textarea id="reviewText" name="reviewText" rows="3" placeholder="What surprised you?" required></textarea>
+        </div>
+        <button type="submit" class="primary-btn reviews-form__submit">Post my review</button>
+      </form>
+    </div>
+    <div class="reviews-hero">
+      <div class="reviews-hero__score">
+        <div class="reviews-hero__stars" aria-hidden="true">
+          <span class="reviews-hero__stars-fill" style="width: 96%;">★★★★★</span>
+          <span class="reviews-hero__stars-base">★★★★★</span>
+        </div>
+        <div class="reviews-hero__meta">
+          <p class="reviews-hero__headline">4.8 out of 5</p>
+          <p class="reviews-hero__sub">Based on 312,143 reviews verified purchases</p>
+        </div>
+      </div>
+      <ul class="reviews-breakdown" aria-label="Rating distribution">
+        <li><span>5 ★</span><div class="bar"><span style="width: 82%"></span></div><span class="count">82%</span></li>
+        <li><span>4 ★</span><div class="bar"><span style="width: 14%"></span></div><span class="count">14%</span></li>
+        <li><span>3 ★</span><div class="bar"><span style="width: 3%"></span></div><span class="count">3%</span></li>
+        <li><span>2 ★</span><div class="bar"><span style="width: 1%"></span></div><span class="count">1%</span></li>
+        <li><span>1 ★</span><div class="bar"><span style="width: 0.5%"></span></div><span class="count">0.5%</span></li>
+      </ul>
+    </div>
+
+    <div class="reviews-list" id="reviewsList" aria-live="polite"></div>
+
+    <div class="reviews-pagination" id="reviewsPagination" aria-label="Review pages"></div>
+  </section>
+
+    <div class="post-faq-cta">
+    <button type="button" class="claim-program-btn" data-open-value-modal>
+      Claim My Plan
+    </button>
+  </div>
+
   <!-- FAQ Section -->
-  <section class="faq-section ">
+  <section class="faq-section" id="faqSection">
     <h2 class="faq-heading">Still have questions?</h2>
     <div class="faq-container">
       <div class="faq-item">
@@ -915,79 +1008,6 @@ alert('Could not initialise PayPal. Please refresh and try again.');
             hoops, just email support within the refund window.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <div class="testimonial-section ">
-    <h2>See What Happens When Everything Connects</h2>
-    <p class="hero-text">
-      Progress from real people, using the same system you're about to unlock.
-    </p>
-
-    <div class="testimonial-container">
-      <!-- Desktop Arrows (hidden on mobile) -->
-      <button class="arrow-button prev">❮</button>
-
-      <!-- Slider that holds all testimonial cards -->
-      <div class="testimonial-slider">
-        <!-- Populated by JS -->
-      </div>
-
-      <button class="arrow-button next">❯</button>
-    </div>
-  </div>
-
-  <div class="dots-container "></div>
-
-  <section class="reviews-section" id="reviewsSection" aria-label="Customer reviews">
-    <div class="reviews-hero">
-      <div class="reviews-hero__score">
-        <div class="reviews-hero__stars" aria-hidden="true">
-          <span class="reviews-hero__stars-fill" style="width: 96%;">★★★★★</span>
-          <span class="reviews-hero__stars-base">★★★★★</span>
-        </div>
-        <div class="reviews-hero__meta">
-          <p class="reviews-hero__headline">4.8 out of 5</p>
-          <p class="reviews-hero__sub">Based on 312,143 reviews verified purchases</p>
-        </div>
-      </div>
-      <ul class="reviews-breakdown" aria-label="Rating distribution">
-        <li><span>5 ★</span><div class="bar"><span style="width: 82%"></span></div><span class="count">82%</span></li>
-        <li><span>4 ★</span><div class="bar"><span style="width: 14%"></span></div><span class="count">14%</span></li>
-        <li><span>3 ★</span><div class="bar"><span style="width: 3%"></span></div><span class="count">3%</span></li>
-        <li><span>2 ★</span><div class="bar"><span style="width: 1%"></span></div><span class="count">1%</span></li>
-        <li><span>1 ★</span><div class="bar"><span style="width: 0.5%"></span></div><span class="count">0.5%</span></li>
-      </ul>
-    </div>
-
-    <div class="reviews-list" id="reviewsList" aria-live="polite"></div>
-
-    <div class="reviews-pagination" id="reviewsPagination" aria-label="Review pages"></div>
-
-    <div class="reviews-form" id="reviewsForm">
-      <h3>Share your experience</h3>
-      <p class="reviews-form__hint">Your review shows up instantly (and helps others feel confident).</p>
-      <form id="reviewComposer">
-        <div class="reviews-form__row">
-          <label for="reviewName">Name</label>
-          <input id="reviewName" name="reviewName" type="text" placeholder="Alex J." required>
-        </div>
-        <div class="reviews-form__row reviews-form__row--rating">
-          <label for="reviewRating">Rating</label>
-          <select id="reviewRating" name="reviewRating">
-            <option value="5">5 - Life changing 🔥</option>
-            <option value="4">4 - Very good</option>
-            <option value="3">3 - It’s decent</option>
-            <option value="2">2 - Needs work</option>
-            <option value="1">1 - Not for me</option>
-          </select>
-        </div>
-        <div class="reviews-form__row">
-          <label for="reviewText">Review</label>
-          <textarea id="reviewText" name="reviewText" rows="3" placeholder="What surprised you?" required></textarea>
-        </div>
-        <button type="submit" class="primary-btn reviews-form__submit">Post my review</button>
-      </form>
     </div>
   </section>
 

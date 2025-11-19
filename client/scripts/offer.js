@@ -227,6 +227,29 @@ document.addEventListener("DOMContentLoaded", () => {
   // Return an absolute/relative path to your assets folder:
   const imgSrc = (file) => `../assets/${file}`;
 
+  const updateSocialProofCoach = () => {
+    const coachImg = document.querySelector('.social-proof__coach');
+    if (!coachImg) return;
+
+    const desiredBodyType = (localStorage.getItem('desiredBodyType') || '').toLowerCase();
+    const dreamMap = {
+      athlete: `athlete${genderSuffix}.webp`,
+      hero: `hero${genderSuffix}.webp`,
+      bodybuilder: `muscular-silhouette${genderSuffix}.webp`
+    };
+    const fallbackFile = `muscular-silhouette${genderSuffix}.webp`;
+    const selectedFile = dreamMap[desiredBodyType] || fallbackFile;
+
+    const formatLabel = (value) => value ? value.charAt(0).toUpperCase() + value.slice(1) : '';
+    const genderLabel = normalizedGender === 'female' ? 'Female' : 'Male';
+    const dreamLabel = formatLabel(desiredBodyType) || 'Coach';
+
+    coachImg.src = imgSrc(selectedFile);
+    coachImg.alt = `${genderLabel} ${dreamLabel} physique illustration`;
+  };
+
+  updateSocialProofCoach();
+
   // Retrieve all offers
   const oneWeekProgram = JSON.parse(localStorage.getItem("oneWeekProgram"));
   const fourWeekProgram = JSON.parse(localStorage.getItem("fourWeekProgram"));
@@ -1286,7 +1309,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (dealOn) {
       el.innerHTML =
-        `Normally ${fmt(code, full)} — now just <strong>${fmt(code, intro)}</strong>. ` +
+        `Normally ${fmt(code, full)} - now just <strong>${fmt(code, intro)}</strong>. ` +
         // `🎉 You won the full 12-Week Plan for ${fmt(code, intro / 30)}.`;
         `🎉 You won the full 12-Week Plan for free.`;
     } else {
@@ -2027,6 +2050,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const reviewsPagination = document.getElementById('reviewsPagination');
   const reviewComposer = document.getElementById('reviewComposer');
   const readReviewsLink = document.getElementById('readReviewsLink');
+  const reassuranceReviewsLink = document.getElementById('reassuranceReviewsLink');
 
   if (!reviewsSection || !reviewsList || !reviewsPagination) return;
 
@@ -2062,12 +2086,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const defaultReviews = [
   // 🔹 TODAY
-        {
-    name: 'joris bonson',
-    rating: 5,
-    time: 'Today',
-    text: 'would rate 67 if i cud',
-  },
+
       {
     name: 'THE ALPHA',
     rating: 4,
@@ -2078,13 +2097,25 @@ const defaultReviews = [
     name: 'alex',
     rating: 5,
     time: 'Today',
-    text: 'so yesterday i did the quiz and everythuing then i got an offer for 100% off. I was skeptical but hollyyy this app this app is sick wouldve been silly saying no',
+    text: 'so yesterday i did the quiz and everythuing then i got an offer for 100% off. I was skeptical but hollyyy this app this app is sick wouldve been silly saying no in hindsight',
+  },
+          {
+    name: 'Sephy xx',
+    rating: 5,
+    time: 'Today',
+    text: 'So I kinda forgot to cancel despite the email reminders so kinda mb. I explained the situation to support and Jasmine was super understanding and refunded me instantly. tysm ❤️❤️',
   },
     {
     name: '.',
     rating: 5,
     time: 'Today',
     text: 'Maybe women will finally find me attractive',
+  },
+          {
+    name: 'joris bonson',
+    rating: 5,
+    time: 'Today',
+    text: 'would rate 67 if i cud',
   },
 
   {
@@ -2769,7 +2800,7 @@ const defaultReviews = [
 
   const scrollToReviews = () => {
     const rect = reviewsSection.getBoundingClientRect();
-    const targetTop = rect.top + window.scrollY - 100;
+    const targetTop = rect.top + window.scrollY + 400;
     window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
   };
 
@@ -2786,9 +2817,11 @@ const defaultReviews = [
     window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
   };
 
-  readReviewsLink?.addEventListener('click', (e) => {
-    e.preventDefault();
-    scrollToReviews();
+  [readReviewsLink, reassuranceReviewsLink].forEach((trigger) => {
+    trigger?.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollToReviews();
+    });
   });
 
   reviewComposer?.addEventListener('submit', (e) => {
