@@ -182,15 +182,18 @@
           currency: curr.code,
           plan: selectedPlan
         })
-      }).then(r => r.json());
+      });
 
-      if (resp.error) {
-        showError(resp.error);
-        return;
+      const payload = await resp.json();
+
+      if (!resp.ok || payload.error) {
+        const msg = payload.error || 'Could not prepare payment. Please try again.';
+        showError(msg);
+        throw new Error(msg);
       }
 
-      clientSecret = resp.clientSecret;
-      intentType = resp.intentType || 'payment';
+      clientSecret = payload.clientSecret;
+      intentType = payload.intentType || 'payment';
 
       stripeJs = stripeJs || stripe(STRIPE_PK);
       if (!elements) {

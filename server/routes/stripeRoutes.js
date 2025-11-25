@@ -51,6 +51,11 @@ const PLAN_LABELS = {
   '12-week': '12-Week Plan',
 };
 
+function getRecurringConfigForPlan(plan) {
+  if (plan === '12-week') return { interval: 'month', interval_count: 3 };
+  return { interval: 'month', interval_count: 1 };
+}
+
 function log(label, obj) {
   console.log(`🟡 ${label}`, util.inspect(obj, { depth: 4, colors: true }));
 }
@@ -188,11 +193,33 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
     }
     const { currency: ccy, priceId, plan: normalizedPlan } = planInfo;
     const couponId = discounted ? getCouponIdForPlan(normalizedPlan, ccy) : null;
+    const price = await stripe.prices.retrieve(priceId);
+    const productId = typeof price.product === 'string' ? price.product : price.product?.id;
+    const recurringConfig = price.recurring || getRecurringConfigForPlan(normalizedPlan);
+
+    if (!productId) {
+      return res.status(500).json({ error: 'Price is missing an associated product.' });
+    }
+    if (!recurringConfig) {
+      return res.status(500).json({ error: 'Recurring configuration missing for selected plan.' });
+    }
+
+    const subscriptionItems = price.type === 'one_time'
+      ? [{
+        price_data: {
+          currency: price.currency,
+          unit_amount: price.unit_amount,
+          product: productId,
+          recurring: recurringConfig,
+          nickname: PLAN_LABELS[normalizedPlan] || undefined,
+        },
+      }]
+      : [{ price: priceId }];
 
     // 3) create subscription in incomplete state (for Elements confirmation)
     const subCfg = {
       customer: customer.id,
-      items: [{ price: priceId }],
+      items: subscriptionItems,
       payment_behavior: 'default_incomplete',
       payment_settings: {
         save_default_payment_method: 'on_subscription',

@@ -95,8 +95,8 @@ const PLAN_PRICING_GBP = {
   },
   '12-week': {
     name: '12-Week Plan',
-    full: 49.99,
-    renewal: 49.99,
+    full: 39.99,
+    renewal: 39.99,
     discount: 19.99,
   },
 };
@@ -207,15 +207,11 @@ function localizeProTrackerCard() {
   const shown = dealOn ? intro : full;
   if (perDayEl) perDayEl.textContent = fmt(code, shown / 30);
   // if (perDayLabel) perDayLabel.textContent = 'per day';
-
-  // keep a human-readable cache for summaries
-  localStorage.setItem('planPrice', dealOn ? fmt(code, intro) : fmt(code, full));
-  localStorage.setItem('planPriceFull', fmt(code, full));
 }
 
 function updateOfferCardsPricing() {
   const offerCards = document.querySelectorAll('.offer-card');
-  const perDayDivisors = { trial: 7, '4-week': 31, '12-week': 90 };
+  const perDayDivisors = { trial: 7, '4-week': 31, '12-week': 92 };
   offerCards.forEach(card => {
     const planId = card.dataset.program;
     const pricing = getPlanPricing(planId, isDiscountActive());
@@ -299,10 +295,12 @@ Need reassurance?
 
 document.addEventListener('DOMContentLoaded', () => {
   const selected = localStorage.getItem('selectedProgram') || 'trial';
-  const pricing = getPlanPricing(selected, isDiscountActive());
-  document.querySelectorAll('.renew-amt').forEach(el => {
-    el.textContent = pricing.renewalFormatted;
-  });
+  const pricing = persistSelectedPlanState(selected);
+  if (pricing) {
+    document.querySelectorAll('.renew-amt').forEach(el => {
+      el.textContent = pricing.renewalFormatted;
+    });
+  }
 });
 
 const userId = localStorage.getItem('userId');
@@ -389,7 +387,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const namePrompt = document.getElementById("offerNamePrompt");
   const updateOfferNamePrompt = (active = isDiscountActive()) => {
     if (!namePrompt) return;
-    namePrompt.textContent = `${name || "Athlete"}, claim your calisthenics workout plan`;
+    namePrompt.textContent = `${name || "Athlete"}, claim your calisthenics workout plan now`;
   };
 
   updateOfferNamePrompt();
@@ -1455,10 +1453,9 @@ function updatePostPayNote() {
   const priceEl = document.getElementById('checkoutPrice');
   if (!host || !priceEl) return;
 
-  const { code, full, intro } = getLocalPrices();
-  const dealOn = document.body.classList.contains('discount-active');
-  const checkout = dealOn ? intro : full;               // price user sees at checkout
-  priceEl.textContent = fmt(code, checkout);
+  const selectedPlan = localStorage.getItem('selectedProgram') || 'trial';
+  const pricing = getPlanPricing(selectedPlan, isDiscountActive());
+  priceEl.textContent = pricing.todayFormatted;
 }
 
 
@@ -1549,6 +1546,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!active) {
       removeDiscountPricing();
     }
+    const selectedPlan = localStorage.getItem('selectedProgram') || 'trial';
+    persistSelectedPlanState(selectedPlan);
     updatePostPayNote();
     updatePricingJustification();
     updatePlanSummary();
@@ -1570,6 +1569,22 @@ function removeDiscountPricing() {
   if (typeof localizeProTrackerCard === 'function') localizeProTrackerCard();
 }
 
+function persistSelectedPlanState(planId = 'trial') {
+  const pricing = getPlanPricing(planId, isDiscountActive());
+  localStorage.setItem('selectedProgram', planId);
+  localStorage.setItem('planName', pricing.name);
+  localStorage.setItem('planPrice', pricing.todayFormatted);
+  localStorage.setItem('planFullPrice', pricing.renewalFormatted);
+  localStorage.setItem('planDiscounted', String(pricing.discountedApplied));
+  localStorage.setItem('planRenewal', pricing.renewalFormatted);
+  document.querySelectorAll('.renew-amt').forEach(el => {
+    el.textContent = pricing.renewalFormatted;
+  });
+  updatePricingJustification();
+  updateOfferDisclaimer(pricing);
+  return pricing;
+}
+
 /**********************************************/
 /* D) SELECTING AN OFFER CARD (10 & 11 & 12)  */
 /**********************************************/
@@ -1583,17 +1598,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const persistPlanSelection = (card) => {
     const planId = card?.dataset?.program || 'trial';
-    const pricing = getPlanPricing(planId, isDiscountActive());
-    localStorage.setItem('selectedProgram', planId);
-    localStorage.setItem('planName', pricing.name);
-    localStorage.setItem('planPrice', pricing.todayFormatted);
-    localStorage.setItem('planRenewal', pricing.renewalFormatted);
-    document.querySelectorAll('.renew-amt').forEach(el => {
-      el.textContent = pricing.renewalFormatted;
-    });
-    updatePricingJustification();
+    persistSelectedPlanState(planId);
     updatePlanSummary();
-    updateOfferDisclaimer(pricing);
+    updatePostPayNote();
   };
 
   // Check localStorage for previously selected program
@@ -2164,19 +2171,19 @@ const defaultReviews = [
     name: 'Chris',
     rating: 4,
     time: 'Today',
-    text: 'really good app, best one ive tried bc it covers both workouts and nutrition at top quality and the results speak for themself (lost 3kg in a week and feel healthier than ever). Idk how i feel abt the random discounts tho. Like i got 25% off and was buzzing but just saw someone got 100% off?? idm TOO much cuz this app is worth the money but if i got a 100% code i wouldve used it in a heartbeat lmao',
+    text: 'really good app, best one ive tried bc it covers both workouts and nutrition at top quality and the results speak for themself (lost 3kg in a week and feel healthier than ever). Idk how i feel abt the random discounts tho. Like i got 25% off and was buzzing but just saw someone got 51% off?? idm TOO much cuz this app is worth the money but if i got a 51% code i wouldve used it in a heartbeat lmao',
   },
       {
     name: 'THE ALPHA',
     rating: 4,
     time: 'Today',
-    text: 'Been using this for a couple of weeks and its genuinely amazing (avging 2kg muscle per week). Was going to rate 5 stars but i littraly just read someone got 100% off like wtf i only got 3% off 💔 still worth it tho',
+    text: 'Been using this for a couple of weeks and its genuinely amazing (avging 2kg muscle per week). Was going to rate 5 stars but i littraly just read someone got 51% off like wtf i only got 3% off 💔 still worth it tho',
   },
     {
     name: 'alex',
     rating: 5,
     time: 'Today',
-    text: 'so yesterday i did the quiz and everythuing then i got an offer for 100% off. I was skeptical but decided to give it a shot and bro this is sick wouldve been silly saying no in hindsight',
+    text: 'so yesterday i did the quiz and everythuing then i got an offer for 51% off. I was skeptical but decided to give it a shot and bro this is sick wouldve been silly saying no in hindsight',
   },
           {
     name: 'Sephy xx',
@@ -3322,7 +3329,7 @@ function setUpCompareModal0() {
         const formattedUsers =
           (info.usersAgo && info.usersAgo.toLocaleString?.()) || info.usersAgo;
         note.innerHTML = `
-          You just scratched 100% off. Last win was
+          You just scratched 51% off. Last win was
           <span class="promo-strip__rarity-count">${formattedUsers}</span>
           users ago, on <span class="promo-strip__rarity-count">${info.dateStr}</span> at <span class="promo-strip__rarity-count">${info.timeStr}</span>. <br> <strong>This is rare - don’t let it expire</strong>.
         `;
@@ -3427,7 +3434,7 @@ function setUpCompareModal0() {
       || target.dataset.activeLabel
       || target.dataset.baseLabel
       || target.textContent.trim()
-      || '100% OFF';
+      || '51% OFF';
 
     if (!baseLabel) return;
 
@@ -3469,7 +3476,7 @@ function setUpCompareModal0() {
     }
 
     discountShuffleTarget = target;
-    const baseLabel = target.dataset.activeLabel || target.textContent.trim() || '100% OFF';
+    const baseLabel = target.dataset.activeLabel || target.textContent.trim() || '51% OFF';
     target.dataset.baseLabel = baseLabel;
     target.dataset.shuffle = '1';
 
@@ -3510,7 +3517,7 @@ function setUpCompareModal0() {
     if (target) {
       target.dataset.shuffle = '0';
       if (restore) {
-        const label = target.dataset.activeLabel || target.dataset.baseLabel || '100% OFF';
+        const label = target.dataset.activeLabel || target.dataset.baseLabel || '51% OFF';
         target.textContent = label;
       }
     }
@@ -3549,7 +3556,7 @@ function setUpCompareModal0() {
 
       if (mainLine) {
         if (!mainLine.dataset.activeLabel) {
-          mainLine.dataset.activeLabel = mainLine.textContent.trim() || '100% OFF';
+          mainLine.dataset.activeLabel = mainLine.textContent.trim() || '51% OFF';
         }
         if (!active) {
           stopScratchDiscountShuffle({ restore: false, target: mainLine });
@@ -3565,7 +3572,7 @@ function setUpCompareModal0() {
           stopScratchDiscountShuffle({ restore: false, target: badge });
           badge.textContent = 'Discount expired';
         } else if (isDone || !isAnimating) {
-          badge.textContent = badge.dataset.activeLabel || '100% OFF';
+          badge.textContent = badge.dataset.activeLabel || '51% OFF';
         }
       }
       if (bonusPill) bonusPill.toggleAttribute('hidden', !active);
@@ -3613,7 +3620,7 @@ function setUpCompareModal0() {
         .replace(/[^a-z0-9]/gi, '-')
         .replace(/-+/g, '-')
         .replace(/^-|-$/g, '');
-      const promoCode = `${firstName}-100-OFF`.toUpperCase();
+      const promoCode = `${firstName}-51-OFF`.toUpperCase();
       localStorage.setItem('appliedPromoCode', promoCode);
 
       const targets = [
@@ -4468,9 +4475,15 @@ function updatePlanSummary() {
   const el = document.getElementById('planSummary');
   const planName = localStorage.getItem('planName') || 'Your plan';
   const planPrice = localStorage.getItem('planPrice');
+  const planFull = localStorage.getItem('planFullPrice');
+  const discounted = localStorage.getItem('planDiscounted') === 'true';
   if (!el) return;
   if (planPrice) {
-    el.textContent = `${planName} – ${planPrice}`;
+    if (discounted && planFull && planFull !== planPrice) {
+      el.innerHTML = `${planName} – <span class="plan-summary__strike">${planFull}</span> <span class="plan-summary__price">${planPrice}</span>`;
+    } else {
+      el.textContent = `${planName} – ${planPrice}`;
+    }
   } else {
     el.textContent = planName;
   }
@@ -4485,15 +4498,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const header = document.getElementById("valueModalHeader");
   if (header) {
     const baseText = firstName
-      ? `🎁 Scratch and win <span class="rtb-blue-underline">random discount</span> for the first 12 weeks`
-      : `🎁 Scratch and win <span class="rtb-blue-underline">random discount</span> for the first 12 weeks`;
+      ? `🎁 Scratch and win <span class="rtb-blue-underline">random discount</span> up to 51% off`
+      : `🎁 Scratch and win <span class="rtb-blue-underline">random discount</span> up to 51% off`;
     header.dataset.baseText = baseText;
     header.dataset.winText = '<span class="promo-strip__rarity-count">Wow!</span> You won the <span class="promo-strip__rarity-count">biggest</span> discount!';
     header.innerHTML = baseText;
 
     const promoLine = document.getElementById("promoCodeLine");
     if (promoLine) {
-      const code = `${firstName.toLowerCase()}-100-OFF`;
+      const code = `${firstName.toLowerCase()}-51-OFF`;
       promoLine.innerHTML = `
         <span class="promo-code-label">Your code:</span>
         <code class="promo-code-value">${code}</code>
@@ -4541,7 +4554,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const stripeForm = document.getElementById('paymentForm');
   if (stripeForm) stripeForm.style.display = 'block';
 
-  // replace hard-coded £49.99/month text with localized value
+  // Sync reassurance note visibility with discount state
   const reassurance = document.getElementById('offerDisclaimer');
   const syncReassuranceVisibility = (active = isDiscountActive()) => {
     if (!reassurance) return;
@@ -4605,7 +4618,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .replace(/[^a-z0-9]/gi, '-')       // normalize
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
-  const promoCode = `${firstName}-100-OFF`.toUpperCase();
+  const promoCode = `${firstName}-51-OFF`.toUpperCase();
 
   // Persist & render in both places (modal + strip)
   localStorage.setItem('appliedPromoCode', promoCode);

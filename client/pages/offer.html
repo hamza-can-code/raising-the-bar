@@ -448,7 +448,7 @@ placeholder.replaceWith(iframe);
       <div class="promo-strip__copy">
         <h4 class="promo-strip__title">🎉 Congratulations</h4>
         <p class="promo-strip__subtitle">
-          Your <span class="promo-strip__highlight">discount</span> of 100% is applied.
+          Your <span class="promo-strip__highlight">discount</span> of 51% is applied.
         </p>
       </div>
 
@@ -594,6 +594,7 @@ placeholder.replaceWith(iframe);
 
       <div class="offer-card offer-tier" data-program="4-week">
         <div class="best-seller-banner" aria-label="Most popular plan">MOST POPULAR</div>
+        <div class="discount-flag" aria-label="Limited-time 51% discount">51% OFF</div>
         <div class="offer-left">
           <div class="duration"><strong>4-Week Plan</strong></div>
           <div class="full-price" data-full-price="£19.99">
@@ -610,16 +611,17 @@ placeholder.replaceWith(iframe);
       </div>
 
       <div class="offer-card offer-tier" data-program="12-week">
+        <div class="discount-flag" aria-label="Limited-time 51% discount">51% OFF</div>
         <div class="offer-left">
           <div class="duration"><strong>12-Week Plan</strong></div>
-          <div class="full-price" data-full-price="£49.99">
-            <span class="price-strikethrough" id="priceTwelveWeekFull">£49.99</span>
+          <div class="full-price" data-full-price="£39.99">
+            <span class="price-strikethrough" id="priceTwelveWeekFull">£39.99</span>
             <span class="discount-price" id="priceTwelveWeekDiscount">£19.99</span>
           </div>
         </div>
         <div class="offer-right">
           <div class="cost-per-day">
-            <strong id="costPerDayTwelveWeek">£49.99</strong>
+            <strong id="costPerDayTwelveWeek">£39.99</strong>
           </div>
           <div class="per-day">per day</div>
         </div>
@@ -664,7 +666,9 @@ placeholder.replaceWith(iframe);
   </section>
 
   <p id="postPayNote" class="post-pay-note" style="display:none;text-align:center;margin-top:12px;">
-    ✅ <strong>After checkout (<span id="checkoutPrice">—</span>), your plan unlocks immediately</strong> – you’ll
+    ✅ <strong>After checkout
+       <!-- (<span id="checkoutPrice">—</span>) -->
+       , your plan unlocks immediately</strong> – you’ll
     land on your dashboard.
   </p>
 
@@ -1089,7 +1093,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
 
       <h2 id="valueModalHeader"></h2>
       <p id="scratchCompletionNote" class="promo-strip__rarity" hidden>
-        You just scratched 100% off. Last win was
+        You just scratched 51% off. Last win was
         <span class="promo-strip__rarity-count">3,847</span> users ago.
         This is rare - don’t let it expire.
       </p>
@@ -1104,7 +1108,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
           <div class="scratch-reveal">
             <div class="reveal-content">
               <div class="discount-badge">
-                <span class="discount-badge__main">100% OFF</span>
+                <span class="discount-badge__main">51% OFF</span>
                 <!-- <span class="discount-badge__bonus">+ Free Coach Call</span> -->
               </div>
               <!-- <p class="reveal-sub">Your 12-Week Plan is free!</p> -->
