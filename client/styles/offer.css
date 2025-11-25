@@ -1707,27 +1707,28 @@ img {
 .offer-cards {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    margin-top: 20px;
+    gap: 10px;
+    margin-top: 18px;
 }
 
 .offer-card {
- background:
-      /* inner fill */
-      linear-gradient(#ffffff, #ffffff) padding-box,
-      /* gradient border */
-      linear-gradient(135deg, #007BFF, #339DFF) border-box;
-    border: 2px solid transparent;
-    border-radius: 6px;
-    padding: 15px;
+    background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(135deg, #dfe4ee, #e9edf5) border-box;
+    border: 1.5px solid transparent;
+    border-radius: 12px;
+    padding: 12px 14px;
     position: relative;
     /* needed for .best-seller-banner */
-    transition: border-color 0.3s;
+    transition: box-shadow 0.2s ease, transform 0.15s ease;
     cursor: pointer;
     display: grid;
     grid-template-columns: 1fr auto;
     /* left col (details) + right col (price) */
-    column-gap: 10px;
+    column-gap: 12px;
+    align-items: center;
+    min-height: 86px;
+    font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .offer-card .toggle-details {
@@ -1769,7 +1770,8 @@ img {
 }
 
 .offer-card:hover {
-    border-color: #bbb;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
 }
 
 /* On selection, highlight border in a blue shade that fits your palette */
@@ -1778,12 +1780,15 @@ img {
 .offer-left {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 4px;
+    line-height: 1.2;
 }
 
 .duration {
     font-size: 1rem;
-    color: #333;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: 0.1px;
 }
 
 .offer-card.offer-special .duration strong {
@@ -1817,53 +1822,44 @@ img {
     font-weight: 600;
 }
 
-.card-subtext {
-    font-size: 0.9rem;
-    color: #666;
-    margin: 0;
-}
-
 .full-price {
-    font-size: 1rem;
-    color: #666;
+    font-size: 0.92rem;
+    color: #4b5563;
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+    line-height: 1.2;
 }
 
 .price-strikethrough {
-    color: #666;
-    /* muted grey when no discount */
-    font-size: 1rem;
-    /* normal size */
-    font-weight: 400;
-    /* normal weight */
+    color: #6b7280;
+    font-size: 0.98rem;
+    font-weight: 500;
     text-decoration: line-through;
-    text-decoration-color: #666;
+    text-decoration-color: #9ca3af;
     text-decoration-thickness: 1px;
     margin-right: 0.5ch;
-    transition: none;
+    transition: color 0.15s ease, text-decoration 0.15s ease;
 }
 
-/* when discount is active, bump size, weight & switch to red anchor */
-body.discount-active .price-strikethrough {
-    color: #d9534f;
-    /* vivid red only while live */
-    font-size: 1.25rem;
-    /* larger for anchor impact */
+.price-strikethrough.no-strike {
+    text-decoration: none;
+    color: #0f172a;
     font-weight: 700;
-    /* bold */
-    text-decoration-color: #d9534f;
-    text-decoration-thickness: 1px;
-    margin-right: 0.5ch;
-    font-family: 'Poppins', sans-serif;
-    /* or even a serif like Georgia for contrast */
-    font-style: italic;
+    margin-right: 0;
 }
 
 /* RIGHT side of the card */
 .offer-right {
     text-align: right;
     align-self: flex-start;
-    /* keep at top, so details expand on left */
-    position: relative;
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    justify-self: end;
+    padding-top: 6px;
 }
 
 .discount-active .offer-card[data-program="1-week"] {
@@ -1882,24 +1878,11 @@ body.discount-active .price-strikethrough {
     margin-top: 0 !important;
 }
 
-.discount-active .offer-card[data-program="1-week"] .offer-right .currency-tag,
-.discount-active .offer-card[data-program="1-week"] .offer-right .per-day {
-    display: none !important;
-}
-
-.currency-tag {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 0.75rem;
-    color: #666;
-}
-
 .cost-per-day {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #333;
-    margin-top: 30px;
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-top: 4px;
 }
 
 @media (max-width: 375px) {
@@ -1909,35 +1892,51 @@ body.discount-active .price-strikethrough {
 }
 
 .per-day {
+    font-size: 0.78rem;
+    color: #6b7280;
+}
+
+.best-seller-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #007BFF, #339DFF);
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-weight: 800;
     font-size: 0.75rem;
-    color: #666;
+    letter-spacing: 0.2px;
+    box-shadow: 0 12px 28px rgba(0, 123, 255, 0.26);
+    border: 1px solid rgba(255, 255, 255, 0.38);
 }
 
 .best-seller-banner {
+    width: 94%;
     position: absolute;
-    bottom: -32px;
-    /* "below" the bottom edge but still attached */
-    left: -2px;
-    width: 100%;
-  background:
-    linear-gradient(135deg, #007BFF, #339DFF) padding-box,
-    linear-gradient(135deg, #007BFF, #339DFF) border-box;
-  border: 2px solid transparent;
-    color: #fff;
-    font-size: 0.8rem;
-    height: 26px;
-    line-height: 28px;
-    text-align: center;
-    text-transform: uppercase;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-    padding-bottom: 5px;
+    left: 50%;
+    bottom: -1px;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 7px 12px;
+    background: linear-gradient(135deg, #007BFF, #339DFF);
+    color: #ffffff;
+    border-radius: 0 0 12px 12px;
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 0.3px;
+    box-shadow: 0 12px 28px rgba(0, 123, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    line-height: 1;
+    z-index: 1;
 }
 
-.banner-text {
-    letter-spacing: 2px;
-    margin-left: 2px;
-}
 
 /* BEST SELLER TAG */
 .best-seller-tag {
@@ -2005,7 +2004,8 @@ body.discount-active .price-strikethrough {
 }
 
 .discount-price {
-    color: #666;
+    color: #0f172a;
+    font-weight: 800;
 }
 
 /******************************************/
@@ -2103,6 +2103,16 @@ body.discount-active .price-strikethrough {
         /* reset any floats */
     }
 }
+
+.legal-link {
+    color: #666; /* soft grey */
+    text-decoration: underline;
+}
+
+.legal-link:hover {
+    color: #555; /* slightly darker on hover */
+}
+
 
 .offer-page .offer-disclaimer {
     display: none;
@@ -2663,13 +2673,18 @@ body.discount-active .price-strikethrough {
 }
 
 .offer-card.selected {
-    border: 2px solid transparent;
-    /* Blue for regular cards */
+    background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(135deg, #007BFF, #339DFF) border-box;
+    box-shadow: 0 16px 34px rgba(0, 123, 255, 0.16);
+    transform: translateY(-1px);
 }
 
 .offer-card.offer-special.selected {
-    border: 2px solid transparent;
-    /* Purple for the special offer card */
+    background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(135deg, #007BFF, #339DFF) border-box;
+    box-shadow: 0 16px 34px rgba(0, 123, 255, 0.16);
 }
 
 .offer-card.highlighted {
@@ -3802,14 +3817,16 @@ body.modal-open .floating-cta {
 }
 
 .rating-summary__reassurance {
-  display: flex;
-  justify-content: center;   /* horizontally center text + button */
-  align-items: center;       /* vertically align them */
+    display: flex;
+    justify-content: center;
+    /* horizontally center text + button */
+    align-items: center;
+    /* vertically align them */
 }
 
 /* optional: remove default p margin so it doesn't push things off */
 .rating-summary__reassurance p {
-  margin: 0;
+    margin: 0;
 }
 
 .offer-scroll-anchor {

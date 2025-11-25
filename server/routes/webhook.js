@@ -63,9 +63,9 @@ router.post(
       let unlockedWeeks = 0;
       let isSubscription = false;
 
-      if (priceId === process.env.PRICE_1_WEEK) unlockedWeeks = 1;
-      else if (priceId === process.env.PRICE_4_WEEK) unlockedWeeks = 4;
-      else if (priceId === process.env.PRICE_12_WEEK) unlockedWeeks = 12;
+      if (priceId === process.env.PRICE_TRIAL_UPFRONT_GBP) unlockedWeeks = 1;
+      else if (priceId === process.env.PRICE_FOUR_WEEK_GBP) unlockedWeeks = 4;
+      else if (priceId === process.env.PRICE_TWELVE_WEEK_GBP) unlockedWeeks = 12;
       else if (priceId === process.env.FULL_PRICE_ID) {
         unlockedWeeks = 4;          // first block on sign-up
         isSubscription = true;

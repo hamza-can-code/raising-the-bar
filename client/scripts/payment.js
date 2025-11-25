@@ -100,8 +100,18 @@
   let intentType = 'payment';
   window.__PAYMENT_VISITED__ = window.__PAYMENT_VISITED__ || false;
   function isDiscountActive() {
+    const hasClass = document.body.classList?.contains('discount-active');
     const end = Number(localStorage.getItem('discountEndTime') || 0);
-    return end > Date.now();
+    return hasClass || end > Date.now();
+  }
+
+  function getSelectedPlanId() {
+    return localStorage.getItem('selectedProgram') || 'trial';
+  }
+
+  function getSelectedPlanPricing() {
+    if (typeof window.RTB_getPlanPricing !== 'function') return null;
+    return window.RTB_getPlanPricing(getSelectedPlanId(), isDiscountActive());
   }
 
   /* ——————————————————————————————————————————————————————————— */
@@ -156,6 +166,8 @@
     }
 
     const discounted = isDiscountActive();
+    const selectedPlan = getSelectedPlanId();
+    const planPricing = getSelectedPlanPricing();
     const curr = (typeof getCurrency === 'function')
       ? getCurrency()
       : { code: 'GBP', country: 'GB', fxFromGBP: 1 };
@@ -167,7 +179,8 @@
         body: JSON.stringify({
           email,
           discounted,
-          currency: curr.code
+          currency: curr.code,
+          plan: selectedPlan
         })
       }).then(r => r.json());
 
@@ -190,35 +203,16 @@
 
       // Wallet button (Apple Pay / GPay)
       if (!window.__STRIPE_WARM__?.pr) {
-        // Read per-currency prices (from offer.js) or use a safe fallback table
-        const PRICE = (window.RTB_PRICE_TABLE) || {
-          GBP: { full: 19.99, weekly: 4.99, intro: 0 },
-          USD: { full: 23.99, weekly: 5.99, intro: 0 },
-          EUR: { full: 22.99, weekly: 5.99, intro: 0 },
-          SEK: { full: 249, weekly: 69, intro: 0 },
-          NOK: { full: 259, weekly: 69, intro: 0 },
-          DKK: { full: 179, weekly: 45, intro: 0 },
-          CAD: { full: 29.99, weekly: 8.99, intro: 0 },
-          CHF: { full: 24.99, weekly: 6.49, intro: 0 },
-          AUD: { full: 34.99, weekly: 9.49, intro: 0 },
-          NZD: { full: 32.99, weekly: 8.99, intro: 0 },
-          SGD: { full: 29.99, weekly: 8.49, intro: 0 },
-          HKD: { full: 169, weekly: 45, intro: 0 },
-          JPY: { full: 3590, weekly: 950, intro: 0 },
-          INR: { full: 1499, weekly: 399, intro: 0 },
-          BRL: { full: 109.99, weekly: 29.99, intro: 0 },
-          MXN: { full: 459, weekly: 119, intro: 0 }
-        };
-
-        const row = PRICE[curr.code] || PRICE.GBP;
-        const displayAmount = discounted ? row.intro : row.full;             // exact local price you set in Stripe
         const minorDigits = curr.minor ?? 2;                // your getCurrency() tells you 0 for JPY, 2 for USD/EUR/etc
-        const amountMinor = Math.round(displayAmount * Math.pow(10, minorDigits));
+        const planDisplayAmount = planPricing
+          ? planPricing.todayLocal
+          : ((window.RTB_PRICE_TABLE?.[curr.code]?.full) || 19.99);
+        const amountMinor = Math.round(planDisplayAmount * Math.pow(10, minorDigits));
 
         const pr = stripeJs.paymentRequest({
           country: curr.country || 'GB',
           currency: (curr.code || 'GBP').toLowerCase(),
-          total: { label: '12-Week Plan', amount: amountMinor },
+          total: { label: planPricing?.name || 'Selected Plan', amount: amountMinor },
           requestPayerName: true,
           requestPayerEmail: true
         });
@@ -313,10 +307,12 @@
 
   continueBtn.addEventListener('click', async (e) => {
     e.preventDefault();
-    // Force the checkout context to the primary 1-week plan
-    localStorage.setItem('selectedProgram', 'new');
+    const selectedPlan = getSelectedPlanId();
+    if (!selectedPlan) {
+      showError('Please select a plan to continue.');
+      return;
+    }
     localStorage.setItem('pendingPurchaseType', 'subscription');
-    localStorage.setItem('planName', 'Pro Tracker');
     try { window.updatePlanSummary?.(); } catch (_) { }
     collapseAllOfferCards();
     if (continueBtn.disabled) return;

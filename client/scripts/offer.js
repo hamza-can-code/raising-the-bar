@@ -79,6 +79,29 @@ window.RTB_PRICE_TABLE = {
   MXN: { full: 459, weekly: 119, intro: 0 },
 };
 
+// GBP anchor values for each plan. Converted using RTB_CURRENCY fxFromGBP.
+const PLAN_PRICING_GBP = {
+  trial: {
+    name: '1-Week Trial',
+    full: 4.99,
+    renewal: 19.99,
+    discount: null,
+  },
+  '4-week': {
+    name: '4-Week Plan',
+    full: 19.99,
+    renewal: 19.99,
+    discount: 9.99,
+  },
+  '12-week': {
+    name: '12-Week Plan',
+    full: 49.99,
+    renewal: 49.99,
+    discount: 19.99,
+  },
+};
+window.RTB_PLAN_PRICING = PLAN_PRICING_GBP;
+
 function getCurrency() {
   return window.RTB_CURRENCY || { code: 'GBP', symbol: '£', minor: 2, country: 'GB' };
 }
@@ -140,6 +163,30 @@ function formatLocal(amountGbp) {
     maximumFractionDigits: c.minor
   }).format(v);
 }
+
+function getPlanPricing(planId, discounted = isDiscountActive()) {
+  const plan = PLAN_PRICING_GBP[planId] || PLAN_PRICING_GBP.trial;
+  const currency = getCurrency();
+  const todayGbp = discounted && plan.discount ? plan.discount : plan.full;
+  const renewalGbp = plan.renewal ?? plan.full;
+  const todayLocal = toLocal(todayGbp);
+  const renewalLocal = toLocal(renewalGbp);
+
+  return {
+    id: planId,
+    name: plan.name,
+    todayGbp,
+    renewalGbp,
+    todayLocal,
+    renewalLocal,
+    todayFormatted: formatLocal(todayGbp),
+    renewalFormatted: formatLocal(renewalGbp),
+    currencyCode: currency.code,
+    minor: currency.minor ?? 2,
+    discountedApplied: Boolean(discounted && plan.discount),
+  };
+}
+window.RTB_getPlanPricing = getPlanPricing;
 function localizeProTrackerCard() {
   const dealOn = document.body.classList.contains('discount-active');
   const card = document.querySelector('.offer-card[data-program="new"]');
@@ -166,12 +213,95 @@ function localizeProTrackerCard() {
   localStorage.setItem('planPriceFull', fmt(code, full));
 }
 
+function updateOfferCardsPricing() {
+  const offerCards = document.querySelectorAll('.offer-card');
+  const perDayDivisors = { trial: 7, '4-week': 31, '12-week': 90 };
+  offerCards.forEach(card => {
+    const planId = card.dataset.program;
+    const pricing = getPlanPricing(planId, isDiscountActive());
+    const fullPriceEl = card.querySelector('.price-value');
+    const strikeEl = card.querySelector('.price-strikethrough');
+    const discountEl = card.querySelector('.discount-price');
+    const perDayEl = card.querySelector('.cost-per-day strong');
+
+    if (strikeEl) {
+      strikeEl.classList.remove('no-strike');
+      strikeEl.style.textDecoration = '';
+    }
+
+    if (pricing.discountedApplied && strikeEl && discountEl) {
+      strikeEl.textContent = formatLocal(pricing.renewalGbp);
+      strikeEl.style.display = 'inline';
+      strikeEl.classList.remove('no-strike');
+      discountEl.textContent = pricing.todayFormatted;
+      discountEl.style.display = 'inline';
+      if (fullPriceEl) fullPriceEl.style.display = 'none';
+    } else {
+      if (strikeEl) {
+        strikeEl.textContent = pricing.todayFormatted;
+        strikeEl.style.display = 'inline';
+        strikeEl.classList.add('no-strike');
+        strikeEl.style.textDecoration = 'none';
+      }
+      if (discountEl) discountEl.style.display = 'none';
+      if (fullPriceEl) {
+        fullPriceEl.style.display = 'inline';
+        fullPriceEl.textContent = pricing.todayFormatted;
+      }
+    }
+
+    const divisor = perDayDivisors[planId] || 30;
+    if (perDayEl) {
+      const perDayGbp = pricing.todayGbp / divisor;
+      perDayEl.textContent = formatLocal(perDayGbp);
+    }
+  });
+}
+
+function updatePricingJustification() {
+  const el = document.querySelector('.pricing-justification');
+  if (!el) return;
+
+  const planId = localStorage.getItem('selectedProgram') || 'trial';
+  const plan = PLAN_PRICING_GBP[planId] || PLAN_PRICING_GBP.trial;
+  const dealOn = document.body.classList.contains('discount-active');
+  const discountToday = dealOn && plan.discount;
+  const originalGbp = plan.renewal ?? plan.full;
+  const todayGbp = discountToday ? plan.discount : plan.full;
+
+  if (discountToday) {
+    const original = formatLocal(originalGbp);
+    const today = formatLocal(todayGbp);
+    el.innerHTML = `Normally ${original}, now just <strong>${today}</strong>. 🎉 You won the ${plan.name} for ${today}.`;
+  } else {
+    el.textContent = 'Like having a personal trainer in your pocket — for less than the cost of one session.';
+  }
+}
+
+function updateOfferDisclaimer(pricing = null) {
+  const disclaimer = document.getElementById('offerDisclaimer');
+  if (!disclaimer) return;
+  const selectedPricing = pricing || getPlanPricing(localStorage.getItem('selectedProgram') || 'trial');
+  disclaimer.innerHTML = `
+By continuing, you agree to our
+<a href="tos.html" target="_blank" class="legal-link">terms</a> and
+<a href="refund-policy.html" target="_blank" class="legal-link">refund policy</a>.
+Covered by
+<a href="#moneyBackGuarantee" id="moneyBackGuaranteeLink" class="mbg-scroll-link">
+  Money-Back Guarantee
+</a>.
+Need reassurance?
+<button type="button" class="rating-summary__link reassurance__reviews-link" id="reassuranceReviewsLink">
+  Read reviews
+</button>
+`;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  const pricing = getLocalPrices();
-  const { code, full } = pricing;
-  // const weekly = getWeeklyAmount(pricing);
+  const selected = localStorage.getItem('selectedProgram') || 'trial';
+  const pricing = getPlanPricing(selected, isDiscountActive());
   document.querySelectorAll('.renew-amt').forEach(el => {
-    el.textContent = fmt(code, full);
+    el.textContent = pricing.renewalFormatted;
   });
 });
 
@@ -259,10 +389,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const namePrompt = document.getElementById("offerNamePrompt");
   const updateOfferNamePrompt = (active = isDiscountActive()) => {
     if (!namePrompt) return;
-    const planCopy = active
-      ? "claim your free calisthenics workout plan"
-      : "claim your calisthenics workout plan";
-    namePrompt.textContent = `${name || "Athlete"}, ${planCopy}`;
+    namePrompt.textContent = `${name || "Athlete"}, claim your calisthenics workout plan`;
   };
 
   updateOfferNamePrompt();
@@ -1373,27 +1500,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Activate or deactivate the discount style immediately
   setDiscountActive(discountEndTime > now, { force: true });
-  function updatePricingJustification() {
-    const el = document.querySelector('.pricing-justification');
-    if (!el) return;
-
-    const dealOn = document.body.classList.contains('discount-active');
-    const pricing = getLocalPrices();
-    const { code, full, intro } = pricing;
-    // const weekly = getWeeklyAmount(pricing);
-
-    if (dealOn) {
-      el.innerHTML =
-        `Normally ${fmt(code, full)} - now just <strong>${fmt(code, intro)}</strong>. ` +
-        // `🎉 You won the full 12-Week Plan for ${fmt(code, intro / 30)}.`;
-        `🎉 You won the full 12-Week Plan for free.`;
-    } else {
-      el.textContent = 'Like having a personal trainer in your pocket — for less than the cost of one session.';
-    }
-  }
-
-  const timerContainer = document.getElementById("timerContainer");
-  const countdownTimerEl = document.getElementById("countdownTimer");
+    const timerContainer = document.getElementById("timerContainer");
+    const countdownTimerEl = document.getElementById("countdownTimer");
 
   function updateTimer() {
     const now = Date.now();
@@ -1406,8 +1514,6 @@ document.addEventListener("DOMContentLoaded", function () {
       updatePostPayNote();
       localStorage.removeItem("sevenDayDiscountEnd");
       if (timerContainer) timerContainer.style.display = "none";
-      const cardSubtext = document.querySelector(".card-subtext");
-      if (cardSubtext) cardSubtext.remove();
       return;
     }
 
@@ -1436,26 +1542,6 @@ document.addEventListener("DOMContentLoaded", function () {
       countdownTimerEl.textContent = display;
     }
 
-    // For 1-Week Program: while the timer is active, force discount pricing
-    const costPerDay1Week = document.getElementById("costPerDay1Week");
-    const currencyTag1Week = document.querySelector('[data-program="1-week"] .currency-tag');
-    const perDay1Week = document.querySelector('[data-program="1-week"] .per-day');
-    if (costPerDay1Week && currencyTag1Week && perDay1Week) {
-      costPerDay1Week.textContent = "FREE!";
-      currencyTag1Week.style.display = "none";
-      perDay1Week.style.display = "none";
-    }
-
-    // For Pro Tracker Subscription (special card, data-program="new") while discount active
-    const costPerDaySpecial = document.getElementById("costPerDaySpecial");
-    const currencyTagSpecial = document.querySelector('[data-program="new"] .currency-tag');
-    const perDaySpecial = document.querySelector('[data-program="new"] .per-day');
-    if (costPerDaySpecial && currencyTagSpecial && perDaySpecial) {
-      const { code, intro } = getLocalPrices();
-      costPerDaySpecial.textContent = fmt(code, intro);
-      perDaySpecial.textContent = "per day";
-      currencyTagSpecial.style.display = "block";
-    }
   }
 
   document.addEventListener(DISCOUNT_STATE_EVENT, (e) => {
@@ -1479,47 +1565,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function removeDiscountPricing() {
-  // 1-Week Program (if present) → revert to full price view
-  const price1WeekFull = document.getElementById('price1WeekFull');
-  const price1WeekDiscount = document.getElementById('price1WeekDiscount');
-  const costPerDay1Week = document.getElementById('costPerDay1Week');
-  const currencyTag1Week = document.querySelector('[data-program="1-week"] .currency-tag');
-  const perDay1Week = document.querySelector('[data-program="1-week"] .per-day');
-
-  if (price1WeekFull && costPerDay1Week) {
-    // Remove strikethrough and hide discounted label if it exists
-    price1WeekFull.style.textDecoration = 'none';
-    if (price1WeekDiscount) price1WeekDiscount.style.display = 'none';
-
-    // Try to parse a base GBP amount from data attribute or text
-    let baseGbp = null;
-    const holder = price1WeekFull.closest('.full-price');
-    const dataAttr = holder?.getAttribute('data-full-price') || '';
-    const txt = price1WeekFull.textContent || dataAttr || '';
-    const m = txt.replace(',', '').match(/([0-9]+(\.[0-9]+)?)/);
-    if (m) baseGbp = parseFloat(m[1]);
-
-    // If we found a GBP amount, format locally and compute per-day over 7 days
-    if (typeof formatLocal === 'function' && typeof toLocal === 'function' && baseGbp) {
-      price1WeekFull.textContent = formatLocal(baseGbp);
-      const perDayLocal = toLocal(baseGbp) / 7;
-      costPerDay1Week.textContent = new Intl.NumberFormat(undefined, {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      }).format(perDayLocal);
-    }
-
-    if (currencyTag1Week) currencyTag1Week.style.display = 'block';
-    if (perDay1Week) {
-      perDay1Week.style.display = 'block';
-      perDay1Week.textContent = 'per day';
-    }
-  }
-
-  // Pro Tracker Subscription → revert to full price in local currency
-  if (typeof localizeProTrackerCard === 'function') {
-    localizeProTrackerCard();
-  }
+  updateOfferCardsPricing();
+  updatePricingJustification();
+  if (typeof localizeProTrackerCard === 'function') localizeProTrackerCard();
 }
 
 /**********************************************/
@@ -1529,59 +1577,47 @@ document.addEventListener("DOMContentLoaded", function () {
   const offerCards = document.querySelectorAll(".offer-card");
   let currentlySelected = null;
 
+  const clearSelections = () => {
+    offerCards.forEach(card => card.classList.remove('selected'));
+  };
+
+  const persistPlanSelection = (card) => {
+    const planId = card?.dataset?.program || 'trial';
+    const pricing = getPlanPricing(planId, isDiscountActive());
+    localStorage.setItem('selectedProgram', planId);
+    localStorage.setItem('planName', pricing.name);
+    localStorage.setItem('planPrice', pricing.todayFormatted);
+    localStorage.setItem('planRenewal', pricing.renewalFormatted);
+    document.querySelectorAll('.renew-amt').forEach(el => {
+      el.textContent = pricing.renewalFormatted;
+    });
+    updatePricingJustification();
+    updatePlanSummary();
+    updateOfferDisclaimer(pricing);
+  };
+
   // Check localStorage for previously selected program
   const savedProgram = localStorage.getItem("selectedProgram");
   if (savedProgram) {
+    clearSelections();
     const savedCard = document.querySelector(`.offer-card[data-program="${savedProgram}"]`);
     if (savedCard) {
       savedCard.classList.add("selected");
       currentlySelected = savedCard;
-      if (savedCard.dataset.program === "new") {
-        // For the special card, always auto-expand
-        toggleDetails(savedCard, true);
-      } else {
-        toggleDetails(savedCard, true);
-      }
+      toggleDetails(savedCard, true);
+      persistPlanSelection(savedCard);
       updateCTA(savedCard.dataset.program);
     }
   }
 
-  // If nothing is saved, auto-select the Pro Tracker (but don't expand it)
-  // If nothing is saved, auto-select the Pro Tracker (but don't expand it)
-  if (!currentlySelected) {
-    const proTrackerCard = document.querySelector('.offer-card[data-program="new"]');
-    if (proTrackerCard) {
-      // 1) mark it selected
-      proTrackerCard.classList.add('selected');
-      currentlySelected = proTrackerCard;
-
-      // 2) keep it collapsed
-      proTrackerCard.dataset.expanded = 'false';
-
-      // 3) persist selection
-      localStorage.setItem('selectedProgram', 'new');
-
-      // 4) seed the purchase info
-      localStorage.setItem('pendingPurchaseType', 'subscription');
-
-      // 5) seed the plan name
-      localStorage.setItem('planName', 'Pro Tracker');
-
-      // 6) seed the displayed price
-      let priceText = '';
-      const discEl = proTrackerCard.querySelector('.discount-price');
-      if (discEl && getComputedStyle(discEl).display !== 'none') {
-        priceText = discEl.textContent.trim();
-      } else {
-        const fullEl = proTrackerCard.querySelector('.full-price span')
-          || proTrackerCard.querySelector('.full-price');
-        priceText = fullEl.textContent.trim();
-      }
-      localStorage.setItem('planPrice', priceText);
-
-      // 7) update the CTA styling
-      updateCTA('new');
-    }
+  if (!currentlySelected && offerCards.length) {
+    clearSelections();
+    const firstCard = offerCards[0];
+    firstCard.classList.add('selected');
+    currentlySelected = firstCard;
+    toggleDetails(firstCard, true);
+    persistPlanSelection(firstCard);
+    updateCTA(firstCard.dataset.program);
   }
 
   // If nothing is saved, automatically select the 4-week card on first load
@@ -1618,67 +1654,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // If this card is already selected, do nothing
       if (currentlySelected === card) {
-        // If it’s collapsed, open it
         if (card.dataset.expanded !== 'true') {
-          toggleDetails(card, true);        // re-open
+          toggleDetails(card, true);
         }
-        return;                             // stop, so we don’t collapse it again
+        return;
       }
 
-      // If a different card is selected...
       if (currentlySelected && currentlySelected !== card) {
-
-        /* NEW: don't collapse if we're just switching
-           between the synced 4- and 12-week cards        */
-        if (!isSyncedPair(currentlySelected, card)) {
-          toggleDetails(currentlySelected, false);   // ← only runs for *other* cards
-        }
-
-        currentlySelected.classList.remove("selected");
+        toggleDetails(currentlySelected, false);
       }
 
-      offerCards.forEach(card => {
-        card.addEventListener('click', function (e) {
-          const proTrackerCard = document.querySelector('.offer-card[data-program="new"]');
-          // 1) always remove the purple outline
-          if (proTrackerCard) proTrackerCard.classList.remove('highlighted');
-
-          // … your existing click-logic here (deselecting/ selecting cards) …
-
-          // 2) if they clicked the Pro Tracker, re-apply the outline
-          if (card.dataset.program === 'new' && proTrackerCard) {
-            proTrackerCard.classList.add('highlighted');
-          }
-        });
-      });
-
-
-
-      // Select the new card
+      clearSelections();
       card.classList.add("selected");
       currentlySelected = card;
-      localStorage.setItem("selectedProgram", card.dataset.program);
-
-      const planName = card.querySelector('.duration strong').textContent;
-      localStorage.setItem("planName", planName);
-
-      // Always route checkout through the primary 1-week experience
-      // localStorage.setItem("selectedProgram", "new");
-      // localStorage.setItem("pendingPurchaseType", "subscription");
-      // localStorage.setItem("planName", "12-Week Plan");
-      // if (typeof updatePlanSummary === 'function') {
-      //   try { updatePlanSummary(); } catch (_) { }
-      // }
-
-      // For the special card, always auto-expand; for others, call toggleDetails as before.
-      if (card.dataset.program === "new") {
-        toggleDetails(card, true);
-      } else {
-        toggleDetails(card, true);
-      }
+      persistPlanSelection(card);
+      toggleDetails(card, true);
       updateCTA(card.dataset.program);
-      // updateCTA('new');
     });
+  });
+
+  updateOfferCardsPricing();
+
+  document.addEventListener(DISCOUNT_STATE_EVENT, () => {
+    updateOfferCardsPricing();
+    persistPlanSelection(currentlySelected || document.querySelector('.offer-card.selected'));
   });
 
   // Attach a separate click listener for the special card’s toggle button (if someone taps directly on it)
@@ -4468,19 +4467,12 @@ function extractDisplayedPrice(card) {
 function updatePlanSummary() {
   const el = document.getElementById('planSummary');
   const planName = localStorage.getItem('planName') || 'Your plan';
-  const dealOn = document.body.classList.contains('discount-active');
-  const { code, full, intro } = getLocalPrices();
-
-  if (planName === 'Pro Tracker' && dealOn) {
-    el.innerHTML = `
-      <span class="plan-name">${planName}</span>
-      <span class="plan-divider">–</span>
-      <span class="old-price">${fmt(code, full)}</span>
-      <span class="new-price">${fmt(code, intro)}</span>`;
-    localStorage.setItem('planPrice', fmt(code, intro));
+  const planPrice = localStorage.getItem('planPrice');
+  if (!el) return;
+  if (planPrice) {
+    el.textContent = `${planName} – ${planPrice}`;
   } else {
-    el.textContent = `${planName} – ${fmt(code, dealOn ? intro : full)}`;
-    localStorage.setItem('planPrice', fmt(code, dealOn ? intro : full));
+    el.textContent = planName;
   }
 }
 

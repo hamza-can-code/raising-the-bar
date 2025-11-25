@@ -476,24 +476,24 @@ placeholder.replaceWith(iframe);
 
     <p class="offer-personalization" id="offerNamePrompt">Athlete, claim your calisthenics workout plan</p>
 
-<div class="rating-summary" aria-label="Average rating 4.8 out of 5">
-  <div class="rating-summary__row">
-    <div class="rating-summary__stars" aria-hidden="true">
-      <span class="rating-summary__stars-fill" style="width: 96%;">★★★★★</span>
-      <span class="rating-summary__stars-base" aria-hidden="true">★★★★★</span>
-    </div>
-    <div class="rating-summary__score">
-      <strong>4.8/5</strong> (312,143 reviews)
-    </div>
-  </div>
+    <div class="rating-summary" aria-label="Average rating 4.8 out of 5">
+      <div class="rating-summary__row">
+        <div class="rating-summary__stars" aria-hidden="true">
+          <span class="rating-summary__stars-fill" style="width: 96%;">★★★★★</span>
+          <span class="rating-summary__stars-base" aria-hidden="true">★★★★★</span>
+        </div>
+        <div class="rating-summary__score">
+          <strong>4.8/5</strong> (312,143 reviews)
+        </div>
+      </div>
 
-  <div class="rating-summary__reassurance">
-    <p>Need reassurance?</p>
-    <button class="rating-summary__link" id="readReviewsLink" type="button">
-      Read reviews
-    </button>
-  </div>
-</div>
+      <div class="rating-summary__reassurance">
+        <p>Need reassurance?</p>
+        <button class="rating-summary__link" id="readReviewsLink" type="button">
+          Read reviews
+        </button>
+      </div>
+    </div>
 
     <!-- <p class="offer-subtext">Most people never stick to fitness because their plan doesn’t adapt. Yours will.
 </p> -->
@@ -509,7 +509,6 @@ placeholder.replaceWith(iframe);
 </div>
 </div>
 <div class="offer-right">
-<div class="currency-tag">GBP</div>
 <div class="cost-per-day">
 <strong id="costPerDay1Week">£0.00</strong>
 </div>
@@ -537,7 +536,6 @@ placeholder.replaceWith(iframe);
 </div>
 </div>
 <div class="offer-right">
-<div class="currency-tag">GBP</div>
 <div class="cost-per-day">
 <strong id="costPerDay4Week">£3.57</strong>
 </div>
@@ -561,7 +559,6 @@ placeholder.replaceWith(iframe);
 </div>
 </div>
 <div class="offer-right">
-<div class="currency-tag">GBP</div>
 <div class="cost-per-day">
 <strong id="costPerDay12Week">£1.79</strong>
 </div>
@@ -579,109 +576,54 @@ placeholder.replaceWith(iframe);
 </div>
 </div> -->
 
-      <!-- Row 3: New Special Offer Card (Full Width) -->
-      <div class="offer-card offer-special" data-program="new">
+      <!-- Offer Cards -->
+      <div class="offer-card offer-tier" data-program="trial">
         <div class="offer-left">
-          <div class="duration"><strong>12-Week Plan</strong></div>
-          <div class="full-price" data-full-price="£19.99">
-            <span class="price-strikethrough" id="priceSpecialFull">£19.99</span>
-            <span class="discount-price" id="priceSpecialDiscount">£0.00</span>
-          </div>
-          <div class="best-seller-banner">
-            <strong><span class="crown-emoji">👑</span> <span class="banner-text">UNREAL VALUE</span></strong>
+          <div class="duration"><strong>1-Week Trial</strong></div>
+          <div class="full-price" data-full-price="£4.99">
+            <span class="price-value" id="priceTrial">£4.99</span>
           </div>
         </div>
-
         <div class="offer-right">
-          <div class="currency-tag">GBP</div>
           <div class="cost-per-day">
-            <strong id="costPerDaySpecial">£0.33</strong>
+            <strong id="costPerDayTrial">£4.99</strong>
           </div>
           <div class="per-day">per day</div>
         </div>
+      </div>
 
-        <!-- Moved .additional-info outside .offer-left so it can span the entire card -->
-        <div class="additional-info" id="info-new" style="display: none;">
-          <h4>Your Complete Fitness Solution</h4>
-          <ul class="offer-includes">
-            <li id="offerWorkoutsLine">
-              🏋️ <strong>Workouts that adapt</strong> based on your performance and feedback.
-            </li>
-            <li id="offerMealsLine">
-              🍽️ <strong>Meals that match your routine</strong> and fit around your lifestyle.
-            </li>
-            <li>
-              🤖 AI Meal and Body Scanners that track and visualize your progress.
-            </li>
-            <li id="offerEmotionLine">
-              💛 <strong>Everything lives in one app</strong> so you feel supported, not overwhelmed.
-            </li>
-            <!-- <li>📈 <strong>1-on-1 online coaching</strong> with your assigned coach for expert guidance</li> -->
-          </ul>
+      <div class="offer-card offer-tier" data-program="4-week">
+        <div class="best-seller-banner" aria-label="Most popular plan">MOST POPULAR</div>
+        <div class="offer-left">
+          <div class="duration"><strong>4-Week Plan</strong></div>
+          <div class="full-price" data-full-price="£19.99">
+            <span class="price-strikethrough" id="priceFourWeekFull">£19.99</span>
+            <span class="discount-price" id="priceFourWeekDiscount">£9.99</span>
+          </div>
         </div>
-
-        <div class="toggle-details" id="toggle-new" style="cursor:pointer;">
-          What’s Included?
+        <div class="offer-right">
+          <div class="cost-per-day">
+            <strong id="costPerDayFourWeek">£19.99</strong>
+          </div>
+          <div class="per-day">per day</div>
         </div>
       </div>
-      <!--
-<div class="offer-card offer-tier" data-program="4-week">
-<div class="offer-left">
-<div class="duration"><strong>4-Week Plan</strong></div>
-<p class="card-subtext">Build momentum with a month of structured, progressive coaching.</p>
-<div class="full-price" data-full-price="£39.99">
-<span>£39.99</span>
-</div>
-</div>
 
-<div class="offer-right">
-<div class="currency-tag">GBP</div>
-<div class="cost-per-day">
-<strong>£1.43</strong>
-</div>
-<div class="per-day">per day</div>
-</div>
-
-<div class="additional-info" style="display: none;">
-<h4>What you lock in</h4>
-<ul class="offer-includes">
-<li>🏋️ <strong>Progressive 4-week training blocks</strong> that evolve each week.</li>
-<li>🍽️ <strong>Weekly meal frameworks</strong> adjusted to your calories and macros.</li>
-<li>🧠 <strong>Accountability check-ins</strong> to keep you focused and on track.</li>
-</ul>
-</div>
-
-<div class="toggle-details" style="cursor:pointer;">What’s Included?</div>
-</div>
-
-<div class="offer-card offer-tier" data-program="12-week">
-<div class="offer-left">
-<div class="duration"><strong>12-Week Plan</strong></div>
-<p class="card-subtext">Go all-in with our flagship transformation program.</p>
-<div class="full-price" data-full-price="£59.99">
-<span>£59.99</span>
-</div>
-</div>
-
-<div class="offer-right">
-<div class="currency-tag">GBP</div>
-<div class="cost-per-day">
-<strong>£0.71</strong>
-</div>
-<div class="per-day">per day</div>
-</div>
-
-<div class="additional-info" style="display: none;">
-<h4>Built for lasting change</h4>
-<ul class="offer-includes">
-<li>🏋️ <strong>12-week periodised training</strong> that adapts as you improve.</li>
-<li>🍽️ <strong>Seasonal meal rotations</strong> with grocery lists and swap suggestions.</li>
-<li>💬 <strong>Priority coach support</strong> with feedback every step of the way.</li>
-</ul>
-</div>
-
-<div class="toggle-details" style="cursor:pointer;">What’s Included?</div>
-</div> -->
+      <div class="offer-card offer-tier" data-program="12-week">
+        <div class="offer-left">
+          <div class="duration"><strong>12-Week Plan</strong></div>
+          <div class="full-price" data-full-price="£49.99">
+            <span class="price-strikethrough" id="priceTwelveWeekFull">£49.99</span>
+            <span class="discount-price" id="priceTwelveWeekDiscount">£19.99</span>
+          </div>
+        </div>
+        <div class="offer-right">
+          <div class="cost-per-day">
+            <strong id="costPerDayTwelveWeek">£49.99</strong>
+          </div>
+          <div class="per-day">per day</div>
+        </div>
+      </div>
 
       <p class="pricing-justification">
         Like having a personal trainer in your pocket — for less than the cost of one session.
@@ -694,19 +636,19 @@ placeholder.replaceWith(iframe);
         </button>
       </div>
 
-<p class="reassurance" id="offerDisclaimer">
-  Try 12-Week Plan free. After trial, renews at
-  <span class="renew-amt"></span>/month unless cancelled.
-  <strong>Cancel anytime in one click, no hidden fees.</strong>
-  Covered by
-  <a href="#moneyBackGuarantee" id="moneyBackGuaranteeLink" class="mbg-scroll-link">
-    Money-Back Guarantee
-  </a>.
-  Need reassurance?
-  <button type="button" class="rating-summary__link reassurance__reviews-link" id="reassuranceReviewsLink">
-    Read reviews
-  </button>
-</p>
+      <p class="reassurance" id="offerDisclaimer">
+        By continuing, you agree to our
+        <a href="tos.html" target="_blank">terms</a> and
+        <a href="refund-policy.html" target="_blank">refund policy</a>.
+         Covered by
+        <a href="#moneyBackGuarantee" id="moneyBackGuaranteeLink" class="mbg-scroll-link">
+          Money-Back Guarantee
+        </a>.
+        Need reassurance?
+        <button type="button" class="rating-summary__link reassurance__reviews-link" id="reassuranceReviewsLink">
+          Read reviews
+        </button>
+      </p>
 
       <p class="offer-disclaimer">
         <!-- By continuing, you agree to our
@@ -915,7 +857,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
   <div class="dots-container "></div>
 
   <section class="reviews-section" id="reviewsSection" aria-label="Customer reviews">
-        <div class="reviews-form" id="reviewsForm">
+    <div class="reviews-form" id="reviewsForm">
       <h3>Share your experience</h3>
       <p class="reviews-form__hint">Your review shows up instantly (and helps others feel confident).</p>
       <form id="reviewComposer">
@@ -952,24 +894,35 @@ alert('Could not initialise PayPal. Please refresh and try again.');
         </div>
       </div>
       <ul class="reviews-breakdown" aria-label="Rating distribution">
-        <li><span>5 ★</span><div class="bar"><span style="width: 82%"></span></div><span class="count">82%</span></li>
-        <li><span>4 ★</span><div class="bar"><span style="width: 14%"></span></div><span class="count">14%</span></li>
-        <li><span>3 ★</span><div class="bar"><span style="width: 3%"></span></div><span class="count">3%</span></li>
-        <li><span>2 ★</span><div class="bar"><span style="width: 1%"></span></div><span class="count">1%</span></li>
-        <li><span>1 ★</span><div class="bar"><span style="width: 0.5%"></span></div><span class="count">0.5%</span></li>
+        <li><span>5 ★</span>
+          <div class="bar"><span style="width: 82%"></span></div><span class="count">82%</span>
+        </li>
+        <li><span>4 ★</span>
+          <div class="bar"><span style="width: 14%"></span></div><span class="count">14%</span>
+        </li>
+        <li><span>3 ★</span>
+          <div class="bar"><span style="width: 3%"></span></div><span class="count">3%</span>
+        </li>
+        <li><span>2 ★</span>
+          <div class="bar"><span style="width: 1%"></span></div><span class="count">1%</span>
+        </li>
+        <li><span>1 ★</span>
+          <div class="bar"><span style="width: 0.5%"></span></div><span class="count">0.5%</span>
+        </li>
       </ul>
     </div>
 
     <div class="reviews-list" id="reviewsList" aria-live="polite"></div>
 
     <div class="reviews-pagination" id="reviewsPagination" aria-label="Review pages"></div>
-  </section>
 
-    <div class="post-faq-cta">
+      <div class="post-faq-cta">
     <button type="button" class="claim-program-btn" data-open-value-modal>
       Claim My Plan
     </button>
   </div>
+  
+  </section>
 
   <!-- FAQ Section -->
   <section class="faq-section" id="faqSection">
@@ -1155,7 +1108,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
                 <!-- <span class="discount-badge__bonus">+ Free Coach Call</span> -->
               </div>
               <!-- <p class="reveal-sub">Your 12-Week Plan is free!</p> -->
- <p id="promoCodeLine" class="promo-code-line" hidden></p>
+              <p id="promoCodeLine" class="promo-code-line" hidden></p>
               <p id="scratchDiscountNote" class="reveal-small" hidden>
                 Auto-applies at checkout · Ends in
                 <span class="reveal-timer" id="scratchMirrorTimer">10:00</span>

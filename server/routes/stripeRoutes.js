@@ -34,61 +34,34 @@ const BONUS_PRODUCT_DESCRIPTION =
    - Keep only the currencies you actually configured
    - Add/remove keys freely; fallback is GBP
    ────────────────────────────────────────────────────────── */
-const PRICE_SUB = {
-  GBP: process.env.PRICE_SUB_GBP,
-  USD: process.env.PRICE_SUB_USD,
-  EUR: process.env.PRICE_SUB_EUR,
-  SEK: process.env.PRICE_SUB_SEK,
-  NOK: process.env.PRICE_SUB_NOK,
-  DKK: process.env.PRICE_SUB_DKK,
-  CHF: process.env.PRICE_SUB_CHF,
-  AUD: process.env.PRICE_SUB_AUD,
-  NZD: process.env.PRICE_SUB_NZD,
-  CAD: process.env.PRICE_SUB_CAD,
-  SGD: process.env.PRICE_SUB_SGD,
-  HKD: process.env.PRICE_SUB_HKD,
-  JPY: process.env.PRICE_SUB_JPY,
-  INR: process.env.PRICE_SUB_INR,
-  BRL: process.env.PRICE_SUB_BRL,
-  MXN: process.env.PRICE_SUB_MXN,
+const PLAN_PRICE_IDS = {
+  trial: { GBP: process.env.PRICE_TRIAL_UPFRONT_GBP },
+  '4-week': { GBP: process.env.PRICE_FOUR_WEEK_GBP },
+  '12-week': { GBP: process.env.PRICE_TWELVE_WEEK_GBP },
 };
 
-// If you created ONE multi-currency coupon, set COUPON_MULTI=promo_...
-// If you created per-currency coupons, set COUPON_<CODE>=coupon_...
-const COUPON_MULTI = process.env.COUPON_MULTI || null;
-const COUPON_BY_CCY = {
-  GBP: process.env.COUPON_GBP,
-  USD: process.env.COUPON_USD,
-  EUR: process.env.COUPON_EUR,
-  SEK: process.env.COUPON_SEK,
-  NOK: process.env.COUPON_NOK,
-  DKK: process.env.COUPON_DKK,
-  CHF: process.env.COUPON_CHF,
-  AUD: process.env.COUPON_AUD,
-  NZD: process.env.COUPON_NZD,
-  CAD: process.env.COUPON_CAD,
-  SGD: process.env.COUPON_SGD,
-  HKD: process.env.COUPON_HKD,
-  JPY: process.env.COUPON_JPY,
-  INR: process.env.COUPON_INR,
-  BRL: process.env.COUPON_BRL,
-  MXN: process.env.COUPON_MXN,
+const PLAN_COUPONS = {
+  '4-week': { GBP: process.env.COUPON_FOUR_WEEK_GBP },
+  '12-week': { GBP: process.env.COUPON_TWELVE_WEEK_GBP },
+};
+
+const PLAN_LABELS = {
+  trial: '1-Week Trial',
+  '4-week': '4-Week Plan',
+  '12-week': '12-Week Plan',
 };
 
 function log(label, obj) {
   console.log(`🟡 ${label}`, util.inspect(obj, { depth: 4, colors: true }));
 }
 
-function pickCurrency(input) {
-  const code = (input || 'GBP').toUpperCase();
-  return PRICE_SUB[code] ? code : 'GBP';
-}
-
-function getSubPriceId(currencyCode) {
-  const c = pickCurrency(currencyCode);
-  const id = PRICE_SUB[c];
-  if (!id) throw new Error(`Missing PRICE_SUB_${c} in environment.`);
-  return { currency: c, priceId: id };
+function getPlanPriceId(plan = 'trial', currencyCode) {
+  const normalizedPlan = PLAN_PRICE_IDS[plan] ? plan : 'trial';
+  const code = (currencyCode || 'GBP').toUpperCase();
+  const priceMap = PLAN_PRICE_IDS[normalizedPlan];
+  const priceId = priceMap[code] || priceMap.GBP || null;
+  if (!priceId) return null;
+  return { currency: code, priceId, plan: normalizedPlan };
 }
 
 function pickBonusCurrency(input) {
@@ -116,11 +89,11 @@ async function ensureStripeCustomer(email) {
   return stripe.customers.create({ email });
 }
 
-function getCouponId(currencyCode) {
-  // Prefer single multi-currency coupon if provided
-  if (COUPON_MULTI) return COUPON_MULTI;
-  const c = pickCurrency(currencyCode);
-  return COUPON_BY_CCY[c] || null; // ok to be null (no discount)
+function getCouponIdForPlan(plan, currencyCode) {
+  const couponMap = PLAN_COUPONS[plan];
+  if (!couponMap) return null;
+  const code = (currencyCode || 'GBP').toUpperCase();
+  return couponMap[code] || couponMap.GBP || null;
 }
 
 /* ──────────────────────────────────────────────────────────
@@ -132,7 +105,7 @@ function getCouponId(currencyCode) {
 router.post('/create-checkout-session', express.json(), async (req, res) => {
   try {
     const {
-      plan = 'subscription',
+      plan = 'trial',
       discounted = false,
       email,
       currency,          // e.g. "USD" sent by client
@@ -147,12 +120,12 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       return res.status(500).json({ error: 'Missing FRONTEND_URL and request origin' });
     }
 
-    if (plan !== 'subscription') {
-      return res.status(400).json({ error: 'Only subscription Checkout supported in this endpoint.' });
+    const planInfo = getPlanPriceId(plan, currency);
+    if (!planInfo) {
+      return res.status(500).json({ error: `Missing price configuration for plan ${plan} (${currency || 'GBP'})` });
     }
-
-    const { currency: ccy, priceId } = getSubPriceId(currency);
-    const couponId = discounted ? null : getCouponId(ccy);
+    const { currency: ccy, priceId, plan: normalizedPlan } = planInfo;
+    const couponId = discounted ? getCouponIdForPlan(normalizedPlan, ccy) : null;
 
     const sessionCfg = {
       mode: 'subscription',
@@ -167,22 +140,19 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       customer_creation: 'always',
 
       subscription_data: {
-        trial_period_days: discounted ? 1 : undefined, // only if you want a trial
         payment_settings: { save_default_payment_method: 'on_subscription' },
         trial_settings: { end_behavior: { missing_payment_method: 'cancel' } },
       },
 
       metadata: {
-        product: '12-Week Plan',
+        product: PLAN_LABELS[normalizedPlan] || 'Selected Plan',
         currency_used: ccy,
         discounted: String(!!discounted),
       },
     };
 
-
-    if (discounted) {
-      sessionCfg.subscription_data = { trial_period_days: 1 };
-      sessionCfg.payment_method_collection = 'always';
+    if (couponId) {
+      sessionCfg.discounts = [{ coupon: couponId }];
     }
 
     log('Checkout session config', sessionCfg);
@@ -202,7 +172,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
 router.post('/create-subscription-intent', express.json(), async (req, res) => {
   console.log('\n───────── /create-subscription-intent ─────────');
   try {
-    const { email, discounted = false, currency } = req.body;
+    const { email, discounted = false, currency, plan = 'trial' } = req.body;
     log('Incoming payload', req.body);
     if (!email) return res.status(400).json({ error: 'Email required' });
 
@@ -212,8 +182,12 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
     log('Customer', { id: customer.id, email: customer.email });
 
     // 2) choose price & coupon by currency
-    const { currency: ccy, priceId } = getSubPriceId(currency);
-    const couponId = discounted ? null : getCouponId(ccy);
+    const planInfo = getPlanPriceId(plan, currency);
+    if (!planInfo) {
+      return res.status(500).json({ error: `Missing price configuration for plan ${plan} (${currency || 'GBP'})` });
+    }
+    const { currency: ccy, priceId, plan: normalizedPlan } = planInfo;
+    const couponId = discounted ? getCouponIdForPlan(normalizedPlan, ccy) : null;
 
     // 3) create subscription in incomplete state (for Elements confirmation)
     const subCfg = {
@@ -226,47 +200,15 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
       },
       expand: ['latest_invoice.payment_intent', 'pending_setup_intent'],
       metadata: {
-        product: '12-Week Plan',
+        product: PLAN_LABELS[normalizedPlan] || 'Selected Plan',
         currency_used: ccy,
         discounted: String(!!discounted),
       },
+      coupon: couponId || undefined,
     };
-
-    if (discounted) {
-      subCfg.trial_period_days = 1;
-    }
-
-
     log('Subscription create config', subCfg);
     const sub = await stripe.subscriptions.create(subCfg);
     log('Subscription', { id: sub.id, status: sub.status });
-
-    if (discounted) {
-      const setup =
-        typeof sub.pending_setup_intent === 'string'
-          ? await stripe.setupIntents.retrieve(sub.pending_setup_intent)
-          : sub.pending_setup_intent;
-      if (!setup) {
-        return res.status(500).json({ error: 'SetupIntent not available' });
-      }
-      try {
-        if (setup.metadata?.subscription_id !== sub.id) {
-          await stripe.setupIntents.update(setup.id, {
-            metadata: {
-              subscription_id: sub.id,
-              customer_id: customer.id,
-            },
-          });
-        }
-      } catch (err) {
-        console.error('⚠️  Failed to tag SetupIntent with subscription metadata', err);
-      }
-      return res.json({
-        clientSecret: setup.client_secret,
-        subscriptionId: sub.id,
-        intentType: 'setup',
-      });
-    }
 
     // 4) extract PaymentIntent for client_secret
     let pi = sub.latest_invoice?.payment_intent || null;
