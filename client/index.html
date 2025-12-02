@@ -1,712 +1,297 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <link rel="preload" as="image" href="../assets/rtb-logo-white-224.webp" fetchpriority="high">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Open Graph / Social Sharing -->
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://raisingthebarapp.com/">
-  <meta property="og:title" content="Raising The Bar – Adaptive Fitness Programs">
-  <meta property="og:description"
-    content="A smarter fitness tracker that adapts to your performance, meals, and lifestyle.">
-  <meta property="og:image" content="https://raisingthebarapp.com/assets/og-preview.jpg">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://raisingthebarapp.com/">
-  <meta name="twitter:title" content="Raising The Bar – Adaptive Fitness Programs">
-  <meta name="twitter:description"
-    content="A smarter fitness tracker that adapts to your performance, meals, and lifestyle.">
-  <meta name="twitter:image" content="https://raisingthebarapp.com/assets/og-preview.jpg">
-  <link rel="icon" type="image/png" href="/favicon.png">
-
-  <title>Raising The Bar</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link rel="preload" as="image" href="/assets/person_walking_outside-600.webp"
-    imagesrcset="/assets/person_walking_outside.webp 320w, /assets/person_walking_outside.webp 600w"
-    imagesizes="(max-width:600px) 100vw, 600px">
-
-  <style>
-    .cookie-banner {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      /* make sure it’s flush to the left edge */
-      right: 0;
-      /* …and the right edge */
-      width: 100%;
-      /* now includes padding, thanks to border-box */
-      box-sizing: border-box;
-      background-color: #2c3e50;
-      color: #fff;
-      padding: 1rem;
-      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      z-index: 1000;
-      transform: translateY(100%);
-      opacity: 0;
-      transition: transform .35s ease, opacity .35s;
-    }
-
-    .cookie-banner.is-visible {
-      transform: none;
-      opacity: 1;
-    }
-
-    .cookie-banner p {
-      margin: 0 0 1rem 0;
-      font-size: 0.9rem;
-    }
-
-    .cookie-banner a {
-      color: #f5a623;
-      text-decoration: underline;
-    }
-
-    .cookie-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-    }
-
-    .cookie-buttons button {
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-
-    #accept-all {
-      background-color: #28a745;
-      color: #fff;
-    }
-
-    #deny-all {
-      background-color: #dc3545;
-      color: #fff;
-    }
-
-    button:hover {
-      opacity: 0.9;
-    }
-  </style>
-
-  <!-- Fonts -->
-  <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
-    rel="stylesheet" media="print" onload="this.media='all'">
-  <noscript>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
-      rel="stylesheet">
-  </noscript>
-
-  <!-- Main CSS -->
-  <link rel="preload" as="style" href="../styles/landing-page.css">
-  <link href="../styles/landing-page.css" rel="stylesheet">
-  <!-- Google tag (gtag.js) -->
-  <!-- <script>
-    window.addEventListener('load', () => {
-      const s = document.createElement('script');
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ';
-      s.async = true;
-      document.head.appendChild(s);
-
-      s.onload = () => {
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-W9CSNHSLQQ');
-      };
-    });
-  </script>
-  <script>
-    window.addEventListener('load', () => {
-      // 1) Stub clarity() so queued calls work before the real script arrives
-      window.clarity = window.clarity || function () {
-        (window.clarity.q = window.clarity.q || []).push(arguments);
-      };
-
-      // 2) Load the real Clarity library asynchronously
-      const c = document.createElement('script');
-      c.src = 'https://www.clarity.ms/tag/rmf0p7sik4';
-      c.async = true;
-      document.head.appendChild(c);
-    });
-  </script> -->
-  <!-- TikTok Pixel Code Start -->
-  <!-- <script>
-!function (w, d, t) {
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-
-
-  ttq.load('D0M3KORC77UCAFR1EOLG');
-  ttq.page();
-}(window, document, 'ttq');
-</script> -->
-  <!-- TikTok Pixel Code End -->
-  <!-- Meta Pixel Code -->
-  <!-- <script>
-    window.addEventListener('load', () => {
-      const f = document.createElement('script');
-      f.src = 'https://connect.facebook.net/en_US/fbevents.js';
-      f.async = true;
-      document.head.appendChild(f);
-      f.onload = () => {
-        fbq('init', '1217477006533345');
-        fbq('track', 'PageView');
-      };
-    });
-  </script>
-  <noscript>
-    <img src="https://www.facebook.com/tr?id=1217477006533345&ev=PageView&noscript=1" alt="">
-  </noscript> -->
-  <!-- End Meta Pixel Code -->
-   <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '2589073464764526');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=2589073464764526&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+    <title>Creator Partnership | Raising The Bar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="../styles/creator-partnership.css" rel="stylesheet">
 </head>
 
 <body>
-  <div class="header">
-    <div class="header-inner">
-      <a href="../index.html" class="logo">
-        <picture>
-          <!-- WebP first -->
-          <source type="image/webp" srcset="/assets/rtb-logo-white-224.webp">
-
-          <!-- JPEG fallback -->
-          <source type="image/jpeg" srcset="/assets/rtb-logo-white-224.jpg">
-
-          <img id="logo" src="/assets/rtb-logo-white-224.webp" alt="Raising The Bar Logo" width="224" height="100"
-            loading="eager" fetchpriority="high" decoding="async">
-        </picture>
-      </a>
-
-      <div id="cookie-banner" class="cookie-banner" hidden>
-        <p>
-          We use cookies to enhance your experience, analyse site traffic,
-          and for marketing purposes. By clicking <strong>Accept All</strong>,
-          you consent to our use of cookies.
-          Learn more in our <a href="/pages/cookie-policy.html">Cookie Policy</a>.
-        </p>
-        <div class="cookie-buttons">
-          <button id="accept-all">Accept All</button>
-          <button id="deny-all">Deny</button>
+    <header class="site-header">
+        <div class="logo-wrap">
+            <a href="../pages/home.html" class="logo-link">
+                <img src="../assets/creator-program-logo.png" alt="Raising The Bar" class="logo" loading="lazy">
+            </a>
+            <span class="tag">Creator Partnership</span>
         </div>
-      </div>
-      <!-- 2) tiny blocking script executed while HTML is still parsing -->
-      <script>
-        /* helpers kept tiny to avoid blocking for long */
-        function loadGoogleAnalytics() {
-          const s = document.createElement('script');
-          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ';
-          s.async = true;
-          document.head.appendChild(s);
-          s.onload = () => {
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date()); gtag('config', 'G-W9CSNHSLQQ');
-          };
-        }
-        function loadClarity() {
-          window.clarity = window.clarity || function () { (clarity.q = clarity.q || []).push(arguments); };
-          const s = document.createElement('script');
-          s.src = 'https://www.clarity.ms/tag/rmf0p7sik4';
-          s.async = true; document.head.appendChild(s);
-        }
-        function loadTikTokPixel() { /* …same pattern… */ }
-
-        /* privacy logic */
-        (function () {
-          const consent = document.cookie.match(/(^|;)\s*userConsent=([^;]+)/)?.[2];
-          const banner = document.getElementById('cookie-banner');
-
-          if (consent === 'allow') {
-            loadGoogleAnalytics(); loadClarity(); loadTikTokPixel();
-          } else if (consent !== 'deny') {
-            banner.hidden = false;                      // show banner immediately
-            const accept = banner.querySelector('#accept-all');
-            const deny = banner.querySelector('#deny-all');
-
-            accept.addEventListener('click', () => {
-              document.cookie = 'userConsent=allow; max-age=' + 60 * 60 * 24 * 180 + '; path=/';
-              banner.remove();
-              loadGoogleAnalytics(); loadClarity(); loadTikTokPixel();
-            });
-            deny.addEventListener('click', () => {
-              document.cookie = 'userConsent=deny; max-age=' + 60 * 60 * 24 * 180 + '; path=/';
-              banner.remove();
-            });
-          }
-        })();
-      </script>
-
-      <!-- <script>
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(() => {
-            const s = document.createElement('script');
-            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ';
-            document.head.appendChild(s);
-            s.onload = () => {
-              window.dataLayer = window.dataLayer || [];
-              function gtag() { dataLayer.push(arguments); }
-              gtag('js', new Date());
-              gtag('config', 'G-W9CSNHSLQQ');
-            };
-          });
-        } else {
-          // fallback to regular load‐listener
-          window.addEventListener('load', () => {
-            const s = document.createElement('script');
-            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ';
-            document.head.appendChild(s);
-            s.onload = () => {
-              window.dataLayer = window.dataLayer || [];
-              function gtag() { dataLayer.push(arguments); }
-              gtag('js', new Date());
-              gtag('config', 'G-W9CSNHSLQQ');
-            };
-          });
-        }
-      </script> -->
-
-      <!-- Desktop nav (inline) -->
-      <nav class="main-nav" id="main-nav">
-        <!-- close btn -->
-        <button class="nav-close" id="nav-close" aria-label="Close Menu">✕</button>
-
-        <ul>
-          <li><a href="#" id="nav-workouts">My Workouts</a></li>
-          <li><a href="#" id="nav-nutrition">My Nutrition</a></li>
-          <li><a href="#" id="nav-help">Help</a></li>
-        </ul>
-      </nav>
-
-      <!-- Mobile hamburger -->
-      <button class="hamburger" id="hamburger-btn" aria-label="Toggle Menu">☰</button>
-
-      <!-- Dark mode toggle -->
-      <!-- <div class="dark-mode-button">
-        <img id="darkModeToggle" src="" alt="">
-      </div> -->
-    </div>
-  </div>
-
-  <!-- ————— Modals ————— -->
-
-  <!-- Email‑login / Claim modal -->
-  <div id="login-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
-    <div class="modal-content">
-      <button class="close-btn" data-target="login-modal" aria-label="Close">✕</button>
-
-      <h2 id="login-title">Log in to your Tracker</h2>
-
-      <!-- identical field names to main login page -->
-      <form id="modal-login-form" novalidate>
-        <div class="input-group">
-          <label for="modal-email">Email</label>
-          <input type="email" id="modal-email" name="email" placeholder="you@example.com" required autocomplete="email">
-          <span class="error-message" id="modal-email-error" role="alert"></span>
+        <div class="cta-group">
+            <!-- <a class="secondary" href="#call-form">Book a call</a> -->
+            <a class="primary" href="#call-form">Book a demo call</a>
         </div>
+    </header>
 
-        <div class="input-group">
-          <label for="modal-password">Password</label>
-          <input type="password" id="modal-password" name="password" placeholder="Your password" required
-            autocomplete="current-password">
-          <span class="error-message" id="modal-password-error" role="alert"></span>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <p class="eyebrow">
+                    For fitness creators who want their own branded app—without development, customer support, or
+                    operational complexity.
+                </p>
+                <h1>Launch your own premium fitness app in days, not months.</h1>
+                <p class="lede">We build, brand, and operate a fully-personalized training app for your audience.
+                    No upfront cost, no code, no customer support headaches.</p>
+                <div class="hero-actions">
+                    <a class="primary" href="#call-form">Book a demo call</a>
+                    <a class="ghost" href="#video">See the experience</a>
+                </div>
+                <div class="proof-grid">
+                    <div>
+                        <p class="stat">$10k+</p>
+                        <p class="caption">investment recouped</p>
+                    </div>
+                    <div>
+                        <p class="stat">4,500+</p>
+                        <p class="caption">email signups</p>
+                    </div>
+                    <div>
+                        <p class="stat">Proven</p>
+                        <p class="caption">funnel tested at scale</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-card">
+                <h3>Your brand, our engine</h3>
+                <ul>
+                    <li>Full-app branding that matches your identity</li>
+                    <li>Automatically generated programs with trillions of variations</li>
+                    <li>Adaptive workout & nutrition trackers that feel premium</li>
+                    <li>Zero-risk launch with revenue share</li>
+                </ul>
+                <a class="primary full" href="#call-form">Book a demo call</a>
+            </div>
+        </section>
+
+        <section class="trust">
+            <div class="badge">No PDFs. No guesswork. Real personalization.</div>
+            <h2>Why creators partner with us</h2>
+            <div class="pillars">
+                <div>
+                    <h3>Stand out in your niche</h3>
+                    <p>Give your audience what most creators don’t: adaptive plans, emotional UX, and a premium
+                        app built under your name.</p>
+                </div>
+                <div>
+                    <h3>Hands-free delivery</h3>
+                    <p>We handle UX, customer support, optimization, and payments so you can stay focused
+                        on content and community.
+                    </p>
+                </div>
+                <div>
+                    <h3>Fast monetization</h3>
+                    <p>
+                    <p>Zero upfront cost and fast rollout—launch in days and start earning immediately with
+                        performance-based revenue share.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="journey">
+            <div class="section-header">
+                <p class="eyebrow">End-to-end, done for you</p>
+                <h2>What your audience experiences</h2>
+                <p class="lede">From the first click to long-term retention, every step is engineered and branded for
+                    you.</p>
+            </div>
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Smart fitness form</h3>
+                    <p>Visitors answer ~25 adaptive questions covering goals, equipment, timeline, and motivations to
+                        build a precise profile.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Personalized offer</h3>
+                    <p>Adaptive offer page with 100k+ variations—shaped by goals, equipment, and deadlines, so it
+                        feels personal and valuable.</p>
+
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Instant app access</h3>
+                    <p>Users unlock tailored programs, macro targets, workout & nutrition trackers, streaks, and a
+                        welcome from you.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="section-header">
+                <p class="eyebrow">Built to feel premium</p>
+                <h2>App highlights</h2>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Program engine</h3>
+                    <p>Goal-specific training with periodization, deloads, and trillions of
+                        configurations that keep users progressing.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Adaptive trackers</h3>
+                    <p>Workout and nutrition tracking with XP, streaks, confidence-based progression, and weekly recaps
+                        that drive retention.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Mobile-first web app</h3>
+                    <p>Opens instantly from your link in bio—no downloads, no App Store approvals, and works on any
+                        device.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Co-branded funnel</h3>
+                    <p>Your logo, colors, tone, testimonials, and transformations across form → offer → checkout → app.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3>Support & optimization</h3>
+                    <p>We run A/B tests, refine pricing, manage support, and share weekly insights on conversions,
+                        retention, and refund rates.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="video" id="video">
+            <div class="video-card">
+                <div class="label">Demo video</div>
+                <div class="placeholder">Video coming soon</div>
+                <p class="caption">We’ll walk through the full funnel and app experience so you can see exactly what
+                    your
+                    audience gets.</p>
+            </div>
+            <div class="video-copy">
+                <h2>See how the funnel performs before you commit</h2>
+                <p>We already validated the system with thousands of signups. You’ll preview the exact flow—copy,
+                    visuals, and pricing—skinned to your brand before launch.</p>
+                <p class="lede">
+                    Prefer to explore it yourself?
+                    <a class="demo-link" href="../pages/forms.html" target="_blank">Open the live demo</a>
+                    and walk through the app exactly as a user would.
+                </p>
+                <ul>
+                    <li>Transparent metrics: form-to-offer, checkout, retention</li>
+                    <li>Launch playbook for your content channels</li>
+                    <li>Optional custom domain for your audience</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="offer">
+            <div class="section-header">
+                <p class="eyebrow">Aligned incentives</p>
+                <h2>Zero-risk launch, performance-based growth</h2>
+            </div>
+            <div class="offer-grid">
+                <div class="offer-card">
+                    <h3>Launch phase</h3>
+                    <p class="price">$0 upfront · 50/50 revenue share</p>
+                    <ul>
+                        <li>We build and brand everything</li>
+                        <li>We handle customer support and fulfillment</li>
+                        <li>Goal: prove demand & gather data</li>
+                    </ul>
+                </div>
+                <div class="offer-card">
+                    <h3>Growth phase</h3>
+                    <p class="price">After month 1 · creator-favored splits as revenue scales</p>
+                    <ul>
+                        <li>Performance-based revenue share that rewards growth</li>
+                        <li>Monthly retainer covers maintenance & upgrades</li>
+                        <li>Ongoing tests for pricing, angles, and retention</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="microcopy">
+                This system has already been validated with thousands of users. We’re now selectively onboarding our
+                first creator partners to build case studies. If you’d like early terms and hands-on launch support,
+                book a demo call below.
+            </p>
+        </section>
+
+        <section class="cta" id="call-form">
+            <div class="cta-content">
+                <p class="eyebrow">Let’s build your app</p>
+                <h2>Tell us about your audience and goals.</h2>
+                <p class="lede">We’ll share a tailored demo, projected revenue scenarios, and next steps within one
+                    business day.</p>
+            </div>
+
+            <!-- FORM STEP -->
+            <form id="creatorCallForm" class="call-form" action="https://formspree.io/f/mjkwlapp" method="POST">
+                <input type="hidden" name="_subject" value="New creator partnership booking">
+                <div class="form-grid">
+                    <label class="field">
+                        <span>Name</span>
+                        <input type="text" name="name" placeholder="Your full name" required>
+                    </label>
+                    <label class="field">
+                        <span>Email</span>
+                        <input type="email" name="email" placeholder="you@example.com" required>
+                    </label>
+                    <label class="field">
+                        <span>Main platform</span>
+                        <input type="text" name="platform" placeholder="TikTok, IG, YT..." required>
+                    </label>
+                    <label class="field">
+                        <span>Audience size</span>
+                        <input type="text" name="audience" placeholder="e.g., 120k followers" required>
+                    </label>
+                    <label class="field">
+                        <span>Typical engagement</span>
+                        <input type="text" name="engagement" placeholder="e.g., avg views, comments" required>
+                    </label>
+                    <label class="field">
+                        <span>Goal for the next 90 days</span>
+                        <input type="text" name="goal" placeholder="e.g., launch high-ticket hybrid coaching">
+                    </label>
+                    <label class="field full">
+                        <span>What should we know about your brand?</span>
+                        <textarea name="notes" rows="4"
+                            placeholder="Your handles, tone, audience profile, promises you’ll never make..."
+                            required></textarea>
+                    </label>
+                </div>
+                <button type="submit" class="primary full">Book a demo call</button>
+                <p class="microcopy" id="callFormStatus">
+                    You’ll receive a confirmation and proposed time slots immediately after submitting.
+                </p>
+            </form>
+
+            <!-- SCHEDULER STEP (hidden until form is successfully submitted) -->
+            <div id="call-scheduler" style="display: none; margin-top: 32px;">
+                <h3>Select a time for your call</h3>
+                <p class="microcopy">
+                    Pick a slot that works for you. You’ll receive a calendar invite automatically.
+                </p>
+
+                <div id="calendly-loader" style="margin-bottom: 24px; opacity: 0.65; font-size: 14px;">
+                    Loading calendar...
+                </div>
+
+                <!-- Calendly inline widget BEGIN -->
+                <div class="calendly-inline-widget" data-url="https://calendly.com/raisingthebarapp-info/30min"
+                    style="min-width:320px;height:700px;"></div>
+                <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                <!-- Calendly inline widget END -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Raising The Bar App Ltd. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="../pages/home.html">Home</a>
+            <span class="separator">|</span>
+            <a href="legal-overview.html">Policies</a>
+            <span class="separator">|</span>
+            <a href="contact-us.html">Contact</a>
         </div>
-
-        <label class="remember-wrap">
-          <input type="checkbox" id="remember-me" class="checkbox">
-          <span class="checkmark"></span>
-          Remember me
-        </label>
-
-        <button type="submit" class="login-btn">Continue</button>
-      </form>
-
-      <p class="small">
-        Don’t have a plan yet?
-        <a href="pages/forms.html">Choose a plan here →</a>
-      </p>
-    </div>
-  </div>
-
-  <!-- Help / FAQ modal (Option B) -->
-  <div id="faq-modal" class="modal">
-    <div class="modal-content">
-      <button class="close-btn" data-target="faq-modal">✕</button>
-      <h2>Frequently Asked Questions</h2>
-      <div class="faq-list">
-        <details>
-          <summary>How do I get started?</summary>
-          <p class="faq-answer">Tap <strong>“Choose a Plan”</strong>, fill out the short form, and your
-            personalised tracker will be ready within minutes.</p>
-        </details>
-
-        <details>
-          <summary>What if I’ve never followed a program before?</summary>
-          <p class="faq-answer">No problem. This is built for real people — simple steps, flexible tools, and progress
-            at your pace.</p>
-        </details>
-
-        <details>
-          <summary>Can I change my goals later on?</summary>
-          <p class="faq-answer">Absolutely. Once you're inside your tracker, you can update your goals anytime — your
-            plan will adapt automatically.</p>
-        </details>
-
-        <details>
-          <summary>What happens after I sign up?</summary>
-          <p class="faq-answer">You'll unlock your own dashboard — filled with workouts, meals, and progress tools
-            tailored to your goals, lifestyle, and experience level. It all connects in one place, ready to use right
-            away.</p>
-        </details>
-
-        <details>
-          <summary>Still have questions?</summary>
-          <p class="faq-answer"><a href="pages/contact-us.html">Click here</a> to contact us or explore more answers.
-            We're here to support you.</p>
-        </details>
-      </div>
-    </div>
-  </div>
-  <div class="slogan">
-    <p>A tracker that adapts when life happens — <br>
-      not just when things go right.</p>
-  </div>
-  <!-- <div class="hero-subheadline">
-    A tracker that adapts when life happens — <br>
-     not just when things go right.
-  </div> -->
-  <div class="dark-mode-button">
-    <img id="darkModeToggle" src="" alt="" height="0px">
-  </div>
-
-  <section>
-    <div class="">
-      <div class="cta-container">
-        <a href="pages/forms.html" class="claim-program-btn">Choose a Plan</a>
-      </div>
-      <p class="challenge-line">
-        Setup in 60 seconds—no credit card needed.
-      </p>
-    </div>
-    <div class="hero-image-wrapper">
-      <img src="/assets/your-ui-mockup.webp" alt="Workout Tracker UI on mobile" class="hero-ui-image">
-    </div>
-  </section>
-
-  <section class="mini-testimonial">
-    <div class="testimonial-card mini">
-      <div class="images">
-        <div class="before">
-          <picture>
-            <source srcset="
-    ../assets/lynn_before.webp 60w,
-    ../assets/lynn_before.webp 120w
-  " sizes="(max-width:120px) 100vw, 120px" type="image/webp">
-            <source srcset="
-    ../assets/lynn_before.jpeg 60w,
-    ../assets/lynn_before.jpeg 120w
-  " sizes="(max-width:120px) 100vw, 120px" type="image/jpeg">
-            <img src="../assets/lynn_before-120.webp" alt="Before" width="120" height="120" loading="lazy"
-              decoding="async" style="display:block; margin:0 auto;">
-          </picture>
-          <p>Before</p>
-        </div>
-        <div class="after">
-          <picture>
-            <source srcset="
-    ../assets/lynn_after.webp 60w,
-    ../assets/lynn_after.webp 120w
-  " sizes="(max-width:120px) 100vw, 120px" type="image/webp">
-            <source srcset="
-    ../assets/lynn_after.png 60w,
-    ../assets/lynn_after.png 120w
-  " sizes="(max-width:120px) 100vw, 120px" type="image/png">
-            <img src="../assets/lynn_after-120.webp" alt="After" width="120" height="120" loading="lazy"
-              decoding="async" style="display:block; margin:0 auto;">
-          </picture>
-          <p>After</p>
-        </div>
-      </div>
-      <p class="review-name">Lee</p>
-      <div class="five-stars">
-        <picture>
-          <source srcset="../assets/5-stars.webp" type="image/webp">
-          <source srcset="../assets/5-stars.png" type="image/png">
-          <img src="../assets/5-stars.png" alt="5 Stars" width="100" height="20" loading="lazy" decoding="async"
-            style="display:block; margin:0 auto;">
-        </picture>
-      </div>
-      <p class="review-text-mini">
-        Nothing worked — until this. I finally feel like myself again, and it actually fit around my life.
-      </p>
-    </div>
-  </section>
-  <section class="tailored-training-plan">
-    <h2>What You’re Getting</h2>
-    <p class="hero-subheading">
-      This is how you finally stay consistent — and see real progress.
-    </p>
-    <p class="hero-text">
-      <!-- You'll unlock a web-based <strong>adaptive all-in-one-tracker</strong>, tailored to you from the start, designed to <strong>remove guesswork</strong>  and evolve with you. -->
-      You’ll unlock a smart, web-based tracker that’s built around you — adapting to your goals, your performance, and
-      your progress.
-    <p class="hero-text">
-      <!-- When you join, you’ll unlock access to your personal dashboard where <strong>everything connects</strong>: -->
-    </p>
-    <div class="step-by-step">
-      <ul class="steps-list">
-        <li class="step-item">
-          <span class="emoji-box">✅</span>
-          <p style="margin-top: 5px;">
-            <strong>Complete a quick 60 second form</strong> to share your goals, preferences, and lifestyle.
-          </p>
-        </li>
-        <li class="step-item">
-          <span class="emoji-box">🚀</span>
-          <p>
-            <strong>Unlock your all-in-one-tracker</strong>, packed with tailored workouts, meals, and progress tools,
-            ready instantly.
-          </p>
-        </li>
-        <li class="step-item">
-          <span class="emoji-box">💪</span>
-          <p style="margin-bottom: 5px;">
-            <strong>Stay consistent and build momentum</strong> - with a plan that adapts every step of the way.
-          </p>
-      </ul>
-      <p class="hero-text">
-        No extra apps. No spreadsheets. Just one place to train, eat, and track everything.
-      </p>
-    </div>
-  </section>
-  <section class="habit-building">
-    <h2>Feel Better, Every Day</h2>
-    <div class="habit-image">
-      <picture style="display:block; margin:0 auto; max-width:100%;">
-        <!-- WebP for best compression -->
-        <source type="image/webp" srcset="
-      ../assets/person_walking_outside_360.webp 360w,
-      ../assets/person_walking_outside_600.webp 600w" sizes="(max-width:600px) 100vw, 600px">
-
-        <!-- JPEG fallback -->
-        <source type="image/webp" srcset="
-      ../assets/person_walking_outside_360.webp 360w,
-      ../assets/person_walking_outside_600.webp 600w" sizes="(max-width:600px) 100vw, 600px">
-
-        <img src="../assets/person_walking_outside_600.webp" width="600" height="400" loading="eager"
-          fetchpriority="high" decoding="async" alt="A person running in nature or doing yoga outdoors">
-      </picture>
-    </div>
-    <p>
-      This is about more than workouts. When your plan adjusts to your life — not the other way around — everything
-      changes. You’ll think clearer, feel more in control, and build the confidence that comes from showing up for
-      yourself — day after day.
-    </p>
-  </section>
-  <section class="nutrition-section">
-    <h2>Meals That Work With You</h2>
-    <div class="nutrition-image">
-      <picture style="display:block; margin:0 auto; max-width:100%;">
-        <!-- WebP for best compression -->
-        <source type="image/webp" srcset="
-      ../assets/meal-prep-360.webp 360w,
-      ../assets/meal-prep-600.webp 600w" sizes="(max-width:600px) 100vw, 600px">
-
-        <!-- JPEG fallback -->
-        <source type="image/jpeg" srcset="
-      ../assets/meal-prep-360.jpg 360w,
-      ../assets/meal-prep-600.jpg 600w" sizes="(max-width:600px) 100vw, 600px">
-
-        <img src="../assets/meal-prep-600.webp" width="600" height="400" loading="lazy" decoding="async"
-          alt="A person preparing a healthy meal">
-      </picture>
-    </div>
-    <p>
-      Your meals adapt to your goals, preferences, and schedule — with evolving plans that keep things fresh and easy
-      to
-      follow. No extra apps. No stress. Just simple, balanced nutrition that fits into your life.
-    </p>
-  </section>
-  <!-- Testimonial Section (Landing Page) -->
-
-  <div class="testimonial-section">
-    <h2>See What Happens When Everything Connects</h2>
-    <p class="hero-text">
-      Progress from real people, using the same system you're about to unlock.
-    </p>
-
-    <div class="testimonial-container">
-      <button class="arrow-button prev">❮</button>
-      <div class="testimonial-slider">
-      </div>
-
-      <button class="arrow-button next">❯</button>
-    </div>
-  </div>
-
-  <div class="dots-container"></div>
-
-  <div class="cta-container-subtle">
-    <a href="pages/forms.html" class="claim-program-btn-subtle">Choose a Plan</a>
-  </div>
-  <section class="youtube-prompt-section">
-    <div class="youtube-video-container" style="position: relative; padding-top: 56.25%; height: 0; overflow: hidden;">
-      <div id="youtube-placeholder" style="
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      cursor: pointer;
-      background: url('https://img.youtube.com/vi/H_aOWlPujIg/hqdefault.jpg')
-                  center center / cover no-repeat;
-    ">
-        <div style="
-        position: absolute;
-        top: 50%; left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgba(0,0,0,0.6);
-        border-radius: 50%; padding: 12px;
-      ">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 5v14l11-7z" />
-          </svg>
-        </div>
-      </div>
-    </div>
-
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const placeholder = document.getElementById("youtube-placeholder");
-        placeholder.addEventListener("click", function () {
-          const iframe = document.createElement("iframe");
-          iframe.setAttribute(
-            "src",
-            "https://www.youtube.com/embed/H_aOWlPujIg?autoplay=1"
-          );
-          iframe.setAttribute("frameborder", "0");
-          iframe.setAttribute(
-            "allow",
-            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          );
-          iframe.setAttribute("allowfullscreen", "");
-          iframe.style.cssText = `
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-      `;
-          placeholder.replaceWith(iframe);
-        });
-      });
-    </script>
-
-    <p class="hero-text">
-      Watch how it works — in under 60 seconds.
-    </p>
-    <div class="join-now-prompt">
-      <h2>Join now</h2>
-      <div class="cta-container">
-        <a href="pages/forms.html" class="claim-program-btn">Choose a Plan</a>
-      </div>
-      <p class="trust-line">
-        Built by a small team of lifters, developers, and designers who’ve been exactly where you are.
-      </p>
-    </div>
-  </section>
-
-  <!-- Cookie Banner -->
-  <!-- <div id="cookie-banner" class="cookie-banner">
-    <p>We use cookies to enhance your experience, analyze site traffic, and for marketing purposes. By clicking
-      "Accept
-      All," you consent to our use of cookies. Learn more in our <a href="pages/cookie-policy.html">Cookie Policy</a>.
-    </p>
-    <div class="cookie-buttons">
-      <button id="accept-all">Accept All</button>
-      <button id="deny-all">Deny</button>
-    </div>
-  </div> -->
-
-  <footer class="footer" id="footer">
-    <div class="footer-content">
-      <p>&copy; 2025 Raising The Bar App Ltd. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="index.html">Start Training</a>
-        <span class="separator">|</span>
-        <a href="pages/legal-overview.html">Our Policies</a>
-        <span class="separator">|</span>
-        <a href="pages/contact-us.html">Contact Us</a>
-      </div>
-      <!-- <div class="social-icons">
-        <a href="https://www.instagram.com/raising_the_bar_app/?hl=en" target="_blank" aria-label="Instagram">
-          <picture>
-            <source srcset="../assets/instagram-icon.webp" type="image/webp">
-            <source srcset="../assets/instagram-icon.png" type="image/png">
-            <img src="../assets/instagram-icon.png" alt="Instagram" width="24" height="24" loading="lazy"
-              decoding="async">
-          </picture>
-        </a>
-        <a href="https://www.youtube.com/@Raising_The_Bar_App" target="_blank" aria-label="YouTube">
-          <picture>
-            <source srcset="../assets/youtube-icon.webp" type="image/webp">
-            <source srcset="../assets/youtube-icon.png" type="image/png">
-            <img src="../assets/youtube-icon.png" alt="YouTube" width="24" height="24" loading="lazy" decoding="async">
-          </picture>
-        </a>
-        <a href="https://www.tiktok.com/@raising_the_bar_app" target="_blank" aria-label="TikTok">
-          <picture>
-            <source srcset="../assets/tiktok-icon.webp" type="image/webp">
-            <source srcset="../assets/tiktok-icon.png" type="image/png">
-            <img src="../assets/tiktok-icon.png" alt="TikTok" width="24" height="24" loading="lazy" decoding="async">
-          </picture>
-        </a>
-      </div> -->
-    </div>
-  </footer>
-  <script>
-    let scrollTracked = false;
-
-    window.addEventListener('scroll', () => {
-      const scrollPosition = window.scrollY + window.innerHeight;
-      const pageHeight = document.body.offsetHeight;
-
-      if (!scrollTracked && scrollPosition / pageHeight > 0.75) {
-        scrollTracked = true;
-        if (window.ttq) {
-          ttq.track('ViewContent', {
-            content_name: '75% Scroll - Landing Page'
-          });
-        }
-      }
-    });
-  </script>
-  <script type="module" src="../scripts/landing-page.js"></script>
+    </footer>
+    <script src="../scripts/creator-partnerships.js"></script>
 </body>
 
 </html>

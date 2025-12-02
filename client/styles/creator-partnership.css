@@ -344,6 +344,15 @@ main {
   padding-left: 18px;
 }
 
+.demo-link {
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.demo-link:hover {
+    opacity: 0.85;
+}
+
 .offer-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
