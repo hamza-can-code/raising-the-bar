@@ -78,6 +78,47 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         });
     }
+
+    const faqQuestions = document.querySelectorAll('.faq-question');
+
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', function () {
+            question.classList.toggle('rotated');
+
+            const faqItem = question.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
+            const isExpanded = faqItem.classList.contains('active');
+
+            if (isExpanded) {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                answer.offsetHeight;
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        answer.style.maxHeight = '0';
+                        answer.style.paddingTop = '0';
+                        answer.style.paddingBottom = '0';
+                    });
+                });
+
+                answer.addEventListener('transitionend', function handler(e) {
+                    if (e.propertyName === 'max-height') {
+                        faqItem.classList.remove('active');
+                        question.classList.remove('rotated');
+                        answer.style.paddingTop = '';
+                        answer.style.paddingBottom = '';
+                        answer.removeEventListener('transitionend', handler);
+                    }
+                });
+            } else {
+                faqItem.classList.add('active');
+                answer.style.paddingTop = '';
+                answer.style.paddingBottom = '';
+                answer.style.maxHeight = '0';
+                answer.offsetHeight;
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            }
+        });
+    });
 });
 
 // Hide the "Loading calendar..." text once Calendly sends any event
