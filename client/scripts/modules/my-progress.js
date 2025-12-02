@@ -5,6 +5,11 @@
   const myWorkoutsSection = document.getElementById("myWorkoutsSection");
   const myProgressSection = document.getElementById("myProgressSection");
 
+  function userHasPurchasedAWT() {
+    if (typeof window === "undefined") return false;
+    return typeof window.hasPurchasedAWT !== "undefined" ? window.hasPurchasedAWT : false;
+  }
+
   function handleWorkoutsTab() {
     localStorage.setItem("lastSelectedTab", "myWorkouts");
     myWorkoutsTab.classList.add("active");
@@ -31,7 +36,7 @@
     if (daySelectorFrame) daySelectorFrame.style.display = "none";
 
     // Everything that makes the Progress tab tick:
-    if (typeof hasPurchasedAWT !== "undefined" && hasPurchasedAWT) {
+    if (userHasPurchasedAWT()) {
       document.getElementById("myProgressOverview").style.display = "block";
       document.getElementById("noProgressDataMessage").style.display = "none";
       updateProgressScoreAndMessages();
@@ -72,7 +77,26 @@
 
   function renderWeeklyRecapAndImprovements() {
     // 1) Read the user's "active" workout week from localStorage (default to 1 if not set)
-    const activeWeek = parseInt(localStorage.getItem("activeWorkoutWeek") || "1", 10);
+    const storedActiveWeek = Number(localStorage.getItem("activeWorkoutWeek"));
+    const purchasedWeekCount = typeof getPurchasedWeeks === "function"
+      ? Number(getPurchasedWeeks())
+      : 0;
+    const cachedProgramLength = typeof twelveWeekProgram !== "undefined"
+      ? Number(twelveWeekProgram?.length || 0)
+      : 0;
+    const maxAvailableWeek = Math.max(1, purchasedWeekCount || cachedProgramLength || 0);
+
+    let activeWeek = Number.isFinite(storedActiveWeek) && storedActiveWeek > 0
+      ? storedActiveWeek
+      : 1;
+
+    // Clamp to the weeks the user actually has access to (prevents NaN/undefined values)
+    activeWeek = Math.min(activeWeek, maxAvailableWeek);
+
+    // Persist the cleaned value so future renders stay consistent
+    if (activeWeek !== storedActiveWeek) {
+      localStorage.setItem("activeWorkoutWeek", String(activeWeek));
+    }
 
     // If the user is on Week 1, there's no "previous" week to show.
     if (activeWeek === 1) {
@@ -1003,7 +1027,7 @@
 
   // (A) We'll show this section only if hasPurchasedAWT
   window.addEventListener("load", () => {
-    if (hasPurchasedAWT) {
+    if (userHasPurchasedAWT()) {
       document.getElementById("strengthWorkoutTrendsHeading").style.display = "block";
       document.getElementById("strengthWorkoutTrendsSection").style.display = "block";
       initStrengthWorkoutTrendsSection();
@@ -1986,7 +2010,7 @@ Helpers to sync logs with the API
     const container = document.getElementById("bodyCompositionSection");
     if (!container) return;
 
-    if (hasPurchasedAWT) {
+    if (userHasPurchasedAWT()) {
       container.style.display = "block";
 
       /* NEW: pull any server logs first, THEN build the chart */

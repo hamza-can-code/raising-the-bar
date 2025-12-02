@@ -358,6 +358,9 @@ function updateActiveWeek() {
 const mealPlanData = JSON.parse(localStorage.getItem('twelveWeekMealPlan') || '[]');
 let totalWeeks = Math.min(mealPlanData.length, 12);
 
+let currentWeekIndex = parseInt(localStorage.getItem("currentNutritionWeekIndex") || "0", 10);
+let currentDayIndex = parseInt(localStorage.getItem("currentNutritionDayIndex") || "0", 10);
+
 let purchasedWeeks;            // runtime value (filled below)
 const planName = localStorage.getItem('planName') || '';
 
@@ -1375,9 +1378,6 @@ myProgressTab.addEventListener("click", () => {
 // let totalWeeks = mealPlanData.length;
 let mealPrepPopupVisible = false;
 if (totalWeeks > 12) totalWeeks = 12;
-
-let currentWeekIndex = parseInt(localStorage.getItem("currentNutritionWeekIndex") || "0", 10);
-let currentDayIndex = parseInt(localStorage.getItem("currentNutritionDayIndex") || "0", 10);
 
 function renderWeekSelector() {
   const weekSelector = document.getElementById("weekSelector");

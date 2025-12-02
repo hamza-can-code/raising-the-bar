@@ -1094,11 +1094,11 @@ document.addEventListener("DOMContentLoaded", () => {
       image: "../assets/visible-results.webp",
       desc: ""
     },
-    {
-      title: "Adaptive Progression Engine (PT)",
-      image: "../assets/meal-scanner.webp",
-      desc: ""
-    },
+    // {
+    //   title: "Adaptive Progression Engine (PT)",
+    //   image: "../assets/meal-scanner.webp",
+    //   desc: ""
+    // },
     {
       title: "Macro-Matched Meals (PT)",
       image: "../assets/progress-tracking-2.PNG",

@@ -1,3 +1,59 @@
+/* ───── global state (declared up-front to avoid TDZ) ───── */
+let saveProgressDebounce;
+let purchasedWeeks = 0;                 // will be fetched
+const planName = localStorage.getItem('planName') || '';
+
+// helpers
+const isProSub = planName === 'Pro Tracker';
+const isTwelve = planName === '12-Week Program';
+const isFourWeek = planName === '4-Week Program';
+const isOneWeek = planName === '1-Week Program';
+
+/* 1)  Initialise the AWT flag from the plan name alone
+      (will be confirmed again after we hit the API)          */
+let hasPurchasedAWT = isProSub || isTwelve;
+
+/*  ⬇ Sync legacy localStorage keys so the rest of the site
+      can stay untouched                                       */
+if (isProSub) {
+  localStorage.setItem('hasAWTSubscription', 'true');
+  localStorage.removeItem('hasPOSAddOnForAWT');
+} else if (isTwelve) {
+  localStorage.setItem('hasPOSAddOnForAWT', 'true');
+  localStorage.removeItem('hasAWTSubscription');
+} else {
+  localStorage.removeItem('hasAWTSubscription');
+  localStorage.removeItem('hasPOSAddOnForAWT');
+}
+
+window.hasPurchasedAWT = hasPurchasedAWT;   // other scripts read this
+
+let exerciseExpansionState = JSON.parse(localStorage.getItem("exerciseExpansionState") || "{}");
+let currentWeekIndex = parseInt(localStorage.getItem("currentWeekIndex") || "0", 10);
+let currentDayIndex = parseInt(localStorage.getItem("currentDayIndex") || "0", 10);
+
+// Initialize twelveWeekProgram early so week/day rendering can run immediately
+let twelveWeekProgram = JSON.parse(localStorage.getItem("twelveWeekProgram") || "[]");
+
+/***************************************
+ * COLLAPSIBLE STATES SETUP
+ ***************************************/
+// Load from localStorage once, so it persists across day/week changes
+let collapsibleStates = JSON.parse(localStorage.getItem("collapsibleStates") || "{}");
+// Default all sections to "expanded" (true) initially, if undefined
+if (typeof collapsibleStates.warmUp === "undefined") collapsibleStates.warmUp = true;
+if (typeof collapsibleStates.mainWork === "undefined") collapsibleStates.mainWork = true;
+if (typeof collapsibleStates.coolDown === "undefined") collapsibleStates.coolDown = true;
+
+/** Save the collapsible state to localStorage whenever it changes. */
+function saveCollapsibleStates() {
+  localStorage.setItem("collapsibleStates", JSON.stringify(collapsibleStates));
+}
+
+let lastFinishButtonType = null;
+let performancePopupTimeout = null;
+let performancePopupSchedule = null;
+
 /* ───── loader utilities (shared) ───── */
 
 (function forceProTracker() {
@@ -460,7 +516,6 @@ function extractWorkoutData(currentWeekIndex, currentDayIndex) {
   };
 }
 
-let saveProgressDebounce;
 function queueProgressSave() {
   clearTimeout(saveProgressDebounce);
   saveProgressDebounce = setTimeout(() => {
@@ -475,34 +530,6 @@ function queueProgressSave() {
 // if (localStorage.getItem("hasPOSAddOnForAWT") !== "true") {
 //   localStorage.setItem("hasPOSAddOnForAWT", "true");
 // }
-
-let purchasedWeeks = 0;                 // will be fetched
-const planName = localStorage.getItem('planName') || '';
-
-// helpers
-const isProSub = planName === 'Pro Tracker';
-const isTwelve = planName === '12-Week Program';
-const isFourWeek = planName === '4-Week Program';
-const isOneWeek = planName === '1-Week Program';
-
-/* 1)  Initialise the AWT flag from the plan name alone
-      (will be confirmed again after we hit the API)          */
-let hasPurchasedAWT = isProSub || isTwelve;
-
-/*  ⬇ Sync legacy localStorage keys so the rest of the site
-      can stay untouched                                       */
-if (isProSub) {
-  localStorage.setItem('hasAWTSubscription', 'true');
-  localStorage.removeItem('hasPOSAddOnForAWT');
-} else if (isTwelve) {
-  localStorage.setItem('hasPOSAddOnForAWT', 'true');
-  localStorage.removeItem('hasAWTSubscription');
-} else {
-  localStorage.removeItem('hasAWTSubscription');
-  localStorage.removeItem('hasPOSAddOnForAWT');
-}
-
-window.hasPurchasedAWT = hasPurchasedAWT;   // other scripts read this
 
 function getPurchasedWeeks() {
   if (typeof purchasedWeeks === 'number') return purchasedWeeks;
@@ -620,20 +647,14 @@ window.addEventListener('DOMContentLoaded', fetchPurchasedWeeks);
   }
 })();
 
-let exerciseExpansionState = JSON.parse(localStorage.getItem("exerciseExpansionState") || "{}");
-let currentWeekIndex = parseInt(localStorage.getItem("currentWeekIndex") || "0", 10);
-let lastFinishButtonType = null;
-let performancePopupTimeout = null;
-let performancePopupSchedule = null;
-
 function kgToLbs(kg) { return kg * 2.2046226218; }
 function lbsToKg(lbs) { return lbs / 2.2046226218; }
 
 // 2) Which unit we’re in
-const getPreferredWeightUnit = () => {
+function getPreferredWeightUnit() {
   const raw = (localStorage.getItem('weightUnit') || 'kg').trim().toLowerCase();
   return (raw === 'lb' || raw === 'lbs') ? 'lbs' : 'kg';
-};
+}
 
 // 3) Parse user input → always return kg
 function normaliseUserWeightInput(raw) {
@@ -1796,7 +1817,7 @@ function maybeShowCoreRandomUpsell() {
 const canUseAdaptiveWeights = () => hasPurchasedAWT === true;
 
 // Example: "twelveWeekProgram" data structure as an array of weeks
-let twelveWeekProgram = JSON.parse(localStorage.getItem("twelveWeekProgram") || "[]");
+twelveWeekProgram = JSON.parse(localStorage.getItem("twelveWeekProgram") || "[]");
 if (Array.isArray(twelveWeekProgram)) {
   twelveWeekProgram.forEach(week => {
     week.days.forEach(day => {
@@ -2576,27 +2597,14 @@ function getRandomOffTrackMessage() {
 }
 
 /***************************************
- * COLLAPSIBLE STATES SETUP
- ***************************************/
-// Load from localStorage once, so it persists across day/week changes
-let collapsibleStates = JSON.parse(localStorage.getItem("collapsibleStates") || "{}");
-// Default all sections to "expanded" (true) initially, if undefined
-if (typeof collapsibleStates.warmUp === "undefined") collapsibleStates.warmUp = true;
-if (typeof collapsibleStates.mainWork === "undefined") collapsibleStates.mainWork = true;
-if (typeof collapsibleStates.coolDown === "undefined") collapsibleStates.coolDown = true;
-
-/** Save the collapsible state to localStorage whenever it changes. */
-function saveCollapsibleStates() {
-  localStorage.setItem("collapsibleStates", JSON.stringify(collapsibleStates));
-}
-
-/***************************************
  * 7) WEEK SELECTION
  ***************************************/
-const weekSelectorEl = document.getElementById("weekSelector");
 const totalWeeksToShow = twelveWeekProgram.length;
 
 function renderWeekSelector() {
+  const weekSelectorEl = document.getElementById("weekSelector");
+  if (!weekSelectorEl) return;
+
   weekSelectorEl.innerHTML = "";
   const weekWrapper = document.querySelector(".week-selector-wrapper");
 
@@ -2641,6 +2649,9 @@ function renderWeekSelector() {
 }
 
 function updateWeekBoxes() {
+  const weekSelectorEl = document.getElementById("weekSelector");
+  if (!weekSelectorEl) return;
+
   const boxes = weekSelectorEl.querySelectorAll(".week-box");
   boxes.forEach((box, index) => {
     box.classList.remove("active");
@@ -2653,10 +2664,11 @@ function updateWeekBoxes() {
 /***************************************
  * 8) DAY SELECTION
  ***************************************/
-const daySelectorEl = document.getElementById("daySelector");
-let currentDayIndex = parseInt(localStorage.getItem("currentDayIndex") || "0", 10);
 
 function renderDaySelector() {
+  const daySelectorEl = document.getElementById("daySelector");
+  if (!daySelectorEl) return;
+
   daySelectorEl.innerHTML = "";
   const currentWeekData = twelveWeekProgram[currentWeekIndex];
   if (!currentWeekData) return;
@@ -2708,6 +2720,9 @@ function renderDaySelector() {
 }
 
 function updateDayBoxes() {
+  const daySelectorEl = document.getElementById("daySelector");
+  if (!daySelectorEl) return;
+
   const boxes = daySelectorEl.querySelectorAll(".day-box");
   boxes.forEach((box, index) => {
     box.classList.remove("active");
@@ -2723,7 +2738,9 @@ renderDaySelector();
 /***************************************
  * 9) WORKOUT DISPLAY (Exercises, Sets)
  ***************************************/
-const workoutDisplayEl = document.getElementById("workoutDisplay");
+function getWorkoutDisplayEl() {
+  return document.getElementById("workoutDisplay");
+}
 
 /***************************************
  * RENDERING THE WORKOUT & EXERCISES
@@ -2731,7 +2748,8 @@ const workoutDisplayEl = document.getElementById("workoutDisplay");
 
 function renderWorkoutDisplay() {
   // 1) Clear & fetch day data as usual
-  const workoutDisplayEl = document.getElementById("workoutDisplay");
+  const workoutDisplayEl = getWorkoutDisplayEl();
+  if (!workoutDisplayEl) return;
   workoutDisplayEl.innerHTML = "";
   const currentWeekData = twelveWeekProgram[currentWeekIndex];
   if (!currentWeekData) return;
@@ -2987,6 +3005,8 @@ function renderCollapsibleSection(sectionTitle, exercisesArray, sectionKey) {
 
   sectionContainer.appendChild(header);
   sectionContainer.appendChild(content);
+  const workoutDisplayEl = getWorkoutDisplayEl();
+  if (!workoutDisplayEl) return;
   workoutDisplayEl.appendChild(sectionContainer);
 }
 
@@ -3929,6 +3949,9 @@ function uncheckAllSetsForExercise(detailsSection) {
 }
 
 function checkAllExercises() {
+  const workoutDisplayEl = getWorkoutDisplayEl();
+  if (!workoutDisplayEl) return;
+
   const exerciseCheckboxes = workoutDisplayEl.querySelectorAll(".exercise-checkbox");
   exerciseCheckboxes.forEach(cb => {
     const key = cb.getAttribute("data-checkbox-key");
@@ -3984,6 +4007,9 @@ function checkAllSetsForExercise(detailsSection) {
 }
 
 function uncheckAllExercises() {
+  const workoutDisplayEl = getWorkoutDisplayEl();
+  if (!workoutDisplayEl) return;
+
   const exerciseCheckboxes = workoutDisplayEl.querySelectorAll(".exercise-checkbox");
   exerciseCheckboxes.forEach(cb => {
     const key = cb.getAttribute("data-checkbox-key");
