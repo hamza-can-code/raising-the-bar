@@ -1,7 +1,34 @@
+const CLARITY_PROJECT_ID = 'rmf0p7sik4';
+let clarityLoaded = false;
+
+function loadClarity() {
+    if (clarityLoaded) return;
+    clarityLoaded = true;
+
+    window.clarity = window.clarity || function () {
+        (window.clarity.q = window.clarity.q || []).push(arguments);
+    };
+
+    const script = document.createElement('script');
+    script.src = `https://www.clarity.ms/tag/${CLARITY_PROJECT_ID}`;
+    script.async = true;
+    document.head.appendChild(script);
+}
+
+function getConsent() {
+    return document.cookie.match(/(^|;)\s*userConsent=([^;]+)/)?.[2];
+}
+
+function setConsent(value) {
+    const maxAge = 60 * 60 * 24 * 180; // 180 days
+    document.cookie = `userConsent=${value}; max-age=${maxAge}; path=/`;
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // Smooth scroll for any "Book a demo call" / call-form links
     const callLinks = document.querySelectorAll('a[href="#call-form"]');
     const callSection = document.getElementById('call-form');
+    const siteHeader = document.querySelector('.site-header');
 
     if (callSection && callLinks.length) {
         callLinks.forEach(function (link) {
@@ -13,6 +40,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             });
         });
+    }
+
+    if (siteHeader && callSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    siteHeader.classList.add('is-hidden');
+                } else {
+                    siteHeader.classList.remove('is-hidden');
+                }
+            });
+        }, {
+            threshold: 0.35
+        });
+
+        observer.observe(callSection);
     }
 
     // Form -> Formspree -> show Calendly scheduler
@@ -119,6 +162,42 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptButton = document.getElementById('accept-all');
+    const denyButton = document.getElementById('deny-all');
+
+    if (cookieBanner && acceptButton && denyButton) {
+        const consent = getConsent();
+
+        const hideBanner = () => {
+            cookieBanner.classList.remove('is-visible');
+            setTimeout(() => {
+                cookieBanner.hidden = true;
+            }, 350);
+        };
+
+        if (consent === 'allow') {
+            loadClarity();
+            cookieBanner.hidden = true;
+        } else if (consent === 'deny') {
+            cookieBanner.hidden = true;
+        } else {
+            cookieBanner.hidden = false;
+            requestAnimationFrame(() => cookieBanner.classList.add('is-visible'));
+        }
+
+        acceptButton.addEventListener('click', () => {
+            setConsent('allow');
+            loadClarity();
+            hideBanner();
+        });
+
+        denyButton.addEventListener('click', () => {
+            setConsent('deny');
+            hideBanner();
+        });
+    }
 });
 
 // Hide the "Loading calendar..." text once Calendly sends any event
