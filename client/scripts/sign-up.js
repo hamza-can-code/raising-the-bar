@@ -75,7 +75,10 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("signupTimestamp", Date.now());
 
       // Step 5: Redirect to dashboard
-      window.location.href = "offer.html";
+      const nextPage = window.location.pathname.includes('sign-up-decoded')
+        ? 'offer-decoded.html'
+        : 'offer.html';
+      window.location.href = nextPage;
 
     } catch (err) {
       // console.error(err);

@@ -322,10 +322,9 @@ function addTrackerBadge() {
   const isPro = isProUser();
 
   if (isPro) {
-    badge.className = "pt-extra-container tracker-badge";
+    badge.className = "";
     badge.innerHTML = `
-      <span class="pt-extra">
-        <span class="crown-emoji">👑</span> Pro<br>Tracker
+      <span>
       </span>`;
   } else {
     badge.className = "ct-extra-container tracker-badge";
@@ -701,8 +700,7 @@ function applyCoreDashboardChanges() {
     const badge = document.createElement("div");
     badge.className = "pt-extra-container";  // your existing badge styling
     badge.innerHTML = `
-      <span class="crown-emoji">👑</span>
-      <span class="pt-extra">Pro Tracker Only</span>
+      <span></span>
     `;
     // Optional spacing
     badge.style.margin = "4px 0 0 0";

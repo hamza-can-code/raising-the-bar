@@ -5,17 +5,18 @@ body {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #f9f7f2;
+    background: linear-gradient(135deg, var(--brand-navy), var(--brand-navy-dark));
     /* overflow-x: hidden; */
     /* 4) Prevent horizontal scroll: */
 }
 
 body {
-    background-color: #f9f7f2;
+    background: linear-gradient(135deg, var(--brand-navy), var(--brand-navy-dark));
     min-height: 100vh;
     font-family: 'Roboto', sans-serif;
     /* Body: Roboto Regular */
     font-weight: 400;
+    color: var(--brand-ivory);
 }
 
 h1,
@@ -119,9 +120,14 @@ img {
 }
 
 :root {
-    --filled: #0077bff;
-    /* 2) user‑specified blue     */
-    --unfilled: #c7dcff;
+    --brand-navy: #1e497c;
+    --brand-navy-dark: #163a63;
+    --brand-navy-mid: #2a5a93;
+    --brand-ivory: #f2e9ea;
+    --brand-ivory-soft: #e5dadd;
+    --filled: #f2e9ea;
+    /* 2) brand fill */
+    --unfilled: rgba(242, 233, 234, 0.35);
     /*    faded version           */
 }
 
@@ -5271,4 +5277,90 @@ body.modal-open .floating-cta {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+/* ================= Brand Color Refresh ================= */
+body.offer-page {
+    background: radial-gradient(circle at 15% 20%, rgba(42, 90, 147, 0.25), transparent 35%),
+        linear-gradient(135deg, var(--brand-navy), var(--brand-navy-dark));
+    color: var(--brand-ivory);
+}
+
+body.offer-page a {
+    color: var(--brand-ivory);
+}
+
+body.offer-page .loader-overlay {
+    background: rgba(22, 58, 99, 0.92);
+}
+
+body.offer-page .offer-container,
+body.offer-page .personalized-box,
+body.offer-page .whats-included-container,
+body.offer-page .wi2-card,
+body.offer-page .plan-summary,
+body.offer-page .summary-card,
+body.offer-page .timer-box,
+body.offer-page .bonus-card,
+body.offer-page .guarantee-box,
+body.offer-page .faq-container,
+body.offer-page .result-card,
+body.offer-page .price-card,
+body.offer-page .plan-card,
+body.offer-page .comparison-table,
+body.offer-page .btp-wrapper {
+    background: rgba(42, 90, 147, 0.78);
+    color: var(--brand-ivory);
+    border-color: rgba(242, 233, 234, 0.35);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+}
+
+body.offer-page h1,
+body.offer-page h2,
+body.offer-page h3,
+body.offer-page h4,
+body.offer-page h5,
+body.offer-page h6,
+body.offer-page p,
+body.offer-page li,
+body.offer-page label,
+body.offer-page .timer-text,
+body.offer-page .offer-heading,
+body.offer-page .results-heading,
+body.offer-page .wi2-heading,
+body.offer-page .summary-heading,
+body.offer-page .plan-heading,
+body.offer-page .discount-label {
+    color: var(--brand-ivory);
+}
+
+body.offer-page button,
+body.offer-page .finish-btn,
+body.offer-page .claim-program-btn,
+body.offer-page .comparison-btn,
+body.offer-page .start-btn,
+body.offer-page .cta-btn {
+    background: var(--brand-ivory);
+    color: var(--brand-navy);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
+}
+
+body.offer-page button:hover,
+body.offer-page .finish-btn:hover,
+body.offer-page .claim-program-btn:hover,
+body.offer-page .comparison-btn:hover,
+body.offer-page .start-btn:hover,
+body.offer-page .cta-btn:hover {
+    background: #e6dce0;
+}
+
+body.offer-page input,
+body.offer-page select,
+body.offer-page textarea {
+    background: var(--brand-ivory);
+    color: var(--brand-navy);
+    border: 1px solid var(--brand-ivory-soft);
+    border-radius: 10px;
 }

@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-  <link rel="preload" as="image" href="../assets/decoded-gains-logo.png" fetchpriority="high">
+  <link rel="preload" as="image" href="../assets/rtb-logo-white-224.webp" fetchpriority="high">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
   <title>Let’s Build Your Plan</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
     rel="stylesheet">
-  <link href="../styles/forms-decoded.css" rel="stylesheet">
+  <link href="../styles/forms.css" rel="stylesheet">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ"></script>
   <script>
@@ -82,9 +82,12 @@ src="https://www.facebook.com/tr?id=2589073464764526&ev=PageView&noscript=1"
         <a href="../pages/home.html" class="logo">
           <picture>
             <!-- WebP first -->
-            <source type="image/png" srcset="/assets/decoded-gains-logo.png">
+            <source type="image/webp" srcset="/assets/rtb-logo-white-224.webp">
 
-            <img id="logo" src="/assets/decoded-gains-logo.png" alt="GAINS+ Logo" width="224" height="100"
+            <!-- JPEG fallback -->
+            <source type="image/jpeg" srcset="/assets/rtb-logo-white-224.jpg">
+
+            <img id="logo" src="/assets/rtb-logo-white-224.webp" alt="Raising The Bar Logo" width="224" height="100"
               loading="eager" fetchpriority="high" decoding="async">
           </picture>
         </a>

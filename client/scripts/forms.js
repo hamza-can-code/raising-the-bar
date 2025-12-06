@@ -1014,7 +1014,7 @@ function handleOptionClick(selectedOption, type) {
       // calculateGoalCalories();
       // calculateBaseProjections();
     }
-     else if (questionKey === "BodyType") {
+    else if (questionKey === "BodyType") {
       const val = clickedText.toLowerCase();
       formData.BodyType = val;
       localStorage.setItem("BodyType", val);
@@ -1113,7 +1113,7 @@ function handleOptionClick(selectedOption, type) {
     if (questionKey === "equipment") {
       localStorage.setItem("equipment", JSON.stringify(formData.equipment));
     }
-        if (questionKey === "injuries") {
+    if (questionKey === "injuries") {
       localStorage.setItem("injuries", JSON.stringify(formData.injuries));
     }
     // console.log("Current selected checkboxes =>", formData[questionKey]);
@@ -5886,9 +5886,9 @@ function replaceWithFinalPage() {
   formContainer.innerHTML = "";
 
   // Final message
-const finalMsg = document.createElement("div");
-finalMsg.classList.add("final-message");
-finalMsg.innerHTML = `
+  const finalMsg = document.createElement("div");
+  finalMsg.classList.add("final-message");
+  finalMsg.innerHTML = `
   <h2 class="final-headline">
     <span class="final-num">10&nbsp;Million+</span><br>
     <span class="final-sub"><strong>kick-started their journey with us</strong></span>
@@ -5904,7 +5904,7 @@ finalMsg.innerHTML = `
 
   <p class="final-reviews">250,000+ five-star reviews from happy users</p>
 `;
-formContainer.appendChild(finalMsg);
+  formContainer.appendChild(finalMsg);
 
 
   // Loading container

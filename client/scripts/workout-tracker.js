@@ -676,12 +676,9 @@ function addTrackerBadge() {
   const badge = document.getElementById("trackerBadge");
   // use your actual AWT flag:
   if (hasPurchasedAWT) {
-    badge.className = "pt-extra-container tracker-badge";
+    badge.className = "";
     badge.innerHTML = `
-      <span class="pt-extra-badge">
-        <span class="crown-emoji-badge">👑</span>
-        Pro<br>Tracker
-      </span>`;
+      <span></span>`;
   } else {
     badge.className = "ct-extra-container tracker-badge";
     badge.innerHTML = `
