@@ -72,6 +72,7 @@ const connectDB = require('./db');
 
 const webhookRouter    = require('./routes/webhook');         // Stripe webhook (raw body)
 const stripeRoutes     = require('./routes/stripeRoutes');
+const connectRoutes    = require('./routes/connectRoutes');
 const apiRoutes        = require('./routes/api');
 const workoutRoutes    = require('./routes/workoutRoutes');
 const nutritionRoutes  = require('./routes/nutritionRoutes');
@@ -117,6 +118,7 @@ app.use('/api', bodyWeightRoutes);
 
 /* 7) Payments */
 app.use('/api', stripeRoutes);
+app.use('/api/connect', connectRoutes);
 
 // PayPal: mount the full router under /api/paypal
 app.use('/api/paypal', paypalRoutesFull);

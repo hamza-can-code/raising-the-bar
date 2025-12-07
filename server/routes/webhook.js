@@ -11,6 +11,44 @@ const sendOrderConfirmationEmail = require('../utils/sendOrderConfirmationEmail'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
+async function promoteSubscriptionFeeToOngoing(subscriptionId, invoiceId) {
+  if (!subscriptionId) return;
+
+  try {
+    const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+    const metadata = subscription.metadata || {};
+    const introApplied = metadata.connect_intro_applied === 'true';
+    const introFeePercent = Number(metadata.platform_intro_fee_percent);
+    const ongoingFeePercent = Number(
+      metadata.platform_ongoing_fee_percent ?? metadata.platform_intro_fee_percent,
+    );
+    const destination = subscription.transfer_data?.destination;
+
+    if (!destination || !Number.isFinite(introFeePercent)) return;
+    if (introApplied) return;
+
+    const updatePayload = {
+      metadata: {
+        ...metadata,
+        connect_intro_applied: 'true',
+        connect_intro_invoice_id: invoiceId || '',
+      },
+    };
+
+    if (Number.isFinite(ongoingFeePercent)) {
+      updatePayload.application_fee_percent = ongoingFeePercent;
+    }
+
+    await stripe.subscriptions.update(subscriptionId, updatePayload);
+  } catch (err) {
+    console.error('⚠️  Failed to promote Connect fee schedule', {
+      subscriptionId,
+      invoiceId,
+      message: err.message,
+    });
+  }
+}
+
 /* Stripe requires the raw body exactly as it arrives */
 router.post(
   '/webhook',
@@ -124,6 +162,8 @@ router.post(
       const subscriptionId = invoice.subscription;
 
       if (!subscriptionId) return res.sendStatus(200);
+
+      await promoteSubscriptionFeeToOngoing(subscriptionId, invoice.id);
 
       console.log('🔄  invoice.payment_succeeded →', subscriptionId);
 

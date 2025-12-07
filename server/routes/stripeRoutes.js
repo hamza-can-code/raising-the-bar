@@ -5,6 +5,7 @@ const util = require('util');
 
 const { protect } = require('../middleware/auth');
 const UserAccess = require('../models/UserAccess');
+const CreatorPartner = require('../models/CreatorPartner');
 
 const router = express.Router();
 
@@ -28,6 +29,35 @@ const BONUS_PRICE_MINOR = {
 
 const BONUS_PRODUCT_DESCRIPTION =
   process.env.BONUS_PRODUCT_DESCRIPTION || 'Raising The Bar bonus upgrade';
+
+async function resolveCreator(creatorSlug) {
+  if (!creatorSlug) return null;
+
+  const slug = creatorSlug.trim().toLowerCase();
+  const creator = await CreatorPartner.findOne({ slug, active: true }).lean();
+  if (!creator) {
+    throw new Error(`Creator ${slug} is not registered or inactive`);
+  }
+
+  if (!creator.stripeAccountId) {
+    throw new Error(`Creator ${slug} is missing a Stripe account`);
+  }
+
+  const introFeePercent = Number.isFinite(creator.platformIntroFeePercent)
+    ? creator.platformIntroFeePercent
+    : 50;
+
+  const ongoingFeePercent = Number.isFinite(creator.platformOngoingFeePercent)
+    ? creator.platformOngoingFeePercent
+    : introFeePercent;
+
+  return {
+    creator,
+    destination: creator.stripeAccountId,
+    introFeePercent,
+    ongoingFeePercent,
+  };
+}
 
 /* ──────────────────────────────────────────────────────────
    Currency-aware Price & Coupon selection
@@ -115,6 +145,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       email,
       currency,          // e.g. "USD" sent by client
       client_reference_id,
+      creatorSlug,
     } = req.body;
 
     if (!email) return res.status(400).json({ error: 'Email is required' });
@@ -132,6 +163,11 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
     const { currency: ccy, priceId, plan: normalizedPlan } = planInfo;
     const couponId = discounted ? getCouponIdForPlan(normalizedPlan, ccy) : null;
 
+    let creatorConfig = null;
+    if (creatorSlug) {
+      creatorConfig = await resolveCreator(creatorSlug);
+    }
+
     const sessionCfg = {
       mode: 'subscription',
       line_items: [{ price: priceId, quantity: 1 }],
@@ -142,10 +178,9 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
 
       // ✅ Always force card entry, even if trial
       payment_method_collection: 'always',
-      customer_creation: 'always',
+      // customer_creation: 'always',
 
       subscription_data: {
-        payment_settings: { save_default_payment_method: 'on_subscription' },
         trial_settings: { end_behavior: { missing_payment_method: 'cancel' } },
       },
 
@@ -158,6 +193,29 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
 
     if (couponId) {
       sessionCfg.discounts = [{ coupon: couponId }];
+    }
+
+    if (creatorConfig) {
+      sessionCfg.subscription_data = {
+        ...(sessionCfg.subscription_data || {}),
+        transfer_data: { destination: creatorConfig.destination },
+        application_fee_percent: creatorConfig.introFeePercent,
+        metadata: {
+          ...(sessionCfg.subscription_data?.metadata || {}),
+          creator_slug: creatorConfig.creator.slug,
+          creator_name: creatorConfig.creator.name,
+          platform_intro_fee_percent: String(creatorConfig.introFeePercent),
+          platform_ongoing_fee_percent: String(creatorConfig.ongoingFeePercent),
+        },
+      };
+
+      sessionCfg.metadata = {
+        ...(sessionCfg.metadata || {}),
+        creator_slug: creatorConfig.creator.slug,
+        creator_name: creatorConfig.creator.name,
+        platform_intro_fee_percent: String(creatorConfig.introFeePercent),
+        platform_ongoing_fee_percent: String(creatorConfig.ongoingFeePercent),
+      };
     }
 
     log('Checkout session config', sessionCfg);
@@ -177,7 +235,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
 router.post('/create-subscription-intent', express.json(), async (req, res) => {
   console.log('\n───────── /create-subscription-intent ─────────');
   try {
-    const { email, discounted = false, currency, plan = 'trial' } = req.body;
+    const { email, discounted = false, currency, plan = 'trial', creatorSlug } = req.body;
     log('Incoming payload', req.body);
     if (!email) return res.status(400).json({ error: 'Email required' });
 
@@ -216,6 +274,11 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
       }]
       : [{ price: priceId }];
 
+    let creatorConfig = null;
+    if (creatorSlug) {
+      creatorConfig = await resolveCreator(creatorSlug);
+    }
+
     // 3) create subscription in incomplete state (for Elements confirmation)
     const subCfg = {
       customer: customer.id,
@@ -233,6 +296,19 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
       },
       coupon: couponId || undefined,
     };
+
+    if (creatorConfig) {
+      subCfg.transfer_data = { destination: creatorConfig.destination };
+      subCfg.application_fee_percent = creatorConfig.introFeePercent;
+      subCfg.metadata = {
+        ...(subCfg.metadata || {}),
+        creator_slug: creatorConfig.creator.slug,
+        creator_name: creatorConfig.creator.name,
+        platform_intro_fee_percent: String(creatorConfig.introFeePercent),
+        platform_ongoing_fee_percent: String(creatorConfig.ongoingFeePercent),
+        connect_intro_applied: 'false',
+      };
+    }
     log('Subscription create config', subCfg);
     const sub = await stripe.subscriptions.create(subCfg);
     log('Subscription', { id: sub.id, status: sub.status });
