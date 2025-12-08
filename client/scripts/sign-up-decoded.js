@@ -1,7 +1,7 @@
 // client/scripts/sign-up.js
 
-import { savePreferencesAfterLogin } from "../scripts/savePreferencesAfterLogin.js";
-import { showGlobalLoader, hideGlobalLoader } from "../scripts/loadingOverlay.js";
+import { savePreferencesAfterLogin } from "./savePreferencesAfterLogin.js";
+import { showGlobalLoader, hideGlobalLoader } from "./loadingOverlay.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("signup-form");
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("signupTimestamp", Date.now());
 
       // Step 5: Redirect to dashboard
-      window.location.href = 'offer.html';
+      window.location.href = 'offer-decoded.html';
 
     } catch (err) {
       // console.error(err);

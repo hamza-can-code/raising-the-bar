@@ -78,7 +78,8 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #F9F4EB;
+    background: radial-gradient(circle at 20% 20%, rgba(242, 233, 234, 0.14), rgba(30, 73, 124, 0)),
+        linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-dark) 100%);
     /* brand cream */
     z-index: 25000;
     transition: opacity .5s ease, transform .5s ease;

@@ -4,7 +4,7 @@
   (async function () {
     const token = localStorage.getItem('token');
     if (!token) {
-      location.href = 'log-in-offer.html';
+      location.href = 'log-in-offer-decoded.html';
       return;
     }
     try {
@@ -17,7 +17,7 @@
       localStorage.setItem('userId', me._id); // <-- save userId for later
     } catch (err) {
       localStorage.removeItem('token');
-      location.href = 'log-in-offer.html';
+      location.href = 'log-in-offer-decoded.html';
       return;
     }
   })();
