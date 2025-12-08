@@ -2,7 +2,8 @@
  * Base Page & Shared Styles 
  ***********************************************/
 :root {
-  --brand-blue: #1e497c;
+  --brand-navy: #1e497c;
+  --brand-blue: var(--brand-navy);
   --brand-cream: #f2e9ea;
   --brand-navy-dark: #163a63;
   --brand-card: rgba(29, 73, 124, 0.85);
@@ -176,7 +177,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.6);
   display: none;
   align-items: center;
   justify-content: center;
@@ -190,7 +191,7 @@ body {
 .faq-list summary {
   cursor: pointer;
   font-weight: 600;
-  color: #333;
+  color: #e4ffff;
   font-size: 1.1rem;
 }
 
@@ -207,7 +208,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.6);
   display: none;
   align-items: center;
   justify-content: center;
@@ -260,7 +261,7 @@ body {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.3);
 }
 
 .faq-modal-content button[type="submit"]:hover {
@@ -304,7 +305,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.6);
   z-index: 2000;
   /* no centering—panel itself will define its layout */
 }
@@ -375,12 +376,12 @@ body {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #333;
+  color: #e4ffff;
   z-index: 2100;
 }
 
 .main-nav.open .nav-close {
-  color: #333;
+  color: #e4ffff;
 }
 
 .main-nav.open::before {
@@ -390,7 +391,7 @@ body {
   left: 0;
   width: 100%;
   height: 1px;
-  /* background: #e5e5e5; */
+  /* background: #325b89; */
 }
 
 .faq-answer {
@@ -402,8 +403,8 @@ body {
 
 .footer {
   margin-top: auto;
-  background: var(--brand-navy-dark);
-  color: var(--brand-cream);
+  background-color: #333;
+  color: white;
   padding: 20px;
   text-align: center;
 }
@@ -502,16 +503,23 @@ body {
 .exercise-row,
 .exercise-details,
 .set-container,
-.week-box,
-.timer-container,
+/* .week-box, */
+/* .timer-container, */
 .progress-card,
 .streak-card,
 #progressStats,
 #progressGraph {
   background: var(--brand-card);
   color: var(--brand-cream);
-  border: 1px solid var(--brand-soft);
-  box-shadow: var(--brand-glow);
+}
+
+/* Ensure graph text contrasts cleanly against the navy cards */
+#progressGraph,
+#progressStats,
+.goal-progress-widget,
+.goal-progress-heading,
+.bodyweight-chart-container {
+  color: #d6e0f0;
 }
 
 .week-box.active {
@@ -519,13 +527,9 @@ body {
   border-right: 2px solid var(--brand-accent);
 }
 
-.tab,
-.tab.active,
-#prevWorkoutBtn,
-#nextWorkoutBtn,
 .exercise-btn,
-.log-weight-button,
-.timer-container button,
+/* .log-weight-button, */
+/* .timer-container button, */
 .cta,
 .tracker-badge,
 .pt-extra-container,
@@ -533,11 +537,25 @@ body {
   background: linear-gradient(135deg, var(--brand-accent), #2f7cc6) !important;
   color: var(--brand-cream) !important;
   border: none;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.3);
+}
+
+#prevWorkoutBtn,
+#nextWorkoutBtn {
+  background: #2b5f93 !important;
+  color: #d6e0f0 !important;
+  border: 1px solid rgba(214, 224, 240, 0.28);
+  box-shadow: none;
+}
+
+#prevWorkoutBtn:hover,
+#nextWorkoutBtn:hover {
+  background: #336aa5 !important;
+  border-color: rgba(214, 224, 240, 0.45);
 }
 
 .tab:not(.active) {
-  background: rgba(242, 233, 234, 0.08);
+  /* background: rgba(242, 233, 234, 0.08); */
   color: var(--brand-cream);
 }
 
@@ -546,8 +564,7 @@ select,
 textarea,
 .exercise-info input,
 .weight-input,
-.sets-reps input,
-.timer-input {
+.sets-reps input{
   background: rgba(242, 233, 234, 0.08);
   color: var(--brand-cream);
   border: 1px solid rgba(242, 233, 234, 0.18);
@@ -558,7 +575,7 @@ label,
 .exercise-label,
 .day-title,
 .week-title,
-.timer-label,
+/* .timer-label, */
 .tab-section h2 {
   color: var(--brand-cream);
 }
@@ -586,25 +603,25 @@ label,
 
 .pt-extra-container,
 .tracker-badge.pt-extra-container {
-  background: #9333EA !important;
+  background: #84ff84 !important;
 }
 
 .pt-extra-badge {
   font-style: italic;
-  color: #F8F4FF;
+  color: #1f4c6f;
   font-size: 0.9rem;
   margin-top: 5px;
 }
 
 .ct-extra-container,
 .tracker-badge.ct-extra-container {
-  background: #e0e0e0;
+  background: #37608e;
 }
 
 .ct-extra-badge {
   font-style: italic;
   font-size: 0.9rem;
-  color: #333 !important;
+  color: #e4ffff !important;
 }
 
 .crown-emoji-badge {
@@ -676,7 +693,7 @@ label,
   top: 50%;
   transform: translateY(-50%);
   font-size: 1rem;
-  color: #007bff;
+  color: #ffc56f;
   font-weight: bold;
   opacity: 0;
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -686,9 +703,9 @@ label,
   position: fixed;
   top: 0;
   width: 100%;
-  background: #F6EFE3;
+  background: #21518b;
   padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
   text-align: center;
   box-sizing: border-box;
   display: flex;
@@ -722,7 +739,7 @@ label,
 
 .xp-bar {
   position: relative;
-  background-color: #e0e0e0;
+  background-color: #37608e;
   width: 70%;
   height: 20px;
   border-radius: 10px;
@@ -730,7 +747,7 @@ label,
 }
 
 .xp-bar-fill {
-  background-color: #007bff;
+  background-color: #ffc56f;
   height: 100%;
   width: 0%;
   /* transition: width 0.5s ease;  */
@@ -744,7 +761,7 @@ label,
   top: 75%;
   transform: translateY(-50%);
   font-size: 1rem;
-  color: #007bff;
+  color: #ffc56f;
   font-weight: bold;
   opacity: 0;
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -758,7 +775,7 @@ label,
   top: 65%;
   transform: translateY(-50%);
   font-size: 1rem;
-  color: #007bff;
+  color: #ffc56f;
   font-weight: bold;
   opacity: 0;
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -766,7 +783,7 @@ label,
 
 body.xp-cap #xpBarFill,
 body.xp-cap #stickyXpBarFill {
-  background: #bdbdbd;
+  background: #5a83b1;
 }
 
 #xp-lock-icon {
@@ -796,7 +813,7 @@ body.xp-cap #stickyXpBarFill {
 
 /* makes the bar grey when XP is capped */
 .xp-bar-fill.capped {
-  background: #c9c9c9 !important;
+  background: #4e77a5 !important;
 }
 
 
@@ -806,7 +823,7 @@ body.xp-cap #stickyXpBarFill {
 .tab-container {
   display: flex;
   width: 100%;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid #4b74a2;
   margin-bottom: 20px;
 }
 
@@ -825,8 +842,8 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .tab.active {
-  /* background-color: #e0e0e0; */
-  border-bottom: 2px solid #007bff;
+  /* background-color: #37608e; */
+  border-bottom: 2px solid #ffc56f;
 }
 
 /* .tab:hover {
@@ -852,11 +869,11 @@ body.xp-cap #stickyXpBarFill {
 .week-selector-frame {
   position: relative;
   border-radius: 6px;
-  background-color: #f1ede5;
+  background-color: #265389;
   overflow: hidden;
   height: 60px;
   margin: 20px 0;
-  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0px 0px rgba(255, 255, 255, 0.1);
 }
 
 /***********************************************
@@ -897,16 +914,16 @@ body.xp-cap #stickyXpBarFill {
 .week-selector-wrapper::before {
   left: 10px;
   background: linear-gradient(to right,
-      rgba(249, 247, 242, 1) 0%,
-      rgba(249, 247, 242, 1) 45%,
-      rgba(249, 247, 242, 0) 100%);
+      rgba(30, 73, 124, 1) 0%,
+      rgba(30, 73, 124, 1) 45%,
+      rgba(30, 73, 124, 0) 100%);
 }
 
 .week-selector-wrapper::after {
   right: -17px;
   background: linear-gradient(to left,
-      #f9f7f2 0%,
-      rgba(249, 247, 242, 0) 100%);
+      #1e497c 0%,
+      rgba(30, 73, 124, 0) 100%);
 }
 
 .week-selector-wrapper.show-left-shadow::before {
@@ -939,7 +956,7 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .week-selector::-webkit-scrollbar-thumb {
-  background-color: #D6CFC7;
+  background-color: #4171a7;
   border-radius: 1px;
 }
 
@@ -971,12 +988,12 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .week-box:hover {
-  background-color: #ddd;
+  background-color: #3a6391;
 }
 
 .week-box.active {
-  border-left: 2px solid #007bff;
-  border-right: 2px solid #007bff;
+  border-left: 2px solid #ffc56f;
+  border-right: 2px solid #ffc56f;
 }
 
 /***********************************************
@@ -984,7 +1001,7 @@ body.xp-cap #stickyXpBarFill {
    ***********************************************/
 #workoutDisplay {
   margin-bottom: 20px;
-  /* border: 1px solid #ccc; */
+  /* border: 1px solid #4b74a2; */
   padding: 10px;
 }
 
@@ -1128,7 +1145,7 @@ body.xp-cap #stickyXpBarFill {
 
 /* Only actual sets get a blue border on the left */
 .bordered-row {
-  border-left: 1px solid #007bff;
+  border-left: 1px solid #ffc56f;
   /* Adjust thickness/color as needed */
 
   /* Shift everything 20px to the left (including the border) */
@@ -1160,12 +1177,12 @@ body.xp-cap #stickyXpBarFill {
   display: flex;
   align-items: center;
   gap: 8px;
-  background-color: #EFEDE8;
+  background-color: #285386;
   padding: 12px;
   cursor: pointer;
   font-weight: bold;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #3a6391;
+  border-bottom: 1px solid #3a6391;
   font-size: 18px;
 }
 
@@ -1183,7 +1200,7 @@ body.xp-cap #stickyXpBarFill {
 /* The collapsible content container */
 .collapsible-content {
   padding: 10px 15px;
-  /* background-color: #fafafa; */
+  /* background-color: #1d4674; */
 }
 
 /* Sets container */
@@ -1196,7 +1213,7 @@ body.xp-cap #stickyXpBarFill {
   row-gap: 8px;
   margin: 8px 0;
   padding: 8px 0;
-  border-top: 1px solid #EAEAEA;
+  border-top: 1px solid #2d5684;
 }
 
 @media (max-width: 375px) {
@@ -1228,7 +1245,7 @@ body.xp-cap #stickyXpBarFill {
 /* Ensure consistent width on the set-label cell */
 .set-label {
   font-size: 0.9rem;
-  color: #333;
+  color: #e4ffff;
   max-width: 40px;
   margin-left: 5px;
 }
@@ -1238,29 +1255,29 @@ body.xp-cap #stickyXpBarFill {
   width: 80px;
   margin-right: 5px;
   padding: 3px 5px;
-  background-color: #f2f0eb;
-  border: 1px solid #d0d0d0;
-  color: #333;
+  background-color: #255083;
+  border: 1px solid #47709e;
+  color: #e4ffff;
   border-radius: 4px;
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .input-field:focus {
-  background-color: #fff;
-  border-color: #007bff;
-  color: #000;
+  background-color: #18416f;
+  border-color: #ffc56f;
+  color: #18416f;
   outline: none;
 }
 
 .set-checkbox {
   margin: 0 !important;
   padding: 0 !important;
-  background-color: #f0f0f0;
+  background-color: #27507e;
 }
 
 .set-checkbox:checked {
-  background-color: #e0e0e0;
-  border-color: #e0e0e0;
+  background-color: #37608e;
+  border-color: #37608e;
 }
 
 /* Links for "Change Exercise" and "Watch Video" */
@@ -1273,13 +1290,13 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .exercise-btn {
-  background-color: #007bff;
-  color: #fff;
+  background-color: #ffc56f;
+  color: #18416f;
   border: none;
   border-radius: 5px;
   margin-right: 5px;
   padding: 3px 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
   cursor: pointer;
   transition: background-color 0.3s ease;
   width: 92px;
@@ -1287,11 +1304,11 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .exercise-btn:hover {
-  background-color: #0056b3;
+  background-color: #ffeabb;
 }
 
 .exercise-actions a {
-  color: #007bff;
+  color: #ffc56f;
   cursor: pointer;
   text-decoration: none;
   font-size: 0.9rem;
@@ -1307,11 +1324,11 @@ body.xp-cap #stickyXpBarFill {
 .day-selector-frame {
   position: relative;
   border-radius: 6px;
-  background-color: #f1ede5;
+  background-color: #265389;
   overflow: hidden;
   height: 60px;
   margin: 20px 0;
-  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0px 0px rgba(255, 255, 255, 0.1);
 }
 
 /***********************************************
@@ -1352,15 +1369,15 @@ body.xp-cap #stickyXpBarFill {
 .day-selector-wrapper::before {
   left: 20px;
   background: linear-gradient(to right,
-      #f9f7f2,
-      rgba(249, 247, 242, 0));
+      #1e497c,
+      rgba(30, 73, 124, 0));
 }
 
 .day-selector-wrapper::after {
   right: -17px;
   background: linear-gradient(to left,
-      #f9f7f2,
-      rgba(249, 247, 242, 0));
+      #1e497c,
+      rgba(30, 73, 124, 0));
 }
 
 .day-selector-wrapper.show-left-shadow::before {
@@ -1392,7 +1409,7 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .day-selector::-webkit-scrollbar-thumb {
-  background-color: #D6CFC7;
+  background-color: #4171a7;
   border-radius: 2px;
 }
 
@@ -1414,22 +1431,22 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .day-box.active {
-  border-left: 2px solid #007bff;
-  border-right: 2px solid #007bff;
+  border-left: 2px solid #ffc56f;
+  border-right: 2px solid #ffc56f;
 }
 
 .day-box.completed {
-  background-color: #28a745;
-  color: #fff;
+  background-color: #ef99ff;
+  color: #18416f;
 }
 
 .day-box.in-progress {
-  background-color: #ffcc00;
-  color: #000;
+  background-color: #1874ff;
+  color: #18416f;
 }
 
 .day-box:hover {
-  background-color: #ddd;
+  background-color: #3a6391;
 }
 
 /***********************************************
@@ -1444,23 +1461,23 @@ body.xp-cap #stickyXpBarFill {
 .navigation-buttons button {
   padding: 10px 20px;
   font-size: 1rem;
-  background-color: #007bff;
+  background-color: #ffc56f;
   border: none;
   border-radius: 8px;
-  color: #fff;
+  color: #18416f;
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 6px 8px rgba(255, 255, 255, 0.1);
 }
 
 .navigation-buttons button:hover {
-  background-color: #0056b3;
-  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffeabb;
+  box-shadow: 0px 6px 8px rgba(255, 255, 255, 0.1);
 }
 
 .navigation-buttons button:active {
-  background-color: #003f7f;
-  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+  background-color: #18416f;
+  box-shadow: 0px 3px 4px rgba(255, 255, 255, 0.1);
 }
 
 #prevWorkoutBtn {
@@ -1505,7 +1522,6 @@ body.xp-cap #stickyXpBarFill {
   pointer-events: auto;
 }
 
-/* Timer display (mm:ss) */
 #restTimer .timer-display {
   display: flex;
   align-items: center;
@@ -1701,7 +1717,7 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .fixed-header {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2) !important;
 }
 
 #restTimer .timer-controls,
@@ -1755,9 +1771,9 @@ body.xp-cap #stickyXpBarFill {
   bottom: 0;
   left: 0;
   width: 93%;
-  background: #F6EFE3;
+  background: #21518b;
   /* same as your XP header background */
-  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 -4px 8px rgba(255, 255, 255, 0.2) !important;
   transform: translateY(100%);
   /* start hidden, slide up when .visible */
   transition: transform 0.3s ease-out;
@@ -1783,9 +1799,9 @@ body.xp-cap #stickyXpBarFill {
   bottom: 0;
   left: 0;
   width: 93%;
-  background: #F6EFE3;
+  background: #21518b;
   /* same beige you already use   */
-  box-shadow: 0 -4px 8px rgba(0, 0, 0, .2);
+  box-shadow: 0 -4px 8px rgba(255, 255, 255, 0.2);
   transform: translateY(100%);
   /* start fully off‑screen       */
   transition: transform .3s ease-out;
@@ -1845,9 +1861,9 @@ body.xp-cap #stickyXpBarFill {
   font-size: 1.1rem;
   font-weight: 600;
   background-color: #6FCF97;
-  color: #000;
+  color: #18416f;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
 }
 
 .popup-btn-fine {
@@ -1858,9 +1874,9 @@ body.xp-cap #stickyXpBarFill {
   font-size: 1.1rem;
   font-weight: 600;
   background-color: #F4D06F;
-  color: #000;
+  color: #18416f;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
 }
 
 .popup-btn-hard {
@@ -1871,9 +1887,9 @@ body.xp-cap #stickyXpBarFill {
   font-size: 1.1rem;
   font-weight: 600;
   background-color: #FF6B6B;
-  color: #000;
+  color: #18416f;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
 }
 
 .popup-btn-easy:hover,
@@ -1889,7 +1905,7 @@ body.xp-cap #stickyXpBarFill {
   margin: 0 auto;
   padding: 0;
   height: 6px;
-  background: #ddd;
+  background: #3a6391;
   border-radius: 2px;
   overflow: hidden;
 }
@@ -1897,7 +1913,7 @@ body.xp-cap #stickyXpBarFill {
 .popup-progress-fill {
   height: 100%;
   width: 100%;
-  background: #007BFF;
+  background: #ffc56f;
   transform: translateX(0);
   transition: width 0.1s linear;
 }
@@ -1958,10 +1974,10 @@ body.xp-cap #stickyXpBarFill {
   cursor: pointer;
   position: relative;
 
-  /* The color can match your theme. Let's say #333 or #007bff, etc. */
-  color: #007bff;
+  /* The color can match your theme. Let's say #e4ffff or #ffc56f, etc. */
+  color: #ffc56f;
   /* 'i' text color */
-  border: 2px solid #007bff;
+  border: 2px solid #ffc56f;
   /* same color border */
   background: transparent;
   /* remove background */
@@ -1974,13 +1990,13 @@ body.xp-cap #stickyXpBarFill {
   /* just below the icon, with some gap */
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.85);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.85);
+  color: #18416f;
   padding: 8px 12px;
   border-radius: 4px;
   width: 90%;
   font-size: 1.1rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -1996,7 +2012,7 @@ body.xp-cap #stickyXpBarFill {
 .progress-score-value {
   font-size: 3.5rem;
   margin: 0;
-  color: #333;
+  color: #e4ffff;
   font-weight: 700;
 }
 
@@ -2049,8 +2065,8 @@ body.xp-cap #stickyXpBarFill {
   justify-content: center;
   border-radius: 8px;
   /* Our default background for weekly recap */
-  background-color: #D4F8E8;
-  /* box-shadow: 0 2px 5px rgba(0,0,0,0.15); */
+  background-color: #434886;
+  /* box-shadow: 0 2px 5px rgba(255, 255, 255, 0.15); */
   /* margin-right: 10px;  */
 }
 
@@ -2062,7 +2078,7 @@ body.xp-cap #stickyXpBarFill {
 
 /* For the 'Areas for Improvement' container, we can just override with a different background. */
 .recap-card.improvement-card {
-  background-color: #FFD9C0;
+  background-color: #1867ae;
 }
 
 /* Dot indicators container. */
@@ -2078,13 +2094,13 @@ body.xp-cap #stickyXpBarFill {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #bbb;
+  background-color: #5c85b3;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .recap-dot.active {
-  background-color: #333;
+  background-color: #e4ffff;
 }
 
 /* Minimal styling inside each card. For the "subheading" text */
@@ -2109,7 +2125,7 @@ body.xp-cap #stickyXpBarFill {
 
 /* For clickable "here" link in the Low Improvement Lift message */
 .recap-card .recap-link {
-  color: #007bff;
+  color: #ffc56f;
   text-decoration: underline;
   cursor: pointer;
 }
@@ -2135,7 +2151,7 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .emoji-bg {
-  background-color: #A7E5C3;
+  background-color: #705bab;
   padding: 6px 6px;
   border-radius: 6px;
   display: inline-block;
@@ -2143,7 +2159,7 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .emoji-bgii {
-  background-color: #FFC77B;
+  background-color: #1879f3;
   /* Light yellow or any color you want */
   padding: 6px 6px;
   border-radius: 6px;
@@ -2183,10 +2199,10 @@ body.xp-cap #stickyXpBarFill {
   width: 100%;
   max-width: 500px;
   margin: 0 auto 15px;
-  border: 1px solid #ccc;
-  background-color: #fefefe;
+  border: 1px solid #4b74a2;
+  background-color: #194270;
   border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
   position: relative;
   z-index: 10;
 }
@@ -2197,14 +2213,14 @@ body.xp-cap #stickyXpBarFill {
 
 .analysis-search-wrapper {
   padding: 8px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #4b74a2;
 }
 
 .analysis-search-input {
   width: 100%;
   padding: 8px 10px;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #4b74a2;
   border-radius: 4px;
   outline: none;
 }
@@ -2220,12 +2236,12 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .analysis-exercise-list::-webkit-scrollbar-thumb {
-  background-color: #ccc;
+  background-color: #4b74a2;
   border-radius: 3px;
 }
 
 .analysis-exercise-list::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
+  background-color: #264f7d;
 }
 
 /* The phase header (--- Phase 1 ---) */
@@ -2233,8 +2249,8 @@ body.xp-cap #stickyXpBarFill {
   font-weight: bold;
   margin: 8px 0 4px;
   font-size: 0.9rem;
-  color: #666;
-  border-bottom: 1px dotted #999;
+  color: #b1daff;
+  border-bottom: 1px dotted #7ea7d5;
   pointer-events: none;
 }
 
@@ -2248,13 +2264,13 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .analysis-exercise-item:hover {
-  background-color: #eaeaea;
+  background-color: #2d5684;
 }
 
 /* No match message */
 .analysis-no-match {
   font-style: italic;
-  color: #999;
+  color: #7ea7d5;
   padding: 8px;
   text-align: center;
 }
@@ -2363,12 +2379,12 @@ body.xp-cap #stickyXpBarFill {
 
 .coach-insights-note {
   /* “sticky note” style */
-  background-color: #fff9c4;
+  background-color: #18416f !important;
   /* light yellowish */
-  /* border: 1px solid #f0e9a2; */
+  /* border: 1px solid #2757cc; */
   padding: 15px;
   border-radius: 8px;
-  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); */
+  /* box-shadow: 0 2px 6px rgba(255, 255, 255, 0.15); */
   line-height: 1.4;
   font-size: 1rem;
 }
@@ -2403,31 +2419,31 @@ body.xp-cap #stickyXpBarFill {
 
 /* Match your existing cell colors: */
 .heatmap-color-square.green {
-  background-color: #69c779;
+  background-color: #ae79f5;
   /* Completed */
 }
 
 .heatmap-color-square.red {
-  background-color: #ff7878;
+  background-color: #18c8f6;
   /* Missed */
 }
 
 .heatmap-color-square.yellow {
-  background-color: #ffe266;
+  background-color: #185eff;
   /* Partially */
-  color: #000;
+  color: #18416f;
   /* Dark text if needed */
 }
 
 .heatmap-color-square.blue {
-  background-color: #5A8DEE;
+  background-color: #bdb380;
   /* Completed Late */
 }
 
 .heatmap-color-square.gray {
-  background-color: #bfbfbf;
+  background-color: #5881af;
   /* Upcoming */
-  color: #000;
+  color: #18416f;
 }
 
 /***********************************************
@@ -2461,7 +2477,7 @@ body.xp-cap #stickyXpBarFill {
   padding: 8px 15px;
   text-align: center;
   /* center all content by default */
-  background-color: #f5f0e6;
+  background-color: #225088;
   border-radius: 8px;
 }
 
@@ -2493,16 +2509,16 @@ body.xp-cap #stickyXpBarFill {
   height: 40px;
   /* same fixed width for all inputs */
   padding: 5px 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #4b74a2;
   border-radius: 4px;
-  background-color: #f2f0eb;
+  background-color: #255083;
   transition: background-color 0.3s ease, border-color 0.3s ease;
   font-family: 'Roboto', sans-serif;
 }
 
 .goal-progress-input:focus {
-  background-color: #fff;
-  border-color: #007bff;
+  background-color: #18416f;
+  border-color: #ffc56f;
   outline: none;
 }
 
@@ -2520,8 +2536,8 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .log-weight-button {
-  background-color: #007bff;
-  color: #fff;
+  background-color: #ffc56f;
+  color: #18416f;
   border: none;
   border-radius: 4px;
   padding: 10px 20px;
@@ -2533,19 +2549,19 @@ body.xp-cap #stickyXpBarFill {
   margin-top: 25px;
   margin-bottom: 35px;
   cursor: pointer;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   font-size: 1rem;
 }
 
 .log-weight-button:hover {
-  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 6px 8px rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
 }
 
 .log-weight-button:active {
-  background-color: #0056b3;
-  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+  background-color: #ffeabb;
+  box-shadow: 0px 3px 4px rgba(255, 255, 255, 0.1);
   transform: translateY(2px);
 }
 
@@ -2571,7 +2587,7 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .goal-progress-bar {
-  background-color: #e0e0e0;
+  background-color: #37608e;
   height: 20px;
   width: 80%;
   margin: 0 auto;
@@ -2583,7 +2599,7 @@ body.xp-cap #stickyXpBarFill {
 .goal-progress-bar-fill {
   height: 100%;
   width: 0%;
-  background-color: #007bff;
+  background-color: #ffc56f;
   transition: width 0.5s;
 }
 
@@ -2626,7 +2642,7 @@ body.xp-cap #stickyXpBarFill {
 
 .expected-goal-date {
   font-weight: bold;
-  color: #333;
+  color: #e4ffff;
 }
 
 /***********************************************
@@ -2638,13 +2654,13 @@ body.xp-cap #stickyXpBarFill {
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
-  background-color: #D4F8E8;
+  background-color: #434886;
   /* pale yellow sticky-note style */
   padding: 15px;
   border-radius: 8px;
   line-height: 1.4;
   font-size: 1rem;
-  color: #333;
+  color: #e4ffff;
 }
 
 /* ============================= */
@@ -2701,19 +2717,19 @@ body.xp-cap #stickyXpBarFill {
   padding: 12px 18px;
   font-size: 1rem;
   font-weight: 600;
-  color: #fff;
-  background-color: #007BFF;
+  color: #18416f;
+  background-color: #ffc56f;
   /* brand blue for "Summary" */
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin: 10px auto;
-  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 6px 8px rgba(255, 255, 255, 0.1);
   transition: background-color 0.3s ease;
 }
 
 .summary-workout-btn:hover {
-  background-color: #0069d9;
+  background-color: #ffd795;
 }
 
 /* Center them if needed */
@@ -2730,9 +2746,9 @@ body.xp-cap #stickyXpBarFill {
   bottom: 0;
   left: 0;
   width: 93%;
-  background: #F6EFE3;
+  background: #21518b;
   /* same background as your existing popups */
-  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 -4px 8px rgba(255, 255, 255, 0.2) !important;
   transform: translateY(100%);
   transition: transform 0.3s ease-out;
   z-index: 1200;
@@ -2771,9 +2787,9 @@ body.xp-cap #stickyXpBarFill {
   bottom: 0;
   left: 0;
   width: 93%;
-  background: #F6EFE3;
+  background: #21518b;
   /* Same background as other popups */
-  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 -4px 8px rgba(255, 255, 255, 0.2) !important;
   transform: translateY(100%);
   transition: transform 0.3s ease-out;
   z-index: 1200;
@@ -2821,7 +2837,7 @@ body.xp-cap #stickyXpBarFill {
   padding: 10px;
   font-size: 0.95rem;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #4b74a2;
   outline: none;
   margin-bottom: 8px;
 }
@@ -2832,11 +2848,11 @@ body.xp-cap #stickyXpBarFill {
   max-height: 200px;
   /* can adjust */
   overflow-y: auto;
-  border: 1px solid #ccc;
+  border: 1px solid #4b74a2;
   border-radius: 6px;
   padding: 6px 0;
   margin-bottom: 12px;
-  background-color: #EDE7DB;
+  background-color: #2a5993;
   /* The important bits: same approach as .search-container */
   max-width: 400px;
   /* match the search bar width */
@@ -2857,26 +2873,26 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .alt-ex-item:hover {
-  background-color: #eaeaea;
+  background-color: #2d5684;
 }
 
 /* Special "Original Exercise" heading style */
 .alt-ex-header {
   font-weight: bold;
   font-size: 1rem;
-  color: #000;
-  border-bottom: 1px solid #ccc;
+  color: #18416f;
+  border-bottom: 1px solid #4b74a2;
   margin: 5px 0;
   padding: 0 12px;
   pointer-events: none;
-  background-color: #E9E2D6;
+  background-color: #2e5e98;
 }
 
 .alt-ex-header--other {
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #4b74a2;
   margin-top: 10px;
   padding-top: 10px;
-  background-color: #E9E2D6;
+  background-color: #2e5e98;
 }
 
 /* The bottom row of 3 buttons */
@@ -2893,26 +2909,26 @@ body.xp-cap #stickyXpBarFill {
   padding: 14px;
   border: none;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
   cursor: pointer;
 }
 
-/* By default, they're "disabled" with #004a99 background, no pointer events */
+/* By default, they're "disabled" with #18416f6d5 background, no pointer events */
 .swap-choice-buttons button:disabled {
-  background-color: #004a99;
-  color: #ccc;
+  background-color: #18416f;
+  color: #4b74a2;
   cursor: not-allowed;
 }
 
-/* When enabled, we set them to #007BFF and white text */
+/* When enabled, we set them to #ffc56f and white text */
 .swap-choice-buttons button.enabled {
-  background-color: #007BFF;
-  color: #fff;
+  background-color: #ffc56f;
+  color: #18416f;
 }
 
 #changeExercisePopup .cancel-btn {
-  background-color: #888;
-  color: #fff;
+  background-color: #8fb8e6;
+  color: #18416f;
   margin: 0 auto 10px auto;
   width: 100%;
   font-weight: 600;
@@ -2924,7 +2940,7 @@ body.xp-cap #stickyXpBarFill {
 
 /* Optional: highlight old sets in same "Coach Insights" yellow color */
 .changed-set-highlight {
-  background-color: #fff9c4 !important;
+  background-color: #18416f !important;
   /* or your Coach Insights post-it color */
 }
 
@@ -2938,19 +2954,19 @@ body.xp-cap #stickyXpBarFill {
   text-align: center;
   font-size: 1.1rem;
   font-weight: 600;
-  background-color: #007BFF;
+  background-color: #ffc56f;
   /* stays blue */
-  color: #fff;
+  color: #18416f;
   cursor: pointer;
   width: 100%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
   transition: opacity 0.3s ease;
 }
 
 .popup-btn-blue:disabled {
-  background-color: #004a99;
+  background-color: #18416f;
   /* darker blue when disabled */
-  color: #ccc;
+  color: #4b74a2;
   cursor: not-allowed;
 }
 
@@ -2967,12 +2983,12 @@ body.xp-cap #stickyXpBarFill {
   text-align: center;
   font-size: 1.1rem;
   font-weight: 600;
-  background-color: #B0B0B0;
-  color: #fff;
+  background-color: #6790be;
+  color: #18416f;
   cursor: pointer;
   width: 100%;
   /* full width in the container */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
   transition: opacity 0.3s ease;
 }
 
@@ -2986,7 +3002,7 @@ body.xp-cap #stickyXpBarFill {
 .wt-onboarding-overlay {
   position: fixed;
   inset: 0;
-  background: linear-gradient(to bottom, #F9F4EB, #F6EFE3);
+  background: linear-gradient(to bottom, #1e4c83, #21518b);
   z-index: 1300;
   transform: translateY(-100%);
   transition: transform .45s cubic-bezier(.36, .66, .04, 1);
@@ -3036,7 +3052,7 @@ body.xp-cap #stickyXpBarFill {
 .wt-subtitle {
   font-size: 1.2rem;
   font-weight: 500;
-  color: #666;
+  color: #b1daff;
 }
 
 .wt-line {
@@ -3053,39 +3069,39 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .wt-goal {
-  color: #333;
+  color: #e4ffff;
   font-weight: 600;
 }
 
 .wt-emoji-goal {
   border-radius: 8px;
-  background-color: #F0ECE5;
+  background-color: #275489;
   font-size: 1.2rem;
   padding: 3px;
   margin-right: 2px;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 .wt-emoji-tutorial {
   border-radius: 8px;
-  background-color: #F0ECE5;
+  background-color: #275489;
   font-size: 1.2rem;
   padding: 3px;
   margin-right: 2px;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 .wt-driver {
-  color: #333;
+  color: #e4ffff;
 }
 
 .wt-tutorial li {
   margin-bottom: 15px;
-  color: #333;
+  color: #e4ffff;
 }
 
 .wt-sub {
-  color: #666;
+  color: #b1daff;
   font-size: 1rem
 }
 
@@ -3103,15 +3119,15 @@ body.xp-cap #stickyXpBarFill {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  background: #007BFF;
-  color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, .15);
+  background: #ffc56f;
+  color: #18416f;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.15);
   transition: background .2s;
 }
 
 .wt-next-btn:active,
 .wt-close-btn:active {
-  background: #0056b3;
+  background: #ffeabb;
 }
 
 @media(min-width:768px) {
@@ -3123,7 +3139,7 @@ body.xp-cap #stickyXpBarFill {
 
   .wt-next-btn:hover,
   .wt-close-btn:hover {
-    background: #0056b3;
+    background: #ffeabb;
   }
 }
 
@@ -3150,13 +3166,13 @@ body.xp-cap #stickyXpBarFill {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #bbb;
+  background: #5c85b3;
   cursor: pointer;
   transition: background .3s;
 }
 
 .wt-dot.active {
-  background: #333;
+  background: #e4ffff;
 }
 
 @media(max-width:480px) {
@@ -3177,7 +3193,7 @@ body.xp-cap #stickyXpBarFill {
 #coreUpsellOverlay {
   position: fixed;
   inset: 0;
-  background: linear-gradient(to bottom, #F9F4EB, #F6EFE3);
+  background: linear-gradient(to bottom, #1e4c83, #21518b);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3201,7 +3217,7 @@ body.xp-cap #stickyXpBarFill {
   padding: 16px;
   border-radius: 12px;
   text-align: center;
-  /* background: #fff;          */
+  /* background: #18416f;          */
   overflow: hidden;
   /* hide any overflow outside the flex */
   font-family: inherit;
@@ -3233,13 +3249,13 @@ body.xp-cap #stickyXpBarFill {
   bottom: 0;
   width: 100vw;
   box-sizing: border-box;
-  background: #e8e4db;
+  background: #2f5c93;
   padding: 1rem 16px;
-  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 -6px 10px -2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 -6px 10px -2px rgba(255, 255, 255, 0.15);
   z-index: 10000;
 }
 
@@ -3262,27 +3278,27 @@ body.xp-cap #stickyXpBarFill {
   box-sizing: border-box;
   padding: 22px;
   margin: 0;
-  background: #9333EA;
-  color: #fff;
+  background: #84ff84;
+  color: #18416f;
   text-decoration: none;
   font-size: 1.1rem;
   font-weight: 600;
   border-radius: 8px;
   transition: background .25s, transform .25s;
   text-align: center;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.2);
 }
 
 .cta:hover {
-  background: #7c2bd6;
+  background: #9bff98;
   transform: translateY(-2px);
-  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 6px 8px rgba(255, 255, 255, 0.3);
 }
 
 .cta:active {
-  background: #6f28c4;
+  background: #a8ffaa;
   transform: translateY(2px);
-  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 3px 4px rgba(255, 255, 255, 0.2);
 }
 
 .upsell-cta {
@@ -3293,21 +3309,21 @@ body.xp-cap #stickyXpBarFill {
   box-sizing: border-box;
   padding: 22px;
   margin: 0;
-  background: #9333EA;
-  color: #fff;
+  background: #84ff84;
+  color: #18416f;
   text-decoration: none;
   font-size: 1.1rem;
   font-weight: 600;
   border-radius: 8px;
   transition: background .25s, transform .25s;
   text-align: center;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.2);
 }
 
 .maybe-later {
   margin-top: .75rem;
   font-size: .9rem;
-  color: #555;
+  color: #c2ebff;
   background: none;
   border: none;
   text-decoration: underline;
@@ -3326,12 +3342,12 @@ body.xp-cap #stickyXpBarFill {
 
 /* testimonial bits (mini version) */
 .testimonial-mini {
-  /* background: #EDE7DB; */
+  /* background: #2a5993; */
   border-radius: 12px;
   padding: 20px 20px 0 20px;
   margin: 0;
-  background-color: #EFE7DB;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  background-color: #285993;
+  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.04);
 }
 
 @media (max-width: 375px) {
@@ -3367,7 +3383,7 @@ body.xp-cap #stickyXpBarFill {
 
 .testimonial-mini .images p {
   font-size: .8rem;
-  color: #666;
+  color: #b1daff;
   margin-top: 5px
 }
 
@@ -3398,7 +3414,7 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .review-text-mini {
-  background: #E3DACF;
+  background: #34669f;
   padding: 12px;
   border-radius: 8px;
   margin: 0 0 5px 0 !important;
@@ -3411,7 +3427,7 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .timer-container {
-  background: #e8e4db;
+  background: #2f5c93;
   border-radius: 6px;
   padding: 15px;
   margin: 5px 0 12px 0;
@@ -3435,16 +3451,16 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .discount-label {
-  color: #333
+  color: #e4ffff
 }
 
 .time-remaining {
-  color: #d9534f
+  color: #3eedff
 }
 
 /* quick comparison */
 .compare-box {
-  background: #f5f5f5;
+  background: #224b79;
   border-radius: 8px;
   padding: 18px;
   margin: 18px 0
@@ -3471,7 +3487,7 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .compare-table tr:nth-child(even) {
-  background: #ececec
+  background: #2b5482
 }
 
 @media (min-width: 390px) {
@@ -3492,7 +3508,7 @@ body.xp-cap #stickyXpBarFill {
 
 #mp-core-hero p {
   font: 400 1rem/1.5 "Poppins", sans-serif;
-  color: #444;
+  color: #d3fcff;
 }
 
 /* Glass‑style cards */
@@ -3512,10 +3528,10 @@ body.xp-cap #stickyXpBarFill {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background: rgba(147, 51, 234, 0.08);
+  background: rgba(132, 255, 132, 0.08);
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
   margin: 0 0.6rem 40px 0.6rem;
 }
 
@@ -3527,12 +3543,12 @@ body.xp-cap #stickyXpBarFill {
 .mp-glass-card p {
   margin: 0;
   font: 400 0.95rem/1.45 "Poppins", sans-serif;
-  color: #333;
+  color: #e4ffff;
 }
 
 /* “Pro Tracker Only” badge */
 .pt-extra-container {
-  background: #9333EA;
+  background: #84ff84;
   margin: 10px auto 15px auto;
   text-align: center;
   padding: 2px 12px 6px 12px;
@@ -3541,7 +3557,7 @@ body.xp-cap #stickyXpBarFill {
 
 .pt-extra {
   font-style: italic;
-  color: #F8F4FF;
+  color: #1f4c6f;
   font-size: 0.9rem;
   margin-top: 5px;
 }
@@ -3563,20 +3579,20 @@ body.xp-cap #stickyXpBarFill {
   max-width: 450px;
   height: 14px;
   margin: 0 auto 100px;
-  background: #e0d8f5;
+  background: #376879;
   border-radius: 8px;
   overflow: hidden;
 }
 
 #mp-core-progress-bar div {
   height: 100%;
-  background: #9333EA;
+  background: #84ff84;
   width: 35%;
 }
 
 /* Sticky “Unlock Pro Tracker” CTA */
 .floating-cta {
-  /* background: #9333EA; */
+  /* background: #84ff84; */
   border-radius: 8px;
   position: fixed;
   bottom: 20px;
@@ -3587,7 +3603,7 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .claim-program-btn {
-  background: #9333EA;
+  background: #84ff84;
 }
 
 .floating-cta-container {
@@ -3629,9 +3645,9 @@ body.xp-cap #stickyXpBarFill {
   /* Centers text */
   text-decoration: none;
   /* Removes underline */
-  background-color: #9333EA;
+  background-color: #84ff84;
   /* Vibrant blue for attention */
-  color: #fff;
+  color: #18416f;
   /* White text for contrast */
   border: none;
   padding: 15px 30px;
@@ -3639,24 +3655,24 @@ body.xp-cap #stickyXpBarFill {
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.2);
   /* Subtle shadow for elevation */
   transition: all 0.3s ease;
 }
 
 .claim-program-btn:hover {
-  background-color: #7c2bd6;
+  background-color: #9bff98;
   /* Darker blue on hover */
-  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 6px 8px rgba(255, 255, 255, 0.3);
   /* Slightly larger shadow */
   transform: translateY(-2px);
   /* Lift effect on hover */
 }
 
 .claim-program-btn:active {
-  background-color: #7c2bd6;
+  background-color: #9bff98;
   /* Even darker blue on click */
-  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 3px 4px rgba(255, 255, 255, 0.2);
   /* Reduced shadow */
   transform: translateY(2px);
   /* Press effect on click */
@@ -3673,10 +3689,10 @@ body.xp-cap #stickyXpBarFill {
       z-index: -1;
 
       background: linear-gradient(to bottom,
-              rgba(0, 0, 0, 0) 0%,
-              rgba(0, 0, 0, 0.1) 80%,
-              rgba(0, 0, 0, 0.1) 90%,
-              rgba(0, 0, 0, 0.2) 100%
+              rgba(255, 255, 255, 0) 0%,
+              rgba(255, 255, 255, 0.1) 80%,
+              rgba(255, 255, 255, 0.1) 90%,
+              rgba(255, 255, 255, 0.2) 100%
           );
   }
 
@@ -3703,9 +3719,9 @@ body.xp-cap #stickyXpBarFill {
     bottom: 0;
     border-radius: 0;
     max-width: none;
-    background-color: #F6EFE3;
+    background-color: #21518b;
     transition: bottom 0.4s ease, opacity 0.4s ease;
-    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -4px 6px rgba(255, 255, 255, 0.1);
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
@@ -3729,9 +3745,9 @@ body.xp-cap #stickyXpBarFill {
   }
 
   .claim-program-btn:hover {
-    background-color: #9333EA;
+    background-color: #84ff84;
     /* Darker blue on hover */
-    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 3px 4px rgba(255, 255, 255, 0.2);
     /* Slightly larger shadow */
     transform: translateY(-2px);
     /* Lift effect on hover */
@@ -3762,8 +3778,8 @@ body.xp-cap #stickyXpBarFill {
   box-sizing: border-box;
   /* include padding in width */
   padding: 50px 20px;
-  /* background-color: #cfd8dc; */
-  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+  /* background-color: #486892; */
+  box-shadow: 0px -2px 10px rgba(255, 255, 255, 0.1);
   text-align: center;
   overflow: hidden;
   z-index: 1;
@@ -3786,10 +3802,10 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .testimonial-section {
-  background-color: rgba(147, 51, 234, 0.06);
+  background-color: rgba(132, 255, 132, 0.06);
   text-align: center;
   padding: 50px 20px;
-  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px -2px 10px rgba(255, 255, 255, 0.1);
 }
 
 .testimonial-container {
@@ -3804,7 +3820,7 @@ body.xp-cap #stickyXpBarFill {
   font-size: 2rem;
   font-weight: bold;
   margin: 0 0 20px 0;
-  color: #222;
+  color: #f5ffff;
 }
 
 .arrow-button {
@@ -3814,24 +3830,24 @@ body.xp-cap #stickyXpBarFill {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #9333EA;
-  color: #fff;
+  background-color: #84ff84;
+  color: #18416f;
   font-size: 20px;
   border: none;
   cursor: pointer;
   z-index: 2;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
 }
 
 .arrow-button:hover {
-  background-color: #A855F7;
-  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+  background-color: #6feb77;
+  box-shadow: 0px 6px 8px rgba(255, 255, 255, 0.3);
 }
 
 .arrow-button:active {
-  background-color: #7E22CE;
-  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+  background-color: #99ffa0;
+  box-shadow: 0px 3px 4px rgba(255, 255, 255, 0.2);
 }
 
 .arrow-button.prev {
@@ -3856,13 +3872,13 @@ body.xp-cap #stickyXpBarFill {
   flex: 0 0 100%;
   /* each card takes up 100% of the container width */
   box-sizing: border-box;
-  background: #fdf8ff;
+  background: #1a486f;
   border-radius: 10px;
   margin: 0 10px 0 10px;
   /* slight horizontal margin so slides aren’t jammed */
   text-align: center;
   padding: 20px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.1);
 }
 
 /* Make sure we don’t get weird spacing at small widths */
@@ -3882,7 +3898,7 @@ body.xp-cap #stickyXpBarFill {
 .after p {
   margin-top: 5px;
   /* font-weight: bold; */
-  color: #666;
+  color: #b1daff;
   font-size: 1rem;
 }
 
@@ -3954,10 +3970,10 @@ body.xp-cap #stickyXpBarFill {
   padding: 10px;
   opacity: 0.5;
   box-sizing: border-box;
-  background: #f8f9fa;
+  background: #1f4774;
   border-radius: 10px;
   text-align: center;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.1);
 }
 
 .testimonial-slot p {
@@ -4002,7 +4018,7 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .testimonial-slot p {
-  color: #555;
+  color: #c2ebff;
   font-size: 12px;
   line-height: 1.4;
   word-wrap: break-word;
@@ -4026,10 +4042,10 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .review-text {
-  color: #4b0082;
+  color: #ccffec;
   padding: 12px 10px;
   border-radius: 8px;
-  color: #333;
+  color: #e4ffff;
   margin-top: 10px;
   line-height: 1.4;
 }
@@ -4044,7 +4060,7 @@ body.xp-cap #stickyXpBarFill {
 .dot {
   width: 12px;
   height: 12px;
-  background-color: #e0d1f9;
+  background-color: #376f75;
   ;
   border-radius: 50%;
   transition: background-color 0.3s ease;
@@ -4052,13 +4068,13 @@ body.xp-cap #stickyXpBarFill {
 }
 
 .dot.active {
-  background-color: #9333EA;
+  background-color: #84ff84;
 }
 
 .review-name {
   font-size: 16px;
   font-weight: bold;
-  color: #2a2a2a;
+  color: #edffff;
   margin-bottom: 5px;
 }
 
@@ -4066,7 +4082,7 @@ body.xp-cap #stickyXpBarFill {
 #video-intro-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.55);
+  background: rgba(255, 255, 255, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4074,13 +4090,13 @@ body.xp-cap #stickyXpBarFill {
 }
 
 #video-intro-overlay .video-intro-content {
-  background: #ffffff;
+  background: #18416f;
   padding: 1.75rem 1.5rem;
   max-width: 380px;
   width: 90%;
   border-radius: 10px;
   text-align: center;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.08);
   font-family: 'Poppins', sans-serif;
 }
 
@@ -4088,14 +4104,14 @@ body.xp-cap #stickyXpBarFill {
   margin: 0 0 .75rem 0;
   font-size: 1.2rem;
   font-weight: 700;
-  color: #222;
+  color: #f5ffff;
 }
 
 #video-intro-overlay .video-intro-content p {
   margin: 0;
   font-size: .95rem;
   line-height: 1.45;
-  color: #555;
+  color: #c2ebff;
 }
 
 :root {
@@ -4125,7 +4141,7 @@ body .section-title {
 }
 
 body .header,
-body .footer,
+/* body .footer, */
 body .card,
 body .panel,
 body .module,
@@ -4136,14 +4152,14 @@ body .container,
 body .wrap,
 body .section,
 body .nav,
-body .tab,
+/* body .tab, */
 body .progress,
 body .log,
 body .calendar {
   background: rgba(42, 90, 147, 0.78);
   color: var(--brand-cream);
-  border-color: rgba(242, 233, 234, 0.35);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  /* border-color: rgba(242, 233, 234, 0.35);
+  box-shadow: 0 15px 35px rgba(255, 255, 255, 0.2); */
 }
 
 body button,
@@ -4156,8 +4172,8 @@ body .pill-btn {
   background: var(--brand-cream);
   color: var(--brand-blue);
   border: none;
-  border-radius: 10px;
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
+  /* border-radius: 10px;
+  box-shadow: 0 10px 26px rgba(255, 255, 255, 0.2); */
 }
 
 body button:hover,
@@ -4175,6 +4191,6 @@ body select,
 body textarea {
   background: var(--brand-cream);
   color: var(--brand-blue);
-  border: 1px solid rgba(242, 233, 234, 0.45);
-  border-radius: 10px;
+  /* border: 1px solid rgba(242, 233, 234, 0.45);
+  border-radius: 10px; */
 }

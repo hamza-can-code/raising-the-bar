@@ -1534,7 +1534,7 @@ function renderDailyMealDisplay() {
     mealPrepBtn.id = "mealPrepModeBtn";
     mealPrepBtn.textContent = "🧑‍🍳 Meal Prep Mode";
     mealPrepBtn.style.width = "100%";
-    mealPrepBtn.style.backgroundColor = "#007BFF";
+    mealPrepBtn.style.backgroundColor = "#ffc56f";
     mealPrepBtn.style.color = "#fff";
     mealPrepBtn.style.padding = "14px 20px";
     mealPrepBtn.style.fontSize = "1rem";
@@ -2774,7 +2774,7 @@ function showSkipMealPopup(mealData, wNum, dayNum, mealIndex) {
   popup.style.bottom = "0";
   popup.style.left = "0";
   popup.style.width = "93%";
-  popup.style.background = "#F6EFE3";
+  popup.style.background = "#234F86";
   popup.style.boxShadow = "0 -4px 8px rgba(0, 0, 0, 0.2)";
   popup.style.transform = "translateY(100%)";
   popup.style.transition = "transform 0.3s ease-out";
@@ -3074,7 +3074,7 @@ function showSummaryPopup() {
   popup.style.bottom = "0";
   popup.style.left = "0";
   popup.style.width = "93%";
-  popup.style.background = "#F6EFE3";
+  popup.style.background = "#234F86";
   popup.style.boxShadow = "0 -4px 8px rgba(0, 0, 0, 0.2)";
   popup.style.transform = "translateY(100%)";
   popup.style.transition = "transform 0.3s ease-out";
@@ -3127,7 +3127,7 @@ function showSummaryPopup() {
 
   // Then use mealCompletionHTML directly in your summaryDetails.innerHTML
   summaryDetails.innerHTML = `
-    <div style="text-align: center; background: #EDE7DB; padding: 12px; border-radius: 5px; border: 1px solid #D8CFC0;">
+    <div style="text-align: center; background: #21487D; padding: 12px; border-radius: 5px; border: 1px solid #D8CFC0;">
       ${mealCompletionHTML}<br><br>
       🔥 Calories: <strong>${calsConsumed}</strong> / <strong>${totalDailyCals}</strong><br>
       🍗 Protein: <strong>${proteinConsumed}g</strong> / <strong>${totalProtein}g</strong><br>
@@ -3346,7 +3346,7 @@ function showMealPrepModePopup(weekIndex) {
   popup.style.bottom = "0";
   popup.style.left = "0";
   popup.style.width = "93%";
-  popup.style.background = "#F6EFE3";
+  popup.style.background = "#234F86";
   popup.style.boxShadow = "0 -4px 8px rgba(0, 0, 0, 0.2)";
   popup.style.transform = "translateY(100%)";
   popup.style.transition = "transform 0.3s ease-out";
@@ -3438,10 +3438,10 @@ function showMealPrepModePopup(weekIndex) {
   weeklySummaryContent.style.maxHeight = "340px";
   weeklySummaryContent.style.marginTop = "10px";
   weeklySummaryContent.style.paddingRight = "8px";
-  weeklySummaryContent.style.backgroundColor = "#F2E9DA";
+  weeklySummaryContent.style.backgroundColor = "#234F86";
   weeklySummaryContent.style.padding = "0 16px";
   weeklySummaryContent.style.borderRadius = "12px";
-  weeklySummaryContent.style.border = "1px solid #D8CFC0";
+  weeklySummaryContent.style.border = "1px solid #1C3F6B";
 
   const shoppingListContent = document.createElement("div");
   shoppingListContent.style.display = "none";
@@ -3449,10 +3449,10 @@ function showMealPrepModePopup(weekIndex) {
   shoppingListContent.style.maxHeight = "340px";
   shoppingListContent.style.marginTop = "10px";
   shoppingListContent.style.paddingRight = "8px";
-  shoppingListContent.style.backgroundColor = "#F2E9DA";
+  shoppingListContent.style.backgroundColor = "#234F86";
   shoppingListContent.style.padding = "0 16px";
   shoppingListContent.style.borderRadius = "12px";
-  shoppingListContent.style.border = "1px solid #D8CFC0";
+  shoppingListContent.style.border = "1px solid #1C3F6B";
 
   // Populate the "Weekly Summary" tab
   weeklySummaryContent.innerHTML = buildWeeklySummaryHTML(weekIndex);
@@ -3622,12 +3622,12 @@ function buildWeeklySummaryHTML(weekIdx) {
     html += `
       <div
         style="
-          background-color:#EDE7DB;
+          background-color:#21487D;
           padding: 12px 16px;
           border-radius: 12px;
           margin-bottom: 16px;
           margin-top: 16px;
-          border: 1px solid #D8CFC0;
+          border: 1px solid #1A3F6B;
         "
       >
         <!-- Day Title -->
@@ -3743,12 +3743,11 @@ function buildShoppingListHTML(weekIdx) {
     // Wrap each segment in its own styled box:
     html += `
     <div style="
-      background-color: #EDE7DB;
+      background-color: #21487D;
       padding: 12px 16px;
       border-radius: 12px;
       margin-bottom: 16px;
       margin-top: 16px;
-      border: 1px solid #D8CFC0;
     ">
       <div style="text-align: center; font-weight: bold; margin-bottom: 8px;">
         ${catData.title}

@@ -557,7 +557,7 @@ h6,
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.6);
   z-index: 2000;
   /* no centering—panel itself will define its layout */
 }
@@ -573,8 +573,8 @@ h6,
   margin: 0;
   /* add extra left‑padding so items aren’t flush to the edge */
   padding: 4.5rem 1rem 1rem 2rem;
-  background: #fff;
-  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+  background: rgba(24, 58, 99, 0.98);
+  box-shadow: var(--brand-glow);
   overflow-y: auto;
   border-radius: 0 8px 8px 0;
 
@@ -593,7 +593,7 @@ h6,
 .main-nav.open ul li {
   margin: 0;
   width: 100%;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid rgba(242, 233, 234, 0.14);
   padding-bottom: 0.75rem;
 }
 
@@ -608,7 +608,7 @@ h6,
   padding: 0.75rem 1rem;
   border-radius: 6px;
   transition: background 0.2s ease;
-  color: #333;
+  color: var(--brand-cream);
   text-align: left;
   display: block;
   font-weight: 500;
@@ -616,7 +616,7 @@ h6,
 }
 
 .main-nav.open ul a:hover {
-  background: #F0F0F0;
+  background: rgba(242, 233, 234, 0.08);
 }
 
 .nav-close {
@@ -628,12 +628,12 @@ h6,
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #333;
+  color: var(--brand-cream);
   z-index: 2100;
 }
 
 .main-nav.open .nav-close {
-  color: #333;
+  color: #e4ffff;
 }
 
 .main-nav.open::before {
@@ -643,7 +643,7 @@ h6,
   left: 0;
   width: 100%;
   height: 1px;
-  /* background: #e5e5e5; */
+  /* background: #325b89; */
 }
 
 .faq-answer {
@@ -695,14 +695,14 @@ h6,
   max-width: 500px;
   height: 22px;
   border-radius: 11px;
-  background: #e0e0e0;
+  background-color: #37608e;
   overflow: hidden;
 }
 
 .xp-bar-fill {
   height: 100%;
   width: 0%;
-  background: var(--brand-blue);
+  background-color: #ffc56f;
   transition: width .4s ease;
 }
 
@@ -1461,7 +1461,11 @@ h6,
   }
 }
 /* ================= Brand Color Refresh ================= */
-body header,
+
+  .header {
+  background: rgba(42, 90, 147, 0.78);
+}
+
 body footer,
 body .card,
 body .tile,
