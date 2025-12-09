@@ -18,6 +18,13 @@
     return window.RTB_CURRENCY || { code: 'GBP', country: 'GB' };
   }
 
+  function getCreatorSlug() {
+    const slug = window.RTB_CREATOR_SLUG;
+    if (!slug || typeof slug !== 'string') return null;
+    const trimmed = slug.trim();
+    return trimmed ? trimmed.toLowerCase() : null;
+  }
+
   if (typeof stripe !== 'function') {
     console.error('[payment.js] Stripe SDK missing – aborting');
     return;
@@ -172,16 +179,21 @@
       ? getCurrency()
       : { code: 'GBP', country: 'GB', fxFromGBP: 1 };
 
+    const creatorSlug = getCreatorSlug();
+    const payload = {
+      email,
+      discounted,
+      currency: curr.code,
+      plan: selectedPlan
+    };
+
+    if (creatorSlug) payload.creatorSlug = creatorSlug;
+
     try {
       const resp = await fetch('/api/create-subscription-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email,
-          discounted,
-          currency: curr.code,
-          plan: selectedPlan
-        })
+        body: JSON.stringify(payload)
       });
 
       const payload = await resp.json();

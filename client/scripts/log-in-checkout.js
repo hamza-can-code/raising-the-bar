@@ -3,6 +3,13 @@
 import { savePreferencesAfterLogin } from "../scripts/savePreferencesAfterLogin.js";
 import { showGlobalLoader, hideGlobalLoader } from "../scripts/loadingOverlay.js";
 
+function getCreatorSlug() {
+  const slug = window.RTB_CREATOR_SLUG;
+  if (!slug || typeof slug !== "string") return null;
+  const trimmed = slug.trim();
+  return trimmed || null;
+}
+
 async function fetchAndStorePreferences() {
   try {
     const token = localStorage.getItem("token");
@@ -123,10 +130,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!restored) await savePreferencesAfterLogin();
 
       /* 4 -- create Checkout session */
+      const creatorSlug = getCreatorSlug();
+      const checkoutPayload = { email: email.value, plan, discounted };
+      if (creatorSlug) checkoutPayload.creatorSlug = creatorSlug;
+
       const sessionRes = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.value, plan, discounted })
+        body: JSON.stringify(checkoutPayload)
       });
       const sessBody = await sessionRes.json();
       if (!sessionRes.ok) throw new Error(sessBody.error || "Unable to start checkout");

@@ -3,6 +3,13 @@
 import { savePreferencesAfterLogin } from "../scripts/savePreferencesAfterLogin.js";
 import { showGlobalLoader, hideGlobalLoader } from "../scripts/loadingOverlay.js";
 
+function getCreatorSlug() {
+  const slug = window.RTB_CREATOR_SLUG;
+  if (!slug || typeof slug !== "string") return null;
+  const trimmed = slug.trim();
+  return trimmed || null;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const pending = localStorage.getItem("pendingPurchaseType");   // ← already saved by your pricing buttons
   const planName = localStorage.getItem("planName") || "Unknown plan";
@@ -73,14 +80,18 @@ document.addEventListener("DOMContentLoaded", () => {
       await savePreferencesAfterLogin();
 
       /* 5)  CREATE CHECKOUT SESSION ——► SEND plan & discounted  */
+      const creatorSlug = getCreatorSlug();
+      const checkoutPayload = {
+        email: emailEl.value,
+        plan,               // '1-week' | '4-week' | '12-week' | 'subscription'
+        discounted          // true/false — only matters for subscription
+      };
+      if (creatorSlug) checkoutPayload.creatorSlug = creatorSlug;
+
       const sessionRes = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: emailEl.value,
-          plan,               // '1-week' | '4-week' | '12-week' | 'subscription'
-          discounted          // true/false — only matters for subscription
-        })
+        body: JSON.stringify(checkoutPayload)
       });
       const sessBody = await sessionRes.json();
       if (!sessionRes.ok) throw new Error(sessBody.error || "Unable to start checkout");

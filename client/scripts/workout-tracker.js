@@ -6106,7 +6106,7 @@ function showWorkoutRecapPopup(weekIndex, dayIndex, mode = "finish") {
 
   // Common recap data block (appears on all screens)
   popupHTML += `
-    <div style="width: 100%; text-align:center; margin: 5px; background: #21487D; padding: 12px; border-radius: 5px; border: 1px solid #D8CFC0;">
+    <div style="width: 100%; text-align:center; margin: 5px; background: #EDE7DB; padding: 12px; border-radius: 5px; border: 1px solid #D8CFC0;">
       <div><strong>🔥 Workout Completion</strong><br>${stats.completionPct}%</div>
       <br>
       <div><strong>🚀 Top Lift</strong><br>${stats.topLiftName}</div>
