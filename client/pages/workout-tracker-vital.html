@@ -5,7 +5,7 @@
   (async function() {
     const token = localStorage.getItem('token');
     if (!token) {
-      location.href = 'log-in-decoded.html';
+      location.href = 'log-in-vital.html';
       return;
     }
     try {
@@ -16,7 +16,7 @@
       if (!res.ok) throw new Error();
     } catch (err) {
       localStorage.removeItem('token');
-      location.href = 'log-in-decoded.html';
+      location.href = 'log-in-vital.html';
       return;
     }
     // If we get here, user is authenticated → do nothing
@@ -35,7 +35,7 @@
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 />
   <!-- Link to the external CSS file -->
-  <link rel="stylesheet" href="../styles/workout-tracker-decoded.css">
+  <link rel="stylesheet" href="../styles/workout-tracker-vital.css">
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ"></script>
 <script>
@@ -86,14 +86,14 @@ src="https://www.facebook.com/tr?id=2589073464764526&ev=PageView&noscript=1"
 
 <body>
   <div id="loaderOverlay" class="loader-overlay">
-    <img src="../assets/decoded-gains-logo.png" alt="GAINS+ logo"
+    <img src="../assets/vital-root-logo.png" alt="GAINS+ logo"
          class="loader-logo" />
   </div>
   <!-- Header -->
   <div class="header" id="header">
     <div class="logo">
-      <a href="dashboard-decoded.html">
-        <img id="logo" src="../assets/decoded-gains-logo.png" alt="GAINS+ Logo">
+      <a href="dashboard-vital.html">
+        <img id="logo" src="../assets/vital-root-logo.png" alt="GAINS+ Logo">
       </a>
       <!-- Desktop nav (inline) -->
       <nav class="main-nav" id="main-nav">
@@ -101,9 +101,9 @@ src="https://www.facebook.com/tr?id=2589073464764526&ev=PageView&noscript=1"
         <button class="nav-close" id="nav-close" aria-label="Close Menu">✕</button>
 
         <ul>
-          <li><a href="dashboard-decoded.html">My Dashboard</a></li>
+          <li><a href="dashboard-vital.html">My Dashboard</a></li>
           <!-- <li><a href="workout-tracker.html" id="nav-workouts">My Workouts</a></li> -->
-          <li><a href="nutrition-tracker-decoded.html" id="nav-nutrition">My Nutrition</a></li>
+          <li><a href="nutrition-tracker-vital.html" id="nav-nutrition">My Nutrition</a></li>
           <li><a href="#" id="nav-help">Help</a></li>
         </ul>
       </nav>
@@ -571,7 +571,7 @@ src="https://www.facebook.com/tr?id=2589073464764526&ev=PageView&noscript=1"
   <script type="module" defer src="../scripts/modules/my-progress.js"></script>
 
   <!-- then the tracker file that calls those globals -->
-  <script defer src="../scripts/workout-tracker-decoded.js"></script>
+  <script defer src="../scripts/workout-tracker.js"></script>
 </body>
 
 </html>
