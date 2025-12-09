@@ -75,6 +75,20 @@ const PLAN_COUPONS = {
   '12-week': { GBP: process.env.COUPON_TWELVE_WEEK_GBP },
 };
 
+const CREATOR_PLAN_PRICE_IDS = {
+  decoded: {
+    trial: { GBP: process.env.PRICE_TRIAL_UPFRONT_GBP_DECODED },
+    '12-week': { GBP: process.env.PRICE_TWELVE_WEEK_GBP_DECODED },
+  },
+};
+
+const CREATOR_PLAN_COUPONS = {
+  decoded: {
+    '4-week': { GBP: process.env.COUPON_FOUR_WEEK_GBP_DECODED },
+    '12-week': { GBP: process.env.COUPON_TWELVE_WEEK_GBP_DECODED },
+  },
+};
+
 const PLAN_LABELS = {
   trial: '1-Week Trial',
   '4-week': '4-Week Plan',
@@ -90,11 +104,19 @@ function log(label, obj) {
   console.log(`🟡 ${label}`, util.inspect(obj, { depth: 4, colors: true }));
 }
 
-function getPlanPriceId(plan = 'trial', currencyCode) {
+function normalizeCreatorSlug(slug) {
+  if (!slug || typeof slug !== 'string') return null;
+  const trimmed = slug.trim().toLowerCase();
+  return trimmed || null;
+}
+
+function getPlanPriceId(plan = 'trial', currencyCode, creatorSlug) {
   const normalizedPlan = PLAN_PRICE_IDS[plan] ? plan : 'trial';
   const code = (currencyCode || 'GBP').toUpperCase();
-  const priceMap = PLAN_PRICE_IDS[normalizedPlan];
-  const priceId = priceMap[code] || priceMap.GBP || null;
+  const creator = normalizeCreatorSlug(creatorSlug);
+  const priceMap = (creator && CREATOR_PLAN_PRICE_IDS[creator]?.[normalizedPlan])
+    || PLAN_PRICE_IDS[normalizedPlan];
+  const priceId = priceMap?.[code] || priceMap?.GBP || null;
   if (!priceId) return null;
   return { currency: code, priceId, plan: normalizedPlan };
 }
@@ -124,8 +146,9 @@ async function ensureStripeCustomer(email) {
   return stripe.customers.create({ email });
 }
 
-function getCouponIdForPlan(plan, currencyCode) {
-  const couponMap = PLAN_COUPONS[plan];
+function getCouponIdForPlan(plan, currencyCode, creatorSlug) {
+  const creator = normalizeCreatorSlug(creatorSlug);
+  const couponMap = (creator && CREATOR_PLAN_COUPONS[creator]?.[plan]) || PLAN_COUPONS[plan];
   if (!couponMap) return null;
   const code = (currencyCode || 'GBP').toUpperCase();
   return couponMap[code] || couponMap.GBP || null;
@@ -156,12 +179,12 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       return res.status(500).json({ error: 'Missing FRONTEND_URL and request origin' });
     }
 
-    const planInfo = getPlanPriceId(plan, currency);
+    const planInfo = getPlanPriceId(plan, currency, creatorSlug);
     if (!planInfo) {
       return res.status(500).json({ error: `Missing price configuration for plan ${plan} (${currency || 'GBP'})` });
     }
     const { currency: ccy, priceId, plan: normalizedPlan } = planInfo;
-    const couponId = discounted ? getCouponIdForPlan(normalizedPlan, ccy) : null;
+    const couponId = discounted ? getCouponIdForPlan(normalizedPlan, ccy, creatorSlug) : null;
 
     let creatorConfig = null;
     if (creatorSlug) {
@@ -245,12 +268,12 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
     log('Customer', { id: customer.id, email: customer.email });
 
     // 2) choose price & coupon by currency
-    const planInfo = getPlanPriceId(plan, currency);
+    const planInfo = getPlanPriceId(plan, currency, creatorSlug);
     if (!planInfo) {
       return res.status(500).json({ error: `Missing price configuration for plan ${plan} (${currency || 'GBP'})` });
     }
     const { currency: ccy, priceId, plan: normalizedPlan } = planInfo;
-    const couponId = discounted ? getCouponIdForPlan(normalizedPlan, ccy) : null;
+    const couponId = discounted ? getCouponIdForPlan(normalizedPlan, ccy, creatorSlug) : null;
     const price = await stripe.prices.retrieve(priceId);
     const productId = typeof price.product === 'string' ? price.product : price.product?.id;
     const recurringConfig = price.recurring || getRecurringConfigForPlan(normalizedPlan);

@@ -28,6 +28,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
   <title>Claim my plan</title>
+  <script>
+    if (!localStorage.getItem('selectedProgram') || localStorage.getItem('selectedProgram') === 'trial') {
+      localStorage.setItem('selectedProgram', '4-week');
+    }
+  </script>
   <!-- 1️⃣ LOAD the real Stripe SDK first (blocks parsing, 30 ms) -->
   <link rel="preconnect" href="https://js.stripe.com" crossorigin>
   <link rel="preconnect" href="https://api.stripe.com" crossorigin>
@@ -577,7 +582,7 @@ placeholder.replaceWith(iframe);
 </div> -->
 
       <!-- Offer Cards -->
-      <div class="offer-card offer-tier" data-program="trial">
+      <!-- <div class="offer-card offer-tier" data-program="trial">
         <div class="offer-left">
           <div class="duration"><strong>1-Week Trial</strong></div>
           <div class="full-price" data-full-price="£4.99">
@@ -590,7 +595,7 @@ placeholder.replaceWith(iframe);
           </div>
           <div class="per-day">per day</div>
         </div>
-      </div>
+      </div> -->
 
       <div class="offer-card offer-tier" data-program="4-week">
         <div class="best-seller-banner" aria-label="Most popular plan">MOST POPULAR</div>
@@ -1087,6 +1092,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
     </div>
   </div>
 
+  <!--
   <div id="valueModal" class="modal">
     <div class="modal-content">
       <!-- <span class="close">&times;</span> -->
@@ -1146,6 +1152,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
       </p> -->
     </div>
   </div>
+  -->
 
   <script>
     let scrollTracked = false;

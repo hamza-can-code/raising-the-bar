@@ -30,6 +30,9 @@
   <title>Claim my plan</title>
   <script>
     window.RTB_CREATOR_SLUG = 'decoded';
+    if (!localStorage.getItem('selectedProgram') || localStorage.getItem('selectedProgram') === 'trial') {
+      localStorage.setItem('selectedProgram', '4-week');
+    }
   </script>
   <!-- 1️⃣ LOAD the real Stripe SDK first (blocks parsing, 30 ms) -->
   <link rel="preconnect" href="https://js.stripe.com" crossorigin>
@@ -580,7 +583,7 @@ placeholder.replaceWith(iframe);
 </div> -->
 
       <!-- Offer Cards -->
-      <div class="offer-card offer-tier" data-program="trial">
+      <!-- <div class="offer-card offer-tier" data-program="trial">
         <div class="offer-left">
           <div class="duration"><strong>1-Week Trial</strong></div>
           <div class="full-price" data-full-price="£4.99">
@@ -593,7 +596,7 @@ placeholder.replaceWith(iframe);
           </div>
           <div class="per-day">per day</div>
         </div>
-      </div>
+      </div> -->
 
       <div class="offer-card offer-tier" data-program="4-week">
         <div class="best-seller-banner" aria-label="Most popular plan">MOST POPULAR</div>
@@ -645,7 +648,9 @@ placeholder.replaceWith(iframe);
         By continuing, you agree to our
         <a href="tos.html" target="_blank">terms</a> and
         <a href="refund-policy.html" target="_blank">refund policy</a>.
-         Covered by
+        Your plan renews every 30 days at
+        <span class="renew-amt"></span>/month unless cancelled.
+        Covered by
         <a href="#moneyBackGuarantee" id="moneyBackGuaranteeLink" class="mbg-scroll-link">
           Money-Back Guarantee
         </a>.
@@ -1090,9 +1095,10 @@ alert('Could not initialise PayPal. Please refresh and try again.');
     </div>
   </div>
 
+  <!--
   <div id="valueModal" class="modal">
     <div class="modal-content">
-      <!-- <span class="close">&times;</span> -->
+      <span class="close">&times;</span>
 
       <h2 id="valueModalHeader"></h2>
       <p id="scratchCompletionNote" class="promo-strip__rarity" hidden>
@@ -1101,20 +1107,18 @@ alert('Could not initialise PayPal. Please refresh and try again.');
         This is rare - don’t let it expire.
       </p>
 
-      <!-- <p class="subtext">
+       <p class="subtext">
           <strong>Scratch the card to reveal your promo.</strong><br>
           Promo auto-applies at checkout — ends in <span id="scratchMirrorTimerNote">10:00</span>
       </p> -->
 
-      <div class="scratch-wrap">
+      <!-- <div class="scratch-wrap">
         <div class="scratch-card" role="group" aria-label="Scratch to reveal your discount">
           <div class="scratch-reveal">
             <div class="reveal-content">
               <div class="discount-badge">
                 <span class="discount-badge__main">51% OFF</span>
-                <!-- <span class="discount-badge__bonus">+ Free Coach Call</span> -->
               </div>
-              <!-- <p class="reveal-sub">Your 12-Week Plan is free!</p> -->
               <p id="promoCodeLine" class="promo-code-line" hidden></p>
               <p id="scratchDiscountNote" class="reveal-small" hidden>
                 Auto-applies at checkout · Ends in
@@ -1122,7 +1126,6 @@ alert('Could not initialise PayPal. Please refresh and try again.');
               </p>
             </div>
             <canvas id="scratchCanvas"></canvas>
-            <!-- Finger-movement hint -->
             <div id="scratchHint" class="scratch-hint" aria-hidden="true">
               <div class="orbit">
                 <div class="dot"></div>
@@ -1132,23 +1135,17 @@ alert('Could not initialise PayPal. Please refresh and try again.');
           </div>
           <button id="scratchReset" class="link-btn" type="button" hidden>Reset</button>
         </div>
-      </div>
+      </div> -->
 
-      <div class="modal-actions">
+      <!-- <div class="modal-actions">
         <button id="valueContinue" class="primary-btn">Continue</button>
-        <!-- <a id="valueDemo" href="https://www.youtube.com/shorts/H_aOWlPujIg" target="_blank" rel="noopener"
-          class="secondary-btn">
-          Watch&nbsp;Demo
-        </a> -->
       </div>
       <p class="urgency-note">
         ⏳ <strong>Claim your plan before the discount ends.</strong>
       </p>
-      <!-- <p class="skip-link">
-        <a href="#" id="valueSkip">No thanks, just take me to the plan</a>
-      </p> -->
     </div>
-  </div>
+  </div> -->
+
 
   <script>
     let scrollTracked = false;
@@ -1198,7 +1195,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
       localStorage.setItem('rtb_currency', JSON.stringify(window.RTB_CURRENCY));
     })();
   </script>
-  <script src="../scripts/offer.js"></script>
+  <script src="../scripts/offer-decoded.js"></script>
   <!-- leave Stripe.js -->
 
   <!-- then YOUR payment.js – pick one path and delete the other -->

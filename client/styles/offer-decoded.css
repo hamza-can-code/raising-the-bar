@@ -1314,7 +1314,7 @@ body.offer-page {
     text-decoration: none;
     /* Removes underline */
     background: linear-gradient(135deg, #FF7A00, #FF8F1F);
-    color: #1E497C;
+
 
     /* Vibrant blue for attention */
     color: #fff;
@@ -1423,7 +1423,6 @@ body.offer-page {
 
     .claim-program-btn:hover {
         background: linear-gradient(135deg, #FF7A00, #FF8F1F);
-        color: #1E497C;
 
         /* Darker blue on hover */
         box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
