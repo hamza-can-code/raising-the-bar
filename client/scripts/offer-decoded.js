@@ -283,7 +283,7 @@ By continuing, you agree to our
 <a href="tos.html" target="_blank" class="legal-link">terms</a> and
 <a href="refund-policy.html" target="_blank" class="legal-link">refund policy</a>.
 Your plan renews every 30 days at
-        <span class="renew-amt">${selectedPricing?.renewalFormatted || ''}</span>/month unless cancelled.
+        <span class="renew-amt">${selectedPricing?.renewalFormatted || ''}</span>/month unless cancelled. Cancel anytime in one click.
 Covered by
 <a href="#moneyBackGuarantee" id="moneyBackGuaranteeLink" class="mbg-scroll-link">
   Money-Back Guarantee
@@ -2173,20 +2173,17 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Chris',
       rating: 4,
       time: 'Today',
-      text: 'really good app, best one ive tried bc it covers both workouts and nutrition at top quality and the results speak for themself (lost 3kg in a week and feel healthier than ever). Idk how i feel abt the random discounts tho. Like i got 25% off and was buzzing but just saw someone got 51% off?? idm TOO much cuz this app is worth the money but if i got a 51% code i wouldve used it in a heartbeat lmao',
-    },
+   text: 'really good app, best one ive tried bc it covers both workouts and nutrition at top quality and the results speak for themself (lost 3kg in a week and feel healthier than ever). the lil sleep + stress notes keep me from overdoing it. only wish every warmup had vids but its still the best ive used tbh',    },
     {
       name: 'THE ALPHA',
       rating: 4,
       time: 'Today',
-      text: 'Been using this for a couple of weeks and its genuinely amazing (avging 2kg muscle per week). Was going to rate 5 stars but i littraly just read someone got 51% off like wtf i only got 3% off 💔 still worth it tho',
-    },
+  text: 'Been watching decoded gains tiktok for a week or so, I found his vids helpful so thought id gv his app a go. been using this for a couple of weeks and its genuinely amazing (avging 2kg muscle per week). Was going to rate 5 stars but the rest timer bugged once on me so im leaving a 4 til they patch it 💔 still worth it tho',    },
     {
       name: 'alex',
       rating: 5,
       time: 'Today',
-      text: 'so yesterday i did the quiz and everythuing then i got an offer for 51% off. I was skeptical but decided to give it a shot and bro this is sick wouldve been silly saying no in hindsight',
-    },
+  text: 'so yesterday i did the quiz and everythuing I was skeptical but decided to give it a shot and bro this is sick wouldve been silly saying no in hindsight',    },
     {
       name: 'Sephy xx',
       rating: 5,
@@ -2216,13 +2213,13 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'sully',
       rating: 5,
       time: 'Today',
-      text: 'got 77% off for my promo what a steal',
+      text: 'got 51% off what a steal',
     },
     {
       name: 'Cal',
       rating: 5,
       time: 'Today',
-      text: 'nice to have an app where i can track workouts and meals rather than juggling multiple apps. plus i got 52% off lfg',
+      text: 'nice to have an app where i can track workouts and meals rather than juggling multiple apps. plus i got 51% off lfg',
     },
     {
       name: 'Diego',
@@ -2260,7 +2257,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Kyra L',
       rating: 5,
       time: 'Yesterday',
-      text: 'Didn’t expect the meals to be this college-budget-friendly, plus i got 23% off woop woop. Big W for the grocery lists.',
+      text: 'Didn’t expect the meals to be this college-budget-friendly. Big W for the grocery lists.',
     },
     {
       name: 'layla',
@@ -2292,7 +2289,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'kia malifa',
       rating: 5,
       time: '2 days ago',
-      text: 'i got 69% off. nice. and yh the apps good too',
+      text: 'the lil streak bar scratches my brain in the best way.. and yh the apps good too',
     },
     {
       name: 'Maddie',

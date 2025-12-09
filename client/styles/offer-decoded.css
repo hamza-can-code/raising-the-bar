@@ -3261,6 +3261,11 @@ body.offer-page {
     text-align: center;
 }
 
+.powered {
+    font-size: 0.75rem !important;
+    letter-spacing: 0.2rem;
+}
+
 .footer-content {
     max-width: 600px;
     margin: 0 auto;
@@ -3629,6 +3634,7 @@ body.modal-open .floating-cta {
     /* ← the magic “space from the edge” */
     box-sizing: border-box;
     position: relative;
+    color: var(--brand-ivory);
 }
 
 .pay-toggle {
