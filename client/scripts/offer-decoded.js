@@ -289,7 +289,7 @@ Covered by
   Money-Back Guarantee
 </a>.
 Need reassurance?
-<button type="button" class="rating-summary__link reassurance__reviews-link" id="reassuranceReviewsLink">
+<button type="button" class="rating-summary__link reassurance__reviews-link" id="reassuranceReviewsLink" data-scroll-target="reviews">
   Read reviews
 </button>
 `;
@@ -2132,8 +2132,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const reviewsList = document.getElementById('reviewsList');
   const reviewsPagination = document.getElementById('reviewsPagination');
   const reviewComposer = document.getElementById('reviewComposer');
-  const readReviewsLink = document.getElementById('readReviewsLink');
-  const reassuranceReviewsLink = document.getElementById('reassuranceReviewsLink');
 
   if (!reviewsSection || !reviewsList || !reviewsPagination) return;
 
@@ -2915,8 +2913,10 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollToReviews({ collapseOfferCard: true });
   };
 
-  [readReviewsLink, reassuranceReviewsLink].forEach((trigger) => {
-    trigger?.addEventListener('click', handleReviewsTrigger);
+  document.addEventListener('click', (event) => {
+    const trigger = event.target.closest('[data-scroll-target="reviews"]');
+    if (!trigger) return;
+    handleReviewsTrigger(event);
   });
 
   reviewComposer?.addEventListener('submit', (e) => {

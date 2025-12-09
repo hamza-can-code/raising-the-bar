@@ -41,6 +41,30 @@
   };
   const SUCCESS_PATH = CREATOR_SUCCESS_PATHS[getCreatorSlug()] || '/pages/plan-building.html';
   const RETURN_URL = `${window.location.origin}${SUCCESS_PATH}`;
+  const PAYMENT_APPEARANCE = {
+    theme: 'night',
+    variables: {
+      colorText: '#e8edf6',
+      colorTextSecondary: '#c8d4e6',
+      colorTextPlaceholder: '#b7c5db',
+      colorBackground: '#0f1d33',
+      colorPrimary: '#ff8f1f',
+      colorIcon: '#e8edf6',
+      borderRadius: '10px',
+      fontFamily: "'Poppins', 'Roboto', system-ui, -apple-system, sans-serif",
+    },
+    rules: {
+      '.Input': {
+        color: '#e8edf6',
+        backgroundColor: '#0f1d33',
+        borderColor: '#324a66',
+      },
+      '.Label': { color: '#d9e3f2' },
+      '.Tab': { color: '#c8d4e6' },
+      '.Tab:focus': { color: '#ffffff' },
+      '.Tab--selected': { color: '#0f1d33', backgroundColor: '#e8edf6' },
+    },
+  };
 
   /* ——————————————————————————————————————————————————————————— */
   /* 3.  DOM handles                                               */
@@ -212,11 +236,11 @@
 
       stripeJs = stripeJs || stripe(STRIPE_PK);
       if (!elements) {
-        elements = stripeJs.elements({ clientSecret });
+        elements = stripeJs.elements({ clientSecret, appearance: PAYMENT_APPEARANCE });
         mountPaymentUI(); // mount once
         document.dispatchEvent(new Event('stripe-elements-ready'));
       } else if (force) {
-        elements.update({ clientSecret }); // update secret if we force refresh
+        elements.update({ clientSecret, appearance: PAYMENT_APPEARANCE }); // update secret if we force refresh
       }
 
       // Wallet button (Apple Pay / GPay)

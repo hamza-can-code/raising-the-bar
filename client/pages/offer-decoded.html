@@ -495,7 +495,7 @@ placeholder.replaceWith(iframe);
 
       <div class="rating-summary__reassurance">
         <p>Need reassurance?</p>
-        <button class="rating-summary__link" id="readReviewsLink" type="button">
+        <button class="rating-summary__link" id="readReviewsLink" type="button" data-scroll-target="reviews">
           Read reviews
         </button>
       </div>
@@ -655,7 +655,8 @@ placeholder.replaceWith(iframe);
           Money-Back Guarantee
         </a>.
         Need reassurance?
-        <button type="button" class="rating-summary__link reassurance__reviews-link" id="reassuranceReviewsLink">
+        <button type="button" class="rating-summary__link reassurance__reviews-link" id="reassuranceReviewsLink"
+          data-scroll-target="reviews">
           Read reviews
         </button>
       </p>
@@ -675,8 +676,8 @@ placeholder.replaceWith(iframe);
 
   <p id="postPayNote" class="post-pay-note" style="display:none;text-align:center;margin-top:12px;">
     ✅ <strong>After checkout
-       <!-- (<span id="checkoutPrice">—</span>) -->
-       , your plan unlocks immediately</strong> – you’ll
+      <!-- (<span id="checkoutPrice">—</span>) -->
+      , your plan unlocks immediately</strong> – you’ll
     land on your dashboard.
   </p>
 
@@ -707,6 +708,10 @@ Card
 </div> -->
 
       <p id="planSummary" class="plan-summary">12-Week Plan</p>
+      <p class="payment-powered">
+        Payments are securely processed by Stripe on behalf of Raising The Bar App Ltd, the platform powering this
+        experience.
+      </p>
       <!-- PayPal -->
       <!-- <div id="paypalMarkContainer" style="margin-top:20px;"></div> -->
 
@@ -928,12 +933,12 @@ alert('Could not initialise PayPal. Please refresh and try again.');
 
     <div class="reviews-pagination" id="reviewsPagination" aria-label="Review pages"></div>
 
-      <div class="post-faq-cta">
-    <button type="button" class="claim-program-btn" data-open-value-modal>
-      Claim My Plan
-    </button>
-  </div>
-  
+    <div class="post-faq-cta">
+      <button type="button" class="claim-program-btn" data-open-value-modal>
+        Claim My Plan
+      </button>
+    </div>
+
   </section>
 
   <!-- FAQ Section -->
@@ -1113,7 +1118,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
           Promo auto-applies at checkout — ends in <span id="scratchMirrorTimerNote">10:00</span>
       </p> -->
 
-      <!-- <div class="scratch-wrap">
+  <!-- <div class="scratch-wrap">
         <div class="scratch-card" role="group" aria-label="Scratch to reveal your discount">
           <div class="scratch-reveal">
             <div class="reveal-content">
@@ -1138,7 +1143,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
         </div>
       </div> -->
 
-      <!-- <div class="modal-actions">
+  <!-- <div class="modal-actions">
         <button id="valueContinue" class="primary-btn">Continue</button>
       </div>
       <p class="urgency-note">

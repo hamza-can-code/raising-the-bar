@@ -3637,6 +3637,13 @@ body.modal-open .floating-cta {
     color: var(--brand-ivory);
 }
 
+.payment-powered {
+    margin: 6px 0 12px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #c8d4e6;
+}
+
 .pay-toggle {
     --pad: 4px;
     /* inner padding / slider gap */
