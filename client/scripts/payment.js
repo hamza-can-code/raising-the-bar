@@ -36,7 +36,10 @@
 
   const STRIPE_PK = 'pk_live_51RJa8007mQ8fzyxpyrHP8Tk9GMzRnhG06vVUTe5mAnpcAacIj8fRmwuRYBpEIr1tRvFqe5nQqpofCURgCHaPASbS00wwfmtIvU';
   // const RETURN_URL = `${window.location.origin}/pages/dashboard.html`;
-  const SUCCESS_PATH = '/pages/plan-building.html';
+  const CREATOR_SUCCESS_PATHS = {
+    decoded: '/pages/thank-you-decoded.html',
+  };
+  const SUCCESS_PATH = CREATOR_SUCCESS_PATHS[getCreatorSlug()] || '/pages/plan-building.html';
   const RETURN_URL = `${window.location.origin}${SUCCESS_PATH}`;
 
   /* ——————————————————————————————————————————————————————————— */
@@ -196,16 +199,16 @@
         body: JSON.stringify(payload)
       });
 
-      const payload = await resp.json();
+      const respPayload = await resp.json();
 
-      if (!resp.ok || payload.error) {
-        const msg = payload.error || 'Could not prepare payment. Please try again.';
+      if (!resp.ok || respPayload.error) {
+        const msg = respPayload.error || 'Could not prepare payment. Please try again.';
         showError(msg);
         throw new Error(msg);
       }
 
-      clientSecret = payload.clientSecret;
-      intentType = payload.intentType || 'payment';
+      clientSecret = respPayload.clientSecret;
+      intentType = respPayload.intentType || 'payment';
 
       stripeJs = stripeJs || stripe(STRIPE_PK);
       if (!elements) {

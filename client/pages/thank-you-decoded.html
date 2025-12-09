@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+  <title>Thank you for your order | decoded</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../styles/thank-you-decoded.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-W9CSNHSLQQ');
+  </script>
+  <script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "rmf0p7sik4");
+  </script>
+</head>
+
+<body>
+  <header class="ty-header" role="banner">
+    <a class="brand" href="/pages/dashboard-decoded.html">
+      <img src="../assets/decoded-gains-logo.png" alt="decoded logo" loading="eager"
+        decoding="async">
+    </a>
+  </header>
+
+  <main class="ty-main" role="main">
+    <section class="ty-card" aria-labelledby="ty-title">
+      <p class="kicker">Order confirmed</p>
+      <h1 id="ty-title">Thank you for your order</h1>
+      <p class="lede">Your decoded coaching access is ready. We’re taking you to your dashboard so you can start right away.</p>
+
+      <div class="progress" role="status" aria-live="polite">
+        <div class="progress-bar" aria-label="Redirecting" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <span class="progress-fill" id="progressFill" aria-hidden="true"></span>
+        </div>
+        <p class="countdown">Redirecting in <span id="redirectSeconds">5</span> seconds…</p>
+      </div>
+
+      <div class="actions">
+        <a id="goNow" class="cta" href="/pages/dashboard-decoded.html">Go to my dashboard now</a>
+        <p class="hint">We’ve sent a receipt and login reminder to your email.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const DASHBOARD_URL = '/pages/dashboard-decoded.html';
+      const REDIRECT_MS = 5000;
+      const countdownEl = document.getElementById('redirectSeconds');
+      const progressFill = document.getElementById('progressFill');
+      const goNow = document.getElementById('goNow');
+      let redirected = false;
+
+      goNow.addEventListener('click', () => {
+        redirected = true;
+      });
+
+      function redirect() {
+        if (!redirected) {
+          redirected = true;
+          window.location.href = DASHBOARD_URL;
+        }
+      }
+
+      function tick(start) {
+        return function step(now) {
+          if (redirected) return;
+          const elapsed = now - start;
+          const clamped = Math.min(elapsed, REDIRECT_MS);
+          const remaining = Math.max(0, Math.ceil((REDIRECT_MS - clamped) / 1000));
+          const progress = Math.min(1, clamped / REDIRECT_MS);
+
+          countdownEl.textContent = remaining.toString();
+          progressFill.style.transform = `scaleX(${progress})`;
+
+          if (clamped >= REDIRECT_MS) {
+            redirect();
+          } else {
+            requestAnimationFrame(step);
+          }
+        };
+      }
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        progressFill.style.transition = 'none';
+        progressFill.style.transform = 'scaleX(1)';
+        countdownEl.textContent = '0';
+        setTimeout(redirect, 300);
+        return;
+      }
+
+      requestAnimationFrame((start) => {
+        requestAnimationFrame(tick(start));
+        setTimeout(redirect, REDIRECT_MS + 200);
+      });
+    })();
+  </script>
+</body>
+
+</html>

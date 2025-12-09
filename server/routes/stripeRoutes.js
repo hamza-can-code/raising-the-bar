@@ -13,6 +13,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2024-04-10',
 });
 
+console.log('[Stripe init] key =', process.env.STRIPE_SECRET_KEY);
+
 const FRONTEND_URL = process.env.FRONTEND_URL;
 
 function parseMinorUnit(value, fallback = null) {
@@ -64,10 +66,28 @@ async function resolveCreator(creatorSlug) {
    - Keep only the currencies you actually configured
    - Add/remove keys freely; fallback is GBP
    ────────────────────────────────────────────────────────── */
+const SUPPORTED_CURRENCIES = [
+  'GBP', 'USD', 'EUR', 'SEK', 'NOK', 'DKK', 'CAD', 'CHF', 'AUD', 'NZD', 'SGD', 'HKD', 'JPY', 'INR', 'BRL', 'MXN',
+];
+
+function buildPriceMap(prefix, currencies = SUPPORTED_CURRENCIES, { suffix = '' } = {}) {
+  const map = {};
+
+  currencies.forEach(code => {
+    const envKey = `${prefix}_${code}${suffix}`;
+    if (process.env[envKey]) map[code] = process.env[envKey];
+  });
+
+  const gbpKey = `${prefix}_GBP${suffix}`;
+  if (!map.GBP && process.env[gbpKey]) map.GBP = process.env[gbpKey];
+
+  return map;
+}
+
 const PLAN_PRICE_IDS = {
-  trial: { GBP: process.env.PRICE_TRIAL_UPFRONT_GBP },
-  '4-week': { GBP: process.env.PRICE_FOUR_WEEK_GBP },
-  '12-week': { GBP: process.env.PRICE_TWELVE_WEEK_GBP },
+  trial: buildPriceMap('PRICE_TRIAL_UPFRONT'),
+  '4-week': buildPriceMap('PRICE_FOUR_WEEK'),
+  '12-week': buildPriceMap('PRICE_TWELVE_WEEK'),
 };
 
 const PLAN_COUPONS = {
@@ -77,8 +97,8 @@ const PLAN_COUPONS = {
 
 const CREATOR_PLAN_PRICE_IDS = {
   decoded: {
-    trial: { GBP: process.env.PRICE_TRIAL_UPFRONT_GBP_DECODED },
-    '12-week': { GBP: process.env.PRICE_TWELVE_WEEK_GBP_DECODED },
+    '4-week': buildPriceMap('PRICE_FOUR_WEEK', SUPPORTED_CURRENCIES, { suffix: '_DECODED' }),
+    '12-week': buildPriceMap('PRICE_TWELVE_WEEK', SUPPORTED_CURRENCIES, { suffix: '_DECODED' }),
   },
 };
 
@@ -95,6 +115,14 @@ const PLAN_LABELS = {
   '12-week': '12-Week Plan',
 };
 
+const CREATOR_SUCCESS_PATHS = {
+  decoded: '/pages/thank-you-decoded.html',
+};
+
+const CREATOR_OFFER_PATHS = {
+  decoded: '/pages/offer-decoded.html',
+};
+
 function getRecurringConfigForPlan(plan) {
   if (plan === '12-week') return { interval: 'month', interval_count: 3 };
   return { interval: 'month', interval_count: 1 };
@@ -102,6 +130,35 @@ function getRecurringConfigForPlan(plan) {
 
 function log(label, obj) {
   console.log(`🟡 ${label}`, util.inspect(obj, { depth: 4, colors: true }));
+}
+
+function evaluateDestinationEligibility(account) {
+  if (!account) return { eligible: false, reason: 'missing_account' };
+
+  const caps = account.capabilities || {};
+  const settlementCapable = ['transfers', 'crypto_transfers', 'legacy_payments']
+    .some(cap => caps[cap] === 'active');
+
+  if (!settlementCapable) {
+    return { eligible: false, reason: 'capability_missing' };
+  }
+
+  return { eligible: true, reason: null };
+}
+
+async function fetchDestinationAccount(destination) {
+  if (!destination) return { valid: false, account: null, reason: 'missing_destination' };
+  try {
+    const account = await stripe.accounts.retrieve(destination);
+    const eligibility = evaluateDestinationEligibility(account);
+    return { valid: eligibility.eligible, account, reason: eligibility.reason };
+  } catch (err) {
+    if (err?.code === 'resource_missing' || err?.statusCode === 404) {
+      console.warn('⚠️  Invalid connect destination; falling back to platform charges.', destination);
+      return { valid: false, account: null, reason: 'not_found' };
+    }
+    throw err;
+  }
 }
 
 function normalizeCreatorSlug(slug) {
@@ -134,6 +191,14 @@ function getBonusAmount(currencyCode) {
     throw new Error(`Missing BONUS price configuration for currency ${currency}`);
   }
   return { currency, amount };
+}
+
+function shouldFallbackToPlatform(err) {
+  const msg = err?.message?.toLowerCase?.() || '';
+  return (
+    msg.includes('destination charge')
+    || msg.includes('destination account needs to have at least one of the following capabilities enabled')
+  );
 }
 
 async function ensureStripeCustomer(email) {
@@ -171,6 +236,8 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       creatorSlug,
     } = req.body;
 
+    const normalizedCreator = normalizeCreatorSlug(creatorSlug);
+
     if (!email) return res.status(400).json({ error: 'Email is required' });
 
     const origin = req.get('origin');
@@ -179,7 +246,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       return res.status(500).json({ error: 'Missing FRONTEND_URL and request origin' });
     }
 
-    const planInfo = getPlanPriceId(plan, currency, creatorSlug);
+    const planInfo = getPlanPriceId(plan, currency, normalizedCreator);
     if (!planInfo) {
       return res.status(500).json({ error: `Missing price configuration for plan ${plan} (${currency || 'GBP'})` });
     }
@@ -187,17 +254,25 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
     const couponId = discounted ? getCouponIdForPlan(normalizedPlan, ccy, creatorSlug) : null;
 
     let creatorConfig = null;
-    if (creatorSlug) {
-      creatorConfig = await resolveCreator(creatorSlug);
+    if (normalizedCreator) {
+      creatorConfig = await resolveCreator(normalizedCreator);
     }
+
+    const successPath = normalizedCreator
+      ? (CREATOR_SUCCESS_PATHS[normalizedCreator] || '/pages/plan-building.html')
+      : '/pages/plan-building.html';
+
+    const cancelPath = normalizedCreator
+      ? (CREATOR_OFFER_PATHS[normalizedCreator] || '/pages/offer.html')
+      : '/pages/offer.html';
 
     const sessionCfg = {
       mode: 'subscription',
       line_items: [{ price: priceId, quantity: 1 }],
       customer_email: email,
       client_reference_id: client_reference_id || undefined,
-      success_url: `${successBase}/pages/plan-building.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${successBase}/pages/offer.html`,
+      success_url: `${successBase}${successPath}?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${successBase}${cancelPath}`,
 
       // ✅ Always force card entry, even if trial
       payment_method_collection: 'always',
@@ -219,18 +294,29 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
     }
 
     if (creatorConfig) {
-      sessionCfg.subscription_data = {
+      const { valid: destinationValid, account: destinationAccount, reason: destinationReason } =
+        await fetchDestinationAccount(creatorConfig.destination);
+      const subscriptionData = {
         ...(sessionCfg.subscription_data || {}),
-        transfer_data: { destination: creatorConfig.destination },
-        application_fee_percent: creatorConfig.introFeePercent,
         metadata: {
           ...(sessionCfg.subscription_data?.metadata || {}),
           creator_slug: creatorConfig.creator.slug,
           creator_name: creatorConfig.creator.name,
           platform_intro_fee_percent: String(creatorConfig.introFeePercent),
           platform_ongoing_fee_percent: String(creatorConfig.ongoingFeePercent),
+          connect_destination_valid: String(destinationValid),
+          connect_destination_country: destinationAccount?.country,
+          connect_destination_reason: destinationReason,
         },
       };
+
+      if (destinationValid) {
+        subscriptionData.transfer_data = { destination: creatorConfig.destination };
+        subscriptionData.application_fee_percent = creatorConfig.introFeePercent;
+        subscriptionData.on_behalf_of = creatorConfig.destination;
+      }
+
+      sessionCfg.subscription_data = subscriptionData;
 
       sessionCfg.metadata = {
         ...(sessionCfg.metadata || {}),
@@ -238,6 +324,9 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
         creator_name: creatorConfig.creator.name,
         platform_intro_fee_percent: String(creatorConfig.introFeePercent),
         platform_ongoing_fee_percent: String(creatorConfig.ongoingFeePercent),
+        connect_destination_valid: String(destinationValid),
+        connect_destination_country: destinationAccount?.country,
+        connect_destination_reason: destinationReason,
       };
     }
 
@@ -259,6 +348,7 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
   console.log('\n───────── /create-subscription-intent ─────────');
   try {
     const { email, discounted = false, currency, plan = 'trial', creatorSlug } = req.body;
+    const normalizedCreator = normalizeCreatorSlug(creatorSlug);
     log('Incoming payload', req.body);
     if (!email) return res.status(400).json({ error: 'Email required' });
 
@@ -268,7 +358,7 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
     log('Customer', { id: customer.id, email: customer.email });
 
     // 2) choose price & coupon by currency
-    const planInfo = getPlanPriceId(plan, currency, creatorSlug);
+    const planInfo = getPlanPriceId(plan, currency, normalizedCreator);
     if (!planInfo) {
       return res.status(500).json({ error: `Missing price configuration for plan ${plan} (${currency || 'GBP'})` });
     }
@@ -298,8 +388,8 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
       : [{ price: priceId }];
 
     let creatorConfig = null;
-    if (creatorSlug) {
-      creatorConfig = await resolveCreator(creatorSlug);
+    if (normalizedCreator) {
+      creatorConfig = await resolveCreator(normalizedCreator);
     }
 
     // 3) create subscription in incomplete state (for Elements confirmation)
@@ -321,19 +411,52 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
     };
 
     if (creatorConfig) {
-      subCfg.transfer_data = { destination: creatorConfig.destination };
-      subCfg.application_fee_percent = creatorConfig.introFeePercent;
+      const { valid: destinationValid, account: destinationAccount, reason: destinationReason } =
+        await fetchDestinationAccount(creatorConfig.destination);
+      if (destinationValid) {
+        subCfg.transfer_data = { destination: creatorConfig.destination };
+        subCfg.application_fee_percent = creatorConfig.introFeePercent;
+        subCfg.on_behalf_of = creatorConfig.destination;
+      }
       subCfg.metadata = {
         ...(subCfg.metadata || {}),
         creator_slug: creatorConfig.creator.slug,
         creator_name: creatorConfig.creator.name,
         platform_intro_fee_percent: String(creatorConfig.introFeePercent),
         platform_ongoing_fee_percent: String(creatorConfig.ongoingFeePercent),
-        connect_intro_applied: 'false',
+        connect_intro_applied: String(destinationValid),
+        connect_destination_valid: String(destinationValid),
+        connect_destination_country: destinationAccount?.country,
+        connect_destination_reason: destinationReason,
       };
     }
     log('Subscription create config', subCfg);
-    const sub = await stripe.subscriptions.create(subCfg);
+    let sub;
+    try {
+      sub = await stripe.subscriptions.create(subCfg);
+    } catch (err) {
+      const needsConnectFallback = creatorConfig && subCfg.transfer_data && shouldFallbackToPlatform(err);
+
+      if (needsConnectFallback) {
+        console.warn('⚠️  Connect destination settlement failed; retrying on platform.', err.message);
+        const fallbackCfg = {
+          ...subCfg,
+          metadata: {
+            ...(subCfg.metadata || {}),
+            connect_destination_fallback: 'platform_charge',
+          },
+        };
+
+        delete fallbackCfg.transfer_data;
+        delete fallbackCfg.application_fee_percent;
+        delete fallbackCfg.on_behalf_of;
+
+        log('Subscription fallback config', fallbackCfg);
+        sub = await stripe.subscriptions.create(fallbackCfg);
+      } else {
+        throw err;
+      }
+    }
     log('Subscription', { id: sub.id, status: sub.status });
 
     // 4) extract PaymentIntent for client_secret
