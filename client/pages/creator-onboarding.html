@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+  <title>Creator Onboarding | Raising The Bar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/connect-onboarding.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-W9CSNHSLQQ');
+  </script>
+  <script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "rmf0p7sik4");
+  </script>
+  <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject = t; var ttq = w[t] = w[t] || []; ttq.methods = ["page", "track", "identify", "instances", "debug",
+        "on", "off", "once",
+        "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"], ttq.setAndDefer = function (t, e
+        ) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } }; for (var i = 0; i < ttq.methods.length; i++)ttq.setAndDefer(ttq, ttq.methods[i]); ttq.instance = function (t) {
+          for (
+            var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++)ttq.setAndDefer(e, ttq.methods[n]); return e
+        }, ttq.load = function (e, n) {
+          var r = "https://analytics.tiktok.com/i18n/pixel/events.js", o = n && n.partner; ttq._i = ttq._i || {}, ttq._i[e] = [], ttq._i[e]._u = r, ttq._t = ttq._t || {}, ttq._t[e] = +new Date, ttq._o = ttq._o || {}, ttq._o[e] = n || {}; n = document.createElement("script")
+            ; n.type = "text/javascript", n.async = !0, n.src = r + "?sdkid=" + e + "&lib=" + t; e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(n, e)
+        };
+
+
+      ttq.load('D0M3KORC77UCAFR1EOLG');
+      ttq.page();
+    }(window, document, 'ttq');
+  </script>
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1217477006533345');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1217477006533345&ev=PageView&noscript=1" alt="Facebook pixel" /></noscript>
+</head>
+
+<body>
+  <header class="header" role="banner">
+    <div class="logo">
+      <a href="/pages/home.html" aria-label="Raising The Bar home">
+        <img src="../assets/creator-program-logo.png" alt="Raising The Bar logo" loading="lazy">
+      </a>
+    </div>
+    <span class="badge" aria-label="Creator payouts">
+      Creator payouts · Secure with Stripe
+    </span>
+  </header>
+
+  <main class="main" role="main">
+    <section class="card -highlight" aria-labelledby="onboarding-start">
+      <div class="status-row">
+        <div class="status-icon" aria-hidden="true">✓</div>
+        <div>
+          <p class="badge" style="margin: 0;">Invite-only</p>
+        </div>
+      </div>
+      <h1 id="onboarding-start">Set up your creator payouts</h1>
+      <p class="lede" id="intro-copy">We'll open Stripe in a new tab so you can verify your details and add a payout account.</p>
+
+      <div class="input-row" style="margin: 16px 0 12px;">
+        <label for="slug-input" class="lede" style="display: block; margin-bottom: 6px;">Invite code</label>
+        <input id="slug-input" name="slug" type="text" inputmode="text" autocomplete="off" spellcheck="false"
+          placeholder="e.g. creator-name" aria-describedby="slug-help" style="width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid #d0d0d0; font-size: 16px;">
+        <p id="slug-help" class="lede" style="margin: 6px 0 0; color: #4a4a4a;">If you don't know your invite code, please contact us.</p>
+      </div>
+
+      <div class="cta-row">
+        <button class="primary" id="start-onboarding" type="button">Start secure onboarding</button>
+        <p class="lede status" id="status-message" role="status" aria-live="polite"></p>
+      </div>
+
+      <div class="meta-panel" style="margin-top: 20px;">
+        <h2 style="margin: 0 0 8px;">Why this link is stable</h2>
+        <p style="margin: 0;">The Stripe link is created only after you click the button above, so preview bots can't burn your invite.</p>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="faq">
+      <div class="meta-panel">
+        <h2 id="faq">Need help?</h2>
+        <p>If the link doesn't open or you need changes to your account, contact our team and we'll resend access.</p>
+        <a class="secondary" href="/pages/contact-us.html">Contact support</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div>&copy; 2025 Raising The Bar App Ltd. All rights reserved.</div>
+    <div class="links">
+      <a href="/pages/home.html">Start Training</a>
+      <span aria-hidden="true">•</span>
+      <a href="/pages/legal-overview.html">Our Policies</a>
+      <span aria-hidden="true">•</span>
+      <a href="/pages/contact-us.html">Contact Us</a>
+    </div>
+  </footer>
+
+  <script>
+    const statusEl = document.getElementById('status-message');
+    const introCopy = document.getElementById('intro-copy');
+    const startButton = document.getElementById('start-onboarding');
+    const slugInput = document.getElementById('slug-input');
+
+    function getSlugFromQuery() {
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get('slug');
+      return slug ? slug.trim().toLowerCase() : '';
+    }
+
+    function resolveSlug() {
+      return (slugInput.value || getSlugFromQuery() || '').trim().toLowerCase();
+    }
+
+    function setStatus(message, isError = false) {
+      statusEl.textContent = message;
+      statusEl.classList.toggle('is-error', Boolean(message) && isError);
+      statusEl.classList.toggle('is-visible', Boolean(message));
+    }
+
+    async function startOnboarding() {
+      const slug = resolveSlug();
+      if (!slug) {
+        setStatus('Add your invite code (the slug) before continuing.', true);
+        slugInput.focus();
+        return;
+      }
+
+      startButton.disabled = true;
+      slugInput.disabled = true;
+      startButton.textContent = 'Preparing your Stripe link…';
+      setStatus('Sit tight while we open Stripe.', false);
+
+      try {
+        const response = await fetch(`/api/connect/creators/${encodeURIComponent(slug)}/onboarding-link`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+        });
+
+        const payload = await response.json();
+        if (!response.ok) {
+          throw new Error(payload?.error || 'Could not start onboarding.');
+        }
+
+        if (!payload.onboardingLink) {
+          throw new Error('No onboarding link was returned.');
+        }
+
+        window.location.href = payload.onboardingLink;
+      } catch (err) {
+        console.error(err);
+        startButton.disabled = false;
+        slugInput.disabled = false;
+        startButton.textContent = 'Start secure onboarding';
+        setStatus(err.message || 'Something went wrong. Please try again or contact support.', true);
+      }
+    }
+
+    function hydratePage() {
+      const slugFromUrl = getSlugFromQuery();
+      if (!slugFromUrl) {
+        introCopy.textContent = 'Paste your invite code below to generate your secure Stripe link.';
+        startButton.disabled = true;
+      } else {
+        slugInput.value = slugFromUrl;
+        introCopy.textContent = `This link is for ${slugFromUrl}. If this is not you, contact support before continuing.`;
+      }
+
+      const toggleStartButton = () => {
+        const hasSlug = resolveSlug().length > 0;
+        startButton.disabled = !hasSlug;
+        if (!hasSlug && statusEl.textContent) {
+          setStatus('', false);
+        }
+      };
+
+      slugInput.addEventListener('input', () => {
+        toggleStartButton();
+        if (statusEl.textContent) {
+          setStatus('', false);
+        }
+      });
+      startButton.addEventListener('click', startOnboarding);
+      toggleStartButton();
+    }
+
+    hydratePage();
+  </script>
+</body>
+
+</html>

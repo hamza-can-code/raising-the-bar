@@ -20,6 +20,19 @@ function requireConnectAdmin(req, res, next) {
   return next();
 }
 
+function appendSlugParam(url, slug) {
+  if (!url) return url;
+
+  try {
+    const parsed = new URL(url);
+    parsed.searchParams.set('slug', slug);
+    return parsed.toString();
+  } catch (err) {
+    const separator = url.includes('?') ? '&' : '?';
+    return `${url}${separator}slug=${encodeURIComponent(slug)}`;
+  }
+}
+
 function normalizePercent(value, fallback) {
   const parsed = Number(value);
   if (!Number.isFinite(parsed)) return fallback;
@@ -103,6 +116,51 @@ const onboardingLink = await stripe.accountLinks.create({
     return res.json({ creator, onboardingLink: onboardingLink.url });
   } catch (err) {
     console.error('❌ Connect creator upsert failed', err);
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+router.post('/creators/:slug/onboarding-link', express.json(), async (req, res) => {
+  try {
+    const normalizedSlug = req.params.slug?.trim().toLowerCase();
+
+    if (!normalizedSlug) {
+      return res.status(400).json({ error: 'A creator slug is required' });
+    }
+
+    const creator = await CreatorPartner.findOne({ slug: normalizedSlug, active: true });
+
+    if (!creator) {
+      return res.status(404).json({ error: 'Creator not found' });
+    }
+
+    if (!creator.stripeAccountId) {
+      return res.status(400).json({ error: 'Creator is missing a Stripe account' });
+    }
+
+    const refreshBase =
+      req.body?.refreshUrl ||
+      process.env.CONNECT_ONBOARDING_REFRESH_URL ||
+      `${process.env.FRONTEND_URL || ''}/pages/creator-onboarding.html`;
+
+    const returnBase =
+      req.body?.returnUrl ||
+      process.env.CONNECT_ONBOARDING_RETURN_URL ||
+      `${process.env.FRONTEND_URL || ''}/pages/creator-onboarding-success.html`;
+
+    const refreshUrl = appendSlugParam(refreshBase, normalizedSlug);
+    const returnUrl = appendSlugParam(returnBase, normalizedSlug);
+
+    const onboardingLink = await stripe.accountLinks.create({
+      account: creator.stripeAccountId,
+      type: 'account_onboarding',
+      refresh_url: refreshUrl,
+      return_url: returnUrl,
+    });
+
+    return res.json({ creator, onboardingLink: onboardingLink.url });
+  } catch (err) {
+    console.error('❌ Public onboarding link creation failed', err);
     return res.status(500).json({ error: err.message });
   }
 });

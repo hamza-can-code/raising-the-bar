@@ -35,7 +35,8 @@ a {
   text-decoration: none;
 }
 
-a.primary {
+a.primary,
+button.primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -44,16 +45,26 @@ a.primary {
   color: #05060a;
   font-weight: 700;
   padding: 14px 18px;
-  border-radius: 999px;
+  border-radius: 14px;
   border: none;
-  box-shadow: 0 15px 40px rgba(160, 91, 255, 0.35);
+  box-shadow: 0 12px 32px rgba(160, 91, 255, 0.35);
   transition: transform 160ms ease, box-shadow 160ms ease;
+  cursor: pointer;
 }
 
 a.primary:hover,
-a.primary:focus-visible {
+a.primary:focus-visible,
+button.primary:hover,
+button.primary:focus-visible {
   transform: translateY(-1px);
   box-shadow: 0 20px 40px rgba(160, 91, 255, 0.45);
+}
+
+button.primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+  box-shadow: none;
+  transform: none;
 }
 
 a.secondary {
@@ -214,6 +225,22 @@ p.lede {
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 22px;
+}
+
+.status {
+  margin: 12px 0 0;
+  color: var(--muted);
+  min-height: 20px;
+  transition: color 120ms ease, opacity 120ms ease;
+  opacity: 0;
+}
+
+.status.is-visible {
+  opacity: 1;
+}
+
+.status.is-error {
+  color: #ff9ba5;
 }
 
 .highlight-box {
