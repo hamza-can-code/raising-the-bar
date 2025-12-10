@@ -274,7 +274,7 @@ so it doesn't appear above the 1st item or below the last item. -->
         <!-- left leaf -->
 
         <h3 class="asp-headline">
-          <span class="asp-number">10&nbsp;Million+</span>
+          <span class="asp-number">50,000+</span>
           <br>
           kick‑started their journey with us
         </h3>
@@ -291,7 +291,7 @@ so it doesn't appear above the 1st item or below the last item. -->
         <img src="../assets/google-play.png" alt="Google Play" loading="lazy">
       </div>
 
-      <p class="asp-reviews">250&nbsp;000+ five‑star reviews from happy users</p>
+      <p class="asp-reviews">15,000+ five‑star reviews from happy users</p>
     </div>
   </section>
 
@@ -422,15 +422,15 @@ placeholder.replaceWith(iframe);
         <span class="discount-label">Discount Expires In:</span>
         <span class="time-remaining" id="countdownTimer">10:00</span>
       </div>
-      <p class="first-1000">🔥 2,000+ claimed their plan today. You're next</p>
+      <p class="first-1000">🔥 271 claimed their plan today. You're next</p>
     </div>
 
     <!-- Offer Cards -->
-     
+
     <section id="socialProof" class="social-proof">
       <img src="../assets/muscular-silhouette.webp" alt="Coach silhouette" class="social-proof__coach" />
       <p class="social-proof__headline">
-        947 people bought workout plans in the last hour
+        33 people bought workout plans in the last hour
       </p>
       <div class="social-proof__recent">
         <span class="social-proof__tag">ava 12-Week Plan</span>
@@ -490,7 +490,7 @@ placeholder.replaceWith(iframe);
           <span class="rating-summary__stars-base" aria-hidden="true">★★★★★</span>
         </div>
         <div class="rating-summary__score">
-          <strong>4.8/5</strong> (312,143 reviews)
+          <strong>4.8/5</strong> (16,227 reviews)
         </div>
       </div>
 
@@ -584,7 +584,7 @@ placeholder.replaceWith(iframe);
 </div> -->
 
       <!-- Offer Cards -->
-         <!--
+      <!--
       <div class="offer-card offer-tier" data-program="trial">
         <div class="offer-left">
           <div class="duration"><strong>1-Week Trial</strong></div>
@@ -651,7 +651,7 @@ placeholder.replaceWith(iframe);
         By continuing, you agree to our
         <a href="tos.html" target="_blank">terms</a> and
         <a href="refund-policy.html" target="_blank">refund policy</a>.
-         Covered by
+        Covered by
         <a href="#moneyBackGuarantee" id="moneyBackGuaranteeLink" class="mbg-scroll-link">
           Money-Back Guarantee
         </a>.
@@ -676,8 +676,8 @@ placeholder.replaceWith(iframe);
 
   <p id="postPayNote" class="post-pay-note" style="display:none;text-align:center;margin-top:12px;">
     ✅ <strong>After checkout
-       <!-- (<span id="checkoutPrice">—</span>) -->
-       , your plan unlocks immediately</strong> – you’ll
+      <!-- (<span id="checkoutPrice">—</span>) -->
+      , your plan unlocks immediately</strong> – you’ll
     land on your dashboard.
   </p>
 
@@ -708,6 +708,10 @@ Card
 </div> -->
 
       <p id="planSummary" class="plan-summary">12-Week Plan</p>
+      <p class="payment-powered">
+        Payments are securely processed by Stripe on behalf of Raising The Bar App Ltd, the platform powering this
+        experience.
+      </p>
       <!-- PayPal -->
       <!-- <div id="paypalMarkContainer" style="margin-top:20px;"></div> -->
 
@@ -903,7 +907,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
         </div>
         <div class="reviews-hero__meta">
           <p class="reviews-hero__headline">4.8 out of 5</p>
-          <p class="reviews-hero__sub">Based on 312,143 reviews verified purchases</p>
+          <p class="reviews-hero__sub">Based on 16,227 reviews verified purchases</p>
         </div>
       </div>
       <ul class="reviews-breakdown" aria-label="Rating distribution">
@@ -929,12 +933,12 @@ alert('Could not initialise PayPal. Please refresh and try again.');
 
     <div class="reviews-pagination" id="reviewsPagination" aria-label="Review pages"></div>
 
-      <div class="post-faq-cta">
-    <button type="button" class="claim-program-btn" data-open-value-modal>
-      Claim My Plan
-    </button>
-  </div>
-  
+    <div class="post-faq-cta">
+      <button type="button" class="claim-program-btn" data-open-value-modal>
+        Claim My Plan
+      </button>
+    </div>
+
   </section>
 
   <!-- FAQ Section -->
@@ -992,6 +996,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
 
   <footer class="footer " id="footer">
     <div class="footer-content">
+      <p class="powered">POWERED BY</p>
       <p>&copy; 2025 Raising The Bar App Ltd. All rights reserved.</p>
       <div class="footer-links">
         <a href="home.html">Start Training</a>
@@ -1095,7 +1100,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
       </p>
     </div>
   </div>
-  
+
 
   <script>
     let scrollTracked = false;
@@ -1145,7 +1150,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
       localStorage.setItem('rtb_currency', JSON.stringify(window.RTB_CURRENCY));
     })();
   </script>
-  <script src="../scripts/offer.js"></script>
+  <script src="../scripts/offer-vital.js"></script>
   <!-- leave Stripe.js -->
 
   <!-- then YOUR payment.js – pick one path and delete the other -->

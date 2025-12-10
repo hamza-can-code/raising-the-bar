@@ -3265,6 +3265,11 @@ body.offer-page {
     margin: 0 auto;
 }
 
+.powered {
+    font-size: 0.75rem !important;
+    letter-spacing: 0.2rem;
+}
+
 .footer-content p {
     margin-bottom: 15px;
     font-size: 0.9rem;
@@ -3615,6 +3620,13 @@ body.modal-open .floating-cta {
 
 .payment-section.hidden {
     display: none;
+}
+
+.payment-powered {
+    margin: 6px 0 12px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #c8d4e6;
 }
 
 .payment-section {

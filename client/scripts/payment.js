@@ -38,6 +38,8 @@
   // const RETURN_URL = `${window.location.origin}/pages/dashboard.html`;
   const CREATOR_SUCCESS_PATHS = {
     decoded: '/pages/thank-you-decoded.html',
+    kayp: '/pages/thank-you-kayp.html',
+    vital: '/pages/thank-you-vital.html',
   };
   const SUCCESS_PATH = CREATOR_SUCCESS_PATHS[getCreatorSlug()] || '/pages/plan-building.html';
   const RETURN_URL = `${window.location.origin}${SUCCESS_PATH}`;

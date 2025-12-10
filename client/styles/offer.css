@@ -3559,6 +3559,13 @@ body.modal-open .floating-cta {
     display: none;
 }
 
+.payment-powered {
+    margin: 6px 0 12px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #c8d4e6;
+}
+
 .payment-section {
     width: 90%;
     /* keep it responsive */

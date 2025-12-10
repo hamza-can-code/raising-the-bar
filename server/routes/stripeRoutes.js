@@ -153,10 +153,14 @@ const PLAN_LABELS = {
 
 const CREATOR_SUCCESS_PATHS = {
   decoded: '/pages/thank-you-decoded.html',
+  kayp: '/pages/thank-you-kayp.html',
+  vital: '/pages/thank-you-vital.html',
 };
 
 const CREATOR_OFFER_PATHS = {
   decoded: '/pages/offer-decoded.html',
+  kayp: '/pages/offer-kayp.html',
+  vital: '/pages/offer-vital.html',
 };
 
 function getRecurringConfigForPlan(plan) {
