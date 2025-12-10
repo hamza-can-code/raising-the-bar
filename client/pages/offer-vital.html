@@ -29,7 +29,10 @@
   <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
   <title>Claim my plan</title>
   <script>
-    window.RTB_CREATOR_SLUG = 'decoded';
+    window.RTB_CREATOR_SLUG = 'vital';
+    if (!localStorage.getItem('selectedProgram') || localStorage.getItem('selectedProgram') === 'trial') {
+      localStorage.setItem('selectedProgram', '4-week');
+    }
   </script>
   <!-- 1️⃣ LOAD the real Stripe SDK first (blocks parsing, 30 ms) -->
   <link rel="preconnect" href="https://js.stripe.com" crossorigin>
@@ -423,6 +426,7 @@ placeholder.replaceWith(iframe);
     </div>
 
     <!-- Offer Cards -->
+     
     <section id="socialProof" class="social-proof">
       <img src="../assets/muscular-silhouette.webp" alt="Coach silhouette" class="social-proof__coach" />
       <p class="social-proof__headline">
@@ -580,6 +584,7 @@ placeholder.replaceWith(iframe);
 </div> -->
 
       <!-- Offer Cards -->
+         <!--
       <div class="offer-card offer-tier" data-program="trial">
         <div class="offer-left">
           <div class="duration"><strong>1-Week Trial</strong></div>
@@ -594,6 +599,7 @@ placeholder.replaceWith(iframe);
           <div class="per-day">per day</div>
         </div>
       </div>
+        -->
 
       <div class="offer-card offer-tier" data-program="4-week">
         <div class="best-seller-banner" aria-label="Most popular plan">MOST POPULAR</div>
@@ -1089,68 +1095,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
       </p>
     </div>
   </div>
-
-  <!--
-  <div id="valueModal" class="modal">
-    <div class="modal-content">
-      <!-- <span class="close">&times;</span> -->
-
-      <h2 id="valueModalHeader"></h2>
-      <p id="scratchCompletionNote" class="promo-strip__rarity" hidden>
-        You just scratched 51% off. Last win was
-        <span class="promo-strip__rarity-count">3,847</span> users ago.
-        This is rare - don’t let it expire.
-      </p>
-
-      <!-- <p class="subtext">
-          <strong>Scratch the card to reveal your promo.</strong><br>
-          Promo auto-applies at checkout — ends in <span id="scratchMirrorTimerNote">10:00</span>
-      </p> -->
-
-      <div class="scratch-wrap">
-        <div class="scratch-card" role="group" aria-label="Scratch to reveal your discount">
-          <div class="scratch-reveal">
-            <div class="reveal-content">
-              <div class="discount-badge">
-                <span class="discount-badge__main">51% OFF</span>
-                <!-- <span class="discount-badge__bonus">+ Free Coach Call</span> -->
-              </div>
-              <!-- <p class="reveal-sub">Your 12-Week Plan is free!</p> -->
-              <p id="promoCodeLine" class="promo-code-line" hidden></p>
-              <p id="scratchDiscountNote" class="reveal-small" hidden>
-                Auto-applies at checkout · Ends in
-                <span class="reveal-timer" id="scratchMirrorTimer">10:00</span>
-              </p>
-            </div>
-            <canvas id="scratchCanvas"></canvas>
-            <!-- Finger-movement hint -->
-            <div id="scratchHint" class="scratch-hint" aria-hidden="true">
-              <div class="orbit">
-                <div class="dot"></div>
-              </div>
-              <p class="hint-copy">Swipe here to scratch</p>
-            </div>
-          </div>
-          <button id="scratchReset" class="link-btn" type="button" hidden>Reset</button>
-        </div>
-      </div>
-
-      <div class="modal-actions">
-        <button id="valueContinue" class="primary-btn">Continue</button>
-        <!-- <a id="valueDemo" href="https://www.youtube.com/shorts/H_aOWlPujIg" target="_blank" rel="noopener"
-          class="secondary-btn">
-          Watch&nbsp;Demo
-        </a> -->
-      </div>
-      <p class="urgency-note">
-        ⏳ <strong>Claim your plan before the discount ends.</strong>
-      </p>
-      <!-- <p class="skip-link">
-        <a href="#" id="valueSkip">No thanks, just take me to the plan</a>
-      </p> -->
-    </div>
-  </div>
-  -->
+  
 
   <script>
     let scrollTracked = false;

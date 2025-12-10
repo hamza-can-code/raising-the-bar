@@ -3801,7 +3801,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ? `🎁 Scratch and win <span class="rtb-blue-underline">random discount</span> up to 51% off`
       : `🎁 Scratch and win <span class="rtb-blue-underline">random discount</span> up to 51% off`;
     header.dataset.baseText = baseText;
-    header.dataset.winText = '<span class="promo-strip__rarity-count">Wow!</span> You won the <span class="promo-strip__rarity-count">biggest</span> discount!';
+    header.dataset.winText = '<span class="promo-strip__rarity-count">';
     header.innerHTML = baseText;
 
     const promoLine = document.getElementById("promoCodeLine");

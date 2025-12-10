@@ -36,26 +36,62 @@ async function resolveCreator(creatorSlug) {
   if (!creatorSlug) return null;
 
   const slug = creatorSlug.trim().toLowerCase();
+  const normalizePercent = (value, fallback) => {
+    const parsed = Number(value);
+    if (!Number.isFinite(parsed)) return fallback;
+    return Math.min(Math.max(parsed, 0), 100);
+  };
+
+  const staticEnvKey = (suffix) => {
+    const safeSlug = slug.toUpperCase().replace(/[^A-Z0-9]/g, '_');
+    return process.env[`CREATOR_${safeSlug}_${suffix}`];
+  };
+
+  const envCreator = (() => {
+    const stripeAccountId = staticEnvKey('STRIPE_ACCOUNT_ID');
+    if (!stripeAccountId) return null;
+
+    const introFeePercent = normalizePercent(staticEnvKey('PLATFORM_INTRO_FEE_PERCENT'), 50);
+    const ongoingFeePercent = normalizePercent(
+      staticEnvKey('PLATFORM_ONGOING_FEE_PERCENT'),
+      introFeePercent,
+    );
+
+    return {
+      name: staticEnvKey('NAME') || slug,
+      slug,
+      stripeAccountId,
+      platformIntroFeePercent: introFeePercent,
+      platformOngoingFeePercent: ongoingFeePercent,
+      defaultCurrency: staticEnvKey('DEFAULT_CURRENCY') || 'GBP',
+      active: true,
+      metadata: {},
+      source: 'env',
+    };
+  })();
+
   const creator = await CreatorPartner.findOne({ slug, active: true }).lean();
-  if (!creator) {
+  const resolved = creator || envCreator;
+
+  if (!resolved) {
     throw new Error(`Creator ${slug} is not registered or inactive`);
   }
 
-  if (!creator.stripeAccountId) {
+  if (!resolved.stripeAccountId) {
     throw new Error(`Creator ${slug} is missing a Stripe account`);
   }
 
-  const introFeePercent = Number.isFinite(creator.platformIntroFeePercent)
-    ? creator.platformIntroFeePercent
+  const introFeePercent = Number.isFinite(resolved.platformIntroFeePercent)
+    ? resolved.platformIntroFeePercent
     : 50;
 
-  const ongoingFeePercent = Number.isFinite(creator.platformOngoingFeePercent)
-    ? creator.platformOngoingFeePercent
+  const ongoingFeePercent = Number.isFinite(resolved.platformOngoingFeePercent)
+    ? resolved.platformOngoingFeePercent
     : introFeePercent;
 
   return {
-    creator,
-    destination: creator.stripeAccountId,
+    creator: resolved,
+    destination: resolved.stripeAccountId,
     introFeePercent,
     ongoingFeePercent,
   };
