@@ -87,14 +87,21 @@ router.post('/creators', express.json(), requireConnectAdmin, async (req, res) =
       { new: true, upsert: true, setDefaultsOnInsert: true },
     );
 
-    const onboardingLink = await stripe.accountLinks.create({
-      account: stripeAccountId,
-      type: 'account_onboarding',
-      refresh_url:
-        refreshUrl || process.env.CONNECT_ONBOARDING_REFRESH_URL || `${process.env.FRONTEND_URL || ''}/creator/onboarding/refresh`,
-      return_url:
-        returnUrl || process.env.CONNECT_ONBOARDING_RETURN_URL || `${process.env.FRONTEND_URL || ''}/creator/onboarding/complete`,
-    });
+const expiresInSeconds = 60 * 60 * 24; // 24 hours
+
+const onboardingLink = await stripe.accountLinks.create({
+  account: stripeAccountId,
+  type: 'account_onboarding',
+  refresh_url:
+    refreshUrl
+    || process.env.CONNECT_ONBOARDING_REFRESH_URL
+    || `${process.env.FRONTEND_URL || ''}/creator/onboarding/refresh`,
+  return_url:
+    returnUrl
+    || process.env.CONNECT_ONBOARDING_RETURN_URL
+    || `${process.env.FRONTEND_URL || ''}/creator/onboarding/complete`,
+  expires_at: Math.floor(Date.now() / 1000) + expiresInSeconds,
+});
 
     return res.json({ creator, onboardingLink: onboardingLink.url });
   } catch (err) {

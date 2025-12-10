@@ -43,7 +43,7 @@
   };
   const SUCCESS_PATH = CREATOR_SUCCESS_PATHS[getCreatorSlug()] || '/pages/plan-building.html';
   const RETURN_URL = `${window.location.origin}${SUCCESS_PATH}`;
-  const PAYMENT_APPEARANCE = {
+  const NIGHT_PAYMENT_APPEARANCE = {
     theme: 'night',
     variables: {
       colorText: '#e8edf6',
@@ -67,6 +67,39 @@
       '.Tab--selected': { color: '#0f1d33', backgroundColor: '#e8edf6' },
     },
   };
+
+  const KAYP_PAYMENT_APPEARANCE = {
+    theme: 'flat',
+    variables: {
+      colorText: '#1f2937',
+      colorTextSecondary: '#4b5563',
+      colorTextPlaceholder: '#9ca3af',
+      colorBackground: '#ffffff',
+      colorPrimary: '#007BFF',
+      colorIcon: '#111827',
+      borderRadius: '10px',
+      fontFamily: "'Poppins', 'Roboto', system-ui, -apple-system, sans-serif",
+    },
+    rules: {
+      '.Input': {
+        color: '#111827',
+        backgroundColor: '#ffffff',
+        borderColor: '#d1d5db',
+      },
+      '.Input:focus': {
+        borderColor: '#007BFF',
+        boxShadow: '0 0 0 1px #007BFF',
+      },
+      '.Label': { color: '#1f2937' },
+      '.Tab': { color: '#4b5563', backgroundColor: '#f9fafb', borderColor: '#e5e7eb' },
+      '.Tab:focus': { color: '#111827' },
+      '.Tab--selected': { color: '#ffffff', backgroundColor: '#007BFF' },
+    },
+  };
+
+  const PAYMENT_APPEARANCE = (getCreatorSlug() === 'kayp')
+    ? KAYP_PAYMENT_APPEARANCE
+    : NIGHT_PAYMENT_APPEARANCE;
 
   /* ——————————————————————————————————————————————————————————— */
   /* 3.  DOM handles                                               */

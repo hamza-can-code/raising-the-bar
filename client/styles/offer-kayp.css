@@ -4899,7 +4899,7 @@ body.modal-open .floating-cta {
     }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 430px) {
     #promoAppliedStrip.promo-strip {
         padding: 8px 12px 10px;
     }

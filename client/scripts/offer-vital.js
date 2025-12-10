@@ -61,22 +61,22 @@ document.addEventListener('DOMContentLoaded', () => {
   discountClassObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 });
 window.RTB_PRICE_TABLE = {
-  GBP: { full: 19.99, weekly: 4.99, intro: 0 },
-  USD: { full: 23.99, weekly: 5.99, intro: 0 },
-  EUR: { full: 22.99, weekly: 5.99, intro: 0 },
-  SEK: { full: 249, weekly: 69, intro: 0 },
-  NOK: { full: 259, weekly: 69, intro: 0 },
-  DKK: { full: 179, weekly: 45, intro: 0 },
-  CAD: { full: 29.99, weekly: 8.99, intro: 0 },
-  CHF: { full: 24.99, weekly: 6.49, intro: 0 },
-  AUD: { full: 34.99, weekly: 9.49, intro: 0 },
-  NZD: { full: 32.99, weekly: 8.99, intro: 0 },
-  SGD: { full: 29.99, weekly: 8.49, intro: 0 },
-  HKD: { full: 169, weekly: 45, intro: 0 },
-  JPY: { full: 3590, weekly: 950, intro: 0 },
-  INR: { full: 1499, weekly: 399, intro: 0 },
-  BRL: { full: 109.99, weekly: 29.99, intro: 0 },
-  MXN: { full: 459, weekly: 119, intro: 0 },
+  GBP: { full: 59.99, weekly: 14.99, intro: 29.99 },
+  USD: { full: 71.99, weekly: 17.99, intro: 35.99 },
+  EUR: { full: 68.99, weekly: 17.49, intro: 34.49 },
+  SEK: { full: 747, weekly: 187, intro: 373 },
+  NOK: { full: 777, weekly: 194, intro: 388 },
+  DKK: { full: 537, weekly: 134, intro: 269 },
+  CAD: { full: 89.99, weekly: 22.49, intro: 44.99 },
+  CHF: { full: 74.99, weekly: 18.74, intro: 37.49 },
+  AUD: { full: 104.99, weekly: 26.24, intro: 52.49 },
+  NZD: { full: 98.99, weekly: 24.74, intro: 49.49 },
+  SGD: { full: 89.99, weekly: 22.49, intro: 44.99 },
+  HKD: { full: 507, weekly: 127, intro: 254 },
+  JPY: { full: 10770, weekly: 2693, intro: 5385 },
+  INR: { full: 4497, weekly: 1124, intro: 2248 },
+  BRL: { full: 329.99, weekly: 82.49, intro: 164.99 },
+  MXN: { full: 1377, weekly: 344, intro: 688 },
 };
 
 // GBP anchor values for each plan. Converted using RTB_CURRENCY fxFromGBP.
@@ -89,15 +89,15 @@ const PLAN_PRICING_GBP = {
   },
   '4-week': {
     name: '4-Week Plan',
-    full: 19.99,
-    renewal: 19.99,
-    discount: 9.99,
+    full: 59.99,
+    renewal: 59.99,
+    discount: 29.99,
   },
   '12-week': {
     name: '12-Week Plan',
-    full: 39.99,
-    renewal: 39.99,
-    discount: 19.99,
+    full: 99.99,
+    renewal: 99.99,
+    discount: 49.99,
   },
 };
 window.RTB_PLAN_PRICING = PLAN_PRICING_GBP;

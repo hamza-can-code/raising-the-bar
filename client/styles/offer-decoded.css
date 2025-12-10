@@ -3814,7 +3814,7 @@ body.modal-open .floating-cta {
 
 .plan-summary .new-price {
     font-weight: 700;
-    color: #007bff;
+    color: #FF7A00;
     background: rgba(0, 123, 255, 0.1);
     padding: 0.1em 0.3em;
     border-radius: 4px;
@@ -3829,7 +3829,7 @@ body.modal-open .floating-cta {
 
 .plan-summary__price {
     font-weight: 700;
-    color: #007bff;
+    color: #FF7A00;
 }
 
 .social-proof {
