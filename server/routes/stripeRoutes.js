@@ -290,6 +290,9 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
     const couponId = discounted ? getCouponIdForPlan(normalizedPlan, ccy, creatorSlug) : null;
 
     let creatorConfig = null;
+    let destinationValid = false;
+    let destinationReason = null;
+    let destinationAccount = null;
     if (normalizedCreator) {
       creatorConfig = await resolveCreator(normalizedCreator);
     }
@@ -330,8 +333,10 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
     }
 
     if (creatorConfig) {
-      const { valid: destinationValid, account: destinationAccount, reason: destinationReason } =
-        await fetchDestinationAccount(creatorConfig.destination);
+      const destinationState = await fetchDestinationAccount(creatorConfig.destination);
+      destinationValid = destinationState.valid;
+      destinationAccount = destinationState.account;
+      destinationReason = destinationState.reason;
       const subscriptionData = {
         ...(sessionCfg.subscription_data || {}),
         metadata: {
@@ -418,12 +423,14 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
           unit_amount: price.unit_amount,
           product: productId,
           recurring: recurringConfig,
-          nickname: PLAN_LABELS[normalizedPlan] || undefined,
         },
       }]
       : [{ price: priceId }];
 
     let creatorConfig = null;
+        let destinationValid = false;
+    let destinationReason = null;
+    let destinationAccount = null;
     if (normalizedCreator) {
       creatorConfig = await resolveCreator(normalizedCreator);
     }
@@ -516,6 +523,12 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
       clientSecret: pi.client_secret,
       subscriptionId: sub.id,
       intentType: 'payment',
+      connectDestination: {
+        valid: destinationValid,
+        reason: destinationReason,
+        accountId: creatorConfig?.destination || null,
+        accountCountry: destinationAccount?.country || null,
+      },
     });
   } catch (err) {
     console.error('❌ /create-subscription-intent error:', err);
@@ -555,7 +568,7 @@ router.post('/upsell/bonus', protect, async (req, res) => {
       paymentMethodId = paymentMethodId.id;
     }
 
-       if (!paymentMethodId && setupIntentId) {
+    if (!paymentMethodId && setupIntentId) {
       try {
         const setupIntent = await stripe.setupIntents.retrieve(setupIntentId, {
           expand: ['payment_method'],
@@ -630,7 +643,7 @@ router.post('/upsell/bonus', protect, async (req, res) => {
     }
 
     if (!paymentMethodId) {
-            console.warn('⚠️  No payment method on file for bonus charge', {
+      console.warn('⚠️  No payment method on file for bonus charge', {
         customerId,
         email: req.user.email,
         setupIntentId,
@@ -659,7 +672,7 @@ router.post('/upsell/bonus', protect, async (req, res) => {
       },
     };
 
-        log('Bonus payment intent config', {
+    log('Bonus payment intent config', {
       ...intentConfig,
       metadata: undefined,
       amountDecimal: Number((amount / 100).toFixed(2)),
@@ -671,7 +684,7 @@ router.post('/upsell/bonus', protect, async (req, res) => {
     );
 
     if (intent.status !== 'succeeded') {
-            console.warn('⚠️  Bonus payment intent requires action', {
+      console.warn('⚠️  Bonus payment intent requires action', {
         intentId: intent.id,
         status: intent.status,
         customerId,
@@ -705,7 +718,7 @@ router.post('/upsell/bonus', protect, async (req, res) => {
       { new: true, upsert: true, setDefaultsOnInsert: true },
     );
 
-        console.log('✅ Bonus payment captured', {
+    console.log('✅ Bonus payment captured', {
       intentId: intent.id,
       customerId,
       amount,

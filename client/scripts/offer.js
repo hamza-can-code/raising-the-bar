@@ -89,15 +89,15 @@ const PLAN_PRICING_GBP = {
   },
   '4-week': {
     name: '4-Week Plan',
-    full: 19.99,
-    renewal: 19.99,
-    discount: 9.99,
+    full: 59.99,
+    renewal: 59.99,
+    discount: 29.99,
   },
   '12-week': {
     name: '12-Week Plan',
-    full: 39.99,
-    renewal: 39.99,
-    discount: 19.99,
+    full: 99.99,
+    renewal: 99.99,
+    discount: 49.99,
   },
 };
 window.RTB_PLAN_PRICING = PLAN_PRICING_GBP;
