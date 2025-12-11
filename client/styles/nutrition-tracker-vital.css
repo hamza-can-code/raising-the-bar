@@ -2458,7 +2458,7 @@ exercise-btn,
 /* .meal-actions button, */
 .cta,
 .nt-onboarding-card button {
-  background: linear-gradient(135deg, var(--brand-accent), #2f7cc6) !important;
+  background: #ffc56f !important;
   color: var(--brand-cream) !important;
   border: none;
   box-shadow: 0 12px 30px rgba(255, 255, 255, 0.3);

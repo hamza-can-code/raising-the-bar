@@ -44,6 +44,7 @@ button.primary {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: inline-block;
   text-align: center;
+  font-family: 'Poppins', sans-serif;
 }
 
 a.primary:hover,
@@ -395,20 +396,21 @@ main {
 }
 
 .video-wrapper {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* 16:9 ratio */
-    border-radius: 12px;
-    overflow: hidden;
-    background: rgba(255,255,255,0.05);
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  /* 16:9 ratio */
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .placeholder {
@@ -436,12 +438,12 @@ main {
 }
 
 .demo-link {
-    text-decoration: underline;
-    font-weight: 500;
+  text-decoration: underline;
+  font-weight: 500;
 }
 
 .demo-link:hover {
-    opacity: 0.85;
+  opacity: 0.85;
 }
 
 .offer-grid {
@@ -528,7 +530,7 @@ main {
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-.revenue-table tbody tr + tr td {
+.revenue-table tbody tr+tr td {
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -673,9 +675,11 @@ main {
 
 #call-scheduler {
   margin-top: 48px;
-  display: none;          /* shown as block via JS */
+  display: none;
+  /* shown as block via JS */
   text-align: center;
-  grid-column: 1 / -1;    /* <-- span full width of the .cta grid */
+  grid-column: 1 / -1;
+  /* <-- span full width of the .cta grid */
 }
 
 #call-scheduler .calendly-inline-widget {
@@ -779,6 +783,7 @@ main {
 }
 
 @media (max-width: 900px) {
+
   .hero,
   .video,
   .cta {

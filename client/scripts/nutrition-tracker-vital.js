@@ -1830,7 +1830,7 @@ function renderDailyMealDisplay() {
     summaryBtn.style.padding = "14px";
     summaryBtn.style.fontSize = "1.1rem";
     summaryBtn.style.width = "100%";
-    summaryBtn.style.backgroundColor = "#007BFF";
+    summaryBtn.style.backgroundColor = "#FF7A00";
     summaryBtn.style.color = "#fff";
     summaryBtn.style.border = "none";
     summaryBtn.style.borderRadius = "5px";

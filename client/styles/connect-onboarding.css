@@ -50,6 +50,7 @@ button.primary {
   box-shadow: 0 12px 32px rgba(160, 91, 255, 0.35);
   transition: transform 160ms ease, box-shadow 160ms ease;
   cursor: pointer;
+  font-family: 'Poppins', sans-serif;
 }
 
 a.primary:hover,
