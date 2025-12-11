@@ -7,6 +7,21 @@ const CreatorPartner = require('../models/CreatorPartner');
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-04-10' });
 const router = express.Router();
 
+async function createConnectAccount(country, email) {
+  return stripe.accounts.create({
+    type: 'express',
+    country,
+    email,
+    business_profile: {
+      product_description: 'Fitness subscriptions and coaching revenue share',
+    },
+    capabilities: {
+      card_payments: { requested: true },
+      transfers: { requested: true },
+    },
+  });
+}
+
 function requireConnectAdmin(req, res, next) {
   const adminSecret = process.env.CONNECT_ADMIN_SECRET;
   if (!adminSecret) {
@@ -69,29 +84,17 @@ router.post('/creators', express.json(), requireConnectAdmin, async (req, res) =
     let existingAccount = null;
 
     if (!stripeAccountId) {
-      const account = await stripe.accounts.create({
-        type: 'express',
-        country: requestedCountry,
-        email,
-        business_profile: {
-          product_description: 'Fitness subscriptions and coaching revenue share',
-        },
-        capabilities: {
-          card_payments: { requested: true },
-          transfers: { requested: true },
-        },
-      });
+      const account = await createConnectAccount(requestedCountry, email);
       stripeAccountId = account.id;
       existingAccount = account;
     } else {
       existingAccount = await stripe.accounts.retrieve(stripeAccountId);
-    }
 
-    if (existingAccount.country !== requestedCountry) {
-      return res.status(400).json({
-        error:
-          `Creator is already provisioned with a ${existingAccount.country} account; create a new account for ${requestedCountry} instead`,
-      });
+      if (existingAccount.country !== requestedCountry) {
+        const newAccount = await createConnectAccount(requestedCountry, email);
+        stripeAccountId = newAccount.id;
+        existingAccount = newAccount;
+      }
     }
 
     const platformIntroFeePercent = normalizePercent(introFeePercent, creator?.platformIntroFeePercent || 50);
