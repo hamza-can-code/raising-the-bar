@@ -45,7 +45,7 @@ router.post('/creators', express.json(), requireConnectAdmin, async (req, res) =
       slug,
       name,
       email,
-      country = 'US',
+      country,
       introFeePercent = 50,
       ongoingFeePercent = 50,
       metadata = {},
@@ -58,14 +58,20 @@ router.post('/creators', express.json(), requireConnectAdmin, async (req, res) =
     }
 
     const normalizedSlug = slug.trim().toLowerCase();
+    const requestedCountry = country?.trim().toUpperCase();
+
+    if (!requestedCountry) {
+      return res.status(400).json({ error: 'country is required for Stripe Connect accounts' });
+    }
 
     let creator = await CreatorPartner.findOne({ slug: normalizedSlug });
     let stripeAccountId = creator?.stripeAccountId || null;
+    let existingAccount = null;
 
     if (!stripeAccountId) {
       const account = await stripe.accounts.create({
         type: 'express',
-        country: country.toUpperCase(),
+        country: requestedCountry,
         email,
         business_profile: {
           product_description: 'Fitness subscriptions and coaching revenue share',
@@ -76,6 +82,16 @@ router.post('/creators', express.json(), requireConnectAdmin, async (req, res) =
         },
       });
       stripeAccountId = account.id;
+      existingAccount = account;
+    } else {
+      existingAccount = await stripe.accounts.retrieve(stripeAccountId);
+    }
+
+    if (existingAccount.country !== requestedCountry) {
+      return res.status(400).json({
+        error:
+          `Creator is already provisioned with a ${existingAccount.country} account; create a new account for ${requestedCountry} instead`,
+      });
     }
 
     const platformIntroFeePercent = normalizePercent(introFeePercent, creator?.platformIntroFeePercent || 50);
@@ -91,27 +107,28 @@ router.post('/creators', express.json(), requireConnectAdmin, async (req, res) =
         slug: normalizedSlug,
         email,
         stripeAccountId,
+        country: requestedCountry,
         platformIntroFeePercent,
         platformOngoingFeePercent,
-        defaultCurrency: (country || 'US').toUpperCase(),
+        defaultCurrency: requestedCountry,
         active: true,
         metadata,
       },
       { new: true, upsert: true, setDefaultsOnInsert: true },
     );
 
-const onboardingLink = await stripe.accountLinks.create({
-  account: stripeAccountId,
-  type: 'account_onboarding',
-  refresh_url:
-    refreshUrl
-    || process.env.CONNECT_ONBOARDING_REFRESH_URL
-    || `${process.env.FRONTEND_URL || ''}/creator/onboarding/refresh`,
-  return_url:
-    returnUrl
-    || process.env.CONNECT_ONBOARDING_RETURN_URL
-    || `${process.env.FRONTEND_URL || ''}/creator/onboarding/complete`,
-});
+    const onboardingLink = await stripe.accountLinks.create({
+      account: stripeAccountId,
+      type: 'account_onboarding',
+      refresh_url:
+        refreshUrl
+        || process.env.CONNECT_ONBOARDING_REFRESH_URL
+        || `${process.env.FRONTEND_URL || ''}/creator/onboarding/refresh`,
+      return_url:
+        returnUrl
+        || process.env.CONNECT_ONBOARDING_RETURN_URL
+        || `${process.env.FRONTEND_URL || ''}/creator/onboarding/complete`,
+    });
 
     return res.json({ creator, onboardingLink: onboardingLink.url });
   } catch (err) {
