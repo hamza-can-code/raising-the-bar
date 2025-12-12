@@ -51,11 +51,11 @@ img {
 .header {
     position: relative;
     text-align: center;
-    padding: 10px 15px;
+    padding: 10px 15px 0 15px;
 }
 
 .logo img {
-    max-height: 50px;
+    max-height: 100px;
 }
 
 .fade-in {

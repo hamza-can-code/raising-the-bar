@@ -36,13 +36,6 @@ button {
     max-height: 100px;
 }
 
-@media (max-width: 389px) {
-
-    .logo img {
-      height: 75px;
-    }
-  }
-
   /* Global Styles */
 * {
     margin: 0;
