@@ -155,12 +155,14 @@ const CREATOR_SUCCESS_PATHS = {
   decoded: '/pages/thank-you-decoded.html',
   kayp: '/pages/thank-you-kayp.html',
   vital: '/pages/thank-you-vital.html',
+  dav: '/pages/thank-you-dav.html',
 };
 
 const CREATOR_OFFER_PATHS = {
   decoded: '/pages/offer-decoded.html',
   kayp: '/pages/offer-kayp.html',
   vital: '/pages/offer-vital.html',
+  dav: '/pages/offer-dav.html',
 };
 
 function getRecurringConfigForPlan(plan) {

@@ -40,6 +40,7 @@
     decoded: '/pages/thank-you-decoded.html',
     kayp: '/pages/thank-you-kayp.html',
     vital: '/pages/thank-you-vital.html',
+    dav: '/pages/thank-you-dav.html',
   };
   const SUCCESS_PATH = CREATOR_SUCCESS_PATHS[getCreatorSlug()] || '/pages/plan-building.html';
   const RETURN_URL = `${window.location.origin}${SUCCESS_PATH}`;
@@ -97,7 +98,9 @@
     },
   };
 
-  const PAYMENT_APPEARANCE = (getCreatorSlug() === 'kayp')
+  const KAYP_STYLE_SLUGS = ['kayp', 'dav'];
+
+  const PAYMENT_APPEARANCE = KAYP_STYLE_SLUGS.includes(getCreatorSlug())
     ? KAYP_PAYMENT_APPEARANCE
     : NIGHT_PAYMENT_APPEARANCE;
 
