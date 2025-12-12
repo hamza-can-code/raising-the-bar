@@ -361,6 +361,9 @@ let totalWeeks = Math.min(mealPlanData.length, 12);
 let currentWeekIndex = parseInt(localStorage.getItem("currentNutritionWeekIndex") || "0", 10);
 let currentDayIndex = parseInt(localStorage.getItem("currentNutritionDayIndex") || "0", 10);
 
+// Keep this near the top so any early renders can safely reference it.
+let previousFillPercent = 0;
+
 let purchasedWeeks;            // runtime value (filled below)
 const planName = localStorage.getItem('planName') || '';
 
@@ -754,15 +757,22 @@ function print12WeekCalendar() {
 ///////////////////////////
 // 1) Shared XP System
 ///////////////////////////
-let currentXP = parseInt(localStorage.getItem("currentXP") || "0", 10);
-let currentLevel = parseInt(localStorage.getItem("currentLevel") || "0", 10);
+const storedXP = Number(localStorage.getItem("currentXP"));
+const storedLevel = Number(localStorage.getItem("currentLevel"));
+
+let currentXP = Number.isFinite(storedXP) && storedXP >= 0 ? storedXP : 0;
+let currentLevel = Number.isFinite(storedLevel) && storedLevel >= 0 ? storedLevel : 0;
+
+// Persist sanitized values so UI labels don't get "NaN" when storage is corrupted.
+localStorage.setItem("currentXP", currentXP.toString());
+localStorage.setItem("currentLevel", currentLevel.toString());
+
 let xpBarAnimating = false;
 let xpAnimationFrameId = null;
 let displayedXP = currentXP;
 let xpRecentlyGained = false;
 let stickyHeaderForceVisible = false;
 let stickyHeaderTimerId = null;
-let previousFillPercent = 0;
 
 const xpLevels = [10, 20, 40, 70, 100, 130, 160, 190, 220, 250];
 function xpNeededForLevel(level) {
