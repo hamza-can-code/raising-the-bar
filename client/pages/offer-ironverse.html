@@ -1,0 +1,1157 @@
+<!doctype html>
+<html lang="en">
+<script>
+  (async function () {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      location.href = 'log-in-offer-ironverse.html';
+      return;
+    }
+    try {
+      const res = await fetch('/api/auth/me', {
+        method: 'GET',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (!res.ok) throw new Error();
+      const me = await res.json();
+      localStorage.setItem('userId', me._id); // <-- save userId for later
+    } catch (err) {
+      localStorage.removeItem('token');
+      location.href = 'log-in-offer-ironverse.html';
+      return;
+    }
+  })();
+</script>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+  <title>Claim my plan</title>
+  <script>
+    window.RTB_CREATOR_SLUG = 'ironverse';
+    if (!localStorage.getItem('selectedProgram') || localStorage.getItem('selectedProgram') === 'trial') {
+      localStorage.setItem('selectedProgram', '4-week');
+    }
+  </script>
+  <!-- 1️⃣ LOAD the real Stripe SDK first (blocks parsing, 30 ms) -->
+  <link rel="preconnect" href="https://js.stripe.com" crossorigin>
+  <link rel="preconnect" href="https://api.stripe.com" crossorigin>
+  <link rel="preconnect" href="https://m.stripe.network" crossorigin>
+  <link rel="dns-prefetch" href="https://r.stripe.com">
+  <!-- <script
+src="https://www.paypal.com/sdk/js?client-id=AcygnP6DJSFGbIeyUa2BdGdznCQQk-qXjMEMijIZJeTbzkIltNVCGL5k1i2DdcNR24qoGTDPF_FD_VQ8&currency=GBP&vault=true&intent=subscription&components=buttons,marks&disable-funding=card"></script> -->
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <!-- 2️⃣ SAVE an immutable reference before *anything* else can touch it -->
+  <script>
+    window.StripeReal = window.Stripe; // keep a copy
+    Object.defineProperty(window, 'Stripe', { // freeze it
+      value: window.Stripe,
+      writable: false,
+      configurable: false
+    });
+  </script>
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
+    rel="stylesheet">
+  <link href="../styles/offer-ironverse.css" rel="stylesheet">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-W9CSNHSLQQ');
+  </script>
+  <script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "rmf0p7sik4");
+  </script>
+  <!-- TikTok Pixel Code Start -->
+  <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject = t; var ttq = w[t] = w[t] || []; ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"], ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } }; for (var i = 0; i < ttq.methods.length; i++)ttq.setAndDefer(ttq, ttq.methods[i]); ttq.instance = function (t) {
+        for (
+          var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++)ttq.setAndDefer(e, ttq.methods[n]); return e
+      }, ttq.load = function (e, n) {
+        var r = "https://analytics.tiktok.com/i18n/pixel/events.js", o = n && n.partner; ttq._i = ttq._i || {}, ttq._i[e] = [], ttq._i[e]._u = r, ttq._t = ttq._t || {}, ttq._t[e] = +new Date, ttq._o = ttq._o || {}, ttq._o[e] = n || {}; n = document.createElement("script")
+          ; n.type = "text/javascript", n.async = !0, n.src = r + "?sdkid=" + e + "&lib=" + t; e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(n, e)
+      };
+
+
+      ttq.load('D0M3KORC77UCAFR1EOLG');
+      ttq.page();
+    }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
+  <!-- Meta Pixel Code -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2589073464764526');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=2589073464764526&ev=PageView&noscript=1" /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+
+<body class="offer-page">
+  <div id="loaderOverlay" class="loader-overlay">
+    <img src="../assets/ironverse-logo.png" alt="GAINS+ logo" class="loader-logo" />
+  </div>
+  <div class="header">
+    <div class="logo">
+        <img id="logo" class="logo" src="../assets/ironverse-logo.png" alt="GAINS+ Logo">
+      </a>
+    </div>
+  </div>
+
+
+  <div class="offer-container">
+    <div id="bodyTypeProgress" class="btp-wrapper">
+      <div class="btp-img-group">
+        <figure class="btp-col">
+          <img id="btpCurrentImg" src="" alt="Current body type" />
+          <figcaption class="visually-hidden">Now</figcaption>
+        </figure>
+
+        <span class="btp-arrow" aria-hidden="true">
+          <!-- size = viewBox; stroke inherits colour -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 24h32" />
+            <polyline points="30 14 40 24 30 34" />
+          </svg>
+        </span>
+
+        <figure class="btp-col">
+          <img id="btpTargetImg" src="" alt="Desired body type" />
+          <figcaption id="btpDays" class="visually-hidden">30&nbsp;Days</figcaption>
+        </figure>
+      </div>
+
+      <div class="btp-stats-table">
+        <!-- NOW column -->
+        <div class="btp-stat-col now">
+          <h5 class="btp-period">Now</h5>
+
+          <div class="btp-stat">
+            <span class="btp-label">Body fat</span>
+            <span class="btp-value" id="bodyFatNow">20‑24%</span>
+          </div>
+
+          <div class="btp-stat">
+            <span class="btp-label">Body muscles</span>
+            <div class="btp-bars" id="muscleBarsNow"></div>
+          </div>
+        </div>
+
+        <!-- GOAL column -->
+        <div class="btp-stat-col goal">
+          <!-- text filled dynamically in JS -->
+          <h5 class="btp-period" id="goalPeriod">‑</h5>
+
+          <div class="btp-stat">
+            <span class="btp-label">Body fat</span>
+            <span class="btp-value">8‑10%</span>
+          </div>
+
+          <div class="btp-stat">
+            <span class="btp-label">Body muscles</span>
+            <div class="btp-bars" id="muscleBarsGoal"></div>
+          </div>
+        </div>
+      </div>
+
+      <p class="btp-disclaimer">
+        Images are illustrative only - results vary by individual.
+      </p>
+    </div>
+    <!-- <p class="plan-diff-text-0">
+<strong>No other app does what we do.</strong><br>
+Other apps just track. <strong>We use what you track to adapt workouts & meals</strong> so you
+<strong>get fit faster</strong>.
+<a href="#compare-plans" id="comparePlansLink0" class="compare-pill">
+🔎 See how it compares
+</a>
+</p> -->
+
+    <div id="dynamicMessageContainer" class="personalized-box">
+      <!-- Dynamic content will go here -->
+
+    </div>
+
+  </div>
+
+
+  <div class="whats-included-container">
+    <h2 class="wi2-heading">Inside Your Plan</h2>
+    <p class="wi2-description">Everything you need to stay consistent — workouts, meals, and progress that adapt as you
+      go.</p>
+
+    <div class="wi2-content">
+      <!-- LEFT: Subheadings with 50px margin between them -->
+      <div class="wi2-left">
+        <div class="wi2-item active ct-item" data-index="0">
+          <h4><span class="tick ct-tick">✔</span> Personalized Workout Plan</h4>
+        </div>
+        <div class="wi2-item ct-item" data-index="1">
+          <h4><span class="tick ct-tick">✔</span> Clear and easy to follow</h4>
+        </div>
+        <div class="wi2-item pt-item" data-index="2">
+          <h4><span class="tick pt-tick">✔</span> Visible Results in 4 Weeks</h4>
+        </div>
+        <!-- <div class="wi2-item pt-item" data-index="3">
+          <h4><span class="tick pt-tick">✔</span> AI Meal & Body Scanners</h4>
+        </div> -->
+        <div class="wi2-item pt-item" data-index="3">
+          <h4><span class="tick pt-tick">✔</span> Progress tracking & analysis</h4>
+        </div>
+        <!-- <div class="wi2-item pt-item" data-index="5">
+          <h4><span class="tick pt-tick">✔</span> Friendly Coach Support</h4>
+        </div> -->
+        <!-- <div class="wi2-item pt-item" data-index="5">
+<h4><span class="tick pt-tick">✔</span> Online <br> 1-On-1 Coaching</h4>
+</div> -->
+        <!-- <div class="wi2-item pt-item" data-index="4">
+<h4><span class="tick pt-tick">✔</span> Flexible Logging</h4>
+</div>
+<div class="wi2-item ct-item" data-index="5">
+<h4><span class="tick ct-tick">✔</span> Daily Streaks</h4>
+</div>
+<div class="wi2-item pt-item" data-index="6">
+<h4><span class="tick pt-tick">✔</span> Your Fitness Story, Visualized</h4>
+</div>
+<div class="wi2-item pt-item" data-index="7">
+<h4><span class="tick pt-tick">✔</span> One Score That Tracks It All</h4>
+</div> -->
+      </div>
+
+
+
+      <!-- RIGHT: pinned container,
+so it doesn't appear above the 1st item or below the last item. -->
+      <div class="wi2-right">
+        <div class="wi2-sticky">
+          <!-- The pinned panel that never goes higher than the first heading or lower than the last -->
+          <div class="wi2-panel">
+            <div class="wi2-image-container fade-stage" id="wi2-image-container">
+              <img id="wi2-image" class="-panel" src="#" alt="Whats Included Image" />
+            </div>
+            <div class="wi2-desc-container fade-stage" id="wi2-desc-container">
+              <p id="wi2-desc" class="-panel">
+                A plan customized to your fitness level, goals, and lifestyle for real, sustainable results.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="app-social-proof" aria-label="App social proof">
+    <div class="asp-inner">
+
+      <!-- Laurel + headline -->
+      <div class="asp-laurels" aria-hidden="true">
+        <!-- left leaf -->
+
+        <h3 class="asp-headline">
+          <span class="asp-number">10,000+</span>
+          <br>
+          kick‑started their journey with us
+        </h3>
+
+      </div>
+
+      <!-- rating + store badges -->
+      <div class="asp-rating">
+        <span class="asp-stars" aria-label="Star rating">★★★★★</span>
+        <span class="asp-score">4.8&nbsp;/&nbsp;5</span>
+
+        <!-- store badges – use your own assets if you prefer -->
+        <img src="../assets/apple-pay-mark.webp" alt="App Store" loading="lazy">
+        <img src="../assets/google-play.png" alt="Google Play" loading="lazy">
+      </div>
+
+      <p class="asp-reviews">2,500+ five‑star reviews from happy users</p>
+    </div>
+  </section>
+
+  <div class="results-section " id="results-section">
+    <!-- <h2 class="results-heading">
+Adapts to You. Built to Last.
+</h2>
+<p class="results-description">
+No more spreadsheets. No more overthinking. Your training, meals, and progress are all connected — adapting to
+your life so you can finally stay consistent.
+</p>
+
+<section class="youtube-prompt-section">
+<div class="youtube-video-container"
+style="position: relative; padding-top: 56.25%; height: 0; overflow: hidden;">
+<div id="youtube-placeholder" style="
+position: absolute;
+top: 0; left: 0;
+width: 100%; height: 100%;
+cursor: pointer;
+background: url('https://img.youtube.com/vi/H_aOWlPujIg/hqdefault.jpg')
+center center / cover no-repeat;
+">
+<div style="
+position: absolute;
+top: 50%; left: 50%;
+transform: translate(-50%, -50%);
+background-color: rgba(0,0,0,0.6);
+border-radius: 50%; padding: 12px;
+">
+<svg width="40" height="40" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 5v14l11-7z" />
+</svg>
+</div>
+</div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+const placeholder = document.getElementById("youtube-placeholder");
+placeholder.addEventListener("click", function () {
+const iframe = document.createElement("iframe");
+iframe.setAttribute(
+"src",
+"https://www.youtube.com/embed/H_aOWlPujIg?autoplay=1"
+);
+iframe.setAttribute("frameborder", "0");
+iframe.setAttribute(
+"allow",
+"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+);
+iframe.setAttribute("allowfullscreen", "");
+iframe.style.cssText = `
+position: absolute;
+top: 0; left: 0;
+width: 100%; height: 100%;
+`;
+placeholder.replaceWith(iframe);
+});
+});
+</script>
+
+</section> -->
+
+    <h2 class="complete-workout-heading">
+      Complete Workout Program
+    </h2>
+    <ul class="workout-benefits">
+      <li><strong>Workouts that adapt</strong> based on your performance and feedback</li>
+      <li><strong>Meals that match your routine</strong> and fit around your lifestyle</li>
+      <li><strong>AI-powered tools</strong> - the Meal and Body Scanner track and visualize your progress</li>
+      <!-- <li>1-on-1 online coaching with your assigned coach for expert guidance</li> -->
+    </ul>
+  </div>
+
+  <!-- Testimonials / Social Proof -->
+  <div class="review-section">
+    <h3>This Isn’t Just Progress — It’s Personal</h3>
+
+    <div class="before-after-images">
+      <div class="before-image">
+        <img src="#" alt="Before">
+        <p class="image-label">Before</p>
+      </div>
+      <div class="after-image">
+        <img src="#" alt="After">
+        <p class="image-label">After</p>
+      </div>
+    </div>
+
+    <div class="review-container">
+      <div class="testimonial-info">
+        <div class="testimonial-left">
+          <strong>Bob</strong>
+        </div>
+        <div class="testimonial-right">
+          <img src="../assets/5-stars.png" alt="5 Stars" class="star-rating">
+        </div>
+      </div>
+      <div class="review-placeholder">
+        <p>I was skeptical at first, but within a few weeks I noticed remarkable changes and felt amazing!</p>
+      </div>
+    </div>
+
+
+    <p class="testimonial-disclaimer">
+      Results may vary. This transformation was achieved using the <strong>12-Week Plan</strong>, part of our tailored
+      training system.
+    </p>
+  </div>
+
+  <div class="floating-cta-container" id="floatingCtaContainer">
+    <div class="floating-cta -cta" id="floating-cta">
+      <button id="claimProgramBtn" class="claim-program-btn">
+        Claim My Plan
+      </button>
+    </div>
+  </div>
+
+  <div id="ctaStopContainer"></div>
+
+  <div id="offerScrollAnchor" class="offer-scroll-anchor" aria-hidden="true"></div>
+
+  <section class="discount-section" id="discountSection">
+    <!-- Timer Container -->
+    <div class="timer-container" id="timerContainer">
+      <div class="timer-text">
+        <span class="discount-label">Discount Expires In:</span>
+        <span class="time-remaining" id="countdownTimer">10:00</span>
+      </div>
+      <p class="first-1000">🔥 2,000+ claimed their plan today. You're next</p>
+    </div>
+
+    <!-- Offer Cards -->
+     
+    <section id="socialProof" class="social-proof">
+      <img src="../assets/muscular-silhouette.webp" alt="Coach silhouette" class="social-proof__coach" />
+      <p class="social-proof__headline">
+        947 people bought workout plans in the last hour
+      </p>
+      <div class="social-proof__recent">
+        <span class="social-proof__tag">ava 12-Week Plan</span>
+        <span class="social-proof__tag">ethan 12-Week Plan</span>
+      </div>
+    </section>
+    <!-- <h3 class="offer-heading" id="path-to-progress">Claim Your Plan</h3> -->
+    <p class="plan-diff-text">
+      <!-- Other apps just track.
+<strong>We use what you track to adapt workouts & meals</strong> so you
+<strong>get fit faster</strong>.<br> -->
+
+      <!-- <a href="#" id="comparePlansLink" class="compare-pill">
+🔎 See how it compares
+</a> -->
+    </p>
+
+    <!-- Promo applied strip -->
+    <div id="promoAppliedStrip" class="promo-strip" hidden>
+      <div class="promo-strip__confetti" aria-hidden="true"></div>
+
+      <div class="promo-strip__copy">
+        <h4 class="promo-strip__title">🎉 Congratulations</h4>
+        <p class="promo-strip__subtitle">
+          Your <span class="promo-strip__highlight">discount</span> of 51% is applied.
+        </p>
+      </div>
+
+      <div class="promo-strip__meta">
+        <div class="promo-strip__meta-item promo-strip__meta-item--code">
+          <span class="promo-strip__meta-label">Promo code</span>
+          <code id="promoStripCode" class="promo-strip__meta-value" aria-label="Promo code"></code>
+        </div>
+        <div class="promo-strip__meta-item promo-strip__meta-item--timer" aria-live="polite">
+          <div class="promo-strip__timer">
+            <div class="promo-strip__timer-block">
+              <span class="promo-strip__timer-value" id="promoStripTimerMinutes">10</span>
+              <span class="promo-strip__timer-unit">min</span>
+            </div>
+            <span class="promo-strip__timer-separator" aria-hidden="true">:</span>
+            <div class="promo-strip__timer-block">
+              <span class="promo-strip__timer-value" id="promoStripTimerSeconds">00</span>
+              <span class="promo-strip__timer-unit">secs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <p class="offer-personalization" id="offerNamePrompt">Athlete, claim your calisthenics workout plan</p>
+
+    <div class="rating-summary" aria-label="Average rating 4.8 out of 5">
+      <div class="rating-summary__row">
+        <div class="rating-summary__stars" aria-hidden="true">
+          <span class="rating-summary__stars-fill" style="width: 96%;">★★★★★</span>
+          <span class="rating-summary__stars-base" aria-hidden="true">★★★★★</span>
+        </div>
+        <div class="rating-summary__score">
+          <strong>4.8/5</strong> (2,691 reviews)
+        </div>
+      </div>
+
+      <div class="rating-summary__reassurance">
+        <p>Need reassurance?</p>
+        <button class="rating-summary__link" id="readReviewsLink" type="button">
+          Read reviews
+        </button>
+      </div>
+    </div>
+
+    <!-- <p class="offer-subtext">Most people never stick to fitness because their plan doesn’t adapt. Yours will.
+</p> -->
+
+    <div class="offer-cards" id="offerCardsContainer">
+      <!-- <div class="offer-card" data-program="1-week">
+<div class="offer-left">
+<div class="duration"><strong>1-Week Program</strong></div>
+<p class="card-subtext">Tailored intro — no card required.</p>
+<div class="full-price" data-full-price="£24.99">
+<span class="price-strikethrough" id="price1WeekFull">£24.99</span>
+<span class="discount-price" id="price1WeekDiscount">FREE!</span>
+</div>
+</div>
+<div class="offer-right">
+<div class="cost-per-day">
+<strong id="costPerDay1Week">£0.00</strong>
+</div>
+<div class="per-day">per day</div>
+</div>
+<div class="additional-info" style="display:none;">
+<h4>What’s inside this plan</h4>
+<ul class="offer-includes">
+<li>🏋️ <strong>7-day workout plan</strong> tailored using your onboarding answers</li>
+<li>📈 <strong>Simple progress tracking</strong> to stay on course</li>
+<li>�� One-time payment, no ongoing fees</li>
+</ul>
+</div>
+<div class="toggle-details" style="cursor:pointer;">See more</div>
+</div> -->
+      <!-- END 1-WEEK CARD -->
+
+      <!-- Row 2: Two Side-by-Side Cards for 4-Week and 12-Week Programs -->
+      <!-- <div class="offer-row">
+<div class="offer-card half-width" data-program="4-week">
+<div class="offer-left">
+<div class="duration"><strong>4-Week Program</strong></div>
+<div class="full-price" data-full-price="£99.99">
+<span id="price4WeekFull">£99.99</span>
+</div>
+</div>
+<div class="offer-right">
+<div class="cost-per-day">
+<strong id="costPerDay4Week">£3.57</strong>
+</div>
+<div class="per-day">per day</div>
+</div>
+<div class="additional-info" style="display:none;">
+<h4>What’s inside this plan</h4>
+<ul class="offer-includes">
+<li>🏋️ <Strong>4-week workout plan</Strong> tailored using your onboarding answers</li>
+<li>📈 <Strong>Simple progress tracking</Strong> to stay on course</li>
+<li>📅 One-time payment, no ongoing fees</li>
+</ul>
+</div>
+<div class="toggle-details" style="cursor:pointer;">See more</div>
+</div>
+<div class="offer-card half-width" data-program="12-week">
+<div class="offer-left">
+<div class="duration"><strong>12-Week Program</strong></div>
+<div class="full-price" data-full-price="£149.99">
+<span id="price12WeekFull">£149.99</span>
+</div>
+</div>
+<div class="offer-right">
+<div class="cost-per-day">
+<strong id="costPerDay12Week">£1.79</strong>
+</div>
+<div class="per-day">per day</div>
+</div>
+<div class="additional-info" id="info-new" style="display:none;">
+<h4>What’s inside this plan</h4>
+<ul class="offer-includes">
+<li>🏋️ <Strong>12-week workout plan</Strong> built from your onboarding answers</li>
+<li>🍽️ <Strong>Macro-matched meals</Strong> and <Strong>smart progress tracking</Strong></li>
+<li>📅 One-time payment — no ongoing fees</li>
+</ul>
+</div>
+<div class="toggle-details" style="cursor:pointer;">See more</div>
+</div>
+</div> -->
+
+      <!-- Offer Cards -->
+         <!--
+      <div class="offer-card offer-tier" data-program="trial">
+        <div class="offer-left">
+          <div class="duration"><strong>1-Week Trial</strong></div>
+          <div class="full-price" data-full-price="£4.99">
+            <span class="price-value" id="priceTrial">£4.99</span>
+          </div>
+        </div>
+        <div class="offer-right">
+          <div class="cost-per-day">
+            <strong id="costPerDayTrial">£4.99</strong>
+          </div>
+          <div class="per-day">per day</div>
+        </div>
+      </div>
+        -->
+
+      <div class="offer-card offer-tier" data-program="4-week">
+        <div class="best-seller-banner" aria-label="Most popular plan">MOST POPULAR</div>
+        <div class="discount-flag" aria-label="Limited-time 51% discount">51% OFF</div>
+        <div class="offer-left">
+          <div class="duration"><strong>4-Week Plan</strong></div>
+          <div class="full-price" data-full-price="£19.99">
+            <span class="price-strikethrough" id="priceFourWeekFull">£19.99</span>
+            <span class="discount-price" id="priceFourWeekDiscount">£9.99</span>
+          </div>
+        </div>
+        <div class="offer-right">
+          <div class="cost-per-day">
+            <strong id="costPerDayFourWeek">£19.99</strong>
+          </div>
+          <div class="per-day">per day</div>
+        </div>
+      </div>
+
+      <div class="offer-card offer-tier" data-program="12-week">
+        <div class="discount-flag" aria-label="Limited-time 51% discount">51% OFF</div>
+        <div class="offer-left">
+          <div class="duration"><strong>12-Week Plan</strong></div>
+          <div class="full-price" data-full-price="£39.99">
+            <span class="price-strikethrough" id="priceTwelveWeekFull">£39.99</span>
+            <span class="discount-price" id="priceTwelveWeekDiscount">£19.99</span>
+          </div>
+        </div>
+        <div class="offer-right">
+          <div class="cost-per-day">
+            <strong id="costPerDayTwelveWeek">£39.99</strong>
+          </div>
+          <div class="per-day">per day</div>
+        </div>
+      </div>
+
+      <p class="pricing-justification">
+        Like having a personal trainer in your pocket — for less than the cost of one session.
+      </p>
+
+      <!-- FINISH BUTTON -->
+      <div class="offer-finish">
+        <button class="finish-btn" id="offerFinishBtn">
+          Continue
+        </button>
+      </div>
+
+      <p class="reassurance" id="offerDisclaimer">
+        By continuing, you agree to our
+        <a href="tos.html" target="_blank">terms</a> and
+        <a href="refund-policy.html" target="_blank">refund policy</a>.
+         Covered by
+        <a href="#moneyBackGuarantee" id="moneyBackGuaranteeLink" class="mbg-scroll-link">
+          Money-Back Guarantee
+        </a>.
+        Need reassurance?
+        <button type="button" class="rating-summary__link reassurance__reviews-link" id="reassuranceReviewsLink">
+          Read reviews
+        </button>
+      </p>
+
+      <p class="offer-disclaimer">
+        <!-- By continuing, you agree to our
+        <a href="tos.html" target="_blank">terms</a> and
+        <a href="refund-policy.html" target="_blank">refund policy</a>.
+        The 1-day free trial renews every 30 days at
+        <span class="renew-amt"></span>/month unless cancelled.
+        One-time bonus (£14.99) shown after checkout.
+        Cancellations take effect at the end of your 30-day period. -->
+      </p>
+
+
+  </section>
+
+  <p id="postPayNote" class="post-pay-note" style="display:none;text-align:center;margin-top:12px;">
+    ✅ <strong>After checkout
+       <!-- (<span id="checkoutPrice">—</span>) -->
+       , your plan unlocks immediately</strong> – you’ll
+    land on your dashboard.
+  </p>
+
+  <section id="loadingSection" class="loading-section" style="display: none;">
+    <p id="loadingText">Loading...</p>
+  </section>
+
+  <div class="payment-wrapper">
+    <!-- this is the overlay rectangle -->
+    <!-- <div class="payment-overlay"></div> -->
+
+    <!-- PAYMENTS: PayPal (default) | Card / Apple Pay (Stripe) -->
+    <section id="paymentSection" class="payment-section preload-hide">
+      <span id="paymentCloseBtn" class="payment-close" aria-label="Close">&times;</span>
+
+      <!-- tab header -->
+      <!-- <div id="pay-toggle" class="pay-toggle" role="tablist">
+<button type="button" data-pay="paypal" class="toggle-btn active" role="tab" aria-selected="true">
+<img src="../assets/paypal-mark.webp" alt="" class="pay-pill-icon" />
+PayPal
+</button>
+<button type="button" data-pay="card" class="toggle-btn" role="tab" aria-selected="false">
+Card
+<img src="../assets/apple-pay-mark.webp" alt="Apple Pay" class="pay-pill-icon" />
+<img src="../assets/google-gpay.webp" alt="Google Pay" class="pay-pill-icon" />
+</button>
+<span class="toggle-slider" aria-hidden="true"></span>
+</div> -->
+
+      <p id="planSummary" class="plan-summary">12-Week Plan</p>
+      <!-- PayPal -->
+      <!-- <div id="paypalMarkContainer" style="margin-top:20px;"></div> -->
+
+      <!-- keep this: SDK renders the real button inside -->
+      <!-- <div id="paypal-button-container" class="visually-hidden"></div> -->
+
+      <!-- PayPal SDK: GBP, vault, capture, buttons -->
+      <!-- <script
+src="https://www.paypal.com/sdk/js?client-id=AcygnP6DJSFGbIeyUa2BdGdznCQQk-qXjMEMijIZJeTbzkIltNVCGL5k1i2DdcNR24qoGTDPF_FD_VQ8&vault=true&intent=capture&components=buttons&currency=GBP"></script> -->
+
+      <!-- Where the button will render -->
+      <!-- <div id="paypal-btn" style="margin-top:16px;"></div>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+try {
+// Get client token from your server
+const ctRes = await fetch('/api/paypal/client-token');
+if (!ctRes.ok) throw new Error('client-token failed: ' + (await ctRes.text()));
+const { client_token } = await ctRes.json();
+
+// Dynamically load the SDK and attach the client token on the script tag
+await new Promise((resolve, reject) => {
+const s = document.createElement('script');
+s.src = 'https://www.paypal.com/sdk/js?client-id=AcygnP6DJSFGbIeyUa2BdGdznCQQk-qXjMEMijIZJeTbzkIltNVCGL5k1i2DdcNR24qoGTDPF_FD_VQ8&vault=true&intent=capture&components=buttons&currency=GBP&disable-funding=card,credit';
+s.setAttribute('data-client-token', client_token);
+s.onload = resolve;
+s.onerror = () => reject(new Error('PayPal SDK failed to load'));
+document.head.appendChild(s);
+});
+
+// Now render the button
+paypal.Buttons({
+createOrder: async () => {
+const currency = (window.RTB_CURRENCY?.code || 'GBP');
+const r = await fetch('/api/paypal/create-order-otp', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ currency })
+});
+if (!r.ok) throw new Error('create-order failed: ' + (await r.text()));
+const { id } = await r.json();
+return id;
+},
+
+onApprove: async (data) => {
+const r = await fetch(`/api/paypal/capture/${data.orderID}`, { method: 'POST' });
+if (!r.ok) throw new Error('capture failed: ' + (await r.text()));
+const { capture, vault_id, vault_status } = await r.json();
+
+console.log('PayPal capture:', capture);
+console.log('vault_id:', vault_id);
+
+const userId = localStorage.getItem('userId');
+const currency = (window.RTB_CURRENCY?.code || 'GBP');
+const renewAmount = (window.RTB_PRICE_TABLE?.[currency]?.full) || 49.99;
+const payload = {
+userId,
+vault_id,
+orderID: data.orderID,
+captureID: capture?.purchase_units?.[0]?.payments?.captures?.[0]?.id,
+currency,
+renewAmount
+};
+if (vault_id && vault_status === 'VAULTED') {
+await fetch('/api/paypal/save-vault', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify(payload)
+});
+} else {
+console.log('Vaulting pending (status:', vault_status, '). Will be saved via webhook.');
+}
+try {
+await fetch('/api/paypal/save-vault', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify(payload)
+});
+} catch (e) {
+console.warn('save-vault failed (non-blocking)', e);
+}
+
+window.location.href = '/pages/dashboard.html';
+},
+
+onError: (err) => {
+console.error('PayPal error', err);
+alert('There was a problem finishing checkout. Please try again.');
+}
+}).render('#paypal-btn');
+} catch (e) {
+console.error(e);
+alert('Could not initialise PayPal. Please refresh and try again.');
+}
+});
+</script> -->
+
+
+      <!-- Stripe -->
+      <form id="paymentForm" style="display:none;">
+        <div id="payment-request-button"></div>
+        <div id="paymentElement" style="margin-top:24px;"></div>
+
+        <button id="paySubmitBtn" class="pay-btn" type="submit">🔒 Pay</button>
+        <div class="card-logos">
+          <img src="../assets/visa.png" alt="Visa" class="visa" />
+          <img src="../assets/mastercard.png" alt="Mastercard" />
+          <img src="../assets/amex.png" alt="American Express" />
+
+
+          <!-- <img src="../assets/discover.png" alt="Discover" /> -->
+        </div>
+      </form>
+
+      <!-- loaders / messages -->
+      <p id="loadingIndicator" style="display:none;text-align:center;margin-top:12px;font-weight:500;color:#333;">
+        Loading
+      </p>
+      <p id="cardError" class="error"></p>
+    </section>
+
+
+    <section class="money-back-guarantee " id="moneyBackGuarantee">
+      <div class="mbg-container">
+        <div class="mbg-content">
+          <h2>100% Money-Back Guarantee</h2>
+          <p>
+            We're confident in the effectiveness of our programs. Achieve visible results in just 4 weeks, or get your
+            money back!
+            If you don't see results within 30 days, and you've followed the plan, we'll provide a full refund—no
+            hassle.
+          </p>
+          <p>
+            <a href="refund-policy.html" class="mbg-link">Learn more about our refund policy</a>.
+          </p>
+        </div>
+      </div>
+  </div>
+  </section>
+
+  <div class="testimonial-section ">
+    <h2>See What Happens When Everything Connects</h2>
+    <p class="hero-text">
+      Progress from real people, using the same system you're about to unlock.
+    </p>
+
+    <div class="testimonial-container">
+      <!-- Desktop Arrows (hidden on mobile) -->
+      <button class="arrow-button prev">❮</button>
+
+      <!-- Slider that holds all testimonial cards -->
+      <div class="testimonial-slider">
+        <!-- Populated by JS -->
+      </div>
+
+      <button class="arrow-button next">❯</button>
+    </div>
+  </div>
+
+  <div class="dots-container "></div>
+
+  <section class="reviews-section" id="reviewsSection" aria-label="Customer reviews">
+    <div class="reviews-form" id="reviewsForm">
+      <h3>Share your experience</h3>
+      <p class="reviews-form__hint">Your review shows up instantly (and helps others feel confident).</p>
+      <form id="reviewComposer">
+        <div class="reviews-form__row">
+          <label for="reviewName">Name</label>
+          <input id="reviewName" name="reviewName" type="text" placeholder="Alex J." required>
+        </div>
+        <div class="reviews-form__row reviews-form__row--rating">
+          <label for="reviewRating">Rating</label>
+          <select id="reviewRating" name="reviewRating">
+            <option value="5">5 - Life changing 🔥</option>
+            <option value="4">4 - Very good</option>
+            <option value="3">3 - It’s decent</option>
+            <option value="2">2 - Needs work</option>
+            <option value="1">1 - Not for me</option>
+          </select>
+        </div>
+        <div class="reviews-form__row">
+          <label for="reviewText">Review</label>
+          <textarea id="reviewText" name="reviewText" rows="3" placeholder="What surprised you?" required></textarea>
+        </div>
+        <button type="submit" class="primary-btn reviews-form__submit">Post my review</button>
+      </form>
+    </div>
+    <div class="reviews-hero">
+      <div class="reviews-hero__score">
+        <div class="reviews-hero__stars" aria-hidden="true">
+          <span class="reviews-hero__stars-fill" style="width: 96%;">★★★★★</span>
+          <span class="reviews-hero__stars-base">★★★★★</span>
+        </div>
+        <div class="reviews-hero__meta">
+          <p class="reviews-hero__headline">4.8 out of 5</p>
+          <p class="reviews-hero__sub">Based on 2,691 reviews verified purchases</p>
+        </div>
+      </div>
+      <ul class="reviews-breakdown" aria-label="Rating distribution">
+        <li><span>5 ★</span>
+          <div class="bar"><span style="width: 82%"></span></div><span class="count">82%</span>
+        </li>
+        <li><span>4 ★</span>
+          <div class="bar"><span style="width: 14%"></span></div><span class="count">14%</span>
+        </li>
+        <li><span>3 ★</span>
+          <div class="bar"><span style="width: 3%"></span></div><span class="count">3%</span>
+        </li>
+        <li><span>2 ★</span>
+          <div class="bar"><span style="width: 1%"></span></div><span class="count">1%</span>
+        </li>
+        <li><span>1 ★</span>
+          <div class="bar"><span style="width: 0.5%"></span></div><span class="count">0.5%</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="reviews-list" id="reviewsList" aria-live="polite"></div>
+
+    <div class="reviews-pagination" id="reviewsPagination" aria-label="Review pages"></div>
+
+      <div class="post-faq-cta">
+    <button type="button" class="claim-program-btn" data-open-value-modal>
+      Claim My Plan
+    </button>
+  </div>
+  
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section" id="faqSection">
+    <h2 class="faq-heading">Still have questions?</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <button class="faq-question">What exactly do I get when I join?</button>
+        <div class="faq-answer">
+          <p>You’ll get instant access to your personalized fitness tracker — with tailored workouts, meals, habit
+            tracking, progress tools, and insights that evolve with you. It’s all online, accessible 24/7, and built
+            around your exact answers during onboarding.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Is this just a plan, or something more interactive?</button>
+        <div class="faq-answer">
+          <p>It’s far more than a plan. This is a live, adaptive tracker that responds to your feedback, tracks your
+            streaks, progression, and nutrition, and helps you stay on track with minimal guesswork. You don’t just
+            follow it — you interact with it daily.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What if I’m a beginner or haven’t worked out in a while?</button>
+        <div class="faq-answer">
+          <p>That’s exactly who it’s built for. The tracker meets you where you are and progresses gradually. No
+            intimidating jumps, no overwhelm — just a smart path forward that builds confidence session by session.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How is this different from a fitness app or YouTube workout?</button>
+        <div class="faq-answer">
+          <p>Most apps throw generic workouts at you. This is different — everything is built around your body, goals,
+            and feedback. It’s like having a personal trainer, nutritionist, and accountability coach — in one
+            connected
+            system — without the £60/hr price tag.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What if I change my mind after joining?</button>
+        <div class="faq-answer">
+          <p>You’re covered. Try the tracker risk-free — if you don’t love it, you’ll get a full refund. No hassle, no
+            hoops, just email support within the refund window.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="trust-line">
+    Built by a small team of lifters, developers, and designers who’ve been exactly where you are.
+  </p>
+
+  <footer class="footer " id="footer">
+    <div class="footer-content">
+      <p class="powered">POWERED BY</p>
+      <p>&copy; 2025 Raising The Bar App Ltd. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="forms-ironverse.html">Start Training</a>
+        <span class="separator">|</span>
+        <a href="legal-overview.html">Our Policies</a>
+        <span class="separator">|</span>
+        <a href="contact-us.html">Contact Us</a>
+      </div>
+      <!-- <div class="social-icons">
+<a href="https://www.instagram.com/raising_the_bar_app/?hl=en" target="_blank" aria-label="Instagram">
+<img src="../assets/instagram-icon.png" alt="Instagram">
+</a>
+<a href="https://www.youtube.com/@Raising_The_Bar_App" target="_blank" aria-label="YouTube">
+<img src="../assets/youtube-icon.png" alt="YouTube">
+</a>
+<a href="https://www.youtube.com/@Raising_The_Bar_App" target="_blank" aria-label="TikTok">
+<img src="../assets/tiktok-icon.png" alt="TikTok">
+</a>
+</div> -->
+    </div>
+  </footer>
+  <div id="compareModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+
+      <h2>Compare Plans</h2>
+      <p class="subtext">Here's what you unlock when using our 12-Week Plan.</p>
+
+      <div class="table-wrapper">
+        <table class="compare-table">
+          <colgroup>
+            <col class="col-feature">
+            <col class="col-ct">
+            <col class="col-pt">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Most Apps</th>
+              <th>Raising The Bar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Workout Logging</td>
+              <td>✅</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Adaptive Progression</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Progress Score</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>My Progress (Trends &amp; Insights)</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Coach Feedback &amp; Weekly Insights</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Nutrition Tracker</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Macro-Matched Meals</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Meal Prep Mode &amp; Shopping List</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>XP Bonuses &amp; Weekly Recaps</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Video Tutorials</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="testimonial">
+        “I didn't realize how much I was missing until I unlocked the 12-Week Plan. It made everything click.”
+        - Alice, lost 7 kg
+      </p>
+    </div>
+  </div>
+  
+
+  <script>
+    let scrollTracked = false;
+
+    window.addEventListener('scroll', () => {
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const pageHeight = document.body.offsetHeight;
+
+      if (!scrollTracked && scrollPosition / pageHeight > 0.75) {
+        scrollTracked = true;
+        if (window.ttq) {
+          ttq.track('ViewContent', {
+            content_name: '75% Scroll - Landing Page'
+          });
+        }
+      }
+    });
+  </script>
+  <script>
+    // Lightweight currency bootstrap (v1)
+    ; (function () {
+      const saved = localStorage.getItem('rtb_currency');
+      if (saved) { window.RTB_CURRENCY = JSON.parse(saved); return; }
+
+      // Minimal map for initial regions. Extend as you add markets.
+      const COUNTRY_TO_CURRENCY = {
+        SE: { code: 'SEK', symbol: 'kr', minor: 2, fxFromGBP: 13.50 }, // 1 GBP ≈ 13.5 SEK (update periodically)
+        US: { code: 'USD', symbol: '$', minor: 2, fxFromGBP: 1.30 },
+        GB: { code: 'GBP', symbol: '£', minor: 2, fxFromGBP: 1.00 },
+        IE: { code: 'EUR', symbol: '€', minor: 2, fxFromGBP: 1.18 },
+        DE: { code: 'EUR', symbol: '€', minor: 2, fxFromGBP: 1.18 },
+        FR: { code: 'EUR', symbol: '€', minor: 2, fxFromGBP: 1.18 },
+        AU: { code: 'AUD', symbol: '$', minor: 2, fxFromGBP: 1.95 },
+        CA: { code: 'CAD', symbol: '$', minor: 2, fxFromGBP: 1.75 }
+      };
+
+      function pickByLocale() {
+        try {
+          const loc = Intl.DateTimeFormat().resolvedOptions().locale || '';
+          const cc = (loc.split('-')[1] || '').toUpperCase();
+          if (COUNTRY_TO_CURRENCY[cc]) return { country: cc, ...COUNTRY_TO_CURRENCY[cc] };
+        } catch { }
+        return { country: 'GB', ...COUNTRY_TO_CURRENCY.GB };
+      }
+
+      window.RTB_CURRENCY = pickByLocale();
+      localStorage.setItem('rtb_currency', JSON.stringify(window.RTB_CURRENCY));
+    })();
+  </script>
+  <script src="../scripts/offer-ironverse.js"></script>
+  <!-- leave Stripe.js -->
+
+  <!-- then YOUR payment.js – pick one path and delete the other -->
+  <!-- <script src="../scripts/paypal.js?v=20250716"></script> -->
+  <script src="../scripts/payment.js?v=20250711"></script>
+
+</body>
+
+</html>

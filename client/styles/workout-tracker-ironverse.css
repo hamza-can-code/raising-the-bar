@@ -1,0 +1,4005 @@
+/***********************************************
+ * Base Page & Shared Styles 
+ ***********************************************/
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f9f7f2;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+exercise-btn,
+.cta,
+.timer-container,
+#myWorkoutsTab,
+#myProgressTab,
+.collapsible-header,
+.exercise-btn,
+#prevWorkoutBtn,
+.log-weight-button,
+#nextWorkoutBtn {
+  font-family: 'Poppins', sans-serif;
+  /* Headers: Poppins */
+  font-weight: 700;
+  /* Bold */
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.header {
+  text-align: center;
+  padding: 25px 10px 10px 10px;
+  position: relative;
+  background-color: transparent;
+}
+
+.header .logo img {
+  max-height: 100px;
+}
+
+/* === LOADER =================================================== */
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F9F4EB;
+  /* brand cream */
+  z-index: 2500;
+  transition: opacity .5s ease, transform .5s ease;
+}
+
+.loader-overlay.fade-out {
+  opacity: 0;
+  transform: translateY(-18px);
+  /* glide upward */
+  pointer-events: none;
+}
+
+.loader-logo {
+  --scale: 0.8;
+  /* driven by JS */
+  width: 120px;
+  max-width: 60vw;
+  transform: scale(var(--scale));
+  transform-origin: center;
+  transition: transform .2s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* @keyframes pulse {
+  0% {
+    transform: scale(.8);
+    opacity: .4;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(.8);
+    opacity: .4;
+  }
+}
+
+.loader-logo.pulsing {
+  animation: pulse 2s ease-in-out infinite;
+} */
+
+/* ——— Header & Nav ——— */
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.main-nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+}
+
+.main-nav a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #fff;
+  transition: color 0.2s;
+}
+
+.main-nav a:hover {
+  color: #A855F7;
+  /* pro purple hover */
+}
+
+/* hide desktop nav on mobile, show hamburger */
+@media (max-width: 768px) {
+  .main-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .hamburger {
+    display: none;
+  }
+}
+
+/* ——— Modal Overlay & Content ——— */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+}
+
+.faq-list details {
+  margin-bottom: 1rem;
+}
+
+.faq-list summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+/* small text under login form */
+.small {
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.faq-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+}
+
+.faq-modal-content {
+  background: #fff;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.faq-modal-content h2 {
+  margin-top: 0;
+}
+
+.faq-modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.faq-modal-content input[type="email"] {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.faq-modal-content button[type="submit"] {
+  padding: 0.8rem;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.faq-modal-content button[type="submit"]:hover {
+  background: #0056b3;
+}
+
+/* ——— Mobile Nav Tweaks ——— */
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.hamburger {
+  display: block;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* hide desktop‑style menu until toggled */
+.main-nav {
+  display: none;
+}
+
+.main-nav.open {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2000;
+  /* no centering—panel itself will define its layout */
+}
+
+.main-nav.open ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 60%;
+  /* shrink the panel width from 75% → 60% */
+  max-width: 300px;
+  margin: 0;
+  /* add extra left‑padding so items aren’t flush to the edge */
+  padding: 4.5rem 1rem 1rem 2rem;
+  background: #fff;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  border-radius: 0 8px 8px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* left‑align the flex items */
+  gap: 1rem;
+  list-style: none;
+}
+
+.main-nav.open ul li+li {
+  margin-top: 0.5rem;
+}
+
+.main-nav.open ul li {
+  margin: 0;
+  width: 100%;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 0.75rem;
+}
+
+.main-nav.open ul li:last-child {
+  border-bottom: none;
+  /* no border on last */
+  padding-bottom: 0;
+  /* optional: remove extra padding */
+}
+
+.main-nav.open ul a {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+  color: #333;
+  text-align: left;
+  display: block;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.main-nav.open ul a:hover {
+  background: #F0F0F0;
+}
+
+.nav-close {
+  display: block;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+  z-index: 2100;
+}
+
+.main-nav.open .nav-close {
+  color: #333;
+}
+
+.main-nav.open::before {
+  content: '';
+  position: absolute;
+  top: 3.75rem;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  /* background: #e5e5e5; */
+}
+
+.faq-answer {
+  color: #444;
+  background-color: #F6F4EF;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.footer {
+  margin-top: auto;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.footer-content p {
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.social-icons img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+
+  .footer {
+    padding: 20px 0;
+
+  }
+
+  .footer-links {
+    flex-direction: column;
+    /* Stack links vertically */
+    gap: 10px;
+    padding: 5px 0;
+  }
+
+  .footer-links a {
+    font-size: 1.1rem;
+    /* Larger text for easier readability */
+    margin-bottom: 10px;
+    text-decoration: underline;
+  }
+
+  .footer p {
+    font-size: 1rem;
+    /* Larger text for easier readability */
+    margin-bottom: 20px;
+  }
+
+  .social-icons img {
+    width: 42px;
+    /* Slightly larger for mobile */
+    height: 42px;
+    margin: 0 35px;
+  }
+
+  .footer span {
+    display: none;
+  }
+}
+
+.pt-extra-container,
+.ct-extra-container,
+.tracker-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 10px !important;
+  padding: 6px 12px;
+  font-size: 0.7rem;
+  border-radius: 5px;
+  text-align: center !important;
+}
+
+.pt-extra-container,
+.tracker-badge.pt-extra-container {
+  background: #9333EA !important;
+}
+
+.pt-extra-badge {
+  font-style: italic;
+  color: #F8F4FF;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.ct-extra-container,
+.tracker-badge.ct-extra-container {
+  background: #e0e0e0;
+}
+
+.ct-extra-badge {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #333 !important;
+}
+
+.crown-emoji-badge {
+  font-size: 1.1rem;
+  display: inline-block;
+  line-height: 1;
+  vertical-align: text-top;
+  /* hugs the first line of “Pro” */
+  font-style: normal;
+}
+
+.tracker-badge {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  z-index: 1100;
+  max-width: 100px;
+  line-height: 1.2;
+  text-align: center;
+  display: block;
+  text-align: center;
+}
+
+.pt-extra-badge,
+.ct-extra-badge {
+  display: inline-block;
+}
+
+/***********************************************
+   * Page Container for Workout Tracker
+   ***********************************************/
+#workout-tracker {
+  max-width: 1200px;
+  margin: 0 auto 20px auto;
+  padding: 10px;
+  width: 95%;
+}
+
+#workout-tracker h1 {
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+/***********************************************
+   * Streak & Messaging
+   ***********************************************/
+#streak-message {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/***********************************************
+   * XP Bar Container
+   ***********************************************/
+
+.xp-bar-container,
+.fixed-header .xp-bar {
+  position: relative;
+}
+
+#xp-gain-animation,
+#sticky-xp-gain-animation {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #007bff;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #F6EFE3;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transform: translateY(-100%);
+  /* hidden by default */
+  transition: transform 0.3s ease-out;
+  z-index: 1000;
+  font-weight: bold;
+}
+
+.fixed-header.visible {
+  transform: translateY(0);
+}
+
+.xp-bar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.xp-bar-container #current-level {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.xp-bar {
+  position: relative;
+  background-color: #e0e0e0;
+  width: 70%;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.xp-bar-fill {
+  background-color: #007bff;
+  height: 100%;
+  width: 0%;
+  /* transition: width 0.5s ease;  */
+}
+
+#xp-gain-animation {
+  position: absolute;
+  /* Position it just to the right of the xp-bar */
+  right: 0px;
+  /* Adjust this value as needed */
+  top: 75%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #007bff;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+#sticky-xp-gain-animation {
+  position: absolute;
+  /* Bring it closer to the progress bar */
+  right: 14px;
+  /* Adjust this value as needed */
+  top: 65%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #007bff;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+body.xp-cap #xpBarFill,
+body.xp-cap #stickyXpBarFill {
+  background: #bdbdbd;
+}
+
+#xp-lock-icon {
+  opacity: .6;
+  font-size: 1rem;
+  margin-left: 4px;
+}
+
+/* nice burst when unlocking levels 6+ */
+@keyframes proBurst {
+  from {
+    transform: scale(1)
+  }
+
+  50% {
+    transform: scale(1.2)
+  }
+
+  to {
+    transform: scale(1)
+  }
+}
+
+.pro-burst {
+  animation: proBurst 0.8s ease-out;
+}
+
+/* makes the bar grey when XP is capped */
+.xp-bar-fill.capped {
+  background: #c9c9c9 !important;
+}
+
+
+/***********************************************
+   * Tab Container & Tabs
+   ***********************************************/
+.tab-container {
+  display: flex;
+  width: 100%;
+  border-bottom: 2px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.tab {
+  width: 50%;
+  text-align: center;
+  padding: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  font-size: 19px;
+}
+
+.tab:last-child {
+  border-right: none;
+}
+
+.tab.active {
+  /* background-color: #e0e0e0; */
+  border-bottom: 2px solid #007bff;
+}
+
+/* .tab:hover {
+
+} */
+
+.tab-content {
+  width: 100%;
+}
+
+.tab-section {
+  display: none;
+  padding: 10px 0;
+}
+
+.tab-section.active {
+  display: block;
+}
+
+/***********************************************
+ * 1) The “Frame” (unchanged except for confirmation)
+ ***********************************************/
+.week-selector-frame {
+  position: relative;
+  border-radius: 6px;
+  background-color: #f1ede5;
+  overflow: hidden;
+  height: 60px;
+  margin: 20px 0;
+  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+/***********************************************
+ * 2) The Wrapper: flex container + vertical centering
+ ***********************************************/
+.week-selector-wrapper {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  /* <-- ensures vertical centering */
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Existing fade logic (unchanged) */
+.week-selector-wrapper::before,
+.week-selector-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: 45px;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.week-selector-wrapper::before {
+  left: 10px;
+  background: linear-gradient(to right,
+      rgba(249, 247, 242, 1) 0%,
+      rgba(249, 247, 242, 1) 45%,
+      rgba(249, 247, 242, 0) 100%);
+}
+
+.week-selector-wrapper::after {
+  right: -17px;
+  background: linear-gradient(to left,
+      #f9f7f2 0%,
+      rgba(249, 247, 242, 0) 100%);
+}
+
+.week-selector-wrapper.show-left-shadow::before {
+  opacity: 1;
+}
+
+.week-selector-wrapper.show-right-shadow::after {
+  opacity: 1;
+}
+
+/***********************************************
+ * 3) The .week-selector row itself
+ ***********************************************/
+.week-selector {
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  position: relative;
+  /* Remove bottom margin so it’s truly centered */
+  margin-bottom: 0;
+  z-index: 1;
+  padding: 5px;
+  font-size: 17px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide or style scrollbar if desired */
+.week-selector::-webkit-scrollbar {
+  height: 2px !important;
+}
+
+.week-selector::-webkit-scrollbar-thumb {
+  background-color: #D6CFC7;
+  border-radius: 1px;
+}
+
+/***********************************************
+ * 4) Each “Week X” box
+ ***********************************************/
+
+.week-box.locked {
+  opacity: 0.45;
+  pointer-events: none;
+  /* disables clicks */
+  cursor: default;
+}
+
+.week-box.locked .icon-lock {
+  margin-right: 4px;
+  font-size: 0.9em;
+  /* tweak to taste */
+}
+
+.week-box {
+  flex: 0 0 auto;
+  min-width: 80px;
+  text-align: center;
+  padding: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.week-box:hover {
+  background-color: #ddd;
+}
+
+.week-box.active {
+  border-left: 2px solid #007bff;
+  border-right: 2px solid #007bff;
+}
+
+/***********************************************
+   * Main Workout Display
+   ***********************************************/
+#workoutDisplay {
+  margin-bottom: 20px;
+  /* border: 1px solid #ccc; */
+  padding: 10px;
+}
+
+.workout-day-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.workout-day-header .day-title {
+  margin: 0;
+  text-align: center;
+}
+
+.workout-day-header .day-checkbox {
+  position: absolute;
+  left: 344px;
+}
+
+@media (max-width: 375px) {
+  .workout-day-header .day-checkbox {
+    left: 293px;
+  }
+}
+
+@media (min-width: 376px) {
+  .workout-day-header .day-checkbox {
+    left: 300px;
+  }
+}
+
+@media (min-width: 391px) {
+  .workout-day-header .day-checkbox {
+    left: 344px;
+  }
+}
+
+@media (min-width: 767px) {
+  .workout-day-header .day-checkbox {
+    left: 670px;
+  }
+}
+
+.day-title {
+  margin: 0;
+  font-size: 1rem;
+  font-size: 18px;
+}
+
+/* Checkbox styles for Day, Exercises */
+.day-checkbox,
+.exercise-checkbox,
+.set-checkbox {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  appearance: none;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  border: 2px solid #ccc;
+  vertical-align: middle;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.day-checkbox:checked,
+.exercise-checkbox:checked,
+.set-checkbox:checked {
+  background-color: #28a745;
+  /* For days */
+  border-color: #28a745;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 14 14' fill='%23FFF' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.5 10.5l-3.5-3.5 1.7-1.7 1.8 1.8 3.8-3.8 1.7 1.7-5.5 5.5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Exercise row with extra padding */
+.exercise-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0;
+  padding: 10px 0;
+  border-top: 1px solid #ddd;
+}
+
+.exercise-arrow {
+  width: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.exercise-info {
+  flex: 1;
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.exercise-label {
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.sets-reps,
+.weight-field {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.exercise-checkbox {
+  margin-left: 5px;
+  background-color: #f0f0f0;
+  /* For exercises */
+}
+
+.exercise-checkbox:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 14 14' fill='%23FFF' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.5 10.5l-3.5-3.5 1.7-1.7 1.8 1.8 3.8-3.8 1.7 1.7-5.5 5.5z'/%3E%3C/svg%3E");
+}
+
+/* Expanded state for sets */
+.exercise-details {
+  display: none;
+  /* margin-left: 20px; */
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+
+.set-container {
+  border-left: none;
+  padding-left: 0;
+}
+
+/* Only actual sets get a blue border on the left */
+.bordered-row {
+  border-left: 1px solid #007bff;
+  /* Adjust thickness/color as needed */
+
+  /* Shift everything 20px to the left (including the border) */
+  margin-left: -20px;
+  /* Then add 20px of padding so your text/inputs line up properly */
+  padding-left: 20px;
+}
+
+.exercise-actions-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+  /* Optionally align with the sets if you like: */
+  margin-left: 10px;
+}
+
+.exercise-details.expanded {
+  display: block;
+}
+
+/* Collapsible Section Container */
+.collapsible-section {
+  margin-bottom: 15px;
+  /* space below each section */
+}
+
+/* The clickable header for Warm-Up / Main Work / Cool-Down */
+.collapsible-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #EFEDE8;
+  padding: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  font-size: 18px;
+}
+
+/* The arrow (▶ or ▼) */
+.collapsible-arrow {
+  font-size: 1.3rem;
+  margin-right: 8px;
+  cursor: pointer;
+  display: inline-block;
+  width: 16px;
+  text-align: center;
+  font-family: roboto;
+}
+
+/* The collapsible content container */
+.collapsible-content {
+  padding: 10px 15px;
+  /* background-color: #fafafa; */
+}
+
+/* Sets container */
+.set-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 1fr 40px;
+  /* 4 columns */
+  align-items: center;
+  column-gap: 8px;
+  row-gap: 8px;
+  margin: 8px 0;
+  padding: 8px 0;
+  border-top: 1px solid #EAEAEA;
+}
+
+@media (max-width: 375px) {
+  .set-row {
+    display: grid;
+    grid-template-columns: 35px 1fr 1fr 35px;
+  }
+
+  .set-label {
+    margin-left: 2px !important;
+  }
+}
+
+.duration-row .duration-label {
+  grid-column: 1;
+  /* "Time" label in column 1 */
+}
+
+.duration-row .duration-input {
+  grid-column: 2 / 4;
+  /* Spans columns 2 & 3 (makes it wide) */
+}
+
+.duration-row .duration-checkbox {
+  grid-column: 4;
+  /* Checkbox in the last column */
+}
+
+/* Ensure consistent width on the set-label cell */
+.set-label {
+  font-size: 0.9rem;
+  color: #333;
+  max-width: 40px;
+  margin-left: 5px;
+}
+
+.input-field {
+  height: 44px;
+  width: 80px;
+  margin-right: 5px;
+  padding: 3px 5px;
+  background-color: #f2f0eb;
+  border: 1px solid #d0d0d0;
+  color: #333;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.input-field:focus {
+  background-color: #fff;
+  border-color: #007bff;
+  color: #000;
+  outline: none;
+}
+
+.set-checkbox {
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: #f0f0f0;
+}
+
+.set-checkbox:checked {
+  background-color: #e0e0e0;
+  border-color: #e0e0e0;
+}
+
+/* Links for "Change Exercise" and "Watch Video" */
+.exercise-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+  /* Optionally add margin-left to move them away from checkboxes if needed */
+  margin-left: 40px;
+}
+
+.exercise-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin-right: 5px;
+  padding: 3px 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 92px;
+  height: 52px;
+}
+
+.exercise-btn:hover {
+  background-color: #0056b3;
+}
+
+.exercise-actions a {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.exercise-actions a:hover {
+  text-decoration: underline;
+}
+
+/***********************************************
+ * Day Selection – Frame Container
+ ***********************************************/
+.day-selector-frame {
+  position: relative;
+  border-radius: 6px;
+  background-color: #f1ede5;
+  overflow: hidden;
+  height: 60px;
+  margin: 20px 0;
+  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+/***********************************************
+ * Day Selector Wrapper (inside the frame)
+ ***********************************************/
+.day-selector-wrapper {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  /* centers the day selector vertically */
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* (Keep your existing fade logic if desired) */
+.day-selector-wrapper::before,
+.day-selector-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: 33px;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.day-selector-wrapper::before {
+  left: 20px;
+  background: linear-gradient(to right,
+      #f9f7f2,
+      rgba(249, 247, 242, 0));
+}
+
+.day-selector-wrapper::after {
+  right: -17px;
+  background: linear-gradient(to left,
+      #f9f7f2,
+      rgba(249, 247, 242, 0));
+}
+
+.day-selector-wrapper.show-left-shadow::before {
+  opacity: 1;
+}
+
+.day-selector-wrapper.show-right-shadow::after {
+  opacity: 1;
+}
+
+/***********************************************
+ * Day Selector – The Row of Tabs
+ ***********************************************/
+.day-selector {
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  position: relative;
+  margin-bottom: 0;
+  /* remove bottom margin for vertical centering */
+  z-index: 1;
+  padding: 5px;
+  font-size: 17px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.day-selector::-webkit-scrollbar {
+  height: 2px;
+}
+
+.day-selector::-webkit-scrollbar-thumb {
+  background-color: #D6CFC7;
+  border-radius: 2px;
+}
+
+/***********************************************
+ * Day Box – Individual Day Tabs
+ ***********************************************/
+.day-box {
+  flex: 0 0 auto;
+  min-width: 80px;
+  text-align: center;
+  padding: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.day-box:last-child {
+  border-right: none;
+}
+
+.day-box.active {
+  border-left: 2px solid #007bff;
+  border-right: 2px solid #007bff;
+}
+
+.day-box.completed {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.day-box.in-progress {
+  background-color: #ffcc00;
+  color: #000;
+}
+
+.day-box:hover {
+  background-color: #ddd;
+}
+
+/***********************************************
+   * Previous / Next Buttons
+   ***********************************************/
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.navigation-buttons button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navigation-buttons button:hover {
+  background-color: #0056b3;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navigation-buttons button:active {
+  background-color: #003f7f;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+}
+
+#prevWorkoutBtn {
+  width: 120px;
+}
+
+#nextWorkoutBtn {
+  width: 120px;
+}
+
+/***************************************
+ * 12) REST TIMER STYLES
+ ***************************************/
+.timer-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Make the timer flush at the top and animate in exactly like your XP header */
+#restTimer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #2A2A2A;
+  color: #fff;
+  z-index: 1100;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(-100%);
+  pointer-events: none;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  z-index: 10001;
+}
+
+/* When visible, slide down & become clickable */
+#restTimer.visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Timer display (mm:ss) */
+#restTimer .timer-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  height: 60px;
+  margin: 0;
+}
+
+.timer-adjustments-inline {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  /* small spacing below */
+}
+
+.adjust-btn {
+  background: rgba(68, 68, 68, 0.2);
+  /* subtle highlight */
+  color: #d40000;
+  /* a complementary red for the icon */
+  border: none;
+  font-size: 1rem;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.adjust-btn:hover {
+  background: rgba(68, 68, 68, 0.4);
+}
+
+/* Icon buttons (X, Pause, Play) */
+.timer-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  /* smaller diameter */
+  height: 32px;
+  /* smaller diameter */
+  border-radius: 50%;
+  /* circular shape */
+  cursor: pointer;
+  text-align: center;
+  font-size: 1.4rem;
+  /* slightly smaller icon size */
+  transition: all 0.2s ease;
+  /* smoother hover transitions */
+}
+
+/* The expand arrow in minimized mode: bigger & half overlapped. Hidden by default */
+/* Remove circle background, use a sleek chevron, keep animations if you like */
+.timer-expand-arrow {
+  display: none;
+  /* only shown once minimized */
+  position: absolute;
+  top: 8px;
+  /* adjust as desired */
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  /* start hidden */
+  background: none;
+  /* no circle background */
+  border: none;
+  color: #fff;
+  font-size: 1.6rem;
+  /* or 2rem if you want bigger */
+  cursor: pointer;
+  opacity: 0;
+  /* keep your existing animation or transition if you want the popIn effect */
+}
+
+.timer-expand-arrow .arrow-icon {
+  /* Just a simple chevron icon; you can also set the text via JavaScript. */
+  transform: rotate(180deg);
+  /* rotate the chevron by 180° */
+  font-size: 1.1rem;
+  margin-top: 6px;
+  color: #fff;
+}
+
+/* “Cancel” button toggles minimize */
+.cancel-btn {
+  background-color: transparent;
+  border: 1px solid rgba(255, 0, 0, 0.6);
+  /* thin red border */
+  color: rgba(255, 0, 0, 0.7);
+  /* toned-down red icon color */
+}
+
+/* Pause styling */
+.pause-btn {
+  background-color: transparent;
+  border: 1px solid rgba(218, 165, 32, 0.6);
+  /* golden border */
+  color: rgba(218, 165, 32, 0.7);
+  /* toned-down golden icon color */
+}
+
+.pause-btn .icon {
+  position: relative;
+  /* top: -2px; */
+}
+
+/* Play styling */
+.play-btn {
+  background-color: transparent;
+  border: 1px solid rgba(0, 128, 0, 0.6);
+  /* green border */
+  color: rgba(0, 128, 0, 0.7);
+  /* toned-down green icon color */
+  display: none;
+  /* shown only when paused */
+}
+
+.play-btn .icon {
+  position: relative;
+  /* top: -1px; */
+  right: -1px;
+}
+
+/* Minimizing => slide it up so only 20px remains visible */
+#restTimer.minimized {
+  height: 20px;
+  overflow: hidden;
+  transform: translateY(calc(-100% + 20px));
+  pointer-events: auto;
+  cursor: pointer;
+  /* entire bar is clickable in minimized mode */
+}
+
+/* Hide the timer contents in minimized mode */
+#restTimer.minimized .timer-row,
+#restTimer.minimized .timer-display,
+#restTimer.minimized .timer-icon-btn,
+#restTimer.minimized .timer-adjustments-inline {
+  display: none;
+}
+
+#restTimer.minimized .pause-btn,
+#restTimer.minimized .play-btn {
+  display: none !important;
+}
+
+/* Flip the arrow to indicate “expand” & show it with a pop-in delay after minimization */
+#restTimer.minimized .arrow-icon {
+  transform: rotate(-180deg);
+}
+
+#restTimer.minimized .timer-expand-arrow {
+  display: flex;
+  /* now visible */
+  position: absolute;
+  /* position absolutely in the 20px strip */
+  top: -12px;
+  /* top of the minimized bar */
+  left: 50%;
+  /* center horizontally */
+  transform: translateX(-50%) scale(0);
+  opacity: 0;
+  animation: arrowPopIn 0.3s 0.3s forwards ease-out;
+  /* 0.3s = arrow growth, 0.3s delay after the .minimized slide finishes */
+}
+
+/* The arrow popping in from scale(0) to scale(1) */
+@keyframes arrowPopIn {
+  0% {
+    transform: translateX(-50%) scale(0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* For arrow popping out when clicked => reverse scale */
+@keyframes arrowPopOut {
+  0% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(-50%) scale(0);
+    opacity: 0;
+  }
+}
+
+.fixed-header {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+#restTimer .timer-controls,
+#restTimer .adjustments {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  padding: 0 10px;
+}
+
+#restTimer button {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 2px 6px;
+}
+
+#restTimer .adjustments button {
+  font-size: 1rem;
+}
+
+.timer-header-row {
+  display: flex;
+  align-items: center;
+  /* vertically center everything */
+  justify-content: space-between;
+  /* left on the left, right on the right, center in the middle */
+  height: 60px;
+  /* same height as your timer row */
+  padding: 0 10px;
+  /* optional horizontal padding */
+}
+
+/* Each subsection can be flex as well if needed */
+.timer-left,
+.timer-center,
+.timer-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/**********************************************
+ *  ADVANCED WORKOUT TRACKER "POP-UP" (FOOTER)
+ **********************************************/
+#performancePopup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 93%;
+  background: #F6EFE3;
+  /* same as your XP header background */
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(100%);
+  /* start hidden, slide up when .visible */
+  transition: transform 0.3s ease-out;
+  z-index: 1200;
+  /* above restTimer (1100) and stickyHeader (1000) */
+  overflow: hidden;
+  padding: 20px 15px;
+  font-family: "Poppins", sans-serif;
+}
+
+@media screen and (min-width: 768px) {
+  #performancePopup {
+    width: 100%;
+  }
+}
+
+#performancePopup.visible {
+  transform: translateY(0);
+}
+
+.performance-popup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 93%;
+  background: #F6EFE3;
+  /* same beige you already use   */
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, .2);
+  transform: translateY(100%);
+  /* start fully off‑screen       */
+  transition: transform .3s ease-out;
+  z-index: 1200;
+  overflow: hidden;
+  padding: 20px 15px;
+  font-family: "Poppins", sans-serif;
+}
+
+@media (min-width:768px) {
+  .performance-popup {
+    width: 100%;
+  }
+}
+
+.performance-popup.visible {
+  transform: translateY(0);
+  /* slide‑up when .visible added */
+}
+
+.popup-content-wrap {
+  max-width: 650px;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.popup-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.popup-subtext {
+  font-size: 0.9rem;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.popup-button-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+  margin: 0 auto;
+}
+
+/* The three main buttons. We replicate your .exercise-btn style but override color. */
+.popup-btn-easy {
+  border: none;
+  border-radius: 5px;
+  padding: 16px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: #6FCF97;
+  color: #000;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.popup-btn-fine {
+  border: none;
+  border-radius: 5px;
+  padding: 16px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: #F4D06F;
+  color: #000;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.popup-btn-hard {
+  border: none;
+  border-radius: 5px;
+  padding: 16px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: #FF6B6B;
+  color: #000;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.popup-btn-easy:hover,
+.popup-btn-fine:hover,
+.popup-btn-hard:hover {
+  opacity: 0.85;
+}
+
+/* Progress bar (thin) */
+.popup-progress-bar {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  height: 6px;
+  background: #ddd;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.popup-progress-fill {
+  height: 100%;
+  width: 100%;
+  background: #007BFF;
+  transform: translateX(0);
+  transition: width 0.1s linear;
+}
+
+/* ============================================= */
+/* [CSS] Additions for "My Progress" Overview    */
+/* ============================================= */
+
+/* 1) Container & Heading */
+#myProgressOverview {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+  /* for the container itself */
+}
+
+/* Center the h3 heading */
+.progress-score-heading {
+  font-size: 1.5rem;
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+/* 2) Info icon + PS display container */
+.progress-score-info-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* center horizontally */
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+/* Ensure the parent container for the progress score info is relatively positioned */
+.progress-score-info-container {
+  position: relative;
+}
+
+/* Position the progress score info pop-up right below its container */
+.info-popup.progress-info-popup {
+  top: calc(100% + 5px);
+  /* 5px gap below the container */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+/* The info icon circle */
+.info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 0.8rem;
+  cursor: pointer;
+  position: relative;
+
+  /* The color can match your theme. Let's say #333 or #007bff, etc. */
+  color: #007bff;
+  /* 'i' text color */
+  border: 2px solid #007bff;
+  /* same color border */
+  background: transparent;
+  /* remove background */
+}
+
+/* The pop-up: placed just below the icon */
+.info-popup {
+  position: absolute;
+  top: calc(27% + 5px);
+  /* just below the icon, with some gap */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  width: 90%;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 999;
+}
+
+.info-popup.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 3) The big h2 for PS */
+.progress-score-value {
+  font-size: 3.5rem;
+  margin: 0;
+  color: #333;
+  font-weight: 700;
+}
+
+/* 4) On-Track / Off-Track + daily messages */
+.progress-status-message {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.progress-daily-message {
+  margin-top: 15px;
+  font-size: 1rem;
+  /* font-style: italic; */
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.4;
+}
+
+/* Container that holds the cards (overflow hidden). */
+.recap-swiper-container {
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto 25px auto;
+  position: relative;
+  overflow: hidden;
+  /* for swiping on mobile */
+  border-radius: 8px;
+}
+
+/* The "inner" row that slides left/right as user swipes or drags. */
+.recap-cards-inner {
+  display: flex;
+  flex-wrap: nowrap;
+  transition: transform 0.3s ease;
+}
+
+/* Each card's style. 
+   We use separate classes for Weekly Recap vs. Improvement background colors. */
+.recap-card {
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  text-align: center;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 8px;
+  /* Our default background for weekly recap */
+  background-color: #D4F8E8;
+  /* box-shadow: 0 2px 5px rgba(0,0,0,0.15); */
+  /* margin-right: 10px;  */
+}
+
+/* The last card in recap-cards has no margin-right. 
+   We'll handle that with :last-child if needed, or we can keep the gap to separate the dots. */
+.recap-cards-inner .recap-card:last-child {
+  margin-right: 0;
+}
+
+/* For the 'Areas for Improvement' container, we can just override with a different background. */
+.recap-card.improvement-card {
+  background-color: #FFD9C0;
+}
+
+/* Dot indicators container. */
+.recap-dots-container {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* Each dot. */
+.recap-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #bbb;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.recap-dot.active {
+  background-color: #333;
+}
+
+/* Minimal styling inside each card. For the "subheading" text */
+.recap-card .recap-card-title {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.recap-card .recap-card-value {
+  font-size: 1.4rem;
+  margin: 0 auto;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.recap-card .recap-card-description {
+  font-size: 1rem;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+/* For clickable "here" link in the Low Improvement Lift message */
+.recap-card .recap-link {
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* A subtle horizontal snap scrolling for mobile. 
+   (User can also swipe with touch, or we can do manual bullet click) */
+.recap-swiper-container {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.recap-cards-inner>.recap-card {
+  scroll-snap-align: center;
+}
+
+.recap-cards-inner .recap-card {
+  flex: 0 0 100%;
+}
+
+/* Hide scrollbar on mobile horizontally if you wish. */
+.recap-swiper-container::-webkit-scrollbar {
+  display: none;
+}
+
+.emoji-bg {
+  background-color: #A7E5C3;
+  padding: 6px 6px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.emoji-bgii {
+  background-color: #FFC77B;
+  /* Light yellow or any color you want */
+  padding: 6px 6px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-right: 6px;
+  /* Small spacing after the emoji */
+}
+
+/* =============================
+   NEW STYLES FOR EXERCISE DROPDOWN 
+   ============================= */
+.exercise-analysis-header {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  cursor: pointer;
+  /* The text is also clickable to open dropdown */
+  position: relative;
+}
+
+.exercise-analysis-subheading {
+  font-size: 1.2rem;
+  font-weight: 700;
+  /* text-decoration: underline dashed; */
+}
+
+.analysis-dropdown-chevron {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.analysis-dropdown-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 15px;
+  border: 1px solid #ccc;
+  background-color: #fefefe;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+.analysis-dropdown-container.hidden {
+  display: none;
+}
+
+.analysis-search-wrapper {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.analysis-search-input {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.analysis-exercise-list {
+  max-height: 260px;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.analysis-exercise-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.analysis-exercise-list::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
+.analysis-exercise-list::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* The phase header (--- Phase 1 ---) */
+.analysis-phase-header {
+  font-weight: bold;
+  margin: 8px 0 4px;
+  font-size: 0.9rem;
+  color: #666;
+  border-bottom: 1px dotted #999;
+  pointer-events: none;
+}
+
+/* Individual exercise item in the list */
+.analysis-exercise-item {
+  padding: 6px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.analysis-exercise-item:hover {
+  background-color: #eaeaea;
+}
+
+/* No match message */
+.analysis-no-match {
+  font-style: italic;
+  color: #999;
+  padding: 8px;
+  text-align: center;
+}
+
+/* =============================
+     NEW STYLES FOR TREND CARDS
+     ============================= */
+/* We can reuse .recap-card styles but override sizing as needed */
+.trend-card {
+  width: 100%;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  position: relative;
+  /* Ensure enough top spacing for the chart’s title, etc. */
+}
+
+/* The heatmap container */
+.heatmap-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Each phase's mini-grid for the heatmap */
+.heatmap-phase-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-auto-rows: 30px;
+  grid-auto-columns: 40px;
+  grid-gap: 4px;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 10px;
+  /* e.g. 4 columns for W1..W4. We'll create them in JS */
+}
+
+.heatmap-cell {
+  /* Make them bigger */
+  width: 60px;
+  height: 50px;
+  /* Modern pastel or minimal styling */
+  border-radius: 6px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  margin: 2px;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Our new color for "blue" */
+.heatmap-cell.blue {
+  background-color: #5A8DEE;
+  /* or any brand-friendly shade of blue */
+}
+
+/* Overwrite yellow, red, green with more pastel hues if you like: */
+.heatmap-cell.green {
+  background-color: #69c779;
+  /* pastel green */
+}
+
+.heatmap-cell.yellow {
+  background-color: #ffe266;
+  color: #000;
+  /* darker text */
+}
+
+.heatmap-cell.red {
+  background-color: #ff7878;
+}
+
+.heatmap-cell.gray {
+  background-color: #bfbfbf;
+  color: #000;
+}
+
+/* For row/column labels */
+.heatmap-header {
+  font-weight: bold;
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+/* =============================
+     NEW STYLES FOR COACH INSIGHTS
+     ============================= */
+.coach-insights-container {
+  max-width: 500px;
+  margin: 0 auto 20px;
+  text-align: center;
+}
+
+.coach-insights-note {
+  /* “sticky note” style */
+  background-color: #fff9c4;
+  /* light yellowish */
+  /* border: 1px solid #f0e9a2; */
+  padding: 15px;
+  border-radius: 8px;
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); */
+  line-height: 1.4;
+  font-size: 1rem;
+}
+
+.coach-insights-note .highlight {
+  font-weight: bold;
+}
+
+/* UPDATED BLOCK: smaller info icon + color squares for the heatmap info popup */
+.info-icon-smaller {
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  line-height: 1;
+  margin-left: 6px;
+  bottom: 2px;
+}
+
+.heatmap-info-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.heatmap-color-square {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
+  border-radius: 2px;
+}
+
+/* Match your existing cell colors: */
+.heatmap-color-square.green {
+  background-color: #69c779;
+  /* Completed */
+}
+
+.heatmap-color-square.red {
+  background-color: #ff7878;
+  /* Missed */
+}
+
+.heatmap-color-square.yellow {
+  background-color: #ffe266;
+  /* Partially */
+  color: #000;
+  /* Dark text if needed */
+}
+
+.heatmap-color-square.blue {
+  background-color: #5A8DEE;
+  /* Completed Late */
+}
+
+.heatmap-color-square.gray {
+  background-color: #bfbfbf;
+  /* Upcoming */
+  color: #000;
+}
+
+/***********************************************
+ * Body Composition & Goal Progress Container
+ ***********************************************/
+.body-composition-section {
+  display: none;
+  /* shown by JS if user has AWT */
+  margin-top: 40px;
+}
+
+.body-composition-title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Chart container */
+.bodyweight-chart-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/***********************************************
+ * Goal Progress Widget
+ ***********************************************/
+.goal-progress-widget {
+  max-width: 500px;
+  margin: 0 auto;
+  /* center horizontally */
+  padding: 8px 15px;
+  text-align: center;
+  /* center all content by default */
+  background-color: #f5f0e6;
+  border-radius: 8px;
+}
+
+.goal-progress-heading {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Example: force each row to have a label of fixed width, and an input of fixed width */
+.goal-progress-row {
+  display: flex;
+  flex-direction: column;
+  /* stack label above input */
+  align-items: center;
+  /* center them horizontally */
+  margin-bottom: 15px;
+  /* space between each row */
+}
+
+.goal-progress-label {
+  font-weight: bold;
+  margin-bottom: 6px;
+  /* small gap below label */
+}
+
+.goal-progress-input {
+  width: 95%;
+  height: 40px;
+  /* same fixed width for all inputs */
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f2f0eb;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  font-family: 'Roboto', sans-serif;
+}
+
+.goal-progress-input:focus {
+  background-color: #fff;
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Specifically ensure the date input doesn't auto-resize */
+.goal-progress-input[type="date"] {
+  width: 95%;
+}
+
+/***********************************************
+ * Log Weight Button
+ ***********************************************/
+.log-weight-button-row {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.log-weight-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  height: 52px;
+  margin-top: 25px;
+  margin-bottom: 35px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.log-weight-button:hover {
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.log-weight-button:active {
+  background-color: #0056b3;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(2px);
+}
+
+/***********************************************
+ * Weight Change Line & Progress Bar
+ ***********************************************/
+.goal-progress-line {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.goal-progress-line>div {
+  display: inline-block;
+  /* place side by side */
+  vertical-align: middle;
+}
+
+/* Progress bar container & fill */
+.goal-progress-bar-container {
+  margin-bottom: 12px;
+}
+
+.goal-progress-bar {
+  background-color: #e0e0e0;
+  height: 20px;
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.goal-progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background-color: #007bff;
+  transition: width 0.5s;
+}
+
+.goal-progress-percent {
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+/***********************************************
+ * Estimated Time & Goal Date
+ ***********************************************/
+.estimated-time-container {
+  text-align: center;
+  margin: 8px 0;
+  font-size: 1rem;
+}
+
+.estimated-time-row {
+  padding: 15px;
+  border-radius: 8px;
+  line-height: 1.4;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.estimated-time-value {
+  font-weight: bold;
+  margin-left: -3px;
+}
+
+.expected-goal-container {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.expected-goal-label {
+  font-weight: normal;
+  margin-bottom: 4px;
+}
+
+.expected-goal-date {
+  font-weight: bold;
+  color: #333;
+}
+
+/***********************************************
+ * Recent Milestones
+ ***********************************************/
+.recent-milestones {
+  margin-top: 25px;
+  display: none;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #D4F8E8;
+  /* pale yellow sticky-note style */
+  padding: 15px;
+  border-radius: 8px;
+  line-height: 1.4;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* ============================= */
+/*  (A) Start & Finish Buttons   */
+/* ============================= */
+.start-workout-btn {
+  display: inline-block;
+  width: 100%;
+  height: 52px;
+  padding: 12px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #28a745;
+  /* green that fits your brand */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px auto 30px auto;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.start-workout-btn:hover {
+  background-color: #218838;
+}
+
+.finish-workout-btn {
+  display: inline-block;
+  width: 100%;
+  height: 52px;
+  padding: 12px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #dc3545;
+  /* red that fits your brand */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px auto;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.finish-workout-btn:hover {
+  background-color: #c82333;
+}
+
+.summary-workout-btn {
+  display: inline-block;
+  width: 100%;
+  height: 52px;
+  padding: 12px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #007BFF;
+  /* brand blue for "Summary" */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px auto;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.summary-workout-btn:hover {
+  background-color: #0069d9;
+}
+
+/* Center them if needed */
+#startButtonContainer,
+#finishButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+#startWorkoutPopup,
+#workoutRecapPopup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 93%;
+  background: #F6EFE3;
+  /* same background as your existing popups */
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-out;
+  z-index: 1200;
+  overflow: hidden;
+  padding: 20px 15px;
+  font-family: "Poppins", sans-serif;
+}
+
+#startWorkoutPopup.visible,
+#workoutRecapPopup.visible {
+  transform: translateY(0);
+}
+
+#startWorkoutPopup .popup-content-wrap,
+#workoutRecapPopup .popup-content-wrap {
+  max-width: 650px;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+#workoutRecapPopup .recap-question-buttons .popup-progress-bar {
+  display: none;
+  /* no auto countdown for the final question */
+}
+
+/* ====================== */
+/* CHANGE EXERCISE POPUP */
+/* ====================== */
+#changeExercisePopup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 93%;
+  background: #F6EFE3;
+  /* Same background as other popups */
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-out;
+  z-index: 1200;
+  overflow: hidden;
+  padding: 20px 15px;
+  font-family: "Poppins", sans-serif;
+}
+
+@media screen and (min-width: 768px) {
+  #changeExercisePopup {
+    width: 100%;
+  }
+}
+
+#changeExercisePopup.visible {
+  transform: translateY(0);
+}
+
+#changeExercisePopup .popup-content-wrap {
+  max-width: 650px;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+}
+
+#changeExercisePopup .popup-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+#changeExercisePopup .search-container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+}
+
+#changeExercisePopup .search-container input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 0.95rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+  margin-bottom: 8px;
+}
+
+/* The scrollable list of alt exercises */
+.alternative-ex-list {
+  position: relative;
+  max-height: 200px;
+  /* can adjust */
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 6px 0;
+  margin-bottom: 12px;
+  background-color: #EDE7DB;
+  /* The important bits: same approach as .search-container */
+  max-width: 400px;
+  /* match the search bar width */
+  margin: 0 auto;
+  /* center the container */
+  width: 100%;
+  /* allow it to shrink on small screens */
+}
+
+.alt-ex-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 0.95rem;
+
+  text-align: center;
+  /* center the text */
+}
+
+.alt-ex-item:hover {
+  background-color: #eaeaea;
+}
+
+/* Special "Original Exercise" heading style */
+.alt-ex-header {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #000;
+  border-bottom: 1px solid #ccc;
+  margin: 5px 0;
+  padding: 0 12px;
+  pointer-events: none;
+  background-color: #E9E2D6;
+}
+
+.alt-ex-header--other {
+  border-top: 1px solid #ccc;
+  margin-top: 10px;
+  padding-top: 10px;
+  background-color: #E9E2D6;
+}
+
+/* The bottom row of 3 buttons */
+.swap-choice-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.swap-choice-buttons button {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 14px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+/* By default, they're "disabled" with #004a99 background, no pointer events */
+.swap-choice-buttons button:disabled {
+  background-color: #004a99;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+/* When enabled, we set them to #007BFF and white text */
+.swap-choice-buttons button.enabled {
+  background-color: #007BFF;
+  color: #fff;
+}
+
+#changeExercisePopup .cancel-btn {
+  background-color: #888;
+  color: #fff;
+  margin: 0 auto 10px auto;
+  width: 100%;
+  font-weight: 600;
+}
+
+#changeExercisePopup .cancel-btn:hover {
+  opacity: 0.9;
+}
+
+/* Optional: highlight old sets in same "Coach Insights" yellow color */
+.changed-set-highlight {
+  background-color: #fff9c4 !important;
+  /* or your Coach Insights post-it color */
+}
+
+/* Put these where your .popup-btn-easy/.popup-btn-hard are defined */
+
+/* A solid blue button (Watch Tutorial) */
+.popup-btn-blue {
+  border: none;
+  border-radius: 5px;
+  padding: 16px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: #007BFF;
+  /* stays blue */
+  color: #fff;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease;
+}
+
+.popup-btn-blue:disabled {
+  background-color: #004a99;
+  /* darker blue when disabled */
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.popup-btn-blue:hover:enabled {
+  opacity: 0.9;
+  /* simple hover fade */
+}
+
+/* A solid gray button (Got It!) */
+.popup-btn-gray {
+  border: none;
+  border-radius: 5px;
+  padding: 16px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: #B0B0B0;
+  color: #fff;
+  cursor: pointer;
+  width: 100%;
+  /* full width in the container */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease;
+}
+
+.popup-btn-gray:hover {
+  opacity: 0.9;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   WT ONBOARDING 
+──────────────────────────────────────────────────────────────── */
+.wt-onboarding-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, #F9F4EB, #F6EFE3);
+  z-index: 1300;
+  transform: translateY(-100%);
+  transition: transform .45s cubic-bezier(.36, .66, .04, 1);
+  overflow: hidden;
+  /* ⬅ keeps slides inside */
+}
+
+.wt-onboarding-overlay.open {
+  transform: translateY(0);
+}
+
+.wt-onboarding-overlay.closing {
+  transform: translateY(100%);
+}
+
+/* slide‑down exit */
+
+/* layout ------------------------------------------------------ */
+.wt-onboarding-slider {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  /* JS will overwrite with  n × 100%  */
+  transition: transform .4s ease;
+}
+
+.wt-onboarding-card {
+  flex: 0 0 100vw;
+  /* ← 1 full viewport per card */
+  width: 100vw;
+  padding: 40px 28px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  justify-content: center;
+  /* vertical centre */
+  text-align: center;
+}
+
+/* content ----------------------------------------------------- */
+.wt-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.wt-subtitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #666;
+}
+
+.wt-line {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .5s, transform .5s;
+  line-height: 1.4;
+  font-size: 1.1rem;
+}
+
+.wt-line.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.wt-goal {
+  color: #333;
+  font-weight: 600;
+}
+
+.wt-emoji-goal {
+  border-radius: 8px;
+  background-color: #F0ECE5;
+  font-size: 1.2rem;
+  padding: 3px;
+  margin-right: 2px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.wt-emoji-tutorial {
+  border-radius: 8px;
+  background-color: #F0ECE5;
+  font-size: 1.2rem;
+  padding: 3px;
+  margin-right: 2px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.wt-driver {
+  color: #333;
+}
+
+.wt-tutorial li {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.wt-sub {
+  color: #666;
+  font-size: 1rem
+}
+
+.wt-next-btn,
+.wt-close-btn {
+  margin-top: auto;
+  margin-bottom: 40px;
+  align-self: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  width: 220px;
+  max-width: 80%;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #007BFF;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .15);
+  transition: background .2s;
+}
+
+.wt-next-btn:active,
+.wt-close-btn:active {
+  background: #0056b3;
+}
+
+@media(min-width:768px) {
+
+  .wt-next-btn,
+  .wt-close-btn {
+    margin: 40px auto 40px auto;
+  }
+
+  .wt-next-btn:hover,
+  .wt-close-btn:hover {
+    background: #0056b3;
+  }
+}
+
+.wt-tutorial {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* dot indicators --------------------------------------------- */
+.wt-onboarding-dots {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.wt-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #bbb;
+  cursor: pointer;
+  transition: background .3s;
+}
+
+.wt-dot.active {
+  background: #333;
+}
+
+@media(max-width:480px) {
+  .wt-title {
+    font-size: 1.6rem;
+  }
+
+  .wt-subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────────
+   SECTION 105 · CORE‑TRACKER  ➜  PRO‑TRACKER  UPSELL MODAL
+   (Full‑screen overlay – same colours / fade as onboarding)
+──────────────────────────────────────────────────────────────── */
+/* -------- core‑upsell modal – quick CSS -------- */
+#coreUpsellOverlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, #F9F4EB, #F6EFE3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity .35s;
+}
+
+#coreUpsellOverlay.visible {
+  opacity: 1
+}
+
+.core-upsell-card {
+  width: 100%;
+  max-width: 640px;
+  height: 100vh;
+  /* full viewport height */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  /* background: #fff;          */
+  overflow: hidden;
+  /* hide any overflow outside the flex */
+  font-family: inherit;
+}
+
+.core-upsell-card .modal-content {
+  flex: 1 1 auto;
+  /* take all available space */
+  overflow-y: auto;
+  /* scroll if it grows too tall */
+  padding-right: 8px;
+  /* avoid clipping scroll bar */
+}
+
+.core-upsell-card h3.upsell-heading {
+  margin: 0 0 .6rem;
+  font-size: 1.8rem;
+}
+
+.core-upsell-card p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: .75rem 0
+}
+
+.cta-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  box-sizing: border-box;
+  background: #e8e4db;
+  padding: 1rem 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 -6px 10px -2px rgba(0, 0, 0, 0.15);
+  z-index: 10000;
+}
+
+.floating-cta:not(.pinned) {
+  width: 92%;
+}
+
+@media (max-width: 375px) {
+  .cta-footer {
+    padding-top: 0;
+  }
+}
+
+
+.cta {
+  display: block;
+  width: 90%;
+  /* nearly full width */
+  max-width: 360px;
+  box-sizing: border-box;
+  padding: 22px;
+  margin: 0;
+  background: #9333EA;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background .25s, transform .25s;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.cta:hover {
+  background: #7c2bd6;
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+.cta:active {
+  background: #6f28c4;
+  transform: translateY(2px);
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+}
+
+.upsell-cta {
+  display: block;
+  width: 100%;
+  /* nearly full width */
+  max-width: 360px;
+  box-sizing: border-box;
+  padding: 22px;
+  margin: 0;
+  background: #9333EA;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background .25s, transform .25s;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.maybe-later {
+  margin-top: .75rem;
+  font-size: .9rem;
+  color: #555;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .5s;
+}
+
+.maybe-later.show {
+  opacity: 1
+}
+
+.upsell-heading {
+  margin: 10px 0;
+}
+
+/* testimonial bits (mini version) */
+.testimonial-mini {
+  /* background: #EDE7DB; */
+  border-radius: 12px;
+  padding: 20px 20px 0 20px;
+  margin: 0;
+  background-color: #EFE7DB;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 375px) {
+  .testimonial-mini {
+    padding: 8px 5px 1px 5px;
+    margin-bottom: 5px;
+  }
+}
+
+@media (min-width: 376px) {
+  .testimonial-mini {
+    margin: 50px 0 20px 0;
+    padding: 40px 20px;
+  }
+}
+
+.testimonial-mini .images {
+  display: flex;
+  gap: 15px;
+  justify-content: center
+}
+
+.testimonial-mini .images div {
+  text-align: center
+}
+
+.testimonial-mini img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px
+}
+
+.testimonial-mini .images p {
+  font-size: .8rem;
+  color: #666;
+  margin-top: 5px
+}
+
+.name-stars {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  /* items hug left inside container */
+  gap: 10px;
+  width: max-content;
+  /* shrink‑wrap to its contents */
+  margin: 0 auto;
+  /* center that box in its parent */
+}
+
+.review-name {
+  font-weight: 600;
+  ;
+  white-space: nowrap;
+  margin: 0px !important;
+}
+
+.five-stars img {
+  width: 100px;
+  height: auto;
+  /* margin: 5px auto; */
+  display: block;
+}
+
+.review-text-mini {
+  background: #E3DACF;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 0 0 5px 0 !important;
+  line-height: 1.4;
+}
+
+.timer-container,
+.timer-text {
+  white-space: nowrap;
+}
+
+.timer-container {
+  background: #e8e4db;
+  border-radius: 6px;
+  padding: 15px;
+  margin: 5px 0 12px 0;
+  display: block;
+  /* it already is, but just to be explicit */
+  width: 100%;
+  /* fill the card’s inner width */
+  box-sizing: border-box;
+}
+
+
+.timer-text {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1.05rem
+}
+
+.time-remaining {
+  font-variant-numeric: tabular-nums;
+}
+
+.discount-label {
+  color: #333
+}
+
+.time-remaining {
+  color: #d9534f
+}
+
+/* quick comparison */
+.compare-box {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 18px;
+  margin: 18px 0
+}
+
+.compare-box h4 {
+  margin-top: 0;
+  font-size: 1.1rem
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .95rem
+}
+
+.compare-table td {
+  padding: 6px 8px
+}
+
+.compare-table td:first-child {
+  font-weight: 600;
+  width: 45%
+}
+
+.compare-table tr:nth-child(even) {
+  background: #ececec
+}
+
+@media (min-width: 390px) {
+  .testimonial-mini {
+    padding-bottom: 20px;
+  }
+}
+
+/* ── My‑Progress → Core‑only “Pro Tracker” upsell ───────────────────── */
+#mp-core-hero {
+  text-align: center;
+  margin: 40px 0 30px 0;
+}
+
+#mp-core-hero h1 {
+  font: 600 1.9rem/1.3 "Poppins", sans-serif;
+}
+
+#mp-core-hero p {
+  font: 400 1rem/1.5 "Poppins", sans-serif;
+  color: #444;
+}
+
+/* Glass‑style cards */
+#mp-core-glass-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 35px 0;
+}
+
+.mp-glass-card {
+  flex: 1 1 48%;
+  min-width: 250px;
+  padding: 24px 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: rgba(147, 51, 234, 0.08);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin: 0 0.6rem 40px 0.6rem;
+}
+
+.mp-glass-card h3 {
+  margin: 0 0 10px;
+  font: 600 1.1rem/1.3 "Poppins", sans-serif;
+}
+
+.mp-glass-card p {
+  margin: 0;
+  font: 400 0.95rem/1.45 "Poppins", sans-serif;
+  color: #333;
+}
+
+/* “Pro Tracker Only” badge */
+.pt-extra-container {
+  background: #9333EA;
+  margin: 10px auto 15px auto;
+  text-align: center;
+  padding: 2px 12px 6px 12px;
+  border-radius: 5px;
+}
+
+.pt-extra {
+  font-style: italic;
+  color: #F8F4FF;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.crown-emoji {
+  font-size: 1.1rem;
+  bottom: 10px;
+}
+
+/* Feature count + bar */
+#mp-core-feature-count {
+  margin: 40px 0 20px;
+  font: 500 1rem/1.5 "Poppins", sans-serif;
+  text-align: center;
+}
+
+#mp-core-progress-bar {
+  width: 90%;
+  max-width: 450px;
+  height: 14px;
+  margin: 0 auto 100px;
+  background: #e0d8f5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#mp-core-progress-bar div {
+  height: 100%;
+  background: #9333EA;
+  width: 35%;
+}
+
+/* Sticky “Unlock Pro Tracker” CTA */
+.floating-cta {
+  /* background: #9333EA; */
+  border-radius: 8px;
+  position: fixed;
+  bottom: 20px;
+  transform: translateX(-50%);
+  padding: 15px 30px;
+  transition: bottom 0.4s ease, opacity 0.4s ease;
+  z-index: 9999;
+}
+
+.claim-program-btn {
+  background: #9333EA;
+}
+
+.floating-cta-container {
+  position: relative;
+  /* positioning context for .pinned */
+  width: 100%;
+  text-align: center;
+  /* center the CTA horizontally */
+  margin: 30px 0;
+  /* vertical breathing room above & below */
+  min-height: 80px;
+  /* reserve ~the height of your CTA so it never overlaps */
+}
+
+.fade-in-cta {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+.cta-visible {
+  opacity: 1;
+  /* Fully visible */
+  transform: translateY(0);
+  /* Reset position */
+}
+
+.floating-cta.pinned {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.claim-program-btn {
+  display: inline-block;
+  /* Ensures proper button-like appearance */
+  text-align: center;
+  /* Centers text */
+  text-decoration: none;
+  /* Removes underline */
+  background-color: #9333EA;
+  /* Vibrant blue for attention */
+  color: #fff;
+  /* White text for contrast */
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  /* Subtle shadow for elevation */
+  transition: all 0.3s ease;
+}
+
+.claim-program-btn:hover {
+  background-color: #7c2bd6;
+  /* Darker blue on hover */
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+  /* Slightly larger shadow */
+  transform: translateY(-2px);
+  /* Lift effect on hover */
+}
+
+.claim-program-btn:active {
+  background-color: #7c2bd6;
+  /* Even darker blue on click */
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+  /* Reduced shadow */
+  transform: translateY(2px);
+  /* Press effect on click */
+}
+
+/* @media (min-width: 768px) {
+  .floating-cta.shadow-active::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+
+      background: linear-gradient(to bottom,
+              rgba(0, 0, 0, 0) 0%,
+              rgba(0, 0, 0, 0.1) 80%,
+              rgba(0, 0, 0, 0.1) 90%,
+              rgba(0, 0, 0, 0.2) 100%
+          );
+  }
+
+  .floating-cta {
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: auto;
+      border-radius: 0;
+      text-align: center;
+      transition: bottom 0.4s ease, opacity 0.4s ease;
+      width: 100%;
+  }
+} */
+
+/* On smaller screens, 
+   no dark overlay, but place CTA in a different colored box. */
+@media (max-width: 767px) {
+  .floating-cta {
+    left: 0;
+    right: 0;
+    transform: none;
+    width: 90%;
+    bottom: 0;
+    border-radius: 0;
+    max-width: none;
+    background-color: #F6EFE3;
+    transition: bottom 0.4s ease, opacity 0.4s ease;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .floating-cta::before {
+    display: none;
+  }
+
+  .claim-program-btn {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 25px;
+    font-size: 1.2rem;
+    /* ensure padding doesn't overflow */
+  }
+
+  .tick {
+    display: flex;
+  }
+
+  .claim-program-btn:hover {
+    background-color: #9333EA;
+    /* Darker blue on hover */
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+    /* Slightly larger shadow */
+    transform: translateY(-2px);
+    /* Lift effect on hover */
+  }
+}
+
+#ctaStopContainer {
+  margin-bottom: 50px;
+  /* or however much space you want */
+}
+
+.floating-cta.visible {
+  bottom: 20px;
+  /* becomes visible */
+  opacity: 1;
+}
+
+.floating-cta.hidden {
+  bottom: -100px;
+  opacity: 0;
+}
+
+.fullwidth-testimonial {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  box-sizing: border-box;
+  /* include padding in width */
+  padding: 50px 20px;
+  /* background-color: #cfd8dc; */
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* center your content and prevent it from sticking to the very edges */
+.fullwidth-testimonial .testimonial-container {
+  max-width: 800px;
+  /* whatever your design calls for */
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 10px;
+  /* extra safety padding inside the container */
+}
+
+.fullwidth-testimonial .testimonial-container,
+.fullwidth-testimonial .testimonial-slider {
+  width: 100%;
+  max-width: none;
+}
+
+.testimonial-section {
+  background-color: rgba(147, 51, 234, 0.06);
+  text-align: center;
+  padding: 50px 20px;
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-container {
+  position: relative;
+  max-width: 750px;
+  margin: 0 auto;
+  overflow: hidden;
+  /* so we can hide the overflowing slides */
+}
+
+.testimonial-section h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0 0 20px 0;
+  color: #222;
+}
+
+.arrow-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #9333EA;
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.arrow-button:hover {
+  background-color: #A855F7;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+.arrow-button:active {
+  background-color: #7E22CE;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+}
+
+.arrow-button.prev {
+  left: 40px;
+  /* instead of -20px */
+}
+
+.arrow-button.next {
+  right: 40px;
+  /* instead of -20px */
+}
+
+
+.testimonial-slider {
+  display: flex;
+  flex-wrap: nowrap;
+  transition: transform 0.3s ease;
+  /* for sliding animation */
+}
+
+.testimonial-card {
+  flex: 0 0 100%;
+  /* each card takes up 100% of the container width */
+  box-sizing: border-box;
+  background: #fdf8ff;
+  border-radius: 10px;
+  margin: 0 10px 0 10px;
+  /* slight horizontal margin so slides aren’t jammed */
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Make sure we don’t get weird spacing at small widths */
+@media (max-width: 768px) {
+  .testimonial-card {
+    margin: 0;
+    /* remove margins on mobile, or adjust as you like */
+  }
+}
+
+.before,
+.after {
+  text-align: center;
+}
+
+.before p,
+.after p {
+  margin-top: 5px;
+  /* font-weight: bold; */
+  color: #666;
+  font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  .testimonial-card {
+    /* Subtract the total horizontal margin so the card+margin = container width */
+    flex: 0 0 calc(100% - 20px);
+    margin: 0 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .arrow-button {
+    display: none;
+  }
+}
+
+.testimonial-card .images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.testimonial-card .before,
+.testimonial-card .after {
+  text-align: center;
+}
+
+.testimonial-card .before img,
+.testimonial-card .after img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* "Before" and "After" labels */
+.testimonial-card .before p,
+.testimonial-card .after p {
+  margin-top: 5px;
+  /* font-weight: bold; */
+  font-size: 1rem;
+}
+
+/* The container that holds the 3 testimonial "slots" */
+.three-slides-container {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  /* Adjust height if needed */
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  /* Use flexbox to center slots horizontally */
+  justify-content: center;
+}
+
+/* Each testimonial slot: small, partially opaque by default */
+/* Slot Styling */
+.testimonial-slot {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  width: 28%;
+  max-width: 320px;
+  padding: 10px;
+  opacity: 0.5;
+  box-sizing: border-box;
+  background: #f8f9fa;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-slot p {
+  margin: 0px auto;
+}
+
+/* Center Slot */
+.testimonial-slot.center {
+  transform: translateY(-50%) scale(1.3);
+  opacity: 1;
+  z-index: 2;
+  /* Ensure it stays above other slots */
+}
+
+/* Left Slot */
+.testimonial-slot.left {
+  transform: translateX(-120%) translateY(-50%) scale(0.8);
+  opacity: 0.5;
+  z-index: 1;
+}
+
+/* Right Slot */
+.testimonial-slot.right {
+  transform: translateX(120%) translateY(-50%) scale(0.8);
+  opacity: 0.5;
+  z-index: 1;
+}
+
+/* Tweak images inside the cards */
+.testimonial-slot .images {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+  margin-bottom: 15px;
+}
+
+.testimonial-slot img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.testimonial-slot p {
+  color: #555;
+  font-size: 12px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 4.5em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Style for the 5-stars image */
+.five-stars img {
+  width: 100px;
+  height: auto;
+  margin: 5px auto;
+  display: block;
+}
+
+.review-text {
+  color: #4b0082;
+  padding: 12px 10px;
+  border-radius: 8px;
+  color: #333;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+.dots-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px auto;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: #e0d1f9;
+  ;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #9333EA;
+}
+
+.review-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #2a2a2a;
+  margin-bottom: 5px;
+}
+
+/* —— Video-intro modal —— */
+#video-intro-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4000;
+}
+
+#video-intro-overlay .video-intro-content {
+  background: #ffffff;
+  padding: 1.75rem 1.5rem;
+  max-width: 380px;
+  width: 90%;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+  font-family: 'Poppins', sans-serif;
+}
+
+#video-intro-overlay .video-intro-content h3 {
+  margin: 0 0 .75rem 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #222;
+}
+
+#video-intro-overlay .video-intro-content p {
+  margin: 0;
+  font-size: .95rem;
+  line-height: 1.45;
+  color: #555;
+}

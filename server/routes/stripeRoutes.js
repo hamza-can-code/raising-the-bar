@@ -170,6 +170,7 @@ const CREATOR_SUCCESS_PATHS = {
   kayp: '/pages/thank-you-kayp.html',
   vital: '/pages/thank-you-vital.html',
   dav: '/pages/thank-you-dav.html',
+  ironverse: '/pages/thank-you-ironverse.html',
   ryan: '/pages/thank-you-ryan.html',
 };
 
@@ -178,6 +179,7 @@ const CREATOR_OFFER_PATHS = {
   kayp: '/pages/offer-kayp.html',
   vital: '/pages/offer-vital.html',
   dav: '/pages/offer-dav.html',
+  ironverse: '/pages/offer-ironverse.html',
   ryan: '/pages/offer-ryan.html',
 };
 
