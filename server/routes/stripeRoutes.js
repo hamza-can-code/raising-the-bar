@@ -13,7 +13,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2024-04-10',
 });
 
-console.log('[Stripe init] key =', process.env.STRIPE_SECRET_KEY);
+// console.log('[Stripe init] key =', process.env.STRIPE_SECRET_KEY);
 
 const FRONTEND_URL = process.env.FRONTEND_URL;
 
@@ -21,6 +21,17 @@ function parseMinorUnit(value, fallback = null) {
   if (value === undefined || value === null || value === '') return fallback;
   const parsed = Number(value);
   return Number.isFinite(parsed) ? Math.round(parsed) : fallback;
+}
+
+function normalizeCurrencyCode(code, fallback = 'GBP') {
+  if (!code || typeof code !== 'string') return fallback;
+  const upper = code.trim().toUpperCase();
+
+  if (/^[A-Z]{3}$/.test(upper)) return upper;
+  if (upper === 'GB' || upper === 'UK') return 'GBP';
+  if (upper === 'US' || upper === 'USA') return 'USD';
+
+  return fallback;
 }
 
 const BONUS_PRICE_MINOR = {
@@ -63,7 +74,7 @@ async function resolveCreator(creatorSlug) {
       stripeAccountId,
       platformIntroFeePercent: introFeePercent,
       platformOngoingFeePercent: ongoingFeePercent,
-      defaultCurrency: staticEnvKey('DEFAULT_CURRENCY') || 'GBP',
+      defaultCurrency: normalizeCurrencyCode(staticEnvKey('DEFAULT_CURRENCY'), 'GBP'),
       active: true,
       metadata: {},
       source: 'env',
@@ -89,11 +100,14 @@ async function resolveCreator(creatorSlug) {
     ? resolved.platformOngoingFeePercent
     : introFeePercent;
 
+  const defaultCurrency = normalizeCurrencyCode(resolved.defaultCurrency, 'GBP');
+
   return {
-    creator: resolved,
+    creator: { ...resolved, defaultCurrency },
     destination: resolved.stripeAccountId,
     introFeePercent,
     ongoingFeePercent,
+    source: resolved.source || (creator ? 'database' : 'env'),
   };
 }
 
@@ -156,6 +170,7 @@ const CREATOR_SUCCESS_PATHS = {
   kayp: '/pages/thank-you-kayp.html',
   vital: '/pages/thank-you-vital.html',
   dav: '/pages/thank-you-dav.html',
+  ryan: '/pages/thank-you-ryan.html',
 };
 
 const CREATOR_OFFER_PATHS = {
@@ -163,6 +178,7 @@ const CREATOR_OFFER_PATHS = {
   kayp: '/pages/offer-kayp.html',
   vital: '/pages/offer-vital.html',
   dav: '/pages/offer-dav.html',
+  ryan: '/pages/offer-ryan.html',
 };
 
 function getRecurringConfigForPlan(plan) {
@@ -349,6 +365,8 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
           ...(sessionCfg.subscription_data?.metadata || {}),
           creator_slug: creatorConfig.creator.slug,
           creator_name: creatorConfig.creator.name,
+          creator_source: creatorConfig.source,
+          creator_default_currency: creatorConfig.creator.defaultCurrency,
           platform_intro_fee_percent: String(creatorConfig.introFeePercent),
           platform_ongoing_fee_percent: String(creatorConfig.ongoingFeePercent),
           connect_destination_valid: String(destinationValid),
@@ -369,6 +387,8 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
         ...(sessionCfg.metadata || {}),
         creator_slug: creatorConfig.creator.slug,
         creator_name: creatorConfig.creator.name,
+        creator_source: creatorConfig.source,
+        creator_default_currency: creatorConfig.creator.defaultCurrency,
         platform_intro_fee_percent: String(creatorConfig.introFeePercent),
         platform_ongoing_fee_percent: String(creatorConfig.ongoingFeePercent),
         connect_destination_valid: String(destinationValid),
@@ -434,7 +454,7 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
       : [{ price: priceId }];
 
     let creatorConfig = null;
-        let destinationValid = false;
+    let destinationValid = false;
     let destinationReason = null;
     let destinationAccount = null;
     if (normalizedCreator) {
@@ -460,8 +480,10 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
     };
 
     if (creatorConfig) {
-      const { valid: destinationValid, account: destinationAccount, reason: destinationReason } =
-        await fetchDestinationAccount(creatorConfig.destination);
+      const destinationInfo = await fetchDestinationAccount(creatorConfig.destination);
+      destinationValid = destinationInfo.valid;
+      destinationAccount = destinationInfo.account;
+      destinationReason = destinationInfo.reason;
       if (destinationValid) {
         subCfg.transfer_data = { destination: creatorConfig.destination };
         subCfg.application_fee_percent = creatorConfig.introFeePercent;
@@ -471,6 +493,8 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
         ...(subCfg.metadata || {}),
         creator_slug: creatorConfig.creator.slug,
         creator_name: creatorConfig.creator.name,
+        creator_source: creatorConfig.source,
+        creator_default_currency: creatorConfig.creator.defaultCurrency,
         platform_intro_fee_percent: String(creatorConfig.introFeePercent),
         platform_ongoing_fee_percent: String(creatorConfig.ongoingFeePercent),
         connect_intro_applied: String(destinationValid),
@@ -534,6 +558,8 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
         reason: destinationReason,
         accountId: creatorConfig?.destination || null,
         accountCountry: destinationAccount?.country || null,
+        source: creatorConfig?.source || null,
+        defaultCurrency: creatorConfig?.creator?.defaultCurrency || null,
       },
     });
   } catch (err) {

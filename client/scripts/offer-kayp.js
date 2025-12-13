@@ -356,26 +356,34 @@ document.addEventListener("DOMContentLoaded", () => {
   // Return an absolute/relative path to your assets folder:
   const imgSrc = (file) => `../assets/${file}`;
 
-  const updateSocialProofCoach = () => {
-    const coachImg = document.querySelector('.social-proof__coach');
-    if (!coachImg) return;
+  // const updateSocialProofCoach = () => {
+  //   const coachImg = document.querySelector('.social-proof__coach');
+  //   if (!coachImg) return;
 
-    const desiredBodyType = (localStorage.getItem('desiredBodyType') || '').toLowerCase();
-    const dreamMap = {
-      athlete: `athlete${genderSuffix}.webp`,
-      hero: `hero${genderSuffix}.webp`,
-      bodybuilder: `muscular-silhouette${genderSuffix}.webp`
-    };
-    const fallbackFile = `muscular-silhouette${genderSuffix}.webp`;
-    const selectedFile = dreamMap[desiredBodyType] || fallbackFile;
+  //   const desiredBodyType = (localStorage.getItem('desiredBodyType') || '').toLowerCase();
+  //   const dreamMap = {
+  //     athlete: `athlete${genderSuffix}.webp`,
+  //     hero: `hero${genderSuffix}.webp`,
+  //     bodybuilder: `muscular-silhouette${genderSuffix}.webp`
+  //   };
+  //   const fallbackFile = `muscular-silhouette${genderSuffix}.webp`;
+  //   const selectedFile = dreamMap[desiredBodyType] || fallbackFile;
 
-    const formatLabel = (value) => value ? value.charAt(0).toUpperCase() + value.slice(1) : '';
-    const genderLabel = normalizedGender === 'female' ? 'Female' : 'Male';
-    const dreamLabel = formatLabel(desiredBodyType) || 'Coach';
+  //   const formatLabel = (value) => value ? value.charAt(0).toUpperCase() + value.slice(1) : '';
+  //   const genderLabel = normalizedGender === 'female' ? 'Female' : 'Male';
+  //   const dreamLabel = formatLabel(desiredBodyType) || 'Coach';
 
-    coachImg.src = imgSrc(selectedFile);
-    coachImg.alt = `${genderLabel} ${dreamLabel} physique illustration`;
-  };
+  //   coachImg.src = imgSrc(selectedFile);
+  //   coachImg.alt = `${genderLabel} ${dreamLabel} physique illustration`;
+  // };
+
+    const updateSocialProofCoach = () => {
+  const coachImg = document.querySelector('.social-proof__coach');
+  if (!coachImg) return;
+
+  coachImg.src = imgSrc('kayp-coach.jpg');
+  coachImg.alt = 'Coach KayP';
+};
 
   updateSocialProofCoach();
 
