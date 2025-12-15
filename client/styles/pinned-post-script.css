@@ -1,4 +1,8 @@
 :root {
+  scroll-behavior: smooth;
+}
+
+:root {
   --bg: #05060a;
   --panel: #0c0f17;
   --panel-2: #101525;
@@ -11,7 +15,9 @@
   --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -24,7 +30,10 @@ body {
   padding: 0 18px 60px;
 }
 
-a { color: inherit; text-decoration: none; }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
 a.primary {
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
@@ -60,7 +69,10 @@ a.primary:hover {
   z-index: 5;
 }
 
-.logo { height: 52px; width: auto; }
+.logo {
+  height: 52px;
+  width: auto;
+}
 
 .logo-wrap {
   display: flex;
@@ -68,7 +80,9 @@ a.primary:hover {
   gap: 10px;
 }
 
-.logo-link { display: inline-flex; }
+.logo-link {
+  display: inline-flex;
+}
 
 .tag {
   padding: 6px 10px;
@@ -80,7 +94,11 @@ a.primary:hover {
   border: 1px solid var(--border);
 }
 
-.cta-group { display: flex; gap: 10px; align-items: center; }
+.cta-group {
+  display: flex;
+  /* gap: 10px; */
+  align-items: center;
+}
 
 .page {
   max-width: 1200px;
@@ -155,7 +173,9 @@ a.primary:hover {
   box-shadow: var(--shadow);
 }
 
-.section-header { margin-bottom: 16px; }
+.section-header {
+  margin-bottom: 16px;
+}
 
 .section-header h2 {
   margin: 4px 0;
@@ -192,7 +212,9 @@ a.primary:hover {
   gap: 8px;
 }
 
-.bullet-list.wrong li { color: #ff8f8f; }
+.bullet-list.wrong li {
+  color: #ff8f8f;
+}
 
 .rule-box {
   border: 1px dashed rgba(255, 255, 255, 0.18);
@@ -220,7 +242,9 @@ a.primary:hover {
   border: 1px solid rgba(255, 143, 143, 0.3);
 }
 
-.muted { color: var(--muted); }
+.muted {
+  color: var(--muted);
+}
 
 .checklist ul {
   list-style: none;
@@ -298,12 +322,22 @@ a.primary:hover {
   padding: 18px;
 }
 
-.why h3 { margin-top: 0; }
+.why h3 {
+  margin-top: 0;
+}
 
 @media (max-width: 720px) {
-  .hero { padding: 26px; }
-  .hero-cards { grid-template-columns: 1fr; }
-  .site-header { position: static; }
+  .hero {
+    padding: 26px;
+  }
+
+  .hero-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .site-header {
+    position: static;
+  }
 }
 
 .footer {

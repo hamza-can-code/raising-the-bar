@@ -99,7 +99,7 @@
     },
   };
 
-  const KAYP_STYLE_SLUGS = ['kayp', 'dav', 'ryan'];
+  const KAYP_STYLE_SLUGS = ['kayp', 'dav', 'ryan', 'ironverse'];
 
   const PAYMENT_APPEARANCE = KAYP_STYLE_SLUGS.includes(getCreatorSlug())
     ? KAYP_PAYMENT_APPEARANCE

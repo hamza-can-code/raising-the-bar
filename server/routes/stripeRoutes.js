@@ -47,6 +47,21 @@ async function resolveCreator(creatorSlug) {
   if (!creatorSlug) return null;
 
   const slug = creatorSlug.trim().toLowerCase();
+  const PLATFORM_ONLY_CREATORS = new Set(['ironverse']);
+
+  const platformOnlyCreator = () => ({
+    creator: {
+      name: slug,
+      slug,
+      defaultCurrency: 'GBP',
+      active: true,
+      metadata: {},
+    },
+    destination: null,
+    introFeePercent: 0,
+    ongoingFeePercent: 0,
+    source: 'platform-only',
+  });
   const normalizePercent = (value, fallback) => {
     const parsed = Number(value);
     if (!Number.isFinite(parsed)) return fallback;
@@ -85,10 +100,12 @@ async function resolveCreator(creatorSlug) {
   const resolved = creator || envCreator;
 
   if (!resolved) {
+    if (PLATFORM_ONLY_CREATORS.has(slug)) return platformOnlyCreator();
     throw new Error(`Creator ${slug} is not registered or inactive`);
   }
 
   if (!resolved.stripeAccountId) {
+    if (PLATFORM_ONLY_CREATORS.has(slug)) return platformOnlyCreator();
     throw new Error(`Creator ${slug} is missing a Stripe account`);
   }
 
@@ -150,12 +167,20 @@ const CREATOR_PLAN_PRICE_IDS = {
     '4-week': buildPriceMap('PRICE_FOUR_WEEK', SUPPORTED_CURRENCIES, { suffix: '_DECODED' }),
     '12-week': buildPriceMap('PRICE_TWELVE_WEEK', SUPPORTED_CURRENCIES, { suffix: '_DECODED' }),
   },
+  ironverse: {
+    '4-week': buildPriceMap('PRICE_FOUR_WEEK', SUPPORTED_CURRENCIES, { suffix: '_IRONVERSE' }),
+    '12-week': buildPriceMap('PRICE_TWELVE_WEEK', SUPPORTED_CURRENCIES, { suffix: '_IRONVERSE' }),
+  },
 };
 
 const CREATOR_PLAN_COUPONS = {
   decoded: {
     '4-week': { GBP: process.env.COUPON_FOUR_WEEK_GBP_DECODED },
     '12-week': { GBP: process.env.COUPON_TWELVE_WEEK_GBP_DECODED },
+  },
+  ironverse: {
+    '4-week': { GBP: process.env.COUPON_FOUR_WEEK_GBP_IRONVERSE },
+    '12-week': { GBP: process.env.COUPON_TWELVE_WEEK_GBP_IRONVERSE },
   },
 };
 
