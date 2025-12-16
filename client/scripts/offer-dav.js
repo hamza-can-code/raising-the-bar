@@ -395,7 +395,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const namePrompt = document.getElementById("offerNamePrompt");
   const updateOfferNamePrompt = (active = isDiscountActive()) => {
     if (!namePrompt) return;
-    namePrompt.textContent = `${name || "Athlete"}, claim your calisthenics workout plan now`;
+    namePrompt.textContent = `${name || "Athlete"}, claim your personalized plan now`;
   };
 
   updateOfferNamePrompt();
@@ -532,7 +532,7 @@ document.addEventListener("DOMContentLoaded", () => {
       : diffKg;
     heroLine1 = `
       <strong>${name}</strong>,
-      your program is built to help you lose
+      your personalized plan is built to help you lose
       <strong>${diffDisplay.toFixed(1)} ${weightUnit}</strong>.
     `;
   }
@@ -542,7 +542,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ? kgToLbs(diffKg)
       : diffKg;
     heroLine1 = `
-      ${name}, your program is built to help you gain
+      ${name}, your personalized plan is built to help you gain
       <strong>${diffDisplay.toFixed(1)} ${weightUnit}</strong>
       of muscle.
     `;
@@ -552,7 +552,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ? kgToLbs(goalKg)
       : goalKg;
     heroLine1 = `
-      ${name}, your program is built to help you reach
+      ${name}, your personalized plan is built to help you reach
       your goal weight of
       <strong>${targetDisplay.toFixed(1)} ${weightUnit}</strong>.
     `;
@@ -2183,19 +2183,19 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'THE ALPHA',
       rating: 4,
       time: 'Today',
-      text: 'Been watching KayPs tiktok for a week or so, I found his vids helpful so thought id gv his app a go. been using this for a couple of weeks and its genuinely amazing (avging 2kg muscle per week). Was going to rate 5 stars but the rest timer bugged once on me so im leaving a 4 til they patch it 💔 still worth it tho',
+      text: 'Been watching davs tiktok for a bit, I found his vids helpful so thought id gv his app a go. been using this for a couple of weeks and its genuinely amazing (avging 2kg muscle per week). Was going to rate 5 stars but the rest timer bugged once on me so im leaving a 4 til they patch it 💔 still worth it tho',
     },
     {
       name: 'alex',
       rating: 5,
       time: 'Today',
-      text: 'so yesterday i did the quiz and everythuing I was skeptical but decided to give it a shot and bro this is sick wouldve been silly saying no in hindsight',
+      text: 'so yesterday i did the quiz and everythuing I was skeptical but decided to give it a shot and bro this is sick ',
     },
     {
       name: 'Sephy xx',
       rating: 5,
       time: 'Today',
-      text: 'So I kinda forgot to cancel despite the email reminders so kinda mb. I explained the situation to support and Jasmine was super understanding and refunded me instantly. tysm ❤️❤️',
+      text: 'Great app! :)',
     },
     {
       name: '.',

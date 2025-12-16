@@ -307,8 +307,7 @@ function getCouponIdForPlan(plan, currencyCode, creatorSlug) {
 /* ──────────────────────────────────────────────────────────
    POST /api/create-checkout-session  (Stripe Checkout)
    Body: { plan: 'subscription', discounted: bool, email: string, currency?: 'USD' }
-   NOTE: You said you currently only sell the subscription.
-   This route still supports Checkout if you want that flow.
+   Automatically chooses subscription or one-off payment based on price type.
    ────────────────────────────────────────────────────────── */
 router.post('/create-checkout-session', express.json(), async (req, res) => {
   try {
@@ -336,6 +335,8 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       return res.status(500).json({ error: `Missing price configuration for plan ${plan} (${currency || 'GBP'})` });
     }
     const { currency: ccy, priceId, plan: normalizedPlan } = planInfo;
+    const price = await stripe.prices.retrieve(priceId);
+    const sessionMode = price.type === 'recurring' ? 'subscription' : 'payment';
     const couponId = discounted ? getCouponIdForPlan(normalizedPlan, ccy, creatorSlug) : null;
 
     let creatorConfig = null;
@@ -355,7 +356,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       : '/pages/offer.html';
 
     const sessionCfg = {
-      mode: 'subscription',
+      mode: sessionMode,
       line_items: [{ price: priceId, quantity: 1 }],
       customer_email: email,
       client_reference_id: client_reference_id || undefined,
@@ -366,16 +367,18 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       payment_method_collection: 'always',
       // customer_creation: 'always',
 
-      subscription_data: {
-        trial_settings: { end_behavior: { missing_payment_method: 'cancel' } },
-      },
-
       metadata: {
         product: PLAN_LABELS[normalizedPlan] || 'Selected Plan',
         currency_used: ccy,
         discounted: String(!!discounted),
       },
     };
+
+    if (sessionMode === 'subscription') {
+      sessionCfg.subscription_data = {
+        trial_settings: { end_behavior: { missing_payment_method: 'cancel' } },
+      };
+    }
 
     if (couponId) {
       sessionCfg.discounts = [{ coupon: couponId }];
@@ -386,10 +389,42 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       destinationValid = destinationState.valid;
       destinationAccount = destinationState.account;
       destinationReason = destinationState.reason;
-      const subscriptionData = {
-        ...(sessionCfg.subscription_data || {}),
-        metadata: {
-          ...(sessionCfg.subscription_data?.metadata || {}),
+
+      if (sessionMode === 'subscription') {
+        const subscriptionData = {
+          ...(sessionCfg.subscription_data || {}),
+          metadata: {
+            ...(sessionCfg.subscription_data?.metadata || {}),
+            creator_slug: creatorConfig.creator.slug,
+            creator_name: creatorConfig.creator.name,
+            creator_source: creatorConfig.source,
+            creator_default_currency: creatorConfig.creator.defaultCurrency,
+            platform_intro_fee_percent: String(creatorConfig.introFeePercent),
+            platform_ongoing_fee_percent: String(creatorConfig.ongoingFeePercent),
+            connect_destination_valid: String(destinationValid),
+            connect_destination_country: destinationAccount?.country,
+            connect_destination_reason: destinationReason,
+          },
+        };
+
+        if (destinationValid) {
+          subscriptionData.transfer_data = { destination: creatorConfig.destination };
+          subscriptionData.application_fee_percent = creatorConfig.introFeePercent;
+          subscriptionData.on_behalf_of = creatorConfig.destination;
+        }
+
+        sessionCfg.subscription_data = subscriptionData;
+      } else if (destinationValid) {
+        sessionCfg.payment_intent_data = {
+          transfer_data: { destination: creatorConfig.destination },
+          application_fee_amount: Math.round(
+            (price.unit_amount || 0) * (creatorConfig.introFeePercent / 100)
+          ),
+          on_behalf_of: creatorConfig.destination,
+        };
+      }
+        sessionCfg.metadata = {
+          ...(sessionCfg.metadata || {}),
           creator_slug: creatorConfig.creator.slug,
           creator_name: creatorConfig.creator.name,
           creator_source: creatorConfig.source,
@@ -399,30 +434,8 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
           connect_destination_valid: String(destinationValid),
           connect_destination_country: destinationAccount?.country,
           connect_destination_reason: destinationReason,
-        },
-      };
-
-      if (destinationValid) {
-        subscriptionData.transfer_data = { destination: creatorConfig.destination };
-        subscriptionData.application_fee_percent = creatorConfig.introFeePercent;
-        subscriptionData.on_behalf_of = creatorConfig.destination;
+        };
       }
-
-      sessionCfg.subscription_data = subscriptionData;
-
-      sessionCfg.metadata = {
-        ...(sessionCfg.metadata || {}),
-        creator_slug: creatorConfig.creator.slug,
-        creator_name: creatorConfig.creator.name,
-        creator_source: creatorConfig.source,
-        creator_default_currency: creatorConfig.creator.defaultCurrency,
-        platform_intro_fee_percent: String(creatorConfig.introFeePercent),
-        platform_ongoing_fee_percent: String(creatorConfig.ongoingFeePercent),
-        connect_destination_valid: String(destinationValid),
-        connect_destination_country: destinationAccount?.country,
-        connect_destination_reason: destinationReason,
-      };
-    }
 
     log('Checkout session config', sessionCfg);
     const session = await stripe.checkout.sessions.create(sessionCfg);

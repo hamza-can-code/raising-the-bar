@@ -51,11 +51,11 @@ img {
 .header {
     position: relative;
     text-align: center;
-    padding: 10px 15px;
+    padding: 10px 15px 0;
 }
 
 .logo img {
-    max-height: 50px;
+    max-height: 120px;
 }
 
 .fade-in {
@@ -2768,7 +2768,7 @@ img {
 
 .offer-personalization {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 700;
     color: #111;
     margin: 20px 0 0;
@@ -2776,7 +2776,7 @@ img {
 
 @media (max-width: 390px) {
     .offer-personalization {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 }
 

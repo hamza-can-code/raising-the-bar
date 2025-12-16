@@ -33,7 +33,7 @@ button {
   }
 
   .logo img {
-    max-height: 100px;
+    max-height: 120px;
 }
 
 @media (max-width: 389px) {

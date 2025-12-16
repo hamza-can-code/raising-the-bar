@@ -389,7 +389,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const namePrompt = document.getElementById("offerNamePrompt");
   const updateOfferNamePrompt = (active = isDiscountActive()) => {
     if (!namePrompt) return;
-    namePrompt.textContent = `${name || "Athlete"}, claim your calisthenics workout plan now`;
+    namePrompt.textContent = `${name || "Athlete"}, claim your personalized plan now`;
   };
 
   updateOfferNamePrompt();
@@ -526,7 +526,7 @@ document.addEventListener("DOMContentLoaded", () => {
       : diffKg;
     heroLine1 = `
       <strong>${name}</strong>,
-      your program is built to help you lose
+      your personalized plan is built to help you lose
       <strong>${diffDisplay.toFixed(1)} ${weightUnit}</strong>.
     `;
   }
@@ -536,7 +536,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ? kgToLbs(diffKg)
       : diffKg;
     heroLine1 = `
-      ${name}, your program is built to help you gain
+      ${name}, your personalized plan is built to help you gain
       <strong>${diffDisplay.toFixed(1)} ${weightUnit}</strong>
       of muscle.
     `;
@@ -546,7 +546,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ? kgToLbs(goalKg)
       : goalKg;
     heroLine1 = `
-      ${name}, your program is built to help you reach
+      ${name}, your personalized plan is built to help you reach
       your goal weight of
       <strong>${targetDisplay.toFixed(1)} ${weightUnit}</strong>.
     `;
@@ -2185,13 +2185,13 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'alex',
       rating: 5,
       time: 'Today',
-      text: 'so yesterday i did the quiz and everythuing then i got an offer for 51% off. I was skeptical but decided to give it a shot and bro this is sick wouldve been silly saying no in hindsight',
+      text: 'so yesterday i did the quiz and everythuing then i got an offer for 51% off. I was skeptical but decided to give it a shot and bro this is sick ',
     },
     {
       name: 'Sephy xx',
       rating: 5,
       time: 'Today',
-      text: 'So I kinda forgot to cancel despite the email reminders so kinda mb. I explained the situation to support and Jasmine was super understanding and refunded me instantly. tysm ❤️❤️',
+      text: 'Great app! :)',
     },
     {
       name: '.',
