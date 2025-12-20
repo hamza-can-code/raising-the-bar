@@ -3,6 +3,7 @@ const express = require('express');
 const Stripe = require('stripe');
 
 const CreatorPartner = require('../models/CreatorPartner');
+const { deriveCurrencyFromCountry } = require('../utils/currency');
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-04-10' });
 const router = express.Router();
@@ -103,6 +104,8 @@ router.post('/creators', express.json(), requireConnectAdmin, async (req, res) =
       creator?.platformOngoingFeePercent || platformIntroFeePercent,
     );
 
+    const defaultCurrency = deriveCurrencyFromCountry(requestedCountry, 'GBP');
+
     creator = await CreatorPartner.findOneAndUpdate(
       { slug: normalizedSlug },
       {
@@ -113,7 +116,7 @@ router.post('/creators', express.json(), requireConnectAdmin, async (req, res) =
         country: requestedCountry,
         platformIntroFeePercent,
         platformOngoingFeePercent,
-        defaultCurrency: requestedCountry,
+        defaultCurrency,
         active: true,
         metadata,
       },

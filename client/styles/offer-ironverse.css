@@ -3555,6 +3555,18 @@ body.modal-open .floating-cta {
     padding: 0 1rem;
 }
 
+.powered {
+    font-size: 0.75rem !important;
+    letter-spacing: 0.2rem;
+}
+
+.payment-powered {
+    margin: 6px 0 12px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #666;
+}
+
 .payment-section.hidden {
     display: none;
 }

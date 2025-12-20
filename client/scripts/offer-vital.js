@@ -524,7 +524,7 @@ document.addEventListener("DOMContentLoaded", () => {
       : diffKg;
     heroLine1 = `
       <strong>${name}</strong>,
-      your personalized plan is built to help you lose
+      Vitalroot has built you a personalized plan to help you lose
       <strong>${diffDisplay.toFixed(1)} ${weightUnit}</strong>.
     `;
   }
@@ -534,7 +534,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ? kgToLbs(diffKg)
       : diffKg;
     heroLine1 = `
-      ${name}, your personalized plan is built to help you gain
+      ${name}, Vitalroot has built you a personalized plan to help you gain
       <strong>${diffDisplay.toFixed(1)} ${weightUnit}</strong>
       of muscle.
     `;
@@ -544,8 +544,8 @@ document.addEventListener("DOMContentLoaded", () => {
       ? kgToLbs(goalKg)
       : goalKg;
     heroLine1 = `
-      ${name}, your personalized plan is built to help you reach
-      your goal weight of
+      ${name}, Vitalroot has built you a personalized plan to help you reach
+  your goal weight of
       <strong>${targetDisplay.toFixed(1)} ${weightUnit}</strong>.
     `;
   }

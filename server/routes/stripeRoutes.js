@@ -6,6 +6,7 @@ const util = require('util');
 const { protect } = require('../middleware/auth');
 const UserAccess = require('../models/UserAccess');
 const CreatorPartner = require('../models/CreatorPartner');
+const { normalizeCurrencyCode, SUPPORTED_CURRENCIES } = require('../utils/currency');
 
 const router = express.Router();
 
@@ -21,17 +22,6 @@ function parseMinorUnit(value, fallback = null) {
   if (value === undefined || value === null || value === '') return fallback;
   const parsed = Number(value);
   return Number.isFinite(parsed) ? Math.round(parsed) : fallback;
-}
-
-function normalizeCurrencyCode(code, fallback = 'GBP') {
-  if (!code || typeof code !== 'string') return fallback;
-  const upper = code.trim().toUpperCase();
-
-  if (/^[A-Z]{3}$/.test(upper)) return upper;
-  if (upper === 'GB' || upper === 'UK') return 'GBP';
-  if (upper === 'US' || upper === 'USA') return 'USD';
-
-  return fallback;
 }
 
 const BONUS_PRICE_MINOR = {
@@ -133,10 +123,6 @@ async function resolveCreator(creatorSlug) {
    - Keep only the currencies you actually configured
    - Add/remove keys freely; fallback is GBP
    ────────────────────────────────────────────────────────── */
-const SUPPORTED_CURRENCIES = [
-  'GBP', 'USD', 'EUR', 'SEK', 'NOK', 'DKK', 'CAD', 'CHF', 'AUD', 'NZD', 'SGD', 'HKD', 'JPY', 'INR', 'BRL', 'MXN',
-];
-
 function buildPriceMap(prefix, currencies = SUPPORTED_CURRENCIES, { suffix = '' } = {}) {
   const map = {};
 
