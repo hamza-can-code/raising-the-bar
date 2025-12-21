@@ -4,7 +4,7 @@
   (async function () {
     const token = localStorage.getItem('token');
     if (!token) {
-      location.href = 'log-in-offer-ironverse.html';
+      location.href = 'log-in-offer-nhial.html';
       return;
     }
     try {
@@ -17,7 +17,7 @@
       localStorage.setItem('userId', me._id); // <-- save userId for later
     } catch (err) {
       localStorage.removeItem('token');
-      location.href = 'log-in-offer-ironverse.html';
+      location.href = 'log-in-offer-nhial.html';
       return;
     }
   })();
@@ -29,7 +29,7 @@
   <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
   <title>Claim my plan</title>
   <script>
-    window.RTB_CREATOR_SLUG = 'ironverse';
+    window.RTB_CREATOR_SLUG = 'nhial';
     if (!localStorage.getItem('selectedProgram') || localStorage.getItem('selectedProgram') === 'trial') {
       localStorage.setItem('selectedProgram', '4-week');
     }
@@ -56,7 +56,7 @@ src="https://www.paypal.com/sdk/js?client-id=AcygnP6DJSFGbIeyUa2BdGdznCQQk-qXjME
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
     rel="stylesheet">
-  <link href="../styles/offer-ironverse.css" rel="stylesheet">
+  <link href="../styles/offer-nhial.css" rel="stylesheet">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ"></script>
   <script>
@@ -113,11 +113,11 @@ src="https://www.paypal.com/sdk/js?client-id=AcygnP6DJSFGbIeyUa2BdGdznCQQk-qXjME
 
 <body class="offer-page">
   <div id="loaderOverlay" class="loader-overlay">
-    <img src="../assets/ironverse-logo.png" alt="GAINS+ logo" class="loader-logo" />
+    <img src="../assets/nhial-logo.png" alt="GAINS+ logo" class="loader-logo" />
   </div>
   <div class="header">
     <div class="logo">
-      <img id="logo" class="logo" src="../assets/ironverse-logo.png" alt="GAINS+ Logo">
+        <img id="logo" class="logo" src="../assets/nhial-logo.png" alt="GAINS+ Logo">
       </a>
     </div>
   </div>
@@ -421,15 +421,15 @@ placeholder.replaceWith(iframe);
         <span class="discount-label">Discount Expires In:</span>
         <span class="time-remaining" id="countdownTimer">10:00</span>
       </div>
-      <p class="first-1000">🔥 271 claimed their plan today. You're next</p>
+      <p class="first-1000">🔥 82 claimed their plan today. You're next</p>
     </div>
 
     <!-- Offer Cards -->
-
+     
     <section id="socialProof" class="social-proof">
       <img src="../assets/muscular-silhouette.webp" alt="Coach silhouette" class="social-proof__coach" />
       <p class="social-proof__headline">
-        33 people bought plans in the last hour
+        17 people bought plans in the last hour
       </p>
       <div class="social-proof__recent">
         <span class="social-proof__tag">ava 4-Week Plan</span>
@@ -495,7 +495,7 @@ placeholder.replaceWith(iframe);
 
       <div class="rating-summary__reassurance">
         <p>Need reassurance?</p>
-        <button class="rating-summary__link" id="readReviewsLink" type="button" data-scroll-target="reviews">
+        <button class="rating-summary__link" id="readReviewsLink" type="button">
           Read reviews
         </button>
       </div>
@@ -525,7 +525,7 @@ placeholder.replaceWith(iframe);
 <ul class="offer-includes">
 <li>🏋️ <strong>7-day workout plan</strong> tailored using your onboarding answers</li>
 <li>📈 <strong>Simple progress tracking</strong> to stay on course</li>
-<li>�� One-time payment, no ongoing fees</li>
+<li>📅 One-time payment, no ongoing fees</li>
 </ul>
 </div>
 <div class="toggle-details" style="cursor:pointer;">See more</div>
@@ -583,7 +583,7 @@ placeholder.replaceWith(iframe);
 </div> -->
 
       <!-- Offer Cards -->
-      <!--
+         <!--
       <div class="offer-card offer-tier" data-program="trial">
         <div class="offer-left">
           <div class="duration"><strong>1-Week Trial</strong></div>
@@ -650,7 +650,7 @@ placeholder.replaceWith(iframe);
         By continuing, you agree to our
         <a href="tos.html" target="_blank">terms</a> and
         <a href="refund-policy.html" target="_blank">refund policy</a>.
-        Covered by
+         Covered by
         <a href="#moneyBackGuarantee" id="moneyBackGuaranteeLink" class="mbg-scroll-link">
           Money-Back Guarantee
         </a>.
@@ -675,8 +675,8 @@ placeholder.replaceWith(iframe);
 
   <p id="postPayNote" class="post-pay-note" style="display:none;text-align:center;margin-top:12px;">
     ✅ <strong>After checkout
-      <!-- (<span id="checkoutPrice">—</span>) -->
-      , your plan unlocks immediately</strong> – you’ll
+       <!-- (<span id="checkoutPrice">—</span>) -->
+       , your plan unlocks immediately</strong> – you’ll
     land on your dashboard.
   </p>
 
@@ -707,10 +707,6 @@ Card
 </div> -->
 
       <p id="planSummary" class="plan-summary">12-Week Plan</p>
-      <p class="payment-powered">
-        Payments are securely processed by Stripe on behalf of Raising The Bar App Ltd, the platform powering this
-        experience.
-      </p>
       <!-- PayPal -->
       <!-- <div id="paypalMarkContainer" style="margin-top:20px;"></div> -->
 
@@ -932,12 +928,12 @@ alert('Could not initialise PayPal. Please refresh and try again.');
 
     <div class="reviews-pagination" id="reviewsPagination" aria-label="Review pages"></div>
 
-    <div class="post-faq-cta">
-      <button type="button" class="claim-program-btn" data-open-value-modal>
-        Claim My Plan
-      </button>
-    </div>
-
+      <div class="post-faq-cta">
+    <button type="button" class="claim-program-btn" data-open-value-modal>
+      Claim My Plan
+    </button>
+  </div>
+  
   </section>
 
   <!-- FAQ Section -->
@@ -998,7 +994,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
       <p class="powered">POWERED BY</p>
       <p>&copy; 2025 Raising The Bar App Ltd. All rights reserved.</p>
       <div class="footer-links">
-        <a href="forms-ironverse.html">Start Training</a>
+        <a href="forms-nhial.html">Start Training</a>
         <span class="separator">|</span>
         <a href="legal-overview.html">Our Policies</a>
         <span class="separator">|</span>
@@ -1099,7 +1095,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
       </p>
     </div>
   </div>
-
+  
 
   <script>
     let scrollTracked = false;
@@ -1149,7 +1145,7 @@ alert('Could not initialise PayPal. Please refresh and try again.');
       localStorage.setItem('rtb_currency', JSON.stringify(window.RTB_CURRENCY));
     })();
   </script>
-  <script src="../scripts/offer-ironverse.js"></script>
+  <script src="../scripts/offer-nhial.js"></script>
   <!-- leave Stripe.js -->
 
   <!-- then YOUR payment.js – pick one path and delete the other -->

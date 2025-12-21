@@ -42,6 +42,7 @@
     vital: '/pages/thank-you-vital.html',
     dav: '/pages/thank-you-dav.html',
     ryan: '/pages/thank-you-ryan.html',
+    nhial: '/pages/thank-you-nhial.html',
   };
   const SUCCESS_PATH = CREATOR_SUCCESS_PATHS[getCreatorSlug()] || '/pages/plan-building.html';
   const RETURN_URL = `${window.location.origin}${SUCCESS_PATH}`;
@@ -99,7 +100,7 @@
     },
   };
 
-  const KAYP_STYLE_SLUGS = ['kayp', 'dav', 'ryan', 'ironverse'];
+  const KAYP_STYLE_SLUGS = ['kayp', 'dav', 'ryan', 'ironverse', 'nhial'];
 
   const PAYMENT_APPEARANCE = KAYP_STYLE_SLUGS.includes(getCreatorSlug())
     ? KAYP_PAYMENT_APPEARANCE

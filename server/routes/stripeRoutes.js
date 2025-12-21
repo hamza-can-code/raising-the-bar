@@ -153,6 +153,10 @@ const CREATOR_PLAN_PRICE_IDS = {
     '4-week': buildPriceMap('PRICE_FOUR_WEEK', SUPPORTED_CURRENCIES, { suffix: '_DECODED' }),
     '12-week': buildPriceMap('PRICE_TWELVE_WEEK', SUPPORTED_CURRENCIES, { suffix: '_DECODED' }),
   },
+  vital: {
+    '4-week': buildPriceMap('PRICE_FOUR_WEEK', SUPPORTED_CURRENCIES, { suffix: '_VITAL' }),
+    '12-week': buildPriceMap('PRICE_TWELVE_WEEK', SUPPORTED_CURRENCIES, { suffix: '_VITAL' }),
+  },
   ironverse: {
     '4-week': buildPriceMap('PRICE_FOUR_WEEK', SUPPORTED_CURRENCIES, { suffix: '_IRONVERSE' }),
     '12-week': buildPriceMap('PRICE_TWELVE_WEEK', SUPPORTED_CURRENCIES, { suffix: '_IRONVERSE' }),
@@ -163,6 +167,10 @@ const CREATOR_PLAN_COUPONS = {
   decoded: {
     '4-week': { GBP: process.env.COUPON_FOUR_WEEK_GBP_DECODED },
     '12-week': { GBP: process.env.COUPON_TWELVE_WEEK_GBP_DECODED },
+  },
+  vital: {
+    '4-week': { GBP: process.env.COUPON_FOUR_WEEK_GBP_VITAL },
+    '12-week': { GBP: process.env.COUPON_TWELVE_WEEK_GBP_VITAL },
   },
   ironverse: {
     '4-week': { GBP: process.env.COUPON_FOUR_WEEK_GBP_IRONVERSE },
@@ -183,6 +191,7 @@ const CREATOR_SUCCESS_PATHS = {
   dav: '/pages/thank-you-dav.html',
   ironverse: '/pages/thank-you-ironverse.html',
   ryan: '/pages/thank-you-ryan.html',
+  nhial: '/pages/thank-you-nhial.html',
 };
 
 const CREATOR_OFFER_PATHS = {
@@ -192,6 +201,7 @@ const CREATOR_OFFER_PATHS = {
   dav: '/pages/offer-dav.html',
   ironverse: '/pages/offer-ironverse.html',
   ryan: '/pages/offer-ryan.html',
+  nhial: '/pages/offer-nhial.html',
 };
 
 function getRecurringConfigForPlan(plan) {

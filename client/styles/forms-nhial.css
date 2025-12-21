@@ -1,0 +1,762 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f7f2;
+  /* 4) Prevent horizontal scroll: */
+}
+
+body {
+  background-color: #f9f7f2;
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  /* Body: Roboto Regular */
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+
+}
+
+#next-button {
+  font-family: 'Poppins', sans-serif;
+  /* CTA: Poppins Extra-Bold */
+}
+
+.logo img {
+  height: 75px;
+  width: auto;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.header {
+  position: relative;
+  text-align: center;
+  padding: 10px 15px 15px 15px;
+}
+
+
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  /* make sure it’s flush to the left edge */
+  right: 0;
+  /* …and the right edge */
+  width: 100%;
+  /* now includes padding, thanks to border-box */
+  box-sizing: border-box;
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 1rem;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 1000;
+}
+
+.cookie-banner p {
+  margin: 0 0 1rem 0;
+  font-size: 0.9rem;
+}
+
+.cookie-banner a {
+  color: #f5a623;
+  text-decoration: underline;
+}
+
+.cookie-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.cookie-buttons button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+#accept-all {
+  background-color: #28a745;
+  color: #fff;
+}
+
+#deny-all {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.scroll {
+  overflow-y: auto;
+  max-height: calc(100vh - 160px);
+  scroll-behavior: smooth;
+  box-sizing: content-box;
+}
+
+/* the banner */
+#incentive-box {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  background: #F5B84C;
+  padding: 12px 16px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 1000;
+  font-size: .95rem;
+  text-align: center;
+  color: #333;
+}
+
+.incentive-text{
+  margin: 0 auto;
+}
+
+/* close button styling */
+#incentive-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.intro-heading {
+  text-align: center;
+  margin: 0 auto 0 auto;
+}
+
+/* @media (max-width: 375px) {
+  #incentive-box {
+    top: 50px;
+  }
+} */
+
+.form-options ol>li:last-child {
+  margin-bottom: 0px;
+}
+
+
+.form-container {
+  width: 80%;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+/* kill the flex */
+.form-container label {
+  display: block;
+  text-align: center;
+  /* keep your centering */
+  line-height: 1.4;
+  /* your existing style */
+  margin-top: 1rem;
+  /* optional */
+}
+
+/* ensure each paragraph stacks neatly */
+.form-container label p {
+  margin: 0 0 0.5rem;
+  /* space them out */
+}
+
+
+@media (max-width: 389px) {
+  .form-container {
+    max-height: 50vh;
+  }
+}
+
+@media (min-width: 768px) {
+  .unit-toggle.pill-toggle {
+    display: flex;
+    justify-content: flex-start;
+    /* keep the pills on the left */
+    width: 100%;
+    max-width: 400px;
+    /* match your .number-input cap */
+    margin: 1rem auto;
+    border: none;
+  }
+
+  .ftin-row {
+    display: flex;
+    justify-content: center;
+    /* or flex-start if you want them flush left under the toggle */
+    gap: 1rem;
+    /* ← here’s your “maximum” gap between the two inputs */
+
+    /* now make the whole row the same width as your other inputs: */
+    width: 100%;
+    max-width: 400px;
+    /* match your .number-input max-width */
+    margin: 0 auto;
+    /* center the pair under the question */
+  }
+
+  .ftin-row .number-input {
+    flex: 1 1 auto;
+    /* each input will take up half of the 400px minus the gap */
+    min-width: 0;
+    /* allow them to shrink properly inside flex */
+  }
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-question {
+  margin: 10px;
+  text-align: center;
+}
+
+.form-question h2 {
+  margin: 0;
+  text-align: center;
+}
+
+.form-options ol {
+  list-style-type: none;
+  padding: 10px;
+  margin: 10px 10px 0 10px;
+}
+
+.form-options li {
+  background-color: #f5ebe2;
+  max-width: 400px;
+  border: 1px solid #f5ebe2;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 20px auto;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+li.button-like:hover {
+  background-color: #e7d8c9;
+  border: 1px solid #d3c2b3;
+  transform: scale(1.01);
+  transition: transform 0.1s ease;
+}
+
+li.button-like:active {
+  background-color: #d3c2b3;
+  border: 1px solid #d3c2b3;
+}
+
+li.button-like.selected {
+  background: linear-gradient(145deg, #7cb342, #558b2f);
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(145deg, #7cb342, #558b2f);
+  transform: scale(1.01);
+  transition: all 0.1s ease;
+}
+
+li.button-like[data-emoji]::before {
+  content: attr(data-emoji) " ";
+  margin-right: 0.3em;
+  /* Adjust spacing as needed */
+}
+
+.text-input {
+  font-family: 'Roboto', sans-serif;
+  width: 100%;
+  max-width: 400px;
+  /* Set max-width */
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: block;
+  margin-left: auto;
+  /* Center horizontally */
+  margin-right: auto;
+  /* Center horizontally */
+}
+
+.date-input {
+  font-family: 'Roboto', sans-serif;
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: 'Arial', sans-serif;
+  box-sizing: border-box;
+  display: block;
+  margin-left: auto;
+  /* Center horizontally */
+  margin-right: auto;
+  /* Center horizontally */
+}
+
+.number-input {
+  font-family: 'Roboto', sans-serif;
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px;
+  box-sizing: border-box;
+  display: block;
+  margin-left: auto;
+  /* Center horizontally */
+  margin-right: auto;
+  /* Center horizontally */
+}
+
+.unit-toggle {
+  display: inline-flex;
+  background: #f9f7f2;
+  /* match page background */
+  /* border: 1px solid #ddd; */
+  /* light neutral border */
+  border-radius: 6px;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  user-select: none;
+}
+
+.unit-toggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Each pill label */
+.unit-toggle label {
+  padding: 8px 20px;
+  margin: 0;
+  cursor: pointer;
+  background: #ffffff;
+  /* white pill when unselected */
+  color: #333333;
+  /* dark text */
+  transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Separator between pills */
+.unit-toggle label+label {
+  border-left: 1px solid #ddd;
+}
+
+/* Selected pill */
+.unit-toggle input:checked+label {
+  background: #ece8e1;
+  /* subtle off‑white accent */
+  color: #111111;
+  /* even darker text */
+}
+
+/* Pressed (active) effect on any pill */
+.unit-toggle label:active {
+  background: #d7d4cc;
+  /* slightly darker on press */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ftin-row {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+}
+
+.pill-toggle {
+  display: inline-flex;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  /* background: #fff; */
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+}
+
+.pill-toggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pill-toggle label {
+  padding: 8px 16px;
+  margin: 0;
+  cursor: pointer;
+  color: #333;
+  transition: background 0.2s, color 0.2s;
+}
+
+.pill-toggle label+input+label {
+  border-left: 1px solid #ccc;
+}
+
+/* .pill-toggle input:checked + label {
+  background: #558b2f;  
+  color: #fff;
+}
+
+.pill-toggle label:hover {
+  background: #f0f0f0;
+} */
+
+.subheading {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.scroll-text {
+  font-size: 18px;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 10px;
+}
+
+#next-button {
+  margin: auto auto 10px auto;
+  width: 90%;
+  max-width: 380px;
+  padding: 15px 40px;
+  font-size: 16px;
+  color: #fff;
+  background: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#next-button:hover {
+  background: #0056b3;
+}
+
+/* Disabled button style */
+#next-button.disabled {
+  background-color: #004a99;
+  /* Darker blue */
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.progress-bar {
+  margin: 20px auto 30px auto;
+  padding: auto;
+  width: 90%;
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-fill {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #5eb8f5, #3498db);
+  transition: width 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    /* Space between loading container and final message */
+  }
+
+  .loading-text {
+    font-size: 1em;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 30px;
+    /* Space between text and progress bar */
+  }
+
+  .final-message {
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+
+  /* Styles for smaller screens (mobile) */
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .text-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+
+  #next-button {
+    margin: auto auto 10px auto;
+    width: 90%;
+    padding: 15px 40px;
+    font-size: 16px;
+    color: #fff;
+    background: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .progress-bar {
+    margin: 20px auto 30px auto;
+  }
+
+  .loading-text {
+    font-size: 0.9em;
+    /* Adjust font size for smaller screens */
+    margin-bottom: 10px;
+  }
+
+  .final-message {
+    text-align: center;
+    margin-top: 5px;
+    /* Space between progress bar and final message */
+  }
+}
+
+.fixed-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #F6EFE3;
+  /* Light contrasting background */
+  margin-top: 50px;
+  padding: 20px;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  /* transform: translateY(100%);
+  opacity: 1;
+  transition: transform 0.75s ease-out, opacity 0.75s ease-out; */
+}
+
+/* .fixed-footer.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.fixed-footer.slide-out {
+  transform: translateY(100%);
+  opacity: 1;
+} */
+
+.back-btn {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  margin-right: auto;
+  color: #666;
+  background: none;
+  border: none;
+  font-size: 1rem;
+}
+
+.back-btn.visible {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+  color: #333;
+  /* Slightly darker on hover */
+}
+
+.back-arrow {
+  position: relative;
+  top: -1px;
+  margin-right: 6px;
+  margin-left: 1rem;
+  font-size: 1.1rem;
+}
+
+/* Container for back button and question counter */
+.navigation-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  /* places items at opposite ends */
+  align-items: center;
+}
+
+/* Styling for the question counter */
+.question-counter {
+  font-size: 1rem;
+  color: #666;
+  /* Adjust the right margin/padding to match your design */
+  margin-right: 1rem;
+}
+
+label {
+  display: flex;
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Align items vertically */
+  text-align: center;
+  /* Ensure text is centered */
+  font-size: 0.9rem;
+  color: #333;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  line-height: 1.5;
+}
+
+/* Styling for the checkbox itself */
+label input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+/* Styling for the links inside the label */
+label a {
+  color: #007bff;
+  text-decoration: none;
+  margin-left: 4px;
+  /* Adds spacing before link */
+}
+
+label a:hover {
+  text-decoration: underline;
+}
+
+.disclaimer {
+  font-size: 0.9rem;
+  color: #333;
+  margin: 0 0 1rem 0;
+}
+
+#warning-text {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  background-color: #dc3545;
+  color: #fff;
+  /* White text */
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  width: 75%;
+  /* Adjust width to fit the layout */
+  margin-left: auto;
+  margin-right: auto;
+  display: none;
+  /* Initially hidden */
+  max-width: 400px;
+}
+
+@media (max-width: 375px) {
+  #warning-text {
+    width: 90%;
+    margin-top: 0;
+  }
+
+  .form-options ol>li:last-child {
+    margin-bottom: 0px;
+    /* Enough space so it can scroll above footer */
+  }
+
+  /* .scroll {
+    overflow-y: auto;
+    max-height: calc(100vh - 160px);
+    scroll-behavior: smooth;
+    box-sizing: content-box; 
+    min-height: 150vh;
+  } */
+}
+
+#warning-text.visible {
+  display: block;
+  /* Show the warning when triggered */
+}
+
+.hidden {
+  display: none;
+}
+
+.rotating-message {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 10px;
+  text-align: center;
+  /* white-space: pre-line; */
+}
+
+.final-message{ text-align:center; margin:24px 0 8px; }
+.final-headline{ margin:0 0 6px; line-height:1.15; }
+.final-num{ font-weight:800; font-size:28px; }
+.final-sub{ font-size:16px; font-weight:600; }
+
+.final-rating{ display:flex; justify-content:center; align-items:center; gap:10px; margin:6px 0 10px; }
+.final-stars{ font-size:18px; letter-spacing:2px; }
+.final-score{ font-weight:600; opacity:.9; }
+
+.final-badges{ display:flex; justify-content:center; align-items:center; gap:12px; margin:6px 0 8px; }
+.final-badges img{ height:28px; opacity:.9; filter:grayscale(100%); transition:opacity .2s ease, filter .2s ease; }
+.final-badges img:hover{ opacity:1; filter:none; }
+
+.prb-inline{ display:flex; justify-content:center; margin:8px 0 6px; }
+.final-reviews{ font-size:.92rem; color:#666; margin:6px 0 0; }
