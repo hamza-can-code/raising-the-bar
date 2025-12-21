@@ -377,13 +377,13 @@ document.addEventListener("DOMContentLoaded", () => {
   //   coachImg.alt = `${genderLabel} ${dreamLabel} physique illustration`;
   // };
 
-    const updateSocialProofCoach = () => {
-  const coachImg = document.querySelector('.social-proof__coach');
-  if (!coachImg) return;
+  const updateSocialProofCoach = () => {
+    const coachImg = document.querySelector('.social-proof__coach');
+    if (!coachImg) return;
 
-  coachImg.src = imgSrc('kayp-coach.jpg');
-  coachImg.alt = 'Coach KayP';
-};
+    coachImg.src = imgSrc('kayp-coach.jpg');
+    coachImg.alt = 'Coach KayP';
+  };
 
   updateSocialProofCoach();
 
@@ -741,15 +741,15 @@ document.addEventListener("DOMContentLoaded", () => {
   function getBMIDescription(category) {
     switch (category.toLowerCase()) {
       case "obese":
-        return `Your BMI indicates a <b>higher weight category</b>, but your tracker adjusts to you — helping you build real, lasting progress without overwhelm.`;
+        return `Your BMI indicates a <b>higher weight category</b>, but your personalized plan adjusts to you — helping you build real, lasting progress without overwhelm.`;
       case "overweight":
-        return `Your BMI suggests you're <b>slightly overweight</b>. Don’t worry — your smart tracker is built to deliver long-term success.`;
+        return `Your BMI suggests you're <b>slightly overweight</b>. Don’t worry — your personalized plan is built to deliver long-term success.`;
       case "healthy":
         return `Your BMI suggests you’re in a great place! Let’s build on that strong foundation and keep the momentum going.`;
       case "underweight":
-        return `Your BMI suggests you're <b>below the recommended range</b>. Your tracker is built to help you get stronger, healthier, and more confident.`;
+        return `Your BMI suggests you're <b>below the recommended range</b>. Your personalized plan is built to help you get stronger, healthier, and more confident.`;
       default:
-        return `Your BMI is just one factor. Your tracker will adapt to support your full transformation.`;
+        return `Your BMI is just one factor. Your personalized plan will adapt to support your full transformation.`;
     }
   }
 
@@ -1095,6 +1095,11 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       title: "Track Workouts, Earn XP (CT)",
       image: "../assets/clear-and-easy.png",
+      desc: ""
+    },
+    {
+      title: "Adaptive Progression Engine (PT)",
+      image: "../assets/kayp-structure.png",
       desc: ""
     },
     {
@@ -2174,22 +2179,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const defaultReviews = [
     // 🔹 TODAY
     {
-      name: 'Chris',
+      name: 'Hussain',
       rating: 4,
       time: 'Today',
       text: 'really good app, best one ive tried bc it covers both workouts and nutrition at top quality and the results speak for themself (lost 3kg in a week and feel healthier than ever). the lil sleep + stress notes keep me from overdoing it. only wish every warmup had vids but its still the best ive used tbh',
     },
     {
-      name: 'THE ALPHA',
+      name: 'ALPHA FARHAN',
       rating: 4,
       time: 'Today',
       text: 'Been watching KayPs tiktok for a bit, I found his vids helpful so thought id gv his app a go. been using this for a couple of weeks and its genuinely amazing (avging 2kg muscle per week). Was going to rate 5 stars but the rest timer bugged once on me so im leaving a 4 til they patch it 💔 still worth it tho',
     },
     {
-      name: 'alex',
+      name: 'arjun',
       rating: 5,
       time: 'Today',
-      text: 'so yesterday i did the quiz and everythuing I was skeptical but decided to give it a shot and bro this is sick ',
+      text: 'so yesterday i did the quiz and everythuing and bro this is sick ',
     },
     {
       name: 'Sephy xx',

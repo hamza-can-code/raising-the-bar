@@ -733,15 +733,15 @@ document.addEventListener("DOMContentLoaded", () => {
   function getBMIDescription(category) {
     switch (category.toLowerCase()) {
       case "obese":
-        return `Your BMI indicates a <b>higher weight category</b>, but your tracker adjusts to you — helping you build real, lasting progress without overwhelm.`;
+        return `Your BMI indicates a <b>higher weight category</b>, but your personalized plan adjusts to you — helping you build real, lasting progress without overwhelm.`;
       case "overweight":
-        return `Your BMI suggests you're <b>slightly overweight</b>. Don’t worry — your smart tracker is built to deliver long-term success.`;
+        return `Your BMI suggests you're <b>slightly overweight</b>. Don’t worry — your personalized plan is built to deliver long-term success.`;
       case "healthy":
         return `Your BMI suggests you’re in a great place! Let’s build on that strong foundation and keep the momentum going.`;
       case "underweight":
-        return `Your BMI suggests you're <b>below the recommended range</b>. Your tracker is built to help you get stronger, healthier, and more confident.`;
+        return `Your BMI suggests you're <b>below the recommended range</b>. Your personalized plan is built to help you get stronger, healthier, and more confident.`;
       default:
-        return `Your BMI is just one factor. Your tracker will adapt to support your full transformation.`;
+        return `Your BMI is just one factor. Your personalized plan will adapt to support your full transformation.`;
     }
   }
 
@@ -2181,7 +2181,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'alex',
       rating: 5,
       time: 'Today',
-      text: 'so yesterday i did the quiz and everythuing I was skeptical but decided to give it a shot and bro this is sick ',
+      text: 'so yesterday i did the quiz and everythuing and bro this is sick ',
     },
     {
       name: 'Sephy xx',

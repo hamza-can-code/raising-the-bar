@@ -2185,7 +2185,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'alex',
       rating: 5,
       time: 'Today',
-      text: 'so yesterday i did the quiz and everythuing then i got an offer for 51% off. I was skeptical but decided to give it a shot and bro this is sick ',
+      text: 'so yesterday i did the quiz and everythuing and bro this is sick ',
     },
     {
       name: 'Sephy xx',
