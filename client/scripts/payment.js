@@ -170,6 +170,7 @@
 
   let stripeJs;
   let elements;        // ← Stripe Elements instance (lazy-created)
+  let paymentElement;  // ← Payment Element instance (remounted when plan changes)
   let clientSecret;    // ← from /api/create-subscription-intent
   let intentType = 'payment';
   window.__PAYMENT_VISITED__ = window.__PAYMENT_VISITED__ || false;
@@ -225,13 +226,28 @@
     // Mount the unified Payment Element once; keep container hidden until Continue
     if (!document.getElementById('paymentElement')) return;
     if (document.getElementById('paymentElement').dataset.mounted === 'true') return;
-    elements.create('payment').mount('#paymentElement');
+    paymentElement = elements.create('payment');
+    paymentElement.mount('#paymentElement');
     document.getElementById('paymentElement').dataset.mounted = 'true';
   }
 
   async function ensureStripe(force = false) {
-    // If already warmed AND not forcing, bail
-    if (!force && window.__STRIPE_WARM__ && window.__STRIPE_WARM__.elements) return;
+    const discounted = isDiscountActive();
+    const selectedPlan = getSelectedPlanId();
+    const planPricing = getSelectedPlanPricing();
+    const curr = (typeof getCurrency === 'function')
+      ? getCurrency()
+      : { code: 'GBP', country: 'GB', fxFromGBP: 1 };
+    const creatorSlug = getCreatorSlug();
+    const warmState = window.__STRIPE_WARM__ || {};
+    const warmMatches = warmState.plan === selectedPlan
+      && warmState.currency === curr.code
+      && warmState.discounted === discounted
+      && warmState.creatorSlug === creatorSlug;
+    const shouldRefresh = force || !warmState.elements || !warmMatches;
+
+    // If already warmed with the same plan context, bail
+    if (!shouldRefresh) return;
 
     const email = await getCustomerEmail?.();
     if (!email) {
@@ -239,14 +255,6 @@
       return;
     }
 
-    const discounted = isDiscountActive();
-    const selectedPlan = getSelectedPlanId();
-    const planPricing = getSelectedPlanPricing();
-    const curr = (typeof getCurrency === 'function')
-      ? getCurrency()
-      : { code: 'GBP', country: 'GB', fxFromGBP: 1 };
-
-    const creatorSlug = getCreatorSlug();
     const payload = {
       email,
       discounted,
@@ -275,16 +283,22 @@
       intentType = respPayload.intentType || 'payment';
 
       stripeJs = stripeJs || stripe(STRIPE_PK);
-      if (!elements) {
+      if (!elements || shouldRefresh) {
+        if (paymentElement) {
+          paymentElement.unmount();
+          paymentElement = null;
+        }
+        const mountTarget = document.getElementById('paymentElement');
+        if (mountTarget) mountTarget.dataset.mounted = 'false';
         elements = stripeJs.elements({ clientSecret, appearance: PAYMENT_APPEARANCE });
         mountPaymentUI(); // mount once
         document.dispatchEvent(new Event('stripe-elements-ready'));
-      } else if (force) {
-        elements.update({ clientSecret, appearance: PAYMENT_APPEARANCE }); // update secret if we force refresh
       }
 
       // Wallet button (Apple Pay / GPay)
-      if (!window.__STRIPE_WARM__?.pr) {
+      if (!window.__STRIPE_WARM__?.pr || !warmMatches) {
+        const prContainer = document.getElementById('payment-request-button');
+        if (prContainer) prContainer.innerHTML = '';
         const minorDigits = curr.minor ?? 2;                // your getCurrency() tells you 0 for JPY, 2 for USD/EUR/etc
         const planDisplayAmount = planPricing
           ? planPricing.todayLocal
@@ -312,9 +326,22 @@
         });
 
         pr.on('paymentmethod', walletHandler);
-        window.__STRIPE_WARM__ = { stripeJs, elements, clientSecret, pr };
+        window.__STRIPE_WARM__ = {
+          stripeJs,
+          elements,
+          clientSecret,
+          pr,
+          plan: selectedPlan,
+          currency: curr.code,
+          discounted,
+          creatorSlug,
+        };
       } else {
         window.__STRIPE_WARM__.clientSecret = clientSecret;
+        window.__STRIPE_WARM__.plan = selectedPlan;
+        window.__STRIPE_WARM__.currency = curr.code;
+        window.__STRIPE_WARM__.discounted = discounted;
+        window.__STRIPE_WARM__.creatorSlug = creatorSlug;
       }
     } catch (e) {
       showError('Could not prepare payment.');
