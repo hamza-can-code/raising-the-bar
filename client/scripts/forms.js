@@ -28,6 +28,7 @@ window.addEventListener('beforeunload', () => {
 });
 
 let rotatingMsgInterval;
+let loadingDotsInterval;
 let rotatingMessageIndex = 0;
 let obeseGainWarnShown = false;
 
@@ -5912,9 +5913,28 @@ function replaceWithFinalPage() {
   loadingContainer.classList.add("loading-container");
   formContainer.appendChild(loadingContainer);
 
+  if (rotatingMsgInterval) {
+    clearInterval(rotatingMsgInterval);
+    rotatingMsgInterval = null;
+  }
+  const existingRotatingMessage = document.getElementById("rotating-message");
+  if (existingRotatingMessage) {
+    existingRotatingMessage.remove();
+  }
+
   const loadingText = document.createElement("p");
   loadingText.classList.add("loading-text");
-  loadingText.textContent = "Loading";
+  const loadingTextBase = "Building your plan";
+  loadingText.textContent = `${loadingTextBase}.`;
+
+  if (loadingDotsInterval) {
+    clearInterval(loadingDotsInterval);
+  }
+  let loadingDots = 1;
+  loadingDotsInterval = setInterval(() => {
+    loadingDots = (loadingDots % 3) + 1;
+    loadingText.textContent = `${loadingTextBase}${".".repeat(loadingDots)}`;
+  }, 500);
   loadingContainer.appendChild(loadingText);
 
   // Move the progress bar into the loading container
@@ -5923,6 +5943,7 @@ function replaceWithFinalPage() {
     loadingContainer.appendChild(pBar);
   }
 
+  /*
   let rotatingMessage = document.getElementById("rotating-message");
   if (!rotatingMessage) {
     rotatingMessage = document.createElement("p");
@@ -5941,6 +5962,7 @@ function replaceWithFinalPage() {
       rotatingMessageElem.textContent = getRotatingMessage();
     }
   }, 2000);
+  */
 
   // Progress bar fill logic over 5 seconds then redirect …
   const duration = 5000;
@@ -6453,6 +6475,9 @@ backButton.addEventListener("click", () => {
 // [UNCHANGED => Start the form]
 loadQuestion(currentQuestionIndex);
 updateProgressBar();
+
+window.formsDebug = window.formsDebug || {};
+window.formsDebug.skipToFinalPage = () => replaceWithFinalPage();
 
 // Make the fixed footer pop in once the DOM is ready
 // window.addEventListener("DOMContentLoaded", () => {
