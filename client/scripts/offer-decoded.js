@@ -82,7 +82,7 @@ window.RTB_PRICE_TABLE = {
 // GBP anchor values for each plan. Converted using RTB_CURRENCY fxFromGBP.
 const PLAN_PRICING_GBP = {
   trial: {
-    name: '1-Week Trial',
+    name: '1-Week Plan',
     full: 4.99,
     renewal: 19.99,
     discount: null,
@@ -278,18 +278,21 @@ function updateOfferDisclaimer(pricing = null) {
   const disclaimer = document.getElementById('offerDisclaimer');
   if (!disclaimer) return;
   const selectedPricing = pricing || getPlanPricing(localStorage.getItem('selectedProgram') || 'trial');
+  const renewalAmount = selectedPricing?.renewalFormatted || '';
+  const renewalLine = selectedPricing?.id === 'trial'
+    ? `Your plan renews at <span class="renew-amt">${renewalAmount}</span> in 1 week, then <span class="renew-amt">${renewalAmount}</span>/month unless cancelled.`
+    : `Your plan renews every 30 days at <span class="renew-amt">${renewalAmount}</span>/month unless cancelled.`;
   disclaimer.innerHTML = `
 By continuing, you agree to our
 <a href="tos.html" target="_blank" class="legal-link">terms</a> and
 <a href="refund-policy.html" target="_blank" class="legal-link">refund policy</a>.
-Your plan renews every 30 days at
-        <span class="renew-amt">${selectedPricing?.renewalFormatted || ''}</span>/month unless cancelled. Cancel anytime in one click.
+${renewalLine}
 Covered by
 <a href="#moneyBackGuarantee" id="moneyBackGuaranteeLink" class="mbg-scroll-link">
   Money-Back Guarantee
 </a>.
 Need reassurance?
-<button type="button" class="rating-summary__link reassurance__reviews-link" id="reassuranceReviewsLink" data-scroll-target="reviews">
+<button type="button" class="rating-summary__link reassurance__reviews-link" id="reassuranceReviewsLink">
   Read reviews
 </button>
 `;
@@ -526,7 +529,7 @@ document.addEventListener("DOMContentLoaded", () => {
       : diffKg;
     heroLine1 = `
       <strong>${name}</strong>,
-      Decoded Gains has built you a personalized plan to help you lose
+      we've built you a personalized plan to help you lose
       <strong>${diffDisplay.toFixed(1)} ${weightUnit}</strong>.
     `;
   }
@@ -536,7 +539,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ? kgToLbs(diffKg)
       : diffKg;
     heroLine1 = `
-      ${name}, Decoded Gains has built you a personalized plan to help you gain
+      ${name}, we've built you a personalized plan to help you gain
       <strong>${diffDisplay.toFixed(1)} ${weightUnit}</strong>
       of muscle.
     `;
@@ -546,7 +549,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ? kgToLbs(goalKg)
       : goalKg;
     heroLine1 = `
-      ${name}, Decoded Gains has built you a personalized plan to help you reach
+      ${name}, we've built you a personalized plan to help you reach
   your goal weight of
       <strong>${targetDisplay.toFixed(1)} ${weightUnit}</strong>.
     `;

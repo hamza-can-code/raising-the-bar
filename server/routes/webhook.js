@@ -49,6 +49,41 @@ async function promoteSubscriptionFeeToOngoing(subscriptionId, invoiceId) {
   }
 }
 
+async function applyTrialUpgradeIfNeeded(subscriptionId) {
+  if (!subscriptionId) return;
+
+  try {
+    const subscription = await stripe.subscriptions.retrieve(subscriptionId, {
+      expand: ['items.data.price'],
+    });
+    const metadata = subscription.metadata || {};
+    const upgradePending = metadata.trial_upgrade_pending === 'true';
+    const upgradePriceId = metadata.trial_upgrade_price_id;
+    const anchorDays = Number(metadata.trial_upgrade_anchor_days || 7);
+
+    if (!upgradePending || !upgradePriceId) return;
+
+    const subscriptionItem = subscription.items?.data?.[0];
+    if (!subscriptionItem) return;
+
+    await stripe.subscriptions.update(subscriptionId, {
+      items: [{ id: subscriptionItem.id, price: upgradePriceId }],
+      billing_cycle_anchor: Math.floor(Date.now() / 1000) + anchorDays * 24 * 60 * 60,
+      proration_behavior: 'none',
+      metadata: {
+        ...metadata,
+        trial_upgrade_pending: 'false',
+        trial_upgrade_applied_at: new Date().toISOString(),
+      },
+    });
+  } catch (err) {
+    console.error('⚠️  Failed to apply trial upgrade', {
+      subscriptionId,
+      message: err.message,
+    });
+  }
+}
+
 /* Stripe requires the raw body exactly as it arrives */
 router.post(
   '/webhook',
@@ -164,6 +199,7 @@ router.post(
       if (!subscriptionId) return res.sendStatus(200);
 
       await promoteSubscriptionFeeToOngoing(subscriptionId, invoice.id);
+      await applyTrialUpgradeIfNeeded(subscriptionId);
 
       console.log('🔄  invoice.payment_succeeded →', subscriptionId);
 

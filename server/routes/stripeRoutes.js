@@ -150,14 +150,17 @@ const PLAN_COUPONS = {
 
 const CREATOR_PLAN_PRICE_IDS = {
   decoded: {
+    trial: buildPriceMap('PRICE_TRIAL_UPFRONT', SUPPORTED_CURRENCIES, { suffix: '_DECODED' }),
     '4-week': buildPriceMap('PRICE_FOUR_WEEK', SUPPORTED_CURRENCIES, { suffix: '_DECODED' }),
     '12-week': buildPriceMap('PRICE_TWELVE_WEEK', SUPPORTED_CURRENCIES, { suffix: '_DECODED' }),
   },
   vital: {
+    trial: buildPriceMap('PRICE_TRIAL_UPFRONT', SUPPORTED_CURRENCIES, { suffix: '_VITAL' }),
     '4-week': buildPriceMap('PRICE_FOUR_WEEK', SUPPORTED_CURRENCIES, { suffix: '_VITAL' }),
     '12-week': buildPriceMap('PRICE_TWELVE_WEEK', SUPPORTED_CURRENCIES, { suffix: '_VITAL' }),
   },
   ironverse: {
+    trial: buildPriceMap('PRICE_TRIAL_UPFRONT', SUPPORTED_CURRENCIES, { suffix: '_IRONVERSE' }),
     '4-week': buildPriceMap('PRICE_FOUR_WEEK', SUPPORTED_CURRENCIES, { suffix: '_IRONVERSE' }),
     '12-week': buildPriceMap('PRICE_TWELVE_WEEK', SUPPORTED_CURRENCIES, { suffix: '_IRONVERSE' }),
   },
@@ -179,7 +182,7 @@ const CREATOR_PLAN_COUPONS = {
 };
 
 const PLAN_LABELS = {
-  trial: '1-Week Trial',
+  trial: '1-Week Plan',
   '4-week': '4-Week Plan',
   '12-week': '12-Week Plan',
 };
@@ -514,6 +517,19 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
       },
       coupon: couponId || undefined,
     };
+
+    if (normalizedPlan === 'trial') {
+      const upgradePlanInfo = getPlanPriceId('4-week', currency, normalizedCreator);
+      if (!upgradePlanInfo) {
+        return res.status(500).json({ error: `Missing price configuration for trial renewal (4-week) (${currency || 'GBP'})` });
+      }
+      subCfg.metadata = {
+        ...(subCfg.metadata || {}),
+        trial_upgrade_pending: 'true',
+        trial_upgrade_price_id: upgradePlanInfo.priceId,
+        trial_upgrade_anchor_days: '7',
+      };
+    }
 
     if (creatorConfig) {
       const destinationInfo = await fetchDestinationAccount(creatorConfig.destination);

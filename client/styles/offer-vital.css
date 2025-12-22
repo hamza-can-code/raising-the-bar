@@ -882,7 +882,7 @@ body.offer-page {
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: start;
-    column-gap: 10px;
+    column-gap: 16px;
 }
 
 .wi2-item:last-child {
@@ -1509,7 +1509,7 @@ body.offer-page {
     align-items: center;
     justify-content: center;
     font-size: 1.1rem;
-    gap: 10px;
+    gap: 16px;
     margin-bottom: 5px;
 }
 
@@ -1727,7 +1727,7 @@ body.offer-page {
 .offer-cards {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 16px;
     margin-top: 18px;
 }
 
@@ -2537,7 +2537,7 @@ body.offer-page {
     .dots-container {
         display: flex;
         justify-content: center;
-        gap: 10px;
+        gap: 16px;
         margin: 20px auto 40px auto;
     }
 
@@ -2562,7 +2562,7 @@ body.offer-page {
 .dots-container {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 16px;
     margin: 10px auto 40px auto;
 }
 
@@ -2698,7 +2698,7 @@ body.offer-page {
 /* New container for row 2 cards to be side by side */
 .offer-row {
     display: flex;
-    gap: 10px;
+    gap: 16px;
     margin-top: 10px;
 }
 
@@ -3181,7 +3181,7 @@ body.offer-page {
 .faq-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 16px;
 }
 
 .faq-item {
@@ -3298,7 +3298,7 @@ body.offer-page {
 .social-icons {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 16px;
 }
 
 .social-icons img {
@@ -3321,7 +3321,7 @@ body.offer-page {
     .footer-links {
         flex-direction: column;
         /* Stack links vertically */
-        gap: 10px;
+        gap: 16px;
         padding: 5px 0;
     }
 
@@ -4735,7 +4735,7 @@ body.modal-open .floating-cta {
     display: flex;
     justify-content: center;
     /* center under MM:SS */
-    gap: 10px;
+    gap: 16px;
     /* tighter spacing */
     width: auto;
     /* stop stretching across the pill */
@@ -4891,7 +4891,7 @@ body.modal-open .floating-cta {
     display: grid;
     grid-template-columns: auto auto auto;
     align-items: end;
-    gap: 10px;
+    gap: 16px;
 }
 
 .promo-strip__timer-block {
@@ -4961,7 +4961,7 @@ body.modal-open .floating-cta {
     }
 
     .promo-strip__meta {
-        gap: 10px;
+        gap: 16px;
     }
 
     .promo-strip__meta-item {
@@ -5070,7 +5070,7 @@ body.modal-open .floating-cta {
 @media (max-width: 420px) {
     .promo-code-line {
         flex-direction: column;
-        gap: 10px;
+        gap: 16px;
     }
 
     /* .promo-code-card {
