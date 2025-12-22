@@ -1094,17 +1094,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const whatsIncludedData = [
     {
       title: "Tailored From Day One (CT)",
-      image: "../assets/your-ui-mockup-ironverse.png",
+      image: "../assets/your-ui-mockup-ironverse.webp",
       desc: ""
     },
     {
       title: "Track Workouts, Earn XP (CT)",
-      image: "../assets/clear-and-easy.png",
+      image: "../assets/clear-and-easy.webp",
       desc: ""
     },
     {
       title: "Adaptive Progression Engine (PT)",
-      image: "../assets/visible-results-decoded.png",
+      image: "../assets/visible-results-decoded.webp",
       desc: ""
     },
     // {
@@ -1114,7 +1114,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // },
     {
       title: "Macro-Matched Meals (PT)",
-      image: "../assets/progress-tracking.png",
+      image: "../assets/progress-tracking.webp",
       desc: ""
     }
     //     {

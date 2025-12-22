@@ -1011,7 +1011,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Muscle gain review.
     selectedReviewName = "David";
     selectedReviewText =
-      "I used to wing it with random exercises and YouTube routines. Having workouts that actually adapt to my progress changed everything. I've built 6 kg of lean muscle all from home.";
+      "I used to wing it with random exercises and YouTube routines. Having a personalized plan built for me but using KayP's structure to follow has genuinely changed my life. I've built 6 kg of lean muscle all from home.";
     beforeImgSrc = "../assets/harry_chest_before.webp";
     afterImgSrc = "../assets/harry_chest_after.webp";
 
@@ -1020,7 +1020,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Male weight-loss review.
       selectedReviewName = "Lee";
       selectedReviewText =
-        "I wasn’t sure I could stick with it. But everything’s laid out — no guessing. I’ve lost 10kg and finally feel like myself again.";
+        "I wasn’t sure I could stick with it. But everything’s laid out, and I found it helpful following the same structure KayP uses. I’ve lost 10kg and finally feel like myself again.";
       beforeImgSrc = "../assets/lynn_before.webp";
       afterImgSrc = "../assets/lynn_after.webp";
 
@@ -1094,22 +1094,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const whatsIncludedData = [
     {
       title: "Tailored From Day One (CT)",
-      image: "../assets/your-ui-mockup-kayp.png",
+      image: "../assets/your-ui-mockup-kayp.webp",
       desc: ""
     },
     {
       title: "Track Workouts, Earn XP (CT)",
-      image: "../assets/clear-and-easy.png",
+      image: "../assets/clear-and-easy.webp",
       desc: ""
     },
     {
       title: "Adaptive Progression Engine (PT)",
-      image: "../assets/kayp-structure.png",
+      image: "../assets/kayp-structure.webp",
       desc: ""
     },
     {
       title: "Adaptive Progression Engine (PT)",
-      image: "../assets/visible-results-decoded.png",
+      image: "../assets/visible-results-decoded.webp",
       desc: ""
     },
     // {
@@ -1119,7 +1119,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // },
     {
       title: "Macro-Matched Meals (PT)",
-      image: "../assets/progress-tracking.png",
+      image: "../assets/progress-tracking.webp",
       desc: ""
     }
     //     {
