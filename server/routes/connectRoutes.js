@@ -8,19 +8,33 @@ const { deriveCurrencyFromCountry } = require('../utils/currency');
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-04-10' });
 const router = express.Router();
 
-async function createConnectAccount(country, email) {
-  return stripe.accounts.create({
+async function createConnectAccount(country, email, name) {
+  const upperCountry = (country || '').trim().toUpperCase();
+
+  // Countries where Stripe commonly pushes business verification if ambiguous
+  const forceIndividualCountries = new Set(['AU']);
+
+  const payload = {
     type: 'express',
-    country,
+    country: upperCountry,
     email,
     business_profile: {
+      // Critical: prevents platform name bleed and keeps the connected account labeled correctly
+      name: (name || '').trim() || email,
       product_description: 'Fitness subscriptions and coaching revenue share',
     },
     capabilities: {
       card_payments: { requested: true },
       transfers: { requested: true },
     },
-  });
+  };
+
+  // Critical: prevents ABN requirement for individual creators by removing ambiguity
+  if (forceIndividualCountries.has(upperCountry)) {
+    payload.business_type = 'individual';
+  }
+
+  return stripe.accounts.create(payload);
 }
 
 function requireConnectAdmin(req, res, next) {
@@ -85,14 +99,21 @@ router.post('/creators', express.json(), requireConnectAdmin, async (req, res) =
     let existingAccount = null;
 
     if (!stripeAccountId) {
-      const account = await createConnectAccount(requestedCountry, email);
+      const account = await createConnectAccount(requestedCountry, email, name);
       stripeAccountId = account.id;
       existingAccount = account;
     } else {
       existingAccount = await stripe.accounts.retrieve(stripeAccountId);
 
-      if (existingAccount.country !== requestedCountry) {
-        const newAccount = await createConnectAccount(requestedCountry, email);
+      const disabledReason = existingAccount?.requirements?.disabled_reason;
+      const isRestricted = Boolean(disabledReason);
+
+      const isJustOnboarding =
+        disabledReason === 'requirements.past_due' ||
+        disabledReason === 'requirements.pending_verification';
+
+      if (existingAccount.country !== requestedCountry || (isRestricted && !isJustOnboarding)) {
+        const newAccount = await createConnectAccount(requestedCountry, email, name);
         stripeAccountId = newAccount.id;
         existingAccount = newAccount;
       }
@@ -159,6 +180,27 @@ router.post('/creators/:slug/onboarding-link', express.json(), async (req, res) 
 
     if (!creator.stripeAccountId) {
       return res.status(400).json({ error: 'Creator is missing a Stripe account' });
+    }
+
+    const acct = await stripe.accounts.retrieve(creator.stripeAccountId);
+    const disabledReason = acct?.requirements?.disabled_reason;
+
+    const isJustOnboarding =
+      disabledReason === 'requirements.past_due' ||
+      disabledReason === 'requirements.pending_verification';
+
+    if (disabledReason && !isJustOnboarding) {
+      const newAccount = await createConnectAccount(creator.country, creator.email, creator.name);
+
+      creator.stripeAccountId = newAccount.id;
+      await creator.save();
+
+      console.log('[Connect] Rotated restricted account', {
+        slug: creator.slug,
+        old: acct.id,
+        new: newAccount.id,
+        disabledReason,
+      });
     }
 
     const refreshBase =
