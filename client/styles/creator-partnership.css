@@ -778,6 +778,58 @@ main {
   letter-spacing: 0.02em;
 }
 
+.stripe-proof {
+  margin-top: 32px;
+  background: linear-gradient(135deg, rgba(82, 96, 255, 0.08), rgba(125, 215, 255, 0.08)),
+    var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  box-shadow: var(--shadow);
+}
+
+.stripe-proof .section-header {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.stripe-proof-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  align-items: center;
+}
+
+.stripe-proof-media {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid rgba(12, 15, 23, 0.08);
+  box-shadow: 0 18px 40px rgba(7, 10, 20, 0.08);
+}
+
+.stripe-proof-media img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+}
+
+.stripe-proof-copy h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.stripe-proof-copy p {
+  margin-top: 0;
+  color: var(--muted);
+}
+
+.stripe-proof-copy ul {
+  padding-left: 18px;
+  margin: 16px 0 0;
+  color: #dbe3f5;
+}
+
 .separator {
   color: rgba(255, 255, 255, 0.2);
 }
