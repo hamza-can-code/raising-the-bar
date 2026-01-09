@@ -134,6 +134,9 @@ function buildPriceMap(prefix, currencies = SUPPORTED_CURRENCIES, { suffix = '' 
   const gbpKey = `${prefix}_GBP${suffix}`;
   if (!map.GBP && process.env[gbpKey]) map.GBP = process.env[gbpKey];
 
+  const baseKey = `${prefix}${suffix}`;
+  if (!map.GBP && process.env[baseKey]) map.GBP = process.env[baseKey];
+
   return map;
 }
 
@@ -143,9 +146,17 @@ const PLAN_PRICE_IDS = {
   '12-week': buildPriceMap('PRICE_TWELVE_WEEK'),
 };
 
+const PLAN_BUNDLE_PRICE_IDS = {
+  'creator-platform': {
+    activation: buildPriceMap('PRICE_CREATOR_PLATFORM_ACTIVATION'),
+    recurring: buildPriceMap('PRICE_CREATOR_PLATFORM_SUBSCRIPTION'),
+  },
+};
+
 const PLAN_COUPONS = {
   '4-week': { GBP: process.env.COUPON_FOUR_WEEK_GBP },
   '12-week': { GBP: process.env.COUPON_TWELVE_WEEK_GBP },
+  'creator-platform': { GBP: process.env.COUPON_CREATOR_PLATFORM_GBP },
 };
 
 const CREATOR_PLAN_PRICE_IDS = {
@@ -185,6 +196,7 @@ const PLAN_LABELS = {
   trial: '1-Week Plan',
   '4-week': '4-Week Plan',
   '12-week': '12-Week Plan',
+  'creator-platform': 'Creator Platform Access',
 };
 
 const CREATOR_SUCCESS_PATHS = {
@@ -251,15 +263,30 @@ function normalizeCreatorSlug(slug) {
   return trimmed || null;
 }
 
-function getPlanPriceId(plan = 'trial', currencyCode, creatorSlug) {
-  const normalizedPlan = PLAN_PRICE_IDS[plan] ? plan : 'trial';
+function getPlanPricing(plan = 'trial', currencyCode, creatorSlug) {
+  const normalizedPlan = (PLAN_PRICE_IDS[plan] || PLAN_BUNDLE_PRICE_IDS[plan]) ? plan : 'trial';
   const code = (currencyCode || 'GBP').toUpperCase();
   const creator = normalizeCreatorSlug(creatorSlug);
+  const bundle = PLAN_BUNDLE_PRICE_IDS[normalizedPlan];
+
+  if (bundle) {
+    const activationPriceId = bundle.activation?.[code] || bundle.activation?.GBP || null;
+    const recurringPriceId = bundle.recurring?.[code] || bundle.recurring?.GBP || null;
+    if (!activationPriceId || !recurringPriceId) return null;
+    return {
+      currency: code,
+      activationPriceId,
+      recurringPriceId,
+      plan: normalizedPlan,
+      bundle: true,
+    };
+  }
+
   const priceMap = (creator && CREATOR_PLAN_PRICE_IDS[creator]?.[normalizedPlan])
     || PLAN_PRICE_IDS[normalizedPlan];
   const priceId = priceMap?.[code] || priceMap?.GBP || null;
   if (!priceId) return null;
-  return { currency: code, priceId, plan: normalizedPlan };
+  return { currency: code, priceId, plan: normalizedPlan, bundle: false };
 }
 
 function pickBonusCurrency(input) {
@@ -329,13 +356,13 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       return res.status(500).json({ error: 'Missing FRONTEND_URL and request origin' });
     }
 
-    const planInfo = getPlanPriceId(plan, currency, normalizedCreator);
+    const planInfo = getPlanPricing(plan, currency, normalizedCreator);
     if (!planInfo) {
       return res.status(500).json({ error: `Missing price configuration for plan ${plan} (${currency || 'GBP'})` });
     }
-    const { currency: ccy, priceId, plan: normalizedPlan } = planInfo;
-    const price = await stripe.prices.retrieve(priceId);
-    const sessionMode = price.type === 'recurring' ? 'subscription' : 'payment';
+    const { currency: ccy, priceId, activationPriceId, recurringPriceId, plan: normalizedPlan, bundle } = planInfo;
+    const price = priceId ? await stripe.prices.retrieve(priceId) : null;
+    const sessionMode = bundle ? 'subscription' : (price?.type === 'recurring' ? 'subscription' : 'payment');
     const couponId = discounted ? getCouponIdForPlan(normalizedPlan, ccy, creatorSlug) : null;
 
     let creatorConfig = null;
@@ -348,15 +375,22 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
 
     const successPath = normalizedCreator
       ? (CREATOR_SUCCESS_PATHS[normalizedCreator] || '/pages/plan-building.html')
-      : '/pages/plan-building.html';
+      : (normalizedPlan === 'creator-platform' ? '/pages/creator-platform-thank-you.html' : '/pages/plan-building.html');
 
     const cancelPath = normalizedCreator
       ? (CREATOR_OFFER_PATHS[normalizedCreator] || '/pages/offer.html')
-      : '/pages/offer.html';
+      : (normalizedPlan === 'creator-platform' ? '/pages/creator-platform-access.html' : '/pages/offer.html');
+
+    const lineItems = bundle
+      ? [
+        { price: recurringPriceId, quantity: 1 },
+        { price: activationPriceId, quantity: 1 },
+      ]
+      : [{ price: priceId, quantity: 1 }];
 
     const sessionCfg = {
       mode: sessionMode,
-      line_items: [{ price: priceId, quantity: 1 }],
+      line_items: lineItems,
       customer_email: email,
       client_reference_id: client_reference_id || undefined,
       success_url: `${successBase}${successPath}?session_id={CHECKOUT_SESSION_ID}`,
@@ -376,6 +410,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
     if (sessionMode === 'subscription') {
       sessionCfg.subscription_data = {
         trial_settings: { end_behavior: { missing_payment_method: 'cancel' } },
+        ...(bundle ? { trial_period_days: 30 } : {}),
       };
     }
 
@@ -464,9 +499,12 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
     log('Customer', { id: customer.id, email: customer.email });
 
     // 2) choose price & coupon by currency
-    const planInfo = getPlanPriceId(plan, currency, normalizedCreator);
+    const planInfo = getPlanPricing(plan, currency, normalizedCreator);
     if (!planInfo) {
       return res.status(500).json({ error: `Missing price configuration for plan ${plan} (${currency || 'GBP'})` });
+    }
+    if (planInfo.bundle) {
+      return res.status(400).json({ error: 'Selected plan is only available via Stripe Checkout.' });
     }
     const { currency: ccy, priceId, plan: normalizedPlan } = planInfo;
     const couponId = discounted ? getCouponIdForPlan(normalizedPlan, ccy, creatorSlug) : null;
@@ -519,7 +557,7 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
     };
 
     if (normalizedPlan === 'trial') {
-      const upgradePlanInfo = getPlanPriceId('4-week', currency, normalizedCreator);
+      const upgradePlanInfo = getPlanPricing('4-week', currency, normalizedCreator);
       if (!upgradePlanInfo) {
         return res.status(500).json({ error: `Missing price configuration for trial renewal (4-week) (${currency || 'GBP'})` });
       }
