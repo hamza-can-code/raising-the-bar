@@ -362,7 +362,11 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
     }
     const { currency: ccy, priceId, activationPriceId, recurringPriceId, plan: normalizedPlan, bundle } = planInfo;
     const price = priceId ? await stripe.prices.retrieve(priceId) : null;
-    const sessionMode = bundle ? 'subscription' : (price?.type === 'recurring' ? 'subscription' : 'payment');
+    const isTrialPlan = normalizedPlan === 'trial';
+    const recurringConfig = price?.recurring || getRecurringConfigForPlan(normalizedPlan);
+    const sessionMode = bundle
+      ? 'subscription'
+      : (isTrialPlan ? 'subscription' : (price?.type === 'recurring' ? 'subscription' : 'payment'));
     const couponId = discounted ? getCouponIdForPlan(normalizedPlan, ccy, creatorSlug) : null;
 
     let creatorConfig = null;
@@ -381,12 +385,23 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       ? (CREATOR_OFFER_PATHS[normalizedCreator] || '/pages/offer.html')
       : (normalizedPlan === 'creator-platform' ? '/pages/creator-platform-access.html' : '/pages/offer.html');
 
+    const trialProductId = price && (typeof price.product === 'string' ? price.product : price.product?.id);
     const lineItems = bundle
       ? [
         { price: recurringPriceId, quantity: 1 },
         { price: activationPriceId, quantity: 1 },
       ]
-      : [{ price: priceId, quantity: 1 }];
+      : (isTrialPlan && price?.type === 'one_time'
+        ? [{
+          price_data: {
+            currency: price.currency,
+            unit_amount: price.unit_amount,
+            product: trialProductId,
+            recurring: recurringConfig,
+          },
+          quantity: 1,
+        }]
+        : [{ price: priceId, quantity: 1 }]);
 
     const sessionCfg = {
       mode: sessionMode,
@@ -411,6 +426,22 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       sessionCfg.subscription_data = {
         trial_settings: { end_behavior: { missing_payment_method: 'cancel' } },
         ...(bundle ? { trial_period_days: 30 } : {}),
+      };
+    }
+
+    if (sessionMode === 'subscription' && isTrialPlan) {
+      const upgradePlanInfo = getPlanPricing('4-week', currency, normalizedCreator);
+      if (!upgradePlanInfo) {
+        return res.status(500).json({ error: `Missing price configuration for trial renewal (4-week) (${currency || 'GBP'})` });
+      }
+      sessionCfg.subscription_data = {
+        ...(sessionCfg.subscription_data || {}),
+        metadata: {
+          ...(sessionCfg.subscription_data?.metadata || {}),
+          trial_upgrade_pending: 'true',
+          trial_upgrade_price_id: upgradePlanInfo.priceId,
+          trial_upgrade_anchor_days: '7',
+        },
       };
     }
 
