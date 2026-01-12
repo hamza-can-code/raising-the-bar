@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+  (async function() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      location.href = 'log-in-carl.html';
+      return;
+    }
+    try {
+      const res = await fetch('/api/auth/me', {
+        method: 'GET',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (!res.ok) throw new Error();
+    } catch (err) {
+      localStorage.removeItem('token');
+      location.href = 'log-in-carl.html';
+      return;
+    }
+    // If we get here, user is authenticated → do nothing
+  })();
+</script>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+  <title>My Workouts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
+    rel="stylesheet">
+    <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+  <!-- Link to the external CSS file -->
+  <link rel="stylesheet" href="../styles/workout-tracker-carl.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-W9CSNHSLQQ');
+</script>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "rmf0p7sik4");
+</script>
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+
+  ttq.load('D0M3KORC77UCAFR1EOLG');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2589073464764526');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2589073464764526&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+
+<body>
+  <div id="loaderOverlay" class="loader-overlay">
+    <img src="../assets/carl-logo.png" alt="GAINS+ logo"
+         class="loader-logo" />
+  </div>
+  <!-- Header -->
+  <div class="header" id="header">
+    <div class="logo">
+      <a href="dashboard-carl.html">
+        <img id="logo" src="../assets/carl-logo.png" alt="GAINS+ Logo">
+      </a>
+      <!-- Desktop nav (inline) -->
+      <nav class="main-nav" id="main-nav">
+        <!-- close btn -->
+        <button class="nav-close" id="nav-close" aria-label="Close Menu">✕</button>
+
+        <ul>
+          <li><a href="dashboard-carl.html">My Dashboard</a></li>
+          <!-- <li><a href="workout-tracker.html" id="nav-workouts">My Workouts</a></li> -->
+          <li><a href="nutrition-tracker-carl.html" id="nav-nutrition">My Nutrition</a></li>
+          <li><a href="#" id="nav-help">Help</a></li>
+        </ul>
+      </nav>
+
+      <!-- Mobile hamburger -->
+      <button class="hamburger" id="hamburger-btn" aria-label="Toggle Menu">☰</button>
+    </div>
+  </div>
+  <div id="trackerBadge"></div>
+
+  <div id="wtOnboardingOverlay" class="wt-onboarding-overlay">
+    <div class="wt-onboarding-slider">
+      <!-- Screen 1 – personalised welcome ---------------------------->
+      <section class="wt-onboarding-card" data-step="1">
+        <h2 class="wt-line wt-title"></h2>
+        <p class="wt-line wt-goal"></p>
+        <p class="wt-line wt-driver"></p>
+
+        <button class="wt-next-btn">Next</button>
+      </section>
+
+      <!-- Screen 2 – tracker tutorial ------------------------------->
+      <section class="wt-onboarding-card" data-step="2">
+        <h2 class="wt-line wt-title">Here’s how to use your tracker.</h2>
+        <ul class="wt-tutorial">
+          <li class="wt-line">
+            <span class="wt-emoji-tutorial">✅</span>
+            <strong>Tick sets as you go</strong> — it’s the core of your tracking.
+          </li>
+          <li class="wt-line">
+            <span class="wt-emoji-tutorial">🔢</span>
+            <strong>Suggested reps are a range</strong> — log how many you actually did.
+          </li>
+          <li class="wt-line">
+            <span class="wt-emoji-tutorial">🏋️</span>
+            <strong>Weights are auto‑calculated</strong> — override anytime.
+          </li>
+          <li class="wt-line">
+            <span class="wt-emoji-tutorial">⏱️</span>
+            <strong>Press Start to begin</strong> — then Finish when you're done.
+          </li>
+        </ul>
+        <p class="wt-line wt-sub">
+          You’ll get the hang of it in no time — just start logging and keep showing up.
+        </p>
+        <button class="wt-next-btn">Next</button>
+      </section>
+
+      <!-- Screen 3 – motivation ------------------------------------->
+      <section class="wt-onboarding-card" data-step="3">
+        <h2 class="wt-line wt-title"></h2>
+        <p class="wt-line wt-subtitle"></p>
+
+        <button class="wt-close-btn">Open My Tracker</button>
+      </section>
+    </div>
+
+    <!-- dot indicators -->
+    <div id="wtOnboardingDots" class="wt-onboarding-dots"></div>
+  </div>
+
+  <div id="stickyHeader" class="fixed-header">
+    <span id="stickyCurrentLevel">Lvl 0</span>
+    <div class="xp-bar">
+      <div id="stickyXpBarFill" class="xp-bar-fill" style="width: 0%;"></div>
+    </div>
+    <!-- New XP gain element for the sticky header -->
+    <span id="sticky-xp-gain-animation">+0 XP</span>
+  </div>
+
+  <!-- Main Workout Tracker Section -->
+  <div id="workout-tracker" class="">
+    <!-- Heading: "Welcome, {userName}" or "Welcome back, {userName}" -->
+    <h1 id="welcome-heading"></h1>
+
+    <!-- Streak message -->
+    <div id="streak-message"></div>
+
+    <!-- XP Bar -->
+    <div class="xp-bar-container">
+      <span id="current-level">Lvl 0</span>
+      <div class="xp-bar">
+        <div class="xp-bar-fill" id="xpBarFill" style="width: 0%;"></div>
+      </div>
+      <span id="xp-gain-animation">+0 XP</span>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tab-container">
+      <div class="tab active" id="myWorkoutsTab">My Workouts</div>
+      <div class="tab" id="myProgressTab">My Progress</div>
+    </div>
+
+    <!-- The new "frame" container -->
+    <div class="week-selector-frame">
+      <!-- The existing .week-selector-wrapper as a child -->
+      <div class="week-selector-wrapper">
+        <div class="week-selector" id="weekSelector">
+          <!-- your .week-box items go here -->
+        </div>
+      </div>
+    </div>
+
+
+    <div class="tab-content">
+      <!-- My Workouts Section -->
+      <div id="myWorkoutsSection" class="tab-section active">
+        <!-- Week Selector -->
+
+        <!-- The actual day's workout display -->
+        <div id="workoutDisplay">
+          <!-- Dynamically populated with exercises, sets, etc. -->
+        </div>
+
+        <!-- Day Selector (Days in the selected week) -->
+        <div class="day-selector-frame">
+          <div class="day-selector-wrapper">
+            <div class="day-selector" id="daySelector">
+              <!-- Dynamically populated with .day-box items -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Previous / Next Workout Buttons -->
+        <div class="navigation-buttons">
+          <button id="prevWorkoutBtn">Previous Workout</button>
+          <button id="nextWorkoutBtn">Next Workout</button>
+        </div>
+      </div>
+
+      <!-- ======================================= -->
+      <!--  My Progress Section   -->
+      <!-- ======================================= -->
+      <div id="myProgressSection" class="tab-section">
+        <!-- The new "Overview (Dashboard View)" for AWT users -->
+        <div id="myProgressOverview" style="display: none;">
+          <!-- 1) Centered h3 -->
+          <h3 class="progress-score-heading">Progress Score</h3>
+
+          <!-- 2) Info icon + dynamic Progress Score side by side, centered -->
+          <div class="progress-score-info-container">
+            <h2 class="progress-score-value" id="progressScoreValue">0</h2>
+            <!-- Small "i" icon with circle -->
+            <span class="info-icon" id="progressInfoIcon">i</span>
+            <!-- The smooth fade-in pop-up -->
+            <div class="info-popup progress-info-popup" id="progressInfoPopup">
+              Your Progress Score reflects your overall fitness progress.<br><br>
+              It's based on your workouts, meals logged, consistency, and how well you stick to your plan over time.
+            </div>
+          </div>
+
+          <!-- Below the PS, display On-Track / Off-Track + daily message -->
+          <div id="progressTrackStatus" class="progress-status-message"></div>
+          <div id="progressDailyMessage" class="progress-daily-message"></div>
+          <h3 id="todaysTipHeading" style="text-align:center; margin-top:30px; margin-bottom:15px; display:none;">
+            Today’s Tip
+          </h3>
+          <div id="todaysTipCard" class="coach-insights-note"
+            style="background-color: #cce5ff; display:none; max-width: 500px; margin: 0 auto;">
+            <!-- JS will place the tip text here -->
+          </div>
+          <!-- 
+               ======================================
+               WEEKLY RECAP SECTION
+               ======================================
+          -->
+          <!-- Subheading: "Your Weekly Recap" -->
+          <h3 id="weeklyRecapSubheading" style="text-align:center; margin-top: 30px; margin-bottom: 15px;">
+            Your Weekly Recap
+          </h3>
+
+          <!-- Container that will hold the swipeable cards for the recap -->
+          <div id="weeklyRecapWrapper" class="recap-swiper-container">
+            <!-- If user is in Week 1, we’ll show one non-swipeable card with welcome text.
+                 Otherwise, from Week 2 onwards, we display 4 mandatory cards plus possibly
+                 1 highlight card at the end if triggered. 
+                 The JavaScript will dynamically populate them, including the dot indicators.
+            -->
+            <div id="weeklyRecapCards" class="recap-cards-inner">
+              <!-- Populated by JS -->
+            </div>
+
+            <!-- The dot indicators for Recap -->
+            <div id="weeklyRecapDots" class="recap-dots-container"></div>
+          </div>
+
+          <!--
+               ==========================================
+               AREAS FOR IMPROVEMENT
+               ==========================================
+          -->
+          <!-- Subheading: "Areas For Improvement" (shown only if triggered) -->
+          <h3 id="areasImprovementSubheading"
+            style="text-align:center; margin-top: 40px; margin-bottom: 15px; display:none;">
+            Areas For Improvement
+          </h3>
+
+          <!-- Similar swipeable container, but can have up to 2 cards -->
+          <div id="areasImprovementWrapper" class="recap-swiper-container" style="display:none;">
+            <div id="areasImprovementCards" class="recap-cards-inner">
+              <!-- Populated by JS -->
+            </div>
+            <!-- The dot indicators for improvements -->
+            <div id="areasImprovementDots" class="recap-dots-container"></div>
+          </div>
+
+          <!-- A fallback text if there’s zero improvements to show -->
+          <p id="areasNoImprovementMessage" style="text-align:center; display:none;">
+            You’re doing great, keep up the fantastic work!
+          </p>
+
+          <!-- 
+     ===========================================
+     STRENGTH & WORKOUT TRENDS
+     ===========================================
+-->
+          <h3 id="strengthWorkoutTrendsHeading"
+            style="text-align:center; margin-top: 40px; margin-bottom: 15px; display:none;">
+            Strength &amp; Workout Trends
+          </h3>
+
+          <div id="strengthWorkoutTrendsSection" style="display:none;">
+            <!-- Subheading & advanced dropdown for the exercise selection -->
+            <div class="exercise-analysis-header">
+              <span id="selectedExerciseName" class="exercise-analysis-subheading">Exercise Analysis</span>
+              <!-- The chevron triggers the dropdown -->
+              <span id="exerciseDropdownChevron" class="analysis-dropdown-chevron">&#9662;</span>
+            </div>
+
+            <!-- Advanced Dropdown Container -->
+            <div id="exerciseDropdownContainer" class="analysis-dropdown-container hidden">
+              <!-- Search input at the top -->
+              <div class="analysis-search-wrapper">
+                <input id="analysisSearchInput" class="analysis-search-input" type="text"
+                  placeholder="Search by name, muscle, or phase.">
+              </div>
+              <!-- The list below, grouped by Phase, each group sorted alphabetically -->
+              <div id="analysisExerciseList" class="analysis-exercise-list">
+                <!-- Populated by JS. 
+           We will have headings like "--- Phase 1 ---" then clickable items. 
+           If no matches, display "No exercise found." 
+      -->
+              </div>
+            </div>
+
+            <!-- Swipeable Cards for the 3 charts -->
+            <div id="strengthTrendsWrapper" class="recap-swiper-container" style="margin-top: 30px;">
+              <div id="strengthTrendsCards" class="recap-cards-inner">
+                <!-- 1) Line Chart (Volume) card -->
+                <div class="recap-card trend-card">
+                  <div class="recap-card-title">Total Volume</div>
+                  <canvas id="chartTotalVolume" width="400" height="300"></canvas>
+                </div>
+
+                <!-- 2) Bar Chart (Reps & Sets) card -->
+                <div class="recap-card trend-card">
+                  <div class="recap-card-title">Reps &amp; Sets Progression</div>
+                  <canvas id="chartRepsSets" width="400" height="300"></canvas>
+                </div>
+
+                <!-- 3) Consistency Heatmap (Calendar) card -->
+                <div class="recap-card trend-card">
+                  <div class="recap-card-title">
+                    Consistency Heatmap
+                    <!-- Smaller info icon -->
+                    <span class="info-icon info-icon-smaller" id="heatmapInfoIcon">i</span>
+                    <!-- The pop-up for heatmap info -->
+                    <div class="info-popup" id="heatmapInfoPopup">
+                      <div class="heatmap-info-row">
+                        <span class="heatmap-color-square green"></span> Completed
+                      </div>
+                      <div class="heatmap-info-row">
+                        <span class="heatmap-color-square red"></span> Missed
+                      </div>
+                      <div class="heatmap-info-row">
+                        <span class="heatmap-color-square yellow"></span> Partially Completed
+                      </div>
+                      <div class="heatmap-info-row">
+                        <span class="heatmap-color-square blue"></span> Completed Late
+                      </div>
+                      <div class="heatmap-info-row">
+                        <span class="heatmap-color-square gray"></span> Upcoming
+                      </div>
+                    </div>
+                  </div>
+                  <div id="heatmapContainer" class="heatmap-container">
+                  </div>
+                </div>
+              </div>
+              <!-- The dot indicators for the 3 trend cards -->
+              <div id="strengthTrendsDots" class="recap-dots-container"></div>
+            </div>
+
+            <!-- Coach Insights -->
+            <h3 id="coachInsightsHeading"
+              style="text-align:center; margin-top: 30px; margin-bottom: 15px; display:none;">
+              Coach Insights
+            </h3>
+            <div id="coachInsightsContainer" class="coach-insights-container" style="display:none;">
+              <!-- We show a single sticky-note style message or a fallback message about deload/no data -->
+              <div id="coachInsightsMessage" class="coach-insights-note"></div>
+            </div>
+            <!-- ======================================= -->
+            <!-- Section 89 - Body Composition & Goal Progress -->
+            <!-- ======================================= -->
+            <div id="bodyCompositionSection" class="body-composition-section">
+              <h3 class="progress-score-heading body-composition-title">
+                Body Composition &amp; Goal Progress
+              </h3>
+
+              <!-- 1) Bodyweight Line Graph -->
+              <div class="bodyweight-chart-container">
+                <canvas id="bodyWeightChart" width="400" height="250"></canvas>
+              </div>
+
+              <!-- 2) Goal Progress Widget -->
+              <div id="goalProgressWidget" class="goal-progress-widget">
+                <h4 class="goal-progress-heading">Goal Progress</h4>
+
+                <!-- Row 1: Goal -->
+                <div class="goal-progress-row">
+                  <label for="goalWeightInput" class="goal-progress-label">Goal:</label>
+                  <input type="number" id="goalWeightInput" class="goal-progress-input" />
+                </div>
+
+                <div class="goal-progress-row">
+                  <label for="goalByDateInput" class="goal-progress-label">Goal by:</label>
+                  <input type="date" id="goalByDateInput" class="goal-progress-input" />
+                </div>
+
+                <div class="goal-progress-row">
+                  <label for="currentWeightInput" class="goal-progress-label">Current:</label>
+                  <input type="number" id="currentWeightInput" class="goal-progress-input" />
+
+                </div>
+
+                <!-- Log Weight Button -->
+                <button id="logWeightBtn" class="log-weight-button">
+                  Log Weight
+                </button>
+
+                <!-- Dynamic Title + Progress Bar -->
+                <!-- Two separate elements, but we want them on one line -->
+                <div id="goalProgressLine" class="goal-progress-line">
+                  <div id="goalProgressTitle" class="goal-progress-dynamic-title">Weight Change:</div>
+                  <div id="goalProgressValue" class="goal-progress-dynamic-value">-69.0 kg so far</div>
+                </div>
+
+
+                <div class="goal-progress-bar-container">
+                  <div class="goal-progress-bar">
+                    <div id="weightProgressFill" class="goal-progress-bar-fill"></div>
+                  </div>
+                  <div id="weightProgressPercent" class="goal-progress-percent">0%</div>
+                </div>
+
+                <!-- Estimated Time Left -->
+                <div class="estimated-time-row" id="estimatedTimeContainer">
+                  <span class="estimated-time-label">Estimated Time Left:</span>
+                  <span id="estimatedTimeLeft" class="estimated-time-value">-</span>
+                  <span>You’re expected to hit your goal by&nbsp;</span>
+                  <span id="estimatedGoalDate" class="estimated-time-value">-</span>
+                </div>
+              </div>
+
+              <!-- 3) Recent Milestones -->
+              <div id="recentMilestones" class="recent-milestones">
+                <!-- Populated by JS if any milestone is triggered -->
+              </div>
+              <!-- 4) Body Composition Coach Insights -->
+              <h3 id="bodyCompCoachInsightsHeading"
+                style="text-align:center; margin-top: 30px; margin-bottom: 15px; display:none;">
+                Coach Insights
+              </h3>
+              <div id="bodyCompCoachInsightsContainer" class="coach-insights-container" style="display:none;">
+                <!-- A sticky-note style container for the dynamic insight text -->
+                <div id="bodyCompCoachInsightsMessage" class="coach-insights-note"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- If user hasn't purchased AWT, or there's no data, fallback text -->
+        <div id="myProgressContainer"></div>
+        <p id="noProgressDataMessage" style="text-align: center;">
+          No progress data yet.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="faq-modal" class="faq-modal">
+    <div class="faq-modal-content">
+      <button class="close-btn" data-target="faq-modal">✕</button>
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <details>
+          <summary>How do I get started?</summary>
+          <p class="faq-answer">Tap <strong>“Claim Your Program”</strong>, fill out the short form, and your
+            personalised tracker will be ready within minutes.</p>
+        </details>
+
+        <details>
+          <summary>What if I’ve never followed a program before?</summary>
+          <p class="faq-answer">No problem. This is built for real people — simple steps, flexible tools, and progress
+            at your pace.</p>
+        </details>
+
+        <details>
+          <summary>Can I change my goals later on?</summary>
+          <p class="faq-answer">Absolutely. Once you're inside your tracker, you can update your goals anytime — your
+            plan will adapt automatically.</p>
+        </details>
+
+        <details>
+          <summary>What happens after I sign up?</summary>
+          <p class="faq-answer">You'll unlock your own dashboard — filled with workouts, meals, and progress tools
+            tailored to your goals, lifestyle, and experience level. It all connects in one place, ready to use right
+            away.</p>
+        </details>
+
+        <details>
+          <summary>Still have questions?</summary>
+          <p class="faq-answer"><a href="contact-us.html">Click here</a> to contact us or explore more answers. We're
+            here to support you.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div id="ctUpsellOverlay">
+    <div class="ct-upsell-card" id="ctUpsellCard"><!-- filled by JS --></div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer fade-in" id="footer">
+    <div class="footer-content">
+      <p class="powered">POWERED BY</p>
+      <p>&copy; 2025 Raising The Bar App Ltd. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="dashboard-carl.html">Start Training</a>
+        <span class="separator">|</span>
+        <a href="legal-overview.html">Our Policies</a>
+        <span class="separator">|</span>
+        <a href="contact-us.html">Contact Us</a>
+      </div>
+      <!-- <div class="social-icons">
+        <a href="https://www.instagram.com/raising_the_bar_app/?hl=en" target="_blank" aria-label="Instagram">
+          <img src="../assets/instagram-icon.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@Raising_The_Bar_App" target="_blank" aria-label="YouTube">
+          <img src="../assets/youtube-icon.png" alt="YouTube">
+        </a>
+        <a href="https://www.tiktok.com/@raising_the_bar_app" target="_blank" aria-label="TikTok">
+          <img src="../assets/tiktok-icon.png" alt="TikTok">
+        </a>
+      </div> -->
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Link to the external JavaScript file -->
+  <script type="module" src="../scripts/forms.js"></script>
+  <script type="module" defer src="../scripts/modules/my-progress.js"></script>
+
+  <!-- then the tracker file that calls those globals -->
+  <script defer src="../scripts/workout-tracker.js"></script>
+</body>
+
+</html>
