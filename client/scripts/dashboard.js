@@ -629,6 +629,15 @@ function populateNutritionCard() {
   }
 }
 
+function populateMindCard() {
+  const streakEl = $("#mmStreak");
+  if (!streakEl) return;
+
+  const stored = Number(localStorage.getItem("mindStreakCount") || 0);
+  const streakCount = Number.isFinite(stored) ? stored : 0;
+  streakEl.textContent = `🔥 ${streakCount}-day reflection streak`;
+}
+
 function populateMotivation() {
   const todayKey = new Date().toISOString().slice(0, 10);
   let msg = localStorage.getItem("dashboardMotivationMsg");
@@ -803,6 +812,7 @@ function initDashboard() {
   renderXP();
   populateWorkoutCard();
   populateNutritionCard();
+  populateMindCard();
   populateMotivation();
   reveal();
     setUpReferralCountdown();
