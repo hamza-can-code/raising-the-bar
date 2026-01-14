@@ -121,9 +121,9 @@ function fadeOutLoader() {
 
 async function decideProStatus() {
   /*  💥  FORCE these three flags on every load  💥 */
-  localStorage.setItem('hasProTracker',  'true');   // ← tells UI “Pro”
+  localStorage.setItem('hasProTracker', 'true');   // ← tells UI “Pro”
   localStorage.setItem('purchasedWeeks', '12');     // ← lets workouts show
-  localStorage.setItem('planName',       'Pro Tracker');
+  localStorage.setItem('planName', 'Pro Tracker');
 
   /*  If some other code still calls this with a token or
       awaits its Promise, we return a resolved Promise to keep
@@ -635,7 +635,9 @@ function populateMindCard() {
 
   const stored = Number(localStorage.getItem("mindStreakCount") || 0);
   const streakCount = Number.isFinite(stored) ? stored : 0;
-  streakEl.textContent = `🔥 ${streakCount}-day reflection streak`;
+  streakEl.textContent = streakCount > 0
+    ? `🔥 ${streakCount}-day reflection streak`
+    : "✨ Start your reflection streak today.";
 }
 
 function populateMotivation() {
@@ -815,7 +817,7 @@ function initDashboard() {
   populateMindCard();
   populateMotivation();
   reveal();
-    setUpReferralCountdown();
+  setUpReferralCountdown();
   wireUpCardClicks();
   addTrackerBadge();           // badge in the corner
   applyCoreDashboardChanges(); // only runs if user is on Core
