@@ -386,8 +386,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const coachImg = document.querySelector('.social-proof__coach');
   if (!coachImg) return;
 
-  coachImg.src = imgSrc('ryan-coach.jpg');
-  coachImg.alt = 'Coach Ryan';
+  coachImg.src = imgSrc('ty-coach.webp');
+  coachImg.alt = 'Coach Tyrae';
 };
 
   updateSocialProofCoach();
@@ -1011,7 +1011,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Muscle gain review.
     selectedReviewName = "David";
     selectedReviewText =
-      "I used to wing it with random exercises and YouTube routines. Having a personalized plan built for me but using Ryan's structure to follow has genuinely changed my life. I've built 6 kg of lean muscle all from home.";
+      "I used to wing it with random exercises and YouTube routines. Having a personalized plan built for me but using Tyrae's structure to follow has genuinely changed my life. I've built 6 kg of lean muscle all from home.";
     beforeImgSrc = "../assets/harry_chest_before.webp";
     afterImgSrc = "../assets/harry_chest_after.webp";
 
@@ -1020,7 +1020,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Male weight-loss review.
       selectedReviewName = "Lee";
       selectedReviewText =
-        "I wasn’t sure I could stick with it. But everything’s laid out, and I found it helpful following the same structure Ryan uses. I’ve lost 10kg and finally feel like myself again.";
+        "I wasn’t sure I could stick with it. But everything’s laid out, and I found it helpful following the same structure Tyrae uses. I’ve lost 10kg and finally feel like myself again.";
       beforeImgSrc = "../assets/lynn_before.webp";
       afterImgSrc = "../assets/lynn_after.webp";
 
@@ -1094,7 +1094,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const whatsIncludedData = [
     {
       title: "Tailored From Day One (CT)",
-      image: "../assets/your-ui-mockup-ryan.webp",
+      image: "../assets/your-ui-mockup-ty.webp",
       desc: ""
     },
     {
@@ -1104,7 +1104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
         {
       title: "Adaptive Progression Engine (PT)",
-      image: "../assets/ryan-structure.webp",
+      image: "../assets/ty-structure.webp",
       desc: ""
     },
     {
@@ -2193,7 +2193,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'THE ALPHA',
       rating: 4,
       time: 'Today',
-      text: 'Been watching ryans tiktok for a bit, I found his vids helpful so thought id gv his app a go. been using this for a couple of weeks and its genuinely amazing (avging 2kg muscle per week). Was going to rate 5 stars but the rest timer bugged once on me so im leaving a 4 til they patch it 💔 still worth it tho',
+      text: 'Been watching tyraes tiktok for a bit, I found his vids helpful so thought id gv his app a go. been using this for a couple of weeks and its genuinely amazing (avging 2kg muscle per week). Was going to rate 5 stars but the rest timer bugged once on me so im leaving a 4 til they patch it 💔 still worth it tho',
     },
     {
       name: 'alex',

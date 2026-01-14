@@ -386,8 +386,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const coachImg = document.querySelector('.social-proof__coach');
   if (!coachImg) return;
 
-  coachImg.src = imgSrc('carl-coach.jpg');
-  coachImg.alt = 'Coach Ryan';
+  coachImg.src = imgSrc('carl-coach.webp');
+  coachImg.alt = 'Coach Carl';
 };
 
   updateSocialProofCoach();
@@ -1011,7 +1011,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Muscle gain review.
     selectedReviewName = "David";
     selectedReviewText =
-      "I used to wing it with random exercises and YouTube routines. Having a personalized plan built for me but using Ryan's structure to follow has genuinely changed my life. I've built 6 kg of lean muscle all from home.";
+      "I used to wing it with random exercises and YouTube routines. Having a personalized plan built for me but using Carl's structure to follow has genuinely changed my life. I've built 6 kg of lean muscle all from home.";
     beforeImgSrc = "../assets/harry_chest_before.webp";
     afterImgSrc = "../assets/harry_chest_after.webp";
 
@@ -1020,7 +1020,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Male weight-loss review.
       selectedReviewName = "Lee";
       selectedReviewText =
-        "I wasn’t sure I could stick with it. But everything’s laid out, and I found it helpful following the same structure Ryan uses. I’ve lost 10kg and finally feel like myself again.";
+        "I wasn’t sure I could stick with it. But everything’s laid out, and I found it helpful following the same structure Carl uses. I’ve lost 10kg and finally feel like myself again.";
       beforeImgSrc = "../assets/lynn_before.webp";
       afterImgSrc = "../assets/lynn_after.webp";
 

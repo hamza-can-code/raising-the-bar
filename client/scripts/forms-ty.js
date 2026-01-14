@@ -5892,7 +5892,7 @@ function replaceWithFinalPage() {
   finalMsg.innerHTML = `
   <h2 class="final-headline">
     <span class="final-num">10,000+</span><br>
-    <span class="final-sub"><strong>kick-started their journey using Ryan’s structure</strong></span>
+    <span class="final-sub"><strong>kick-started their journey using Tyrae’s structure</strong></span>
   </h2>
 
   <div class="final-rating" role="img" aria-label="Rated 4.8 out of 5 stars">
