@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+  <title>My Mind</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../styles/my-mind.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <header class="header">
+    <a href="dashboard-nhial.html" class="logo">
+      <img src="../assets/nhial-logo.png" alt="GAINS+ logo">
+    </a>
+    <!-- Desktop nav (inline) -->
+    <nav class="main-nav" id="main-nav">
+      <!-- close btn -->
+      <button class="nav-close" id="nav-close" aria-label="Close Menu">✕</button>
+
+      <ul>
+        <!-- <li><a href="dashboard-nhial.html">My Dashboard</a></li> -->
+        <li><a href="workout-tracker-nhial.html" id="nav-workouts">My Workouts</a></li>
+        <li><a href="nutrition-tracker-nhial.html" id="nav-nutrition">My Nutrition</a></li>
+        <li><a href="#" id="nav-help">Help</a></li>
+      </ul>
+    </nav>
+
+    <!-- Mobile hamburger -->
+    <button class="hamburger" id="hamburger-btn" aria-label="Toggle Menu">☰</button>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'G-W9CSNHSLQQ');
+    </script>
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "rmf0p7sik4");
+    </script>
+    <!-- TikTok Pixel Code Start -->
+    <script>
+      !function (w, d, t) {
+        w.TiktokAnalyticsObject = t; var ttq = w[t] = w[t] || []; ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"], ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } }; for (var i = 0; i < ttq.methods.length; i++)ttq.setAndDefer(ttq, ttq.methods[i]); ttq.instance = function (t) {
+          for (
+            var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++)ttq.setAndDefer(e, ttq.methods[n]); return e
+        }, ttq.load = function (e, n) {
+          var r = "https://analytics.tiktok.com/i18n/pixel/events.js", o = n && n.partner; ttq._i = ttq._i || {}, ttq._i[e] = [], ttq._i[e]._u = r, ttq._t = ttq._t || {}, ttq._t[e] = +new Date, ttq._o = ttq._o || {}, ttq._o[e] = n || {}; n = document.createElement("script")
+            ; n.type = "text/javascript", n.async = !0, n.src = r + "?sdkid=" + e + "&lib=" + t; e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(n, e)
+        };
+
+
+        ttq.load('D0M3KORC77UCAFR1EOLG');
+        ttq.page();
+      }(window, document, 'ttq');
+    </script>
+    <!-- TikTok Pixel Code End -->
+    <!-- Meta Pixel Code -->
+    <script>
+      !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return; n = f.fbq = function () {
+          n.callMethod ?
+            n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+        n.queue = []; t = b.createElement(e); t.async = !0;
+        t.src = v; s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+      }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '2589073464764526');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=2589073464764526&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
+  </header>
+
+  <main class="mind-page">
+    <section class="mind-hero">
+      <h1>My Mind</h1>
+      <p id="mindSubtext" class="mind-subtext"></p>
+    </section>
+
+    <section class="mind-card">
+      <h2>Today’s Check-In</h2>
+      <p class="card-prompt">How are you feeling today?</p>
+      <div class="mood-options" role="group" aria-label="Mood check-in options">
+        <button class="mood-option" data-mood="good">😄 Good</button>
+        <button class="mood-option" data-mood="okay">🙂 Okay</button>
+        <button class="mood-option" data-mood="low">😕 Low</button>
+        <button class="mood-option" data-mood="stressed">😣 Stressed</button>
+      </div>
+      <p id="moodResponse" class="mood-response" aria-live="polite"></p>
+    </section>
+
+    <section class="mind-card">
+      <h2>Quick Reset</h2>
+      <p class="card-subtext">Tap one below for a quick reset.</p>
+      <div class="reset-grid">
+        <button class="reset-tile" data-modal="breathe">Breathe</button>
+        <button class="reset-tile" data-modal="write">Write</button>
+        <button class="reset-tile" data-modal="gratitude">Gratitude</button>
+      </div>
+    </section>
+
+    <p class="mind-disclaimer">
+      This feature supports reflection and wellbeing.
+      It is not a substitute for professional mental health care.
+    </p>
+  </main>
+
+  <div class="modal" id="breatheModal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="breatheTitle">
+      <button class="modal-close" type="button" aria-label="Close" data-close>✕</button>
+      <h3 id="breatheTitle">Breathe</h3>
+      <div class="breathe-visual" aria-hidden="true"></div>
+      <p class="modal-text">Inhale 4… Hold 4… Exhale 6…</p>
+      <p class="modal-text">Repeat 3 times.</p>
+      <button class="modal-action" type="button" data-close>Close</button>
+    </div>
+  </div>
+
+  <div class="modal" id="writeModal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="writeTitle">
+      <button class="modal-close" type="button" aria-label="Close" data-close>✕</button>
+      <h3 id="writeTitle">Write</h3>
+      <p class="modal-text">What’s one thing on your mind right now?</p>
+      <textarea class="modal-textarea" rows="5" placeholder="Type here…"></textarea>
+      <p class="modal-helper">Tip: if you want to keep this, screenshot it.</p>
+      <button class="modal-action" type="button" data-close>Done</button>
+    </div>
+  </div>
+
+  <div class="modal" id="gratitudeModal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="gratitudeTitle">
+      <button class="modal-close" type="button" aria-label="Close" data-close>✕</button>
+      <h3 id="gratitudeTitle">Gratitude</h3>
+      <p class="modal-text">What’s one small win from today?</p>
+      <input class="modal-input" type="text" placeholder="Type here…" />
+      <button class="modal-action" type="button" data-close>Done</button>
+    </div>
+  </div>
+
+  <footer class="footer fade-in" id="footer">
+    <div class="footer-content">
+      <p class="powered">POWERED BY</p>
+      <p>&copy; 2026 Raising The Bar App Ltd. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="dashboard-nhial.html">Start Training</a>
+        <span class="separator">|</span>
+        <a href="legal-overview.html">Our Policies</a>
+        <span class="separator">|</span>
+        <a href="contact-us.html">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../scripts/my-mind.js"></script>
+</body>
+
+</html>

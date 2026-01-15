@@ -387,22 +387,23 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       ? (CREATOR_OFFER_PATHS[normalizedCreator] || '/pages/offer.html')
       : (normalizedPlan === 'creator-platform' ? '/pages/creator-platform-access.html' : '/pages/offer.html');
 
-    const trialProductId = price && (typeof price.product === 'string' ? price.product : price.product?.id);
+    let upgradePlanInfo = null;
+    if (isTrialPlan) {
+      upgradePlanInfo = getPlanPricing('4-week', currency, normalizedCreator);
+      if (!upgradePlanInfo) {
+        return res.status(500).json({ error: `Missing price configuration for trial renewal (4-week) (${currency || 'GBP'})` });
+      }
+    }
     const lineItems = bundle
       ? [
         { price: recurringPriceId, quantity: 1 },
         { price: activationPriceId, quantity: 1 },
       ]
-      : (isTrialPlan && price?.type === 'one_time'
-        ? [{
-          price_data: {
-            currency: price.currency,
-            unit_amount: price.unit_amount,
-            product: trialProductId,
-            recurring: recurringConfig,
-          },
-          quantity: 1,
-        }]
+      : (isTrialPlan
+        ? [
+          { price: upgradePlanInfo.priceId, quantity: 1 },
+          { price: priceId, quantity: 1 },
+        ]
         : [{ price: priceId, quantity: 1 }]);
 
     const sessionCfg = {
@@ -428,22 +429,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       sessionCfg.subscription_data = {
         trial_settings: { end_behavior: { missing_payment_method: 'cancel' } },
         ...(bundle ? { trial_period_days: 30 } : {}),
-      };
-    }
-
-    if (sessionMode === 'subscription' && isTrialPlan) {
-      const upgradePlanInfo = getPlanPricing('4-week', currency, normalizedCreator);
-      if (!upgradePlanInfo) {
-        return res.status(500).json({ error: `Missing price configuration for trial renewal (4-week) (${currency || 'GBP'})` });
-      }
-      sessionCfg.subscription_data = {
-        ...(sessionCfg.subscription_data || {}),
-        metadata: {
-          ...(sessionCfg.subscription_data?.metadata || {}),
-          trial_upgrade_pending: 'true',
-          trial_upgrade_price_id: upgradePlanInfo.priceId,
-          trial_upgrade_anchor_days: '7',
-        },
+        ...(isTrialPlan ? { trial_period_days: 7 } : {}),
       };
     }
 
@@ -548,8 +534,87 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
     if (!productId) {
       return res.status(500).json({ error: 'Price is missing an associated product.' });
     }
-    if (!recurringConfig) {
+    if (!recurringConfig && normalizedPlan !== 'trial') {
       return res.status(500).json({ error: 'Recurring configuration missing for selected plan.' });
+    }
+
+    let creatorConfig = null;
+    let destinationValid = false;
+    let destinationReason = null;
+    let destinationAccount = null;
+    if (normalizedCreator) {
+      creatorConfig = await resolveCreator(normalizedCreator);
+    }
+
+    if (normalizedPlan === 'trial') {
+      const upgradePlanInfo = getPlanPricing('4-week', currency, normalizedCreator);
+      if (!upgradePlanInfo) {
+        return res.status(500).json({ error: `Missing price configuration for trial renewal (4-week) (${currency || 'GBP'})` });
+      }
+
+      const intentMetadata = {
+        product: PLAN_LABELS[normalizedPlan] || 'Selected Plan',
+        currency_used: ccy,
+        discounted: String(!!discounted),
+        trial_subscription: 'true',
+        trial_upfront_price_id: priceId,
+        trial_subscription_price_id: upgradePlanInfo.priceId,
+        trial_period_days: '7',
+      };
+
+      if (creatorConfig) {
+        const destinationInfo = await fetchDestinationAccount(creatorConfig.destination);
+        destinationValid = destinationInfo.valid;
+        destinationAccount = destinationInfo.account;
+        destinationReason = destinationInfo.reason;
+        intentMetadata.creator_slug = creatorConfig.creator.slug;
+        intentMetadata.creator_name = creatorConfig.creator.name;
+        intentMetadata.creator_source = creatorConfig.source;
+        intentMetadata.creator_default_currency = creatorConfig.creator.defaultCurrency;
+        intentMetadata.platform_intro_fee_percent = String(creatorConfig.introFeePercent);
+        intentMetadata.platform_ongoing_fee_percent = String(creatorConfig.ongoingFeePercent);
+        intentMetadata.connect_intro_applied = String(destinationValid);
+        intentMetadata.connect_destination_valid = String(destinationValid);
+        intentMetadata.connect_destination = creatorConfig.destination || '';
+        intentMetadata.connect_destination_country = destinationAccount?.country || '';
+        intentMetadata.connect_destination_reason = destinationReason || '';
+      }
+
+      const intentConfig = {
+        amount: price.unit_amount,
+        currency: price.currency,
+        customer: customer.id,
+        setup_future_usage: 'off_session',
+        payment_method_types: ['card'],
+        metadata: intentMetadata,
+      };
+
+      if (creatorConfig && destinationValid) {
+        intentConfig.transfer_data = { destination: creatorConfig.destination };
+        intentConfig.application_fee_amount = Math.round(
+          (price.unit_amount || 0) * (creatorConfig.introFeePercent / 100)
+        );
+        intentConfig.on_behalf_of = creatorConfig.destination;
+      }
+
+      log('Trial upfront payment intent config', {
+        ...intentConfig,
+        metadata: undefined,
+      });
+
+      const intent = await stripe.paymentIntents.create(intentConfig);
+      return res.json({
+        clientSecret: intent.client_secret,
+        intentType: 'payment',
+        connectDestination: {
+          valid: destinationValid,
+          reason: destinationReason,
+          accountId: creatorConfig?.destination || null,
+          accountCountry: destinationAccount?.country || null,
+          source: creatorConfig?.source || null,
+          defaultCurrency: creatorConfig?.creator?.defaultCurrency || null,
+        },
+      });
     }
 
     const subscriptionItems = price.type === 'one_time'
@@ -562,14 +627,6 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
         },
       }]
       : [{ price: priceId }];
-
-    let creatorConfig = null;
-    let destinationValid = false;
-    let destinationReason = null;
-    let destinationAccount = null;
-    if (normalizedCreator) {
-      creatorConfig = await resolveCreator(normalizedCreator);
-    }
 
     // 3) create subscription in incomplete state (for Elements confirmation)
     const subCfg = {
@@ -588,19 +645,6 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
       },
       coupon: couponId || undefined,
     };
-
-    if (normalizedPlan === 'trial') {
-      const upgradePlanInfo = getPlanPricing('4-week', currency, normalizedCreator);
-      if (!upgradePlanInfo) {
-        return res.status(500).json({ error: `Missing price configuration for trial renewal (4-week) (${currency || 'GBP'})` });
-      }
-      subCfg.metadata = {
-        ...(subCfg.metadata || {}),
-        trial_upgrade_pending: 'true',
-        trial_upgrade_price_id: upgradePlanInfo.priceId,
-        trial_upgrade_anchor_days: '7',
-      };
-    }
 
     if (creatorConfig) {
       const destinationInfo = await fetchDestinationAccount(creatorConfig.destination);
