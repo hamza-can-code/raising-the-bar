@@ -5891,7 +5891,7 @@ function replaceWithFinalPage() {
   finalMsg.classList.add("final-message");
   finalMsg.innerHTML = `
   <h2 class="final-headline">
-    <span class="final-num">10,000+</span><br>
+    <span class="final-num">5,000+</span><br>
     <span class="final-sub"><strong>kick-started their journey using Carl's structure</strong></span>
   </h2>
 
@@ -5903,7 +5903,7 @@ function replaceWithFinalPage() {
   <!-- optional: real Apple/Google Pay button mounts here if supported -->
   <div id="prb-inline" class="prb-inline" style="display:none;"></div>
 
-  <p class="final-reviews">2,500+ five-star reviews from happy users</p>
+  <p class="final-reviews">1,300+ five-star reviews from happy users</p>
 `;
   formContainer.appendChild(finalMsg);
 
