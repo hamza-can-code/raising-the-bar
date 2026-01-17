@@ -42,6 +42,8 @@
     vital: '/pages/thank-you-vital.html',
     dav: '/pages/thank-you-dav.html',
     ryan: '/pages/thank-you-ryan.html',
+    danny: '/pages/thank-you-danny.html',
+    carl: '/pages/thank-you-carl.html',
     ty: '/pages/thank-you-ty.html',
     nhial: '/pages/thank-you-nhial.html',
   };
