@@ -5974,7 +5974,7 @@ function replaceWithFinalPage() {
     if (progress < 100) {
       requestAnimationFrame(fillBar);
     } else {
-      window.location.href = "sign-up-carl.html";
+window.location.href = "../pages/sign-up-carl.html";
     }
   }
   requestAnimationFrame(fillBar);

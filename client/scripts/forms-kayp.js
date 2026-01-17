@@ -5971,7 +5971,7 @@ function replaceWithFinalPage() {
     if (progress < 100) {
       requestAnimationFrame(fillBar);
     } else {
-      window.location.href = "sign-up-kayp.html";
+window.location.href = "../pages/sign-up-kayp.html";
     }
   }
   requestAnimationFrame(fillBar);
