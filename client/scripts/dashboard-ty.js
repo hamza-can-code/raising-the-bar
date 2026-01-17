@@ -648,8 +648,8 @@ function applyCoreDashboardChanges() {
 
   /* 1 · Workout card upsell line */
   const wtCardEl = document.getElementById("wtCard");
-  wtCardEl.style.background = "rgba(225, 225, 225, 0.85)";
-  wtCardEl.style.border = "1px solid rgba(0, 0, 0, 0.06)";
+  wtCardEl.style.background = "rgba(35, 35, 35, 0.85)";
+  wtCardEl.style.border = "1px solid rgba(255, 255, 255, 0.06)";
   const wtCard = document.getElementById("wtCard");
   const upsell = document.createElement("p");
   upsell.className = "core-lock";

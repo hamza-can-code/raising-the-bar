@@ -1,8 +1,8 @@
 :root {
-  --brand-blue: #007bff;
-  --brand-cream: #f9f7f2;
-  --text-dark: #1f2933;
-  --text-muted: #6b7280;
+  --brand-blue: #39ff14;
+  --brand-cream: #0f0f0f;
+  --text-dark: #d3dbe4;
+  --text-muted: #858c99;
 }
 
 * {
@@ -76,7 +76,7 @@ button {
 
 .main-nav a {
   text-decoration: none;
-  color: #ffffff;
+  color: #e5e5e5;
   font-weight: 600;
 }
 
@@ -134,7 +134,7 @@ button {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.6);
   z-index: 2000;
   /* no centering—panel itself will define its layout */
 }
@@ -150,8 +150,8 @@ button {
   margin: 0;
   /* add extra left‑padding so items aren’t flush to the edge */
   padding: 4.5rem 1rem 1rem 2rem;
-  background: #fff;
-  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+  background: #050505;
+  box-shadow: 2px 0 15px rgba(255, 255, 255, 0.2);
   overflow-y: auto;
   border-radius: 0 8px 8px 0;
 
@@ -170,7 +170,7 @@ button {
 .main-nav.open ul li {
   margin: 0;
   width: 100%;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #1f1f1f;
   padding-bottom: 0.75rem;
 }
 
@@ -185,7 +185,7 @@ button {
   padding: 0.75rem 1rem;
   border-radius: 6px;
   transition: background 0.2s ease;
-  color: #333;
+  color: #d2d2d2;
   text-align: left;
   display: block;
   font-weight: 500;
@@ -193,7 +193,7 @@ button {
 }
 
 .main-nav.open ul a:hover {
-  background: #F0F0F0;
+  background: #141414;
 }
 
 .nav-close {
@@ -205,12 +205,12 @@ button {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #333;
+  color: #d2d2d2;
   z-index: 2100;
 }
 
 .main-nav.open .nav-close {
-  color: #333;
+  color: #d2d2d2;
 }
 
 .main-nav.open::before {
@@ -220,7 +220,7 @@ button {
   left: 0;
   width: 100%;
   height: 1px;
-  /* background: #e5e5e5; */
+  /* background: #1f1f1f; */
 }
 
 .mind-page {
@@ -247,11 +247,11 @@ button {
 }
 
 .mind-card {
-  background: #ffffff;
+  background: #050505;
   border-radius: 20px;
   padding: 22px 22px 0;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: 0 8px 24px rgba(221, 228, 243, 0.08);
+  border: 1px solid rgba(75, 91, 114, 0.25);
   margin-bottom: 20px;
 }
 
@@ -271,17 +271,17 @@ button {
   border-radius: 14px;
   margin: 0 0 12px;
   line-height: 1;
-  background: rgba(0, 123, 255, 0.12);
-  color: #0f172a;
+  background: rgba(57, 255, 20, 0.12);
+  color: #dde4f3;
 }
 
 /* Make each card's title feel distinct */
 .mind-card:nth-of-type(1) h2 {
-  background: rgba(0, 123, 255, 0.14); /* Check-In: blue tint */
+  background: rgba(57, 255, 20, 0.14); /* Check-In: neon tint */
 }
 
 .mind-card:nth-of-type(2) h2 {
-  background: rgba(16, 185, 129, 0.14); /* Quick Reset: green tint */
+  background: rgba(57, 255, 20, 0.14); /* Quick Reset: neon tint */
 }
 
 /* Optional: tiny accent line on the left of each title */
@@ -294,11 +294,11 @@ button {
   width: 6px;
   height: 70%;
   border-radius: 999px;
-  background: rgba(0, 123, 255, 0.9);
+  background: rgba(57, 255, 20, 0.9);
 }
 
 .mind-card:nth-of-type(2) h2::before {
-  background: rgba(16, 185, 129, 0.9);
+  background: rgba(57, 255, 20, 0.9);
 }
 
 /* --- Mood card colours --- */
@@ -336,8 +336,8 @@ button {
 }
 
 .mood-option {
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  background: #f8fafc;
+  border: 1px solid rgba(75, 91, 114, 0.4);
+  background: #060a0f;
   padding: 14px 12px;
   border-radius: 14px;
   font-size: 1rem;
@@ -351,7 +351,7 @@ button {
 }
 
 .mood-option.selected {
-  color: #0f172a;
+  color: #dde4f3;
   font-weight: 600;
   transform: translateY(-1px);
 }
@@ -379,13 +379,13 @@ button {
 .mood-response {
   margin: 16px 0 6px;
   font-weight: 600;
-  color: #111827;
+  color: #e0e5f1;
   min-height: 24px;
 }
 
 .mind-streak {
   margin: 0;
-  color: #111827;
+  color: #e0e5f1;
   font-weight: 600;
 }
 
@@ -397,7 +397,7 @@ button {
 
 .reset-tile {
   border: none;
-  background: rgba(15, 23, 42, 0.06);
+  background: rgba(221, 228, 243, 0.06);
   padding: 16px;
   border-radius: 16px;
   font-size: 1rem;
@@ -406,20 +406,20 @@ button {
 }
 
 .reset-tile:hover {
-  background: rgba(0, 123, 255, 0.1);
+  background: rgba(57, 255, 20, 0.12);
   transform: translateY(-2px);
 }
 
 .reset-tile[data-modal="breathe"] {
-  background: rgba(59, 130, 246, 0.12);
+  background: rgba(57, 255, 20, 0.12);
 }
 
 .reset-tile[data-modal="write"] {
-  background: rgba(168, 85, 247, 0.12);
+  background: rgba(57, 255, 20, 0.12);
 }
 
 .reset-tile[data-modal="gratitude"] {
-  background: rgba(34, 197, 94, 0.12);
+  background: rgba(57, 255, 20, 0.12);
 }
 
 .mind-disclaimer {
@@ -430,21 +430,21 @@ button {
 }
 
 .reset-tile[data-modal="breathe"]:hover {
-  background: rgba(59, 130, 246, 0.22);
+  background: rgba(57, 255, 20, 0.22);
 }
 
 .reset-tile[data-modal="write"]:hover {
-  background: rgba(168, 85, 247, 0.22);
+  background: rgba(57, 255, 20, 0.22);
 }
 
 .reset-tile[data-modal="gratitude"]:hover {
-  background: rgba(34, 197, 94, 0.22);
+  background: rgba(57, 255, 20, 0.22);
 }
 
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   display: none;
   align-items: center;
   justify-content: center;
@@ -457,12 +457,12 @@ button {
 }
 
 .modal-content {
-  background: #ffffff;
+  background: #050505;
   border-radius: 18px;
   padding: 24px;
   width: min(480px, 100%);
   position: relative;
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+  box-shadow: 0 20px 40px rgba(221, 228, 243, 0.2);
 }
 
 .modal-close {
@@ -470,7 +470,7 @@ button {
   top: 14px;
   right: 14px;
   border: none;
-  background: #f1f5f9;
+  background: #091016;
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -487,7 +487,7 @@ button {
 .modal-input {
   width: 100%;
   border-radius: 12px;
-  border: 1px solid rgba(148, 163, 184, 0.5);
+  border: 1px solid rgba(75, 91, 114, 0.5);
   padding: 12px;
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
@@ -511,11 +511,11 @@ button {
   max-width: 320px;
   margin: 20px auto 0;
   border: none;
-  background: linear-gradient(135deg, #007BFF, #339DFF);
+  background: linear-gradient(135deg, #39ff14, #2eea0f);
   cursor: pointer;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
-  color: #ffffff;
+  color: #050505;
   padding: 14px 18px;
   border-radius: 999px;
   cursor: pointer;
@@ -528,7 +528,7 @@ button {
   height: 120px;
   border-radius: 50%;
   margin: 16px auto;
-  background: radial-gradient(circle at 30% 30%, #e0f2fe, #bae6fd, #93c5fd);
+  background: radial-gradient(circle at 30% 30%, #011a2a, #023550, #023977);
   animation: pulse 3s ease-in-out infinite;
 }
 
@@ -549,7 +549,7 @@ button {
 /* -------- Footer -------- */
 .footer {
   margin-top: auto;
-  background-color: #333;
+  background-color: #d2d2d2;
   color: white;
   padding: 20px;
   text-align: center;

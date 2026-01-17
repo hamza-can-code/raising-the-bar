@@ -425,6 +425,16 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       },
     };
 
+    if (isTrialPlan) {
+      sessionCfg.metadata = {
+        ...(sessionCfg.metadata || {}),
+        trial_subscription: 'true',
+        trial_upfront_price_id: priceId,
+        trial_subscription_price_id: upgradePlanInfo.priceId,
+        trial_period_days: '7',
+      };
+    }
+
     if (sessionMode === 'subscription') {
       sessionCfg.subscription_data = {
         trial_settings: { end_behavior: { missing_payment_method: 'cancel' } },
@@ -455,6 +465,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
             platform_intro_fee_percent: String(creatorConfig.introFeePercent),
             platform_ongoing_fee_percent: String(creatorConfig.ongoingFeePercent),
             connect_destination_valid: String(destinationValid),
+            connect_destination: creatorConfig.destination || '',
             connect_destination_country: destinationAccount?.country,
             connect_destination_reason: destinationReason,
           },
@@ -484,6 +495,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
           creator_default_currency: creatorConfig.creator.defaultCurrency,
           platform_intro_fee_percent: String(creatorConfig.introFeePercent),
           platform_ongoing_fee_percent: String(creatorConfig.ongoingFeePercent),
+          connect_destination: creatorConfig.destination || '',
           connect_destination_valid: String(destinationValid),
           connect_destination_country: destinationAccount?.country,
           connect_destination_reason: destinationReason,

@@ -1866,9 +1866,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const finishBtn = document.getElementById("offerFinishBtn");
     if (!finishBtn) return;
     // if (selectedProgram === "new") {
-    //   finishBtn.style.backgroundColor = "#9333EA";
+    //   finishBtn.style.backgroundColor = "#7b16d6";
     // } else {
-    //   finishBtn.style.backgroundColor = "#007BFF";
+    //   finishBtn.style.backgroundColor = "#39ff14";
     // }
   }
   document.addEventListener('click', e => {

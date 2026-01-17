@@ -129,7 +129,7 @@ router.post(
     if (event.type === 'checkout.session.completed') {
       /* A) Pull full session (need price + subscription id) */
       const session = await stripe.checkout.sessions.retrieve(event.data.object.id, {
-        expand: ['subscription']
+        expand: ['subscription', 'payment_intent']
       });
 
       // Step B: Retrieve line items separately
@@ -161,7 +161,8 @@ router.post(
       const hasFourWeek = priceIds.some(id => FOUR_WEEK_PRICE_IDS.includes(id));
       const hasTwelveWeek = priceIds.some(id => TWELVE_WEEK_PRICE_IDS.includes(id));
       const hasFullPrice = priceIds.includes(process.env.FULL_PRICE_ID);
-      const hasSubscription = !!session.subscription?.id;
+      let subscription = session.subscription || null;
+      const hasSubscription = !!subscription?.id;
       const isFullSubscriptionPurchase = hasFullPrice;
 
       if (hasTrialUpfront) {
@@ -181,11 +182,79 @@ router.post(
         $inc: { unlockedWeeks },
         $set: {}
       };
-      if (hasSubscription) {
-        update.$set.subscriptionId = session.subscription.id;
-        update.$set.subscriptionStatus = session.subscription.status || 'active';
-        update.$set.renewalDate = session.subscription.current_period_end
-          ? new Date(session.subscription.current_period_end * 1000)
+
+      if (!hasSubscription && hasTrialUpfront && session.metadata?.trial_subscription === 'true') {
+        const paymentIntent = session.payment_intent;
+        const upgradePriceId = session.metadata?.trial_subscription_price_id;
+        const trialDays = Number(session.metadata?.trial_period_days || 7);
+        const customerId = paymentIntent?.customer;
+        const paymentMethodId = paymentIntent?.payment_method;
+
+        if (upgradePriceId && customerId) {
+          if (paymentMethodId) {
+            try {
+              await stripe.paymentMethods.attach(paymentMethodId, { customer: customerId });
+            } catch (attachErr) {
+              if (attachErr.code !== 'resource_already_exists') {
+                console.error('⚠️  Failed to attach payment method', paymentMethodId, attachErr.message);
+              }
+            }
+
+            try {
+              await stripe.customers.update(customerId, {
+                invoice_settings: { default_payment_method: paymentMethodId },
+              });
+            } catch (updateErr) {
+              console.error('⚠️  Failed to set default payment method', customerId, updateErr.message);
+            }
+          }
+
+          const subscriptionConfig = {
+            customer: customerId,
+            items: [{ price: upgradePriceId }],
+            trial_period_days: Number.isFinite(trialDays) ? trialDays : 7,
+            default_payment_method: paymentMethodId || undefined,
+            payment_settings: { save_default_payment_method: 'on_subscription' },
+            metadata: {
+              product: '4-Week Plan',
+              currency_used: (paymentIntent?.currency || 'gbp').toUpperCase(),
+              trial_origin: 'checkout',
+              trial_upfront_payment_intent_id: paymentIntent?.id || '',
+              creator_slug: session.metadata?.creator_slug || '',
+              creator_name: session.metadata?.creator_name || '',
+              creator_source: session.metadata?.creator_source || '',
+              creator_default_currency: session.metadata?.creator_default_currency || '',
+              platform_intro_fee_percent: session.metadata?.platform_intro_fee_percent || '',
+              platform_ongoing_fee_percent: session.metadata?.platform_ongoing_fee_percent || '',
+              connect_intro_applied: session.metadata?.connect_intro_applied || '',
+              connect_destination_valid: session.metadata?.connect_destination_valid || '',
+              connect_destination_country: session.metadata?.connect_destination_country || '',
+              connect_destination_reason: session.metadata?.connect_destination_reason || '',
+            },
+          };
+
+          const destination = session.metadata?.connect_destination;
+          const destinationValid = session.metadata?.connect_destination_valid === 'true';
+          const introFeePercent = Number(session.metadata?.platform_intro_fee_percent);
+          if (destination && destinationValid && Number.isFinite(introFeePercent)) {
+            subscriptionConfig.transfer_data = { destination };
+            subscriptionConfig.application_fee_percent = introFeePercent;
+            subscriptionConfig.on_behalf_of = destination;
+          }
+
+          try {
+            subscription = await stripe.subscriptions.create(subscriptionConfig);
+          } catch (err) {
+            console.error('❌  Failed to create trial follow-on subscription from Checkout', err.message);
+          }
+        }
+      }
+
+      if (subscription?.id) {
+        update.$set.subscriptionId = subscription.id;
+        update.$set.subscriptionStatus = subscription.status || 'active';
+        update.$set.renewalDate = subscription.current_period_end
+          ? new Date(subscription.current_period_end * 1000)
           : new Date();          // now
       }
 
