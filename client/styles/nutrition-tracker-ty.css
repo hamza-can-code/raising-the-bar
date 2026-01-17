@@ -262,6 +262,7 @@ exercise-btn,
   font-size: 1.5rem;
   cursor: pointer;
   z-index: 10;
+    color: #ffffff;
 }
 
 /* hide desktop‑style menu until toggled */
@@ -431,98 +432,98 @@ exercise-btn,
 }
 
 .footer {
-  margin-top: auto;
-  background-color: #d2d2d2;
-  color: white;
-  padding: 20px;
-  text-align: center;
+    margin-top: auto;
+    background-color: #151515;
+    color: #e5e5e5;
+    padding: 20px;
+    text-align: center;
 }
 
 .footer-content {
-  max-width: 600px;
-  margin: 0 auto;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .footer-content p {
-  margin-bottom: 15px;
-  font-size: 0.9rem;
-  color: white;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: #e5e5e5;
 }
 
 .footer-links {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 15px;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
 }
 
 .footer-links a {
-  text-decoration: none;
-  color: white;
-  font-size: 0.9rem;
+    text-decoration: none;
+    color: #e5e5e5;
+    font-size: 0.9rem;
 }
 
 .footer-links a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
+    color: #39ff14;
 }
 
 .social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
 }
 
 .social-icons img {
-  width: 24px;
-  height: 24px;
-  transition: transform 0.2s;
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s;
 }
 
 .social-icons img:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
 
-  .footer {
-    padding: 20px 0;
+    .footer {
+        padding: 20px 0;
 
-  }
+    }
 
-  .footer-links {
-    flex-direction: column;
-    /* Stack links vertically */
-    gap: 10px;
-    padding: 5px 0;
-  }
+    .footer-links {
+        flex-direction: column;
+        /* Stack links vertically */
+        gap: 16px;
+        padding: 5px 0;
+    }
 
-  .footer-links a {
-    font-size: 1.1rem;
-    /* Larger text for easier readability */
-    margin-bottom: 10px;
-    text-decoration: underline;
-  }
+    .footer-links a {
+        font-size: 1.1rem;
+        /* Larger text for easier readability */
+        margin-bottom: 10px;
+        text-decoration: underline;
+    }
 
-  .footer p {
-    font-size: 1rem;
-    /* Larger text for easier readability */
-    margin-bottom: 20px;
-  }
+    .footer p {
+        font-size: 1rem;
+        /* Larger text for easier readability */
+        margin-bottom: 20px;
+    }
 
-  .social-icons img {
-    width: 42px;
-    /* Slightly larger for mobile */
-    height: 42px;
-    margin: 0 35px;
-  }
+    .social-icons img {
+        width: 42px;
+        /* Slightly larger for mobile */
+        height: 42px;
+        margin: 0 35px;
+    }
 
-  .footer span {
-    display: none;
-  }
+    .footer span {
+        display: none;
+    }
 }
-
 /* Nutrition Tracker Container */
 #nutrition-tracker {
   max-width: 1200px;

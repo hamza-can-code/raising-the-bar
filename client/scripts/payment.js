@@ -101,11 +101,70 @@
     },
   };
 
-  const KAYP_STYLE_SLUGS = ['kayp', 'dav', 'ryan', 'ty', 'ironverse', 'nhial'];
+const TY_PAYMENT_APPEARANCE = {
+  ...NIGHT_PAYMENT_APPEARANCE,
+  variables: {
+    ...NIGHT_PAYMENT_APPEARANCE.variables,
 
-  const PAYMENT_APPEARANCE = KAYP_STYLE_SLUGS.includes(getCreatorSlug())
-    ? KAYP_PAYMENT_APPEARANCE
-    : NIGHT_PAYMENT_APPEARANCE;
+    // surrounding UI
+    colorText: '#ffffff',
+    colorTextSecondary: '#cbd5e1',
+    colorTextPlaceholder: '#94a3b8',
+    colorIcon: '#ffffff',
+
+    // inputs = light theme (AS YOU WANT)
+    colorBackground: '#ffffff',
+    colorPrimary: '#22c55e',
+    colorDanger: '#ef4444',
+    colorBorder: '#e2e8f0',
+  },
+  rules: {
+    ...NIGHT_PAYMENT_APPEARANCE.rules,
+
+    // inputs (unchanged from how you want it)
+    '.Input': {
+      ...NIGHT_PAYMENT_APPEARANCE.rules['.Input'],
+      backgroundColor: '#ffffff',
+      color: '#0f172a',
+      border: '1px solid #e2e8f0',
+      boxShadow: '0 1px 2px rgba(0,0,0,0.12)',
+    },
+
+    '.Input:focus': {
+      border: '1px solid #22c55e',
+      boxShadow: '0 0 0 3px rgba(34,197,94,0.25)',
+    },
+
+    '.Label': { color: '#ffffff' },
+
+    // 🔴 THIS IS THE ONLY FIX YOU NEED 🔴
+    // Google Pay / Card tabs text + icon darker
+    '.Tab': {
+      color: '#0f172a',
+    },
+    '.TabLabel': {
+      color: '#0f172a',
+      fontWeight: '600',
+    },
+    '.TabIcon': {
+      color: '#0f172a',
+    },
+
+    '.Tab--selected': {
+      color: '#0f172a',
+    },
+  },
+};
+
+
+  const KAYP_STYLE_SLUGS = ['kayp', 'dav', 'ryan', 'ironverse', 'nhial', 'danny', 'carl'];
+  const creatorSlug = getCreatorSlug();
+
+  const PAYMENT_APPEARANCE = creatorSlug === 'ty'
+    ? TY_PAYMENT_APPEARANCE
+    : (KAYP_STYLE_SLUGS.includes(creatorSlug)
+      ? KAYP_PAYMENT_APPEARANCE
+      : NIGHT_PAYMENT_APPEARANCE);
 
   /* ——————————————————————————————————————————————————————————— */
   /* 3.  DOM handles                                               */

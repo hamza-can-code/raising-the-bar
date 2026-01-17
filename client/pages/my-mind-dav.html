@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<script>
+  (async function() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      location.href = 'log-in-dav.html';
+      return;
+    }
+    try {
+      const res = await fetch('/api/auth/me', {
+        method: 'GET',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (!res.ok) throw new Error();
+    } catch (err) {
+      localStorage.removeItem('token');
+      location.href = 'log-in-dav.html';
+      return;
+    }
+    // If we get here, user is authenticated → do nothing
+  })();
+</script>
+
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">

@@ -91,6 +91,7 @@ button {
   font-size: 1.5rem;
   cursor: pointer;
   z-index: 10;
+    color: #ffffff;
 }
 
 .header-inner {
@@ -303,25 +304,28 @@ button {
 
 /* --- Mood card colours --- */
 .mood-option[data-mood="good"] {
-  background: rgba(34, 197, 94, 0.12);
-  border-color: rgba(34, 197, 94, 0.5);
+  background: rgba(34, 197, 94, 0.18);
+  border-color: rgba(34, 197, 94, 0.7);
+  color: rgba(134, 239, 172, 0.98);
 }
 
 .mood-option[data-mood="okay"] {
-  background: rgba(59, 130, 246, 0.12);
-  border-color: rgba(59, 130, 246, 0.5);
+  background: rgba(59, 130, 246, 0.18);
+  border-color: rgba(59, 130, 246, 0.7);
+  color: rgba(147, 197, 253, 0.98);
 }
 
 .mood-option[data-mood="low"] {
-  background: rgba(245, 158, 11, 0.12);
-  border-color: rgba(245, 158, 11, 0.5);
+  background: rgba(245, 158, 11, 0.18);
+  border-color: rgba(245, 158, 11, 0.7);
+  color: rgba(253, 230, 138, 0.98);
 }
 
 .mood-option[data-mood="stressed"] {
-  background: rgba(239, 68, 68, 0.12);
-  border-color: rgba(239, 68, 68, 0.5);
+  background: rgba(239, 68, 68, 0.18);
+  border-color: rgba(239, 68, 68, 0.7);
+  color: rgba(254, 202, 202, 0.98);
 }
-
 
 .card-prompt,
 .card-subtext {
@@ -343,6 +347,10 @@ button {
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
+
+  color: #dde4f3;
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
 }
 
 .mood-option:hover {
@@ -351,8 +359,8 @@ button {
 }
 
 .mood-option.selected {
-  color: #dde4f3;
-  font-weight: 600;
+  color: #f1f5f9;
+  font-weight: 800;
   transform: translateY(-1px);
 }
 
@@ -396,30 +404,39 @@ button {
 }
 
 .reset-tile {
-  border: none;
-  background: rgba(221, 228, 243, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(15, 23, 42, 0.35);
   padding: 16px;
   border-radius: 16px;
   font-size: 1rem;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+
+  color: #e5e7eb;
+  font-weight: 700;
 }
 
 .reset-tile:hover {
-  background: rgba(57, 255, 20, 0.12);
+  background: rgba(57, 255, 20, 0.22);
   transform: translateY(-2px);
 }
 
 .reset-tile[data-modal="breathe"] {
-  background: rgba(57, 255, 20, 0.12);
+  background: rgba(59, 130, 246, 0.18);
+  border-color: rgba(59, 130, 246, 0.55);
+  color: #bfdbfe;
 }
 
 .reset-tile[data-modal="write"] {
-  background: rgba(57, 255, 20, 0.12);
+  background: rgba(168, 85, 247, 0.18);
+  border-color: rgba(168, 85, 247, 0.55);
+  color: #e9d5ff;
 }
 
 .reset-tile[data-modal="gratitude"] {
-  background: rgba(57, 255, 20, 0.12);
+  background: rgba(34, 197, 94, 0.18);
+  border-color: rgba(34, 197, 94, 0.55);
+  color: #bbf7d0;
 }
 
 .mind-disclaimer {
@@ -430,15 +447,21 @@ button {
 }
 
 .reset-tile[data-modal="breathe"]:hover {
-  background: rgba(57, 255, 20, 0.22);
+  background: rgba(59, 130, 246, 0.28);
+  border-color: rgba(59, 130, 246, 0.75);
+  transform: translateY(-2px);
 }
 
 .reset-tile[data-modal="write"]:hover {
-  background: rgba(57, 255, 20, 0.22);
+  background: rgba(168, 85, 247, 0.28);
+  border-color: rgba(168, 85, 247, 0.75);
+  transform: translateY(-2px);
 }
 
 .reset-tile[data-modal="gratitude"]:hover {
-  background: rgba(57, 255, 20, 0.22);
+  background: rgba(34, 197, 94, 0.28);
+  border-color: rgba(34, 197, 94, 0.75);
+  transform: translateY(-2px);
 }
 
 .modal {
@@ -546,98 +569,98 @@ button {
   }
 }
 
-/* -------- Footer -------- */
 .footer {
-  margin-top: auto;
-  background-color: #d2d2d2;
-  color: white;
-  padding: 20px;
-  text-align: center;
+    margin-top: auto;
+    background-color: #151515;
+    color: #e5e5e5;
+    padding: 20px;
+    text-align: center;
 }
 
 .footer-content {
-  max-width: 600px;
-  margin: 0 auto;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .footer-content p {
-  margin-bottom: 15px;
-  font-size: 0.9rem;
-  color: white;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: #e5e5e5;
 }
 
 .footer-links {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 15px;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
 }
 
 .footer-links a {
-  text-decoration: none;
-  color: white;
-  font-size: 0.9rem;
+    text-decoration: none;
+    color: #e5e5e5;
+    font-size: 0.9rem;
 }
 
 .footer-links a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
+    color: #39ff14;
 }
 
 .social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
 }
 
 .social-icons img {
-  width: 24px;
-  height: 24px;
-  transition: transform 0.2s;
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s;
 }
 
 .social-icons img:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
 
-  .footer {
-    padding: 20px 0;
+    .footer {
+        padding: 20px 0;
 
-  }
+    }
 
-  .footer-links {
-    flex-direction: column;
-    /* Stack links vertically */
-    gap: 10px;
-    padding: 5px 0;
-  }
+    .footer-links {
+        flex-direction: column;
+        /* Stack links vertically */
+        gap: 16px;
+        padding: 5px 0;
+    }
 
-  .footer-links a {
-    font-size: 1.1rem;
-    /* Larger text for easier readability */
-    margin-bottom: 10px;
-    text-decoration: underline;
-  }
+    .footer-links a {
+        font-size: 1.1rem;
+        /* Larger text for easier readability */
+        margin-bottom: 10px;
+        text-decoration: underline;
+    }
 
-  .footer p {
-    font-size: 1rem;
-    /* Larger text for easier readability */
-    margin-bottom: 20px;
-  }
+    .footer p {
+        font-size: 1rem;
+        /* Larger text for easier readability */
+        margin-bottom: 20px;
+    }
 
-  .social-icons img {
-    width: 42px;
-    /* Slightly larger for mobile */
-    height: 42px;
-    margin: 0 35px;
-  }
+    .social-icons img {
+        width: 42px;
+        /* Slightly larger for mobile */
+        height: 42px;
+        margin: 0 35px;
+    }
 
-  .footer span {
-    display: none;
-  }
+    .footer span {
+        display: none;
+    }
 }
 
 .separator {
