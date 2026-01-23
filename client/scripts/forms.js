@@ -923,6 +923,10 @@ function loadQuestion(i) {
     // If it's the very first question (i=0), hide it
     backButton.classList.remove("visible");
   }
+  const loginOfferLink = document.getElementById("login-offer-link");
+  if (loginOfferLink) {
+    loginOfferLink.style.display = i === 0 ? "inline-flex" : "none";
+  }
   if (i === questions.length - 1) {
     nextButton.textContent = "Finish";
   } else {
