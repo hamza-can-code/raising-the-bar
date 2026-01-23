@@ -5,7 +5,7 @@
   <link rel="preload" as="image" href="../assets/kayp-logo.png" fetchpriority="high">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
   <title>Let’s Build Your Plan</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
     rel="stylesheet">
@@ -44,23 +44,25 @@
   </script>
   <!-- TikTok Pixel Code End -->
   <!-- Meta Pixel Code -->
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '2589073464764526');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=2589073464764526&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+  <!-- Meta Pixel Code -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2589073464764526');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=2589073464764526&ev=PageView&noscript=1" /></noscript>
+  <!-- End Meta Pixel Code -->
 </head>
 
 <body>
@@ -79,15 +81,18 @@ src="https://www.facebook.com/tr?id=2589073464764526&ev=PageView&noscript=1"
   <div class="scroll">
     <div class="header">
       <div class="logo">
-          <picture>
-            <!-- WebP first -->
-            <source type="image/png" srcset="/assets/kayp-logo.png">
+        <picture>
+          <!-- WebP first -->
+          <source type="image/png" srcset="/assets/kayp-logo.png">
 
-            <img id="logo" src="/assets/kayp-logo.png" alt="GAINS+ Logo" width="224" height="100"
-              loading="eager" fetchpriority="high" decoding="async">
-          </picture>
+          <img id="logo" src="/assets/kayp-logo.png" alt="GAINS+ Logo" width="224" height="100" loading="eager"
+            fetchpriority="high" decoding="async">
+        </picture>
         </a>
       </div>
+      <a class="login-link" id="login-offer-link" href="../pages/log-in-offer-kayp.html">
+        Already completed the quiz? Log in
+      </a>
       <!-- <div class="dark-mode-button">
         <img id="darkModeToggle" class="" src="" alt="" height="0px">
       </div> -->
@@ -101,7 +106,7 @@ src="https://www.facebook.com/tr?id=2589073464764526&ev=PageView&noscript=1"
     <div class="form-container form-wrapper">
       <div class="form-question">
         <h2>Question</h2>
-      </div> 
+      </div>
       <div class="form-options">
         <ol>
           <li class="button-like">Option 1</li>
@@ -123,9 +128,11 @@ src="https://www.facebook.com/tr?id=2589073464764526&ev=PageView&noscript=1"
         </p>
         <br>
         <input type="checkbox" id="agreement-checkbox" checked>
-        By continuing, you agree to our <a href="tos.html" target="_blank">Terms of Service</a>,
-        <a href="privacy-policy.html" target="_blank">Privacy Policy</a>, and
-        <a href="cookie-policy.html" target="_blank">Cookie Policy</a>.
+By continuing, you agree to our 
+<a href="../pages/tos.html" target="_blank">Terms of Service</a>, 
+<a href="../pages/privacy-policy.html" target="_blank">Privacy Policy</a>, and 
+<a href="../pages/cookie-policy.html" target="_blank">Cookie Policy</a>.
+
       </label>
       <p id="warning-text" class="hidden">To continue, please accept our terms and policies.</p>
       <br>
