@@ -368,7 +368,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
     const recurringConfig = price?.recurring || getRecurringConfigForPlan(normalizedPlan);
     const sessionMode = bundle
       ? 'subscription'
-      : (isTrialPlan ? 'subscription' : (price?.type === 'recurring' ? 'subscription' : 'payment'));
+      : (isTrialPlan ? 'payment' : (price?.type === 'recurring' ? 'subscription' : 'payment'));
     const couponId = discounted ? getCouponIdForPlan(normalizedPlan, ccy, creatorSlug) : null;
 
     let creatorConfig = null;
@@ -399,12 +399,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
         { price: recurringPriceId, quantity: 1 },
         { price: activationPriceId, quantity: 1 },
       ]
-      : (isTrialPlan
-        ? [
-          { price: upgradePlanInfo.priceId, quantity: 1 },
-          { price: priceId, quantity: 1 },
-        ]
-        : [{ price: priceId, quantity: 1 }]);
+      : [{ price: priceId, quantity: 1 }];
 
     const sessionCfg = {
       mode: sessionMode,
@@ -414,8 +409,8 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       success_url: `${successBase}${successPath}?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${successBase}${cancelPath}`,
 
-      // ✅ Always force card entry, even if trial
-      payment_method_collection: 'always',
+      // ✅ Always force card entry for subscriptions
+      ...(sessionMode === 'subscription' ? { payment_method_collection: 'always' } : {}),
       // customer_creation: 'always',
 
       metadata: {
