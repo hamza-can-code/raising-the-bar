@@ -435,6 +435,17 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
         trial_settings: { end_behavior: { missing_payment_method: 'cancel' } },
         ...(bundle ? { trial_period_days: 30 } : {}),
         ...(isTrialPlan ? { trial_period_days: 7 } : {}),
+        trial_origin: 'checkout',
+      };
+    }
+
+    if (isTrialPlan && sessionMode === 'payment') {
+      sessionCfg.customer_creation = 'always';
+      sessionCfg.payment_intent_data = {
+        setup_future_usage: 'off_session',
+        metadata: {
+          ...(sessionCfg.metadata || {}),
+        },
       };
     }
 
@@ -475,6 +486,7 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
         sessionCfg.subscription_data = subscriptionData;
       } else if (destinationValid) {
         sessionCfg.payment_intent_data = {
+          ...(sessionCfg.payment_intent_data || {}),
           transfer_data: { destination: creatorConfig.destination },
           application_fee_amount: Math.round(
             (price.unit_amount || 0) * (creatorConfig.introFeePercent / 100)
@@ -482,20 +494,27 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
           on_behalf_of: creatorConfig.destination,
         };
       }
-        sessionCfg.metadata = {
-          ...(sessionCfg.metadata || {}),
-          creator_slug: creatorConfig.creator.slug,
-          creator_name: creatorConfig.creator.name,
-          creator_source: creatorConfig.source,
-          creator_default_currency: creatorConfig.creator.defaultCurrency,
-          platform_intro_fee_percent: String(creatorConfig.introFeePercent),
-          platform_ongoing_fee_percent: String(creatorConfig.ongoingFeePercent),
-          connect_destination: creatorConfig.destination || '',
-          connect_destination_valid: String(destinationValid),
-          connect_destination_country: destinationAccount?.country,
-          connect_destination_reason: destinationReason,
-        };
-      }
+      sessionCfg.metadata = {
+        ...(sessionCfg.metadata || {}),
+        creator_slug: creatorConfig.creator.slug,
+        creator_name: creatorConfig.creator.name,
+        creator_source: creatorConfig.source,
+        creator_default_currency: creatorConfig.creator.defaultCurrency,
+        platform_intro_fee_percent: String(creatorConfig.introFeePercent),
+        platform_ongoing_fee_percent: String(creatorConfig.ongoingFeePercent),
+        connect_destination: creatorConfig.destination || '',
+        connect_destination_valid: String(destinationValid),
+        connect_destination_country: destinationAccount?.country,
+        connect_destination_reason: destinationReason,
+      };
+    }
+
+    if (sessionCfg.payment_intent_data) {
+      sessionCfg.payment_intent_data.metadata = {
+        ...(sessionCfg.metadata || {}),
+        ...(sessionCfg.payment_intent_data.metadata || {}),
+      };
+    }
 
     log('Checkout session config', sessionCfg);
     const session = await stripe.checkout.sessions.create(sessionCfg);
@@ -567,6 +586,7 @@ router.post('/create-subscription-intent', express.json(), async (req, res) => {
         trial_upfront_price_id: priceId,
         trial_subscription_price_id: upgradePlanInfo.priceId,
         trial_period_days: '7',
+        trial_origin: 'elements',
       };
 
       if (creatorConfig) {

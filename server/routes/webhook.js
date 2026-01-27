@@ -184,11 +184,24 @@ router.post(
       };
 
       if (!hasSubscription && hasTrialUpfront && session.metadata?.trial_subscription === 'true') {
-        const paymentIntent = session.payment_intent;
+        let paymentIntent = session.payment_intent;
         const upgradePriceId = session.metadata?.trial_subscription_price_id;
         const trialDays = Number(session.metadata?.trial_period_days || 7);
-        const customerId = paymentIntent?.customer;
-        const paymentMethodId = paymentIntent?.payment_method;
+        if (paymentIntent && typeof paymentIntent === 'string') {
+          try {
+            paymentIntent = await stripe.paymentIntents.retrieve(paymentIntent, {
+              expand: ['payment_method', 'charges.data.payment_method'],
+            });
+          } catch (err) {
+            console.error('⚠️  Failed to retrieve payment intent for checkout session', paymentIntent, err.message);
+          }
+        }
+
+        const customerId = paymentIntent?.customer || session.customer;
+        const paymentMethodId =
+          paymentIntent?.payment_method ||
+          paymentIntent?.charges?.data?.[0]?.payment_method ||
+          null;
 
         if (upgradePriceId && customerId) {
           if (paymentMethodId) {
@@ -246,6 +259,23 @@ router.post(
             subscription = await stripe.subscriptions.create(subscriptionConfig);
           } catch (err) {
             console.error('❌  Failed to create trial follow-on subscription from Checkout', err.message);
+          }
+          if (subscription?.id && paymentIntent?.id) {
+            try {
+              await stripe.paymentIntents.update(paymentIntent.id, {
+                metadata: {
+                  ...(paymentIntent.metadata || {}),
+                  trial_subscription_created: 'true',
+                  trial_subscription_id: subscription.id,
+                },
+              });
+            } catch (err) {
+              console.error(
+                '⚠️  Failed to tag trial payment intent after subscription creation',
+                paymentIntent.id,
+                err.message
+              );
+            }
           }
         }
       }
@@ -434,9 +464,9 @@ router.post(
       }
     }
 
-     /******************************************************************
-     * 3️⃣  SUBSCRIPTION CREATED/UPDATED (ensure SetupIntent tagged)
-     *****************************************************************/
+    /******************************************************************
+    * 3️⃣  SUBSCRIPTION CREATED/UPDATED (ensure SetupIntent tagged)
+    *****************************************************************/
     if (
       event.type === 'customer.subscription.created' ||
       event.type === 'customer.subscription.updated'
