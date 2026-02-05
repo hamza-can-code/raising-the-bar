@@ -105,6 +105,53 @@ async function applyTrialUpgradeIfNeeded(subscriptionId) {
   }
 }
 
+function resolveTrialEndTimestamp(rawTrialDays) {
+  const parsedDays = Number(rawTrialDays);
+  const safeDays = Number.isFinite(parsedDays) && parsedDays > 0 ? parsedDays : 7;
+  return Math.floor(Date.now() / 1000) + safeDays * 24 * 60 * 60;
+}
+
+async function enforceSubscriptionTrial(subscription, rawTrialDays) {
+  if (!subscription?.id) return subscription;
+  if (subscription.trial_end) return subscription;
+
+  const trialEnd = resolveTrialEndTimestamp(rawTrialDays);
+  try {
+    return await stripe.subscriptions.update(subscription.id, {
+      trial_end: trialEnd,
+      proration_behavior: 'none',
+      metadata: {
+        ...(subscription.metadata || {}),
+        trial_recovery_applied: 'true',
+      },
+    });
+  } catch (err) {
+    console.error('⚠️  Failed to enforce trial period on follow-on subscription', {
+      subscriptionId: subscription.id,
+      message: err.message,
+    });
+    return subscription;
+  }
+}
+
+function buildFollowOnTrialSubscriptionConfig({
+  customerId,
+  upgradePriceId,
+  paymentMethodId,
+  rawTrialDays,
+  metadata,
+}) {
+  return {
+    customer: customerId,
+    items: [{ price: upgradePriceId }],
+    trial_end: resolveTrialEndTimestamp(rawTrialDays),
+    trial_settings: { end_behavior: { missing_payment_method: 'cancel' } },
+    default_payment_method: paymentMethodId || undefined,
+    payment_settings: { save_default_payment_method: 'on_subscription' },
+    metadata,
+  };
+}
+
 /* Stripe requires the raw body exactly as it arrives */
 router.post(
   '/webhook',
@@ -186,7 +233,6 @@ router.post(
       if (!hasSubscription && hasTrialUpfront && session.metadata?.trial_subscription === 'true') {
         let paymentIntent = session.payment_intent;
         const upgradePriceId = session.metadata?.trial_subscription_price_id;
-        const trialDays = Number(session.metadata?.trial_period_days || 7);
         if (paymentIntent && typeof paymentIntent === 'string') {
           try {
             paymentIntent = await stripe.paymentIntents.retrieve(paymentIntent, {
@@ -222,12 +268,11 @@ router.post(
             }
           }
 
-          const subscriptionConfig = {
-            customer: customerId,
-            items: [{ price: upgradePriceId }],
-            trial_period_days: Number.isFinite(trialDays) ? trialDays : 7,
-            default_payment_method: paymentMethodId || undefined,
-            payment_settings: { save_default_payment_method: 'on_subscription' },
+          const subscriptionConfig = buildFollowOnTrialSubscriptionConfig({
+            customerId,
+            upgradePriceId,
+            paymentMethodId,
+            rawTrialDays: session.metadata?.trial_period_days,
             metadata: {
               product: '4-Week Plan',
               currency_used: (paymentIntent?.currency || 'gbp').toUpperCase(),
@@ -244,7 +289,7 @@ router.post(
               connect_destination_country: session.metadata?.connect_destination_country || '',
               connect_destination_reason: session.metadata?.connect_destination_reason || '',
             },
-          };
+          });
 
           const destination = session.metadata?.connect_destination;
           const destinationValid = session.metadata?.connect_destination_valid === 'true';
@@ -257,6 +302,10 @@ router.post(
 
           try {
             subscription = await stripe.subscriptions.create(subscriptionConfig);
+            subscription = await enforceSubscriptionTrial(
+              subscription,
+              session.metadata?.trial_period_days,
+            );
           } catch (err) {
             console.error('❌  Failed to create trial follow-on subscription from Checkout', err.message);
           }
@@ -353,7 +402,6 @@ router.post(
       const metadata = paymentIntent.metadata || {};
       const isTrialSubscription = metadata.trial_subscription === 'true';
       const upgradePriceId = metadata.trial_subscription_price_id;
-      const trialDays = Number(metadata.trial_period_days || 7);
 
       if (!isTrialSubscription || !upgradePriceId) return res.sendStatus(200);
       if (metadata.trial_subscription_created === 'true') {
@@ -402,14 +450,13 @@ router.post(
         connect_destination_reason: metadata.connect_destination_reason || '',
       };
 
-      const subscriptionConfig = {
-        customer: customerId,
-        items: [{ price: upgradePriceId }],
-        trial_period_days: Number.isFinite(trialDays) ? trialDays : 7,
-        default_payment_method: paymentMethodId || undefined,
-        payment_settings: { save_default_payment_method: 'on_subscription' },
+      const subscriptionConfig = buildFollowOnTrialSubscriptionConfig({
+        customerId,
+        upgradePriceId,
+        paymentMethodId,
+        rawTrialDays: metadata.trial_period_days,
         metadata: subscriptionMetadata,
-      };
+      });
 
       const destination = metadata.connect_destination;
       const destinationValid = metadata.connect_destination_valid === 'true';
@@ -423,6 +470,7 @@ router.post(
       let subscription;
       try {
         subscription = await stripe.subscriptions.create(subscriptionConfig);
+        subscription = await enforceSubscriptionTrial(subscription, metadata.trial_period_days);
       } catch (err) {
         console.error('❌  Failed to create trial follow-on subscription', err.message);
         return res.sendStatus(200);
