@@ -144,6 +144,7 @@ const PLAN_PRICE_IDS = {
   trial: buildPriceMap('PRICE_TRIAL_UPFRONT'),
   '4-week': buildPriceMap('PRICE_FOUR_WEEK'),
   '12-week': buildPriceMap('PRICE_TWELVE_WEEK'),
+  'creator-platform-monthly': buildPriceMap('PRICE_CREATOR_PLATFORM_SUBSCRIPTION'),
 };
 
 const PLAN_BUNDLE_PRICE_IDS = {
@@ -197,6 +198,7 @@ const PLAN_LABELS = {
   '4-week': '4-Week Plan',
   '12-week': '12-Week Plan',
   'creator-platform': 'Creator Platform Access',
+  'creator-platform-monthly': 'Creator Platform Access (Monthly)',
 };
 
 const CREATOR_SUCCESS_PATHS = {
@@ -379,13 +381,17 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
       creatorConfig = await resolveCreator(normalizedCreator);
     }
 
+    const isCreatorPlatformPlan = normalizedPlan === 'creator-platform' || normalizedPlan === 'creator-platform-monthly';
+
     const successPath = normalizedCreator
       ? (CREATOR_SUCCESS_PATHS[normalizedCreator] || '/pages/plan-building.html')
-      : (normalizedPlan === 'creator-platform' ? '/pages/creator-platform-thank-you.html' : '/pages/plan-building.html');
+      : (isCreatorPlatformPlan ? '/pages/creator-platform-thank-you.html' : '/pages/plan-building.html');
 
     const cancelPath = normalizedCreator
       ? (CREATOR_OFFER_PATHS[normalizedCreator] || '/pages/offer.html')
-      : (normalizedPlan === 'creator-platform' ? '/pages/creator-platform-access.html' : '/pages/offer.html');
+      : (normalizedPlan === 'creator-platform-monthly'
+        ? '/pages/creator-platform-access-monthly.html'
+        : (normalizedPlan === 'creator-platform' ? '/pages/creator-platform-access.html' : '/pages/offer.html'));
 
     let upgradePlanInfo = null;
     if (isTrialPlan) {
@@ -433,9 +439,8 @@ router.post('/create-checkout-session', express.json(), async (req, res) => {
     if (sessionMode === 'subscription') {
       sessionCfg.subscription_data = {
         trial_settings: { end_behavior: { missing_payment_method: 'cancel' } },
-        ...(bundle ? { trial_period_days: 30 } : {}),
+        ...((bundle || normalizedPlan === 'creator-platform-monthly') ? { trial_period_days: 30 } : {}),
         ...(isTrialPlan ? { trial_period_days: 7 } : {}),
-        trial_origin: 'checkout',
       };
     }
 
