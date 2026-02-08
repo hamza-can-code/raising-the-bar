@@ -208,6 +208,7 @@ const CREATOR_SUCCESS_PATHS = {
   dav: '/pages/thank-you-dav.html',
   ironverse: '/pages/thank-you-ironverse.html',
   ryan: '/pages/thank-you-ryan.html',
+  ddfitness: '/pages/thank-you-ddfitness.html',
   ty: '/pages/thank-you-ty.html',
   nhial: '/pages/thank-you-nhial.html',
 };
@@ -219,6 +220,7 @@ const CREATOR_OFFER_PATHS = {
   dav: '/pages/offer-dav.html',
   ironverse: '/pages/offer-ironverse.html',
   ryan: '/pages/offer-ryan.html',
+  ddfitness: '/pages/offer-ddfitness.html',
   ty: '/pages/offer-ty.html',
   nhial: '/pages/offer-nhial.html',
 };

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+  <title>My Dashboard</title>
+
+  <!-- Fonts + stylesheets -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../styles/dashboard-ddfitness.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div id="loaderOverlay" class="loader-overlay">
+    <img src="../assets/DDFitness-logo.png" alt="GAINS+ logo" class="loader-logo" />
+  </div>
+  <!-- Header / logo -->
+  <header class="header">
+    <a href="dashboard-ddfitness.html" class="logo">
+      <img src="../assets/DDFitness-logo.png" alt="GAINS+ logo">
+    </a>
+    <!-- Desktop nav (inline) -->
+    <nav class="main-nav" id="main-nav">
+      <!-- close btn -->
+      <button class="nav-close" id="nav-close" aria-label="Close Menu">✕</button>
+
+      <ul>
+        <!-- <li><a href="dashboard.html">My Dashboard</a></li> -->
+        <li><a href="workout-tracker-ddfitness.html" id="nav-workouts">My Workouts</a></li>
+        <li><a href="nutrition-tracker-ddfitness.html" id="nav-nutrition">My Nutrition</a></li>
+        <li><a href="my-mind-ddfitness.html" id="nav-mind">My Mind</a></li>
+        <li><a href="#" id="nav-help">Help</a></li>
+      </ul>
+    </nav>
+
+    <!-- Mobile hamburger -->
+    <button class="hamburger" id="hamburger-btn" aria-label="Toggle Menu">☰</button>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9CSNHSLQQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'G-W9CSNHSLQQ');
+    </script>
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "rmf0p7sik4");
+    </script>
+    <!-- TikTok Pixel Code Start -->
+    <script>
+      !function (w, d, t) {
+        w.TiktokAnalyticsObject = t; var ttq = w[t] = w[t] || []; ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"], ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } }; for (var i = 0; i < ttq.methods.length; i++)ttq.setAndDefer(ttq, ttq.methods[i]); ttq.instance = function (t) {
+          for (
+            var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++)ttq.setAndDefer(e, ttq.methods[n]); return e
+        }, ttq.load = function (e, n) {
+          var r = "https://analytics.tiktok.com/i18n/pixel/events.js", o = n && n.partner; ttq._i = ttq._i || {}, ttq._i[e] = [], ttq._i[e]._u = r, ttq._t = ttq._t || {}, ttq._t[e] = +new Date, ttq._o = ttq._o || {}, ttq._o[e] = n || {}; n = document.createElement("script")
+            ; n.type = "text/javascript", n.async = !0, n.src = r + "?sdkid=" + e + "&lib=" + t; e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(n, e)
+        };
+
+
+        ttq.load('D0M3KORC77UCAFR1EOLG');
+        ttq.page();
+      }(window, document, 'ttq');
+    </script>
+    <!-- TikTok Pixel Code End -->
+    <!-- Meta Pixel Code -->
+    <script>
+      !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return; n = f.fbq = function () {
+          n.callMethod ?
+            n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+        n.queue = []; t = b.createElement(e); t.async = !0;
+        t.src = v; s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+      }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '2589073464764526');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=2589073464764526&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
+  </header>
+
+
+
+  <div id="trackerBadge"></div>
+
+  <div id="wtOnboardingOverlay" class="wt-onboarding-overlay">
+    <div class="wt-onboarding-slider">
+      <!-- Screen 1 – personalised welcome ---------------------------->
+      <section class="wt-onboarding-card" data-step="1">
+        <h2 class="wt-line wt-title"></h2>
+        <p class="wt-line wt-goal"></p>
+        <p class="wt-line wt-driver"></p>
+
+        <button class="wt-next-btn">Next</button>
+      </section>
+
+      <!-- Screen 2 – tracker tutorial ------------------------------->
+      <section class="wt-onboarding-card" data-step="2">
+        <h2 class="wt-line wt-title">What’s inside your tracker.</h2>
+        <ul class="wt-tutorial">
+          <li class="wt-line">
+            <span class="wt-emoji-tutorial">🏋️</span>
+            <strong>Workout Tracker</strong> — follow your personalised workouts and log your training each session.
+          </li>
+          <li class="wt-line">
+            <span class="wt-emoji-tutorial">🍽️</span>
+            <strong>Nutrition Tracker</strong> — view your meal plan, swap meals, and keep your nutrition on track.
+          </li>
+          <li class="wt-line">
+            <span class="wt-emoji-tutorial">📈</span>
+            <strong>My Progress</strong> — track your consistency, streaks, and personal bests over time.
+          </li>
+        </ul>
+        <p class="wt-line wt-sub">
+          Everything’s designed to keep you focused and moving forward—jump in when you’re ready.
+        </p>
+        <button class="wt-next-btn">Next</button>
+      </section>
+
+
+      <!-- Screen 3 – motivation ------------------------------------->
+      <section class="wt-onboarding-card" data-step="3">
+        <h2 class="wt-line wt-title"></h2>
+        <p class="wt-line wt-subtitle"></p>
+
+        <button class="wt-close-btn">Open My Tracker</button>
+      </section>
+    </div>
+
+    <!-- dot indicators -->
+    <div id="wtOnboardingDots" class="wt-onboarding-dots"></div>
+  </div>
+
+  <!-- Greeting -->
+  <section class="welcome">
+    <h1 id="welcomeHeading"></h1>
+    <p id="welcomeSub" class="welcome-sub"></p>
+  </section>
+
+  <!-- Main XP bar -->
+  <section>
+    <section class="xp-bar-container">
+      <span id="currentLevel">Lvl 0</span>
+      <div class="xp-bar">
+        <div id="xpFill" class="xp-bar-fill"></div>
+      </div>
+      <span id="xpGainAnim">+0 XP</span>
+    </section>
+
+
+    <section id="firstWorkoutBanner" class="first-workout-banner" style="display:none;">
+      <p class="headline">🎉 You’ve just hit your first milestone!</p>
+      <p class="subline">
+        Want to see what Pro unlocks for your strength, nutrition, and progress? Tap below to compare trackers.
+      </p>
+      <a href="#" id="firstWorkoutCompare" class="cta pt-cta">
+        🔍 See What’s Inside
+      </a>
+    </section>
+
+  </section>
+
+  <!-- <section class="referral-banner" aria-label="Referral giveaway">
+    <div class="referral-banner__inner">
+      <div class="referral-banner__timer" id="referralCountdown" role="status" aria-live="polite">
+        <span class="referral-banner__timer-label">Ends in</span>
+        <span class="referral-banner__timer-value" data-default="24:00:00">24:00:00</span>
+      </div>
+      <div class="referral-banner__copy">
+        <div class="referral-banner__headline">
+          <span class="referral-banner__icon" aria-hidden="true">🏆</span>
+          <div>
+            <h2>Earn £10</h2>
+            <p class="referral-banner__subtitle">Each referral = one entry this month.</p>
+          </div>
+        </div>
+
+        <p class="referral-banner__lede">
+          Win £1,000 for yourself — and both you and your referrals get 12 weeks of coaching, free.
+        </p>
+
+        <p class="referral-banner__steps">
+          <strong>How to earn:</strong>
+          Friends claim their plan at
+          <a href="https://raisingthebarapp.com" class="referral-banner__link">raisingthebarapp.com</a>,
+          then contact us with the email of who you referred.
+        </p>
+      </div>
+
+      <div class="referral-banner__side">
+        <p class="referral-banner__note">More referrals = more money to earn.</p>
+        <a class="referral-banner__button" href="contact-us.html">Submit Referrals Now</a>
+        <div class="referral-banner__trust" aria-live="polite">
+          <p style="text-align: center;">💸 £5,000+ awarded so far</p>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Tracker cards -->
+  <main class="cards">
+    <!-- Workout -->
+    <article class="tracker-card" id="wtCard">
+      <span class="emoji">🏋️</span>
+      <h2>My Workouts</h2>
+      <p id="wtStatus" class="status"></p>
+      <p id="wtStreak" class="streak"></p>
+      <a href="workout-tracker-ddfitness.html" class="cta">Go to Workouts</a>
+    </article>
+
+    <!-- Nutrition -->
+    <article class="tracker-card" id="ntCard">
+      <span class="emoji">🍽️</span>
+      <h2>My Nutrition</h2>
+      <p id="ntStatus" class="status"></p>
+      <p id="ntStreak" class="streak"></p>
+      <p class="nt-subtext"><span class="nt-subtext-emoji">🧠</span> Stay on track without tracking stress.</p>
+        <a href="nutrition-tracker-ddfitness.html" class="cta">Go to Nutrition</a>
+    </article>
+
+    <!-- My Mind -->
+    <article class="tracker-card" id="mmCard">
+      <span class="emoji">🧠</span>
+      <h2>My Mind</h2>
+      <p class="status">Check in, reset, and keep your mindset strong.</p>
+      <p class="streak">Small steps for big mental wins.</p>
+      <a href="my-mind-ddfitness.html" class="cta">Go to My Mind</a>
+    </article>
+
+    <article class="tracker-card" id="mpCard" style="display:none;">
+      <span class="emoji">🚀</span>
+      <h2>My Progress</h2>
+
+      <div class="pt-extra-container">
+        <span class="crown-emoji">👑</span>
+        <span class="pt-extra">Pro Tracker Only</span>
+      </div>
+
+      <p class="streak">
+        Track your transformation with strength, body, and habit trends — plus instant feedback that keeps you improving
+      </p>
+      <p class="mp-subtext"><span class="mp-subtext-emoji">🪞</span> Your progress deserves a full picture.</p>
+
+      <a href="offer.html" class="cta pt-cta">🔓 Unlock Pro Tracker</a>
+    </article>
+  </main>
+
+  <p class="compare-plans">
+    👀 Want the full experience? <a href="#" id="comparePlansLink">Compare Plans</a>
+  </p>
+
+  <!-- Daily motivation -->
+  <section class="motivation">
+    <p id="motivationMsg"></p>
+  </section>
+
+  <!-- Footer (same as NT) -->
+  <footer class="footer fade-in" id="footer">
+    <div class="footer-content">
+      <p class="powered">POWERED BY</p>
+      <p>&copy; 2026 Raising The Bar App Ltd. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="dashboard-ddfitness.html">Start Training</a>
+        <span class="separator">|</span>
+        <a href="legal-overview.html">Our Policies</a>
+        <span class="separator">|</span>
+        <a href="contact-us.html">Contact Us</a>
+      </div>
+      <!-- <div class="social-icons">
+        <a href="https://www.instagram.com/raising_the_bar_app/?hl=en" target="_blank" aria-label="Instagram">
+          <img src="../assets/instagram-icon.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@Raising_The_Bar_App" target="_blank" aria-label="YouTube">
+          <img src="../assets/youtube-icon.png" alt="YouTube">
+        </a>
+        <a href="https://www.tiktok.com/@raising_the_bar_app" target="_blank" aria-label="TikTok">
+          <img src="../assets/tiktok-icon.png" alt="TikTok">
+        </a>
+      </div> -->
+    </div>
+  </footer>
+
+  <div id="compareModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+
+      <h2>Compare Plans</h2>
+      <p class="subtext">Here's what you unlock when upgrading to Pro.</p>
+
+      <div class="table-wrapper">
+        <table class="compare-table">
+          <colgroup>
+            <col class="col-feature">
+            <col class="col-ct">
+            <col class="col-pt">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Core Tracker</th>
+              <th>Pro Tracker</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Workout Logging</td>
+              <td>✅</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Adaptive Progression</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Progress Score</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>My Progress (Trends &amp; Insights)</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Coach Feedback &amp; Weekly Insights</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Nutrition Tracker</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Macro-Matched Meals</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Meal Prep Mode &amp; Shopping List</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>XP Bonuses &amp; Weekly Recaps</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Video Tutorials</td>
+              <td>❌</td>
+              <td>✅</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="testimonial">
+        “I didn’t realize how much I was missing until I unlocked Pro Tracker. It made everything click.”<br>
+        – Alice, lost 7 kg with Pro
+      </p>
+    </div>
+  </div>
+
+  <div id="faq-modal" class="faq-modal">
+    <div class="faq-modal-content">
+      <button class="close-btn" data-target="faq-modal">✕</button>
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <details>
+          <summary>How do I get started?</summary>
+          <p class="faq-answer">Tap <strong>“Claim Your Program”</strong>, fill out the short form, and your
+            personalised tracker will be ready within minutes.</p>
+        </details>
+
+        <details>
+          <summary>What if I’ve never followed a program before?</summary>
+          <p class="faq-answer">No problem. This is built for real people — simple steps, flexible tools, and progress
+            at your pace.</p>
+        </details>
+
+        <details>
+          <summary>Can I change my goals later on?</summary>
+          <p class="faq-answer">Absolutely. Once you're inside your tracker, you can update your goals anytime — your
+            plan will adapt automatically.</p>
+        </details>
+
+        <details>
+          <summary>What happens after I sign up?</summary>
+          <p class="faq-answer">You'll unlock your own dashboard — filled with workouts, meals, and progress tools
+            tailored to your goals, lifestyle, and experience level. It all connects in one place, ready to use right
+            away.</p>
+        </details>
+
+        <details>
+          <summary>Still have questions?</summary>
+          <p class="faq-answer"><a href="contact-us.html">Click here</a> to contact us or explore more answers. We're
+            here to support you.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logic -->
+  <script src="../scripts/dashboard-ddfitness.js"></script>
+</body>
+
+</html>
