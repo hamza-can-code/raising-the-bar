@@ -211,6 +211,7 @@ const CREATOR_SUCCESS_PATHS = {
   ddfitness: '/pages/thank-you-ddfitness.html',
   ty: '/pages/thank-you-ty.html',
   nhial: '/pages/thank-you-nhial.html',
+  jacklifts: '/pages/thank-you-jacklifts.html',
 };
 
 const CREATOR_OFFER_PATHS = {
@@ -223,6 +224,7 @@ const CREATOR_OFFER_PATHS = {
   ddfitness: '/pages/offer-ddfitness.html',
   ty: '/pages/offer-ty.html',
   nhial: '/pages/offer-nhial.html',
+  jacklifts: '/pages/offer-jacklifts.html',
 };
 
 function getRecurringConfigForPlan(plan) {

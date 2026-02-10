@@ -47,6 +47,7 @@
     carl: '/pages/thank-you-carl.html',
     ty: '/pages/thank-you-ty.html',
     nhial: '/pages/thank-you-nhial.html',
+    jacklifts: '/pages/thank-you-jacklifts.html',
   };
   const SUCCESS_PATH = CREATOR_SUCCESS_PATHS[getCreatorSlug()] || '/pages/plan-building.html';
   const RETURN_URL = `${window.location.origin}${SUCCESS_PATH}`;
@@ -160,7 +161,7 @@ const TY_PAYMENT_APPEARANCE = {
 };
 
 
-  const KAYP_STYLE_SLUGS = ['kayp', 'dav', 'ryan', 'ddfitness', 'ironverse', 'nhial', 'danny', 'carl'];
+  const KAYP_STYLE_SLUGS = ['kayp', 'dav', 'ryan', 'jacklifts', 'ddfitness', 'ironverse', 'nhial', 'danny', 'carl'];
   const creatorSlug = getCreatorSlug();
 
   const PAYMENT_APPEARANCE = creatorSlug === 'ty'
