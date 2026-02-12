@@ -198,6 +198,55 @@ document.addEventListener('DOMContentLoaded', function () {
             hideBanner();
         });
     }
+
+     // Creator carousel dots
+    const track = document.getElementById('creatorTrack');
+    const dots = document.querySelectorAll('.carousel-dots .dot');
+
+    if (track && dots.length) {
+        const setActiveDot = (index) => {
+            dots.forEach((d) => d.classList.remove('is-active'));
+            if (dots[index]) dots[index].classList.add('is-active');
+        };
+
+        dots.forEach((dot) => {
+            dot.addEventListener('click', () => {
+                const idx = Number(dot.getAttribute('data-index') || '0');
+                const slide = track.children[idx];
+                if (!slide) return;
+
+                slide.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+                setActiveDot(idx);
+            });
+        });
+
+        const onScroll = () => {
+            const slides = Array.from(track.children);
+            const trackRect = track.getBoundingClientRect();
+            const trackCenter = trackRect.left + trackRect.width / 2;
+
+            let closestIndex = 0;
+            let closestDistance = Infinity;
+
+            slides.forEach((slide, i) => {
+                const rect = slide.getBoundingClientRect();
+                const center = rect.left + rect.width / 2;
+                const dist = Math.abs(center - trackCenter);
+                if (dist < closestDistance) {
+                    closestDistance = dist;
+                    closestIndex = i;
+                }
+            });
+
+            setActiveDot(closestIndex);
+        };
+
+        track.addEventListener('scroll', () => {
+            window.requestAnimationFrame(onScroll);
+        });
+
+        setActiveDot(0);
+    }
 });
 
 // Hide the "Loading calendar..." text once Calendly sends any event

@@ -2162,13 +2162,13 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Chris',
       rating: 4,
       time: 'Today',
-      text: 'really good app, best one ive tried bc it covers both workouts and nutrition at top quality and the results speak for themself (lost 3kg in a week and feel healthier than ever). the lil sleep + stress notes keep me from overdoing it. only wish every warmup had vids but its still the best ive used tbh',
+      text: 'really good app, best one ive tried bc it covers both workouts and nutrition at top quality and the results speak for themself (lost 1.1kg in a week and feel healthier than ever). the lil sleep + stress notes keep me from overdoing it. only wish every warmup had vids but its still the best ive used tbh',
     },
     {
       name: 'THE ALPHA',
       rating: 4,
       time: 'Today',
-      text: 'Been watching carls tiktok for a bit, I found his vids helpful so thought id gv his app a go. been using this for a couple of weeks and its genuinely amazing (avging 2kg muscle per week). Was going to rate 5 stars but the rest timer bugged once on me so im leaving a 4 til they patch it 💔 still worth it tho',
+      text: 'Been watching carls tiktok for a bit, I found his vids helpful so thought id gv his app a go. been using this for a couple of weeks and its genuinely amazing (avging 0.6kg muscle per week). Was going to rate 5 stars but the rest timer bugged once on me so im leaving a 4 til they patch it 💔 still worth it tho',
     },
     {
       name: 'alex',

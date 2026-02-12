@@ -361,26 +361,34 @@ document.addEventListener("DOMContentLoaded", () => {
   // Return an absolute/relative path to your assets folder:
   const imgSrc = (file) => `../assets/${file}`;
 
+  // const updateSocialProofCoach = () => {
+  //   const coachImg = document.querySelector('.social-proof__coach');
+  //   if (!coachImg) return;
+
+  //   const desiredBodyType = (localStorage.getItem('desiredBodyType') || '').toLowerCase();
+  //   const dreamMap = {
+  //     athlete: `athlete${genderSuffix}.webp`,
+  //     hero: `hero${genderSuffix}.webp`,
+  //     bodybuilder: `muscular-silhouette${genderSuffix}.webp`
+  //   };
+  //   const fallbackFile = `muscular-silhouette${genderSuffix}.webp`;
+  //   const selectedFile = dreamMap[desiredBodyType] || fallbackFile;
+
+  //   const formatLabel = (value) => value ? value.charAt(0).toUpperCase() + value.slice(1) : '';
+  //   const genderLabel = normalizedGender === 'female' ? 'Female' : 'Male';
+  //   const dreamLabel = formatLabel(desiredBodyType) || 'Coach';
+
+  //   coachImg.src = imgSrc(selectedFile);
+  //   coachImg.alt = `${genderLabel} ${dreamLabel} physique illustration`;
+  // };
+
   const updateSocialProofCoach = () => {
-    const coachImg = document.querySelector('.social-proof__coach');
-    if (!coachImg) return;
+  const coachImg = document.querySelector('.social-proof__coach');
+  if (!coachImg) return;
 
-    const desiredBodyType = (localStorage.getItem('desiredBodyType') || '').toLowerCase();
-    const dreamMap = {
-      athlete: `athlete${genderSuffix}.webp`,
-      hero: `hero${genderSuffix}.webp`,
-      bodybuilder: `muscular-silhouette${genderSuffix}.webp`
-    };
-    const fallbackFile = `muscular-silhouette${genderSuffix}.webp`;
-    const selectedFile = dreamMap[desiredBodyType] || fallbackFile;
-
-    const formatLabel = (value) => value ? value.charAt(0).toUpperCase() + value.slice(1) : '';
-    const genderLabel = normalizedGender === 'female' ? 'Female' : 'Male';
-    const dreamLabel = formatLabel(desiredBodyType) || 'Coach';
-
-    coachImg.src = imgSrc(selectedFile);
-    coachImg.alt = `${genderLabel} ${dreamLabel} physique illustration`;
-  };
+  coachImg.src = imgSrc('ryan-coach.jpg');
+  coachImg.alt = 'Coach Seb';
+};
 
   updateSocialProofCoach();
 
@@ -519,7 +527,7 @@ document.addEventListener("DOMContentLoaded", () => {
   userGoal = userGoal ? userGoal.trim().toLowerCase() : "improve body composition";
 
   // 4) Build line #1 of hero message
-   let heroLine1 = "";
+  let heroLine1 = "";
   if (userGoal === "lose weight") {
     // how much to lose, in kg
     const diffKg = currentKg - goalKg;
@@ -738,15 +746,15 @@ document.addEventListener("DOMContentLoaded", () => {
   function getBMIDescription(category) {
     switch (category.toLowerCase()) {
       case "obese":
-        return `Your BMI indicates a <b>higher weight category</b>, but your tracker adjusts to you — helping you build real, lasting progress without overwhelm.`;
+        return `Your BMI indicates a <b>higher weight category</b>, but your personalized plan adjusts to you — helping you build real, lasting progress without overwhelm.`;
       case "overweight":
-        return `Your BMI suggests you're <b>slightly overweight</b>. Don’t worry — your smart tracker is built to deliver long-term success.`;
+        return `Your BMI suggests you're <b>slightly overweight</b>. Don’t worry — your personalized plan is built to deliver long-term success.`;
       case "healthy":
         return `Your BMI suggests you’re in a great place! Let’s build on that strong foundation and keep the momentum going.`;
       case "underweight":
-        return `Your BMI suggests you're <b>below the recommended range</b>. Your tracker is built to help you get stronger, healthier, and more confident.`;
+        return `Your BMI suggests you're <b>below the recommended range</b>. Your personalized plan is built to help you get stronger, healthier, and more confident.`;
       default:
-        return `Your BMI is just one factor. Your tracker will adapt to support your full transformation.`;
+        return `Your BMI is just one factor. Your personalized plan will adapt to support your full transformation.`;
     }
   }
 
@@ -1003,7 +1011,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Muscle gain review.
     selectedReviewName = "David";
     selectedReviewText =
-      "I used to wing it with random exercises and YouTube routines. Having workouts that actually adapt to my progress changed everything. I've built 6 kg of lean muscle all from home.";
+      "I used to wing it with random exercises and YouTube routines. Having a personalized plan built for me but using Seb's structure to follow has genuinely changed my life. I've built 6 kg of lean muscle all from home.";
     beforeImgSrc = "../assets/harry_chest_before.webp";
     afterImgSrc = "../assets/harry_chest_after.webp";
 
@@ -1012,7 +1020,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Male weight-loss review.
       selectedReviewName = "Lee";
       selectedReviewText =
-        "I wasn’t sure I could stick with it. But everything’s laid out — no guessing. I’ve lost 10kg and finally feel like myself again.";
+        "I wasn’t sure I could stick with it. But everything’s laid out, and I found it helpful following the same structure Seb uses. I’ve lost 10kg and finally feel like myself again.";
       beforeImgSrc = "../assets/lynn_before.webp";
       afterImgSrc = "../assets/lynn_after.webp";
 
@@ -1083,57 +1091,37 @@ document.addEventListener("DOMContentLoaded", () => {
    * A) WHAT’S INCLUDED DATA
    ***************************************************/
 
-  const whatsIncludedData = [
+    const whatsIncludedData = [
     {
-      title: "Tailored From Day One (CT)",
-      image: "../assets/your-ui-mockup.webp",
+      title: "Personalized workout plan",
+      image: "../assets/your-ui-mockup-seb.webp",
       desc: ""
     },
     {
-      title: "Track Workouts, Earn XP (CT)",
-      image: "../assets/clear-and-easy.PNG",
+      title: "Clear and easy to follow",
+      image: "../assets/clear-and-easy.webp",
       desc: ""
     },
     {
-      title: "Adaptive Progression Engine (PT)",
-      image: "../assets/visible-results.webp",
+      title: "Progress tracking & analysis",
+      image: "../assets/progress-tracking.webp",
       desc: ""
     },
-    // {
-    //   title: "Adaptive Progression Engine (PT)",
-    //   image: "../assets/meal-scanner.webp",
-    //   desc: ""
-    // },
     {
-      title: "Macro-Matched Meals (PT)",
-      image: "../assets/progress-tracking-2.PNG",
+      title: "Mindset & recovery tools",
+      image: "../assets/my-mind-seb.webp",
+      desc: ""
+    },
+    {
+      title: "The same structure creator follows",
+      image: "../assets/seb-structure.webp",
+      desc: ""
+    },
+    {
+      title: "Visible results in 4 weeks",
+      image: "../assets/visible-results-decoded.webp",
       desc: ""
     }
-    //     {
-    //   title: "Macro-Matched Meals (PT)",
-    //   image: "../assets/customer-support.webp",
-    //   desc: ""
-    // }
-    // {
-    //   title: "Flexible Logging, Your Way (PT)",
-    //   image: "../assets/5_flexible_logging.png",
-    //   desc: "Log in one tap, customize meals, or skip when needed — your tracker adjusts for you."
-    // },
-    // {
-    //   title: "Daily Streaks That Stick (CT)",
-    //   image: "../assets/6_daily_streaks.png",
-    //   desc: "Build streaks that unlock milestones — with encouragement that celebrates your wins and helps you stay on track when it counts."
-    // },
-    // {
-    //   title: "Your Fitness Story, Visualized (PT)",
-    //   image: "../assets/7_your_fitness_story.png",
-    //   desc: "Your tracker doesn't just log data — it highlights trends, flags issues, and offers insights like a coach who's always paying attention."
-    // },
-    // {
-    //   title: "Your Progress, Scored (PT)",
-    //   image: "../assets/8_your_progress.png",
-    //   desc: "One score that reflects your training, nutrition, and consistency — so you can see how far you’ve come."
-    // }
   ];
 
   /***************************************************
@@ -2135,8 +2123,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const reviewsList = document.getElementById('reviewsList');
   const reviewsPagination = document.getElementById('reviewsPagination');
   const reviewComposer = document.getElementById('reviewComposer');
-  const readReviewsLink = document.getElementById('readReviewsLink');
-  const reassuranceReviewsLink = document.getElementById('reassuranceReviewsLink');
 
   if (!reviewsSection || !reviewsList || !reviewsPagination) return;
 
@@ -2176,13 +2162,13 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Chris',
       rating: 4,
       time: 'Today',
-      text: 'really good app, best one ive tried bc it covers both workouts and nutrition at top quality and the results speak for themself (lost 1.1kg in a week and feel healthier than ever). Idk how i feel abt the random discounts tho. Like i got 25% off and was buzzing but just saw someone got 51% off?? idm TOO much cuz this app is worth the money but if i got a 51% code i wouldve used it in a heartbeat lmao',
+      text: 'really good app, best one ive tried bc it covers both workouts and nutrition at top quality and the results speak for themself (lost 1.1kg in a week and feel healthier than ever). the lil sleep + stress notes keep me from overdoing it. only wish every warmup had vids but its still the best ive used tbh',
     },
     {
       name: 'THE ALPHA',
       rating: 4,
       time: 'Today',
-      text: 'Been using this for a couple of weeks and its genuinely amazing (avging 0.6kg muscle per week). Was going to rate 5 stars but i littraly just read someone got 51% off like wtf i only got 3% off 💔 still worth it tho',
+      text: 'Been watching sebs tiktok for a bit, I found his vids helpful so thought id gv his app a go. been using this for a couple of weeks and its genuinely amazing (avging 0.6kg muscle per week). Was going to rate 5 stars but the rest timer bugged once on me so im leaving a 4 til they patch it 💔 still worth it tho',
     },
     {
       name: 'alex',
@@ -2219,13 +2205,13 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'sully',
       rating: 5,
       time: 'Today',
-      text: 'got 77% off for my promo what a steal',
+      text: 'got 51% off what a steal',
     },
     {
       name: 'Cal',
       rating: 5,
       time: 'Today',
-      text: 'nice to have an app where i can track workouts and meals rather than juggling multiple apps. plus i got 52% off lfg',
+      text: 'nice to have an app where i can track workouts and meals rather than juggling multiple apps. plus i got 51% off lfg',
     },
     {
       name: 'Diego',
@@ -2263,7 +2249,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Kyra L',
       rating: 5,
       time: 'Yesterday',
-      text: 'Didn’t expect the meals to be this college-budget-friendly, plus i got 23% off woop woop. Big W for the grocery lists.',
+      text: 'Didn’t expect the meals to be this college-budget-friendly. Big W for the grocery lists.',
     },
     {
       name: 'layla',
@@ -2295,7 +2281,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'kia malifa',
       rating: 5,
       time: '2 days ago',
-      text: 'i got 69% off. nice. and yh the apps good too',
+      text: 'the lil streak bar scratches my brain in the best way.. and yh the apps good too',
     },
     {
       name: 'Maddie',
@@ -2514,7 +2500,7 @@ document.addEventListener('DOMContentLoaded', () => {
       text: 'App aesthetic is 🔥 and the coach notes read like a friend. Wish there was dark mode but still obsessed.',
     },
 
-    // 🔹 2 MONTHS AGO
+    // �� 2 MONTHS AGO
     {
       name: 'dad',
       rating: 5,
@@ -2921,8 +2907,10 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollToReviews({ collapseOfferCard: true });
   };
 
-  [readReviewsLink, reassuranceReviewsLink].forEach((trigger) => {
-    trigger?.addEventListener('click', handleReviewsTrigger);
+  document.addEventListener('click', (event) => {
+    const trigger = event.target.closest('[data-scroll-target="reviews"]');
+    if (!trigger) return;
+    handleReviewsTrigger(event);
   });
 
   reviewComposer?.addEventListener('submit', (e) => {
@@ -3804,7 +3792,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ? `🎁 Scratch and win <span class="rtb-blue-underline">random discount</span> up to 51% off`
       : `🎁 Scratch and win <span class="rtb-blue-underline">random discount</span> up to 51% off`;
     header.dataset.baseText = baseText;
-    header.dataset.winText = '<span class="promo-strip__rarity-count">';
+    header.dataset.winText = '<span class="promo-strip__rarity-count">Wow!</span> You won the <span class="promo-strip__rarity-count">biggest</span> discount!';
     header.innerHTML = baseText;
 
     const promoLine = document.getElementById("promoCodeLine");

@@ -42,6 +42,7 @@
     vital: '/pages/thank-you-vital.html',
     dav: '/pages/thank-you-dav.html',
     ryan: '/pages/thank-you-ryan.html',
+    seb: '/pages/thank-you-seb.html',
     ddfitness: '/pages/thank-you-ddfitness.html',
     danny: '/pages/thank-you-danny.html',
     carl: '/pages/thank-you-carl.html',
@@ -161,7 +162,7 @@ const TY_PAYMENT_APPEARANCE = {
 };
 
 
-  const KAYP_STYLE_SLUGS = ['kayp', 'dav', 'ryan', 'jacklifts', 'ddfitness', 'ironverse', 'nhial', 'danny', 'carl'];
+  const KAYP_STYLE_SLUGS = ['kayp', 'dav', 'ryan', 'seb', 'jacklifts', 'ddfitness', 'ironverse', 'nhial', 'danny', 'carl'];
   const creatorSlug = getCreatorSlug();
 
   const PAYMENT_APPEARANCE = creatorSlug === 'ty'

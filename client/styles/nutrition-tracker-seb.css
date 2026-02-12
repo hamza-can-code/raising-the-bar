@@ -87,7 +87,7 @@ exercise-btn,
 .loader-logo {
   --scale: 0.8;
   /* driven by JS */
-  width: 400px;
+  width: 120px;
   max-width: 60vw;
   transform: scale(var(--scale));
   transform-origin: center;
