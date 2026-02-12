@@ -386,7 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const coachImg = document.querySelector('.social-proof__coach');
   if (!coachImg) return;
 
-  coachImg.src = imgSrc('ryan-coach.jpg');
+  coachImg.src = imgSrc('seb-coach.webp');
   coachImg.alt = 'Coach Seb';
 };
 
@@ -1099,12 +1099,12 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       title: "Clear and easy to follow",
-      image: "../assets/clear-and-easy.webp",
+      image: "../assets/clear-and-easy-seb.webp",
       desc: ""
     },
     {
       title: "Progress tracking & analysis",
-      image: "../assets/progress-tracking.webp",
+      image: "../assets/progress-tracking-ty.webp",
       desc: ""
     },
     {

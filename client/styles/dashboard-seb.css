@@ -858,7 +858,7 @@ h6,
 }
 
 .cta:active {
-  background-color: #24c20c;
+  background-color: #003f7f;
   /* Even darker blue on click */
   box-shadow: 0px 3px 4px rgba(255, 255, 255, 0.2);
   /* Reduced shadow */
@@ -1102,7 +1102,7 @@ h6,
 
 .wt-next-btn:active,
 .wt-close-btn:active {
-  background: #24c20c;
+  background: #0056b3;
 }
 
 @media(min-width:768px) {
