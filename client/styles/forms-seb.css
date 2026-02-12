@@ -5,16 +5,17 @@ body {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #f9f7f2;
+  background-color: #0f0f0f;
   /* 4) Prevent horizontal scroll: */
 }
 
 body {
-  background-color: #f9f7f2;
+  background-color: #0f0f0f;
   min-height: 100vh;
   font-family: 'Roboto', sans-serif;
   /* Body: Roboto Regular */
   font-weight: 400;
+  color: #e5e5e5;
 }
 
 h1,
@@ -69,7 +70,7 @@ h6 {
   font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #333;
+  color: #f9f7f2;
   text-decoration: none;
   padding-left: 10px;
   text-align: center;
@@ -97,10 +98,10 @@ h6 {
   width: 100%;
   /* now includes padding, thanks to border-box */
   box-sizing: border-box;
-  background-color: #2c3e50;
-  color: #fff;
+  background-color: #151515;
+  color: #e5e5e5;
   padding: 1rem;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 -2px 5px rgba(255, 255, 255, 0.08);
   text-align: center;
   z-index: 1000;
 }
@@ -111,7 +112,7 @@ h6 {
 }
 
 .cookie-banner a {
-  color: #f5a623;
+  color: #007BFF;
   text-decoration: underline;
 }
 
@@ -130,13 +131,13 @@ h6 {
 }
 
 #accept-all {
-  background-color: #28a745;
+  background-color: #007BFF;
   color: #fff;
 }
 
 #deny-all {
-  background-color: #dc3545;
-  color: #fff;
+  background-color: #2a2a2a;
+  color: #e5e5e5;
 }
 
 button:hover {
@@ -181,6 +182,7 @@ button:hover {
   font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;
+  color: #333;
   padding: 0;
 }
 
@@ -274,6 +276,7 @@ button:hover {
 .form-question {
   margin: 10px;
   text-align: center;
+  color: #e5e5e5;
 }
 
 .form-question h2 {
@@ -288,33 +291,34 @@ button:hover {
 }
 
 .form-options li {
-  background-color: #f5ebe2;
+  background-color: #191919;
   max-width: 400px;
-  border: 1px solid #f5ebe2;
+  border: 1px solid #191919;
   border-radius: 15px;
   padding: 10px;
   margin: 20px auto;
   cursor: pointer;
   transition: all 0.3s ease;
+  color: #e5e5e5;
 }
 
 li.button-like:hover {
-  background-color: #e7d8c9;
-  border: 1px solid #d3c2b3;
+  background-color: #2c2c2c;
+  border: 1px solid #424242;
   transform: scale(1.01);
   transition: transform 0.1s ease;
 }
 
 li.button-like:active {
-  background-color: #d3c2b3;
-  border: 1px solid #d3c2b3;
+  background-color: #424242;
+  border: 1px solid #424242;
 }
 
 li.button-like.selected {
-  background: linear-gradient(145deg, #7cb342, #558b2f);
-  color: white;
+  background: linear-gradient(145deg, #007BFF, #339DFF);
+  color: #fff;
   font-weight: bold;
-  background: linear-gradient(145deg, #7cb342, #558b2f);
+  background: linear-gradient(145deg, #007BFF, #339DFF);
   transform: scale(1.01);
   transition: all 0.1s ease;
 }
@@ -333,7 +337,9 @@ li.button-like[data-emoji]::before {
   padding: 10px;
   margin-top: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid #383838;
+  background: #141414;
+  color: #e5e5e5;
   border-radius: 4px;
   box-sizing: border-box;
   display: block;
@@ -349,7 +355,9 @@ li.button-like[data-emoji]::before {
   max-width: 400px;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid #383838;
+  background: #141414;
+  color: #e5e5e5;
   border-radius: 4px;
   font-family: 'Arial', sans-serif;
   box-sizing: border-box;
@@ -366,7 +374,7 @@ li.button-like[data-emoji]::before {
   max-width: 400px;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid #383838;
   border-radius: 5px;
   margin-top: 10px;
   box-sizing: border-box;
@@ -379,9 +387,9 @@ li.button-like[data-emoji]::before {
 
 .unit-toggle {
   display: inline-flex;
-  background: #f9f7f2;
+  background: #0f0f0f;
   /* match page background */
-  /* border: 1px solid #ddd; */
+  /* border: 1px solid #272727; */
   /* light neutral border */
   border-radius: 6px;
   overflow: hidden;
@@ -400,9 +408,9 @@ li.button-like[data-emoji]::before {
   padding: 8px 20px;
   margin: 0;
   cursor: pointer;
-  background: #ffffff;
+  background: #050505;
   /* white pill when unselected */
-  color: #333333;
+  color: #d2d2d2;
   /* dark text */
   transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
   display: flex;
@@ -412,22 +420,22 @@ li.button-like[data-emoji]::before {
 
 /* Separator between pills */
 .unit-toggle label+label {
-  border-left: 1px solid #ddd;
+  border-left: 1px solid #272727;
 }
 
 /* Selected pill */
 .unit-toggle input:checked+label {
-  background: #ece8e1;
+  background: #1e1e1e;
   /* subtle off‑white accent */
-  color: #111111;
+  color: #f3f3f3;
   /* even darker text */
 }
 
 /* Pressed (active) effect on any pill */
 .unit-toggle label:active {
-  background: #d7d4cc;
+  background: #333333;
   /* slightly darker on press */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
 }
 
 .ftin-row {
@@ -438,10 +446,10 @@ li.button-like[data-emoji]::before {
 
 .pill-toggle {
   display: inline-flex;
-  border: 1px solid #ccc;
+  border: 1px solid #383838;
   border-radius: 4px;
   overflow: hidden;
-  /* background: #fff; */
+  /* background: #050505; */
   font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
 }
@@ -456,34 +464,34 @@ li.button-like[data-emoji]::before {
   padding: 8px 16px;
   margin: 0;
   cursor: pointer;
-  color: #333;
+  color: #d2d2d2;
   transition: background 0.2s, color 0.2s;
 }
 
 .pill-toggle label+input+label {
-  border-left: 1px solid #ccc;
+  border-left: 1px solid #383838;
 }
 
 /* .pill-toggle input:checked + label {
-  background: #558b2f;  
-  color: #fff;
+  background: #a0d37c;  
+  color: #050505;
 }
 
 .pill-toggle label:hover {
-  background: #f0f0f0;
+  background: #141414;
 } */
 
 .subheading {
   font-weight: 600;
   font-size: 1rem;
-  color: #333;
+  color: #d2d2d2;
   margin-top: 10px;
   text-align: center;
 }
 
 .scroll-text {
   font-size: 18px;
-  color: #333;
+  color: #d2d2d2;
   margin-top: 0;
   margin-bottom: 0;
   padding-top: 10px;
@@ -519,7 +527,7 @@ li.button-like[data-emoji]::before {
   padding: auto;
   width: 90%;
   height: 10px;
-  background-color: #ddd;
+  background-color: #272727;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
@@ -528,7 +536,7 @@ li.button-like[data-emoji]::before {
 .progress-bar-fill {
   width: 0;
   height: 100%;
-  background: linear-gradient(90deg, #5eb8f5, #3498db);
+  background: linear-gradient(90deg, #007BFF, #339DFF);
   transition: width 0.3s ease;
 }
 
@@ -545,7 +553,7 @@ li.button-like[data-emoji]::before {
   .loading-text {
     font-size: 1em;
     font-weight: bold;
-    color: #555;
+    color: #b0b0b0;
     margin-bottom: 30px;
     /* Space between text and progress bar */
   }
@@ -607,11 +615,11 @@ li.button-like[data-emoji]::before {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background: #F6EFE3;
+  background: #241b0c;
   /* Light contrasting background */
   margin-top: 50px;
   padding: 20px;
-  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -4px 6px rgba(255, 255, 255, 0.1);
   text-align: center;
   box-sizing: border-box;
   display: flex;
@@ -639,7 +647,7 @@ li.button-like[data-emoji]::before {
   pointer-events: none;
   transition: opacity 0.3s ease;
   margin-right: auto;
-  color: #666;
+  color: #9e9e9e;
   background: none;
   border: none;
   font-size: 1rem;
@@ -653,7 +661,7 @@ li.button-like[data-emoji]::before {
 
 .back-button:hover {
   text-decoration: underline;
-  color: #333;
+  color: #d2d2d2;
   /* Slightly darker on hover */
 }
 
@@ -677,7 +685,7 @@ li.button-like[data-emoji]::before {
 /* Styling for the question counter */
 .question-counter {
   font-size: 1rem;
-  color: #666;
+  color: #cfcfcf;
   /* Adjust the right margin/padding to match your design */
   margin-right: 1rem;
 }
@@ -691,7 +699,7 @@ label {
   text-align: center;
   /* Ensure text is centered */
   font-size: 0.9rem;
-  color: #333;
+  color: #d2d2d2;
   flex-wrap: wrap;
   margin-top: 1rem;
   line-height: 1.5;
@@ -704,7 +712,7 @@ label input[type="checkbox"] {
 
 /* Styling for the links inside the label */
 label a {
-  color: #007bff;
+  color: #007BFF;
   text-decoration: none;
   margin-left: 4px;
   /* Adds spacing before link */
@@ -716,14 +724,14 @@ label a:hover {
 
 .disclaimer {
   font-size: 0.9rem;
-  color: #333;
+  color: #d2d2d2;
   margin: 0 0 1rem 0;
 }
 
 #warning-text {
   margin-top: 1rem;
   font-size: 0.9rem;
-  background-color: #dc3545;
+  background-color: #d32535;
   color: #fff;
   /* White text */
   padding: 10px;
@@ -769,7 +777,7 @@ label a:hover {
 
 .rotating-message {
   font-size: 0.9rem;
-  color: #666;
+  color: #9e9e9e;
   margin-top: 10px;
   text-align: center;
   /* white-space: pre-line; */
@@ -789,4 +797,4 @@ label a:hover {
 .final-badges img:hover{ opacity:1; filter:none; }
 
 .prb-inline{ display:flex; justify-content:center; margin:8px 0 6px; }
-.final-reviews{ font-size:.92rem; color:#666; margin:6px 0 0; }
+.final-reviews{ font-size:.92rem; color:#9e9e9e; margin:6px 0 0; }

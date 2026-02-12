@@ -1,16 +1,16 @@
 :root {
-  --brand-bg: #f7f9f2;
-  --surface: #ffffff;
-  --surface-soft: #f2f4f7;
-  --border: #d1d9e2;
+  --brand-bg: #0f0f0f;
+  --surface: #050505;
+  --surface-soft: #0c0f14;
+  --border: #212a35;
 
-  --text-strong: #1a1a1a;   /* headings */
-  --text-main: #2d2d2d;     /* main body */
-  --text-soft: #4b5563;     /* secondary body */
-  --text-muted: #6b7280;
+  --text-strong: #eaeaea;   /* headings */
+  --text-main: #d7d7d7;     /* main body */
+  --text-soft: #a2acb9;     /* secondary body */
+  --text-muted: #858c99;
 
-  --accent-1: #5eb8f5;      /* progress start */
-  --accent-2: #3498db;      /* progress end */
+  --accent-1: #007BFF;      /* progress start */
+  --accent-2: #339DFF;      /* progress end */
 }
 
 * {
@@ -64,7 +64,7 @@ body {
   border-radius: 24px;
   padding: 32px;
   width: min(720px, 100%);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 18px 45px rgba(255, 255, 255, 0.06);
 }
 
 .kicker {
@@ -97,7 +97,7 @@ body {
   position: relative;
   width: 100%;
   height: 12px;
-  background: #e5e7eb;
+  background: #191b20;
   border-radius: 999px;
   overflow: hidden;
 }
@@ -105,7 +105,7 @@ body {
 .progress-fill {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #5eb8f5, #3498db);
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.2s ease-out;
@@ -132,17 +132,17 @@ body {
   gap: 8px;
   padding: 14px 18px;
   border-radius: 14px;
-    background: linear-gradient(135deg, #007BFF, #339DFF);
-  color: #ffffff;
+  background: linear-gradient(135deg, #007BFF, #339DFF);
+  color: #fff;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.15);
   transition: transform 150ms ease, box-shadow 150ms ease;
 }
 
 .cta:hover {
   transform: translateY(-1px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 16px 32px rgba(255, 255, 255, 0.18);
 }
 
 .cta:active {

@@ -5,15 +5,17 @@ body {
   padding: 0;
   min-height: 100%;
   font-family: 'Roboto', sans-serif;
-  background-color: #f9f7f2;
+  background-color: #0f0f0f;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  color: #e5e5e5;
 }
 
 body {
   font-weight: 400;
   font-family: 'Roboto', sans-serif;
+  color: #e5e5e5;
 }
 
 h1,
@@ -71,7 +73,7 @@ exercise-btn,
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #F9F4EB;
+  background: #1c1509;
   /* brand cream */
   z-index: 2500;
   transition: opacity .5s ease, transform .5s ease;
@@ -133,12 +135,12 @@ exercise-btn,
 .main-nav a {
   text-decoration: none;
   font-weight: 600;
-  color: #fff;
+  color: #e5e5e5;
   transition: color 0.2s;
 }
 
 .main-nav a:hover {
-  color: #A855F7;
+  color: #007BFF;
   /* pro purple hover */
 }
 
@@ -166,7 +168,7 @@ exercise-btn,
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   display: none;
   align-items: center;
   justify-content: center;
@@ -174,7 +176,7 @@ exercise-btn,
 }
 
 .modal-content {
-  background: #fff;
+  background: #151515;
   padding: 2rem;
   width: 90%;
   max-width: 400px;
@@ -204,13 +206,13 @@ exercise-btn,
 
 .modal-content input[type="email"] {
   padding: 0.6rem;
-  border: 1px solid #ccc;
+  border: 1px solid #383838;
   border-radius: 4px;
 }
 
 .modal-content button[type="submit"] {
   padding: 0.8rem;
-  background: #007bff;
+  background: #007BFF;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -218,7 +220,7 @@ exercise-btn,
 }
 
 .modal-content button[type="submit"]:hover {
-  background: #0056b3;
+  background: #339DFF;
 }
 
 .faq-list details {
@@ -228,7 +230,7 @@ exercise-btn,
 .faq-list summary {
   cursor: pointer;
   font-weight: 600;
-  color: #333;
+  color: #d2d2d2;
   font-size: 1.1rem;
 }
 
@@ -260,6 +262,7 @@ exercise-btn,
   font-size: 1.5rem;
   cursor: pointer;
   z-index: 10;
+    color: #ffffff;
 }
 
 /* hide desktop‑style menu until toggled */
@@ -274,7 +277,7 @@ exercise-btn,
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.6);
   z-index: 2000;
   /* no centering—panel itself will define its layout */
 }
@@ -290,8 +293,8 @@ exercise-btn,
   margin: 0;
   /* add extra left‑padding so items aren’t flush to the edge */
   padding: 4.5rem 1rem 1rem 2rem;
-  background: #fff;
-  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+  background: #050505;
+  box-shadow: 2px 0 15px rgba(255, 255, 255, 0.2);
   overflow-y: auto;
   border-radius: 0 8px 8px 0;
 
@@ -310,7 +313,7 @@ exercise-btn,
 .main-nav.open ul li {
   margin: 0;
   width: 100%;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #1f1f1f;
   padding-bottom: 0.75rem;
 }
 
@@ -325,7 +328,7 @@ exercise-btn,
   padding: 0.75rem 1rem;
   border-radius: 6px;
   transition: background 0.2s ease;
-  color: #333;
+  color: #d2d2d2;
   text-align: left;
   display: block;
   font-weight: 500;
@@ -333,7 +336,7 @@ exercise-btn,
 }
 
 .main-nav.open ul a:hover {
-  background: #F0F0F0;
+  background: #141414;
 }
 
 .nav-close {
@@ -345,12 +348,12 @@ exercise-btn,
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #333;
+  color: #d2d2d2;
   z-index: 2100;
 }
 
 .main-nav.open .nav-close {
-  color: #333;
+  color: #d2d2d2;
 }
 
 .main-nav.open::before {
@@ -360,12 +363,12 @@ exercise-btn,
   left: 0;
   width: 100%;
   height: 1px;
-  /* background: #e5e5e5; */
+  /* background: #1f1f1f; */
 }
 
 .faq-answer {
-  color: #444;
-  background-color: #F6F4EF;
+  color: #c0c0c0;
+  background-color: #121212;
   padding: 10px;
   border-radius: 5px;
 }
@@ -391,20 +394,20 @@ exercise-btn,
 
 .pt-extra-badge {
   font-style: italic;
-  color: #F8F4FF;
+  color: #080016;
   font-size: 0.9rem;
   margin-top: 5px;
 }
 
 .ct-extra-container,
 .tracker-badge.ct-extra-container {
-  background: #e0e0e0;
+  background: #242424;
 }
 
 .ct-extra-badge {
   font-style: italic;
   font-size: 0.9rem;
-  color: #333 !important;
+  color: #d2d2d2 !important;
 }
 
 .crown-emoji-badge {
@@ -429,98 +432,98 @@ exercise-btn,
 }
 
 .footer {
-  margin-top: auto;
-  background-color: #333;
-  color: white;
-  padding: 20px;
-  text-align: center;
+    margin-top: auto;
+    background-color: #151515;
+    color: #e5e5e5;
+    padding: 20px;
+    text-align: center;
 }
 
 .footer-content {
-  max-width: 600px;
-  margin: 0 auto;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .footer-content p {
-  margin-bottom: 15px;
-  font-size: 0.9rem;
-  color: white;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: #e5e5e5;
 }
 
 .footer-links {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 15px;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
 }
 
 .footer-links a {
-  text-decoration: none;
-  color: white;
-  font-size: 0.9rem;
+    text-decoration: none;
+    color: #e5e5e5;
+    font-size: 0.9rem;
 }
 
 .footer-links a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
+    color: #007BFF;
 }
 
 .social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
 }
 
 .social-icons img {
-  width: 24px;
-  height: 24px;
-  transition: transform 0.2s;
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s;
 }
 
 .social-icons img:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
 
-  .footer {
-    padding: 20px 0;
+    .footer {
+        padding: 20px 0;
 
-  }
+    }
 
-  .footer-links {
-    flex-direction: column;
-    /* Stack links vertically */
-    gap: 10px;
-    padding: 5px 0;
-  }
+    .footer-links {
+        flex-direction: column;
+        /* Stack links vertically */
+        gap: 16px;
+        padding: 5px 0;
+    }
 
-  .footer-links a {
-    font-size: 1.1rem;
-    /* Larger text for easier readability */
-    margin-bottom: 10px;
-    text-decoration: underline;
-  }
+    .footer-links a {
+        font-size: 1.1rem;
+        /* Larger text for easier readability */
+        margin-bottom: 10px;
+        text-decoration: underline;
+    }
 
-  .footer p {
-    font-size: 1rem;
-    /* Larger text for easier readability */
-    margin-bottom: 20px;
-  }
+    .footer p {
+        font-size: 1rem;
+        /* Larger text for easier readability */
+        margin-bottom: 20px;
+    }
 
-  .social-icons img {
-    width: 42px;
-    /* Slightly larger for mobile */
-    height: 42px;
-    margin: 0 35px;
-  }
+    .social-icons img {
+        width: 42px;
+        /* Slightly larger for mobile */
+        height: 42px;
+        margin: 0 35px;
+    }
 
-  .footer span {
-    display: none;
-  }
+    .footer span {
+        display: none;
+    }
 }
-
 /* Nutrition Tracker Container */
 #nutrition-tracker {
   max-width: 1200px;
@@ -556,7 +559,7 @@ exercise-btn,
   top: 50%;
   transform: translateY(-50%);
   font-size: 1rem;
-  color: #007bff;
+  color: #007BFF;
   font-weight: bold;
   opacity: 0;
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -567,9 +570,9 @@ exercise-btn,
   position: fixed;
   top: 0;
   width: 100%;
-  background: #F6EFE3;
+  background: #241b0c;
   padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
   text-align: center;
   box-sizing: border-box;
   display: flex;
@@ -602,7 +605,7 @@ exercise-btn,
 
 .xp-bar {
   position: relative;
-  background-color: #e0e0e0;
+  background-color: #242424;
   width: 70%;
   height: 20px;
   border-radius: 10px;
@@ -610,7 +613,7 @@ exercise-btn,
 }
 
 .xp-bar-fill {
-  background-color: #007bff;
+  background-color: #007BFF;
   height: 100%;
   width: 0%;
 }
@@ -621,7 +624,7 @@ exercise-btn,
   top: 75%;
   transform: translateY(-50%);
   font-size: 1rem;
-  color: #007bff;
+  color: #007BFF;
   font-weight: bold;
   opacity: 0;
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -633,7 +636,7 @@ exercise-btn,
   top: 65%;
   transform: translateY(-50%);
   font-size: 1rem;
-  color: #007bff;
+  color: #007BFF;
   font-weight: bold;
   opacity: 0;
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -643,7 +646,7 @@ exercise-btn,
 .tab-container {
   display: flex;
   width: 100%;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid #383838;
   margin-bottom: 20px;
 }
 
@@ -658,7 +661,7 @@ exercise-btn,
 }
 
 .tab.active {
-  border-bottom: 2px solid #007bff;
+  border-bottom: 2px solid #007BFF;
 }
 
 .tab-content {
@@ -692,11 +695,11 @@ exercise-btn,
 .week-selector-frame {
   position: relative;
   border-radius: 6px;
-  background-color: #f1ede5;
+  background-color: #191919;
   overflow: hidden;
   height: 60px;
   margin: 20px 0;
-  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0px 0px rgba(255, 255, 255, 0.1);
 }
 
 .week-selector-wrapper {
@@ -729,12 +732,12 @@ exercise-btn,
 
 .week-selector-wrapper::before {
   left: 10px;
-  background: linear-gradient(to right, rgba(249, 247, 242, 1) 0%, rgba(249, 247, 242, 1) 45%, rgba(249, 247, 242, 0) 100%);
+  background: linear-gradient(to right, rgba(15, 15, 15, 1) 0%, rgba(15, 15, 15, 1) 45%, rgba(15, 15, 15, 0) 100%);
 }
 
 .week-selector-wrapper::after {
   right: -17px;
-  background: linear-gradient(to left, #f9f7f2 0%, rgba(249, 247, 242, 0) 100%);
+  background: linear-gradient(to left, #0f0f0f 0%, rgba(15, 15, 15, 0) 100%);
 }
 
 .week-selector-wrapper.show-left-shadow::before {
@@ -761,7 +764,7 @@ exercise-btn,
 }
 
 .week-selector::-webkit-scrollbar-thumb {
-  background-color: #D6CFC7;
+  background-color: #363636;
   border-radius: 1px;
 }
 
@@ -776,23 +779,23 @@ exercise-btn,
 }
 
 .week-box:hover {
-  background-color: #ddd;
+  background-color: #272727;
 }
 
 .week-box.active {
-  border-left: 2px solid #007bff;
-  border-right: 2px solid #007bff;
+  border-left: 2px solid #007BFF;
+  border-right: 2px solid #007BFF;
 }
 
 /* Day Selector */
 .day-selector-frame {
   position: relative;
   border-radius: 6px;
-  background-color: #f1ede5;
+  background-color: #191919;
   overflow: hidden;
   height: 60px;
   margin: 20px 0;
-  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0px 0px rgba(255, 255, 255, 0.1);
 }
 
 .day-selector-wrapper {
@@ -825,12 +828,12 @@ exercise-btn,
 
 .day-selector-wrapper::before {
   left: 20px;
-  background: linear-gradient(to right, #f9f7f2, rgba(249, 247, 242, 0));
+  background: linear-gradient(to right, #0f0f0f, rgba(15, 15, 15, 0));
 }
 
 .day-selector-wrapper::after {
   right: -17px;
-  background: linear-gradient(to left, #f9f7f2, rgba(249, 247, 242, 0));
+  background: linear-gradient(to left, #0f0f0f, rgba(15, 15, 15, 0));
 }
 
 .day-selector-wrapper.show-left-shadow::before {
@@ -858,7 +861,7 @@ exercise-btn,
 }
 
 .day-selector::-webkit-scrollbar-thumb {
-  background-color: #D6CFC7;
+  background-color: #363636;
   border-radius: 2px;
 }
 
@@ -873,12 +876,12 @@ exercise-btn,
 }
 
 .day-box.active {
-  border-left: 2px solid #007bff;
-  border-right: 2px solid #007bff;
+  border-left: 2px solid #007BFF;
+  border-right: 2px solid #007BFF;
 }
 
 .day-box:hover {
-  background-color: #ddd;
+  background-color: #272727;
 }
 
 /* Prev / Next Day Buttons */
@@ -891,23 +894,23 @@ exercise-btn,
 .navigation-buttons button {
   padding: 10px 20px;
   font-size: 1rem;
-  background-color: #007bff;
+  background-color: #007BFF;
   border: none;
   border-radius: 8px;
-  color: #fff;
+  color: #050505;
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 6px 8px rgba(255, 255, 255, 0.1);
 }
 
 .navigation-buttons button:hover {
-  background-color: #0056b3;
-  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+  background-color: #339DFF;
+  box-shadow: 0px 6px 8px rgba(255, 255, 255, 0.1);
 }
 
 .navigation-buttons button:active {
-  background-color: #003f7f;
-  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+  background-color: #24c20c;
+  box-shadow: 0px 3px 4px rgba(255, 255, 255, 0.1);
 }
 
 #prevDayBtn {
@@ -920,7 +923,7 @@ exercise-btn,
 
 /* Collapsible Meal Cards */
 .meal-card {
-  /* border: 1px solid #ddd; */
+  /* border: 1px solid #272727; */
   border-radius: 6px;
   margin-bottom: 15px;
   overflow: hidden;
@@ -928,7 +931,7 @@ exercise-btn,
 }
 
 .meal-card-header {
-  background-color: #EFEDE8;
+  background-color: #191919;
   padding: 12px;
   cursor: pointer;
   display: flex;
@@ -936,17 +939,17 @@ exercise-btn,
   justify-content: space-between;
   gap: 8px;
   font-weight: bold;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #272727;
+  border-bottom: 1px solid #272727;
 }
 
 .meal-card-header.green-logged {
-  background-color: #c7f9cc;
+  background-color: #07420d;
   /* light green */
 }
 
 .meal-card-header.grey-skipped {
-  background-color: #e9ecef;
+  background-color: #15181c;
   /* light grey */
 }
 
@@ -972,7 +975,7 @@ exercise-btn,
 .meal-details {
   display: none;
   padding: 10px;
-  /* background-color: #fafafa; */
+  /* background-color: #0a0a0a; */
 }
 
 .meal-details.expanded {
@@ -981,8 +984,8 @@ exercise-btn,
 
 /* Sub-collapses: Macros, Ingredients, Recipe */
 .meal-subtitle {
-  /* background-color: #f1f1f1; */
-  border-top: 1px solid #ddd;
+  /* background-color: #131313; */
+  border-top: 1px solid #272727;
   margin: 8px 0;
   padding: 15px 0;
   cursor: pointer;
@@ -1004,17 +1007,17 @@ exercise-btn,
 
 /* Macros */
 .macros-emoji {
-  background-color: #e0f7fa;
+  background-color: #072528;
 }
 
 /* Ingredients */
 .ingredients-emoji {
-  background-color: #fce4ec;
+  background-color: #25040f;
 }
 
 /* Recipe */
 .recipe-emoji {
-  background-color: #e8f5e9;
+  background-color: #0d1f0f;
 }
 
 .meal-subtitle-arrow {
@@ -1039,23 +1042,23 @@ exercise-btn,
 }
 
 .meal-subsection-content.macros-content.expanded {
-  background-color: #e0f7fa;
+  background-color: #072528;
   /* Light Teal */
-  border: 1px solid #b2ebf2;
+  border: 1px solid #0f4f56;
   /* Soft Mid Teal */
 }
 
 .meal-subsection-content.ingredients-content.expanded {
-  background-color: #fce4ec;
+  background-color: #25040f;
   /* Light Pink */
-  border: 1px solid #f8bbd0;
+  border: 1px solid #4e0820;
   /* Soft Mid Pink */
 }
 
 .meal-subsection-content.recipe-content.expanded {
-  background-color: #e8f5e9;
+  background-color: #0d1f0f;
   /* Light Green */
-  border: 1px solid #c8e6c9;
+  border: 1px solid #1c3f1e;
   /* Soft Mid Green */
 }
 
@@ -1077,7 +1080,7 @@ exercise-btn,
   border-radius: 5px;
   transition: background-color 0.3s ease;
   font-weight: 600;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.1);
   font-size: 1.1rem;
 }
 
@@ -1136,19 +1139,19 @@ exercise-btn,
   gap: 6px;
   margin-bottom: 10px;
   font-size: 1rem;
-  background-color: #EDE7DB;
-  border: 1px solid #D8CFC0;
+  background-color: #202020;
+  border: 1px solid #383838;
   padding: 16px;
   border-radius: 12px;
 }
 
 .day-info-stats .highlight {
   font-weight: bold;
-  color: #007bff;
+  color: #007BFF;
 }
 
 .calorie-progress-bar {
-  background-color: #e0d8c8;
+  background-color: #303030;
   height: 20px;
   width: 100%;
   border-radius: 10px;
@@ -1158,7 +1161,7 @@ exercise-btn,
 }
 
 .calorie-progress-fill {
-  background-color: #007bff;
+  background-color: #007BFF;
   height: 100%;
   width: 0%;
   transition: width 0.5s ease-in-out;
@@ -1182,8 +1185,8 @@ exercise-btn,
   bottom: 0;
   left: 0;
   width: 93%;
-  background: #F6EFE3;
-  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+  background: #241b0c;
+  box-shadow: 0 -4px 8px rgba(255, 255, 255, 0.2);
   transform: translateY(100%);
   transition: transform 0.3s ease-out;
   z-index: 1200;
@@ -1235,17 +1238,17 @@ exercise-btn,
   padding: 10px;
   font-size: 0.95rem;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #383838;
   outline: none;
 }
 
 .swap-list {
   max-height: 160px;
   overflow-y: auto;
-  border: 1px solid #ccc;
+  border: 1px solid #383838;
   border-radius: 6px;
   padding: 6px 0;
-  background-color: #F2E9DA;
+  background-color: #1f1f1f;
   width: 100%;
   margin: 0 auto;
 }
@@ -1256,14 +1259,14 @@ exercise-btn,
   transition: background-color 0.2s ease;
   /* text-align: center; */
   font-size: 0.95rem;
-  background-color: #EDE7DB;
-  border: 1px solid #D8CFC0;
+  background-color: #202020;
+  border: 1px solid #383838;
   width: 90%;
   margin: 0 auto;
 }
 
 .swap-item:nth-child(even) {
-  background-color: #F4F0E6;
+  background-color: #171717;
   /* or whichever you choose */
 }
 
@@ -1289,7 +1292,7 @@ exercise-btn,
   padding: 10px;
   font-size: 0.95rem;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #383838;
   outline: none;
 }
 
@@ -1371,16 +1374,16 @@ exercise-btn,
   font-weight: 600;
   background-color: #007BFF;
   /* stays blue */
-  color: #fff;
+  color: #050505;
   cursor: pointer;
   width: 100%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
   transition: opacity 0.3s ease;
 }
 
 #confirmSwapMealBtn:disabled {
-  background-color: #004a99;
-  color: #ccc;
+  background-color: #1f7f0b;
+  color: #050505;
   cursor: not-allowed;
 }
 
@@ -1391,12 +1394,12 @@ exercise-btn,
   text-align: center;
   font-size: 1.1rem;
   font-weight: 600;
-  background-color: #B0B0B0;
-  color: #fff;
+  background-color: #545454;
+  color: #e5e5e5;
   cursor: pointer;
   width: 100%;
   /* full width in the container */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
   transition: opacity 0.3s ease;
 }
 
@@ -1455,13 +1458,13 @@ exercise-btn,
   /* just below the icon, with some gap */
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.85);
-  color: #fff;
+  background: #151515;
+  color: #e5e5e5;
   padding: 8px 12px;
   border-radius: 4px;
   width: 90%;
   font-size: 1.1rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.12);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -1486,10 +1489,10 @@ exercise-btn,
   cursor: pointer;
   position: relative;
 
-  /* The color can match your theme. Let's say #333 or #007bff, etc. */
-  color: #007bff;
+  /* The color can match your theme. Let's say #d2d2d2 or #007BFF, etc. */
+  color: #007BFF;
   /* 'i' text color */
-  border: 2px solid #007bff;
+  border: 2px solid #007BFF;
   /* same color border */
   background: transparent;
   /* remove background */
@@ -1498,7 +1501,7 @@ exercise-btn,
 .progress-score-value {
   font-size: 3.5rem;
   margin: 0;
-  color: #333;
+  color: #d2d2d2;
   font-weight: 700;
 }
 
@@ -1547,16 +1550,16 @@ exercise-btn,
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #D4F8E8;
+  background-color: #093421;
   /* or your choice */
 }
 
 .recap-card.improvement-card {
-  background-color: #FFD9C0;
+  background-color: #4a1d00;
 }
 
 .emoji-bgii {
-  background-color: #FFC77B;
+  background-color: #8f5200;
   /* Light yellow or any color you want */
   padding: 6px 6px;
   border-radius: 6px;
@@ -1569,13 +1572,13 @@ exercise-btn,
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #bbb;
+  background-color: #4a4a4a;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .recap-dot.active {
-  background-color: #333;
+  background-color: #d2d2d2;
 }
 
 .recap-dots-container {
@@ -1621,7 +1624,7 @@ exercise-btn,
 }
 
 .emoji-bg {
-  background-color: #A7E5C3;
+  background-color: #1d603b;
   padding: 6px 6px;
   border-radius: 6px;
   display: inline-block;
@@ -1666,13 +1669,13 @@ exercise-btn,
   top: calc(100% + 5px);
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.85);
-  color: #fff;
+  background: #151515;
+  color: #e5e5e5;
   padding: 8px 12px;
   border-radius: 4px;
   width: 200px;
   font-size: 0.9rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.12);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -1730,7 +1733,7 @@ exercise-btn,
 
 /* The “Coach Insights” sticky note. */
 .coach-insights-note {
-  background-color: #fff9c4;
+  background-color: #463f00 !important;
   /* Light yellowish */
   padding: 15px;
   border-radius: 8px;
@@ -1753,7 +1756,7 @@ exercise-btn,
 
 .macro-week-selector .week-btn {
   padding: 8px 12px;
-  background-color: #eee;
+  background-color: #161616;
   border-radius: 4px;
   font-weight: 600;
   cursor: pointer;
@@ -1761,8 +1764,8 @@ exercise-btn,
 }
 
 .macro-week-selector .week-btn.active {
-  border: 2px solid #007bff;
-  background-color: #fafafa;
+  border: 2px solid #007BFF;
+  background-color: #0a0a0a;
 }
 
 /* ===========================================
@@ -1797,15 +1800,15 @@ exercise-btn,
 
 .macro-dropdown-list {
   position: absolute;
-  background-color: #f9f7f2;
-  border: 1px solid #ccc;
+  background-color: #0f0f0f;
+  border: 1px solid #383838;
   border-radius: 6px;
   z-index: 5000;
   width: 100%;
   max-height: 200px;
   overflow-y: auto;
   display: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
 }
 
 .macro-dropdown-list.show {
@@ -1819,12 +1822,12 @@ exercise-btn,
 }
 
 .macro-dropdown-item:hover {
-  background-color: #eee;
+  background-color: #161616;
 }
 
 .macro-dropdown-no-weeks {
   padding: 8px 10px;
-  color: #999;
+  color: #6b6b6b;
 }
 
 /* The subheading style you already have for WT’s analysis header. */
@@ -1865,10 +1868,10 @@ exercise-btn,
   width: 100%;
   max-width: 500px;
   margin: 0 auto 15px;
-  border: 1px solid #ccc;
-  background-color: #fefefe;
+  border: 1px solid #383838;
+  background-color: #060606;
   border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
   position: relative;
   z-index: 10;
 }
@@ -1894,7 +1897,7 @@ exercise-btn,
 }
 
 .analysis-exercise-item:hover {
-  background-color: #eaeaea;
+  background-color: #1a1a1a;
 }
 
 /* A container that horizontally scrolls the “cards” */
@@ -1915,7 +1918,7 @@ exercise-btn,
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #D4F8E8;
+  background-color: #093421;
   /* or your choice */
 }
 
@@ -2005,8 +2008,8 @@ exercise-btn,
 /* For row/column labels */
 .heatmap-header {
   font-weight: bold;
-  background-color: #f1f1f1;
-  color: #333;
+  background-color: #131313;
+  color: #d2d2d2;
 }
 
 /***********************************************
@@ -2040,7 +2043,7 @@ exercise-btn,
   padding: 8px 15px;
   text-align: center;
   /* center all content by default */
-  background-color: #f5f0e6;
+  background-color: #171717;
   border-radius: 8px;
 }
 
@@ -2072,16 +2075,17 @@ exercise-btn,
   height: 40px;
   /* same fixed width for all inputs */
   padding: 5px 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #383838;
   border-radius: 4px;
-  background-color: #f2f0eb;
+  background-color: #161616;
+  color: #e5e5e5;
   transition: background-color 0.3s ease, border-color 0.3s ease;
   font-family: 'Roboto', sans-serif;
 }
 
 .goal-progress-input:focus {
-  background-color: #fff;
-  border-color: #007bff;
+  background-color: #050505;
+  border-color: #007BFF;
   outline: none;
 }
 
@@ -2099,7 +2103,7 @@ exercise-btn,
 }
 
 .log-weight-button {
-  background-color: #007bff;
+  background-color: #007BFF;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -2112,19 +2116,19 @@ exercise-btn,
   margin-top: 25px;
   margin-bottom: 35px;
   cursor: pointer;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   font-size: 1rem;
 }
 
 .log-weight-button:hover {
-  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 6px 8px rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
 }
 
 .log-weight-button:active {
-  background-color: #0056b3;
-  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+  background-color: #339DFF;
+  box-shadow: 0px 3px 4px rgba(255, 255, 255, 0.1);
   transform: translateY(2px);
 }
 
@@ -2150,7 +2154,7 @@ exercise-btn,
 }
 
 .goal-progress-bar {
-  background-color: #e0e0e0;
+  background-color: #242424;
   height: 20px;
   width: 80%;
   margin: 0 auto;
@@ -2162,7 +2166,7 @@ exercise-btn,
 .goal-progress-bar-fill {
   height: 100%;
   width: 0%;
-  background-color: #007bff;
+  background-color: #007BFF;
   transition: width 0.5s;
 }
 
@@ -2205,7 +2209,7 @@ exercise-btn,
 
 .expected-goal-date {
   font-weight: bold;
-  color: #333;
+  color: #d2d2d2;
 }
 
 /***********************************************
@@ -2217,13 +2221,13 @@ exercise-btn,
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
-  background-color: #D4F8E8;
+  background-color: #093421;
   /* pale yellow sticky-note style */
   padding: 15px;
   border-radius: 8px;
   line-height: 1.4;
   font-size: 1rem;
-  color: #333;
+  color: #d2d2d2;
 }
 
 /* ────────────────────────────────────────────────────────────────
@@ -2232,7 +2236,7 @@ exercise-btn,
 .nt-onboarding-overlay {
   position: fixed;
   inset: 0;
-  background: linear-gradient(to bottom, #F9F4EB, #F6EFE3);
+  background: linear-gradient(to bottom, #1c1509, #241b0c);
   z-index: 1300;
   transform: translateY(-100%);
   transition: transform .45s cubic-bezier(.36, .66, .04, 1);
@@ -2274,7 +2278,7 @@ exercise-btn,
 .nt-subtitle {
   font-size: 1.2rem;
   font-weight: 500;
-  color: #666;
+  color: #9e9e9e;
 }
 
 .nt-line {
@@ -2297,17 +2301,17 @@ exercise-btn,
 .nt-goal,
 .nt-driver,
 .nt-tutorial li {
-  color: #333;
+  color: #d2d2d2;
 }
 
 .nt-emoji-goal,
 .nt-emoji-tutorial {
   border-radius: 8px;
-  background-color: #F0ECE5;
+  background-color: #1a1a1a;
   font-size: 1.2rem;
   padding: 3px;
   margin-right: 6px;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 .nt-tutorial {
@@ -2320,7 +2324,7 @@ exercise-btn,
 }
 
 .nt-sub {
-  color: #666;
+  color: #9e9e9e;
   font-size: 1rem;
 }
 
@@ -2340,13 +2344,13 @@ exercise-btn,
   cursor: pointer;
   background: #007BFF;
   color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.15);
   transition: background .2s;
 }
 
 .nt-next-btn:active,
 .nt-close-btn:active {
-  background: #0056b3;
+  background: #339DFF;
 }
 
 @media(min-width:768px) {
@@ -2358,7 +2362,7 @@ exercise-btn,
 
   .nt-next-btn:hover,
   .nt-close-btn:hover {
-    background: #0056b3;
+    background: #339DFF;
   }
 }
 
@@ -2385,13 +2389,13 @@ exercise-btn,
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #bbb;
+  background: #4a4a4a;
   cursor: pointer;
   transition: background .3s;
 }
 
 .nt-dot.active {
-  background: #333;
+  background: #d2d2d2;
 }
 
 #nutritionWeeklyRecapCards {       /* the OUTER shell */
