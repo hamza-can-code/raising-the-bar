@@ -197,6 +197,30 @@ const questions = [
     key: "workoutLocation",
   },
   {
+    question: "Which gym do you train at?",
+    extraText: "So we can tailor exercises to your equipment",
+    options: [
+      "Planet Fitness",
+      "LA Fitness",
+      "24 Hour Fitness",
+      "Anytime Fitness",
+      "Gold's Gym",
+      "Crunch Fitness",
+      "PureGym",
+      "The Gym Group",
+      "David Lloyd Clubs",
+      "Virgin Active",
+      "Nuffield Health",
+      "Other / Independent gym",
+    ],
+    type: "radio",
+    key: "gymFranchise",
+    condition: {
+      key: "workoutLocation",
+      value: "gym"
+    }
+  },
+  {
     question: "What equipment is available to you?",
     options: [
       "Dumbbells",
@@ -288,6 +312,60 @@ const questions = [
     options: ["Dairy", "Nuts", "Gluten", "Shellfish", "Soy", "None of the above"],
     type: "checkbox",
     key: "foodAllergies"
+  },
+  {
+    question: "Do you want us to match your plan to your usual supermarket?",
+    options: [
+      "Tesco",
+      "Sainsbury's",
+      "ASDA",
+      "Morrisons",
+      "Aldi",
+      "Lidl",
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Costco",
+      "Whole Foods",
+      "Trader Joe's",
+      "No / No preference",
+    ],
+    type: "checkbox",
+    key: "supermarketPreference"
+  },
+  {
+    question: "Do you use a wearable?",
+    options: ["Apple Watch", "Fitbit", "Garmin", "WHOOP", "Oura Ring", "Samsung Galaxy Watch", "None"],
+    type: "radio",
+    key: "wearable"
+  },
+  {
+    question: "Do you currently take any supplements?",
+    options: ["Yes", "No"],
+    type: "radio",
+    key: "takesSupplements"
+  },
+  {
+    question: "Which brands do you usually buy from?",
+    extraText: "So we can recommend products you’ll actually stick to",
+    options: [
+      "Optimum Nutrition",
+      "Myprotein",
+      "Bulk",
+      "Transparent Labs",
+      "Dymatize",
+      "Ghost",
+      "BSN",
+      "USN",
+      "Grenade",
+      "Other / Not listed",
+    ],
+    type: "checkbox",
+    key: "supplementBrands",
+    condition: {
+      key: "takesSupplements",
+      value: "yes"
+    }
   },
   // {
   //   question: "How many meals per day do you prefer?",
@@ -1089,6 +1167,23 @@ function handleOptionClick(selectedOption, type) {
       localStorage.setItem("effortLevel", normalized);
       // console.log(`Effort Level saved: ${normalized}`);
     }
+    else if (questionKey === "gymFranchise") {
+      formData.gymFranchise = clickedText;
+      localStorage.setItem("gymFranchise", clickedText);
+    }
+    else if (questionKey === "wearable") {
+      formData.wearable = clickedText;
+      localStorage.setItem("wearable", clickedText);
+    }
+    else if (questionKey === "takesSupplements") {
+      const takesSupplements = clickedText.toLowerCase();
+      formData.takesSupplements = takesSupplements;
+      localStorage.setItem("takesSupplements", takesSupplements);
+      if (takesSupplements !== "yes") {
+        formData.supplementBrands = [];
+        localStorage.removeItem("supplementBrands");
+      }
+    }
     else if (questionKey === "goalDriver") {
       formData.goalDriver = clickedText;
       localStorage.setItem("goalDriver", clickedText);
@@ -1099,7 +1194,13 @@ function handleOptionClick(selectedOption, type) {
     const noneOption = Array.from(optionsContainer.querySelectorAll("li")).find(
       li => li.textContent.trim() === "None of the above"
     );
-    if (clickedText === "None of the above") {
+    const supermarketNoneOption = questionKey === "supermarketPreference"
+      ? Array.from(optionsContainer.querySelectorAll("li")).find(
+        li => li.textContent.trim() === "No / No preference"
+      )
+      : null;
+
+    if (clickedText === "None of the above" || (questionKey === "supermarketPreference" && clickedText === "No / No preference")) {
       optionsContainer.querySelectorAll("li").forEach(li => {
         if (li !== selectedOption) li.classList.remove("selected");
       });
@@ -1107,6 +1208,7 @@ function handleOptionClick(selectedOption, type) {
       formData[questionKey] = [];
     } else {
       if (noneOption) noneOption.classList.remove("selected");
+      if (supermarketNoneOption) supermarketNoneOption.classList.remove("selected");
       selectedOption.classList.toggle("selected");
     }
     const selectedTexts = Array.from(optionsContainer.querySelectorAll("li.selected")).map(li => li.textContent.trim());
@@ -1116,6 +1218,12 @@ function handleOptionClick(selectedOption, type) {
     }
     if (questionKey === "injuries") {
       localStorage.setItem("injuries", JSON.stringify(formData.injuries));
+    }
+    if (questionKey === "supermarketPreference") {
+      localStorage.setItem("supermarketPreference", JSON.stringify(formData.supermarketPreference));
+    }
+    if (questionKey === "supplementBrands") {
+      localStorage.setItem("supplementBrands", JSON.stringify(formData.supplementBrands));
     }
     // console.log("Current selected checkboxes =>", formData[questionKey]);
   }
