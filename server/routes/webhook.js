@@ -198,13 +198,13 @@ router.post(
       );
       if (!user) {
         console.warn('⚠️  No user found for', email);
-        return res.sendStatus(200);
       }
 
       /* C) work out WHAT they bought */
       // const priceId = session.line_items.data[0].price.id;
       let unlockedWeeks = 0;
       const hasTrialUpfront = priceIds.some(id => TRIAL_UPFRONT_PRICE_IDS.includes(id));
+      const hasTrialMetadata = session.metadata?.trial_subscription === 'true';
       const hasFourWeek = priceIds.some(id => FOUR_WEEK_PRICE_IDS.includes(id));
       const hasTwelveWeek = priceIds.some(id => TWELVE_WEEK_PRICE_IDS.includes(id));
       const hasFullPrice = priceIds.includes(process.env.FULL_PRICE_ID);
@@ -212,7 +212,7 @@ router.post(
       const hasSubscription = !!subscription?.id;
       const isFullSubscriptionPurchase = hasFullPrice;
 
-      if (hasTrialUpfront) {
+      if (hasTrialUpfront || hasTrialMetadata) {
         unlockedWeeks = 1;
       } else if (hasFourWeek) {
         unlockedWeeks = 4;
@@ -230,7 +230,7 @@ router.post(
         $set: {}
       };
 
-      if (!hasSubscription && hasTrialUpfront && session.metadata?.trial_subscription === 'true') {
+      if (!hasSubscription && hasTrialMetadata) {
         let paymentIntent = session.payment_intent;
         const upgradePriceId = session.metadata?.trial_subscription_price_id;
         if (paymentIntent && typeof paymentIntent === 'string') {
@@ -337,35 +337,40 @@ router.post(
           : new Date();          // now
       }
 
-      const ua = await UserAccess.findOneAndUpdate(
-        { userId: user._id },
-        update,
-        { upsert: true, new: true, setDefaultsOnInsert: true }
-      );
+      let ua = null;
+      if (user?._id) {
+        ua = await UserAccess.findOneAndUpdate(
+          { userId: user._id },
+          update,
+          { upsert: true, new: true, setDefaultsOnInsert: true }
+        );
 
-      console.log('🔐 UserAccess saved → weeks:', ua.unlockedWeeks,
-        'subId:', ua.subscriptionId);
+        console.log('🔐 UserAccess saved → weeks:', ua.unlockedWeeks,
+          'subId:', ua.subscriptionId);
+      }
 
       /* E) confirmation e-mail (optional) */
-      try {
-        // ✅ Get name from user preferences BEFORE sending the email
-        const preferencesDoc = await UserPreferences.findOne({ userId: user._id });
-        const fullName = preferencesDoc?.preferences?.name || session.customer_details?.name || 'There';
-        const firstName = fullName.split(' ')[0];
+      if (user?._id) {
+        try {
+          // ✅ Get name from user preferences BEFORE sending the email
+          const preferencesDoc = await UserPreferences.findOne({ userId: user._id });
+          const fullName = preferencesDoc?.preferences?.name || session.customer_details?.name || 'There';
+          const firstName = fullName.split(' ')[0];
 
-        await sendOrderConfirmationEmail({
-          email,
-          programName: isFullSubscriptionPurchase
-            ? 'Pro Tracker Subscription'
-            : `${unlockedWeeks}-Week Program`,
-          unlockedWeeks,
-          renewalDate: isFullSubscriptionPurchase ? ua.renewalDate : null,
-          firstName
-        });
-        console.log('📨 Attempting to send order confirmation to:', email);
-        console.log('📧  Confirmation e-mail sent');
-      } catch (err) {
-        console.error('📧  sendOrderConfirmationEmail failed:', err.message);
+          await sendOrderConfirmationEmail({
+            email,
+            programName: isFullSubscriptionPurchase
+              ? 'Pro Tracker Subscription'
+              : `${unlockedWeeks}-Week Program`,
+            unlockedWeeks,
+            renewalDate: isFullSubscriptionPurchase ? ua?.renewalDate : null,
+            firstName
+          });
+          console.log('📨 Attempting to send order confirmation to:', email);
+          console.log('📧  Confirmation e-mail sent');
+        } catch (err) {
+          console.error('📧  sendOrderConfirmationEmail failed:', err.message);
+        }
       }
     }
 
