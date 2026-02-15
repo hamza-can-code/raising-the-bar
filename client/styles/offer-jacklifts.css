@@ -93,10 +93,11 @@ img {
 .loader-logo {
     --scale: 0.8;
     /* driven by JS */
-    width: 120px;
+    width: 400px;
     max-width: 60vw;
-    transform: scale(var(--scale));
     transform-origin: center;
+    transform: scale(var(--scale));
+    /* smooth any manual changes */
     transition: transform .2s cubic-bezier(.4, 0, .2, 1);
 }
 
@@ -1861,8 +1862,8 @@ img {
 }
 
 .price-value {
-        color: #6b7280;
-        font-size: 0.95rem;
+    color: #6b7280;
+    font-size: 0.95rem;
 }
 
 .price-strikethrough {
@@ -2059,7 +2060,7 @@ img {
 
 .discount-price {
     color: #6b7280;
-        font-size: 0.95rem;
+    font-size: 0.95rem;
 }
 
 /******************************************/
