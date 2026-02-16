@@ -70,6 +70,7 @@ a.ghost {
 .primary.full,
 button.primary.full {
   width: 100%;
+  margin-top: 36px;
 }
 
 .site-header {
@@ -476,30 +477,28 @@ main {
 }
 
 /* Place this badge above the offer cards */
-.guarantee-badge{
+.guarantee-badge {
   margin: 16px 0 18px;
   padding: 16px 16px;
   border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
 /* Make it feel like a "stamp" not a random card */
-.guarantee-badge{
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,255,255,0.18);
-  background: linear-gradient(
-    135deg,
-    rgba(138, 92, 255, 0.18),
-    rgba(98, 190, 255, 0.14)
-  );
+.guarantee-badge {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(135deg,
+      rgba(138, 92, 255, 0.18),
+      rgba(98, 190, 255, 0.14));
 }
 
 /* Icon bubble */
-.guarantee-icon{
+.guarantee-icon {
   width: 40px;
   height: 40px;
   border-radius: 12px;
@@ -507,23 +506,23 @@ main {
   place-items: center;
   font-weight: 800;
   font-size: 18px;
-  background: rgba(0,0,0,0.22);
-  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 /* Typography */
-.guarantee-text{
+.guarantee-text {
   flex: 1;
   min-width: 0;
 }
 
-.guarantee-title{
+.guarantee-title {
   font-weight: 800;
   font-size: 16px;
   line-height: 1.1;
 }
 
-.guarantee-sub{
+.guarantee-sub {
   margin-top: 4px;
   font-size: 14px;
   line-height: 1.35;
@@ -531,29 +530,29 @@ main {
 }
 
 /* Link styling */
-.guarantee-link{
+.guarantee-link {
   white-space: nowrap;
   font-weight: 700;
   font-size: 14px;
   padding: 10px 12px;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.18);
   text-decoration: none;
 }
 
-.guarantee-link:hover{
-  background: rgba(0,0,0,0.28);
+.guarantee-link:hover {
+  background: rgba(0, 0, 0, 0.28);
 }
 
 /* Mobile layout */
-@media (max-width: 640px){
-  .guarantee-badge{
+@media (max-width: 640px) {
+  .guarantee-badge {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .guarantee-link{
+  .guarantee-link {
     width: 100%;
     text-align: center;
   }
@@ -1077,13 +1076,43 @@ main {
   letter-spacing: 0.02em;
 }
 
+.payout-proof {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 18px;
+  margin-top: 48px;
+  box-shadow: var(--shadow);
+}
+
+.payout-proof .section-header {
+  margin-bottom: 18px;
+}
+
+.payout-proof-card {
+  /* background: #050505;
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px; */
+  padding: 14px;
+  overflow: hidden;
+}
+
+.payout-proof-card img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 10px;
+  display: block;
+}
+
 .creator-proof {
   background: radial-gradient(circle at 15% 30%, rgba(160, 91, 255, 0.1), transparent 40%),
     radial-gradient(circle at 85% 20%, rgba(125, 215, 255, 0.08), transparent 35%),
     var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 26px;
+  padding: 0 26px 26px;
   box-shadow: var(--shadow);
 }
 
@@ -1186,7 +1215,7 @@ main {
   }
 }
 
-.demo-tease-card{
+.demo-tease-card {
   background: radial-gradient(circle at 20% 20%, rgba(125, 215, 255, 0.1), rgba(12, 15, 23, 0.9));
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -1194,17 +1223,17 @@ main {
   box-shadow: var(--shadow);
 }
 
-.demo-tease-points{
+.demo-tease-points {
   margin-top: 14px;
   display: grid;
   gap: 10px;
 }
 
-.demo-point{
+.demo-point {
   padding: 12px 14px;
   border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
   color: var(--muted);
   font-weight: 600;
 }
