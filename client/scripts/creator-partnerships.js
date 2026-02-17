@@ -199,7 +199,56 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-     // Creator carousel dots
+    // Creator carousel dots
+    // Examples carousel dots
+    const examplesTrack = document.getElementById('examplesTrack');
+    const examplesDots = document.querySelectorAll('.examples-dots .dot');
+
+    if (examplesTrack && examplesDots.length) {
+        const setActiveExampleDot = (index) => {
+            examplesDots.forEach((d) => d.classList.remove('is-active'));
+            if (examplesDots[index]) examplesDots[index].classList.add('is-active');
+        };
+
+        examplesDots.forEach((dot) => {
+            dot.addEventListener('click', () => {
+                const idx = Number(dot.getAttribute('data-index') || '0');
+                const slide = examplesTrack.children[idx];
+                if (!slide) return;
+
+                slide.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+                setActiveExampleDot(idx);
+            });
+        });
+
+        const onScroll = () => {
+            const slides = Array.from(examplesTrack.children);
+            const trackRect = examplesTrack.getBoundingClientRect();
+            const trackCenter = trackRect.left + trackRect.width / 2;
+
+            let closestIndex = 0;
+            let closestDistance = Infinity;
+
+            slides.forEach((slide, i) => {
+                const rect = slide.getBoundingClientRect();
+                const center = rect.left + rect.width / 2;
+                const dist = Math.abs(center - trackCenter);
+                if (dist < closestDistance) {
+                    closestDistance = dist;
+                    closestIndex = i;
+                }
+            });
+
+            setActiveExampleDot(closestIndex);
+        };
+
+        examplesTrack.addEventListener('scroll', () => {
+            window.requestAnimationFrame(onScroll);
+        });
+
+        setActiveExampleDot(0);
+    }
+
     const track = document.getElementById('creatorTrack');
     const dots = document.querySelectorAll('.carousel-dots .dot');
 
