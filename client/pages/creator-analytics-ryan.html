@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+  <title>Ryan Analytics Dashboard | Raising The Bar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/creator-analytics.css">
+</head>
+
+<body>
+  <main class="analytics-page">
+    <header class="analytics-header">
+      <p class="eyebrow">Creator analytics</p>
+      <h1>Ryan dashboard</h1>
+      <p class="sub">Track visits, signups, paid conversions, revenue, and recurring subscription momentum.</p>
+      <div class="controls">
+        <label for="rangeDays">Date range</label>
+        <select id="rangeDays">
+          <option value="7">Last 7 days</option>
+          <option value="30" selected>Last 30 days</option>
+          <option value="60">Last 60 days</option>
+          <option value="90">Last 90 days</option>
+        </select>
+        <button id="refreshButton" type="button">Refresh</button>
+      </div>
+    </header>
+
+    <section id="statusBanner" class="status-banner" role="status" aria-live="polite">Loading analytics…</section>
+
+    <section class="kpi-grid" id="kpiGrid" aria-label="Key metrics"></section>
+
+    <section class="card">
+      <h2>Daily performance</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Checkout visits</th>
+              <th>Email signups</th>
+              <th>Paid conversions</th>
+              <th>Revenue</th>
+            </tr>
+          </thead>
+          <tbody id="timeseriesBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card notes-card">
+      <h2>Insight notes</h2>
+      <ul id="notesList"></ul>
+    </section>
+  </main>
+
+  <script type="module" src="../scripts/creator-analytics-ryan.js"></script>
+</body>
+
+</html>

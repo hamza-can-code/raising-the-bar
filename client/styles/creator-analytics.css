@@ -1,0 +1,146 @@
+:root {
+  --bg: #080b12;
+  --surface: #111725;
+  --surface-soft: #182033;
+  --text: #f4f7ff;
+  --muted: #a2aec9;
+  --brand: #7a8cff;
+  --brand-soft: rgba(122, 140, 255, 0.22);
+  --good: #1fd38d;
+  --warn: #ffce61;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #10172a, var(--bg) 55%);
+  color: var(--text);
+}
+
+.analytics-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 18px 36px;
+}
+
+.analytics-header h1 {
+  margin: 4px 0;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  color: var(--brand);
+  letter-spacing: 0.08em;
+  margin: 0;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.sub {
+  color: var(--muted);
+  max-width: 720px;
+}
+
+.controls {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+select, button {
+  border-radius: 10px;
+  border: 1px solid #283247;
+  background: #0e1421;
+  color: var(--text);
+  font: inherit;
+  padding: 10px 12px;
+}
+
+button {
+  background: linear-gradient(135deg, var(--brand), #6d73ff);
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.status-banner, .card, .kpi {
+  background: var(--surface);
+  border: 1px solid #232f47;
+  border-radius: 14px;
+}
+
+.status-banner {
+  margin-top: 18px;
+  padding: 12px 14px;
+  color: var(--muted);
+}
+
+.kpi-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+}
+
+.kpi {
+  padding: 14px;
+}
+
+.kpi-label {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin: 0 0 6px;
+}
+
+.kpi-value {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.kpi-sub {
+  margin-top: 6px;
+  color: var(--good);
+  font-size: 0.8rem;
+}
+
+.card {
+  margin-top: 16px;
+  padding: 14px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #26314a;
+  text-align: left;
+}
+
+th {
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.notes-card li {
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.empty {
+  color: var(--warn);
+  margin: 0;
+}

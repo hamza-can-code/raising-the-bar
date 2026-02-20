@@ -1862,8 +1862,8 @@ img {
 }
 
 .price-value {
-        color: #858c99;
-        font-size: 0.95rem;
+    color: #858c99;
+    font-size: 0.95rem;
 }
 
 .price-strikethrough {
@@ -2060,7 +2060,7 @@ img {
 
 .discount-price {
     color: #858c99;
-        font-size: 0.95rem;
+    font-size: 0.95rem;
 }
 
 /******************************************/
@@ -2800,6 +2800,10 @@ img {
     margin-bottom: 24px;
 }
 
+.reviews-hero span {
+    color: #d2d2d2;
+}
+
 .reviews-hero__score {
     display: flex;
     gap: 12px;
@@ -2834,6 +2838,7 @@ img {
     font-size: 1.5rem;
     font-weight: 700;
     margin: 0;
+    color: #d2d2d2;
 }
 
 .reviews-hero__sub {
@@ -2992,11 +2997,13 @@ img {
     padding: 18px 16px;
     border-radius: 12px;
     margin: 0 0 30px 0;
+    color: #d2d2d2;
 }
 
 .reviews-form h3 {
     margin-top: 0;
     margin-bottom: 6px;
+    color: #d2d2d2;
 }
 
 .reviews-form__hint {
@@ -3080,7 +3087,7 @@ img {
     opacity: 0.75;
     font-style: italic;
     text-align: center;
-        color: #d2d2d2;
+    color: #d2d2d2;
 }
 
 .pricing-justification {
@@ -3090,7 +3097,7 @@ img {
     opacity: 0.75;
     font-style: italic;
     text-align: center;
-            color: #d2d2d2;
+    color: #d2d2d2;
 }
 
 /* FAQ Section Styles */

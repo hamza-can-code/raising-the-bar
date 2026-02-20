@@ -12,6 +12,7 @@
 // const nutritionRoutes = require('./routes/nutritionRoutes');
 // const accessRoutes    = require('./routes/accessRoutes');
 // const bodyWeightRoutes = require('./routes/bodyWeightRoutes');
+// const creatorAnalyticsRoutes = require('./routes/creatorAnalyticsRoutes');
 // const paypalRoutes = require('./routes/paypalRoutes');
 
 // const app  = express();
@@ -44,6 +45,7 @@
 // app.use('/api', nutritionRoutes);
 // app.use('/api', accessRoutes);
 // app.use('/api', bodyWeightRoutes);
+// app.use('/api', creatorAnalyticsRoutes);
 
 // /* 7) Stripe checkout route (normal JSON)                       */
 // app.use('/api', stripeRoutes);
@@ -78,6 +80,7 @@ const workoutRoutes    = require('./routes/workoutRoutes');
 const nutritionRoutes  = require('./routes/nutritionRoutes');
 const accessRoutes     = require('./routes/accessRoutes');
 const bodyWeightRoutes = require('./routes/bodyWeightRoutes');
+const creatorAnalyticsRoutes = require('./routes/creatorAnalyticsRoutes');
 
 // PayPal routers (pick one or both if you want)
 const paypalRoutesFull = require('./routes/paypalRoutes');    // full vault/capture/charge
@@ -115,6 +118,7 @@ app.use('/api', workoutRoutes);
 app.use('/api', nutritionRoutes);
 app.use('/api', accessRoutes);
 app.use('/api', bodyWeightRoutes);
+app.use('/api', creatorAnalyticsRoutes);
 
 /* 7) Payments */
 app.use('/api', stripeRoutes);
