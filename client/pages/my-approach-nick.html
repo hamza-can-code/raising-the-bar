@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+  (async function () {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      location.href = 'log-in-nick.html';
+      return;
+    }
+    try {
+      const res = await fetch('/api/auth/me', {
+        method: 'GET',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (!res.ok) throw new Error();
+    } catch (err) {
+      localStorage.removeItem('token');
+      location.href = 'log-in-nick.html';
+    }
+  })();
+</script>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+  <title>My Approach</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../styles/my-approach-nick.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <header class="header">
+    <a href="dashboard-nick.html" class="logo">
+      <img src="../assets/nick-logo.png" alt="GAINS+ logo">
+    </a>
+    <nav class="main-nav" id="main-nav">
+      <button class="nav-close" id="nav-close" aria-label="Close Menu">✕</button>
+      <ul>
+        <li><a href="nutrition-tracker-nick.html" id="nav-nutrition">My Nutrition</a></li>
+        <li><a href="workout-tracker-nick.html" id="nav-workouts">My Workouts</a></li>
+        <li><a href="my-mind-nick.html" id="nav-mind">My Mind</a></li>
+        <li><a href="#" id="nav-help">Help</a></li>
+      </ul>
+    </nav>
+
+    <button class="hamburger" id="hamburger-btn" aria-label="Toggle Menu">☰</button>
+  </header>
+
+  <main class="approach-page">
+    <section class="approach-hero">
+      <h1>My Approach</h1>
+      <p class="positioning-line">Simple habits. Consistent effort. Long-term results.</p>
+    </section>
+
+    <section class="approach-intro">
+      <p>
+        This is how I approach training, nutrition, and discipline so I can keep progressing year-round.
+        These are the principles I follow to build and maintain my physique.
+      </p>
+    </section>
+
+    <section class="approach-sections" aria-label="My approach principles">
+      <details class="approach-item" open>
+        <summary>Training Principles</summary>
+        <div class="approach-content">
+          <ul>
+            <li>Progressive overload first: add reps, control, or load over time.</li>
+            <li>Master the basics before chasing complexity.</li>
+            <li>Train with intent: quality reps and consistent execution.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="approach-item">
+        <summary>Nutrition Principles</summary>
+        <div class="approach-content">
+          <ul>
+            <li>Build each meal around protein and whole foods.</li>
+            <li>Keep nutrition simple enough to stay consistent every week.</li>
+            <li>Use structure, not restriction, to stay lean and energized.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="approach-item">
+        <summary>Discipline & Consistency</summary>
+        <div class="approach-content">
+          <ul>
+            <li>Show up even when motivation dips — momentum compounds.</li>
+            <li>Focus on repeatable daily actions over short-term extremes.</li>
+            <li>Track what matters and adjust quickly when needed.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="approach-item">
+        <summary>Recovery & Lifestyle</summary>
+        <div class="approach-content">
+          <ul>
+            <li>Prioritize sleep and hydration to support performance.</li>
+            <li>Manage stress so training and nutrition stay sustainable.</li>
+            <li>Aim for progress you can maintain, not perfection for a week.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <p class="closing-note">Stay patient, stay consistent, and let the basics do the heavy lifting.</p>
+  </main>
+
+  <footer class="footer " id="footer">
+    <div class="footer-content">
+      <p class="powered">POWERED BY</p>
+      <p>&copy; 2026 Raising The Bar App Ltd. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="../nick.html">Start Training</a>
+        <span class="separator">|</span>
+        <a href="legal-overview.html">Our Policies</a>
+        <span class="separator">|</span>
+        <a href="contact-us.html">Contact Us</a>
+      </div>
+      
+  <script src="../scripts/my-approach-nick.js"></script>
+</body>
+
+</html>
