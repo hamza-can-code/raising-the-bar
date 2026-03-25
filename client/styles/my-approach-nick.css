@@ -150,6 +150,16 @@ ul {
   padding: 18px 0 8px;
 }
 
+.approach-hero-image {
+  display: block;
+  width: min(35%, 250px);
+  margin: 0 auto 14px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-soft);
+}
+
 .eyebrow {
   display: inline-flex;
   align-items: center;

@@ -3,16 +3,16 @@
 }
 
 :root {
-  --bg: #05060a;
-  --panel: #0c0f17;
-  --panel-2: #101525;
-  --text: #e9edf5;
-  --muted: #b8c0d4;
-  --accent: #7dd7ff;
-  --accent-2: #a05bff;
-  --border: rgba(255, 255, 255, 0.08);
+  --bg: #F9F7F2;
+  --panel: #FFFFFF;
+  --panel-2: #F4F7FC;
+  --text: #111827;
+  --muted: #4B5563;
+  --accent: #007BFF;
+  --accent-2: #339DFF;
+  --border: rgba(17, 24, 39, 0.1);
   --radius: 14px;
-  --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  --shadow: 0 18px 40px rgba(0, 26, 58, 0.08);
 }
 
 * {
@@ -22,8 +22,8 @@
 body {
   margin: 0;
   font-family: 'Poppins', system-ui, -apple-system, sans-serif;
-  background: radial-gradient(circle at 20% 20%, rgba(125, 215, 255, 0.08), transparent 35%),
-    radial-gradient(circle at 80% 0%, rgba(160, 91, 255, 0.12), transparent 30%),
+  background: radial-gradient(circle at 20% 20%, rgba(0, 123, 255, 0.08), transparent 35%),
+    radial-gradient(circle at 80% 0%, rgba(51, 157, 255, 0.1), transparent 30%),
     var(--bg);
   color: var(--text);
   line-height: 1.7;
@@ -37,18 +37,18 @@ a {
 
 a.primary {
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: #05060a;
+  color: #ffffff;
   font-weight: 700;
   padding: 12px 18px;
   border-radius: 12px;
   display: inline-block;
-  box-shadow: 0 12px 30px rgba(125, 215, 255, 0.35);
+  box-shadow: 0 10px 24px rgba(0, 123, 255, 0.26);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 a.primary:hover {
   transform: translateY(-1px) scale(1.01);
-  box-shadow: 0 15px 40px rgba(160, 91, 255, 0.35);
+  box-shadow: 0 14px 28px rgba(0, 123, 255, 0.3);
 }
 
 .site-header {
@@ -87,7 +87,7 @@ a.primary:hover {
 .tag {
   padding: 6px 10px;
   border-radius: 10px;
-  background: rgba(125, 215, 255, 0.12);
+  background: rgba(0, 123, 255, 0.1);
   color: var(--accent);
   font-weight: 600;
   font-size: 13px;
@@ -109,7 +109,7 @@ a.primary:hover {
 }
 
 .hero {
-  background: linear-gradient(140deg, rgba(125, 215, 255, 0.07), rgba(160, 91, 255, 0.08)), var(--panel);
+  background: linear-gradient(135deg, rgba(0, 123, 255, 0.12), rgba(51, 157, 255, 0.06));
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 36px;
@@ -217,8 +217,8 @@ a.primary:hover {
 }
 
 .rule-box {
-  border: 1px dashed rgba(255, 255, 255, 0.18);
-  background: rgba(160, 91, 255, 0.08);
+  border: 1px dashed rgba(17, 24, 39, 0.18);
+  background: rgba(51, 157, 255, 0.08);
 }
 
 .rule-title {
@@ -231,7 +231,7 @@ a.primary:hover {
   margin-top: 12px;
   padding: 12px 14px;
   border-radius: 12px;
-  background: rgba(125, 215, 255, 0.08);
+  background: rgba(0, 123, 255, 0.08);
   border: 1px dashed var(--accent);
   color: var(--text);
   font-weight: 600;
@@ -285,7 +285,7 @@ a.primary:hover {
   align-items: center;
   padding: 6px 10px;
   border-radius: 999px;
-  background: rgba(125, 215, 255, 0.12);
+  background: rgba(0, 123, 255, 0.1);
   border: 1px solid var(--border);
   color: var(--accent);
   font-weight: 700;
@@ -302,8 +302,8 @@ a.primary:hover {
   margin: 0;
   padding: 14px;
   border-radius: 12px;
-  background: rgba(0, 0, 0, 0.28);
-  border: 1px dashed rgba(255, 255, 255, 0.18);
+  background: #eef4ff;
+  border: 1px dashed rgba(17, 24, 39, 0.18);
   overflow: auto;
 }
 

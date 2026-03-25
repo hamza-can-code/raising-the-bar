@@ -74,6 +74,12 @@ button.primary.full {
   margin-top: 36px;
 }
 
+.header {
+    position: relative;
+    text-align: center;
+    padding: 10px 15px;
+}
+
 .site-header {
   margin: 18px auto 28px;
   max-width: 1200px;
