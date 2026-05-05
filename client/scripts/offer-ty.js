@@ -1099,12 +1099,12 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       title: "Clear and easy to follow",
-      image: "../assets/clear-and-easy-ty.webp",
+      image: "../assets/clear-and-easy.webp",
       desc: ""
     },
     {
       title: "Progress tracking & analysis",
-      image: "../assets/progress-tracking-ty.webp",
+      image: "../assets/progress-tracking.webp",
       desc: ""
     },
     {
