@@ -5,7 +5,7 @@
   padding: 18px;
   border-radius: 14px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.72);
   display: grid;
   gap: 12px;
 }
@@ -47,19 +47,19 @@
   width: 100%;
   padding: 12px 14px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(5, 6, 10, 0.6);
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  background: rgba(255, 255, 255, 0.92);
   color: var(--text);
   font-size: 16px;
 }
 
 .form-stack input:focus-visible {
-  outline: 2px solid rgba(125, 215, 255, 0.5);
+  outline: 2px solid rgba(0, 123, 255, 0.35);
   outline-offset: 2px;
 }
 
 .form-stack input::placeholder {
-  color: rgba(233, 237, 245, 0.6);
+  color: rgba(75, 85, 99, 0.68);
 }
 
 .form-note {
