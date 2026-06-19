@@ -167,6 +167,26 @@ By continuing, you agree to our
   <!-- <script src="scripts/exercise.js"></script>
   <script src="scripts/meals.js"></script> -->
   <script type="module" src="../scripts/forms-kalix.js"></script>
+  <script>
+    const setKalixByline = () => {
+      const heading = document.querySelector('.form-question h2');
+      const subtitle = document.querySelector('.form-question .scroll-text');
+
+      if (heading?.textContent.trim() === "Let's build your dream body" && subtitle) {
+        subtitle.textContent = 'by Kalix';
+      }
+    };
+
+    const kalixQuestion = document.querySelector('.form-question');
+    if (kalixQuestion) {
+      new MutationObserver(setKalixByline).observe(kalixQuestion, {
+        childList: true,
+        subtree: true,
+        characterData: true,
+      });
+      setKalixByline();
+    }
+  </script>
   <script type="module">
     import { initCookieBanner } from '../scripts/modules/cookieBanner.js';
     initCookieBanner();
