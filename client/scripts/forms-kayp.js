@@ -52,7 +52,7 @@ const MIN_RT_EXERCISES = 3;
 const questions = [
   {
     // this becomes the big heading:
-    question: "Let's build your dream body",
+    question: "Let's build your dream body by Krishna",
 
     // this gets rendered as the small sub-text under the heading:
     extraText: "Select your body type",
