@@ -52,7 +52,7 @@ const MIN_RT_EXERCISES = 3;
 const questions = [
   {
     // this becomes the big heading:
-    question: "Let's build your dream body by Kalix",
+    question: "Let's build your dream body",
 
     // this gets rendered as the small sub-text under the heading:
     extraText: "Select your body type",
@@ -2057,1222 +2057,1273 @@ const FBB_WORKOUTS = {
 };
 
 const HOME_NO_EQUIPMENT_WORKOUTS = [
-  // ---------- Day 1 ----------
+  // ---------- Workout 1 – Beginner 1 ----------
   {
-    dayLabel: "Day 1 – FULL BODY",
-    /* -------- Warm-Up (≈5 min total) -------- */
+    dayLabel: 'Workout 1 – Beginner 1',
+    /* -------- Warm-Up -------- */
     warmUp: [
-      {
-        name: "Jumping Jacks",
-        duration: "60 seconds",
-        rpe: 5
-      },
-      {
-        name: "Arm Circles",
-        duration: "30 seconds",
-        rpe: 4
-      },
-      {
-        name: "Hip Circles",
-        duration: "30 seconds",
-        rpe: 4
-      },
-      {
-        name: "Cat-Cow Stretch",
-        duration: "60 seconds",
-        rpe: 3
-      }
+      { name: 'Wide + Slow Arm Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Small + Quick Arm Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Elbow Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Wrist Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Holding Hands Wrist Circles', duration: "30 seconds", rpe: 4 }
     ],
 
-    /* -------- Main Work (≈30 min RT + 5 min cardio) -------- */
+    /* -------- Main Work -------- */
     mainWork: [
       {
         blockType: "Resistance Training",
-        allocatedMinutes: 30,
+        allocatedMinutes: 60,
         exercises: [
           {
-            name: "Push-Ups",
-            muscleGroup: "chest",
+            name: 'Incline Push-Ups',
+            muscleGroup: 'chest',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "push",
+            splitTag: 'push',
             isTechnical: false,
             advancedVariant: false,
-            typeOfMovement: "compound",
-            pairedWith: "Plank Shoulder Taps",
+            typeOfMovement: 'compound',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/_l3ySVKYVJ8",
-            alternativeExercises: [
-              "Knee Push-Ups",
-              "Incline Push-Ups",
-              "Decline Push-Ups",
-              "Diamond Push-Ups",
-              "Wide-Grip Push-Ups"
-            ],
-            sets: 3,
-            reps: "10-15",
-            rpe: "6-7",
-            rest: "45s",
-            tempo: "2:1:2",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '10',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           },
           {
-            name: "Bodyweight Squats",
-            muscleGroup: "quads",
+            name: 'Push-Ups (Use knees if too hard)',
+            muscleGroup: 'chest',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
+            splitTag: 'push',
             isTechnical: false,
             advancedVariant: false,
-            typeOfMovement: "compound",
-            pairedWith: "Glute Bridges",
+            typeOfMovement: 'compound',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/aclHkVaku9U",
-            alternativeExercises: [
-              "Sumo Squats",
-              "Pulse Squats",
-              "Jump Squats",
-              "Wall Sit",
-              "Chair Squats"
-            ],
-            sets: 3,
-            reps: "15-20",
-            rpe: "6-7",
-            rest: "45s",
-            tempo: "2:1:2",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '10',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           },
           {
-            name: "Pike Push-Ups",
-            muscleGroup: "shoulders",
+            name: 'Tricep Dips (chair/sofa)',
+            muscleGroup: 'triceps',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "push",
+            splitTag: 'push',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '10',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Plank Hold',
+            muscleGroup: 'core',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'core',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'isolation',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '20 sec',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Australian Rows',
+            muscleGroup: 'back',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'pull',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '12',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Pull-Up Negatives',
+            muscleGroup: 'back',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'pull',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '8',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Band Assisted Chin-Ups',
+            muscleGroup: 'back',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'pull',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '8',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Hanging Knee Raises',
+            muscleGroup: 'core',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'core',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'isolation',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '12',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          }
+        ]
+      }
+    ],
+
+    /* -------- Cool-Down -------- */
+    coolDown: [
+      { name: 'Chest Stretch', duration: '30 seconds', rpe: 3, notes: "" },
+      { name: 'Shoulder Stretch', duration: '30 seconds', rpe: 3, notes: "" },
+      { name: "Child's Pose", duration: '45 seconds', rpe: 3, notes: "" }
+    ]
+  },
+  // ---------- Workout 2 – Beginner 2 ----------
+  {
+    dayLabel: 'Workout 2 – Beginner 2',
+    /* -------- Warm-Up -------- */
+    warmUp: [
+      { name: 'Wide + Slow Arm Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Small + Quick Arm Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Elbow Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Wrist Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Holding Hands Wrist Circles', duration: "30 seconds", rpe: 4 }
+    ],
+
+    /* -------- Main Work -------- */
+    mainWork: [
+      {
+        blockType: "Resistance Training",
+        allocatedMinutes: 60,
+        exercises: [
+          {
+            name: 'Push-Ups',
+            muscleGroup: 'chest',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'push',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '8',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Diamond Push-Ups',
+            muscleGroup: 'triceps',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'push',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '8',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Wide Push-Ups',
+            muscleGroup: 'chest',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'push',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '8',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Pseudo Planche Lean Hold',
+            muscleGroup: 'shoulders',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'push',
             isTechnical: true,
             advancedVariant: false,
-            typeOfMovement: "compound",
-            pairedWith: "Reverse Lunges",
+            typeOfMovement: 'isolation',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/KC1M9nT6mXc",
-            alternativeExercises: [
-              "Hand-Release Push-Ups",
-              "Decline Pike Push-Ups",
-              "Elevated Pike Push-Ups",
-              "Shoulder Tap Push-Ups",
-              "Wall Handstand Hold"
-            ],
-            sets: 3,
-            reps: "8-12",
-            rpe: "7-8",
-            rest: "60s",
-            tempo: "2:1:2",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '15 sec',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           },
           {
-            name: "Reverse Lunges",
-            muscleGroup: "glutes",
+            name: 'Pull-Ups',
+            muscleGroup: 'back',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
+            splitTag: 'pull',
             isTechnical: false,
             advancedVariant: false,
-            typeOfMovement: "isolation",
-            pairedWith: "Push-Ups",
+            typeOfMovement: 'compound',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/1b98CIogp7Q",
-            alternativeExercises: [
-              "Forward Lunges",
-              "Walking Lunges",
-              "Split Squats",
-              "Curtsy Lunges",
-              "Lateral Lunges"
-            ],
-            sets: 3,
-            reps: "12-15 / leg",
-            rpe: "6-7",
-            rest: "45s",
-            tempo: "2:1:2",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '6',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           },
           {
-            name: "Plank Shoulder Taps",
-            muscleGroup: "core",
+            name: 'Chin-Ups',
+            muscleGroup: 'back',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "core",
+            splitTag: 'pull',
             isTechnical: false,
             advancedVariant: false,
-            typeOfMovement: "isolation",
-            pairedWith: "Bodyweight Squats",
+            typeOfMovement: 'compound',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/9Ar2iRwKfnY",
-            alternativeExercises: [
-              "High-Plank Hold",
-              "Plank Toe Taps",
-              "Plank Jacks",
-              "Mountain Climbers",
-              "Dead Bug"
-            ],
-            sets: 3,
-            reps: "20 total",
-            rpe: "6-7",
-            rest: "30s",
-            tempo: "1:1:1",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '6',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           },
           {
-            name: "Glute Bridges",
-            muscleGroup: "glutes",
+            name: 'Scapular Pull-Ups',
+            muscleGroup: 'back',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
+            splitTag: 'pull',
             isTechnical: false,
             advancedVariant: false,
-            typeOfMovement: "compound",
-            pairedWith: "Plank Shoulder Taps",
+            typeOfMovement: 'isolation',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/Iw3LRapHcM0",
-            alternativeExercises: [
-              "Single-Leg Glute Bridge",
-              "Hip Thrust (Feet Elevated)",
-              "Frog Pumps",
-              "Isometric Glute Bridge Hold",
-              "Banded Glute Bridge"
-            ],
-            sets: 3,
-            reps: "15-20",
-            rpe: "6-7",
-            rest: "45s",
-            tempo: "2:1:2",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '12',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Hanging Knee Raises',
+            muscleGroup: 'core',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'core',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'isolation',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '15',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           }
         ]
-      },
-      {
-        blockType: "Cardio",
-        allocatedMinutes: 5,
-        name: "Burpees",
-        rpe: 8
       }
     ],
 
-    /* -------- Cool-Down (≈5 min) -------- */
+    /* -------- Cool-Down -------- */
     coolDown: [
-      {
-        name: "Child’s Pose",
-        duration: "45 seconds",
-        rpe: 3,
-        notes: ""
-      },
-      {
-        name: "Standing Quad Stretch",
-        duration: "30 seconds / leg",
-        rpe: 3,
-        notes: ""
-      },
-      {
-        name: "Chest Stretch",
-        duration: "30 seconds",
-        rpe: 3,
-        notes: ""
-      }
+      { name: 'Chest Stretch', duration: '30 seconds', rpe: 3, notes: "" },
+      { name: 'Shoulder Stretch', duration: '30 seconds', rpe: 3, notes: "" },
+      { name: "Child's Pose", duration: '45 seconds', rpe: 3, notes: "" }
     ]
   },
-
-  /* ================= DAY 2 – LOWER & CORE ================= */
+  // ---------- Workout 3 – Intermediate 1 ----------
   {
-    dayLabel: "Day 2 – LOWER & CORE",
-
-    /* -------- Warm-Up (≈5 min) -------- */
+    dayLabel: 'Workout 3 – Intermediate 1',
+    /* -------- Warm-Up -------- */
     warmUp: [
-      { name: "High Knees", duration: "60 seconds", rpe: 5 },
-      { name: "Leg Swings (Front/Side)", duration: "30 seconds / leg", rpe: 4 },
-      { name: "Glute Bridges", duration: "45 seconds", rpe: 4 },
-      { name: "Air Squats", duration: "20 reps", rpe: 4 }
+      { name: 'Wide + Slow Arm Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Small + Quick Arm Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Elbow Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Wrist Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Holding Hands Wrist Circles', duration: "30 seconds", rpe: 4 }
     ],
 
-    /* -------- Main Work (≈30 min RT + 5 min cardio) -------- */
+    /* -------- Main Work -------- */
     mainWork: [
       {
         blockType: "Resistance Training",
-        allocatedMinutes: 30,
+        allocatedMinutes: 60,
         exercises: [
           {
-            name: "Bodyweight Split Squats",
-            muscleGroup: "quads",
+            name: 'Pseudo Planche Push-Ups',
+            muscleGroup: 'shoulders',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "compound",
-            pairedWith: "Side Plank",
-            isBodyweight: true,
-            videoUrl: "https://youtu.be/2C-uNgKwPLE",
-            alternativeExercises: [
-              "Reverse Lunges",
-              "Step-Ups",
-              "Bulgarian Split Squat",
-              "Static Lunge",
-              "Curtsy Lunge"
-            ],
-            sets: 3,
-            reps: "10-12 / leg",
-            rpe: "6-7",
-            rest: "60s",
-            tempo: "2:1:2",
-            notes: ""
-          },
-          {
-            name: "Single-Leg Glute Bridge",
-            muscleGroup: "glutes",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "compound",
-            isBodyweight: true,
-            pairedWith: "Calf Raises",
-            videoUrl: "https://youtu.be/6HYpQ1U0Cj8",
-            alternativeExercises: [
-              "Glute Bridge",
-              "Hip Thrust (Feet Elevated)",
-              "Frog Pumps",
-              "Banded Glute Bridge",
-              "Marching Glute Bridge"
-            ],
-            sets: 3,
-            reps: "12-15 / leg",
-            rpe: "6-7",
-            rest: "45s",
-            tempo: "2:1:2",
-            notes: ""
-          },
-          {
-            name: "Squat Jumps",
-            muscleGroup: "quads",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
+            splitTag: 'push',
             isTechnical: true,
             advancedVariant: false,
-            typeOfMovement: "compound",
-            pairedWith: "Single-Leg Glute Bridge",
+            typeOfMovement: 'compound',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/Ut0bI5Pv6Os",
-            alternativeExercises: [
-              "Jumping Lunges",
-              "Pulse Squats",
-              "Tuck Jumps",
-              "Broad Jumps",
-              "Jumping Jacks"
-            ],
-            sets: 3,
-            reps: "8-10",
-            rpe: "7-8",
-            rest: "60s",
-            tempo: "1:0:1",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '6',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           },
           {
-            name: "Side Plank",
-            muscleGroup: "core",
+            name: 'Pike Push-Ups',
+            muscleGroup: 'shoulders',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "core",
+            splitTag: 'push',
             isTechnical: false,
             advancedVariant: false,
-            typeOfMovement: "isolation",
-            pairedWith: "Bodyweight Split Squats",
+            typeOfMovement: 'compound',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/wqzrb67Dwf8",
-            alternativeExercises: [
-              "Plank Hold",
-              "Plank Shoulder Taps",
-              "Dead Bug",
-              "Bird Dog",
-              "Hollow Hold"
-            ],
-            sets: 3,
-            reps: "30-45 s / side",
-            rpe: "6-7",
-            rest: "30s",
-            tempo: "static",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '8',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           },
           {
-            name: "Calf Raises",
-            muscleGroup: "calves",
+            name: 'Decline Push-Ups',
+            muscleGroup: 'chest',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
+            splitTag: 'push',
             isTechnical: false,
             advancedVariant: false,
-            typeOfMovement: "isolation",
-            pairedWith: "Single-Leg Glute Bridge",
+            typeOfMovement: 'compound',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/-cdph8hv0O0",
-            alternativeExercises: [
-              "Single-Leg Calf Raise",
-              "Seated Calf Raise (Bodyweight)",
-              "Tiptoe Walk",
-              "Jump Rope Skips",
-              "Isometric Calf Hold"
-            ],
-            sets: 3,
-            reps: "15-20",
-            rpe: "6-7",
-            rest: "30s",
-            tempo: "1:1:2",
-            notes: ""
-          }
-        ]
-      },
-      {
-        blockType: "Cardio",
-        allocatedMinutes: 5,
-        name: "Mountain Climbers",
-        rpe: 8
-      }
-    ],
-
-    /* -------- Cool-Down (≈5 min) -------- */
-    coolDown: [
-      { name: "Standing Hamstring Stretch", duration: "45 seconds", rpe: 3, notes: "" },
-      { name: "Figure-4 Stretch", duration: "30 seconds / leg", rpe: 3, notes: "" },
-      { name: "Child’s Pose", duration: "45 seconds", rpe: 3, notes: "" }
-    ]
-  },
-  /* ================= DAY 3 – PULL ================= */
-  {
-    dayLabel: "Day 3 – PULL",
-
-    /* -------- Warm-Up (≈5 min) -------- */
-    warmUp: [
-      { name: "Jumping Jacks", duration: "60 seconds", rpe: 5 },
-      { name: "Shoulder Rolls", duration: "30 seconds × 2", rpe: 4 },
-      { name: "Cat-Cow Stretch", duration: "45 seconds", rpe: 4 },
-      { name: "Arm Circles (Forward/Back)", duration: "30 seconds each", rpe: 4 }
-    ],
-
-    /* -------- Main Work (≈30 min RT + 5 min cardio) -------- */
-    mainWork: [
-      {
-        blockType: "Resistance Training",
-        allocatedMinutes: 30,
-        exercises: [
-          {
-            name: "Doorway Rows",
-            muscleGroup: "back",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "pull",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "compound",
-            pairedWith: "Reverse Snow Angels",
-            isBodyweight: true,
-            videoUrl: "https://youtu.be/8A6z31m6p8s",
-            alternativeExercises: [
-              "Inverted Table Rows",
-              "Towel Rows (Under Foot)",
-              "Single-Arm Backpack Rows",
-              "Superman Pull-Downs",
-              "Bent-Over Towel Rows"
-            ],
-            sets: 3,
-            reps: "10-12",
-            rpe: "6-7",
-            rest: "60s",
-            tempo: "2:1:2",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '8',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           },
           {
-            name: "Superman",
-            muscleGroup: "back",
+            name: 'Push-Ups',
+            muscleGroup: 'chest',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "pull",
+            splitTag: 'push',
             isTechnical: false,
             advancedVariant: false,
-            typeOfMovement: "isolation",
+            typeOfMovement: 'compound',
+            pairedWith: "",
             isBodyweight: true,
-            pairedWith: "Towel Bicep Curls",
-            videoUrl: "https://youtu.be/z6PJMT2y8GQ",
-            alternativeExercises: [
-              "Reverse Hyperextension (Floor)",
-              "Prone Y-Raise",
-              "Bird Dog",
-              "Swimmer Kicks",
-              "Prone T-Raise"
-            ],
-            sets: 3,
-            reps: "12-15",
-            rpe: "6-7",
-            rest: "45s",
-            tempo: "2:1:2",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '12',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           },
           {
-            name: "Towel Bicep Curls",
-            muscleGroup: "biceps",
+            name: 'Wide Grip Pull-Ups',
+            muscleGroup: 'back',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "pull",
+            splitTag: 'pull',
             isTechnical: false,
             advancedVariant: false,
-            typeOfMovement: "isolation",
+            typeOfMovement: 'compound',
+            pairedWith: "",
             isBodyweight: true,
-            pairedWith: "Superman",
-            videoUrl: "https://youtu.be/XTHs0DgoUAw",
-            alternativeExercises: [
-              "Isometric Bicep Hold (Towel)",
-              "Backpack Curl",
-              "Reverse Grip Inverted Row",
-              "Door Handle Curl",
-              "Resistance-Band Curl"
-            ],
-            sets: 3,
-            reps: "12-15",
-            rpe: "6-7",
-            rest: "45s",
-            tempo: "1:1:2",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '6',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           },
           {
-            name: "Reverse Snow Angels",
-            muscleGroup: "traps",
+            name: 'Neutral Grip Pull-Ups',
+            muscleGroup: 'back',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "pull",
+            splitTag: 'pull',
             isTechnical: false,
             advancedVariant: false,
-            typeOfMovement: "isolation",
+            typeOfMovement: 'compound',
+            pairedWith: "",
             isBodyweight: true,
-            pairedWith: "Doorway Rows",
-            videoUrl: "https://youtu.be/zlR9lxqF5j8",
-            alternativeExercises: [
-              "Prone Y-T-W Raises",
-              "Scapular Wall Slides",
-              "Face-Down I-Raise",
-              "Standing Band Pull-Apart",
-              "Seated Resistance-Band Face Pull"
-            ],
-            sets: 3,
-            reps: "12-15",
-            rpe: "6-7",
-            rest: "45s",
-            tempo: "2:1:2",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '6',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           },
           {
-            name: "Plank Shoulder Taps",
-            muscleGroup: "core",
+            name: 'Commando Pull-Ups',
+            muscleGroup: 'back',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "core",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "isolation",
-            isBodyweight: true,
-            pairedWith: "Doorway Rows",
-            videoUrl: "https://youtu.be/LM8XHLYJoYs",
-            alternativeExercises: [
-              "Bird Dog",
-              "Dead Bug",
-              "High-Plank Hold",
-              "Mountain Climbers (Slow)",
-              "Side-Plank Reach-Through"
-            ],
-            sets: 3,
-            reps: "20 taps",
-            rpe: "6-7",
-            rest: "30s",
-            tempo: "controlled",
-            notes: ""
-          }
-        ]
-      },
-      {
-        blockType: "Cardio",
-        allocatedMinutes: 5,
-        name: "Burpees",
-        rpe: 8
-      }
-    ],
-
-    /* -------- Cool-Down (≈5 min) -------- */
-    coolDown: [
-      { name: "Child’s Pose", duration: "45 seconds", rpe: 3, notes: "" },
-      { name: "Cross-Body Shoulder Stretch", duration: "30 seconds / arm", rpe: 3, notes: "" },
-      { name: "Thread-the-Needle Stretch", duration: "45 seconds", rpe: 3, notes: "" }
-    ]
-  },
-  /* ================= DAY 4 – FULL BODY ================= */
-  {
-    dayLabel: "Day 4 – FULL BODY",
-
-    /* -------- Warm-Up (≈5 min) -------- */
-    warmUp: [
-      { name: "High Knees", duration: "45 seconds", rpe: 5 },
-      { name: "Inchworm Walk-outs", duration: "6 reps", rpe: 4 },
-      { name: "World’s Greatest Stretch", duration: "30 seconds / side", rpe: 4 },
-      { name: "Hip Circles", duration: "30 seconds each direction", rpe: 4 }
-    ],
-
-    /* -------- Main Work (≈30 min RT + 5 min cardio) -------- */
-    mainWork: [
-      {
-        blockType: "Resistance Training",
-        allocatedMinutes: 30,
-        exercises: [
-          {
-            name: "Push-Up to Shoulder Tap",
-            muscleGroup: "chest",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "push",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "compound",
-            pairedWith: "Reverse Lunges",
-            isBodyweight: true,
-            videoUrl: "https://youtu.be/5zYOKF0RpfM",
-            alternativeExercises: [
-              "Knee Push-Ups",
-              "Incline Push-Ups",
-              "Decline Push-Ups",
-              "Hand-Release Push-Ups",
-              "Diamond Push-Ups"
-            ],
-            sets: 3,
-            reps: "10-12",
-            rpe: "6-7",
-            rest: "60s",
-            tempo: "2:1:2",
-            notes: ""
-          },
-          {
-            name: "Reverse Lunges",
-            muscleGroup: "quads",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "compound",
-            pairedWith: "Push-Up to Shoulder Tap",
-            isBodyweight: true,
-            videoUrl: "https://youtu.be/1_t5vOPm9y0",
-            alternativeExercises: [
-              "Forward Lunges",
-              "Walking Lunges",
-              "Static Lunges",
-              "Split Squat",
-              "Curtsy Lunge"
-            ],
-            sets: 3,
-            reps: "10-12 / leg",
-            rpe: "6-7",
-            rest: "60s",
-            tempo: "2:1:2",
-            notes: ""
-          },
-          {
-            name: "Pike Push-Ups",
-            muscleGroup: "shoulders",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "push",
+            splitTag: 'pull',
             isTechnical: true,
             advancedVariant: false,
-            typeOfMovement: "compound",
-            pairedWith: "Glute Bridge March",
+            typeOfMovement: 'compound',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/j-M_HszYGmA",
-            alternativeExercises: [
-              "Decline Push-Ups",
-              "Handstand Hold (Wall)",
-              "Dolphin Push-Ups",
-              "Elevated Pike Press",
-              "Pseudo-Planche Push-Ups"
-            ],
-            sets: 3,
-            reps: "8-10",
-            rpe: "7-8",
-            rest: "60s",
-            tempo: "2:1:2",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '6',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           },
           {
-            name: "Glute Bridge March",
-            muscleGroup: "glutes",
+            name: 'Hanging Leg Raises',
+            muscleGroup: 'core',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
+            splitTag: 'core',
             isTechnical: false,
             advancedVariant: false,
-            typeOfMovement: "compound",
-            pairedWith: "Pike Push-Ups",
+            typeOfMovement: 'isolation',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/ulR1-e3lz0A",
-            alternativeExercises: [
-              "Glute Bridge",
-              "Single-Leg Glute Bridge",
-              "Hip Thrust (Feet Elevated)",
-              "Banded Glute Bridge",
-              "Frog Pumps"
-            ],
-            sets: 3,
-            reps: "12-15",
-            rpe: "6-7",
-            rest: "45s",
-            tempo: "2:1:2",
-            notes: ""
-          },
-          {
-            name: "Bicycle Crunches",
-            muscleGroup: "core",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "core",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "isolation",
-            isBodyweight: true,
-            pairedWith: "Squat Pulses",
-            videoUrl: "https://youtu.be/Iwyvozckjak",
-            alternativeExercises: [
-              "Dead Bug",
-              "Alternating V-Ups",
-              "Russian Twists",
-              "Toe Touch Crunches",
-              "Reverse Crunches"
-            ],
-            sets: 3,
-            reps: "20 reps",
-            rpe: "6-7",
-            rest: "30s",
-            tempo: "controlled",
-            notes: ""
-          },
-          {
-            name: "Squat Pulses",
-            muscleGroup: "quads",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "compound",
-            isBodyweight: true,
-            pairedWith: "Bicycle Crunches",
-            videoUrl: "https://youtu.be/8z-LZLGGk7o",
-            alternativeExercises: [
-              "Air Squats",
-              "Jump Squats",
-              "Wall Sit",
-              "Isometric Squat Hold",
-              "Sumo Squat Pulses"
-            ],
-            sets: 3,
-            reps: "15-20",
-            rpe: "7-8",
-            rest: "45s",
-            tempo: "1:0:1",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '12',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           }
         ]
-      },
-      {
-        blockType: "Cardio",
-        allocatedMinutes: 5,
-        name: "Jump Rope Skips",
-        rpe: 8
       }
     ],
 
-    /* -------- Cool-Down (≈5 min) -------- */
+    /* -------- Cool-Down -------- */
     coolDown: [
-      { name: "Downward Dog", duration: "45 seconds", rpe: 3, notes: "" },
-      { name: "Standing Quad Stretch", duration: "30 seconds / leg", rpe: 3, notes: "" },
-      { name: "Seated Forward Fold", duration: "45 seconds", rpe: 3, notes: "" }
+      { name: 'Chest Stretch', duration: '30 seconds', rpe: 3, notes: "" },
+      { name: 'Shoulder Stretch', duration: '30 seconds', rpe: 3, notes: "" },
+      { name: "Child's Pose", duration: '45 seconds', rpe: 3, notes: "" }
     ]
   },
-  /* ================= DAY 5 – LEGS (Hamstring Focus) ================= */
+  // ---------- Workout 4 – Intermediate 2 ----------
   {
-    dayLabel: "Day 5 – LEGS (HAM)",
-
-    /* -------- Warm-Up (≈5 min) -------- */
+    dayLabel: 'Workout 4 – Intermediate 2',
+    /* -------- Warm-Up -------- */
     warmUp: [
-      { name: "Bodyweight Good Mornings", duration: "45 seconds", rpe: 5 },
-      { name: "Leg Swings (Front & Side)", duration: "30 seconds / leg", rpe: 4 },
-      { name: "Glute Bridges", duration: "12 reps", rpe: 4 },
-      { name: "Hip Circles", duration: "30 seconds / side", rpe: 4 }
+      { name: 'Wide + Slow Arm Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Small + Quick Arm Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Elbow Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Wrist Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Holding Hands Wrist Circles', duration: "30 seconds", rpe: 4 }
     ],
 
-    /* -------- Main Work (≈30 min RT + 5 min cardio) -------- */
+    /* -------- Main Work -------- */
     mainWork: [
       {
         blockType: "Resistance Training",
-        allocatedMinutes: 30,
+        allocatedMinutes: 60,
         exercises: [
           {
-            name: "Single-Leg Romanian Deadlift",
-            muscleGroup: "hamstrings",
+            name: 'Wall Handstand Hold',
+            muscleGroup: 'shoulders',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "compound",
-            isBodyweight: true,
-            pairedWith: "Glute Bridge Walkout",
-            isBodyweight: true,
-            videoUrl: "https://youtu.be/2zcE1Yd8z9M",
-            alternativeExercises: [
-              "Good Morning (Bodyweight)",
-              "Sliding Hamstring Curl",
-              "Reverse Hip Hinge",
-              "Backpack RDL",
-              "Tabletop Hip Thrust"
-            ],
-            sets: 3,
-            reps: "8-10 / leg",
-            rpe: "7-8",
-            rest: "60s",
-            tempo: "2:1:2",
-            notes: ""
-          },
-          {
-            name: "Glute Bridge Walkout",
-            muscleGroup: "glutes",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "compound",
-            pairedWith: "Single-Leg Romanian Deadlift",
-            isBodyweight: true,
-            videoUrl: "https://youtu.be/OPyHpt_kEJE",
-            alternativeExercises: [
-              "Glute Bridge March",
-              "Single-Leg Glute Bridge",
-              "Hip Thrust (Feet Elevated)",
-              "Frog Pumps",
-              "Isometric Glute Bridge Hold"
-            ],
-            sets: 3,
-            reps: "10-12",
-            rpe: "6-7",
-            rest: "60s",
-            tempo: "2:1:2",
-            notes: ""
-          },
-          {
-            name: "Hamstring Curl (Towel / Slider)",
-            muscleGroup: "hamstrings",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "isolation",
-            pairedWith: "Step-Up to Knee Drive",
-            isBodyweight: true,
-            videoUrl: "https://youtu.be/F6BK3gheSxE",
-            alternativeExercises: [
-              "Nordic Curl (Assisted)",
-              "Swiss-Ball Hamstring Curl",
-              "Prone Hamstring Curl (Band)",
-              "Gliding Ham Curl",
-              "Stability-Ball Leg Curl"
-            ],
-            sets: 3,
-            reps: "12-15",
-            rpe: "6-7",
-            rest: "45s",
-            tempo: "2:1:2",
-            notes: ""
-          },
-          {
-            name: "Step-Up to Knee Drive",
-            muscleGroup: "quads",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "compound",
-            pairedWith: "Hamstring Curl (Towel / Slider)",
-            isBodyweight: true,
-            videoUrl: "https://youtu.be/9Z3-wWc7o4w",
-            alternativeExercises: [
-              "Reverse Lunge",
-              "Bulgarian Split Squat",
-              "Curtsy Lunge",
-              "Box Step-Up",
-              "Static Split Squat"
-            ],
-            sets: 3,
-            reps: "10-12 / leg",
-            rpe: "6-7",
-            rest: "45s",
-            tempo: "2:1:2",
-            notes: ""
-          },
-          {
-            name: "Single-Leg Calf Raise",
-            muscleGroup: "calves",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "isolation",
-            pairedWith: "Hamstring Curl (Towel / Slider)",
-            isBodyweight: true,
-            videoUrl: "https://youtu.be/OLHH- c_bDs0",
-            alternativeExercises: [
-              "Double-Leg Calf Raise",
-              "Seated Calf Raise (Bodyweight)",
-              "Wall-Lean Calf Raise",
-              "Banded Calf Raise",
-              "Calf Raise Pulse"
-            ],
-            sets: 3,
-            reps: "15-20 / leg",
-            rpe: "6-7",
-            rest: "30s",
-            tempo: "1:1:1",
-            notes: ""
-          }
-        ]
-      },
-      {
-        blockType: "Cardio",
-        allocatedMinutes: 5,
-        name: "Skater Jumps",
-        rpe: 8
-      }
-    ],
-
-    /* -------- Cool-Down (≈5 min) -------- */
-    coolDown: [
-      { name: "Standing Hamstring Stretch", duration: "45 seconds", rpe: 3, notes: "" },
-      { name: "Seated Figure-4 Stretch", duration: "30 seconds / leg", rpe: 3, notes: "" },
-      { name: "Calf Stretch (Wall)", duration: "30 seconds / leg", rpe: 3, notes: "" }
-    ]
-  },
-  /* ================= DAY 6 – HIIT & CORE ================= */
-  {
-    dayLabel: "Day 6 – HIIT & CORE",
-
-    /* -------- Warm-Up  (≈5 min) -------- */
-    warmUp: [
-      { name: "Jumping Jacks", duration: "45 seconds", rpe: 5 },
-      { name: "World’s Greatest Stretch", duration: "30 seconds / side", rpe: 4 },
-      { name: "Cat-Cow", duration: "8 reps", rpe: 4 },
-      { name: "Bodyweight Squats", duration: "12 reps", rpe: 4 }
-    ],
-
-    /* -------- Main Work (≈25 min HIIT + 10 min Core) -------- */
-    mainWork: [
-      /* HIIT Circuit – 20 min */
-      {
-        blockType: "HIIT",
-        allocatedMinutes: 20,
-        name: "Tabata-Style 4-Round Circuit",
-        rpe: 8,
-        notes: "20s work / 10s rest • Complete all eight intervals per round; rest 60 s between rounds.",
-        exercises: [
-          {
-            name: "Burpees",
-            muscleGroup: "full body",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "fullbody",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "compound",
-            isBodyweight: true,
-            videoUrl: "https://youtu.be/TJ2ifmkGGus",
-            alternativeExercises: [
-              "Half-Burpee",
-              "Squat Thrust",
-              "Sprawl",
-              "Step-Back Burpee",
-              "Jump Squat"
-            ]
-          },
-          {
-            name: "High Knees",
-            muscleGroup: "cardio",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "cardio",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "cardio",
-            isBodyweight: true,
-            videoUrl: "https://youtu.be/OAJ_J3EZkdY",
-            alternativeExercises: [
-              "Butt Kicks",
-              "Marching High Knees",
-              "Jog in Place",
-              "Fast Feet Shuffle",
-              "Jumping Jacks"
-            ]
-          },
-          {
-            name: "Mountain Climbers",
-            muscleGroup: "core",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "core",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "cardio",
-            isBodyweight: true,
-            videoUrl: "https://youtu.be/IT94xC35u6k",
-            alternativeExercises: [
-              "Cross-Body Mountain Climbers",
-              "Slow Mountain Climbers",
-              "Plank Knee Drives",
-              "Standing Climbers",
-              "Plank Jacks"
-            ]
-          },
-          {
-            name: "Skater Jumps",
-            muscleGroup: "legs",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "compound",
-            isBodyweight: true,
-            videoUrl: "https://youtu.be/nRAkcp3s2p8",
-            alternativeExercises: [
-              "Lateral Bounds",
-              "Side-Step Squat",
-              "Jump Squat",
-              "Curtsy Lunge Hop",
-              "Speed Skaters (Low Impact)"
-            ]
-          }
-        ]
-      },
-
-      /* Core Finisher – 10 min */
-      {
-        blockType: "Resistance Training",
-        allocatedMinutes: 10,
-        exercises: [
-          {
-            name: "Plank Shoulder Taps",
-            muscleGroup: "core",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "core",
-            isTechnical: false,
-            advancedVariant: false,
-            typeOfMovement: "isolation",
-            isBodyweight: true,
-            videoUrl: "https://youtu.be/it6PzT-DHCw",
-            alternativeExercises: [
-              "Standard Plank",
-              "Knee-Plank Shoulder Taps",
-              "Plank with Reach",
-              "High-Plank Hold",
-              "Bird-Dog"
-            ],
-            sets: 3,
-            reps: "16-20 (alt)",
-            rpe: "6-7",
-            rest: "30s",
-            tempo: "controlled",
-            notes: ""
-          },
-          {
-            name: "Alternating V-Ups",
-            muscleGroup: "core",
-            equipmentNeeded: ["Bodyweight"],
-            splitTag: "core",
+            splitTag: 'push',
             isTechnical: true,
             advancedVariant: false,
-            typeOfMovement: "isolation",
+            typeOfMovement: 'isolation',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/bk-MNSx5RPU",
-            alternativeExercises: [
-              "Toe-Touch Crunch",
-              "Dead Bug",
-              "Straight-Leg Crunch",
-              "Reverse Crunch",
-              "Seated Knee Tuck"
-            ],
-            sets: 3,
-            reps: "12-15 / side",
-            rpe: "7-8",
-            rest: "45s",
-            tempo: "up fast • down slow",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '30 sec',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           },
           {
-            name: "Glute Bridge Hold",
-            muscleGroup: "glutes",
+            name: 'Pike Push-Ups',
+            muscleGroup: 'shoulders',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
+            splitTag: 'push',
             isTechnical: false,
             advancedVariant: false,
-            typeOfMovement: "isolation",
+            typeOfMovement: 'compound',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/r5kY-D-3p_kw",
-            alternativeExercises: [
-              "Glute Bridge March",
-              "Single-Leg Glute Bridge",
-              "Hip Thrust (Feet Elevated)",
-              "Banded Glute Bridge",
-              "Frog Pump Hold"
-            ],
-            sets: 3,
-            reps: "30-40 s hold",
-            rpe: "6-7",
-            rest: "30s",
-            tempo: "static",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '10',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Pseudo Planche Push-Ups',
+            muscleGroup: 'shoulders',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'push',
+            isTechnical: true,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '8',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Decline Push-Ups',
+            muscleGroup: 'chest',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'push',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '10',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Pull-Ups',
+            muscleGroup: 'back',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'pull',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '8',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Close Grip Chin-Ups',
+            muscleGroup: 'back',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'pull',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '8',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Archer Australian Pull-Ups',
+            muscleGroup: 'back',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'pull',
+            isTechnical: true,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '12',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Hanging Leg Raises to Bar (or as close as you can get)',
+            muscleGroup: 'core',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'core',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'isolation',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '10',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           }
         ]
       }
     ],
 
-    /* -------- Cool-Down (≈5 min) -------- */
+    /* -------- Cool-Down -------- */
     coolDown: [
-      { name: "Child’s Pose", duration: "45 seconds", rpe: 3, notes: "" },
-      { name: "Seated Forward Fold", duration: "45 seconds", rpe: 3, notes: "" },
-      { name: "Figure-4 Glute Stretch", duration: "30 seconds / side", rpe: 3, notes: "" }
+      { name: 'Chest Stretch', duration: '30 seconds', rpe: 3, notes: "" },
+      { name: 'Shoulder Stretch', duration: '30 seconds', rpe: 3, notes: "" },
+      { name: "Child's Pose", duration: '45 seconds', rpe: 3, notes: "" }
     ]
   },
-  /* ================= DAY 7 – ACTIVE RECOVERY / MOBILITY ================= */
+  // ---------- Workout 5 – Advanced 1 ----------
   {
-    dayLabel: "Day 7 – ACTIVE RECOVERY",
-
-    /* -------- Warm-Up (≈5 min) -------- */
+    dayLabel: 'Workout 5 – Advanced 1',
+    /* -------- Warm-Up -------- */
     warmUp: [
-      { name: "Marching in Place", duration: "60 seconds", rpe: 4 },
-      { name: "Arm Circles (Fwd/Rev)", duration: "30 seconds / dir", rpe: 4 },
-      { name: "Hip Circles", duration: "30 seconds / dir", rpe: 3 },
-      { name: "Inchworm Walk-Out", duration: "6 reps", rpe: 4 }
+      { name: 'Wide + Slow Arm Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Small + Quick Arm Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Elbow Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Wrist Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Holding Hands Wrist Circles', duration: "30 seconds", rpe: 4 }
     ],
 
-    /* -------- Main Work (≈25 min Mobility Flow) -------- */
+    /* -------- Main Work -------- */
     mainWork: [
       {
-        blockType: "Recovery",
-        allocatedMinutes: 25,
+        blockType: "Resistance Training",
+        allocatedMinutes: 60,
         exercises: [
           {
-            name: "World’s Greatest Stretch Flow",
-            muscleGroup: "full body",
+            name: 'Wall Handstand Hold (gently lift feet off and tap the wall periodically)',
+            muscleGroup: 'shoulders',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "fullbody",
-            isTechnical: false,
+            splitTag: 'push',
+            isTechnical: true,
             advancedVariant: false,
-            typeOfMovement: "mobility",
+            typeOfMovement: 'isolation',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/2If7T-H4Lf0",
-            alternativeExercises: [
-              "Lunge-With-Reach",
-              "Spiderman Stretch",
-              "Knee-Elbow Opener",
-              "Deep Lunge Hold",
-              "Runner’s Lunge Twist"
-            ],
-            sets: 2,
-            reps: "45 s / side",
-            rpe: "4-5",
-            rest: "30 s",
-            tempo: "slow & controlled",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '20 sec',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           },
           {
-            name: "Cat-Cow ➜ Cobra Flow",
-            muscleGroup: "core",
+            name: 'Elevated Pike Push-Ups',
+            muscleGroup: 'shoulders',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "core",
+            splitTag: 'push',
             isTechnical: false,
             advancedVariant: false,
-            typeOfMovement: "mobility",
+            typeOfMovement: 'compound',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/5rLYaFtAa0A",
-            alternativeExercises: [
-              "Cat-Cow Only",
-              "Prone Press-Up",
-              "Sphinx Stretch",
-              "Child’s Pose to Cobra",
-              "Seated Cat-Cow"
-            ],
-            sets: 2,
-            reps: "8 slow flows",
-            rpe: "4-5",
-            rest: "30 s",
-            tempo: "smooth",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '8',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           },
           {
-            name: "90/90 Hip Switch",
-            muscleGroup: "hips",
+            name: 'Pseudo Planche Push-Ups',
+            muscleGroup: 'shoulders',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "legs",
-            isTechnical: false,
+            splitTag: 'push',
+            isTechnical: true,
             advancedVariant: false,
-            typeOfMovement: "mobility",
+            typeOfMovement: 'compound',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/Sf_yMJ2-eHc",
-            alternativeExercises: [
-              "Seated Hip Internal-External Rotation",
-              "Shin-Box Get-Up",
-              "Prone Hip IR/ER",
-              "Standing Hip CARs",
-              "Half-Kneeling Hip Lift"
-            ],
-            sets: 2,
-            reps: "10 switches",
-            rpe: "4-5",
-            rest: "30 s",
-            tempo: "controlled",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '10',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           },
           {
-            name: "Thread-the-Needle (Thoracic Opener)",
-            muscleGroup: "upper back",
+            name: 'Pseudo Planche Lean Hold',
+            muscleGroup: 'shoulders',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "pull",
-            isTechnical: false,
+            splitTag: 'push',
+            isTechnical: true,
             advancedVariant: false,
-            typeOfMovement: "mobility",
+            typeOfMovement: 'isolation',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/v-x-dBw7Kp8",
-            alternativeExercises: [
-              "Open-Book Stretch",
-              "T-Spine Rotation (Side-Lying)",
-              "Child’s Pose Reach",
-              "Quadruped Reach-Through",
-              "Wall Thoracic Rotation"
-            ],
-            sets: 2,
-            reps: "10 / side",
-            rpe: "3-4",
-            rest: "30 s",
-            tempo: "pause at end-range",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '20 sec',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           },
           {
-            name: "Down-Dog ➜ Up-Dog Flow",
-            muscleGroup: "full body",
+            name: 'Explosive Pull-Ups',
+            muscleGroup: 'back',
             equipmentNeeded: ["Bodyweight"],
-            splitTag: "fullbody",
+            splitTag: 'pull',
+            isTechnical: true,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '5',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Wide Pull-Ups',
+            muscleGroup: 'back',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'pull',
             isTechnical: false,
             advancedVariant: false,
-            typeOfMovement: "mobility",
+            typeOfMovement: 'compound',
+            pairedWith: "",
             isBodyweight: true,
-            videoUrl: "https://youtu.be/BnS_c-EEKeI",
-            alternativeExercises: [
-              "Down-Dog Hold",
-              "Up-Dog Hold",
-              "Pike to Cobra",
-              "Dolphin Push-Up",
-              "Child’s Pose to Up-Dog"
-            ],
-            sets: 2,
-            reps: "8 slow flows",
-            rpe: "4-5",
-            rest: "30 s",
-            tempo: "steady breath",
-            notes: ""
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '8',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Chin-Ups',
+            muscleGroup: 'back',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'pull',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '8',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'L-Sit Knee Raises',
+            muscleGroup: 'core',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'core',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'isolation',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '12',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
           }
         ]
       }
     ],
 
-    /* -------- Cool-Down (≈5 min) -------- */
+    /* -------- Cool-Down -------- */
     coolDown: [
-      { name: "Child’s Pose with Reach", duration: "60 seconds", rpe: 2, notes: "" },
-      { name: "Seated Forward Fold", duration: "45 seconds", rpe: 2, notes: "" },
-      { name: "Supine Figure-4 Stretch", duration: "30 seconds / side", rpe: 2, notes: "" }
+      { name: 'Chest Stretch', duration: '30 seconds', rpe: 3, notes: "" },
+      { name: 'Shoulder Stretch', duration: '30 seconds', rpe: 3, notes: "" },
+      { name: "Child's Pose", duration: '45 seconds', rpe: 3, notes: "" }
     ]
   },
+  // ---------- Workout 6 – Advanced 2 ----------
+  {
+    dayLabel: 'Workout 6 – Advanced 2',
+    /* -------- Warm-Up -------- */
+    warmUp: [
+      { name: 'Wide + Slow Arm Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Small + Quick Arm Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Elbow Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Wrist Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Holding Hands Wrist Circles', duration: "30 seconds", rpe: 4 }
+    ],
+
+    /* -------- Main Work -------- */
+    mainWork: [
+      {
+        blockType: "Resistance Training",
+        allocatedMinutes: 60,
+        exercises: [
+          {
+            name: 'Handstand Attempts',
+            muscleGroup: 'shoulders',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'push',
+            isTechnical: true,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 1,
+            reps: '6-8 attempts',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Tuck Planche (use gentle feet assistance if too hard)',
+            muscleGroup: 'shoulders',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'push',
+            isTechnical: true,
+            advancedVariant: true,
+            typeOfMovement: 'isolation',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '5-8 sec',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Elevated Pike Push-Ups',
+            muscleGroup: 'shoulders',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'push',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '8',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Pseudo Planche Push-Ups',
+            muscleGroup: 'shoulders',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'push',
+            isTechnical: true,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '10',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Raise into Front Lever',
+            muscleGroup: 'back',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'pull',
+            isTechnical: true,
+            advancedVariant: true,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '4',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Explosive Chin-Ups',
+            muscleGroup: 'back',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'pull',
+            isTechnical: true,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '6',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Pull-Ups',
+            muscleGroup: 'back',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'pull',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '10',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Toes to Bar',
+            muscleGroup: 'core',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'core',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'isolation',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '10',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          }
+        ]
+      }
+    ],
+
+    /* -------- Cool-Down -------- */
+    coolDown: [
+      { name: 'Chest Stretch', duration: '30 seconds', rpe: 3, notes: "" },
+      { name: 'Shoulder Stretch', duration: '30 seconds', rpe: 3, notes: "" },
+      { name: "Child's Pose", duration: '45 seconds', rpe: 3, notes: "" }
+    ]
+  },
+  // ---------- Workout 7 – Advanced 3 ----------
+  {
+    dayLabel: 'Workout 7 – Advanced 3',
+    /* -------- Warm-Up -------- */
+    warmUp: [
+      { name: 'Wide + Slow Arm Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Small + Quick Arm Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Elbow Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Wrist Circles', duration: "30 seconds", rpe: 4 },
+      { name: 'Holding Hands Wrist Circles', duration: "30 seconds", rpe: 4 }
+    ],
+
+    /* -------- Main Work -------- */
+    mainWork: [
+      {
+        blockType: "Resistance Training",
+        allocatedMinutes: 60,
+        exercises: [
+          {
+            name: 'Tuck Planche Hold',
+            muscleGroup: 'shoulders',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'push',
+            isTechnical: true,
+            advancedVariant: true,
+            typeOfMovement: 'isolation',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '8 sec',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Wall Handstand Push-Up Negatives',
+            muscleGroup: 'shoulders',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'push',
+            isTechnical: true,
+            advancedVariant: true,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '5',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Elevated Pike Push-Ups',
+            muscleGroup: 'shoulders',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'push',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '10',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Pseudo Planche Push-Ups',
+            muscleGroup: 'shoulders',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'push',
+            isTechnical: true,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '10',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Tuck Front Lever Hold',
+            muscleGroup: 'back',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'pull',
+            isTechnical: true,
+            advancedVariant: true,
+            typeOfMovement: 'isolation',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: 'max hold',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Archer Pull-Ups',
+            muscleGroup: 'back',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'pull',
+            isTechnical: true,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '6',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Wide Pull-Ups',
+            muscleGroup: 'back',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'pull',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'compound',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '8',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          },
+          {
+            name: 'Hanging Leg Raises',
+            muscleGroup: 'core',
+            equipmentNeeded: ["Bodyweight"],
+            splitTag: 'core',
+            isTechnical: false,
+            advancedVariant: false,
+            typeOfMovement: 'isolation',
+            pairedWith: "",
+            isBodyweight: true,
+            videoUrl: "",
+            alternativeExercises: [],
+            sets: 4,
+            reps: '15',
+            rpe: "",
+            rest: "",
+            tempo: "",
+            notes: "Stop each set with 1-2 reps in reserve and focus on perfect technique."
+          }
+        ]
+      }
+    ],
+
+    /* -------- Cool-Down -------- */
+    coolDown: [
+      { name: 'Chest Stretch', duration: '30 seconds', rpe: 3, notes: "" },
+      { name: 'Shoulder Stretch', duration: '30 seconds', rpe: 3, notes: "" },
+      { name: "Child's Pose", duration: '45 seconds', rpe: 3, notes: "" }
+    ]
+  }
 ];
 
 /***********************************************************************

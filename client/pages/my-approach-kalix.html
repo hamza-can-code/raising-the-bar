@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+  (async function () {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      location.href = 'log-in-kalix.html';
+      return;
+    }
+    try {
+      const res = await fetch('/api/auth/me', {
+        method: 'GET',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (!res.ok) throw new Error();
+    } catch (err) {
+      localStorage.removeItem('token');
+      location.href = 'log-in-kalix.html';
+    }
+  })();
+</script>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+  <title>My Approach</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../styles/my-approach-kalix.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <header class="header">
+    <a href="dashboard-kalix.html" class="logo">
+      <img src="../assets/kalix-logo.png" alt="GAINS+ logo">
+    </a>
+    <nav class="main-nav" id="main-nav">
+      <button class="nav-close" id="nav-close" aria-label="Close Menu">✕</button>
+      <ul>
+        <li><a href="workout-tracker-kalix.html" id="nav-workouts">My Workouts</a></li>
+        <li><a href="nutrition-tracker-kalix.html" id="nav-nutrition">My Nutrition</a></li>
+        <li><a href="my-approach-kalix.html" id="nav-approach" aria-current="page">My Approach</a></li>
+        <li><a href="my-mind-kalix.html" id="nav-mind">My Mind</a></li>
+        <li><a href="#" id="nav-help">Help</a></li>
+      </ul>
+    </nav>
+    <button class="hamburger" id="hamburger-btn" aria-label="Toggle Menu">☰</button>
+  </header>
+
+  <main class="approach-page">
+    <section class="approach-hero">
+      <img src="../assets/kalix-logo.png" alt="Kalix logo" class="approach-hero-image">
+      <span class="eyebrow">Calisthenics strength, muscle, and control</span>
+      <h1>My Approach</h1>
+      <p class="positioning-line">A practical framework for building real bodyweight strength, mastering the basics, and
+        progressing toward skills only a small percentage of people can perform.</p>
+    </section>
+
+    <section class="approach-intro">
+      <p>This page gives you an overview of the training methods and principles I have learned from some of the best
+        calisthenics athletes in the world over the last five years.</p>
+      <p>My approach is designed primarily for beginners and intermediates. Whether you are learning your first push-up
+        or working toward advanced skills like the planche, front lever, or handstand push-up, the goal stays the same:
+        build strength, muscle, and body control.</p>
+      <p>If you stay consistent with the program, you can expect to become stronger, leaner, more muscular, and
+        significantly more capable with your own bodyweight.</p>
+    </section>
+
+    <section class="approach-highlight-grid" aria-label="Core approach highlights">
+      <article class="highlight-card">
+        <h2>Master the basics</h2>
+        <p>Push-ups, pull-ups, and dips create the foundation that makes future progress possible.</p>
+      </article>
+      <article class="highlight-card">
+        <h2>Build skill often</h2>
+        <p>Short, frequent practice helps your body learn new movement patterns without draining recovery.</p>
+      </article>
+      <article class="highlight-card">
+        <h2>Recover to grow</h2>
+        <p>Protein, sleep, smart warm-ups, and pain-free training keep you progressing for the long term.</p>
+      </article>
+    </section>
+
+    <section class="approach-sections" aria-label="Kalix's approach guide">
+      <details class="approach-item" open>
+        <summary>Core philosophy</summary>
+        <div class="approach-content">
+          <h3>Master the basics first</h3>
+          <p>Most people want to rush into advanced skills before they have earned the strength required for them.
+            Before worrying about advanced skills, build a solid foundation with three exercises: push-ups, pull-ups,
+            and dips.</p>
+          <p>Your core is still important, but it is often overemphasised by people who do not train calisthenics. Your
+            shoulders and triceps, plus your back and biceps, are the two most important areas to build. You only need
+            minimal core-specific work because your core is indirectly challenged in virtually every skill.</p>
+          <p>A strong foundation will increase your progress tenfold.</p>
+
+          <h3>Beginners: volume is king</h3>
+          <p>At the beginner stage, focus on mastering these movements and their variations:</p>
+          <ul>
+            <li>Push-ups</li>
+            <li>Pull-ups</li>
+            <li>Dips</li>
+          </ul>
+          <p>Volume is king here. The more quality reps you perform, the faster you will improve.</p>
+
+          <h3>Intermediates: where the fun begins</h3>
+          <p>Once the basics are established, start introducing skill work and harder exercise variations. Form becomes
+            extremely important: bad technique creates bad habits, slows progress, and increases injury risk.</p>
+          <p>Record yourself during training whenever possible. Video often reveals technical mistakes you do not notice
+            while performing the exercise.</p>
+        </div>
+      </details>
+
+      <details class="approach-item">
+        <summary>Skill development</summary>
+        <div class="approach-content">
+          <h3>Practice skills frequently</h3>
+          <p>Skill development is different from strength development. Advanced movements such as handstands, planches,
+            and front levers require your central nervous system to learn new movement patterns.</p>
+          <p>Short daily practice sessions can be extremely effective. Even 5–10 minutes of skill work outside the main
+            training session can dramatically improve progress over time.</p>
+
+          <h3>Prioritise dynamics over statics</h3>
+          <p>Whenever possible, dynamic exercises should be prioritised over static holds. For example, full range of
+            motion pull-ups usually provide more strength and muscle-building benefit than simply holding the top
+            position.</p>
+          <p>Static holds still have value, but movement should form the foundation of your training.</p>
+        </div>
+      </details>
+
+      <details class="approach-item">
+        <summary>Training approach</summary>
+        <div class="approach-content">
+          <h3>Why calisthenics works</h3>
+          <p>Unlike traditional bodybuilding, most calisthenics exercises are compound movements. Multiple muscle groups
+            work together during each exercise, creating greater overall strength, better coordination, and a more
+            balanced, aesthetic physique.</p>
+
+          <h3>Training split</h3>
+          <p>Although it is not mainstream, I generally recommend training push and pull movements within the same
+            workout. This helps you achieve higher weekly training volume and more balanced development.</p>
+
+          <h3>Workout structure</h3>
+          <ul>
+            <li>4 push exercises</li>
+            <li>4 pull exercises</li>
+            <li>4 sets per exercise</li>
+            <li>8–12 reps per set</li>
+            <li>2–3 minutes rest between sets</li>
+          </ul>
+          <p>More advanced athletes may use lower rep ranges for strength-focused work.</p>
+
+          <h3>Frequency</h3>
+          <ul>
+            <li>Train 3–4 times per week</li>
+            <li>Take at least one rest day between sessions</li>
+            <li>Keep workouts between 60–90 minutes</li>
+            <li>Avoid regularly exceeding 2 hours, as this can actually stunt growth</li>
+          </ul>
+
+          <h3>Legs</h3>
+          <p>Upper body skills are often the main focus of calisthenics, but lower body training should not be
+            neglected. I recommend at least one dedicated leg session per week aside from your regular calisthenics
+            sessions.</p>
+          <p>Alternatively, include a few leg exercises at the end of your workouts so you preserve energy for the main
+            workout.</p>
+        </div>
+      </details>
+
+      <details class="approach-item">
+        <summary>Nutrition and recovery</summary>
+        <div class="approach-content">
+          <h3>Protein comes first</h3>
+          <p>If your goal is to build muscle and recover properly, protein intake should be your top nutritional
+            priority. Aim for approximately 1g of protein per pound of bodyweight, or around 2g per kilogram of
+            bodyweight.</p>
+
+          <h3>Recovery standards</h3>
+          <p>Recovery is where growth happens. You do not get stronger during the workout; you get stronger after the
+            workout. This is why sufficient protein intake and 7–9 hours of good sleep per night are vital.</p>
+
+          <h3>Warm up properly</h3>
+          <p>Calisthenics places significant stress on the wrists, elbows, shoulders, and connective tissues. Never skip
+            your warm-up.</p>
+
+          <h3>Injuries</h3>
+          <p>If you experience unusual pain during an exercise, stop that movement immediately, continue only with
+            exercises that are pain-free, and allow the area to recover.</p>
+          <p>For more serious injuries, avoid painful movements entirely until recovery. If symptoms persist, consult a
+            qualified doctor or physiotherapist.</p>
+        </div>
+      </details>
+
+      <details class="approach-item">
+        <summary>Mindset and accountability</summary>
+        <div class="approach-content">
+          <p>Motivation is good, but unreliable. Discipline is what produces results. There will be periods where you do
+            not feel motivated to train, and everyone experiences this, including me. The athletes who progress are
+            simply the ones who do not give up.</p>
+
+          <h3>When progress slows</h3>
+          <ul>
+            <li>Progress is not linear</li>
+            <li>Plateaus are normal</li>
+            <li>Everyone progresses differently because of height, weight, sex, and starting level</li>
+          </ul>
+          <p>Sometimes you will feel stuck for weeks or months before suddenly breaking through to a new level. Trust
+            the process.</p>
+
+          <h3>If you are burnt out</h3>
+          <ul>
+            <li>Change exercise variations</li>
+            <li>Learn a new skill</li>
+            <li>Adjust training volume</li>
+            <li>Take a short deload week with fewer sets or reps, or even no training at all</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer">
+    <div class="footer-content">
+      <p class="powered">POWERED BY</p>
+      <p>&copy; 2026 Raising The Bar App Ltd. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="../nick.html">Start Training</a>
+        <span class="separator">|</span>
+        <a href="legal-overview.html">Our Policies</a>
+        <span class="separator">|</span>
+        <a href="contact-us.html">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../scripts/my-approach-kalix.js"></script>
+</body>
+
+</html>
