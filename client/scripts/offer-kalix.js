@@ -386,7 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const coachImg = document.querySelector('.social-proof__coach');
   if (!coachImg) return;
 
-  coachImg.src = imgSrc('kalix-coach.jpg');
+  coachImg.src = imgSrc('kalix-coach.webp');
   coachImg.alt = 'Coach Kalix';
 };
 
@@ -2168,7 +2168,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'THE ALPHA',
       rating: 4,
       time: 'Today',
-      text: 'Been watching kalix's tiktok for a bit, I found his vids helpful so thought id gv his app a go. been using this for a couple of weeks and its genuinely amazing (avging 0.6kg muscle per week). Was going to rate 5 stars but the rest timer bugged once on me so im leaving a 4 til they patch it 💔 still worth it tho',
+      text: "Been watching kalix's tiktok for a bit, I found his vids helpful so thought id gv his app a go. been using this for a couple of weeks and its genuinely amazing (avging 0.6kg muscle per week). Was going to rate 5 stars but the rest timer bugged once on me so im leaving a 4 til they patch it 💔 still worth it tho",
     },
     {
       name: 'alex',
