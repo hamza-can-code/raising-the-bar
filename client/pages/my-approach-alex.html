@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+  (async function () {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      location.href = 'log-in-alex.html';
+      return;
+    }
+    try {
+      const res = await fetch('/api/auth/me', {
+        method: 'GET',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (!res.ok) throw new Error();
+    } catch (err) {
+      localStorage.removeItem('token');
+      location.href = 'log-in-alex.html';
+    }
+  })();
+</script>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+  <title>My Approach</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/my-approach-alex.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <header class="header">
+    <a href="dashboard-alex.html" class="logo"><img src="../assets/alex-logo.png" alt="GAINS+ logo"></a>
+    <nav class="main-nav" id="main-nav">
+      <button class="nav-close" id="nav-close" aria-label="Close Menu">✕</button>
+      <ul>
+        <li><a href="workout-tracker-alex.html" id="nav-workouts">My Workouts</a></li>
+        <li><a href="nutrition-tracker-alex.html" id="nav-nutrition">My Nutrition</a></li>
+        <li><a href="my-approach-alex.html" id="nav-approach" aria-current="page">My Approach</a></li>
+        <li><a href="my-mind-alex.html" id="nav-mind">My Mind</a></li>
+        <li><a href="#" id="nav-help">Help</a></li>
+      </ul>
+    </nav>
+    <button class="hamburger" id="hamburger-btn" aria-label="Toggle Menu">☰</button>
+  </header>
+
+  <main class="approach-page">
+    <section class="approach-hero">
+      <span class="eyebrow">Calisthenics training system</span>
+      <h1>My Approach</h1>
+      <p class="positioning-line">A practical push, pull, legs calisthenics framework for building strength, control, skill, and consistency at your current level.</p>
+    </section>
+
+    <section class="approach-intro">
+      <p>Use the beginner or advanced split based on your current strength, skill level, and ability to recover. Repeat the Push, Pull, Legs split 1-2 times per week depending on what you can recover from.</p>
+      <p>For each exercise, rest 1-3 minutes. Start the next set when you feel ready mentally and physically, not just when a timer tells you to move.</p>
+      <p>Keep the routines as written, scale the regressions when needed, and prioritize clean reps over rushing through the workout.</p>
+    </section>
+
+    <section class="approach-highlight-grid" aria-label="Core approach highlights">
+      <article class="highlight-card"><h2>Choose your level</h2><p>Begin with the beginner plan if you are still building control. Move to the advanced plan when the listed skills and volumes are realistic.</p></article>
+      <article class="highlight-card"><h2>Recover first</h2><p>Run Push, Pull, Legs 1-2 times weekly based on recovery. More is only better if performance and joints are holding up.</p></article>
+      <article class="highlight-card"><h2>Use tutorials</h2><p>Video tutorials are included for key skill movements so you can understand the standards before loading intensity.</p></article>
+    </section>
+
+    <section class="approach-sections" aria-label="Alex's approach guide">
+      <details class="approach-item" open>
+        <summary>Beginner calisthenics workout</summary>
+        <div class="approach-content">
+          <p class="section-intro">Repeat the Push, Pull, Legs split 1-2 times a week based on what you can recover from. Rest 1-3 minutes per exercise depending on readiness.</p>
+          <div class="food-columns training-columns">
+            <section class="food-card"><h3>Push</h3><h4>Warm up</h4><ul><li>Jumping jacks — 60 seconds.</li><li>Arm circles — 20 forward and 20 back.</li><li>Wrist circles — 15 each direction.</li><li>Scapular pushups — 2 × 10.</li><li>Band external rotations — 2 × 12.</li></ul><h4>Main workout</h4><ul><li>Push-ups — 3 sets of 8-15 reps; use knees if too difficult.</li><li>Pike push-ups — 3 sets of 6-12 reps; do pike holds if too difficult.</li><li>Chest-to-wall handstand holds — 3 sets of 15-30 seconds; protract your scapula, turn elbows in, and squeeze glutes and core.</li><li>Bench dips or assisted dips — 3 sets of 8-12 reps; use dip negatives if too difficult.</li><li>Planche leans — 3 sets of 10-20 seconds; protract your scapula, turn elbows in, and squeeze glutes and core.</li></ul><h4>Cool down</h4><ul><li>Doorway chest stretch — 30 seconds.</li><li>Overhead triceps stretch — 30 seconds each arm.</li><li>Cross-body shoulder stretch — 30 seconds each arm.</li><li>Wrist flexor stretch — 30 seconds each side.</li><li>Wrist extensor stretch — 30 seconds each side.</li></ul></section>
+            <section class="food-card"><h3>Pull</h3><h4>Warm up</h4><ul><li>Jumping jacks — 60 seconds.</li><li>Arm circles — 20 forward and 20 backward.</li><li>Scapular pull-ups — 2 × 8.</li><li>Dead hang — 20-30 seconds.</li><li>Band pull-aparts — 2 × 15.</li></ul><h4>Main workout</h4><ul><li>Pullups — 3 sets of 4-8 reps; use assistance or negatives if too difficult.</li><li>Inverted rows — 3 sets of 8-12 reps; flare out the elbows.</li><li>Tuck front lever holds — 2 sets of 7-15 seconds.</li><li>Chin-ups — 2 sets of 5-9 reps; use assistance or negatives if too difficult.</li><li>Supermans — 3 sets of 10-15 reps.</li></ul><h4>Cool down</h4><ul><li>Overhead lat stretch — 30 seconds each side.</li><li>Doorway biceps stretch — 30 seconds each arm.</li><li>Cross-body shoulder stretch — 30 seconds each arm.</li><li>Upper trapezius stretch — 30 seconds each side.</li><li>Wrist flexor stretch — 30 seconds each side.</li></ul></section>
+            <section class="food-card"><h3>Legs</h3><h4>Warm up</h4><ul><li>Jumping jacks — 60 seconds.</li><li>Leg swings front-to-back — 10 reps each leg.</li><li>Leg swings side-to-side — 10 reps each leg.</li><li>Bodyweight squats — 2 sets of 10 reps.</li><li>Glute bridges — 2 sets of 12 reps.</li></ul><h4>Main workout</h4><ul><li>Reverse nordics — 3 sets of 4-6 reps.</li><li>Split squats — 3 sets of 8-12 reps.</li><li>Bodyweight squats — 2 sets of 15-20 reps.</li><li>Single-leg Romanian deadlifts — 3 sets of 6-8 reps; hold onto something if too difficult. Go slowly and get a deep stretch at the bottom.</li><li>Single-leg calf raises — 3 sets of 10-15 reps; get a full deep stretch at the bottom. Use both legs if too difficult.</li></ul><h4>Cool down</h4><ul><li>Standing hamstring stretch — 30 seconds each leg.</li><li>Kneeling hip flexor stretch — 30 seconds each leg.</li><li>Standing quadriceps stretch — 30 seconds each leg.</li><li>Standing calf stretch — 30 seconds each leg.</li><li>Figure four glute stretch — 30 seconds each leg.</li></ul></section>
+          </div>
+        </div>
+      </details>
+
+      <details class="approach-item">
+        <summary>Advanced calisthenics workout</summary>
+        <div class="approach-content">
+          <p class="section-intro">Repeat the Push, Pull, Legs split 1-2 times a week based on what you can recover from. Rest 1-3 minutes per exercise depending on readiness.</p>
+          <div class="food-columns training-columns">
+            <section class="food-card"><h3>Push</h3><h4>Warm up</h4><ul><li>Jumping jacks — 60 seconds.</li><li>Arm circles — 20 forward and 20 back.</li><li>Wrist circles — 15 each direction.</li><li>Scapular pushups — 2 sets of 10 reps.</li><li>Band external rotations — 2 sets of 12 reps.</li></ul><h4>Main workout</h4><ul><li>90° handstand pushups — 3 sets of 1-4 reps; straddle your legs or only do the negative if too difficult.</li><li>Planche press negatives — 2 sets of 4-6 reps; if too easy do tuck planche presses. Keep scapula protracted and arms straight the whole time.</li><li>Chest-to-wall handstand pulls — 3 sets of 6-10 reps; protract your scapula, turn elbows in, and squeeze glutes and core.</li><li>Elevated and supinated planche leans — 3 sets of 15-20 seconds; protract your scapula, turn elbows in, and squeeze glutes and core.</li><li>Handstand pushups — 2 sets of 3-6 reps; protract your scapula, turn elbows in, and squeeze glutes and core.</li><li>Dips — 3 sets of 15-25 reps using parallel bars.</li></ul><h4>Cool down</h4><ul><li>Doorway chest stretch — 30 seconds.</li><li>Overhead triceps stretch — 30 seconds each arm.</li><li>Cross-body shoulder stretch — 30 seconds each arm.</li><li>Wrist flexor stretch — 30 seconds each side.</li><li>Wrist extensor stretch — 30 seconds each side.</li></ul></section>
+            <section class="food-card"><h3>Pull</h3><h4>Warm up</h4><ul><li>Jumping jacks — 60 seconds.</li><li>Arm circles — 20 forward and 20 backward.</li><li>Scapular pull-ups — 2 × 8.</li><li>Dead hang — 20-30 seconds.</li><li>Band pull-aparts — 2 × 15.</li></ul><h4>Main workout</h4><ul><li>Explosive pullups — 2 sets of 6-8 reps; keep reps low and pull as hard and fast as you can.</li><li>Pullups — 2 sets of 12-16 reps with controlled full range of motion.</li><li>Front lever banded holds — 3 sets of 12-18 seconds; keep good form, locked-out arms, retracted scapula, and hips up. If too difficult, hold in straddle or half lay.</li><li>Ice cream makers — 2 sets of 6-8 reps; keep good front lever form. If too difficult, do them in straddle or half lay.</li><li>Muscle ups — 2 sets of 2-4 reps with limited swinging and kipping.</li><li>Inverted rows with feet elevated — 3 sets of 12-20 reps; keep elbows flared and retract your scapula in the rep.</li></ul><h4>Cool down</h4><ul><li>Overhead lat stretch — 30 seconds each side.</li><li>Doorway biceps stretch — 30 seconds each arm.</li><li>Cross-body shoulder stretch — 30 seconds each arm.</li><li>Upper trapezius stretch — 30 seconds each side.</li><li>Wrist flexor stretch — 30 seconds each side.</li></ul></section>
+            <section class="food-card"><h3>Legs</h3><h4>Warm up</h4><ul><li>Jumping jacks — 60 seconds.</li><li>Leg swings front-to-back — 10 reps each leg.</li><li>Leg swings side-to-side — 10 reps each leg.</li><li>Bodyweight squats — 2 sets of 10 reps.</li><li>Glute bridges — 2 sets of 12 reps.</li></ul><h4>Main workout</h4><ul><li>Reverse nordics — 3 sets of 8-10 reps; use a slow controlled negative and go all the way down if you can.</li><li>Sissy squats — 2 sets of 13-16 reps; keep hips up and go all the way down. Hold onto something for support if too difficult.</li><li>Pistol squats — 2 sets of 8-12 reps; go all the way down and hold onto something for support if too difficult.</li><li>Nordics — 3 sets of 6-10 reps with a slow controlled negative. If too easy, do the complete eccentric and concentric rep.</li><li>Single-leg calf raises — 3 sets of 15-25 reps; get a full deep stretch at the bottom of the rep.</li></ul><h4>Cool down</h4><ul><li>Standing hamstring stretch — 30 seconds each leg.</li><li>Kneeling hip flexor stretch — 30 seconds each leg.</li><li>Standing quadriceps stretch — 30 seconds each leg.</li><li>Standing calf stretch — 30 seconds each leg.</li><li>Figure four glute stretch — 30 seconds each leg.</li></ul></section>
+          </div>
+        </div>
+      </details>
+
+      <details class="approach-item">
+        <summary>Video tutorials</summary>
+        <div class="approach-content">
+          <p class="section-intro">Watch these tutorials before attempting the higher-skill movements so your setup and execution are clear.</p>
+          <div class="supplement-list tutorial-list">
+            <article class="supplement-card"><h3>Reverse nordics</h3><p>Form tutorial for reverse nordics.</p><a class="tutorial-link" href="https://youtube.com/shorts/bwcJeZ_KORw?si=0DPWEsaCaoQy03M8" target="_blank" rel="noopener noreferrer">Watch tutorial</a></article>
+            <article class="supplement-card"><h3>Sissy squat</h3><p>Form tutorial for sissy squats.</p><a class="tutorial-link" href="https://youtube.com/shorts/6oNAs6_BsyQ?si=zZlsx3mmoPsHYbQL" target="_blank" rel="noopener noreferrer">Watch tutorial</a></article>
+            <article class="supplement-card"><h3>90° handstand push-up</h3><p>Form tutorial for 90° handstand push-ups.</p><a class="tutorial-link" href="https://youtube.com/shorts/hH_5aO0Wmko?si=UfSzy92txPMqVY8J" target="_blank" rel="noopener noreferrer">Watch tutorial</a></article>
+            <article class="supplement-card"><h3>Planche press negative</h3><p>Form tutorial for planche press negatives.</p><a class="tutorial-link" href="https://youtube.com/shorts/hZllWQ3BqT8?si=AMNmRfsTGbfJWFZB" target="_blank" rel="noopener noreferrer">Watch tutorial</a></article>
+            <article class="supplement-card"><h3>Ice cream makers</h3><p>Form tutorial for ice cream makers.</p><a class="tutorial-link" href="https://youtube.com/shorts/2KRb8sBcbgs?si=hmYXhjTvnesCjeMo" target="_blank" rel="noopener noreferrer">Watch tutorial</a></article>
+            <article class="supplement-card"><h3>Chest-to-wall handstand pulls</h3><p>Form tutorial for chest-to-wall handstand pulls.</p><a class="tutorial-link" href="https://youtube.com/shorts/2tQOrqpn4H8?si=SkizzRICyZYZAsIk" target="_blank" rel="noopener noreferrer">Watch tutorial</a></article>
+          </div>
+        </div>
+      </details>
+    </section>
+    <p class="closing-note">Master the basics, progress when your form is ready, and let consistent sessions stack up.</p>
+  </main>
+
+  <footer class="footer" id="footer"><div class="footer-content"><p class="powered">POWERED BY</p><p>&copy; 2026 Raising The Bar App Ltd. All rights reserved.</p><div class="footer-links"><a href="../alex.html">Start Training</a><span class="separator">|</span><a href="legal-overview.html">Our Policies</a><span class="separator">|</span><a href="contact-us.html">Contact Us</a></div></div></footer>
+  <script src="../scripts/my-approach-alex.js"></script>
+</body>
+</html>

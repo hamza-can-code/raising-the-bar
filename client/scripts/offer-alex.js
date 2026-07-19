@@ -386,7 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const coachImg = document.querySelector('.social-proof__coach');
   if (!coachImg) return;
 
-  coachImg.src = imgSrc('alex-coach.jpg');
+  coachImg.src = imgSrc('alex-coach.webp');
   coachImg.alt = 'Coach Alex';
 };
 
