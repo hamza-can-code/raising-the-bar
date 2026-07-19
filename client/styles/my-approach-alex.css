@@ -627,3 +627,141 @@ ul {
   transform: translateY(-1px);
   box-shadow: 0 8px 18px rgba(236, 91, 46, 0.28);
 }
+
+/* Alex workout presentation refresh */
+.training-columns {
+  align-items: stretch;
+}
+
+.training-columns .food-card {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  background: #ffffff;
+  border-color: rgba(0, 123, 255, 0.16);
+}
+
+.training-columns .food-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 6px;
+  background: linear-gradient(90deg, var(--brand-blue), #55a8ff, var(--brand-blue));
+}
+
+.training-columns .food-card h3 {
+  margin: 0;
+  padding: 24px 20px 16px;
+  color: #101820;
+  font-size: 1.28rem;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid rgba(232, 225, 214, 0.8);
+  background:
+    radial-gradient(circle at top right, rgba(0, 123, 255, 0.12), transparent 42%),
+    linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+}
+
+.training-columns .food-card h3::after {
+  content: 'Session';
+  flex-shrink: 0;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(0, 123, 255, 0.1);
+  color: var(--brand-blue);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.training-columns .food-card h4 {
+  margin: 0;
+  padding: 18px 20px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #24313d;
+  font-size: 0.82rem;
+}
+
+.training-columns .food-card h4::before {
+  width: 28px;
+  height: 28px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(0, 123, 255, 0.1);
+  color: var(--brand-blue);
+  font-size: 0.82rem;
+}
+
+.training-columns .food-card h4:nth-of-type(1)::before {
+  content: '01';
+}
+
+.training-columns .food-card h4:nth-of-type(2)::before {
+  content: '02';
+}
+
+.training-columns .food-card h4:nth-of-type(3)::before {
+  content: '03';
+}
+
+.training-columns .food-card ul {
+  margin: 0 20px 6px;
+  padding: 0 0 16px;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  border-bottom: 1px dashed rgba(95, 108, 120, 0.22);
+}
+
+.training-columns .food-card ul:last-child {
+  border-bottom: 0;
+  padding-bottom: 20px;
+  margin-bottom: 0;
+}
+
+.training-columns .food-card li {
+  position: relative;
+  margin: 0;
+  padding: 12px 13px;
+  border: 1px solid rgba(0, 123, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(0, 123, 255, 0.035);
+  color: #24313d;
+  line-height: 1.45;
+}
+.training-columns .food-card li + li {
+  margin-top: 0;
+}
+
+@media (min-width: 1024px) {
+  .training-columns {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .training-columns .food-card h3 {
+    padding: 22px 16px 14px;
+  }
+
+  .training-columns .food-card h4 {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .training-columns .food-card ul {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .training-columns .food-card li {
+    padding-right: 11px;
+  }
+}
