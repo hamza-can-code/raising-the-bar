@@ -400,7 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const namePrompt = document.getElementById("offerNamePrompt");
   const updateOfferNamePrompt = (active = isDiscountActive()) => {
     if (!namePrompt) return;
-    namePrompt.textContent = `${name || "Athlete"}, claim your personalized plan now`;
+    namePrompt.textContent = `${name || "Athlete"}, claim your calisthenics plan now`;
   };
 
   updateOfferNamePrompt();
