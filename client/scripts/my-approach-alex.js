@@ -1,3 +1,22 @@
+const trainingItems = document.querySelectorAll('.training-columns .food-card li');
+
+trainingItems.forEach((item) => {
+  const [exerciseName, ...details] = item.textContent.split(' — ');
+
+  if (!exerciseName || details.length === 0) return;
+
+  const name = document.createElement('strong');
+  name.className = 'exercise-name';
+  name.textContent = exerciseName.trim();
+
+  const detail = document.createElement('span');
+  detail.className = 'exercise-detail';
+  detail.textContent = ` — ${details.join(' — ').trim()}`;
+
+  item.textContent = '';
+  item.append(name, detail);
+});
+
 const hamburger = document.getElementById('hamburger-btn');
 const navClose = document.getElementById('nav-close');
 const mainNav = document.getElementById('main-nav');

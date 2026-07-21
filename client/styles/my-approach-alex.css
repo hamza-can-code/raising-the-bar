@@ -765,3 +765,49 @@ ul {
     padding-right: 11px;
   }
 }
+
+.training-columns .food-card li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  align-items: baseline;
+  box-shadow: 0 8px 18px rgba(0, 123, 255, 0.06);
+}
+
+.training-columns .food-card li::before {
+  content: '•';
+  width: 24px;
+  height: 24px;
+  display: inline-grid;
+  place-items: center;
+  grid-row: 1 / span 2;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--brand-blue);
+  font-size: 1.35rem;
+  line-height: 1;
+  box-shadow: inset 0 0 0 1px rgba(0, 123, 255, 0.14);
+}
+
+.exercise-name {
+  color: #101820;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.exercise-detail {
+  color: var(--text-muted);
+}
+
+@media (max-width: 520px) {
+  .training-columns .food-card li {
+    grid-template-columns: 24px 1fr;
+    gap: 7px;
+  }
+
+  .exercise-name,
+  .exercise-detail {
+    grid-column: 2;
+  }
+}

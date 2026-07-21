@@ -1099,7 +1099,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       title: "Clear and easy to follow",
-      image: "../assets/clear-and-easy.webp",
+      image: "../assets/clear-and-easy-alex.webp",
       desc: ""
     },
     {
