@@ -1,0 +1,2407 @@
+/* Base Reset / Layout */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f9f7f2;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+body {
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+exercise-btn,
+#myNutritionTab,
+#myProgressTab,
+.collapsible-header,
+.meal-actions button,
+#prevDayBtn,
+.log-weight-button,
+.day-info-header,
+#nextDayBtn,
+#summaryBtn,
+#mealPrepModeBtn {
+  font-family: 'Poppins', sans-serif;
+  /* Headers: Poppins */
+  font-weight: 700;
+  /* Bold */
+}
+
+
+/* Fade-in animations used throughout */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Header Styles */
+.header {
+  text-align: center;
+  padding: 25px 10px 10px 10px;
+  position: relative;
+  background-color: transparent;
+}
+
+.header .logo img {
+  max-height: 120px;
+}
+
+/* === LOADER =================================================== */
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F9F4EB;
+  /* brand cream */
+  z-index: 2500;
+  transition: opacity .5s ease, transform .5s ease;
+}
+
+.loader-overlay.fade-out {
+  opacity: 0;
+  transform: translateY(-18px);
+  /* glide upward */
+  pointer-events: none;
+}
+
+.loader-logo {
+  --scale: 0.8;
+  /* driven by JS */
+  width: 120px;
+  max-width: 60vw;
+  transform: scale(var(--scale));
+  transform-origin: center;
+  transition: transform .2s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* @keyframes pulse {
+  0% {
+    transform: scale(.8);
+    opacity: .4;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(.8);
+    opacity: .4;
+  }
+}
+
+.loader-logo.pulsing {
+  animation: pulse 2s ease-in-out infinite;
+} */
+
+/* ——— Header & Nav ——— */
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.main-nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+}
+
+.main-nav a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #fff;
+  transition: color 0.2s;
+}
+
+.main-nav a:hover {
+  color: #A855F7;
+  /* pro purple hover */
+}
+
+/* hide desktop nav on mobile, show hamburger */
+@media (max-width: 768px) {
+  .main-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .hamburger {
+    display: none;
+  }
+}
+
+/* ——— Modal Overlay & Content ——— */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.modal-content input[type="email"] {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal-content button[type="submit"] {
+  padding: 0.8rem;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-content button[type="submit"]:hover {
+  background: #0056b3;
+}
+
+.faq-list details {
+  margin-bottom: 1rem;
+}
+
+.faq-list summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+/* small text under login form */
+.small {
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* ——— Mobile Nav Tweaks ——— */
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.hamburger {
+  display: block;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* hide desktop‑style menu until toggled */
+.main-nav {
+  display: none;
+}
+
+.main-nav.open {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2000;
+  /* no centering—panel itself will define its layout */
+}
+
+.main-nav.open ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 60%;
+  /* shrink the panel width from 75% → 60% */
+  max-width: 300px;
+  margin: 0;
+  /* add extra left‑padding so items aren’t flush to the edge */
+  padding: 4.5rem 1rem 1rem 2rem;
+  background: #fff;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  border-radius: 0 8px 8px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* left‑align the flex items */
+  gap: 1rem;
+  list-style: none;
+}
+
+.main-nav.open ul li+li {
+  margin-top: 0.5rem;
+}
+
+.main-nav.open ul li {
+  margin: 0;
+  width: 100%;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 0.75rem;
+}
+
+.main-nav.open ul li:last-child {
+  border-bottom: none;
+  /* no border on last */
+  padding-bottom: 0;
+  /* optional: remove extra padding */
+}
+
+.main-nav.open ul a {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+  color: #333;
+  text-align: left;
+  display: block;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.main-nav.open ul a:hover {
+  background: #F0F0F0;
+}
+
+.nav-close {
+  display: block;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+  z-index: 2100;
+}
+
+.main-nav.open .nav-close {
+  color: #333;
+}
+
+.main-nav.open::before {
+  content: '';
+  position: absolute;
+  top: 3.75rem;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  /* background: #e5e5e5; */
+}
+
+.faq-answer {
+  color: #444;
+  background-color: #F6F4EF;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.pt-extra-container,
+.ct-extra-container,
+.tracker-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 10px !important;
+  padding: 6px 12px;
+  font-size: 0.7rem;
+  border-radius: 5px;
+  text-align: center !important;
+}
+
+.pt-extra-container,
+.tracker-badge.pt-extra-container {
+  background: #9333EA !important;
+}
+
+.pt-extra-badge {
+  font-style: italic;
+  color: #F8F4FF;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.ct-extra-container,
+.tracker-badge.ct-extra-container {
+  background: #e0e0e0;
+}
+
+.ct-extra-badge {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #333 !important;
+}
+
+.crown-emoji-badge {
+  font-size: 1.1rem;
+  display: inline-block;
+  line-height: 1;
+  vertical-align: text-top;
+  /* hugs the first line of “Pro” */
+  font-style: normal;
+}
+
+.tracker-badge {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  z-index: 1100;
+  max-width: 100px;
+  line-height: 1.2;
+  text-align: center;
+  display: block;
+  text-align: center;
+}
+
+.footer {
+  margin-top: auto;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.footer-content p {
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.social-icons img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+
+  .footer {
+    padding: 20px 0;
+
+  }
+
+  .footer-links {
+    flex-direction: column;
+    /* Stack links vertically */
+    gap: 10px;
+    padding: 5px 0;
+  }
+
+  .footer-links a {
+    font-size: 1.1rem;
+    /* Larger text for easier readability */
+    margin-bottom: 10px;
+    text-decoration: underline;
+  }
+
+  .footer p {
+    font-size: 1rem;
+    /* Larger text for easier readability */
+    margin-bottom: 20px;
+  }
+
+  .social-icons img {
+    width: 42px;
+    /* Slightly larger for mobile */
+    height: 42px;
+    margin: 0 35px;
+  }
+
+  .footer span {
+    display: none;
+  }
+}
+
+/* Nutrition Tracker Container */
+#nutrition-tracker {
+  max-width: 1200px;
+  margin: 0 auto 20px auto;
+  padding: 10px;
+  width: 95%;
+}
+
+#nutrition-tracker h1 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+#nutrition-streak-message {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* XP Bar (shared) */
+.xp-bar-container,
+.fixed-header .xp-bar {
+  position: relative;
+}
+
+#xp-gain-animation,
+#sticky-xp-gain-animation {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #007bff;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* The sticky header for XP */
+.fixed-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #F6EFE3;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-out;
+  z-index: 1000;
+  font-weight: bold;
+}
+
+.fixed-header.visible {
+  transform: translateY(0);
+}
+
+.xp-bar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.xp-bar-container #current-level {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.xp-bar {
+  position: relative;
+  background-color: #e0e0e0;
+  width: 70%;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.xp-bar-fill {
+  background-color: #007bff;
+  height: 100%;
+  width: 0%;
+}
+
+#xp-gain-animation {
+  position: absolute;
+  right: 0;
+  top: 75%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #007bff;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+#sticky-xp-gain-animation {
+  position: absolute;
+  right: 14px;
+  top: 65%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #007bff;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Tabs */
+.tab-container {
+  display: flex;
+  width: 100%;
+  border-bottom: 2px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.tab {
+  width: 50%;
+  text-align: center;
+  padding: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  font-size: 19px;
+}
+
+.tab.active {
+  border-bottom: 2px solid #007bff;
+}
+
+.tab-content {
+  width: 100%;
+}
+
+.tab-section {
+  display: none;
+  padding: 10px 0;
+}
+
+.tab-section.active {
+  display: block;
+}
+
+/* Week Selector Frame */
+
+.week-box.locked {
+  opacity: 0.45;
+  pointer-events: none;
+  /* disables clicks */
+  cursor: default;
+}
+
+.week-box.locked .icon-lock {
+  margin-right: 4px;
+  font-size: 0.9em;
+  /* tweak to taste */
+}
+
+.week-selector-frame {
+  position: relative;
+  border-radius: 6px;
+  background-color: #f1ede5;
+  overflow: hidden;
+  height: 60px;
+  margin: 20px 0;
+  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+.week-selector-wrapper {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.week-selector-wrapper::before,
+.week-selector-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: 45px;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.week-selector-wrapper::before {
+  left: 10px;
+  background: linear-gradient(to right, rgba(249, 247, 242, 1) 0%, rgba(249, 247, 242, 1) 45%, rgba(249, 247, 242, 0) 100%);
+}
+
+.week-selector-wrapper::after {
+  right: -17px;
+  background: linear-gradient(to left, #f9f7f2 0%, rgba(249, 247, 242, 0) 100%);
+}
+
+.week-selector-wrapper.show-left-shadow::before {
+  opacity: 1;
+}
+
+.week-selector-wrapper.show-right-shadow::after {
+  opacity: 1;
+}
+
+.week-selector {
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  position: relative;
+  margin-bottom: 0;
+  z-index: 1;
+  padding: 5px;
+  font-size: 17px;
+}
+
+.week-selector::-webkit-scrollbar {
+  height: 2px !important;
+}
+
+.week-selector::-webkit-scrollbar-thumb {
+  background-color: #D6CFC7;
+  border-radius: 1px;
+}
+
+.week-box {
+  flex: 0 0 auto;
+  min-width: 80px;
+  text-align: center;
+  padding: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.week-box:hover {
+  background-color: #ddd;
+}
+
+.week-box.active {
+  border-left: 2px solid #007bff;
+  border-right: 2px solid #007bff;
+}
+
+/* Day Selector */
+.day-selector-frame {
+  position: relative;
+  border-radius: 6px;
+  background-color: #f1ede5;
+  overflow: hidden;
+  height: 60px;
+  margin: 20px 0;
+  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+.day-selector-wrapper {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.day-selector-wrapper::before,
+.day-selector-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: 33px;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.day-selector-wrapper::before {
+  left: 20px;
+  background: linear-gradient(to right, #f9f7f2, rgba(249, 247, 242, 0));
+}
+
+.day-selector-wrapper::after {
+  right: -17px;
+  background: linear-gradient(to left, #f9f7f2, rgba(249, 247, 242, 0));
+}
+
+.day-selector-wrapper.show-left-shadow::before {
+  opacity: 1;
+}
+
+.day-selector-wrapper.show-right-shadow::after {
+  opacity: 1;
+}
+
+.day-selector {
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  position: relative;
+  margin-bottom: 0;
+  z-index: 1;
+  padding: 5px;
+  font-size: 17px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.day-selector::-webkit-scrollbar {
+  height: 2px;
+}
+
+.day-selector::-webkit-scrollbar-thumb {
+  background-color: #D6CFC7;
+  border-radius: 2px;
+}
+
+.day-box {
+  flex: 0 0 auto;
+  min-width: 80px;
+  text-align: center;
+  padding: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.day-box.active {
+  border-left: 2px solid #007bff;
+  border-right: 2px solid #007bff;
+}
+
+.day-box:hover {
+  background-color: #ddd;
+}
+
+/* Prev / Next Day Buttons */
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.navigation-buttons button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navigation-buttons button:hover {
+  background-color: #0056b3;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navigation-buttons button:active {
+  background-color: #003f7f;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+}
+
+#prevDayBtn {
+  width: 120px;
+}
+
+#nextDayBtn {
+  width: 120px;
+}
+
+/* Collapsible Meal Cards */
+.meal-card {
+  /* border: 1px solid #ddd; */
+  border-radius: 6px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+.meal-card-header {
+  background-color: #EFEDE8;
+  padding: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-weight: bold;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.meal-card-header.green-logged {
+  background-color: #c7f9cc;
+  /* light green */
+}
+
+.meal-card-header.grey-skipped {
+  background-color: #e9ecef;
+  /* light grey */
+}
+
+.meal-card-title {
+  margin: 0;
+  font-size: 18px;
+}
+
+.meal-card-arrow {
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: inline-block;
+  width: 16px;
+  text-align: center;
+  font-family: roboto;
+  transition: transform 0.3s ease;
+}
+
+.meal-card-arrow.expanded {
+  transform: rotate(90deg);
+}
+
+.meal-details {
+  display: none;
+  padding: 10px;
+  /* background-color: #fafafa; */
+}
+
+.meal-details.expanded {
+  display: block;
+}
+
+/* Sub-collapses: Macros, Ingredients, Recipe */
+.meal-subtitle {
+  /* background-color: #f1f1f1; */
+  border-top: 1px solid #ddd;
+  margin: 8px 0;
+  padding: 15px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  /* margin-bottom: 8px; */
+  font-weight: 600;
+  border-radius: 4px;
+  font-size: 17px;
+}
+
+.emoji {
+  padding: 6px 6px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* Macros */
+.macros-emoji {
+  background-color: #e0f7fa;
+}
+
+/* Ingredients */
+.ingredients-emoji {
+  background-color: #fce4ec;
+}
+
+/* Recipe */
+.recipe-emoji {
+  background-color: #e8f5e9;
+}
+
+.meal-subtitle-arrow {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.meal-subtitle-arrow.expanded {
+  transform: rotate(90deg);
+}
+
+.meal-subsection-content {
+  display: none;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.meal-subsection-content.expanded {
+  display: block;
+}
+
+.meal-subsection-content.macros-content.expanded {
+  background-color: #e0f7fa;
+  /* Light Teal */
+  border: 1px solid #b2ebf2;
+  /* Soft Mid Teal */
+}
+
+.meal-subsection-content.ingredients-content.expanded {
+  background-color: #fce4ec;
+  /* Light Pink */
+  border: 1px solid #f8bbd0;
+  /* Soft Mid Pink */
+}
+
+.meal-subsection-content.recipe-content.expanded {
+  background-color: #e8f5e9;
+  /* Light Green */
+  border: 1px solid #c8e6c9;
+  /* Soft Mid Green */
+}
+
+
+/* Buttons Row (Log / Swap / Skip) */
+.meal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+
+.meal-actions button {
+  flex: 1;
+  padding: 13px 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1.1rem;
+}
+
+.log-meal-btn {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.log-meal-btn:hover {
+  background-color: #218838;
+}
+
+.swap-meal-btn {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.swap-meal-btn:hover {
+  background-color: #0056b3;
+}
+
+.skip-meal-btn {
+  background-color: #B0B0B0;
+  color: #fff;
+}
+
+.skip-meal-btn:hover {
+  background-color: #5a6268;
+}
+
+/* After a meal is logged or skipped, we hide the 3 main buttons and show a status message */
+.meal-status-message {
+  margin-top: 10px;
+  font-weight: 600;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* Meal Info Display at Top (Week X - Day Y, date, macros left, progress bar, etc.) */
+.day-info-container {
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.day-info-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.day-info-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  background-color: #EDE7DB;
+  border: 1px solid #D8CFC0;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.day-info-stats .highlight {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.calorie-progress-bar {
+  background-color: #e0d8c8;
+  height: 20px;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.calorie-progress-fill {
+  background-color: #007bff;
+  height: 100%;
+  width: 0%;
+  transition: width 0.5s ease-in-out;
+}
+
+/* Dynamic message under progress bar */
+.nutrition-day-message {
+  font-weight: 600;
+  margin-top: 8px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.nutrition-day-message.visible {
+  opacity: 1;
+}
+
+/* Swap Meal Pop-up */
+#swapMealPopup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 93%;
+  background: #F6EFE3;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(100%);
+  transition: transform 0.3s ease-out;
+  z-index: 1200;
+  overflow: hidden;
+  padding: 20px 15px;
+  font-family: "Poppins", sans-serif;
+}
+
+@media (min-width: 768px) {
+  #swapMealPopup {
+    width: 100%;
+  }
+
+  .swap-input {
+    width: 100%;
+  }
+}
+
+#swapMealPopup.visible {
+  transform: translateY(0);
+}
+
+.swap-popup-content {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.swap-popup-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.swap-search-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.swap-search-container input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 0.95rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.swap-list {
+  max-height: 160px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 6px 0;
+  background-color: #F2E9DA;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.swap-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  /* text-align: center; */
+  font-size: 0.95rem;
+  background-color: #EDE7DB;
+  border: 1px solid #D8CFC0;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.swap-item:nth-child(even) {
+  background-color: #F4F0E6;
+  /* or whichever you choose */
+}
+
+@media screen and (max-width: 390px) {
+  .swap-list {
+    height: 100px;
+  }
+}
+
+.swap-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.swap-label {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.swap-input {
+  width: 93%;
+  padding: 10px;
+  font-size: 0.95rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+/* Default: stack each label+input vertically on larger screens */
+.macros-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* One column = vertical stacking */
+  row-gap: 8px;
+}
+
+/* On very small screens, arrange macros in two rows:
+   Row 1 => all three labels (Protein | Carbs | Fats)
+   Row 2 => all three inputs beneath them             */
+@media (max-width: 375px) {
+  .macros-container {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 8px;
+    row-gap: 8px;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .macros-container input.swap-input {
+    width: 88px;
+  }
+
+  input.swap-input.center-placeholder::placeholder {
+    text-align: center;
+  }
+
+  /* Child 1 => Protein label, Child 2 => Protein input, etc. */
+  .macros-container>*:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .macros-container>*:nth-child(2) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .macros-container>*:nth-child(3) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .macros-container>*:nth-child(4) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .macros-container>*:nth-child(5) {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .macros-container>*:nth-child(6) {
+    grid-column: 3;
+    grid-row: 2;
+  }
+}
+
+.swap-btn-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+#confirmSwapMealBtn {
+  border: none;
+  border-radius: 5px;
+  padding: 16px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: #007BFF;
+  /* stays blue */
+  color: #fff;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease;
+}
+
+#confirmSwapMealBtn:disabled {
+  background-color: #004a99;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+#cancelSwapMealBtn {
+  border: none;
+  border-radius: 5px;
+  padding: 16px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: #B0B0B0;
+  color: #fff;
+  cursor: pointer;
+  width: 100%;
+  /* full width in the container */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease;
+}
+
+/* Fade in day message */
+.day-message-fade {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.day-message-fade.show {
+  opacity: 1;
+}
+
+/* ==============================
+   My Progress (Nutrition) 
+   Borrowed from WT styles
+============================== */
+
+#myProgressOverview {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+  /* for the container itself */
+}
+
+/* The progress score heading, container, and info icon logic is the same as in the WT. */
+.progress-score-heading {
+  font-size: 1.5rem;
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+.progress-score-info-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* center horizontally */
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.progress-score-info-container {
+  position: relative;
+}
+
+.info-popup.progress-info-popup {
+  top: calc(100% + 5px);
+  /* 5px gap below the container */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.info-popup {
+  position: absolute;
+  top: calc(27% + 5px);
+  /* just below the icon, with some gap */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  width: 90%;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 999;
+  text-align: center;
+}
+
+.info-popup.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 0.8rem;
+  cursor: pointer;
+  position: relative;
+
+  /* The color can match your theme. Let's say #333 or #007bff, etc. */
+  color: #007bff;
+  /* 'i' text color */
+  border: 2px solid #007bff;
+  /* same color border */
+  background: transparent;
+  /* remove background */
+}
+
+.progress-score-value {
+  font-size: 3.5rem;
+  margin: 0;
+  color: #333;
+  font-weight: 700;
+}
+
+.progress-status-message {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.progress-daily-message {
+  margin-top: 15px;
+  font-size: 1rem;
+  /* font-style: italic; */
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* The recap-swiper-container & .recap-cards-inner logic. */
+.recap-swiper-container {
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto 25px auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.recap-cards-inner {
+  display: flex;
+  flex-wrap: nowrap;
+  transition: transform 0.3s ease;
+}
+
+.recap-card {
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  text-align: center;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #D4F8E8;
+  /* or your choice */
+}
+
+.recap-card.improvement-card {
+  background-color: #FFD9C0;
+}
+
+.emoji-bgii {
+  background-color: #FFC77B;
+  /* Light yellow or any color you want */
+  padding: 6px 6px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-right: 6px;
+  /* Small spacing after the emoji */
+}
+
+.recap-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #bbb;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.recap-dot.active {
+  background-color: #333;
+}
+
+.recap-dots-container {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* For Trend Cards in the Nutrition Trends area. */
+.trend-card {
+  width: 100%;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.trend-card .recap-card-title {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.recap-card .recap-card-title {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.recap-card .recap-card-value {
+  font-size: 1.4rem;
+  margin: 0 auto;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.recap-card .recap-card-description {
+  font-size: 1rem;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+.emoji-bg {
+  background-color: #A7E5C3;
+  padding: 6px 6px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* Heatmap styles: same as WT but with meal context. */
+.heatmap-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.heatmap-cell {
+  width: 60px;
+  height: 50px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  margin: 2px;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.info-icon-smaller {
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  line-height: 1;
+  margin-left: 6px;
+  bottom: 2px;
+}
+
+/* The info popup for the meal heatmap icon. */
+#mealHeatmapInfoPopup {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  width: 200px;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 999;
+}
+
+.heatmap-info-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.heatmap-color-square {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
+  border-radius: 2px;
+}
+
+/* Match your existing cell colors: */
+.heatmap-color-square.green {
+  background-color: #69c779;
+  /* Completed */
+}
+
+.heatmap-color-square.red {
+  background-color: #ff7878;
+  /* Missed */
+}
+
+.heatmap-color-square.yellow {
+  background-color: #ffe266;
+  /* Partially */
+  color: #000;
+  /* Dark text if needed */
+}
+
+.heatmap-color-square.blue {
+  background-color: #5A8DEE;
+  /* Completed Late */
+}
+
+.heatmap-color-square.gray {
+  background-color: #bfbfbf;
+  /* Upcoming */
+  color: #000;
+}
+
+.coach-insights-container {
+  max-width: 500px;
+  margin: 0 auto 20px;
+  text-align: center;
+}
+
+/* The “Coach Insights” sticky note. */
+.coach-insights-note {
+  background-color: #fff9c4;
+  /* Light yellowish */
+  padding: 15px;
+  border-radius: 8px;
+  line-height: 1.4;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.coach-insights-note .highlight {
+  font-weight: bold;
+}
+
+/* Macro breakdown chart container, etc. */
+.macro-week-selector {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.macro-week-selector .week-btn {
+  padding: 8px 12px;
+  background-color: #eee;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.macro-week-selector .week-btn.active {
+  border: 2px solid #007bff;
+  background-color: #fafafa;
+}
+
+/* ===========================================
+   (NEW) Macro Breakdown Dropdown-Style 
+   =========================================== */
+.macro-dropdown-container {
+  position: relative;
+  display: inline-block;
+  text-align: left;
+  margin: 0 auto;
+  max-width: 230px;
+  margin-bottom: 15px;
+}
+
+.macro-dropdown-selected {
+  padding: 10px 12px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* gap: 10px; */
+}
+
+.macro-dropdown-chevron {
+  transition: transform 0.3s ease;
+}
+
+.macro-dropdown-chevron.rotate {
+  transform: rotate(90deg);
+}
+
+.macro-dropdown-list {
+  position: absolute;
+  background-color: #f9f7f2;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  z-index: 5000;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.macro-dropdown-list.show {
+  display: block;
+}
+
+.macro-dropdown-item {
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.macro-dropdown-item:hover {
+  background-color: #eee;
+}
+
+.macro-dropdown-no-weeks {
+  padding: 8px 10px;
+  color: #999;
+}
+
+/* The subheading style you already have for WT’s analysis header. */
+.exercise-analysis-header {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+#nutritionTrendsSection {
+  text-align: center;
+}
+
+/* .macro-dropdown-selected {} */
+/* If you want any specific color or background for the macro subheading, do it here. */
+
+
+/* The subheading text */
+.exercise-analysis-subheading {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* Chevron styling */
+.analysis-dropdown-chevron {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+/* The container for the dropdown list, hidden by default. */
+.analysis-dropdown-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 15px;
+  border: 1px solid #ccc;
+  background-color: #fefefe;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+.analysis-dropdown-container.hidden {
+  display: none;
+}
+
+/* The list of weeks inside. Re-use your .analysis-exercise-list styling. */
+.analysis-exercise-list {
+  max-height: 260px;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+/* Each clickable item (Week 1, Week 2, etc.) same style as your exercises. */
+.analysis-exercise-item {
+  padding: 6px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.analysis-exercise-item:hover {
+  background-color: #eaeaea;
+}
+
+/* A container that horizontally scrolls the “cards” */
+#nutritionTrendsCards {
+  display: flex;
+  transition: transform 0.3s ease;
+  width: 100%;
+  /* overflow: hidden; */
+}
+
+/* Each .trend-card is 100% wide so they line up horizontally */
+.trend-card {
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  text-align: center;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #D4F8E8;
+  /* or your choice */
+}
+
+.trend-card {
+  width: 100%;
+  /* min-height: 300px; */
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  position: relative;
+  /* Ensure enough top spacing for the chart’s title, etc. */
+}
+
+/* The heatmap container */
+.heatmap-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Each phase's mini-grid for the heatmap */
+.heatmap-phase-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-auto-rows: 30px;
+  grid-auto-columns: 40px;
+  grid-gap: 4px;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 10px;
+  /* e.g. 4 columns for W1..W4. We'll create them in JS */
+}
+
+.heatmap-cell {
+  /* Make them bigger */
+  width: 60px;
+  height: 50px;
+  /* Modern pastel or minimal styling */
+  border-radius: 6px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  margin: 2px;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Our new color for "blue" */
+.heatmap-cell.blue {
+  background-color: #5A8DEE;
+  /* or any brand-friendly shade of blue */
+}
+
+/* Overwrite yellow, red, green with more pastel hues if you like: */
+.heatmap-cell.green {
+  background-color: #69c779;
+  /* pastel green */
+}
+
+.heatmap-cell.yellow {
+  background-color: #ffe266;
+  color: #000;
+  /* darker text */
+}
+
+.heatmap-cell.red {
+  background-color: #ff7878;
+}
+
+.heatmap-cell.gray {
+  background-color: #bfbfbf;
+  color: #000;
+}
+
+/* For row/column labels */
+.heatmap-header {
+  font-weight: bold;
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+/***********************************************
+ * Body Composition & Goal Progress Container
+ ***********************************************/
+.body-composition-section {
+  display: none;
+  /* shown by JS if user has AWT */
+  margin-top: 40px;
+}
+
+.body-composition-title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Chart container */
+.bodyweight-chart-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/***********************************************
+ * Goal Progress Widget
+ ***********************************************/
+.goal-progress-widget {
+  max-width: 500px;
+  margin: 0 auto;
+  /* center horizontally */
+  padding: 8px 15px;
+  text-align: center;
+  /* center all content by default */
+  background-color: #f5f0e6;
+  border-radius: 8px;
+}
+
+.goal-progress-heading {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Example: force each row to have a label of fixed width, and an input of fixed width */
+.goal-progress-row {
+  display: flex;
+  flex-direction: column;
+  /* stack label above input */
+  align-items: center;
+  /* center them horizontally */
+  margin-bottom: 15px;
+  /* space between each row */
+}
+
+.goal-progress-label {
+  font-weight: bold;
+  margin-bottom: 6px;
+  /* small gap below label */
+}
+
+.goal-progress-input {
+  width: 95%;
+  height: 40px;
+  /* same fixed width for all inputs */
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f2f0eb;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  font-family: 'Roboto', sans-serif;
+}
+
+.goal-progress-input:focus {
+  background-color: #fff;
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Specifically ensure the date input doesn't auto-resize */
+.goal-progress-input[type="date"] {
+  width: 95%;
+}
+
+/***********************************************
+ * Log Weight Button
+ ***********************************************/
+.log-weight-button-row {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.log-weight-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  height: 52px;
+  margin-top: 25px;
+  margin-bottom: 35px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.log-weight-button:hover {
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.log-weight-button:active {
+  background-color: #0056b3;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(2px);
+}
+
+/***********************************************
+ * Weight Change Line & Progress Bar
+ ***********************************************/
+.goal-progress-line {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.goal-progress-line>div {
+  display: inline-block;
+  /* place side by side */
+  vertical-align: middle;
+}
+
+/* Progress bar container & fill */
+.goal-progress-bar-container {
+  margin-bottom: 12px;
+}
+
+.goal-progress-bar {
+  background-color: #e0e0e0;
+  height: 20px;
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.goal-progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background-color: #007bff;
+  transition: width 0.5s;
+}
+
+.goal-progress-percent {
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+/***********************************************
+ * Estimated Time & Goal Date
+ ***********************************************/
+.estimated-time-container {
+  text-align: center;
+  margin: 8px 0;
+  font-size: 1rem;
+}
+
+.estimated-time-row {
+  padding: 15px;
+  border-radius: 8px;
+  line-height: 1.4;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.estimated-time-value {
+  font-weight: bold;
+  margin-left: -3px;
+}
+
+.expected-goal-container {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.expected-goal-label {
+  font-weight: normal;
+  margin-bottom: 4px;
+}
+
+.expected-goal-date {
+  font-weight: bold;
+  color: #333;
+}
+
+/***********************************************
+ * Recent Milestones
+ ***********************************************/
+.recent-milestones {
+  margin-top: 25px;
+  display: none;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #D4F8E8;
+  /* pale yellow sticky-note style */
+  padding: 15px;
+  border-radius: 8px;
+  line-height: 1.4;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   WT ONBOARDING 
+──────────────────────────────────────────────────────────────── */
+.nt-onboarding-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, #F9F4EB, #F6EFE3);
+  z-index: 1300;
+  transform: translateY(-100%);
+  transition: transform .45s cubic-bezier(.36, .66, .04, 1);
+  overflow: hidden;
+}
+
+.nt-onboarding-overlay.open {
+  transform: translateY(0);
+}
+
+.nt-onboarding-overlay.closing {
+  transform: translateY(100%);
+}
+
+.nt-onboarding-slider {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  transition: transform .4s ease;
+}
+
+.nt-onboarding-card {
+  flex: 0 0 100vw;
+  width: 100vw;
+  padding: 40px 28px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  justify-content: center;
+  text-align: center;
+}
+
+.nt-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.nt-subtitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #666;
+}
+
+.nt-line {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .5s, transform .5s;
+  line-height: 1.4;
+  font-size: 1.1rem;
+}
+
+.nt-line.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nt-goal {
+  font-weight: 600;
+}
+
+.nt-goal,
+.nt-driver,
+.nt-tutorial li {
+  color: #333;
+}
+
+.nt-emoji-goal,
+.nt-emoji-tutorial {
+  border-radius: 8px;
+  background-color: #F0ECE5;
+  font-size: 1.2rem;
+  padding: 3px;
+  margin-right: 6px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.nt-tutorial {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.nt-sub {
+  color: #666;
+  font-size: 1rem;
+}
+
+.nt-next-btn,
+.nt-close-btn {
+  margin-top: auto;
+  margin-bottom: 40px;
+  align-self: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  width: 220px;
+  max-width: 80%;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #007BFF;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: background .2s;
+}
+
+.nt-next-btn:active,
+.nt-close-btn:active {
+  background: #0056b3;
+}
+
+@media(min-width:768px) {
+
+  .nt-next-btn,
+  .nt-close-btn {
+    margin: 40px auto;
+  }
+
+  .nt-next-btn:hover,
+  .nt-close-btn:hover {
+    background: #0056b3;
+  }
+}
+
+@media(max-width:480px) {
+  .nt-title {
+    font-size: 1.6rem;
+  }
+
+  .nt-subtitle {
+    font-size: 1rem;
+  }
+}
+
+.nt-onboarding-dots {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.nt-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #bbb;
+  cursor: pointer;
+  transition: background .3s;
+}
+
+.nt-dot.active {
+  background: #333;
+}
+
+#nutritionWeeklyRecapCards {       /* the OUTER shell */
+  scroll-snap-type: none;          /* <- kill auto-scroll */
+  touch-action: pan-y;             /* <- let vertical page scroll through */
+}
+
+#nutritionWeeklyRecapWrapper,
+#areasImprovementWrapper,
+#nutritionTrendsWrapper{
+  scroll-snap-type: none;   /* stops the auto-snap that was hijacking touches   */
+  touch-action:  pan-y;     /* allow vertical page scroll, block horizontal UA */
+}
