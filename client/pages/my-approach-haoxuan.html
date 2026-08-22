@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+  (async function () {
+    const token = localStorage.getItem('token');
+    if (!token) { location.href = 'log-in-haoxuan.html'; return; }
+    try {
+      const res = await fetch('/api/auth/me', { headers: { Authorization: `Bearer ${token}` } });
+      if (!res.ok) throw new Error();
+    } catch (_) { localStorage.removeItem('token'); location.href = 'log-in-haoxuan.html'; }
+  })();
+</script>
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+  <title>The Beginner Blueprint | Haoxuan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/my-approach-haoxuan.css">
+</head>
+<body>
+<header class="header">
+  <a href="dashboard-haoxuan.html" class="logo"><img src="../assets/haoxuan-logo.png" alt="Haoxuan logo"></a>
+  <nav class="main-nav" id="main-nav"><button class="nav-close" id="nav-close" aria-label="Close menu">✕</button><ul>
+    <li><a href="workout-tracker-haoxuan.html">My Workouts</a></li><li><a href="nutrition-tracker-haoxuan.html">My Nutrition</a></li>
+    <li><a href="my-approach-haoxuan.html" aria-current="page">My Approach</a></li><li><a href="my-mind-haoxuan.html">My Mind</a></li><li><a href="#" id="nav-help">Help</a></li>
+  </ul></nav><button class="hamburger" id="hamburger-btn" aria-label="Toggle menu">☰</button>
+</header>
+<main class="approach-page">
+  <section class="approach-hero blueprint-cover">
+    <span class="eyebrow">Founder's edition</span><h1>The Beginner Blueprint</h1>
+    <p class="positioning-line">The step-by-step calisthenics blueprint to turn you into 2.0—build a strong foundation, stay consistent, and enjoy the process.</p>
+  </section>
+  <section class="approach-intro"><span class="chapter-kicker">Message from the author</span><h2>Hey, I'm Haoxuan.</h2>
+    <p>Welcome to The Beginner Blueprint. If you are interested in calisthenics but unsure where to begin, I know exactly how that feels. I felt lost, unmotivated, confused, and weak. With so many exercises, skills, and opinions online, it was hard to know what worked. That is why I created this guide.</p>
+    <p>My goal is to give beginners a clear understanding of calisthenics and help you avoid common mistakes. This is not about becoming amazing overnight. It is about building a strong foundation, staying consistent, and enjoying the process—whether your goal is a first pull-up, first handstand, or simply becoming stronger and healthier.</p>
+    <p>This guide is based on my own journey and research. Keep learning, ask questions, and never rely on only one source, including this guide. Thank you for supporting my work.</p>
+  </section>
+  <section class="approach-highlight-grid">
+    <article class="highlight-card"><h2>Follow it in order</h2><p>Learn the basics, then complete the workouts and progressions step by step. Do not rush advanced skills.</p></article>
+    <article class="highlight-card"><h2>Quality over quantity</h2><p>Take your time and prioritize full-range, controlled technique. Go back a progression whenever you feel stuck.</p></article>
+    <article class="highlight-card"><h2>Track and recover</h2><p>Record your progress, give your body time to adapt, and remember that consistency always pays off.</p></article>
+  </section>
+  <section class="approach-sections" aria-label="Beginner Blueprint chapters">
+    <details class="approach-item" open><summary>Start here: How to use the Blueprint</summary><div class="approach-content">
+      <p class="section-intro">You do not need to read everything in one day. Understand the basics first, follow each progression in order, and return to the previous level whenever your technique breaks down.</p>
+      <div class="food-columns"><section class="food-card"><h3>What you will learn</h3><ul class="check-list"><li>What calisthenics is and why it works.</li><li>How bodyweight exercises build a strong foundation.</li><li>Technique for essential beginner movements.</li><li>How to structure training for progress.</li><li>Why nutrition, recovery, and mobility matter.</li><li>How to avoid common beginner mistakes.</li><li>How to stay motivated after this guide.</li></ul></section>
+      <section class="food-card"><h3>Your rules</h3><ul class="check-list"><li>Progress takes time.</li><li>Stay consistent.</li><li>Do not compare yourself to others.</li><li>Focus on good technique.</li><li>Enjoy the process.</li></ul></section></div>
+    </div></details>
+
+    <details class="approach-item"><summary>Chapter 1 — My story</summary><div class="approach-content"><div class="lesson-grid">
+      <article class="lesson-card"><h3>Why I started</h3><p>I did not begin because I was bored or only wanted an aesthetic physique. I was tired of being the skinny, weak guy people made fun of. Calisthenics changed my life: I can do it anywhere, anytime, and it is now part of my daily life. Starting was 100% the right move for me, and I believe it can change you too.</p></article>
+      <article class="lesson-card"><h3>Lessons I learned early</h3><p>You can become stronger, leaner, and more confident—but motivation will still come and go. Calisthenics demands dedication, discipline, satisfaction, and passion. Enjoy the journey and stay consistent.</p></article>
+      <article class="lesson-card"><h3>Why I made this</h3><p>Beginners starting from zero often feel lost in exercises, skills, recovery, sets, and progressions. This Blueprint breaks down those mechanics and gives you one clear path forward.</p></article>
+    </div></div></details>
+
+    <details class="approach-item"><summary>Chapter 2 — What is calisthenics?</summary><div class="approach-content"><p class="section-intro">Calisthenics uses your bodyweight and gravity as resistance to build strength, muscle, endurance, flexibility, and body control.</p><div class="lesson-grid">
+      <article class="lesson-card"><h3>Accessible training</h3><p>Bodyweight training can require little or no equipment. Your own mass provides resistance while you improve strength, mobility, and cardiovascular endurance.</p></article>
+      <article class="lesson-card"><h3>Calisthenics vs. weightlifting</h3><p>Calisthenics emphasizes relative strength and whole-body control. Weightlifting uses external loads and can target specific muscles more directly.</p></article>
+      <article class="lesson-card"><h3>Myth: it is only for skinny people</h3><p>False. Anyone can start, regardless of body type.</p></article><article class="lesson-card"><h3>Myth: you must already be strong</h3><p>False. Regressions and progressions allow complete beginners to improve safely.</p></article><article class="lesson-card"><h3>Myth: it cannot build muscle</h3><p>False. Progressive bodyweight training can build significant muscle alongside proper nutrition and consistent training.</p></article>
+    </div></div></details>
+
+    <details class="approach-item"><summary>Chapter 3 — Beginner mindset 🌱</summary><div class="approach-content"><div class="lesson-grid">
+      <article class="lesson-card"><h3>Realistic expectations</h3><p>Advanced skills take time. Your pace depends on experience, consistency, recovery, and genetics. Aim to become a little better every week—not perfect overnight.</p></article>
+      <article class="lesson-card"><h3>Consistency over perfection</h3><p>Motivation comes and goes; consistency creates results. Showing up and completing the right session moves you forward.</p></article>
+      <article class="lesson-card"><h3>Trust the process</h3><p>Fast weeks and slow weeks are both normal. Keep following the program, recover properly, and let small daily improvements add up.</p></article>
+      <article class="lesson-card"><h3>Build discipline</h3><p>Discipline is doing what needs to be done when you do not feel like it. Create a routine and turn training into a habit.</p></article>
+      <article class="lesson-card"><h3>Avoid comparison</h3><p>Do not compare your beginning with someone else's years of training. Compare yourself with last month and celebrate every improvement.</p></article>
+    </div></div></details>
+
+    <details class="approach-item"><summary>Chapter 4 — Goal setting 🎯</summary><div class="approach-content"><div class="lesson-grid">
+      <article class="lesson-card"><h3>Choose a realistic goal</h3><p>A planche in four weeks from absolute zero is not realistic. Five to ten clean pull-ups with consistent training is a meaningful beginner goal.</p></article>
+      <article class="lesson-card"><h3>Short-term vs. long-term</h3><p>Short-term goals establish your baseline and foundation. Skills such as handstand push-ups and the planche are long-term projects that can take years.</p></article>
+      <article class="lesson-card"><h3>Track progress</h3><p>Record your physique, skill performance, reps, holds, and form. Without tracking, it is difficult to see whether you are moving forward.</p></article>
+      <article class="lesson-card"><h3>Build good habits</h3><p>One deep, controlled push-up beats ten fast, shallow reps. Master push-ups, dips, pull-ups, and other foundations before chasing flashy skills.</p></article>
+    </div></div></details>
+
+    <details class="approach-item"><summary>Chapter 5 — Equipment guide</summary><div class="approach-content"><p class="section-intro">You can build an excellent foundation with only the floor and a wall. Push-ups, squats, and wall handstand holds are enough to begin.</p><div class="lesson-grid">
+      <article class="lesson-card"><h3>Beginner essentials</h3><p>If you want equipment, start with a pull-up bar and dip bars. Parallettes are useful for L-sits, V-sits, handstands, deeper push-ups, and reducing wrist extension.</p></article>
+      <article class="lesson-card"><h3>Resistance bands</h3><p>Bands can assist your first pull-up, support progressions, warm up joints, or add resistance.</p></article>
+      <article class="lesson-card"><h3>Haoxuan's parallettes</h3><p>I recommend <a href="https://barflow.store/" target="_blank" rel="noopener noreferrer">BarFlow parallettes</a>. They are light and versatile. Use code <strong>CALIHAO10</strong> for 10% off.</p></article>
+    </div></div></details>
+
+    <details class="approach-item"><summary>Chapter 6 — Understanding strength</summary><div class="approach-content"><div class="lesson-grid">
+      <article class="lesson-card"><h3>Progressive overload</h3><p>Increase the difficulty of your exercises over time. Without a new challenge—more quality reps, range, control, or a harder variation—progress will stall.</p></article>
+      <article class="lesson-card"><h3>Why basics matter</h3><p>Push-ups, pull-ups, dips, and squats build the strength and coordination needed for skills. A muscle-up, for example, needs sound technique and roughly 10–15 solid pull-ups.</p></article>
+      <article class="lesson-card"><h3>Training frequency</h3><p>Frequency is how often you train a muscle group or movement pattern. As a general framework, train each muscle group around twice weekly while managing recovery.</p></article>
+      <article class="lesson-card"><h3>Rest days</h3><p>Training adds stress; downtime is when muscles repair, grow, and restore energy. Seven hard days every week is not the shortcut it seems.</p></article>
+      <article class="lesson-card"><h3>Volume and intensity</h3><p>Volume is total work (sets × reps × load). Intensity is how difficult the work is relative to your maximum ability or proximity to failure.</p></article>
+      <article class="lesson-card"><h3>Patience and progress</h3><p>Set milestones, track small wins, and stay resilient through plateaus. Steady progress beats rushing.</p></article>
+    </div></div></details>
+
+    <details class="approach-item"><summary>Chapter 7 — Recovery (important)</summary><div class="approach-content"><div class="lesson-grid">
+      <article class="lesson-card"><h3>Why recovery matters</h3><p>Bodyweight training stresses muscles, connective tissue, and your nervous system. Rest supports repair, tendon adaptation, strength gains, and injury prevention.</p></article>
+      <article class="lesson-card"><h3>Sleep and performance</h3><p>Aim for 7–9 hours each night. Sleep supports motor learning, muscle repair, energy, and the coordination demanded by planches, levers, and muscle-ups.</p></article>
+      <article class="lesson-card"><h3>Muscle recovery</h3><p>Balance high-intensity skill work with targeted rest, sufficient sleep, and appropriate protein and energy intake.</p></article>
+      <article class="lesson-card"><h3>Deload weeks</h3><p>Every 4–6 weeks, consider 6–7 easier days with roughly half your usual volume and easier variations to reduce accumulated fatigue.</p></article>
+      <article class="lesson-card"><h3>Stretching and mobility</h3><p>Before training, use 5–10 minutes of dynamic movement such as arm circles, leg swings, and thoracic twists. Mobility combines usable range with active control.</p></article>
+      <article class="lesson-card"><h3>Warm up</h3><p>Spend 10–15 minutes moving from light general cardio into joint preparation and specific muscle activation.</p></article>
+      <article class="lesson-card"><h3>Cool down</h3><p>Use 5–10 minutes to lower your heart rate gradually and gently lengthen the muscles you trained.</p></article>
+      <article class="lesson-card"><h3>Prevent overtraining</h3><p>Program 2–3 rest days, avoid taking every set to failure, and prioritize sleep, protein, carbohydrates, and sustainable skill frequency.</p></article>
+      <article class="lesson-card"><h3>Listen to your body</h3><p>Do not ignore sharp shoulder or joint pain. Missing one session is better than losing months to an injury. Stop and seek appropriate professional advice when pain persists.</p></article>
+    </div><div class="callout-box"><h3>Founder's note</h3><p>Thank you for supporting the Founder's Edition Blueprint. As I keep learning and improving, my goal is to create even better resources that help more people begin their journey.</p></div></div></details>
+
+    <details class="approach-item"><summary>The 6-week Beginner Program — Start here</summary><div class="approach-content">
+      <p>Progress takes time. Every exercise and progression has a purpose, so trust the process and avoid skipping ahead. Everyone starts at a different level; improve from where you are today instead of comparing yourself with others.</p><p>Complete a strength assessment before week one and record your results. Train with good technique, recover well, and measure again after the program. Quality always beats quantity.</p>
+      <div class="callout-box"><h3>Your graduation targets</h3><ul class="check-list"><li>15–20 push-ups comfortably.</li><li>Your first pull-up from zero, or 3–5 pull-ups if you already had one.</li><li>A 45–60 second plank.</li><li>A 30–45 second dead hang.</li><li>20 bodyweight squats with solid form.</li><li>A 10–20 second hollow-body hold.</li></ul></div>
+      <p class="note">These are motivating targets, not guarantees. Starting ability and progress differ. Showing up, using clean technique, and becoming stronger each week are the real goals.</p>
+    </div></details>
+
+    <details class="approach-item"><summary>Phase 1 — Foundation (weeks 1–2) 🟢</summary><div class="approach-content">
+      <div class="phase-banner"><h3>Learn technique. Build consistency.</h3><p>Repeat this schedule for two weeks. Control every movement and create the habit of training.</p></div>
+      <div class="week-strip"><span><b>Mon</b><br>Full Body A</span><span><b>Tue</b><br>Active recovery</span><span><b>Wed</b><br>Full Body B</span><span><b>Thu</b><br>Recovery</span><span><b>Fri</b><br>Repeat A</span><span><b>Sat</b><br>Cardio + mobility</span><span><b>Sun</b><br>Rest</span></div>
+      <section class="day-card"><h3>Monday / Friday — Full Body A</h3><p><strong>Warm-up (5–10 min):</strong> jumping jacks 60 sec; high knees or butt kicks 60 sec; wrist circles 60 sec; arm circles 60 sec; 5 scapular push-ups; 5 scapular pull-ups.</p>
+        <div class="exercise"><strong>Wall push-ups</strong><p class="exercise-meta">3 sets × 4–8 reps · 60 sec rest</p><p>Set your body on a diagonal, use full range, and avoid shallow reps.</p></div>
+        <div class="exercise"><strong>Dead hangs</strong><p class="exercise-meta">2 sets × 10–30 sec · 60 sec rest</p><p>Lightly engage your lower traps and lats.</p></div>
+        <div class="exercise"><strong>Squats</strong><p class="exercise-meta">2–3 sets × 8–12 reps · 30–60 sec rest</p><p>Use your safe full range rather than stopping every rep at 90 degrees.</p></div>
+        <div class="exercise"><strong>Dead bug</strong><p class="exercise-meta">2 sets × 4–6 slow reps per side · 30–60 sec rest</p><p>Extend for about 2 seconds, keep your back from arching, and breathe.</p></div>
+      </section>
+      <section class="day-card"><h3>Wednesday — Full Body B</h3><p><strong>Warm-up:</strong> repeat Monday's sequence.</p>
+        <div class="exercise"><strong>Incline push-ups</strong><p class="exercise-meta">3 sets × 2–6 reps · 60 sec rest</p><p>Keep a straight body and use full range; regress to scapular push-ups if needed.</p></div>
+        <div class="exercise"><strong>Active hang</strong><p class="exercise-meta">2 sets × 15–30 sec · 45 sec rest</p><p>Keep shoulders away from ears, elbows straight, ribs controlled, and breathe.</p></div>
+        <div class="exercise"><strong>Reverse lunge</strong><p class="exercise-meta">2 sets × 6–8 reps per side · 30–60 sec rest</p><p>Keep feet hip-width, front foot flat, hips square, and push through the front leg.</p></div>
+        <div class="exercise"><strong>Plank</strong><p class="exercise-meta">2 sets × 30–60 sec · 30–45 sec rest</p><p>Brace your core and keep your back neutral without sagging or arching.</p></div>
+      </section>
+      <section class="day-card"><h3>Cooldown and recovery days</h3><p><strong>After lifting (5–10 min):</strong> chest stretch; lat stretch for 20–30 sec; gentle hamstring stretch.</p><p><strong>Tuesday:</strong> light walk or bike plus mobility. <strong>Thursday:</strong> light mobility and rest. <strong>Saturday:</strong> 20–30 minutes of walking, jogging, basketball, or cycling plus mobility. <strong>Sunday:</strong> rest, with optional easy movement and stretching.</p></section>
+      <div class="callout-box"><h3>Phase complete</h3><ul class="check-list"><li>Better technique.</li><li>More confidence and consistency.</li><li>Improved strength from your starting point.</li></ul></div>
+    </div></details>
+
+    <details class="approach-item"><summary>Phase 2 — Strength (weeks 3–4) 🔵</summary><div class="approach-content">
+      <div class="phase-banner blue"><h3>Add volume. Own the movements.</h3><p>Repeat for two weeks. Progress to harder variations only while form remains clean.</p></div>
+      <div class="week-strip"><span><b>Mon</b><br>Full Body A</span><span><b>Tue</b><br>Active recovery</span><span><b>Wed</b><br>Full Body B</span><span><b>Thu</b><br>Recovery</span><span><b>Fri</b><br>Repeat A</span><span><b>Sat</b><br>Cardio + mobility</span><span><b>Sun</b><br>Rest</span></div>
+      <section class="day-card"><h3>Monday / Friday — Full Body A</h3><p><strong>Warm-up:</strong> use the Phase 1 warm-up.</p>
+        <div class="exercise"><strong>Knee push-ups</strong><p class="exercise-meta">3 sets × 4–6 reps · 60 sec rest</p><p>Keep elbows near 45 degrees, core tight, and body straight. Return to last week's variation if needed.</p></div>
+        <div class="exercise"><strong>Scapular pull-ups</strong><p class="exercise-meta">2–3 sets × 4–8 reps · 45 sec rest</p><p>Move through the shoulder blades with straight elbows; lower reps to preserve quality.</p></div>
+        <div class="exercise"><strong>Walking lunge</strong><p class="exercise-meta">2 sets × 6–8 reps per side · 30–60 sec rest</p><p>Use a long controlled step, keep your chest tall, hips square, and drive through the front foot.</p></div>
+        <div class="exercise"><strong>Side plank</strong><p class="exercise-meta">2 sets × 15–30 sec per side · 45–60 sec rest</p><p>Stack your elbow under your shoulder and keep hips lifted without rolling forward.</p></div>
+      </section>
+      <section class="day-card"><h3>Wednesday — Full Body B</h3><p><strong>Warm-up:</strong> use the Phase 1 warm-up.</p>
+        <div class="exercise"><strong>Push-ups</strong><p class="exercise-meta">2 sets × 3–6 reps · 60 sec rest</p><p>Use full range with a straight body; choose an easier push-up variation if needed.</p></div>
+        <div class="exercise"><strong>Australian pull-ups</strong> <em>(dip bar required)</em><p class="exercise-meta">2 sets × 3–6 reps · 45 sec rest</p><p>Keep hips up, initiate with your back, and do not swing.</p></div>
+        <div class="exercise"><strong>Bulgarian split squat</strong><p class="exercise-meta">2 sets × 4–8 reps per side · 45–60 sec rest</p><p>Use a sensible bench height, keep the front knee tracking well, and control each rep.</p></div>
+        <div class="exercise"><strong>Hollow-body hold</strong><p class="exercise-meta">2 sets × 15–30 sec · 30–45 sec rest</p><p>Brace your abs, keep your lower back connected to the floor, and scale arm or leg position as needed.</p></div>
+      </section>
+      <section class="day-card"><h3>Cooldown and recovery</h3><p>Repeat the Phase 1 cooldown and recovery-day structure. Friday is about refining technique, not forcing difficulty.</p></section>
+      <div class="callout-box"><h3>Phase complete</h3><ul class="check-list"><li>Cleaner technique and more confidence.</li><li>Better consistency—good job.</li><li>Noticeably improved strength.</li></ul></div>
+    </div></details>
+
+    <details class="approach-item"><summary>Phase 3 — Graduation (weeks 5–6) 🏅</summary><div class="approach-content">
+      <div class="phase-banner gold"><h3>Build strength and confidence.</h3><p>Your final two weeks introduce more challenging movements. Earn every progression with control.</p></div>
+      <div class="week-strip"><span><b>Mon</b><br>Full Body A</span><span><b>Tue</b><br>Active recovery</span><span><b>Wed</b><br>Full Body B</span><span><b>Thu</b><br>Recovery</span><span><b>Fri</b><br>Repeat A</span><span><b>Sat</b><br>Cardio + mobility</span><span><b>Sun</b><br>Rest</span></div>
+      <section class="day-card"><h3>Monday / Friday — Full Body A</h3><p><strong>Warm-up:</strong> use the Phase 1 warm-up.</p>
+        <div class="exercise"><strong>Diamond push-ups</strong><p class="exercise-meta">2 sets × 6 reps · 60 sec rest</p><p>Use an easier close-grip variation if needed. Avoid flared elbows, sagging hips, and partial range.</p></div>
+        <div class="exercise"><strong>Band-assisted pull-ups</strong><p class="exercise-meta">2–3 sets × 4–8 reps · 45 sec rest</p><p>Use enough assistance for full, controlled reps. Reduce reps before sacrificing quality.</p></div>
+        <div class="exercise"><strong>Jump squats</strong><p class="exercise-meta">2 sets × 6–8 reps · 30–60 sec rest</p><p>Squat under control, jump powerfully, and land softly with knees tracking over toes.</p></div>
+        <div class="exercise"><strong>Hanging knee raises</strong><p class="exercise-meta">2 sets × 5–8 reps · 45–60 sec rest</p><p>Control the ascent and descent without swinging or relying on momentum.</p></div>
+      </section>
+      <section class="day-card"><h3>Wednesday — Full Body B</h3><p><strong>Warm-up:</strong> use the Phase 1 warm-up.</p>
+        <div class="exercise"><strong>Decline push-ups</strong><p class="exercise-meta">2 sets × 3–6 reps · 60 sec rest</p><p>Keep your body straight and use clean full-range reps; regress if this standard is not ready.</p></div>
+        <div class="exercise"><strong>Pull-up</strong><p class="exercise-meta">2 sets × 2–4 reps · 45 sec rest</p><p>If you have earned it, celebrate your first pull-up. Avoid kipping, reach full elbow extension, and engage your shoulder blades. Continue assisted reps if needed.</p></div>
+        <div class="exercise"><strong>Assisted pistol squat</strong><p class="exercise-meta">2 sets × 3–6 reps per side · 45–60 sec rest</p><p>Use a stable support, keep your heel down and knee tracking well, and do not let your arms do all the work.</p></div>
+        <div class="exercise"><strong>Hanging leg raises</strong><p class="exercise-meta">2 sets × 3–6 reps · 30–45 sec rest</p><p>Use only the range you can control without momentum; regress to knee raises when needed.</p></div>
+      </section>
+      <section class="day-card"><h3>Cooldown and recovery</h3><p>Repeat the Phase 1 cooldown and recovery-day structure. Keep Friday technical; Saturday light; Sunday restorative.</p></section>
+      <div class="callout-box"><h3>You graduated</h3><ul class="check-list"><li>Improved pushing strength.</li><li>Better pulling control and grip.</li><li>Stronger legs and core.</li><li>More confidence in every exercise.</li><li>The consistency and discipline to keep progressing.</li></ul></div>
+    </div></details>
+
+    <details class="approach-item"><summary>Thank you — your journey continues</summary><div class="approach-content"><h2>Congratulations!</h2>
+      <p>If you made it this far, you completed The Beginner Blueprint. Whether your goal was your first push-up, pull-up, or simply becoming healthier and stronger, I hope this program helped.</p>
+      <p>Thank you for letting me be part of your calisthenics journey. Every workout, every rep, and every day you stayed consistent brought you closer to your goals. Calisthenics is a long journey, not a race. Do not compare yourself with others; compare yourself with who you were when you started.</p>
+      <p>This is the end of the Beginner Blueprint, but only the beginning of your calisthenics journey. Every expert was once a beginner who refused to quit. Keep working hard, stay consistent, and never stop believing in yourself.</p><p class="signature">— Haoxuan<br><small>Founder of The Beginner Blueprint</small></p>
+    </div></details>
+  </section>
+  <p class="closing-note">Build the foundation. Trust the process. Become 2.0.</p>
+</main>
+<footer class="footer"><div class="footer-content"><p class="powered">POWERED BY</p><p>&copy; 2026 Raising The Bar App Ltd. All rights reserved.</p><div class="footer-links"><a href="../haoxuan.html">Start Training</a><span class="separator">|</span><a href="legal-overview.html">Our Policies</a><span class="separator">|</span><a href="contact-us.html">Contact Us</a></div></div></footer>
+<script src="../scripts/my-approach-haoxuan.js"></script>
+</body></html>

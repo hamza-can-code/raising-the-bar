@@ -386,7 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const coachImg = document.querySelector('.social-proof__coach');
   if (!coachImg) return;
 
-  coachImg.src = imgSrc('haoxuan-coach.jpg');
+  coachImg.src = imgSrc('haoxuan-coach.webp');
   coachImg.alt = 'Coach Haoxuan';
 };
 
